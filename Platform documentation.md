@@ -2,13 +2,13 @@
 
 ## [Command line client, web console and API](#interfaces)
 
-###TL;DR:
+**TL;DR:**
 
  * The command line client cctrl is the primary interface.
  * We also offer a web console.
  * For most control and integration it's possible to talk directly to the RESTful API.
 
-To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called cctrlapp. In addition to the command line client we also offer a web console. Both the CLI as well as the web console however are merely frontends to our RESTful API. For maximum integration into your apps you can use one of our available API libraries.
+To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called cctrl. In addition to the command line client we also offer a web console. Both the CLI as well as the web console however are merely frontends to our RESTful API. For maximum integration into your apps you can use one of our available API libraries.
 
 Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For installation instructions please refer to the [cctrl installation guide](/dev-center/guides/cctrl-installation-guide).
 
@@ -33,7 +33,7 @@ The command line client features a detailed online help. Just append --help or -
 
 ## [Apps, Users and Deployments](#appsandusers)
 
-###TL;DR:
+**TL;DR:**
 
  * Apps have a repository, deployments and users.
  * The repository is where your code lives organized in branches.
@@ -134,7 +134,7 @@ App
 
 ## [Version Control & Images](#versioncontrol)
 
-###TL;DR:
+**TL;DR:**
 
  * Git and Bazaar are the supported version control systems.
  * When you push a branch a read only image of your code is built ready to be deployed.
@@ -160,64 +160,64 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 
 ## [Development, Staging and Production Environments](#environments)
 
-###TL;DR:
+**TL;DR:**
 
  * Leverage multiple deployments to support the complete application lifecycle.
 
 ## [Managing Dependencies](#dependencies)
 
-###TL;DR:
+**TL;DR:**
 
  * Dependencies are pulled in as part of the image building process.
  * Use your languages native way to specify your requirements.
 
 ## [Logging](#logging)
 
-###TL;DR:
+**TL;DR:**
 
  * There are four different log types (access, error, worker and deploy) available.
 
 ## [Add-ons](#add-ons)
 
-###TL;DR:
+**TL;DR:**
 
  * Add-ons give you access to services like databases and more.
  * Each deployment needs its own set of Add-ons.
 
 ## [Custom Domains](#domains)
 
-###TL;DR:
+**TL;DR:**
 
  * Custom domains are supported via the Alias Add-on.
 
 ## [Scaling](#scaling)
 
-###TL;DR:
+**TL;DR:**
 
  * You can scale up or down anytime by adding more containers or changing the container size.
 
 ## [Performance & Caching](#performance)
 
-###TL;DR:
+**TL;DR:**
 
  * 
 
 ## [Scheduled jobs](#scheduledjobs)
 
-###TL;DR:
+**TL;DR:**
 
  * Scheduled jobs are supported through different Add-ons.
 
 ## [Background workers](#workers)
 
-###TL;DR:
+**TL;DR:**
 
  * Web requests do have a timelimit of 120s.
  * Background workers are the recommended way of handling long running or asynchronous tasks.
 
 ## [Stacks](#stacks)
 
-###TL;DR:
+**TL;DR:**
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu releases first letter.
