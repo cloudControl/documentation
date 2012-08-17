@@ -357,9 +357,9 @@ The loadbalancing and routing tier that's in front of all deployments includes a
 
 You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from cache, and MISS means it did not.
 
-### In Memory Caching
+#### In Memory Caching
 
-Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached available via the [Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [Memcachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
+To make requests that can't use a cookieless domain faster you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [Memcachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
 
 ## Scheduled jobs
 
