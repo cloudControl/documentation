@@ -250,7 +250,7 @@ $config = array(
 ?>
 ~~~
 
-You can display the format and contents of the *creds.json* file locally use the addon.creds command.
+To see the format and contents of the *creds.json* file locally use the addon.creds command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
