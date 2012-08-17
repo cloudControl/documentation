@@ -231,11 +231,11 @@ Most apps share a common application lifecycle consisting of development, stagin
 
 To enable you to determine programatically which deployment your app currently runs in, e.g. to enable debugging output in development deployments but disable it in production deployments, each deployment makes the following set of environment variables available to the apps.
 
- * TMP_DIR: The path to the tmp directory.
- * CRED_FILE: The path of the creds.json file containing the Add-on credentials.
- * DEP_VERSION: The Git or Bazaar version.
- * DEP_NAME: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
- * DEP_ID: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
+ * **TMP_DIR**: The path to the tmp directory.
+ * **CRED_FILE**: The path of the creds.json file containing the Add-on credentials.
+ * **DEP_VERSION**: The Git or Bazaar version.
+ * **DEP_NAME**: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
+ * **DEP_ID**: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
 
 ### Configuration Files
 
