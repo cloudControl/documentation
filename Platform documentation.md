@@ -1,6 +1,6 @@
 # cloudControl Documentation
 
-## [Command line client, web console and API](#interfaces)
+## Command line client, web console and API
 
 **TL;DR:**
 
@@ -10,7 +10,7 @@
 
 To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called cctrl. In addition to the command line client we also offer a web console. Both the CLI as well as the web console however are merely frontends to our RESTful API. For maximum integration into your apps you can use one of our available API libraries.
 
-Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For installation instructions please refer to the [cctrl installation guide](/dev-center/guides/cctrl-installation-guide).
+Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
 
 #### Quick Installtion Windows
 
@@ -33,7 +33,7 @@ $ pip install cctrl
 
 The command line client features a detailed online help. Just append --help or -h to any command that you need more details on.
 
-## [Apps, Users and Deployments](#appsandusers)
+## Apps, Users and Deployments
 
 **TL;DR:**
 
@@ -116,7 +116,7 @@ $ cctrluser key.remove Dohyoonuf7
 
 ### Deployments
 
-Deployments are a distinct version from one of your branches running on the platform and made accessible via a URL. The deployment name needs to match the branch name, with the exception of the master branch which is used by the default deployment. Deployments are completly seperated from each other including runtime environment, file system storage and also all Add-ons including e.g. databases and caches. This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#environments) for more details.
+Deployments are a distinct version from one of your branches running on the platform and made accessible via a URL. The deployment name needs to match the branch name, with the exception of the master branch which is used by the default deployment. Deployments are completly seperated from each other including runtime environment, file system storage and also all Add-ons including e.g. databases and caches. This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) for more details.
 
 You can list all app deployments with the details command.
 
@@ -134,7 +134,7 @@ App
    APP_NAME/stage
 ~~~
 
-## [Version Control & Images](#versioncontrol)
+## Version Control & Images
 
 **TL;DR:**
 
@@ -151,7 +151,7 @@ $ cctrlapp APP_NAME create php --repo [git,bzr]
 
 ### Image Building
 
-On each push to one of your branches a deployment image is built automatically. This image than can be deployed with the deploy command to the deployment matching the branch name. The deployment image includes your apps code as well as your [dependencies](#dependencies).
+On each push to one of your branches a deployment image is built automatically. This image than can be deployed with the deploy command to the deployment matching the branch name. The deployment image includes your apps code as well as your [dependencies](#managing-dependencies).
 
 You can use the cctrlapp push command or your version control systems own push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following to commands are interchangeable. Also note, both require the existence of a branch called dev.
 
@@ -160,21 +160,21 @@ $ cctrlapp APP_NAME/dev push
 $ git push cctrl dev #requires that you have added a git remote called cctrl already
 ~~~
 
-## [Development, Staging and Production Environments](#environments)
+## Development, Staging and Production Environments
 
 **TL;DR:**
 
  * Leverage multiple deployments to support the complete application lifecycle.
  * Each deployment has a set of environment variables to help you configure your app.
 
-## [Managing Dependencies](#dependencies)
+## Managing Dependencies
 
 **TL;DR:**
 
  * Dependencies are pulled in as part of the image building process.
  * Use your languages native way to specify your requirements.
 
-## [Logging](#logging)
+## Logging
 
 **TL;DR:**
 
@@ -203,7 +203,7 @@ Workers are long running background processes. As such, they are not accessible 
 
 The deploy log gives detailed information on the deploy process. With the deploy log you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the new version.
 
-## [Add-ons](#add-ons)
+## Add-ons
 
 **TL;DR:**
 
@@ -300,7 +300,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 }
 ~~~
 
-## [Custom Domains](#domains)
+## Custom Domains
 
 **TL;DR:**
 
@@ -312,9 +312,9 @@ You can use custom domains to access your deployments. To add a domain like *www
 
 All custom domains need to be verified before they start working. To verify a domain in addition to the CNAME also add the verfification code associated with your alias as a TXT record.
 
-Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
 
-## [Scaling](#scaling)
+## Scaling
 
 **TL;DR:**
 
@@ -334,26 +334,26 @@ In addition to controlling the number of containers you can also specify the siz
 
 You can use the Blitz.io Add-on to run synthetic load tests against your deployments to see how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly.
 
-## [Performance & Caching](#performance)
+## Performance & Caching
 
 **TL;DR:**
 
  * 
 
-## [Scheduled jobs](#scheduledjobs)
+## Scheduled jobs
 
 **TL;DR:**
 
  * Scheduled jobs are supported through different Add-ons.
 
-## [Background workers](#workers)
+## Background workers
 
 **TL;DR:**
 
  * Web requests do have a timelimit of 120s.
  * Background workers are the recommended way of handling long running or asynchronous tasks.
 
-## [Stacks](#stacks)
+## Stacks
 
 **TL;DR:**
 
@@ -366,8 +366,8 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
 
 ### Available Stacks
 
- * Luigi: based [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
- * Pinky: based [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
+ * **Luigi**: based [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
+ * **Pinky**: based [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
 
 You can choose the stack per deployment. This is handy for testing new stacks with a seperate deployment before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
 
