@@ -203,6 +203,14 @@ Every time a new version is deployed, the latest or the specified image is downl
 
 **Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
+## Emergency Rollback
+
+If for some reason a new version does not work as expected you can rollback any deployment to a previous version in a matter of seconds. To do so you can check the [deploy log](#deploy-log) for the previously deployed version and then simply use the Git or Bazaar version identifier that's part of the log output to redeploy this version using the deploy command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
+~~~
+
 ## Non Persistent Filesystem
 
 **TL;DR:**
