@@ -226,7 +226,7 @@ Of course adding an Add-on is only the first step. You also need to implement th
 
 The path to the *creds.json* is always available through the CRED_FILE environment variable. Here's a quick example in PHP how to read the file and parse the JSON.
 
-~~~
+~~~php
 <?php
 
 # read the credentials file
