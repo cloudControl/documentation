@@ -222,6 +222,7 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu releases first letter.
 
+
  A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries. Likewise you can use a seperate deployment to test a new stack before your migrate your live deployments.
 
  Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes for security or performance reasons to optimize the stack for its specific purpose on our platform.
