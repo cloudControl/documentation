@@ -201,7 +201,7 @@ Every time a new version is deployed, the latest/specified image is downloaded t
 
 This means, all data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for template caches and the like, because it ensures templates are always the latest version but prevents storage of user uploads.
 
-## Non Persitent Filesystem
+## Non Persistent Filesystem
 
 **TL;DR:**
 
