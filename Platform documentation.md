@@ -219,7 +219,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
  * The filesystem is not persistent.
  * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platforms failover system to recover from node failures.
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platform's failover system to recover from node failures.
 
 For customer uploads like e.g. user profile pictures and more we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on](https://www.cloudcontrol.com/add-ons/mongolab).
 
