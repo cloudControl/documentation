@@ -166,6 +166,13 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 
  * Leverage multiple deployments to support the complete application lifecycle.
  * Each deployment has a set of environment variables to help you configure your app.
+ * Various configuration files are available to adjust common settings according to your apps needs.
+
+### Development, Staging and Production: The Application Lifecycle
+
+### Environment Variables
+
+### Configuration Files
 
 ## Managing Dependencies
 
@@ -264,19 +271,13 @@ if ($string == false) {
 # the file contains a JSON string, decode it and return an associative array
 $creds = json_decode($string, true);
 
-# use credentials to set the configuration for your Add-on
-# replace ADDON_NAME and PARAMETER with Add-on specific values
-$config = array(
-    'VAR1_NAME' => $creds['ADDON_NAME']['PARAMETER_1'],
-    'VAR2_NAME' => $creds['ADDON_NAME']['PARAMETER_2'],  
-    'VAR3_NAME' => $creds['ADDON_NAME']['PARAMETER_3'],
-# e.g. for MYSQLS: 'MYSQLS_HOSTNAME' => $creds['MYSQLS']['MYSQLS_HOSTNAME'],
-);
+# now use the $creds array to configure your app e.g.
+$MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
 
 ?>
 ~~~
 
-To see the format and contents of the *creds.json* file locally use the addon.creds command.
+The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detailed examples how to configure various frameworks using the *creds.json* file. To see the format and contents of the *creds.json* file locally use the addon.creds command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
@@ -319,6 +320,7 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
 **TL;DR:**
 
  * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
+ * User performance monitoring and load testing to determine the optimal scaling settings for your app.
 
 When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size.
 
@@ -338,7 +340,26 @@ You can use the Blitz.io Add-on to run synthetic load tests against your deploym
 
 **TL;DR:**
 
- * 
+ * Reduce the total number of requests that make up a page view.
+ * Cache as far away from your database as possible.
+
+### Optimize For Less Requests
+
+Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. Common techniques to do this is combining and minimizing javascript and css files into one file each and using sprites for images.
+
+### Caching Early
+
+After you have reduced the total number of requests it's recommended to cache as far away from your database as possible. Using far future expires headers to avoid that browsers request ressources at all. The next best way of reducing the number of requests that hit your backends is to cache complete responses in the loadbalancer. For this we offer caching directly in Varnish.
+
+#### Varnish
+
+The loadbalancing and routing tier that's in front of all deployments includes a [Varnish](https://www.varnish-cache.org/) caching proxy. To have your requests cached directly in Varnish and speed up the response time through this, ensure you have set correct cache control headers for the request. Also ensure, that the request does not include a cookie. Cookies are often used to keep state accross requests (e.g. if a user is logged in). To avoid caching responses for logged in users and returning them to other users Varnish is configured to never cache requests with cookies. To be able to cache requests in Varnish for apps that rely on cookies we recommend using a cookieless domain.
+
+You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from cache, and MISS means it did not.
+
+### In Memory Caching
+
+Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached available via the [Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [Memcachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
 
 ## Scheduled jobs
 
@@ -366,8 +387,8 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
 
 ### Available Stacks
 
- * **Luigi**: based [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
- * **Pinky**: based [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
+ * **Luigi** based on [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
+ * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
 
 You can choose the stack per deployment. This is handy for testing new stacks with a seperate deployment before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
 
