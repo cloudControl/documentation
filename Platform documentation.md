@@ -307,11 +307,11 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment gets a *.cloudcontrolled.com* subdomain. The default deployment always answers at *APP_NAME.cloudcontrolled.com* while any additional deployments get a *DEP_NAME.APP_NAME.cloudcontrolled.com* subdomain.
+Each deployment gets a "*.cloudcontrolled.com*" subdomain. The default deployment always answers at `APP_NAME.cloudcontrolled.com` while any additional deployments get a `DEP_NAME.APP_NAME.cloudcontrolled.com` subdomain.
 
-You can use custom domains to access your deployments. To add a domain like "*www.example.com*", "*app.example.com*" or "*secure.example.com*" to one of your deployments simply add them as an alias and add a CNAME pointing to your deployments subdomain. So to point "*www.example.com*" to the default deployment of the app called *awesomeapp* add a CNAME for "*www.example.com*" pointing to "*awesomeapp.cloudcontrolled.com*".
+You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`.
 
-All custom domains need to be verified before they start working. To verify a domain in addition to the CNAME also add the verfification code associated with your alias as a TXT record.
+All custom domains need to be verified before they start working. To verify a domain it is required to also add the provided verfification code as a TXT record.
 
 Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
 
