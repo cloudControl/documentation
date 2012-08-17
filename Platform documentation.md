@@ -14,15 +14,17 @@ Throughout this documentation we will use the CLI as the primary way of controll
 
 #### Quick Installtion Windows
 
-For Windows we offer an installer. Please refer to the latest version of the installer at [Github](https://github.com/cloudControl/cctrl/downloads). The file is named cctrl-x.x-setup.exe.
+For Windows we offer an installer. Please download the latest version of the installer from [Github](https://github.com/cloudControl/cctrl/downloads). The file is named cctrl-x.x-setup.exe.
 
 #### Quick Installtion Linux/Mac
+
+We recommned installing cctrl via pip.
 
 ~~~
 $ pip install cctrl
 ~~~
 
-We recommned installing cctrl via pip. If you don't have pip you can install pip via easy_install (usually part of the python-setuptools package) and then install cctrl.
+If you don't have pip you can install pip via easy_install (usually part of the python-setuptools package) and then install cctrl.
 
 ~~~
 $ easy_install pip
@@ -40,7 +42,7 @@ The command line client features a detailed online help. Just append --help or -
  * A deployment is one version from a branch accessible via a URL. Important: Branch and deployment names need to match.
  * Users can be added to apps to gain access to the repository, its branches and deployments.
 
-cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform most effectively, it's important to understand the basic concept.
+cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform most effectively, it's important to understand the following basic concepts.
 
 ### Apps
 
