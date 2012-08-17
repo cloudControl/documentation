@@ -60,7 +60,7 @@ Apps
  Nr  Name                           Type
    1 myfirstapp                     php
    2 nextbigthing                   php
-   ...
+   [...]
 ~~~
 
 ### Users
@@ -194,7 +194,19 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 
 **TL;DR:**
 
- * You can scale up or down anytime by adding more containers or changing the container size.
+ * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
+
+When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size.
+
+### Horizontal Scaling
+
+Horizontal scaling is controlled by the --min parameter. It specifies the number of containers you have running. Raising --min also increases the availabiltiy in case of node failures.
+
+### Vertical Scaling
+
+In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --max parameter. Valid values are 1 <= x <= 8 and result in x times 128mb. So setting --max to 1 will result in 128mb of RAM available to each one of your containers, while --max 4 or 8 will give you 512mb or 1024mb RAM respectively.
+
+To determine the optimal --max value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app. You can also use the Blitz.io Add-on to run synthetic load tests against your deployments to see how well they performan and determine the optimal scaling settings.
 
 ## [Performance & Caching](#performance)
 
@@ -222,7 +234,26 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu releases first letter.
 
+A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries. Likewise you can use a seperate deployment to test a new stack before your migrate your live deployments.
 
- A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries. Likewise you can use a seperate deployment to test a new stack before your migrate your live deployments.
+Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes for security or performance reasons to optimize the stack for its specific purpose on our platform.
 
- Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes for security or performance reasons to optimize the stack for its specific purpose on our platform.
+### Available Stacks
+
+ * Luigi: based [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
+ * Pinky: based [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
+
+You can choose the stack per deployment. This is handy for testing new stacks with a seperate deployment before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME details
+ name: APP_NAME/DEP_NAME
+ stack: luigi
+ [...]
+~~~
+
+To change the stack of a deployment simply append the --stack command line option to the deploy command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
+~~~
