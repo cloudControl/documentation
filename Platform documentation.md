@@ -6,11 +6,11 @@
 
  * The command line client cctrl is the primary interface.
  * We also offer a web console.
- * For most control and integration it's possible to talk directly to the RESTful API.
+ * For full control and integration it's possible to talk directly to the RESTful API.
 
-To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called cctrl. In addition to the command line client we also offer a web console. Both the CLI as well as the web console however are merely frontends to our RESTful API. For maximum integration into your apps you can use one of our available API libraries.
+To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called *cctrl*. Additionally we also offer a [web console](https://console.cloudcontrolled.com). Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries](https://github.com/cloudControl).
 
-Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
+Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For detailed installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
 
 #### Quick Installtion Windows
 
@@ -18,20 +18,20 @@ For Windows we offer an installer. Please download the latest version of the ins
 
 #### Quick Installtion Linux/Mac
 
-We recommned installing cctrl via pip.
+On Linux and Mac OS we recommned installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
 
 ~~~
 $ pip install cctrl
 ~~~
 
-If you don't have pip you can install pip via easy_install (usually part of the python-setuptools package) and then install cctrl.
+If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
 
 ~~~
 $ easy_install pip
 $ pip install cctrl
 ~~~
 
-The command line client features a detailed online help. Just append --help or -h to any command that you need more details on.
+The command line client features a detailed online help. Just append --help or -h to any command.
 
 ## Apps, Users and Deployments
 
@@ -39,10 +39,10 @@ The command line client features a detailed online help. Just append --help or -
 
  * Apps have a repository, deployments and users.
  * The repository is where your code lives organized in branches.
- * A deployment is one version from a branch accessible via a URL. Important: Branch and deployment names need to match.
+ * A deployment is a running version of a branch accessible via a URL. Important: Branch and deployment names need to match.
  * Users can be added to apps to gain access to the repository, its branches and deployments.
 
-cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform most effectively, it's important to understand the following basic concepts.
+cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform most effectively, it's important to understand the following few basic concepts.
 
 ### Apps
 
@@ -67,7 +67,7 @@ Apps
 
 ### Users
 
-By adding users to an app you can grant fellow developers access to the source code in the repository and allow them to deploy and modify the deployments. Permissions are role based and there are currently two different roles.
+By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploy-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the users [role](#roles).
 
 You can list, add and remove app users using the command line client.
 
@@ -94,18 +94,18 @@ $ cctrlapp APP_NAME user.remove user3
 
 #### Roles
 
- * Owner: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for the apps' consumption. If you plan to have multiple developers work on the same app, it's advisable to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
- * Developer: The default role for users added to an app is the developer role. Developers have full access to the repository as well as all the deployments. Developers can add more developers or even remove existing ones. Developers however can not change the associated billing account or remove the owner.
+ * Owner: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for all his apps' consumption. If you plan to have multiple developers work on the same app, it's recommended to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
+ * Developer: The default role for users added to an app is the developer role. Developers have full access to the repository as well as all the deployments. Developers can add more developers or even remove existing ones. They can even delete deployments and also the app itself. Developers however can not change the associated billing account or remove the owner.
 
 #### Keys
 
-For secure access to the apps repository each developers needs to authenticate via public/private key authentication. You can add a key to your user account using the command line client.
+For secure access to the apps repository each developer needs to authenticate via public/private key authentication. Please refer to the [SSH key guide](https://www.cloudcontrol.com/dev-center/guides/ssh-keys) for details how to create and manage your keys. You can simply add your default key to your user account using the command line client. If it can't find one, cctrl will try to help you create a key.
 
 ~~~
 $ cctrluser key add
 ~~~
 
-You can also list available keys' ids and remove an existing keys using that id.
+You can also list the available keys' ids and remove an existing key using that id.
 
 ~~~
 $ cctrluser key
@@ -116,7 +116,7 @@ $ cctrluser key.remove Dohyoonuf7
 
 ### Deployments
 
-Deployments are a distinct version from one of your branches running on the platform and made accessible via a URL. The deployment name needs to match the branch name, with the exception of the master branch which is used by the default deployment. Deployments are completly seperated from each other including runtime environment, file system storage and also all Add-ons including e.g. databases and caches. This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) for more details.
+Deployments are a running version of your branch made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains). The deployment name needs to match the branch name, with the exception of the master branch which is used by the default deployment. Deployments are started in secure unprivileged linux containers (LXC) completly seperated from each other including runtime environment, file system storage and also all Add-ons like e.g. databases and caches. This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) for why this is a good idea.
 
 You can list all app deployments with the details command.
 
@@ -146,7 +146,7 @@ App
 For version control cloudControl supports Git and Bazaar. When you create an app we try to determine if the current working directory has a .git or .bzr directory. If so, we create the app with Git or Bazaar as version control respectively. If we can't determine this based on the current working directory we fall back to Git as the default. You can always overwrite this using the --repo command line switch.
 
 ~~~
-$ cctrlapp APP_NAME create php --repo [git,bzr]
+$ cctrlapp APP_NAME create php [--repo [git,bzr]]
 ~~~
 
 It's easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
@@ -162,9 +162,9 @@ If yours starts with `ssh://` and ends with `.git` it's using Git. If it starts 
 
 ### Image Building
 
-On each push to one of your branches a deployment image is built automatically. This image than can be deployed with the deploy command to the deployment matching the branch name. The deployment image includes your apps code as well as your [dependencies](#managing-dependencies).
+On each push to one of your branches a deployment image is built automatically. This image than can be deployed with the deploy command to the deployment matching the branch name. Remember for Git the default deployment uses the master branch. The deployment image includes your apps code as well as your dependencies pulled in by the [buildpack](#buildpacks).
 
-You can use the cctrlapp push command or your version control systems own push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following to commands are interchangeable. Also note, both require the existence of a branch called dev.
+You can use the cctrlapp push command or your version control systems own push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
 
 ~~~
 # the cctrlapp push command automatically detects Git or Bazaar
@@ -179,11 +179,13 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as automatic recovy from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
+
 #### Buildpacks
 
-During the push a hook is fired that starts the buildpack execution. A buildpack is a set of scripts that determine how a specific language or framework has to be prepared for and deployed on the cloudControl platform. These buildpacks have originally been created for the Heroku platform, but to make it easier for the open source community to write custom buildpacks for specific frameworks we support the same [buildpack API](https://devcenter.heroku.com/articles/buildpack-api).
+During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how a specific language or framework has to be prepared for and deployed on the cloudControl platform. Most of the buildpacks have originally been created for the Heroku platform, but to make it easier for the open source community to write custom buildpacks for specific frameworks we support the same [buildpack API](https://devcenter.heroku.com/articles/buildpack-api).
 
-Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node, Composer for PHP and so on.
+Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
 
 Which buildpack is going to be used is determined by the application type set when creating the app.
 
@@ -195,11 +197,11 @@ The cloudControl platform supports zero downtime deploys for all deployments. To
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
 
-To deploy a specific version append your version control systems identifier (a hash for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one build during the last push).
+To deploy a specific version append your version control systems identifier (a hash for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
-Every time a new version is deployed, the latest/specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) marks when this process has finished.
+Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
-This means, all data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for template caches and the like, because it ensures templates are always the latest version but prevents storage of user uploads.
+**Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
 ## Non Persistent Filesystem
 
@@ -207,9 +209,9 @@ This means, all data that has been written during runtime of the old version int
 
  * Each container has its own filesystem.
  * The filesystem is not persistent.
- * Store uploads somewhere else.
+ * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is guaranteed to be deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platforms failover system to recover from node failures.
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platforms failover system to recover from node failures.
 
 For customer uploads like e.g. user profile pictures and more we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on](https://www.cloudcontrol.com/add-ons/mongolab).
 
@@ -219,11 +221,11 @@ For customer uploads like e.g. user profile pictures and more we recommend objec
 
  * Leverage multiple deployments to support the complete application lifecycle.
  * Each deployment has a set of environment variables to help you configure your app.
- * Various configuration files are available to adjust common settings according to your apps needs.
+ * Various configuration files are available to adjust runtime settings.
 
 ### Development, Staging and Production: The Application Lifecycle
 
-Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on new featire it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More important even these development/feature or staging deployments also ensure that the new code will work because each deployment using the same [stack](#stacks) is guaranteed to result in an identical runtime environment.
+Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on new feature it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More important even these development/feature or staging deployments also ensure that the new code will work because each deployment using the same [stack](#stacks) is guaranteed to result in an identical runtime environment.
 
 ### Environment Variables
 
@@ -237,12 +239,9 @@ To enable you to determine programatically which deployment your app currently r
 
 ### Configuration Files
 
-## Managing Dependencies
+#### .ccconfig.yaml
 
-**TL;DR:**
-
- * Dependencies are pulled in as part of the image building process.
- * Use your languages native way to specify your requirements.
+#### Procfile
 
 ## Logging
 
@@ -263,34 +262,35 @@ The access log shows each access to your app in an Apache compatible log format.
 
 ### Error Log
 
-The error log shows errors from all components of your app. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the deploy log.
+The error log shows errors from all components of your app. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the [deploy log](#deploy-log).
 
 ### Worker Log
 
-Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, all stdout and stderr output of your workers is redirected to the worker log. The worker log shows the timestamp of when the message was written, the wrk_id of the worker the message came from as well as the actual log line.
+Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, stdout and stderr is redirected to this log. The worker log shows the timestamp of when the message was written, the *wrk_id* of the worker the message came from as well as the actual log line.
 
 ### Deploy Log
 
-The deploy log gives detailed information on the deploy process. With the deploy log you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the new version.
+The deploy log gives detailed information on the deploy process. With it you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the [new version](#deploying-new-versions).
 
 ## Add-ons
 
 **TL;DR:**
 
- * Add-ons give you access to services like databases and more.
+ * Add-ons give you access to additional services like databases and more.
  * Each deployment needs its own set of Add-ons.
  * Add-on credentials are automatically available to your app via the *creds.json* file.
 
 ### Managing Add-ons
 
-Add-ons add additional services to your deployment. The [Add-on marketplace](https://www.cloudcontrol.com/add-ons) offers a wide variety of different Add-ons. Think of it as an app store dedicated to developers. Add-ons can be different databases technologies, caching, performance monitoring or logging services or even complete backend API or billing solutions.
+Add-ons add additional services to your deployment. The [Add-on marketplace](https://www.cloudcontrol.com/add-ons) offers a wide variety of different Add-ons. Think of it as an app store dedicated to developers. Add-ons can be different databases technologies, caching, performance monitoring or logging services or even complete backend APIs or billing solutions.
 
-Each deployment needs its own set of Add-ons. So if your app needs a MySQL database and you have a production, a development and a staging environment all three need their own MySQL Add-ons. Each Add-on comes in different plans allowing you to chose a bigger database for your high traffic production deployment and a smaller one for the development or staging environments.
+Each deployment needs its own set of Add-ons. So if your app needs a MySQL database and you have a production, a development and a staging environment all three need their own MySQL Add-ons. Each Add-on comes in different plans allowing you to chose a more powerful database for your high traffic production deployment and a smaller one for the development or staging environments.
 
 You can see the available Add-on plans on the [Add-on marketplace website](https://www.cloudcontrol.com/add-ons) or with the addon.list command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.list
+[...]
 ~~~
 
 Adding an Add-on is just as easy.
@@ -316,6 +316,16 @@ Addon                    : memcachier.dev
 [...]
 ~~~
 
+To upgrade or downgrade ann Add-on use the respective command followed by the Add-on name you upgrade from to the Add-on name you upgrade to.
+
+~~~
+# upgrade
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
+# downgrade
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_BIG_ADDON TO_SMALL_ADDON
+~~~
+**Remember:** As in all examples during this documentation replace all uppercase placeholders with their respective values.
+
 ### Add-on Credentials
 
 Of course adding an Add-on is only the first step. You also need to implement the functionality in your application code. To make this super easy also accross the different deployments it's highly recommended to always read the credentials from the *creds.json* file. This ensures, that your app is always talking to the right database and you can freely merge your branches without having to worry about keeping the credentials in sync.
@@ -334,7 +344,7 @@ if ($string == false) {
 # the file contains a JSON string, decode it and return an associative array
 $creds = json_decode($string, true);
 
-# now use the $creds array to configure your app e.g.
+# now use the $creds array to configure your app e.g.:
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
 
 ?>
@@ -364,17 +374,18 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 }
 ~~~
 
-## Custom Domains
+## Provided Subdomains and Custom Domains
 
 **TL;DR:**
 
+ * Each deployment is provided a `.cloudcontrolled.com` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment gets a "*.cloudcontrolled.com*" subdomain. The default deployment always answers at `APP_NAME.cloudcontrolled.com` while any additional deployments get a `DEP_NAME.APP_NAME.cloudcontrolled.com` subdomain.
+Each deployment gets a `.cloudcontrolled.com` subdomain. The default deployment always answers at `APP_NAME.cloudcontrolled.com` while any additional deployments get a `DEP_NAME.APP_NAME.cloudcontrolled.com` subdomain.
 
-You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`.
+You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on](https://www.cloudcontrol.com/add-ons/alias) also support mapping wildcard domains like `*.example.com` to one of your deployments.
 
-All custom domains need to be verified before they start working. To verify a domain it is required to also add the provided verfification code as a TXT record.
+All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verfification code as a TXT record.
 
 Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
 
@@ -383,13 +394,13 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
 **TL;DR:**
 
  * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
- * User performance monitoring and load testing to determine the optimal scaling settings for your app.
+ * Use performance monitoring and load testing to determine the optimal scaling settings for your app.
 
 When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size.
 
 ### Horizontal Scaling
 
-Horizontal scaling is controlled by the --min parameter. It specifies the number of containers you have running. Raising --min also increases the availabiltiy in case of node failures.
+Horizontal scaling is controlled by the --min parameter. It specifies the number of containers you have running. Raising --min also increases the availabiltiy in case of node failures. Deployments with --min 1 (the default) are unavailable for a few minutes after a node failure until the failover process has finished. Set --min >=2 if you want to avoid downtime like this.
 
 ### Vertical Scaling
 
@@ -397,7 +408,7 @@ In addition to controlling the number of containers you can also specify the siz
 
 ### Choosing Optimal Settings
 
-You can use the Blitz.io Add-on to run synthetic load tests against your deployments to see how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly.
+You can use the Blitz.io and New Relic Add-ons to run synthetic load tests against your deployments and analyze how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
 
 ## Performance & Caching
 
@@ -407,42 +418,37 @@ You can use the Blitz.io Add-on to run synthetic load tests against your deploym
  * Cache as far away from your database as possible.
  * Try to rely on cache breakers instead of flushing.
 
-### Optimize For Less Requests
+### Reduce the Number of Requests
 
 Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. Common techniques to do this is combining and minimizing javascript and css files into one file each and using sprites for images.
 
 ### Caching Early
 
-After you have reduced the total number of requests it's recommended to cache as far away from your database as possible. Using far future expires headers to avoid that browsers request ressources at all. The next best way of reducing the number of requests that hit your backends is to cache complete responses in the loadbalancer. For this we offer caching directly in Varnish.
+After you have reduced the total number of requests it's recommended to cache as far away from your database as possible. Using far future expire headers to avoid that browsers request ressources at all. The next best way of reducing the number of requests that hit your backends is to cache complete responses in the loadbalancer. For this we offer caching directly in the loadbalancing and routing tier.
 
 #### Caching Proxy
 
 The loadbalancing and routing tier that's in front of all deployments includes a [Varnish](https://www.varnish-cache.org/) caching proxy. To have your requests cached directly in Varnish and speed up the response time through this, ensure you have set correct cache control headers for the request. Also ensure, that the request does not include a cookie. Cookies are often used to keep state accross requests (e.g. if a user is logged in). To avoid caching responses for logged in users and returning them to other users Varnish is configured to never cache requests with cookies. To be able to cache requests in Varnish for apps that rely on cookies we recommend using a cookieless domain.
 
-You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from cache, and MISS means it did not.
+You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from cache, and MISS means it was not.
 
-#### In Memory Caching
+#### In-Memory Caching
 
 To make requests that can't use a cookieless domain faster you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [Memcachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
 
 ### Cache Breakers
 
-When caching requests client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same, the answer is used from cache until the expiration time. As part of every deploy all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. But when using far future expire headers as recommended above it's this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
+When caching requests client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same and and the cached response has not expired, the request is answered from cache. As part of every deploy all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. But when using far future expire headers as recommended above this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
 
-As part of the set of [environment variables](#environment-variables) in the deployment runtime environment the DEP_VERSION environment variable is made available to the app. The value is either the Git version hash or the Bazaar revision number depending on what version control system your app uses. If you want to break caches when a new version is deployed you can use the DEP_VERSION to accomplish this.
+As part of the set of [environment variables](#environment-variables) in the deployment runtime environment the DEP_VERSION is made available to the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
 
-This technique works for URLs as well as keys in in memory caches like Memcache. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcache that you want refreshed for each new version. Since Memcache only allows flushing the complete cache you would lose all cached values. Including the DEP_VERSION as part of the key of the cached values you want refreshed ensures the new version does not use the old cached values because the keys changed.
+This technique works for URLs as well as keys in in-memory caches like Memcached. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache you would lose all cached values. Including the DEP_VERSION as part of the key of the cached values you want refreshed is an easy way to ensure the cache gets refreshed.
 
-## Scheduled jobs
+## Scheduled Jobs and Background Workers
 
 **TL;DR:**
 
  * Scheduled jobs are supported through different Add-ons.
-
-## Background workers
-
-**TL;DR:**
-
  * Web requests do have a timelimit of 120s.
  * Background workers are the recommended way of handling long running or asynchronous tasks.
 
@@ -451,9 +457,9 @@ This technique works for URLs as well as keys in in memory caches like Memcache.
 **TL;DR:**
 
  * Stacks define the common runtime environment.
- * They are based on Ubuntu and stack names match the Ubuntu releases first letter.
+ * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
 
-A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries. Likewise you can use a seperate deployment to test a new stack before your migrate your live deployments.
+A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
 Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes when necessary for security or performance reasons to optimize the stack for its specific purpose on our platform.
 
@@ -462,7 +468,7 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
  * **Luigi** based on [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
  * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
 
-You can choose the stack per deployment. This is handy for testing new stacks with a seperate deployment before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
+You can change the stack per deployment. This is handy for testing new stacks before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME details
