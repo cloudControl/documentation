@@ -309,7 +309,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 
 Each deployment gets a *.cloudcontrolled.com* subdomain. The default deployment always answers at *APP_NAME.cloudcontrolled.com* while any additional deployments get a *DEP_NAME.APP_NAME.cloudcontrolled.com* subdomain.
 
-You can use custom domains to access your deployments. To add a domain like *www.example.com*, *app.example.com* or *secure.example.com* to one of your deployments simply add them as an alias and add a CNAME pointing to your deployments subdomain. So to point *www.example.com* to the default deployment of the app called *awesomeapp* add a CNAME for *www.example.com* pointing to *awesomeapp.cloudcontrolled.com*.
+You can use custom domains to access your deployments. To add a domain like "*www.example.com*", "*app.example.com*" or "*secure.example.com*" to one of your deployments simply add them as an alias and add a CNAME pointing to your deployments subdomain. So to point "*www.example.com*" to the default deployment of the app called *awesomeapp* add a CNAME for "*www.example.com*" pointing to "*awesomeapp.cloudcontrolled.com*".
 
 All custom domains need to be verified before they start working. To verify a domain in addition to the CNAME also add the verfification code associated with your alias as a TXT record.
 
