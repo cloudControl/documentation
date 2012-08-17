@@ -94,8 +94,8 @@ $ cctrlapp APP_NAME user.remove user3
 
 #### Roles
 
- * Owner: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for all his apps' consumption. If you plan to have multiple developers work on the same app, it's recommended to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
- * Developer: The default role for users added to an app is the developer role. Developers have full access to the repository as well as all the deployments. Developers can add more developers or even remove existing ones. They can even delete deployments and also the app itself. Developers however can not change the associated billing account or remove the owner.
+ * **Owner**: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for all his apps' consumption. If you plan to have multiple developers work on the same app, it's recommended to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
+ * **Developer**: The default role for users added to an app is the developer role. Developers have full access to the repository as well as all the deployments. Developers can add more developers or even remove existing ones. They can even delete deployments and also the app itself. Developers however can not change the associated billing account or remove the owner.
 
 #### Keys
 
@@ -143,7 +143,7 @@ App
 
 ### Supported Version Control Systems
 
-For version control cloudControl supports Git and Bazaar. When you create an app we try to determine if the current working directory has a .git or .bzr directory. If so, we create the app with Git or Bazaar as version control respectively. If we can't determine this based on the current working directory we fall back to Git as the default. You can always overwrite this using the --repo command line switch.
+For version control cloudControl supports Git ([quick Git tutorial](http://rogerdudler.github.com/git-guide/)) and Bazaar ([Bazaar in five minutes](http://doc.bazaar.canonical.com/latest/en/mini-tutorial/)). When you create an app we try to determine if the current working directory has a .git or .bzr directory. If so, we create the app with Git or Bazaar as version control respectively. If we can't determine this based on the current working directory we fall back to Git as the default. You can always overwrite this using the --repo command line switch.
 
 ~~~
 $ cctrlapp APP_NAME create php [--repo [git,bzr]]
@@ -404,7 +404,7 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
  * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
  * Use performance monitoring and load testing to determine the optimal scaling settings for your app.
 
-When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size.
+When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and routing tier ensures efficient distribution of incoming requests accross all available containers.
 
 ### Horizontal Scaling
 
