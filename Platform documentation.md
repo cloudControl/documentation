@@ -165,6 +165,7 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 **TL;DR:**
 
  * Leverage multiple deployments to support the complete application lifecycle.
+ * Each deployment has a set of environment variables to help you configure your app.
 
 ## [Managing Dependencies](#dependencies)
 
@@ -178,6 +179,29 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 **TL;DR:**
 
  * There are four different log types (access, error, worker and deploy) available.
+
+To see the log output in a *tail -f* like fashion use the log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
+[...]
+~~~
+
+### Access Log
+
+The access log shows each access to your app in an Apache compatible log format.
+
+### Error Log
+
+The error log shows errors from all components of your app. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the deploy log.
+
+### Worker Log
+
+Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, all stdout and stderr output of your workers is redirected to the worker log. The worker log shows the timestamp of when the message was written, the wrk_id of the worker the message came from as well as the actual log line.
+
+### Deploy Log
+
+The deploy log gives detailed information on the deploy process. With the deploy log you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the new version.
 
 ## [Add-ons](#add-ons)
 
@@ -222,7 +246,7 @@ Addon                    : memcachier.dev
 [...]
 ~~~
 
-### Using Add-ons In Your Code
+### Add-on Credentials
 
 Of course adding an Add-on is only the first step. You also need to implement the functionality in your application code. To make this super easy also accross the different deployments it's highly recommended to always read the credentials from the *creds.json* file. This ensures, that your app is always talking to the right database and you can freely merge your branches without having to worry about keeping the credentials in sync.
 
