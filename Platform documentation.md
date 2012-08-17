@@ -48,7 +48,7 @@ cloudControl PaaS uses a distinct set of naming conventions. To understand how t
 
 Apps are a container for the repository and its branches, deployments and users. Creating an app allows you to add or remove users to an app giving them access to the source code as well as allowing them to manage the deployments.
 
-Creating an app is easy. Simply specify a name and the desired type.
+Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks) to use.
 
 ~~~
 $ cctrlapp APP_NAME create php
@@ -139,7 +139,7 @@ App
 **TL;DR:**
 
  * Git and Bazaar are the supported version control systems.
- * When you push a branch a read only image of your code is built ready to be deployed.
+ * When you push a branch an image of your code is built ready to be deployed.
 
 ### Supported Version Control Systems
 
@@ -149,6 +149,17 @@ For version control cloudControl supports Git and Bazaar. When you create an app
 $ cctrlapp APP_NAME create php --repo [git,bzr]
 ~~~
 
+It's easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
+
+~~~
+$ cctrlapp APP_NAME details
+App
+ Name: APP_NAME                       Type: php        Owner: user1
+ Repository: ssh://APP_NAME@cloudcontrolled.com/repository.git
+ [...]
+~~~
+If yours starts with `ssh://` and ends with `.git` it's using Git. If it starts with `bzr+ssh://` it's using Bazaar.
+
 ### Image Building
 
 On each push to one of your branches a deployment image is built automatically. This image than can be deployed with the deploy command to the deployment matching the branch name. The deployment image includes your apps code as well as your [dependencies](#managing-dependencies).
@@ -156,9 +167,51 @@ On each push to one of your branches a deployment image is built automatically. 
 You can use the cctrlapp push command or your version control systems own push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following to commands are interchangeable. Also note, both require the existence of a branch called dev.
 
 ~~~
+# the cctrlapp push command automatically detects Git or Bazaar
 $ cctrlapp APP_NAME/dev push
-$ git push cctrl dev #requires that you have added a git remote called cctrl already
+
+# it's also possible to push using Git directly
+$ git remote add cctrl REPO_URL #adding the remote is required only the first time
+$ git push cctrl dev
+
+# or push using Bazaar directly
+# the --remember parameter remembers the REPO_URL as a default
+$ bzr push --remember REPO_URL
 ~~~
+
+#### Buildpacks
+
+During the push a hook is fired that starts the buildpack execution. A buildpack is a set of scripts that determine how a specific language or framework has to be prepared for and deployed on the cloudControl platform. These buildpacks have originally been created for the Heroku platform, but to make it easier for the open source community to write custom buildpacks for specific frameworks we support the same [buildpack API](https://devcenter.heroku.com/articles/buildpack-api).
+
+Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node, Composer for PHP and so on.
+
+Which buildpack is going to be used is determined by the application type set when creating the app.
+
+## Deploying New Versions
+
+The cloudControl platform supports zero downtime deploys for all deployments. To deploy a new version use the command line's deploy command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy
+~~~
+
+To deploy a specific version append your version control systems identifier (a hash for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one build during the last push).
+
+Every time a new version is deployed, the latest/specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) marks when this process has finished.
+
+This means, all data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for template caches and the like, because it ensures templates are always the latest version but prevents storage of user uploads.
+
+## Non Persitent Filesystem
+
+**TL;DR:**
+
+ * Each container has its own filesystem.
+ * The filesystem is not persistent.
+ * Store uploads somewhere else.
+
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is guaranteed to be deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platforms failover system to recover from node failures.
+
+For customer uploads like e.g. user profile pictures and more we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on](https://www.cloudcontrol.com/add-ons/mongolab).
 
 ## Development, Staging and Production Environments
 
@@ -170,7 +223,17 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 
 ### Development, Staging and Production: The Application Lifecycle
 
+Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on new featire it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More important even these development/feature or staging deployments also ensure that the new code will work because each deployment using the same [stack](#stacks) is guaranteed to result in an identical runtime environment.
+
 ### Environment Variables
+
+To enable you to determine programatically which deployment your app currently runs in, e.g. to enable debugging output in development deployments but disable it in production deployments, each deployment makes the following set of environment variables available to the apps.
+
+ * TMP_DIR: The path to the tmp directory.
+ * CRED_FILE: The path of the creds.json file containing the Add-on credentials.
+ * DEP_VERSION: The Git or Bazaar version.
+ * DEP_NAME: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
+ * DEP_ID: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
 
 ### Configuration Files
 
@@ -342,6 +405,7 @@ You can use the Blitz.io Add-on to run synthetic load tests against your deploym
 
  * Reduce the total number of requests that make up a page view.
  * Cache as far away from your database as possible.
+ * Try to rely on cache breakers instead of flushing.
 
 ### Optimize For Less Requests
 
@@ -360,6 +424,14 @@ You can check if a request was cached in Varnish by checking the response's *X-v
 #### In Memory Caching
 
 To make requests that can't use a cookieless domain faster you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [Memcachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
+
+### Cache Breakers
+
+When caching requests client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same, the answer is used from cache until the expiration time. As part of every deploy all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. But when using far future expire headers as recommended above it's this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
+
+As part of the set of [environment variables](#environment-variables) in the deployment runtime environment the DEP_VERSION environment variable is made available to the app. The value is either the Git version hash or the Bazaar revision number depending on what version control system your app uses. If you want to break caches when a new version is deployed you can use the DEP_VERSION to accomplish this.
+
+This technique works for URLs as well as keys in in memory caches like Memcache. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcache that you want refreshed for each new version. Since Memcache only allows flushing the complete cache you would lose all cached values. Including the DEP_VERSION as part of the key of the cached values you want refreshed ensures the new version does not use the old cached values because the keys changed.
 
 ## Scheduled jobs
 
