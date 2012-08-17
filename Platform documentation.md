@@ -183,12 +183,110 @@ $ git push cctrl dev #requires that you have added a git remote called cctrl alr
 
  * Add-ons give you access to services like databases and more.
  * Each deployment needs its own set of Add-ons.
+ * Add-on credentials are automatically available to your app via the *creds.json* file.
+
+### Managing Add-ons
+
+Add-ons add additional services to your deployment. The [Add-on marketplace](https://www.cloudcontrol.com/add-ons) offers a wide variety of different Add-ons. Think of it as an app store dedicated to developers. Add-ons can be different databases technologies, caching, performance monitoring or logging services or even complete backend API or billing solutions.
+
+Each deployment needs its own set of Add-ons. So if your app needs a MySQL database and you have a production, a development and a staging environment all three need their own MySQL Add-ons. Each Add-on comes in different plans allowing you to chose a bigger database for your high traffic production deployment and a smaller one for the development or staging environments.
+
+You can see the available Add-on plans on the [Add-on marketplace website](https://www.cloudcontrol.com/add-ons) or with the addon.list command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.list
+~~~
+
+Adding an Add-on is just as easy.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
+~~~
+As always replace the placeholders written in uppercase with their respective values.
+
+To get the list of current Add-ons for a deployment use the addon command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon
+Addon                    : alias.free
+
+Addon                    : newrelic.standard
+[...]
+
+Addon                    : blitz.250
+[...]
+
+Addon                    : memcachier.dev
+[...]
+~~~
+
+### Using Add-ons In Your Code
+
+Of course adding an Add-on is only the first step. You also need to implement the functionality in your application code. To make this super easy also accross the different deployments it's highly recommended to always read the credentials from the *creds.json* file. This ensures, that your app is always talking to the right database and you can freely merge your branches without having to worry about keeping the credentials in sync.
+
+The path to the *creds.json* is always available through the CRED_FILE environment variable. Here's a quick example in PHP how to read the file and parse the JSON.
+
+~~~
+<?php
+
+# read the credentials file
+$string = file_get_contents($_ENV['CRED_FILE'], false);
+if ($string == false) {
+    die('FATAL: Could not read credentials file');
+}
+
+# the file contains a JSON string, decode it and return an associative array
+$creds = json_decode($string, true);
+
+# use credentials to set the configuration for your Add-on
+# replace ADDON_NAME and PARAMETER with Add-on specific values
+$config = array(
+    'VAR1_NAME' => $creds['ADDON_NAME']['PARAMETER_1'],
+    'VAR2_NAME' => $creds['ADDON_NAME']['PARAMETER_2'],  
+    'VAR3_NAME' => $creds['ADDON_NAME']['PARAMETER_3'],
+# e.g. for MYSQLS: 'MYSQLS_HOSTNAME' => $creds['MYSQLS']['MYSQLS_HOSTNAME'],
+);
+
+?>
+~~~
+
+You can display the format and contents of the *creds.json* file locally use the addon.creds command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.creds
+{
+    "BLITZ": {
+        "BLITZ_API_KEY": "SOME_SECRET_API_KEY", 
+        "BLITZ_API_USER": "SOME_USER_ID"
+    }, 
+    "MEMCACHIER": {
+        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD", 
+        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com", 
+        "MEMCACHIER_USERNAME": "SOME_USERNAME"
+    },
+    "MYSQLS": {
+        "MYSQLS_DATABASE": "SOME_DB_NAME", 
+        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com", 
+        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD", 
+        "MYSQLS_PORT": "3306", 
+        "MYSQLS_USERNAME": "SOME_USERNAME"
+    }
+}
+~~~
 
 ## [Custom Domains](#domains)
 
 **TL;DR:**
 
  * Custom domains are supported via the Alias Add-on.
+
+Each deployment gets a *.cloudcontrolled.com* subdomain. The default deployment always answers at *APP_NAME.cloudcontrolled.com* while any additional deployments get a *DEP_NAME.APP_NAME.cloudcontrolled.com* subdomain.
+
+You can use custom domains to access your deployments. To add a domain like *www.example.com*, *app.example.com* or *secure.example.com* to one of your deployments simply add them as an alias and add a CNAME pointing to your deployments subdomain. So to point *www.example.com* to the default deployment of the app called *awesomeapp* add a CNAME for *www.example.com* pointing to *awesomeapp.cloudcontrolled.com*.
+
+All custom domains need to be verified before they start working. To verify a domain in addition to the CNAME also add the verfification code associated with your alias as a TXT record.
+
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
 
 ## [Scaling](#scaling)
 
@@ -204,9 +302,11 @@ Horizontal scaling is controlled by the --min parameter. It specifies the number
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --max parameter. Valid values are 1 <= x <= 8 and result in x times 128mb. So setting --max to 1 will result in 128mb of RAM available to each one of your containers, while --max 4 or 8 will give you 512mb or 1024mb RAM respectively.
+In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --max parameter. Valid values are 1 <= x <= 8 and result in x times 128mb. So setting --max to 1 will result in 128mb of RAM available to each one of your containers, while --max 4 or 8 will give you 512mb or 1024mb RAM respectively. To determine the optimal --max value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
 
-To determine the optimal --max value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app. You can also use the Blitz.io Add-on to run synthetic load tests against your deployments to see how well they performan and determine the optimal scaling settings.
+### Choosing Optimal Settings
+
+You can use the Blitz.io Add-on to run synthetic load tests against your deployments to see how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly.
 
 ## [Performance & Caching](#performance)
 
