@@ -29,7 +29,7 @@ To call an URL with the specific interval you write it as the parameter:
 ~~~
 # for the default deployment
 $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudcontrolled.com
-# for any additional deplyoment
+# for any additional deployment
 $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
 ~~~
 
