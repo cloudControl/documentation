@@ -33,7 +33,7 @@ $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudco
 $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
 ~~~
 
-You can only add cron jobs calling a verified alias of the deployment. The Cron add-on supports http basic authentication. It is recommended to use https when sending credentials.
+You can only add cron jobs calling a verified alias of the deployment. The Cron add-on supports http basic authentication. It is recommended to use https when sending credentials. Please note, https via piggyback ssl is not available for non-default deployments due to the `*.cloudcontrolled.com` wildcard certificate not being valid for `*.*.cloudcontrolled.com`.
 
 ## List Cron overview
 
