@@ -18,14 +18,14 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your domain. This is an example of a valid TXT record as used for our own www.cloudcontrol.com domain.
  
  ~~~
-cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
+ cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
  ~~~
  
  Setting the TXT record on the root domain automatically works if you want to verifiy multiple domains like e.g. www.example.com and secure.example.com with just one TXT record.
  
- 1. Add a CNAME pointing to the provided ´APP_NAME.cloudcontrolled.com´ subdomain.
+ 1. Add a CNAME pointing to the provided `.cloudcontrolled.com` subdomain.
  
- In addition to the TXT record, go ahead and also add a CNAME pointing to your apps ´.cloudcontrolled.com´ subdomain. Use the command line clients alias command to show the one specific to your deployment.
+ In addition to the TXT record, go ahead and also add a CNAME pointing to your apps `.cloudcontrolled.com` subdomain. Use the command line client's alias command to show the one specific to your deployment.
  
  ~~~
  # for the default deployment
