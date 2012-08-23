@@ -10,6 +10,8 @@ The Cron add-on allows you to call an URL in a specific interval, e.g. daily or 
 
 Cronjobs are regular requests against your app and are subject the the same 120s timelimit.
 
+If you need more control over when and how often tasks are run and/or have tasks that take longer than 120 seconds we recommend using the [Worker](https://www.cloudcontrol.com/add-ons/worker) or [IronWorker](https://www.cloudcontrol.com/add-ons/iron_worker) add-on. There are also the [IronMQ](https://www.cloudcontrol.com/add-ons/iron_mq) and the [CloudAMQP](https://www.cloudcontrol.com/add-ons/cloudamqp) message queues available that can be used to dispatch tasks to the workers.
+
 ## Adding the Cron add-on
 
 Before you can add a Cron job, the add-on itself has to be added:
