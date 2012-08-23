@@ -21,7 +21,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
  ~~~
  
- Setting the TXT record on the root domain automatically works if you want to verifiy multiple domains like e.g. www.example.com and secure.example.com with just one TXT record.
+ Setting the TXT record on the root domain automatically works if you want to verifiy multiple domains like e.g. `www.example.com` and `secure.example.com` with just one TXT record.
  
  1. Add a CNAME pointing to the provided `.cloudcontrolled.com` subdomain.
  
