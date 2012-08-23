@@ -8,6 +8,8 @@ On UNIX systems [cronjobs](http://en.wikipedia.org/wiki/Cron) are commands that 
 
 The Cron add-on allows you to call an URL in a specific interval, e.g. daily or hourly. When you add an hourly cron at 2.45pm, the next call will run at 3.45pm. For the daily Cron it would reoccur the next day at 2.45pm. The Cron add-on does not guarantee a URL is only called once per interval.
 
+Cronjobs are regular requests against your app and are subject the the same 120s timelimit.
+
 ## Adding the Cron add-on
 
 Before you can add a Cron job, the add-on itself has to be added:
@@ -23,10 +25,13 @@ As always the different options are listed on the [Cron add-on](https://www.clou
 To call an URL with the specific interval you write it as the parameter:
 
 ~~~
+# for the default deployment
 $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudcontrolled.com
+# for any additional deplyoment
+$ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
 ~~~
 
-You can only add cron jobs calling a verified alias of the deployment.
+You can only add cron jobs calling a verified alias of the deployment. The Cron add-on supports http basic authentication. It is recommended to use https when sending credentials.
 
 ## List Cron overview
 
