@@ -1,4 +1,4 @@
-# Dedicated MySQL Add-on
+# MySQLd: Dedicated MySQL Add-on
 
 High available dedicated MySQL databases are available for mission critical production deployments. The dedicated MySQL Add-on is based on [Amazon RDS](http://aws.amazon.com/rds/) and is using master-slave replicated Multi-AZ instances. Read slaves or reserved instances are currently not supported via the Add-on but you can always create a custom RDS instance in the EU region and connect your app to that. We recommend using the [Config add-on](https://www.cloudcontrol.com/add-ons/config) to make the credentials of the self managed RDS instance available to your app.
 

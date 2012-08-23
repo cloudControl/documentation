@@ -1,4 +1,4 @@
-# Shared MySQL Add-on
+# MySQLs: Shared MySQL Add-on
 
 Every deployment can access a highly available shared MySQL add-on based on [Amazon RDS](http://aws.amazon.com/rds/). The shared MySQL add-on is recommended for development and low traffic apps only. For medium to high traffic apps we recommend one of the dedicated [MySQLd add-on](https://www.cloudcontrol.com/add-ons/mysqld) plans.
 
