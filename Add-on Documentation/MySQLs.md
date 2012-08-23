@@ -41,28 +41,13 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
 
 All instances are master-slave replicated accross two different availability zones. In case of a failure of the master, an automatic failover to the slave will trigger to restore availability. This failover process takes usually between 3 and 10 minutes.
 
-## Database credentials
+## Database Credentials
 
-### Internal access credentials
+### Internal Access
 
-For the add-on credentials we provide a json file. You can read out the location of the file from the env variable `CRED_FILE`. The benefit of using the environment variable is that you don't need to hardcode the add-on credentials, so if the add-on vendor changes the credentials, your app still works without your intervention. See an example of code reading the `CRED_FILE` variable here.
+It's recommended to the read database credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/platform-documentation#add-on-credentials) in the general documentation.
 
- 
-
-The JSON file has the following structure:
-~~~
-{
-   "MYSQLS":{
-      "MYSQLS_DATABASE":"depx11xxx22",
-      "MYSQLS_PASSWORD":"asdfasdfasdf",
-      "MYSQLS_PORT":"3306",
-      "MYSQLS_HOSTNAME":"mysqlsdb.asdf.eu-1.rds.amazonaws.com",
-      "MYSQLS_USERNAME":"depx11xxx22"
-   }
-}
-~~~
-
-### External access
+### External Access
 
 External access to the MySQLs add-on is available through an SSL encrypted connection by following these simple steps.
 
@@ -83,21 +68,21 @@ Addon : mysqls.512mb
 
 Settings
 
-MYSQLS_PASSWORD    : kIYUZGknx6cy
-MYSQLS_USERNAME    : dep12345678
-MYSQLS_HOSTNAME    : mysqlddb.io9si2var48.eu-west-1.rds.amazonaws.com:3306
-MYSQLS_DATABASE    : dep12345678
+MYSQLS_PASSWORD    : SOME_SECRET_PASSWORD
+MYSQLS_USERNAME    : SOME_SECRET_USERNAME
+MYSQLS_HOSTNAME    : SOME_HOST.eu-west-1.rds.amazonaws.com:3306
+MYSQLS_DATABASE    : SOME_DATABASE_NAME
 ~~~
 
 Likewise imports and exports are equally simple.
 
 To **export** your data use the mysqldump command.
 ~~~
-$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE > MYSQL_DATABASE.sql
+$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE > MYSQLS_DATABASE.sql
 ~~~
 
 To **import** an sql file into a MySQL database use the following command.
 ~~~
-$ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE < MYSQL_DATABASE.sql
+$ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
 ~~~
 
