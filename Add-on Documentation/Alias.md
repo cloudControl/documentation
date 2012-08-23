@@ -1,74 +1,104 @@
 # Alias Add-on
 
-Adding custom domains to a deployment is supported via the Alias add-on. The process requires basic knowledge about how the DNS system works. To add a custom domain follow the following simple steps.
+Adding custom domains to a deployment is supported via the Alias add-on. The process requires basic knowledge about how the DNS system works. To add a custom domain follow the following simple steps **for each domain**.
+
+## Adding an Alias
 
  1. Get the verification code.
- ## Verification code
-
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
  $ cctrlapp APP_NAME/DEP_NAME alias APP_NAME.cloudcontrolled.com
  ~~~
 
- **The verification code is case sensitive and includes a space after the colon.**
+ The verification code is case sensitive and includes a space after the colon.
 
  1. Add it as a TXT record to your domain.
+ 
+ Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your domain. This is an example of a valid TXT record as used for our own www.cloudcontrol.com domain.
+ 
+ ~~~
+cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
+ ~~~
+ 
+ Setting the TXT record on the root domain automatically works if you want to verifiy multiple domains like e.g. www.example.com and secure.example.com with just one TXT record.
+ 
  1. Add a CNAME pointing to the provided ´APP_NAME.cloudcontrolled.com´ subdomain.
+ 
+ In addition to the TXT record, go ahead and also add a CNAME pointing to your apps ´.cloudcontrolled.com´ subdomain. Use the command line clients alias command to show the one specific to your deployment.
+ 
+ ~~~
+ # for the default deployment
+  $ cctrlapp APP_NAME/default alias
+ Aliases
+ name                                                         default  verified
+ APP_NAME.cloudcontrolled.com                                        1        1
+ # for any additional deployment
+ $ cctrlapp APP_NAME/DEP_NAME alias
+ Aliases
+ name                                                         default  verified
+ DEP_NAME.APP_NAME.cloudcontrolled.com                               1        1
+ ~~~
+ 
+ The resulting CNAME record should look something like this.
+ 
+ ~~~
+ www.cloudcontrol.com.	1593	IN	CNAME	www2.cloudcontrolled.com.
+ ~~~
+ 
  1. Add one alias per domain to your deployment.
+ 
+ Next add the domain as an alias to your deployment using the alias.add command.
+ 
+ ~~~
+ $ cctrlapp APP_NAME/DEP_NAME alias.add www.example.com
+ ~~~
+ 
+ You should now see your domain in the deployment's list of aliases.
+ 
+ ~~~
+ $ cctrlapp APP_NAME/DEP_NAME alias
+ Aliases
+ name                                                         default  verified
+ www.example.com                                                     0        0
+ [...]
+ ~~~
+ 
+ The verification takes between 15 minutes and 24 hours so please be patient.
+ 
  1. Wait for the DNS changes to propagate.
 
-
-
-Sub-Domain
-Sub-domains can be easily pointed to your deployment with a CNAME entry: 
-
-
-Watch out that the text record does not include line breaks.
-
-Alias.free and Alias.wildcard
-
-Alias.free is free of costs and automatically added to each deployment. With this add-on you can add aliasses as described below.
-
-In order to add wildcard entries for a hostname you need to upgrade to the alias.wildcard add-on:
-
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard 
-The wildcard alias can easily be added by CNAME:
-
-
-Watch out that the text record does not include line breaks.
-
-Adding and removing aliases
-
-Add Alias
-Adds an alias to a deployment, e.g. www.example.com or test.www.example.com:
-
-$ cctrlapp APP_NAME/DEP_NAME alias.add WWW.EXAMPLE.COM
-An overview of all added aliases can be found in the deployment details:
-
-$ cctrlapp APP_NAME/DEP_NAME alias
+ As soon as the changes have propagated through the DNS the alias will be verified and the deployment will start answering requests to that domain automatically.
+ 
+ ~~~
+ $ cctrlapp APP_NAME/DEP_NAME alias
  Aliases
- name                                                 default  verified
- APP_NAME.cloudcontrolled.com                               1        1
- WWW.EXAMPLE.COM                                            0        1
-Show Alias Details
-Shows all details of an alias, e.g. whether an alias is verified and the verification code:
+ name                                                         default  verified
+ www.example.com                                                     0        1
+ [...]
+ ~~~
+ 
+## Removing an Alias
 
-$ cctrlapp APP_NAME/DEP_NAME alias WWW.EXAMPLE.COM
-Alias                    : WWW.EXAMPLE.COM
-   is_default               : False
-   is_verified              : True
-   verification_errors      : 0
-   verification_code        : cloudControl-verification: f6554424981ddsfbdsf1sdf4ssdf2afg34375456dd4dsfsd28a0sdfsafassfs
-   date_created             : 2011-02-07 11:03:05
-   date_modified            : 2011-02-08 20:12:24
-Remove Alias
-$ cctrlapp APP_NAME/DEP_NAME alias.remove ALIAS_NAME 
-SEO: Avoiding duplicated content
+To remove an alias, simply use the alias.remove command.
 
-By using an alias, the content of the page will been shown on two domains simultaneously. This is a disadvantage for search engines. To avoid this, it is best to create a 301 redirect (permanent) to the main alias in the .htaccess file:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME alias.remove www.example.com
+~~~
 
-RewriteEngine On
-RewriteBase /
-RewriteCond %{HTTP_HOST} !^alias\.tld$ [NC]
-RewriteRule ^(.*)$ http://alias.tld/$1 [R=301,L]
+## Special Case: Wildcard Domains
+
+The alias add-on does support wildcard domains. A wildcard domain like ´*.example.com´ allows you to have your deployment answer to arbitrary subdomains without needing the add every one of them as an alias in advance.
+
+To use this feature first upgrade your alias add-on from free to wildcard.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard 
+~~~
+
+Then add the wildcard domain itself as an alias.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME alias.add *.example.com
+~~~
+
