@@ -2,7 +2,7 @@
 
 Every deployment can access a highly available shared MySQL add-on based on [Amazon RDS](http://aws.amazon.com/rds/). The shared MySQL add-on is recommended for development and low traffic apps only. For medium to high traffic apps we recommend one of the dedicated [MySQLd add-on](https://www.cloudcontrol.com/add-ons/mysqld) plans.
 
-## Adding or removing the shared MySQL Add-on
+## Adding the MySQLs Add-on
 
 The database comes in different sizes and prices. It can be added using the addon.add command.
 
@@ -11,7 +11,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add mysqls.OPTION
 ~~~
 Replace `mysqls.OPTION` with a valid option, e.g. `mysqls.free`.
 
-## Upgrading the MySQL Add-on
+## Upgrading the MySQLs Add-on
 
 To upgrade from one plan to another use the addon.upgrade command.
 
@@ -19,7 +19,7 @@ To upgrade from one plan to another use the addon.upgrade command.
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
 ~~~
 
-## Downgrade the MySQL Add-on
+## Downgrading the MySQLs Add-on
 
 To downgrade from the current plan to a smaller one use the addon.downgrade command.
 
@@ -27,7 +27,7 @@ To downgrade from the current plan to a smaller one use the addon.downgrade comm
 $ cctrlapp APP_NAME/DEP_NAME addon.downgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
 ~~~
 
-## Removing the MySQL add-on
+## Removing the MySQLs Add-on
 
 Similarily, an add-on can also be removed from the deployment by using the addon.remove command.
 
