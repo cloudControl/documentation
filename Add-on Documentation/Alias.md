@@ -88,7 +88,7 @@ $ cctrlapp APP_NAME/DEP_NAME alias.remove www.example.com
 
 ## Special Case: Wildcard Domains
 
-The alias add-on does support wildcard domains. A wildcard domain like ´*.example.com´ allows you to have your deployment answer to arbitrary subdomains without needing the add every one of them as an alias in advance.
+The alias add-on does support wildcard domains. A wildcard domain like `*.example.com` allows you to have your deployment answer to arbitrary subdomains like `something.example.com` and `somethingelse.example.com` without needing to add every one of them as an alias in advance.
 
 To use this feature first upgrade your alias add-on from free to wildcard.
 
