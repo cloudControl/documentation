@@ -91,14 +91,12 @@ MYSQLS_DATABASE    : dep12345678
 
 Likewise imports and exports are equally simple.
 
-**Export**
-Use mysqldump to create a dump of your database.
+To **export** your data use the mysqldump command.
 ~~~
 $ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE > MYSQL_DATABASE.sql
 ~~~
 
-**Import**
-To import that file into a MySQL database use the following command.
+To **import** an sql file into a MySQL database use the following command.
 ~~~
 $ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE < MYSQL_DATABASE.sql
 ~~~
