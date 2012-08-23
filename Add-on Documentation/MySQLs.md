@@ -68,38 +68,38 @@ External access to the MySQLs add-on is available through an SSL encrypted conne
 
  1. Download the [certificate file](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem) to your local machine.
  1. Connect to the database using an SSL encrypted connection.
- 
- The following example uses the MySQL command line tool.
- 
- ~~~
- $ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem
- ~~~
- 
- Replace the uppercase variables with the corresponding values shown by the addon command.
 
- ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon mysqls.OPTION
- Addon : mysqls.512mb
+The following example uses the MySQL command line tool.
 
- Settings
+~~~
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem
+~~~
 
- MYSQLS_PASSWORD    : kIYUZGknx6cy
- MYSQLS_USERNAME    : dep12345678
- MYSQLS_HOSTNAME    : mysqlddb.io9si2var48.eu-west-1.rds.amazonaws.com:3306
- MYSQLS_DATABASE    : dep12345678
- ~~~
- 
- Likewise imports and exports are equally simple.
+Replace the uppercase variables with the corresponding values shown by the addon command.
 
- **Export**
- Use mysqldump to create a dump of your database.
- ~~~
- $ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE > MYSQL_DATABASE.sql
- ~~~
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon mysqls.OPTION
+Addon : mysqls.512mb
 
- **Import**
- To import that file into a MySQL database use the following command.
- ~~~
- $ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE < MYSQL_DATABASE.sql
- ~~~
+Settings
+
+MYSQLS_PASSWORD    : kIYUZGknx6cy
+MYSQLS_USERNAME    : dep12345678
+MYSQLS_HOSTNAME    : mysqlddb.io9si2var48.eu-west-1.rds.amazonaws.com:3306
+MYSQLS_DATABASE    : dep12345678
+~~~
+
+Likewise imports and exports are equally simple.
+
+**Export**
+Use mysqldump to create a dump of your database.
+~~~
+$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE > MYSQL_DATABASE.sql
+~~~
+
+**Import**
+To import that file into a MySQL database use the following command.
+~~~
+$ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQL_DATABASE < MYSQL_DATABASE.sql
+~~~
 
