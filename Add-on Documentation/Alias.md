@@ -11,7 +11,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  $ cctrlapp APP_NAME/DEP_NAME alias APP_NAME.cloudcontrolled.com
  ~~~
 
- The verification code is case sensitive and includes a space after the colon.
+ The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
 
  1. Add it as a TXT record to your domain.
  
