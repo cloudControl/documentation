@@ -26,7 +26,7 @@ Please follow the following simple steps to add SSL support to your deployment.
  Use any SFTP compatible client to upload the files to the /private directory. It expects the same SSH key that is used for pushing for authentication. The private directory is only accessible via SFTP. Even the deployment itself can not access this directory.
  
  ~~~
- $ sftp dep2ngmtrza@cloudcontrolled.com
+ $ sftp DEP_ID@cloudcontrolled.com
  Connected to cloudcontrolled.com.
  sftp> cd /private
  sftp> put CERT_FILE
