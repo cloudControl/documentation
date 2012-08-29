@@ -1,19 +1,19 @@
 # cloudControl Documentation
 
-[Command line client, web console and API](#command-line-client-web-console-and-api)
-[Apps, Users and Deployments](#apps-users-and-deployments)
-[Version Control & Images](#version-control--images)
-[Deploying New Versions](#deploying-new-versions)
-[Emergency Rollback](#emergency-rollback)
-[Non Persistent Filesystem](#non-persistent-filesystem)
-[Development, Staging and Production Environments](#development-staging-and-production-environments)
-[Logging](#logging)
-[Add-ons](#add-ons)
-[Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
-[Scaling](#scaling)
-[Performance & Caching](#performance--caching)
-[Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
-[Stacks](#stacks)
+ 1. [Command line client, web console and API](#command-line-client-web-console-and-api)
+ 1. [Apps, Users and Deployments](#apps-users-and-deployments)
+ 1. [Version Control & Images](#version-control--images)
+ 1. [Deploying New Versions](#deploying-new-versions)
+ 1. [Emergency Rollback](#emergency-rollback)
+ 1. [Non Persistent Filesystem](#non-persistent-filesystem)
+ 1. [Development, Staging and Production Environments](#development-staging-and-production-environments)
+ 1. [Logging](#logging)
+ 1. [Add-ons](#add-ons)
+ 1. [Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
+ 1. [Scaling](#scaling)
+ 1. [Performance & Caching](#performance--caching)
+ 1. [Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
+ 1. [Stacks](#stacks)
 
 ## Command line client, web console and API
 
