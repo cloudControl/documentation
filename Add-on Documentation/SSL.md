@@ -37,4 +37,40 @@ Please follow the following simple steps to add SSL support to your deployment.
  1. Send an e-mail to [support@cloudcontrol.de] to request activation.
  
  Please provide the common APP_NAME/DEP_NAME string as part of your e-mail.
- 
+
+## HTTPS Redirects
+
+HTTPS termination is done at the routing tier. Requests are then routed via HTTP to one of your app's clones. To determine if a request was made via HTTPS originally the routing tier sets the `X-FORWARDED-PROTO` header to `https`. The header is only set for requests that arrived via HTTPS at the routing tier. This allows you to redirect accordingly.
+
+### PHP Example
+
+For PHP you can either redirect via Apache's mod_rewrite using a `.htaccess` file or directly in your PHP code.
+
+#### .htaccess
+~~~
+<IfModule mod_rewrite.c> 
+    RewriteEngine On
+    
+    RewriteCond %{HTTP:X-FORWARDED-PROTO} !=https [NC]
+    RewriteRule ^.*$ https://%{HTTP_HOST}
+</IfModule>
+~~~
+
+#### PHP
+~~~php
+<?php
+
+    if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && 
+        $_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
+        
+        header(
+            'Location: https://' . 
+            $_SERVER['HTTP_HOST'] . 
+            $_SERVER['REQUEST_URI']
+        );
+    
+    }
+
+?>
+~~~
+
