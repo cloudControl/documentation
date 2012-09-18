@@ -401,7 +401,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 
 Each deployment gets a `.cloudcontrolled.com` subdomain. The default deployment always answers at `APP_NAME.cloudcontrolled.com` while any additional deployments get a `DEP_NAME.APP_NAME.cloudcontrolled.com` subdomain.
 
-You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on](https://www.cloudcontrol.com/add-ons/alias) also support mapping wildcard domains like `*.example.com` to one of your deployments.
+You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on](https://www.cloudcontrol.com/add-ons/alias) also supports mapping wildcard domains like `*.example.com` to one of your deployments.
 
 All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verfification code as a TXT record.
 
