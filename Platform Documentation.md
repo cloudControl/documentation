@@ -11,6 +11,7 @@
  1. [Add-ons](#add-ons)
  1. [Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
  1. [Scaling](#scaling)
+ 1. [Routing Tier](#routing-tier)
  1. [Performance & Caching](#performance--caching)
  1. [Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
  1. [Stacks](#stacks)
@@ -194,7 +195,7 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as automatic recovy from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as automatically recovering from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
 
 #### Buildpacks
 
@@ -212,7 +213,7 @@ The cloudControl platform supports zero downtime deploys for all deployments. To
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
 
-To deploy a specific version append your version control systems identifier (a hash for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
+To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
 Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
@@ -234,7 +235,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
  * The filesystem is not persistent.
  * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platform's failover system to recover from node failures.
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platform's failover system to recover from node failures.
 
 For customer uploads like e.g. user profile pictures and more we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on](https://www.cloudcontrol.com/add-ons/mongolab).
 
@@ -413,7 +414,7 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
  * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
  * Use performance monitoring and load testing to determine the optimal scaling settings for your app.
 
-When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and routing tier ensures efficient distribution of incoming requests accross all available containers.
+When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and [routing tier](#routing-tier) ensures efficient distribution of incoming requests accross all available containers.
 
 ### Horizontal Scaling
 
@@ -426,6 +427,14 @@ In addition to controlling the number of containers you can also specify the siz
 ### Choosing Optimal Settings
 
 You can use the Blitz.io and New Relic Add-ons to run synthetic load tests against your deployments and analyze how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
+
+## Routing Tier
+
+All HTTP requests made to apps on the platform are routed via the routing tier. It takes care of routing the request to one of the app's containers based on the `Host` header.
+
+### Remote Address
+
+Because client requests don't hit your app directly, but are forwarded via the routing tier, you can't access the clients IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available the routing tier sets the `X-Forwarded-For` header to the original clients IP.
 
 ## Performance & Caching
 
