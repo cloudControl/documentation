@@ -435,7 +435,7 @@ All HTTP requests made to apps on the platform are routed via the routing tier. 
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
 
-The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. Each one of those nodes is in a different availability zone but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
 
 Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefor highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
