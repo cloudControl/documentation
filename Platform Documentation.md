@@ -260,6 +260,7 @@ To enable you to determine programatically which deployment your app currently r
  * **DEP_VERSION**: The Git or Bazaar version.
  * **DEP_NAME**: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
  * **DEP_ID**: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
+ * **WRK_ID**: The internal worker ID. Only set for worker containers.
 
 ## Logging
 
@@ -430,7 +431,15 @@ You can use the Blitz.io and New Relic Add-ons to run synthetic load tests again
 
 ## Routing Tier
 
-All HTTP requests made to apps on the platform are routed via the routing tier. It takes care of routing the request to one of the app's containers based on the `Host` header.
+All HTTP requests made to apps on the platform are routed via the routing tier. It takes care of routing the request to one of the app's containers based on matching the `Host` header against the list of the deployments aliasses.
+
+The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
+
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. Each one of those nodes is in a different availability zone but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
+
+Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefor highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
+
+If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --min >= 2.
 
 ### Remote Address
 
@@ -494,6 +503,7 @@ Tasks that will take longer than 120s or are triggered by a user request and sho
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
+ * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks).
 
 A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
