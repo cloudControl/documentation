@@ -1,5 +1,21 @@
 # cloudControl Documentation
 
+ 1. [Command line client, web console and API](#command-line-client-web-console-and-api)
+ 1. [Apps, Users and Deployments](#apps-users-and-deployments)
+ 1. [Version Control & Images](#version-control--images)
+ 1. [Deploying New Versions](#deploying-new-versions)
+ 1. [Emergency Rollback](#emergency-rollback)
+ 1. [Non Persistent Filesystem](#non-persistent-filesystem)
+ 1. [Development, Staging and Production Environments](#development-staging-and-production-environments)
+ 1. [Logging](#logging)
+ 1. [Add-ons](#add-ons)
+ 1. [Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
+ 1. [Scaling](#scaling)
+ 1. [Routing Tier](#routing-tier)
+ 1. [Performance & Caching](#performance--caching)
+ 1. [Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
+ 1. [Stacks](#stacks)
+
 ## Command line client, web console and API
 
 **TL;DR:**
@@ -74,7 +90,7 @@ You can list, add and remove app users using the command line client.
 ~~~
 $ cctrlapp APP_NAME user
 Users
- Name                                     Email               
+ Name                                     Email
  user1                                    user1@example.com
  user2                                    user2@example.com
  user3                                    user3@example.com
@@ -179,7 +195,7 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as automatic recovy from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as automatically recovering from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
 
 #### Buildpacks
 
@@ -197,7 +213,7 @@ The cloudControl platform supports zero downtime deploys for all deployments. To
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
 
-To deploy a specific version append your version control systems identifier (a hash for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
+To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
 Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
@@ -219,7 +235,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
  * The filesystem is not persistent.
  * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the routing tier routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platform's failover system to recover from node failures.
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests accross available containers, and is deleted after each deploy. This does include deploys you trigger to deploy a new version as well as deploys triggered by the platform's failover system to recover from node failures.
 
 For customer uploads like e.g. user profile pictures and more we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on](https://www.cloudcontrol.com/add-ons/mongolab).
 
@@ -244,12 +260,7 @@ To enable you to determine programatically which deployment your app currently r
  * **DEP_VERSION**: The Git or Bazaar version.
  * **DEP_NAME**: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
  * **DEP_ID**: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
-
-### Configuration Files
-
-#### .ccconfig.yaml
-
-#### Procfile
+ * **WRK_ID**: The internal worker ID. Only set for worker containers.
 
 ## Logging
 
@@ -391,7 +402,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 
 Each deployment gets a `.cloudcontrolled.com` subdomain. The default deployment always answers at `APP_NAME.cloudcontrolled.com` while any additional deployments get a `DEP_NAME.APP_NAME.cloudcontrolled.com` subdomain.
 
-You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on](https://www.cloudcontrol.com/add-ons/alias) also support mapping wildcard domains like `*.example.com` to one of your deployments.
+You can use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments simply add each one as an alias and add a CNAME for each pointing to your deployments subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on](https://www.cloudcontrol.com/add-ons/alias) also supports mapping wildcard domains like `*.example.com` to one of your deployments.
 
 All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verfification code as a TXT record.
 
@@ -404,7 +415,7 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
  * You can scale up or down anytime by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
  * Use performance monitoring and load testing to determine the optimal scaling settings for your app.
 
-When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and routing tier ensures efficient distribution of incoming requests accross all available containers.
+When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and [routing tier](#routing-tier) ensures efficient distribution of incoming requests accross all available containers.
 
 ### Horizontal Scaling
 
@@ -417,6 +428,22 @@ In addition to controlling the number of containers you can also specify the siz
 ### Choosing Optimal Settings
 
 You can use the Blitz.io and New Relic Add-ons to run synthetic load tests against your deployments and analyze how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
+
+## Routing Tier
+
+All HTTP requests made to apps on the platform are routed via the routing tier. It takes care of routing the request to one of the app's containers based on matching the `Host` header against the list of the deployments aliasses.
+
+The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
+
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
+
+Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefor highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
+
+If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --min >= 2.
+
+### Remote Address
+
+Because client requests don't hit your app directly, but are forwarded via the routing tier, you can't access the clients IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available the routing tier sets the `X-Forwarded-For` header to the original clients IP.
 
 ## Performance & Caching
 
@@ -456,9 +483,19 @@ This technique works for URLs as well as keys in in-memory caches like Memcached
 
 **TL;DR:**
 
- * Scheduled jobs are supported through different Add-ons.
  * Web requests do have a timelimit of 120s.
+ * Scheduled jobs are supported through different Add-ons.
  * Background workers are the recommended way of handling long running or asynchronous tasks.
+
+Since web requests taking longer than 120s are killed by the routing tier, longer running tasks have to be handled asyncronously.
+
+### Cron
+
+For tasks that are guaranteed to finish within the timelimit the [Cron add-on](https://www.cloudcontrol.com/add-ons/cron) is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on or if you have more specific scheduling needs please refer to the [Cron add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/cron)
+
+### Workers
+
+Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. A more details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/worker)
 
 ## Stacks
 
@@ -466,6 +503,7 @@ This technique works for URLs as well as keys in in-memory caches like Memcached
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
+ * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks).
 
 A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
