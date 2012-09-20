@@ -1,20 +1,24 @@
-# cloudControl Documentation
+<aside>
+<ul>
+<li class=""><a href="#command-line-client-web-console-and-api">Command line client, web console and API</a></li>
+<li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
+<li class=""><a href="#version-control--images">Version Control & Images</a></li>
+<li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
+<li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
+<li class=""><a href="#non-persistent-filesystem">Non Persistent Filesystem</a></li>
+<li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
+<li class=""><a href="#logging">Logging</a></li>
+<li class=""><a href="#add-ons">Add-ons</a></li>
+<li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
+<li class=""><a href="#scaling">Scaling</a></li>
+<li class=""><a href="#routing-tier">Routing Tier</a></li>
+<li class=""><a href="#performance--caching">Performance & Caching</a></li>
+<li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
+<li class=""><a href="#stacks">Stacks</a></li>
+</ul>
+</aside>
 
- 1. [Command line client, web console and API](#command-line-client-web-console-and-api)
- 1. [Apps, Users and Deployments](#apps-users-and-deployments)
- 1. [Version Control & Images](#version-control--images)
- 1. [Deploying New Versions](#deploying-new-versions)
- 1. [Emergency Rollback](#emergency-rollback)
- 1. [Non Persistent Filesystem](#non-persistent-filesystem)
- 1. [Development, Staging and Production Environments](#development-staging-and-production-environments)
- 1. [Logging](#logging)
- 1. [Add-ons](#add-ons)
- 1. [Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
- 1. [Scaling](#scaling)
- 1. [Routing Tier](#routing-tier)
- 1. [Performance & Caching](#performance--caching)
- 1. [Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
- 1. [Stacks](#stacks)
+# cloudControl Documentation
 
 ## Command line client, web console and API
 
