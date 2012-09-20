@@ -352,8 +352,6 @@ Of course adding an Add-on is only the first step. You also need to implement th
 The path to the *creds.json* is always available through the CRED_FILE environment variable. Here's a quick example in PHP how to read the file and parse the JSON.
 
 ~~~php
-<?php
-
 # read the credentials file
 $string = file_get_contents($_ENV['CRED_FILE'], false);
 if ($string == false) {
@@ -365,8 +363,6 @@ $creds = json_decode($string, true);
 
 # now use the $creds array to configure your app e.g.:
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
-
-?>
 ~~~
 
 The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detailed examples how to configure various frameworks using the *creds.json* file. To see the format and contents of the *creds.json* file locally use the addon.creds command.
@@ -375,19 +371,19 @@ The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detail
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 {
     "BLITZ": {
-        "BLITZ_API_KEY": "SOME_SECRET_API_KEY", 
+        "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
         "BLITZ_API_USER": "SOME_USER_ID"
-    }, 
+    },
     "MEMCACHIER": {
-        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD", 
-        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com", 
+        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com",
         "MEMCACHIER_USERNAME": "SOME_USERNAME"
     },
     "MYSQLS": {
-        "MYSQLS_DATABASE": "SOME_DB_NAME", 
-        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com", 
-        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD", 
-        "MYSQLS_PORT": "3306", 
+        "MYSQLS_DATABASE": "SOME_DB_NAME",
+        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com",
+        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MYSQLS_PORT": "3306",
         "MYSQLS_USERNAME": "SOME_USERNAME"
     }
 }
