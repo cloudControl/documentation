@@ -95,7 +95,6 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove worker.single
 The following example shows how to use the exit codes to restart or stop a worker.
 
 ~~~php
-<?php
 // read exit code parameter
 $exitCode = isset($argv[1]) && (int)$argv[1] > 0 ? (int)$argv[1] : 0;
 $steps = 5;
