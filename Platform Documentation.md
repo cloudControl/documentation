@@ -1,20 +1,24 @@
-# cloudControl Documentation
+<aside>
+<ul>
+<li class=""><a href="#command-line-client-web-console-and-api">Command line client, web console and API</a></li>
+<li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
+<li class=""><a href="#version-control--images">Version Control & Images</a></li>
+<li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
+<li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
+<li class=""><a href="#non-persistent-filesystem">Non Persistent Filesystem</a></li>
+<li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
+<li class=""><a href="#logging">Logging</a></li>
+<li class=""><a href="#add-ons">Add-ons</a></li>
+<li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
+<li class=""><a href="#scaling">Scaling</a></li>
+<li class=""><a href="#routing-tier">Routing Tier</a></li>
+<li class=""><a href="#performance--caching">Performance & Caching</a></li>
+<li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
+<li class=""><a href="#stacks">Stacks</a></li>
+</ul>
+</aside>
 
- 1. [Command line client, web console and API](#command-line-client-web-console-and-api)
- 1. [Apps, Users and Deployments](#apps-users-and-deployments)
- 1. [Version Control & Images](#version-control--images)
- 1. [Deploying New Versions](#deploying-new-versions)
- 1. [Emergency Rollback](#emergency-rollback)
- 1. [Non Persistent Filesystem](#non-persistent-filesystem)
- 1. [Development, Staging and Production Environments](#development-staging-and-production-environments)
- 1. [Logging](#logging)
- 1. [Add-ons](#add-ons)
- 1. [Provided Subdomains and Custom Domains](#provided-subdomains-and-custom-domains)
- 1. [Scaling](#scaling)
- 1. [Routing Tier](#routing-tier)
- 1. [Performance & Caching](#performance--caching)
- 1. [Scheduled Jobs and Background Workers](#scheduled-jobs-and-background-workers)
- 1. [Stacks](#stacks)
+# cloudControl Documentation
 
 ## Command line client, web console and API
 
@@ -352,8 +356,6 @@ Of course adding an Add-on is only the first step. You also need to implement th
 The path to the *creds.json* is always available through the CRED_FILE environment variable. Here's a quick example in PHP how to read the file and parse the JSON.
 
 ~~~php
-<?php
-
 # read the credentials file
 $string = file_get_contents($_ENV['CRED_FILE'], false);
 if ($string == false) {
@@ -365,8 +367,6 @@ $creds = json_decode($string, true);
 
 # now use the $creds array to configure your app e.g.:
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
-
-?>
 ~~~
 
 The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detailed examples how to configure various frameworks using the *creds.json* file. To see the format and contents of the *creds.json* file locally use the addon.creds command.
@@ -375,19 +375,19 @@ The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detail
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 {
     "BLITZ": {
-        "BLITZ_API_KEY": "SOME_SECRET_API_KEY", 
+        "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
         "BLITZ_API_USER": "SOME_USER_ID"
-    }, 
+    },
     "MEMCACHIER": {
-        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD", 
-        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com", 
+        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com",
         "MEMCACHIER_USERNAME": "SOME_USERNAME"
     },
     "MYSQLS": {
-        "MYSQLS_DATABASE": "SOME_DB_NAME", 
-        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com", 
-        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD", 
-        "MYSQLS_PORT": "3306", 
+        "MYSQLS_DATABASE": "SOME_DB_NAME",
+        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com",
+        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MYSQLS_PORT": "3306",
         "MYSQLS_USERNAME": "SOME_USERNAME"
     }
 }
