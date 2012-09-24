@@ -431,6 +431,13 @@ You can use the Blitz.io and New Relic Add-ons to run synthetic load tests again
 
 ## Routing Tier
 
+**TL;DR:**
+
+ * All HTTP requests are route via the routing tier.
+ * `*.cloudcontrolled.com` is round robin across available routing tier nodes.
+ * Requests are routed based on the `Host` header.
+ * Use the `X-Forwarded-For` header to get the client IP.
+
 All HTTP requests made to apps on the platform are routed via the routing tier. It takes care of routing the request to one of the app's containers based on matching the `Host` header against the list of the deployments aliasses.
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
