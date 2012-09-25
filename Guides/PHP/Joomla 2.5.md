@@ -1,6 +1,6 @@
 #Deploying Joomla 2.5 to cloudControl
 
-![Successful Deployment](../images/joomla-logo.png)
+![Successful Deployment](images/joomla-logo.png)
 
 If you're looking for a fast, light and effective PHP Framework for your projects, you can't go past [Joomla](http://www.joomla.org/download.html). Now at [version 2.5](http://www.joomla.org/download.html) it comes with a variety of features to speed up your application development, including:
 
@@ -10,11 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Joomla v2.5 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to what Joomla looks like, out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Joomla v2.5 to [the cloudControl platform](http://www.cloudcontrol.com). 
 
 ##Prerequisites
 
@@ -34,7 +30,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://www.joomla.org/download.html](http://www.joomla.org/download.html). After that, extract it to your local file sytem. 
 
-![Successful Deployment](../images/joomla-source.png)
+![Successful Deployment](images/joomla-source.png)
 
 
 ##Create a Basic Application
@@ -43,7 +39,7 @@ Once you have a copy of the Joomla source available locally, setup a VHost (or e
 
 ##2. Update the Configuration
 
-Now, as I mentioned before, a few changes need to be made to the default Joomla configuration and code to accommodate cloudControl deployment. These changes are as follows:
+A few changes need to be made to the default Joomla configuration and code to accommodate cloudControl deployment. These changes are as follows:
 
  * Store sessions in the database
  * Store Cache Information in APC
@@ -146,7 +142,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -164,7 +160,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldljoomla`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldljoomla`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -174,15 +171,15 @@ Now, we need to make our first deployment of both branches to the cloudControl p
     
     // deploy the default branch
     cctrlapp cloudcontroldljoomla/default push    
-    cctrlapp cloudcontroldljoomla/default deploy --stack luigi
+    cctrlapp cloudcontroldljoomla/default deploy
     
     // deploy the testing branch
     cctrlapp cloudcontroldljoomla/testing push    
-    cctrlapp cloudcontroldljoomla/testing deploy --stack luigi
+    cctrlapp cloudcontroldljoomla/testing deploy
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
 
 ###4.1 Check the Add-on Configuration
 
@@ -216,10 +213,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldljoomla2/default addon.add config.free --APPLICATION_ENV=production
+    cctrlapp cloudcontroldljoomla/default addon.add config.free --APPLICATION_ENV=production
 
     // Set the testing environment setting    
-    cctrlapp cloudcontroldljoomla2/testing addon.add config.free --APPLICATION_ENV=testing
+    cctrlapp cloudcontroldljoomla/testing addon.add config.free --APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 
@@ -254,14 +251,14 @@ This will show you the tables from the SQL file. Now that that's done, commit th
 
     // deploy the default branch
     cctrlapp cloudcontroldljoomla/default push    
-    cctrlapp cloudcontroldljoomla/default deploy --stack luigi
+    cctrlapp cloudcontroldljoomla/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
     cctrlapp cloudcontroldljoomla/testing push    
-    cctrlapp cloudcontroldljoomla/testing deploy --stack luigi
+    cctrlapp cloudcontroldljoomla/testing deploy
 
 ##7. Review the Deployment
 
@@ -274,7 +271,7 @@ With that completed, then have a look at both your deployments to ensure that th
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](../images/joomla-running.png)
+![Successful Deployment](images/joomla-running.png)
 
 ###7.1 Deployment Problems
 

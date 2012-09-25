@@ -1,6 +1,6 @@
 #Deploying Yii 1.1.10 to cloudControl
 
-![Successful Deployment](../images/yii-framework-logo.png)
+![Successful Deployment](images/yii-framework-logo.png)
 
 If you're looking for a lightning fast, light and effective PHP Framework for your projects, one without a lot of the cruft and legacy overhead of some of the other popular PHP frameworks available today, you can't go past [Yii Framework](http://www.yiiframework.com/). Now at [version 1.1.11](http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz) it comes with a variety of features to speed up your application development, including:
 
@@ -10,11 +10,7 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to what Yii Framework looks like, out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the cloudControl platform](http://www.cloudcontrol.com).
 
 ##Prerequisites
 
@@ -34,7 +30,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz](http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz). After that, extract it to your local file sytem. 
 
-![Source files](../images/yii-framework-source.png)
+![Source files](images/yii-framework-source.png)
 
 
 ##Create a Basic Application
@@ -51,7 +47,7 @@ Ok, now that you have your test application created and running, we need to modi
 
 ###2.1 Store Session in the Cache Log Files in a Database, Not on the Filesystem
 
-We need to do this because Yii Framework, by default, logs to and stores its session files on the filesystem. However, this approach isn't possible on the cloudControl platform as it has a read-only filesystem. 
+We need to do this because Yii Framework, by default, logs to and stores its session files on the filesystem. However, this approach isn't recommended on the cloudControl platform.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store both the session and log files in a two-level cache, composed of MySQL and APC. 
 
@@ -59,9 +55,9 @@ Thankfully, Yii Framework is written in a very straight-forward and configurable
 
 ###2.2 Auto-magically Determine the Environment and Set the Configuration
 
-As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. Yii Framework does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on. 
+As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. Yii Framework does do this out of the box, but it's done by using different bootstrap files, such as ``index.php``, ``index-test.php`` and so on. 
 
-When using cloudControl, this isn't really possible. What we need to do is to have one bootstrap file, across multiple deployments, and for it to programmatically know where it is and set the appropriate configuration options. So we're going to be making additions to the code so this happens auto-magically.
+On cloudControl, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code Under Git Control
 
@@ -71,7 +67,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -89,7 +85,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldlyii`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldlyii`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -127,7 +124,7 @@ You should see output as below:
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config Add-on is required for determining the active environment and mysqls for storing our session and logging information. 
 
 ###4.1 Check the Add-on Configuration
 
@@ -172,7 +169,7 @@ Now that this is done, we're ready to make some changes to our code to make use 
 
 ###5.1 Bootstrap
 
-By default, Yii comes with 3 bootstrap configuration files. Located in ``<yourapp>/protected/config`` the files are called **console.php**, **main.php** and **test.php**. They are the *console*, *production* and *testing* environment configurations, respectively. 
+By default, Yii comes with 3 bootstrap configuration files. Located in ``<yourapp>/protected/config`` the files are called ``console.php``, ``main.php`` and ``test.php``. They are the *console*, *production* and *testing* environment configurations, respectively. 
 
 We need to change them slightly so that they'll do what we need. Have a look at the code below that will show, specifically, what we need to change.
 
@@ -195,7 +192,7 @@ When we configured the add ons earlier (mysqls and config) the settings were aut
     
 ####5.1.2 Enable the MySQL Database Configuration
     
-With the CRED_FILE information available, we set the database name, username, password and hostname automatically, as below:
+With the ``CRED_FILE`` information available, we set the database name, username, password and hostname automatically, as below:
     
 	'db'=>array(
 		'connectionString' => 'mysql:host=' . $creds["MYSQLS"]["MYSQLS_HOSTNAME"] . ';dbname=' . $creds["MYSQLS"]["MYSQLS_DATABASE"],
@@ -239,11 +236,11 @@ You can find out more about the class in [the online documentation](http://www.y
 
 ###5.3 index.php
 
-Initially, index.php will use the main.php configuration file as so:
+Initially, ``index.php`` will use the ``main.php`` configuration file as so:
 
     $config = dirname(__FILE__) . '/protected/config/main.php';
     
-But we need to change that based on the environment we're in, as determined by the APPLICATION_ENV value we set with the configs add-on. So change index.php to be as follows:
+But we need to change that based on the environment we're in, as determined by the *APPLICATION_ENV* value we set with the configs add-on. So change ``index.php`` to be as follows:
 
     if (!empty($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localdomain') === FALSE) {
         // Parse the json file with ADDONS credentials
@@ -264,7 +261,7 @@ But we need to change that based on the environment we're in, as determined by t
     
     $config = dirname(__FILE__) . '/protected/config/' . $entryScript . '.php';
     
-Now, index.php will load the configuration file based on ``APPLICATION_ENV`` automatically for us.
+Now, ``index.php`` will load the configuration file based on *APPLICATION_ENV* automatically for us.
 
 ##6. Database Schema
 
@@ -346,7 +343,7 @@ With that completed, then have a look at both your deployments to ensure that th
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](../images/yii-framework-running.png)
+![Successful Deployment](images/yii-framework-running.png)
 
 ###7.1 Deployment Problems
 
