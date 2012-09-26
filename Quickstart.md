@@ -76,6 +76,6 @@ http://APP_NAME.cloudcontrolled.com
 ~~~
 
 ## Cheatsheet
-Grab [our cheatsheet (PDF)](http://example.org) to have an overview over all commands of the command line client.
+Grab [our cheatsheet (PDF)](cctrl_cheatsheet.pdf) to have an overview over all commands of the command line client.
 
   
