@@ -1,6 +1,6 @@
 # cloudControl Quickstart
 
-It's easy to start with cloudControl. You will have an running application on cloudControl within 5 minutes when you follow this guide.
+It's easy to start with cloudControl. You will have a running application on cloudControl within 5 minutes when you follow this guide.
 
 ## Install the Required Software 
 * Install git ([quick Git tutorial](http://rogerdudler.github.com/git-guide/))
@@ -13,7 +13,7 @@ $ sudo easy_install cctrl
 
 ## Create an User Account
 
-* Open a terminal (Mac OS X/Linux) or a command line window (Windows)
+* Open a terminal (Mac OS X/Linux) or Git Bash (Windows)
 * Create an user account with the command 
 ~~~
 $ cctrluser create
@@ -53,7 +53,7 @@ If the APP_NAME is already taken, please pick another one.
 * Open a terminal (Mac OS X/Linux) or Git Bash (Windows)
 * Change in to your project's directory: 
 ~~~
-$ cd PATHTO/myfirstproject
+$ cd PATH_TO/myfirstproject
 ~~~
 
 * Init git repository, add files, commit and push the changes
