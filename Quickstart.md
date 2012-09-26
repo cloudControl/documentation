@@ -53,7 +53,7 @@ If the APP_NAME is already taken, please pick another one.
 * Open a terminal (Mac OS X/Linux) or Git Bash (Windows)
 * Change in to your project's directory: 
 ~~~
-$ cd PATHTO/myfistproject
+$ cd PATHTO/myfirstproject
 ~~~
 
 * Init git repository, add files, commit and push the changes
