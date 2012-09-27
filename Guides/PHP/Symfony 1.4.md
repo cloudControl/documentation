@@ -12,11 +12,7 @@ If you're looking for a feature-rich, open source, PHP Framework for your projec
  * Factories, plug-ins, and mixins
  * Built-in unit and functional testing framework
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments  to the default Symfony 1 codebase so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). 
 
 ##Prerequisites
 
@@ -49,7 +45,7 @@ As I mentioned before, a few changes need to be made to the default Symfony conf
 
 ###2.1 Store Sessions in the Database & Disable Logging
 
-We need to do this because Symfony, by default, logs to and stores its session files on the filesystem. However, this approach isn't possible on the cloudControl platform as it has a read-only filesystem. 
+We need to do this because Symfony, by default, logs to and stores its session files on the filesystem. However, this approach recommended on the cloudControl platform.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store sessions in the database and disable logging. 
 
@@ -67,7 +63,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -85,7 +81,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldlsymfony`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldlsymfony`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -95,17 +92,17 @@ Now, we need to make our first deployment of both branches to the cloudControl p
     
     // deploy the default branch
     cctrlapp cloudcontroldlsymfony/default push    
-    cctrlapp cloudcontroldlsymfony/default deploy --stack luigi
+    cctrlapp cloudcontroldlsymfony/default deploy
     
     // deploy the testing branch
     cctrlapp cloudcontroldlsymfony/testing push    
-    cctrlapp cloudcontroldlsymfony/testing deploy --stack luigi
+    cctrlapp cloudcontroldlsymfony/testing deploy
 
 ###3.1 Symfony Auto-Detected
 
 When you do this, you'll see output similar to the following:
 
-    $ cctrlapp cloudcontroldlsymfony1/default push
+    $ cctrlapp cloudcontroldlsymfony/default push
     Counting objects: 15, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (7/7), done.
@@ -119,7 +116,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (3.0M)
            
-    To ssh://cloudcontroldlsymfony1@cloudcontrolled.com/repository.git
+    To ssh://cloudcontroldlsymfony@cloudcontrolled.com/repository.git
        d90506c..4078c78  master -> master
 
 Note the following lines:
@@ -132,11 +129,11 @@ In the previous version of the cloudControl platform, you would have had to have
     BaseConfig:
       WebContent: /web
 
-However, with the latest stack, **luigi**, that's a thing of the past for a number of PHP frameworks, including Symfony 1.x because it auto-detects it and handles this for us. 
+However, beginning with the **luigi** stack, that's a thing of the past for a number of PHP frameworks, including Symfony 1.x because it auto-detects it and handles this for us. 
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config Add-on is required for determining the active environment and mysqls for storing our session and logging information. 
 
 ###4.1 Initialising mysqls
 
@@ -204,7 +201,7 @@ Change it to:
 
 ###5.3 Store Sessions in the Database
 
-Under **apps/frontend/config** open the file ``factories.yaml``. In that file, we need to adding in session configuration for both prod and test. These are identified by ``prod:`` and ``test:`` respectively. For each one, add in a configuration similar to that below, changing the respective details where necessary:
+Under ``apps/frontend/config`` open the file ``factories.yaml``. In that file, we need to adding in session configuration for both prod and test. These are identified by ``prod:`` and ``test:`` respectively. For each one, add in a configuration similar to that below, changing the respective details where necessary:
     
       storage:
         class: sfCacheSessionStorage
@@ -332,14 +329,14 @@ After this, stage all the files in Git and commit them with a suitable commit me
 
     // deploy the default branch
     cctrlapp cloudcontroldlsymfony/default push    
-    cctrlapp cloudcontroldlsymfony/default deploy --stack luigi
+    cctrlapp cloudcontroldlsymfony/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
     cctrlapp cloudcontroldlsymfony/testing push    
-    cctrlapp cloudcontroldlsymfony/testing deploy --stack luigi
+    cctrlapp cloudcontroldlsymfony/testing deploy
 
 
 ##7. Review the Deployment

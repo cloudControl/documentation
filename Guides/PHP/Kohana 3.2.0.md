@@ -12,11 +12,7 @@ If you're looking for a very fast, light, highly configurable and effective PHP 
  * The ability to add in 3rd party libraries, such as Zend Framework
  * Rich [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) support
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to how Kohana comes out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the cloudControl platform](http://www.cloudcontrol.com). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
 
 ##Prerequisites
 
@@ -47,7 +43,7 @@ As I mentioned before, a few changes need to be made to the default Kohana confi
 
 ###2.1 Store Sessions in the Database
 
-We need to do this because Kohana, by default, stores its session files on the filesystem. However, this approach isn't possible on the cloudControl platform as it has a non-persistent filesystem. 
+We need to do this because Kohana, by default, stores its session files on the filesystem. However, this approach isn't recommended on the cloudControl platform. 
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store them in a MySQL database. 
 
@@ -57,7 +53,7 @@ Thankfully, Kohana is written in a very straight-forward and configurable manner
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. Kohana does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on. 
 
-When using cloudControl, this isn't really possible. What we need to do is to have one bootstrap file, across multiple deployments, and for it to programmatically know where it is and set the appropriate configuration options. So we're going to be making additions to the code so this happens *auto-magically*.
+On cloudControl, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code Under Git Control
 
@@ -67,7 +63,7 @@ Ok, now let's get started making these changes to the application. We'll begin b
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -85,7 +81,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldlkohana`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldlkohana`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -93,13 +90,13 @@ Now, we need to make our first deployment of both branches to the cloudControl p
     // create the application
     cctrlapp cloudcontroldlkohana create php
     
-    // deploy the default branch to the new luigi stack
+    // deploy the default branch
     cctrlapp cloudcontroldlkohana/default push    
-    cctrlapp cloudcontroldlkohana/default deploy --stack luigi
+    cctrlapp cloudcontroldlkohana/default deploy
     
-    // deploy the testing branch to the new luigi stack
+    // deploy the testing branch
     cctrlapp cloudcontroldlkohana/testing push    
-    cctrlapp cloudcontroldlkohana/testing deploy --stack luigi
+    cctrlapp cloudcontroldlkohana/testing deploy
  
 ###3.1 Kohana Auto-Detected
 
@@ -128,11 +125,11 @@ Note the following lines:
     INFO: Kohana Framework detected
     INFO: Required directory missing, creating 'application/cache'.
 
-With the latest stack, **luigi**, a number of PHP frameworks, including Kohana, are auto-detected handling some of the deployment work for us, such as clearing/creating the cache directory. 
+Beginning with the **luigi** stack, a number of PHP frameworks, including Kohana, are auto-detected handling some of the deployment work for us, such as clearing/creating the cache directory. 
 
 ##4. Initialise the Required Addons
 
-Now that that's done, we need to configure two addons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config addon's required for determining the active environment and mysqls for storing our session information. To initialise these, run the following commands and make a note of the output:
+Now that that's done, we need to configure two addons, config and mysqls. The config addon's required for determining the active environment and mysqls for storing our session information. To initialise these, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
     cctrlapp cloudcontroldlkohana/default addon.add mysql.free
@@ -178,7 +175,7 @@ Now that this is done, we're ready to make some changes to our code to make use 
 
 ##5. Environment Configuration
 
-In application/bootstrap.php, search for the following line:
+In ``application/bootstrap.php``, search for the following line:
 
     if (!empty($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localdomain') !== FALSE) {
        $env = Kohana::DEVELOPMENT; 
@@ -219,11 +216,11 @@ After you've found it, replace them with the following. I'll go through the code
     
     Kohana::$environment = $env;
 
-What that the code's completed for replacing the original environment configuration with one that is based on looking at the setting contained in the cloudControl credentials file setting, APPLICATION_ENV, that we set earlier.
+What that the code's completed for replacing the original environment configuration with one that is based on looking at the setting contained in the cloudControl credentials file setting, *APPLICATION_ENV*, that we set earlier.
 
 You'll notice that the we're using the Kohana environment constants, which you can find in ``/system/classes/kohana/core.php``. This way, the code can stay consistent throughout and we're not adding on any unnecessary complexity or reinventing the wheel.
 
-What will happen is that if we're in a development environment, determined by "*localdomain*" being in the url, then we'll default to the development setting. Otherwise, we'll retrieve the APPLICATION_ENV value and attempt to match it against the Kohana environment configs. Now I'll show you how we use this.
+What will happen is that if we're in a development environment, determined by "*localdomain*" being in the url, then we'll default to the development setting. Otherwise, we'll retrieve the *APPLICATION_ENV* value and attempt to match it against the Kohana environment configs. Now I'll show you how we use this.
 
 ###5.1 Core Configuration Settings
 
@@ -257,7 +254,7 @@ Now we'll have both the cache and database modules available. As our example app
 
 ###5.2 Configuring Caching
 
-Create a new file under **application/config** called ``cache.php``. In that file, add the following code:
+Create a new file under ``application/config`` called ``cache.php``. In that file, add the following code:
 
     <?php defined('SYSPATH') or die('No direct script access.');
     
@@ -275,7 +272,7 @@ What that does is to tell Kohana that the cache will be using APC as the backend
 
 ###5.3 Configuring Database Connections
 
-Create a new file under **application/config** called ``database.php``. In that file, add the following code:
+Create a new file under ``application/config`` called ``database.php``. In that file, add the following code:
 
     <?php
     
@@ -332,7 +329,7 @@ When we configured the add ons earlier (*mysqls* and *config*) the settings were
 
 ###5.4 Configuring Session
 
-Create a new file under **application/config** called ``session.php``. In that file, add the following code:
+Create a new file under ``application/config`` called ``session.php``. In that file, add the following code:
 
     <?php
     
@@ -355,7 +352,7 @@ Create a new file under **application/config** called ``session.php``. In that f
 
 What this does is to say that the session information will be stored in the database. It will be stored in a table called sessions and have a lifetime of **43200 seconds**. You can read about the other settings in [the session documentation online](http://kohanaframework.org/3.0/guide/kohana/sessions).
 
-So your application/config directory should look like that below:
+So your ``application/config`` directory should look like that below:
 
 ![Successful Deployment](images/kohana application-config dir.png)
 
@@ -456,11 +453,11 @@ After all these changes are done, we need to then commit them on the master bran
     
     // push the code to the default (production) branch
     cctrlapp cloudcontroldlkohana/default push
-    cctrlapp cloudcontroldlkohana/default deploy --stack luigi
+    cctrlapp cloudcontroldlkohana/default deploy
 
     // push the code to the testing branch
     cctrlapp cloudcontroldlkohana/testing push
-    cctrlapp cloudcontroldlkohana/testing deploy --stack luigi
+    cctrlapp cloudcontroldlkohana/testing deploy
     
 ##A Simple Application
 
@@ -469,7 +466,7 @@ Now we're going to build a very simple application to test our new configuration
  * Get a handle on our database and perform some basic SQL
  * Create, store and manipulate a simple object in the cache
  
-Under **application/classes/controlle**r create a new controller file called ``hello.php``, which contains the following code:
+Under ``application/classes/controller`` create a new controller file called ``hello.php``, which contains the following code:
 
     <?php defined('SYSPATH') OR die('No Direct Script Access');
      
@@ -523,7 +520,7 @@ After that, we create an object that we use to manipulate the cache and print ou
 
 ##The View Template
 
-Now create a file called ``site.php`` under **application/views/**. In it, add the following code:
+Now create a file called ``site.php`` under ``application/views/``. In it, add the following code:
 
     <html>
         <head>

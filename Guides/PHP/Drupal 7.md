@@ -9,11 +9,7 @@ If you're looking for a flexible, friendly and powerful content management platf
  * Auto-update notification
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to how Drupal is configured, out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Drupal 7 to [the cloudControl platform](http://www.cloudcontrol.com).
 
 ##Prerequisites
 
@@ -39,7 +35,7 @@ After this, in your local development environment, perform a standard installati
 
 ##2. Amend the Code
 
-As I mentioned before, a few changes need to be made to the default Drupal 7 configuration. These changes are as follows:
+A few changes need to be made to the default Drupal 7 configuration. These changes are as follows:
 
 ###2.1 Auto-Magically Determine the Environment and Configuration the Application
 
@@ -57,7 +53,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -75,7 +71,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldldrupal`` and *push* and *deploy* both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldldrupal`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -85,15 +82,15 @@ Now, we need to make our first deployment of both branches to the cloudControl p
     
     // deploy the default branch
     cctrlapp cloudcontroldldrupal/default push    
-    cctrlapp cloudcontroldldrupal/default deploy --stack luigi
+    cctrlapp cloudcontroldldrupal/default deploy
     
     // deploy the testing branch
     cctrlapp cloudcontroldldrupal/testing push    
-    cctrlapp cloudcontroldldrupal/testing deploy --stack luigi
+    cctrlapp cloudcontroldldrupal/testing deploy
 
 ##4. Initialise the Required Addons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on is required to determine the active environment and mysqls for storing our session and logging information. 
 
 ###4.1 Initialising mysqls
 
@@ -178,9 +175,9 @@ It’s really handy as we don’t need to do too much to make use of the options
 
 Under **sites/default** create three new files:
 
- * settings.development.inc
- * settings.testing.inc 
- * settings.production.inc
+ * ``settings.development.inc``
+ * ``settings.testing.inc``
+ * ``settings.production.inc``
 
 In there, past the respective database settings for your different environments that you can retrieve from the database add-on configuration or your local development environment. 
 
@@ -292,14 +289,14 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
     // deploy the default branch
     cctrlapp cloudcontroldlDrupal 7/default push    
-    cctrlapp cloudcontroldlDrupal 7/default deploy --stack luigi
+    cctrlapp cloudcontroldlDrupal 7/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
     cctrlapp cloudcontroldlDrupal 7/testing push    
-    cctrlapp cloudcontroldlDrupal 7/testing deploy --stack luigi
+    cctrlapp cloudcontroldlDrupal 7/testing deploy
 
 ##8. Review the Deployment
 

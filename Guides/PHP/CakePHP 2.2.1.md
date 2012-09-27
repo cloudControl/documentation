@@ -10,11 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to what CakePHP looks like, out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). 
 
 ##Prerequisites
 
@@ -40,24 +36,24 @@ If you use an IDE, then it's best to open up the source as a project in it. In t
 
 ##2. Amend the Code
 
-As I mentioned before, a few changes need to be made to the default CakePHP configuration and code to accommodate cloudControl deployment. These changes are as follows:
+A few changes need to be made to the default CakePHP configuration and code to accommodate cloudControl deployment. These changes are as follows:
 
  * Store session and log files in a database, not on the filesystem
  * Auto-magically determine the environment and set the configuration
 
 ###2.1 Store session and log files in a database, not on the filesystem
 
-We need to do this because Kohana, by default, stores its session files on the filesystem. However, this approach isn’t possible on the cloudControl platform as it has a non-persistent filesystem.
+We need to do this because CakePHP, by default, stores its session files on the filesystem. However, this approach isn’t recommended on cloud platforms like cloudControl.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store both the session and log files in a two-level cache, composed of MySQL and APC. 
 
-Thankfully, CakePHP is written in a very straight-forward and configurable manner, so this isn't too hard to do. What's more, the community around it is very healthy, so there's loads of options and support available. 
+Thankfully, CakePHP is written in a very straight-forward and configurable manner, so this is easy to do. What's more, the community around it is very healthy, so there's loads of options and support available. 
 
 ###2.2 Auto-magically determine the environment and set the configuration
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. CakePHP does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on. 
 
-When using cloudControl, this isn't really possible. What we need to do is to have one bootstrap file, across multiple deployments, and for it to programmatically know where it is and set the appropriate configuration options. So we're going to be making additions to the code so this happens auto-magically.
+On cloudControl, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code under Git Control
 
@@ -67,7 +63,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -85,41 +81,43 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldlcakephp`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontrolledcakephp`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. 
+By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
     
     // create the application
-    cctrlapp cloudcontroldlcakephp create php
+    cctrlapp cloudcontrolledcakephp create php
     
     // deploy the default branch
-    cctrlapp cloudcontroldlcakephp/default push    
-    cctrlapp cloudcontroldlcakephp/default deploy --stack luigi
+    cctrlapp cloudcontrolledcakephp/default push    
+    cctrlapp cloudcontrolledcakephp/default deploy 
     
     // deploy the testing branch
-    cctrlapp cloudcontroldlcakephp/testing push    
-    cctrlapp cloudcontroldlcakephp/testing deploy --stack luigi
+    cctrlapp cloudcontrolledcakephp/testing push    
+    cctrlapp cloudcontrolledcakephp/testing deploy 
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on is required to determine the active environment and mysqls is used for storing our session and logging information. 
 
 ###4.1 Check the Add-on Configuration
 
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlcakephp/default addon.add mysql.free
+    cctrlapp cloudcontrolledcakephp/default addon.add mysql.free
     
     // Retrieve the settings
-    cctrlapp cloudcontroldlcakephp/default addon mysql.free
+    cctrlapp cloudcontrolledcakephp/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlcakephp/testing addon.add mysql.free
+    cctrlapp cloudcontrolledcakephp/testing addon.add mysql.free
     
     // Retrieve the settings
-    cctrlapp cloudcontroldlcakephp/testing addon mysql.free
+    cctrlapp cloudcontrolledcakephp/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -137,10 +135,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldlcakephp2/default addon.add config.free --CAKE_ENV=production
+    cctrlapp cloudcontrolledcakephp/default addon.add config.free --CAKE_ENV=production
 
     // Set the testing environment setting    
-    cctrlapp cloudcontroldlcakephp2/testing addon.add config.free --CAKE_ENV=testing
+    cctrlapp cloudcontrolledcakephp/testing addon.add config.free --CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 
@@ -185,7 +183,7 @@ We then look in there for a value called **CAKE_ENV**, which determines the acti
         return $environment;
     }
      
-Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in app/Config/database.php. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all cloudControl environments. 
+Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in ``app/Config/database.php``. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all cloudControl environments. 
 
 When we configured the add ons earlier (*mysqls* and *config*) the settings were automatically persisted to the running server environments. So we're now able to retrieve these settings, when we're not in a local development environment, and configure our database connection to use them. It's really handy as we don't need to do too much to make use of the options.
 
@@ -253,7 +251,7 @@ An example is provided below:
 
 ###5.2 app/Config/bootstrap.php
 
-The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching use the filesystem. What we're going to do is to make use of the built-in APC module that comes with cloudControl and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
+The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching is using the filesystem as storage. What we're going to do is to make use of the built-in APC module that comes with cloudControl and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
 
 Go down in the file until you find a line similar to below:
 
@@ -315,7 +313,7 @@ What this does is to have a two-level cache. The information is stored in both A
 
 ###5.4 Model/Datasource/Session/ComboSession.php
 
-Next, create the file ComboSession.php in Model/Datasource/Session. And set it up as below. 
+Next, create the file ``ComboSession.php`` in ``Model/Datasource/Session``. And set it up as below. 
 
     <?php
     App::uses('DatabaseSession', 'Model/Datasource/Session');
@@ -420,15 +418,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlcakephp/default push    
-    cctrlapp cloudcontroldlcakephp/default deploy --stack luigi
+    cctrlapp cloudcontrolledcakephp/default push    
+    cctrlapp cloudcontrolledcakephp/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    cctrlapp cloudcontroldlcakephp/testing push    
-    cctrlapp cloudcontroldlcakephp/testing deploy --stack luigi
+    cctrlapp cloudcontrolledcakephp/testing push    
+    cctrlapp cloudcontrolledcakephp/testing deploy
 
 ##7. Review the Deployment
 
@@ -436,8 +434,8 @@ With that completed, then have a look at both your deployments to ensure that th
 
 | URL | Deployment |
 | ------ | ------ |
-|  [http://cloudcontroldlcakephp.cloudcontrolled.com](http://cloudcontroldlcakephp.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldlcakephp.cloudcontrolled.com](http://testing.cloudcontroldlcakephp.cloudcontrolled.com)  |  Testing  |
+|  [http://cloudcontrolledcakephp.cloudcontrolled.com](http://cloudcontrolledcakephp.cloudcontrolled.com)  |  Production  |
+|  [http://testing.cloudcontrolledcakephp.cloudcontrolled.com](http://testing.cloudcontrolledcakephp.cloudcontrolled.com)  |  Testing  |
 
 You should see output similar to that below, in figure 2.
 

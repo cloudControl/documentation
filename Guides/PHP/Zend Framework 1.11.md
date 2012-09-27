@@ -1,6 +1,6 @@
 #Deploying Zend Framework 1.11 to cloudControl
 
-![Successful Deployment](../images/ZendFramework-logo.png)
+![Successful Deployment](images/ZendFramework-logo.png)
 
 If you're looking for a feature-rich, flexible and capable PHP Framework for your projects, you can't go past [Zend Framework](http://framework.zend.com/). Now at [version 1.11](http://framework.zend.com/download/latest) it comes with a variety of features to speed up your application development, including:
 
@@ -10,11 +10,7 @@ If you're looking for a feature-rich, flexible and capable PHP Framework for you
  * Easy to read documentation
  * A super, shiny, new version 2 **coming soon**
 
-In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the cloudControl platform](http://www.cloudcontrol.com). cloudControl provides a [Platform as a Service](http://searchcloudcomputing.techtarget.com/definition/Platform-as-a-Service-PaaS) (PaaS) architecture. It has a writeable filesystem, however it's not persistent across deployments or reloads. 
-
-What this means for us is that we shouldn't attempt to store sessions or write logs to it; especially if we're going to use more than one node. So we're going to need to make some adjustments to what Zend Framework looks like, out of the box, so that it can be deployed successfully. 
-
-If you need more background on the architecture of the cloudControl platform, have a look at the excellent documentation [available online](https://www.cloudcontrol.com/documentation/getting-started/popular-articles). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the cloudControl platform](http://www.cloudcontrol.com). 
 
 ##Prerequisites
 
@@ -34,7 +30,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://framework.zend.com/download/latest](http://framework.zend.com/download/latest). After that, extract it to your local file system. 
 
-![Source files](../images/zf-source-files.png)
+![Source files](images/zf-source-files.png)
 
 ##Create a Basic Application
 
@@ -76,7 +72,7 @@ Ok, now let's get started making these changes and deploying the application. We
     
     git init .
     
-    git add *.*
+    git add -A
     
     git commit -m "First addition of the source files"
     
@@ -94,7 +90,8 @@ That will show output similar to below:
         master
         * testing
 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account, which we'll call ``cloudcontroldlzf`` and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldlzf`` in this example. You will of course have to use some different name. 
+Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -128,7 +125,7 @@ In the output above, you'll see ``INFO: Zend Framework 1.x detected``. This is t
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, [config](https://www.cloudcontrol.com/documentation/add-ons/config) and [mysqls](https://www.cloudcontrol.com/documentation/add-ons/mysql-shared). The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on is required for determining the active environment and mysqls for storing our session and logging information. 
 
 ###4.1 Check the Add-on Configuration
 
@@ -353,7 +350,7 @@ This is more of a utility method, for convenience within the application. We mak
    
 ###5.3 index.php
 
-We then need to make an adjustment to the default index.php that comes with a standard Zend Framework installation, as created by zf.sh (or bat).
+We then need to make an adjustment to the default ``index.php`` that comes with a standard Zend Framework installation, as created by ``zf.sh`` (or bat).
 
 Normally it looks like the below (formatted for readability):
 
@@ -485,7 +482,7 @@ With that completed, then have a look at both your deployments to ensure that th
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](../images/zf-deployed.png)
+![Successful Deployment](images/zf-deployed.png)
 
 ###7.1 Deployment Problems
 
