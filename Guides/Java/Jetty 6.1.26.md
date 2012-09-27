@@ -43,7 +43,7 @@ Execute:
 		
 This should create given project structure (You can get rid of test directories since we will not use them):
 
-![[image]](images/project.png)
+![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/project.png)
 		
 ##Extend pom.xml with missing dependencies and build directive:
 
@@ -161,7 +161,7 @@ This should create given project structure (You can get rid of test directories 
 		
 * #####Test it
 
-	![[image]](images/local_test.png)	
+	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/local_test.png)	
 	
 ##Deploy application to cloudControl
 
@@ -210,7 +210,7 @@ This should create given project structure (You can get rid of test directories 
  
 * #####Test it
 
-	![[image]](images/test.png)
+	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/test.png)
 
 
 ##Monitor you application
