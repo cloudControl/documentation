@@ -1,7 +1,6 @@
 #Deploying Java WEB application with embedded Jetty server
 
-If you're looking for a fast and light Java WEB server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version
-6.1.26](http://dist.codehaus.org/jetty/jetty-6.1.26/), it provides a variety of features to speed up and simplify your application development, including:
+If you're looking for a fast and light Java WEB server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 6.1.26](http://dist.codehaus.org/jetty/jetty-6.1.26/), it provides a variety of features to speed up and simplify your application development, including:
 
 * Open source 
 * Commercially usable 
@@ -9,7 +8,7 @@ If you're looking for a fast and light Java WEB server / Servlet container for y
 * Enterprise scalable 
 * Integrated with Eclipse
 
-In this tutorial, we're going to take you through deploying Java WEB application with embedded Jetty server to [the cloudControl platform](http://www.cloudcontrol.com). You can find git repository of below example [here]().
+In this tutorial, we're going to take you through deploying Java WEB application with embedded Jetty server to [the cloudControl platform](http://www.cloudcontrol.com).
 
 ##Prerequisites
 
@@ -213,7 +212,7 @@ This should create given project structure (You can get rid of test directories 
 	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/test.png)
 
 
-##Monitor you application
+##Monitor your application
 
 * #####Deploy logs:
 
