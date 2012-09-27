@@ -44,10 +44,12 @@ It's recommended to the read database credentials from the creds.json file. The 
 
 The JSON file has the following structure:
 
+~~~
 {
-   "SENDGRID":{
-      "SENDGRID_USERNAME":"youraddress@example.com",
-"SENDGRID_PASSWORD":"yoursendgridpassword",
+    "SENDGRID": {
+        "SENDGRID_USERNAME": "SOME_NAME@example.com",
+        "SENDGRID_PASSWORD": "SOME_SECRET_PASSWORD",
+    }
 }
-}
+~~~
 
