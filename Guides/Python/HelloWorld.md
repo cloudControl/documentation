@@ -210,6 +210,6 @@ Which means "run 4 clones which get 256 MB RAM each".
 
 [flask]: http://flask.pocoo.org/
 [cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/documentation/getting-started/command-line-client "documentation of the cloudControl-command-line-client"
+[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the cloudControl-command-line-client"
 [virtualenv]: http://pypi.python.org/pypi/virtualenv
 [virtualenvwrapper]: http://www.doughellmann.com/projects/virtualenvwrapper/
