@@ -180,9 +180,11 @@ To allow your app to be accessed via web you have to deploy it:
 
     $ cctrlapp pythontest/default deploy 
 
+
 Now we see some deploy- and error-logs in our output. 
 *   The deploy-log shows us how often, when and where our application was deployed.
 *   The error-log shows us all output (stdout and stderr) of our declared web-process 
+
 
     $ cctrlapp pythontest/default log deploy 
         [Thu Dec 24 12:31:34] repo-1 INFO Initialized deployment
@@ -196,6 +198,7 @@ Now we see some deploy- and error-logs in our output.
     $ cctrlapp pythontest/default log error 
         [Thu Dec 24 12:46:59 2012] deploy ***** Deployed 28dd4d532c54b87e8f06e6ddbaa076be5579269d *****
         [Thu Dec 24 12:47:01 2012] info  * Running on http://0.0.0.0:21692/
+
 
 
 You can now reach your application via [http://pythontest.cloudcontrolled.com](http://pythontest.cloudcontrolled.com)
