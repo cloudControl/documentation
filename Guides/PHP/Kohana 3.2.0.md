@@ -132,10 +132,10 @@ Beginning with the **luigi** stack, a number of PHP frameworks, including Kohana
 Now that that's done, we need to configure two addons, config and mysqls. The config addon's required for determining the active environment and mysqls for storing our session information. To initialise these, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlkohana/default addon.add mysql.free
+    cctrlapp cloudcontroldlkohana/default addon.add mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlkohana/testing addon.add mysql.free
+    cctrlapp cloudcontroldlkohana/testing addon.add mysqls.free
 
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
@@ -150,7 +150,7 @@ Now we need to configure the config addon and store the respective environment s
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
     
     // Retrieve the settings
-    cctrlapp cloudcontroldlkohana/testing addon mysql.free
+    cctrlapp cloudcontroldlkohana/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
