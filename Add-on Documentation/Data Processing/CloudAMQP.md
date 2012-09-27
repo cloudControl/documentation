@@ -33,6 +33,7 @@ Similarily, an Add-on can also be removed from the deployment easily. The costs 
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.remove cloudamqp.OPTION
+~~~
 
 ## Add-on credentials
 
