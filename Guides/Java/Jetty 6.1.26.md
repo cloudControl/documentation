@@ -183,8 +183,8 @@ This should create given project structure (You can get rid of test directories 
 		Deployment
  			name: APPLICATION_NAME/default
  			stack: pinky
- 			branch: ssh://APPLICATION_NAME@cloudcontrol.com/repository.git
- 			private files: sftp://dep8dqw34vx@cloudcontrol.com/
+ 			branch: ssh://APPLICATION_NAME@cloudcontrolled.com/repository.git
+ 			private files: sftp://dep8dqw34vx@cloudcontrolled.com/
  			last modified: 2012-09-27 11:27:38
  			current version: ddb81c1c510d9c845492d2322a6bdc1cfaba4bdc
  			current state: deployed
@@ -219,8 +219,8 @@ This should create given project structure (You can get rid of test directories 
 
 	`cctrlapp APPLICATION_NAME/default log access`
 	
-		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://javawebjetty.devcctrl.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
-		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://javawebjetty.devcctrl.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4" 
+		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APPLICATION_NAME.cloudcontrolled.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
+		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APPLICATION_NAME.cloudcontrolled.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4" 
 		
 * #####Error / Application logs:
 
