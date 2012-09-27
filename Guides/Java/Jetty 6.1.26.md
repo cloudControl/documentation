@@ -14,14 +14,6 @@ In this tutorial, we're going to take you through deploying Java WEB application
 
 You're going to need only a few things to following along with this tutorial. These are:
 
- * A [Git client](http://git-scm.com/), whether command-line or GUI. If you're a GUI fan, there are some excellent options available. These include:
-   * [GitX](http://gitx.frim.nl/)
-   * [Github for Mac](http://mac.github.com/)
-   * [Github for Windows](http://windows.github.com/)
-   * [Gitbox](http://www.gitboxapp.com/)
-   * [git-cola](http://git-cola.github.com/)
-   * [Tower](http://www.git-tower.com/)
-   * [TortoiseGit](http://code.google.com/p/gitextensions/)
  * A [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
  * A [Maven3](http://maven.apache.org/download.html)
  * A cloudControl client - `easy_install cctrl` or `pip install cctrl`
@@ -38,7 +30,7 @@ Execute:
  	mvn archetype:generate \
 		-DarchetypeGroupId=org.apache.maven.archetypes \
 		-DgroupId=com.cloudcontrol.example \
-		-DartifactId=javawebjetty
+		-DartifactId=APPLICATION_NAME
 		
 This should create given project structure (You can get rid of test directories since we will not use them):
 
@@ -52,7 +44,7 @@ This should create given project structure (You can get rid of test directories 
     	
     	<modelVersion>4.0.0</modelVersion>
     	<groupId>com.cloudcontrol.example</groupId>
-    	<artifactId>javawebjetty</artifactId>
+    	<artifactId>APPLICATION_NAME</artifactId>
     	<version>1.0-SNAPSHOT</version>
     	<dependencies>
         	<dependency>
@@ -166,7 +158,7 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Create application: 
 
-	`cctrlapp javawebjetty create java`		
+	`cctrlapp APPLICATION_NAME create java`		
 
 * #####Create Procfile in project root directory specyfing start command:
 
@@ -178,21 +170,21 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Push code to cloudControl: 
 
-	`cctrlapp javawebjetty/master push`
+	`cctrlapp APPLICATION_NAME/master push`
 
 * #####Deploy application: 
 
-	`cctrlapp javawebjetty/default deploy`
+	`cctrlapp APPLICATION_NAME/default deploy`
 
 * #####Check deployment details: 
 
-	`cctrlapp javawebjetty/default details`
+	`cctrlapp APPLICATION_NAME/default details`
 
 		Deployment
- 			name: javawebjetty/default
+ 			name: APPLICATION_NAME/default
  			stack: pinky
- 			branch: ssh://javawebjetty@devcctrl.com/repository.git
- 			private files: sftp://dep8dqw34vx@devcctrl.com/
+ 			branch: ssh://APPLICATION_NAME@cloudcontrol.com/repository.git
+ 			private files: sftp://dep8dqw34vx@cloudcontrol.com/
  			last modified: 2012-09-27 11:27:38
  			current version: ddb81c1c510d9c845492d2322a6bdc1cfaba4bdc
  			current state: deployed
@@ -201,11 +193,11 @@ This should create given project structure (You can get rid of test directories 
  
 * #####Show aliases:
  
- 	`cctrlapp javawebjetty/default alias`
+ 	`cctrlapp APPLICATION_NAME/default alias`
  
  		Aliases
  		name                                                         default  verified
- 		javawebjetty.devcctrl.com                                           1        1
+ 		APPLICATION_NAME.cloudcontrol.com                                  1         1
  
 * #####Test it
 
@@ -216,7 +208,7 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Deploy logs:
 
-	`cctrlapp javawebjetty/default log deploy`
+	`cctrlapp APPLICATION_NAME/default log deploy`
 
 		[Thu Sep 27 12:10:23 2012] lxc-dev-136 INFO Deploying ...
 		[Thu Sep 27 12:10:35 2012] lxc-dev-136 INFO Deployed version: f2b73a2d941a67ad5a2e2a400b9b88cc665caf6f
@@ -225,14 +217,14 @@ This should create given project structure (You can get rid of test directories 
 		
 * #####Access logs:
 
-	`cctrlapp javawebjetty/default log access`
+	`cctrlapp APPLICATION_NAME/default log access`
 	
 		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://javawebjetty.devcctrl.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
 		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://javawebjetty.devcctrl.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4" 
 		
 * #####Error / Application logs:
 
-	`cctrlapp javawebjetty/default log error`
+	`cctrlapp APPLICATION_NAME/default log error`
 	
 		[Thu Sep 27 12:10:37 2012] info 2012-09-27 12:10:37.914:INFO:oejs.Server:jetty-7.6.0.v20120127
 		[Thu Sep 27 12:10:38 2012] info 2012-09-27 12:10:38.066:INFO:oejsh.ContextHandler:started o.e.j.s.ServletContextHandler{/,null}
