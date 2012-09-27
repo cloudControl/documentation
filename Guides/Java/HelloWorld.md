@@ -30,7 +30,7 @@ Execute:
  	mvn archetype:generate \
 		-DarchetypeGroupId=org.apache.maven.archetypes \
 		-DgroupId=com.cloudcontrol.example \
-		-DartifactId=APPLICATION_NAME
+		-DartifactId=APP_NAME
 		
 This should create given project structure (You can get rid of test directories since we will not use them):
 
@@ -44,7 +44,7 @@ This should create given project structure (You can get rid of test directories 
     	
     	<modelVersion>4.0.0</modelVersion>
     	<groupId>com.cloudcontrol.example</groupId>
-    	<artifactId>APPLICATION_NAME</artifactId>
+    	<artifactId>APP_NAME</artifactId>
     	<version>1.0-SNAPSHOT</version>
     	<dependencies>
         	<dependency>
@@ -125,7 +125,7 @@ This should create given project structure (You can get rid of test directories 
         	server.setHandler(context);
         	context.addServlet(new ServletHolder(new App()),"/*");
         	server.start();
-        	server.join();  
+        	server.join();
         	System.out.println("Application started");
     	}
 	}
@@ -158,7 +158,7 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Create application: 
 
-	`cctrlapp APPLICATION_NAME create java`		
+	`cctrlapp APP_NAME create java`
 
 * #####Create Procfile in project root directory specyfing start command:
 
@@ -170,21 +170,21 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Push code to cloudControl: 
 
-	`cctrlapp APPLICATION_NAME/master push`
+	`cctrlapp APP_NAME/master push`
 
 * #####Deploy application: 
 
-	`cctrlapp APPLICATION_NAME/default deploy`
+	`cctrlapp APP_NAME/default deploy`
 
 * #####Check deployment details: 
 
-	`cctrlapp APPLICATION_NAME/default details`
+	`cctrlapp APP_NAME/default details`
 
 		Deployment
- 			name: APPLICATION_NAME/default
+ 			name: APP_NAME/default
  			stack: pinky
- 			branch: ssh://APPLICATION_NAME@cloudcontrolled.com/repository.git
- 			private files: sftp://dep8dqw34vx@cloudcontrolled.com/
+ 			branch: ssh://APP_NAME@cloudcontrolled.com/repository.git
+ 			private files: sftp://DEP_ID@cloudcontrolled.com/
  			last modified: 2012-09-27 11:27:38
  			current version: ddb81c1c510d9c845492d2322a6bdc1cfaba4bdc
  			current state: deployed
@@ -193,11 +193,11 @@ This should create given project structure (You can get rid of test directories 
  
 * #####Show aliases:
  
- 	`cctrlapp APPLICATION_NAME/default alias`
+ 	`cctrlapp APP_NAME/default alias`
  
  		Aliases
  		name                                                         default  verified
- 		APPLICATION_NAME.cloudcontrol.com                                  1         1
+ 		APP_NAME.cloudcontrolled.com                                 1        1
  
 * #####Test it
 
@@ -208,7 +208,7 @@ This should create given project structure (You can get rid of test directories 
 
 * #####Deploy logs:
 
-	`cctrlapp APPLICATION_NAME/default log deploy`
+	`cctrlapp APP_NAME/default log deploy`
 
 		[Thu Sep 27 12:10:23 2012] lxc-dev-136 INFO Deploying ...
 		[Thu Sep 27 12:10:35 2012] lxc-dev-136 INFO Deployed version: f2b73a2d941a67ad5a2e2a400b9b88cc665caf6f
@@ -217,14 +217,14 @@ This should create given project structure (You can get rid of test directories 
 		
 * #####Access logs:
 
-	`cctrlapp APPLICATION_NAME/default log access`
+	`cctrlapp APP_NAME/default log access`
 	
-		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APPLICATION_NAME.cloudcontrolled.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
-		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APPLICATION_NAME.cloudcontrolled.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4" 
+		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APP_NAME.cloudcontrolled.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
+		178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APP_NAME.cloudcontrolled.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4" 
 		
 * #####Error / Application logs:
 
-	`cctrlapp APPLICATION_NAME/default log error`
+	`cctrlapp APP_NAME/default log error`
 	
 		[Thu Sep 27 12:10:37 2012] info 2012-09-27 12:10:37.914:INFO:oejs.Server:jetty-7.6.0.v20120127
 		[Thu Sep 27 12:10:38 2012] info 2012-09-27 12:10:38.066:INFO:oejsh.ContextHandler:started o.e.j.s.ServletContextHandler{/,null}
