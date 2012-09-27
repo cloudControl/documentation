@@ -32,13 +32,13 @@ To control the platform we offer different interfaces. The primary way of contro
 
 Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For detailed installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
 
-#### Quick Installtion Windows
+#### Quick Installation Windows
 
 For Windows we offer an installer. Please download the latest version of the installer from [Github](https://github.com/cloudControl/cctrl/downloads). The file is named cctrl-x.x-setup.exe.
 
-#### Quick Installtion Linux/Mac
+#### Quick Installation Linux/Mac
 
-On Linux and Mac OS we recommned installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
+On Linux and Mac OS we recommend installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
 
 ~~~
 $ pip install cctrl
@@ -87,7 +87,7 @@ Apps
 
 ### Users
 
-By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploy-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the users [role](#roles).
+By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the users [role](#roles).
 
 You can list, add and remove app users using the command line client.
 
@@ -259,7 +259,7 @@ Most apps share a common application lifecycle consisting of development, stagin
 
 To enable you to determine programatically which deployment your app currently runs in, e.g. to enable debugging output in development deployments but disable it in production deployments, each deployment makes the following set of environment variables available to the apps.
 
- * **TMP_DIR**: The path to the tmp directory.
+ * **TMPDIR**: The path to the tmp directory.
  * **CRED_FILE**: The path of the creds.json file containing the Add-on credentials.
  * **DEP_VERSION**: The Git or Bazaar version.
  * **DEP_NAME**: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
@@ -339,13 +339,13 @@ Addon                    : memcachier.dev
 [...]
 ~~~
 
-To upgrade or downgrade ann Add-on use the respective command followed by the Add-on name you upgrade from to the Add-on name you upgrade to.
+To upgrade or downgrade an Add-on use the respective command followed by the Add-on name you upgrade from to the Add-on name you upgrade to.
 
 ~~~
 # upgrade
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
 # downgrade
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_BIG_ADDON TO_SMALL_ADDON
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 ~~~
 **Remember:** As in all examples during this documentation replace all uppercase placeholders with their respective values.
 
