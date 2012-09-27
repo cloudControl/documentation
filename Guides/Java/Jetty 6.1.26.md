@@ -43,7 +43,7 @@ Execute:
 		
 This should create given project structure (You can get rid of test directories since we will not use them):
 
-![image](images/project.png)
+![image](https://github.com/mkorszun/documentation/blob/master/Guides/Java/images/project.png)
 		
 ##Extend pom.xml with missing dependencies and build directive:
 
@@ -161,7 +161,7 @@ This should create given project structure (You can get rid of test directories 
 		
 * #####Test it
 
-	![image](images/local_test.png)	
+	![image](https://github.com/mkorszun/documentation/blob/master/Guides/Java/images/local_test.png)	
 	
 ##Deploy application to cloudControl
 
@@ -200,7 +200,7 @@ This should create given project structure (You can get rid of test directories 
  			min boxes: 1
  			max boxes: 1
  
- * #####Show aliases:
+* #####Show aliases:
  
  	`cctrlapp javawebjetty/default alias`
  
@@ -210,7 +210,7 @@ This should create given project structure (You can get rid of test directories 
  
 * #####Test it
 
-	![image](images/test.png)
+	![image](https://github.com/mkorszun/documentation/tree/master/Guides/Java/images/test.png)
 
 
 ##Monitor you application
