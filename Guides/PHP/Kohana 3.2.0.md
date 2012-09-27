@@ -18,14 +18,7 @@ In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the
 
 You're going to need only a few things to following along with this tutorial. These are:
 
- * A [Git client](http://git-scm.com/), whether command-line or GUI. If you're a GUI fan, there are some excellent options available. These include:
-   * [GitX](http://gitx.frim.nl/)
-   * [Github for Mac](http://mac.github.com/)
-   * [Github for Windows](http://windows.github.com/)
-   * [Gitbox](http://www.gitboxapp.com/)
-   * [git-cola](http://git-cola.github.com/)
-   * [Tower](http://www.git-tower.com/)
-   * [TortoiseGit](http://code.google.com/p/gitextensions/)
+ * A [Git client](http://git-scm.com/), whether command-line or GUI.
  * A MySQL client, whether command-line or GUI, such as [MySQL Workbench](http://dev.mysql.com/downloads/workbench/) or the command-line tools.
 
 ##1. Grab a Copy of the Kohana code. 
