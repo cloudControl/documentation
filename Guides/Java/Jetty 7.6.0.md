@@ -201,15 +201,7 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
  			current state: deployed
  			min boxes: 1
  			max boxes: 1
- 
-* #####Show aliases:
- 
- 	`cctrlapp APPLICATION_NAME/default alias`
- 
- 		Aliases
- 		name                                                         default  verified
- 		APPLICATION_NAME.cloudcontrol.com                                  1         1
- 
+  
 * #####Test it
 
 	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/test.png)
