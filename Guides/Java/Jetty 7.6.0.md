@@ -1,6 +1,6 @@
 #Deploying Java WEB application with embedded Jetty server
 
-If you're looking for a fast and light Java WEB server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 6.1.26](http://dist.codehaus.org/jetty/jetty-6.1.26/), it provides a variety of features to speed up and simplify your application development, including:
+If you're looking for a fast and light Java WEB server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 7.6.0](http://dist.codehaus.org/jetty/jetty-hightide-7.6.0/), it provides a variety of features to speed up and simplify your application development, including:
 
 * Open source 
 * Commercially usable 
@@ -32,11 +32,13 @@ Execute:
 		-DgroupId=com.cloudcontrol.example \
 		-DartifactId=APPLICATION_NAME
 		
-This should create given project structure (You can get rid of test directories since we will not use them):
+Accept all default options proposed by maven. This should create given project structure. Get rid of test directories since we will not use them: `cd PROJECTDIR ; rm -rf src/test`
 
 ![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/project.png)
 		
 ##Extend pom.xml with missing dependencies and build directive:
+
+You have to specify maven dependencies to include Jetty server and Servlet library. Add build directive specifying [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
 
 	<project 
 		xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -108,7 +110,7 @@ This should create given project structure (You can get rid of test directories 
 		private static final long serialVersionUID = -96650638989718048L;
 
 		@Override
-    	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     	{
         	System.out.println("Request received from: "+req.getLocalAddr());
         	resp.setContentType("text/html");
@@ -134,7 +136,7 @@ This should create given project structure (You can get rid of test directories 
         	server.setHandler(context);
         	context.addServlet(new ServletHolder(new App()),"/*");
         	server.start();
-        	server.join();  
+        	server.join();
         	System.out.println("Application started");
     	}
 	}
@@ -169,23 +171,23 @@ This should create given project structure (You can get rid of test directories 
 
 	`cctrlapp APPLICATION_NAME create java`		
 
-* #####Create Procfile in project root directory specyfing start command:
+* #####Create a file called 'Procfile' in the project dir with the following contents to specify the start command:
 
 	`web:    java -cp target/classes:target/dependency/* com.cloudcontrol.example.App`
 
 * #####Init git repository: 
 
-	`cd PROJECTDIR ; git init ; git add . ; git commit -am "MSG"`
+	`cd PROJECTDIR ; git init ; git add pom.xml Procfile src/ ; git commit -am "MSG"`
 
 * #####Push code to cloudControl: 
 
-	`cctrlapp APPLICATION_NAME/master push`
+	`cctrlapp APPLICATION_NAME/default push`
 
 * #####Deploy application: 
 
 	`cctrlapp APPLICATION_NAME/default deploy`
 
-* #####Check deployment details: 
+* #####Check deployment details (it can take a few seconds to change status to "deployed"): 
 
 	`cctrlapp APPLICATION_NAME/default details`
 
@@ -193,7 +195,7 @@ This should create given project structure (You can get rid of test directories 
  			name: APPLICATION_NAME/default
  			stack: pinky
  			branch: ssh://APPLICATION_NAME@cloudcontrolled.com/repository.git
- 			private files: sftp://dep8dqw34vx@cloudcontrolled.com/
+ 			private files: sftp://depabcd1234@cloudcontrolled.com/
  			last modified: 2012-09-27 11:27:38
  			current version: ddb81c1c510d9c845492d2322a6bdc1cfaba4bdc
  			current state: deployed
