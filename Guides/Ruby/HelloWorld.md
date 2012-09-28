@@ -8,8 +8,9 @@ the requirements, creating the Procfile and deploying your app on
 
 
 ## Prerequisites
-*   Installed [Ruby](http://www.ruby-lang.org/). For this tutorial we'll use 1.9 version.
-* [Rubygems][rubygems] installed. See [this guide](http://rubygems.org/pages/download) for install and get your gems up to date.
+* Basic Ruby knowledge
+* Installed [Ruby](http://www.ruby-lang.org/). For this tutorial we'll use 1.9 version.
+* [Rubygems][rubygems] installed. See [this guide](http://rubygems.org/pages/download) to install and get your gems up to date.
 *   A [cloudControl][cloudControl] user account.
 *   Installed [cloudControl-command-line-client][cloudControl-doc-cmdline]
 *   A [Git client](http://git-scm.com/), whether command-line or GUI. 
@@ -23,10 +24,9 @@ First create an empty directory for your application and switch to it:
 
 	$ mkdir hello-ruby && cd hello-ruby
 
-Now we install our dependencies. In this case we need to install two gems, [Bundler](http://rubygems.org/gems/bundler), which will manage our app dependencias, and [Sinatra](http://rubygems.org/gems/sinatra), which contains the Sinatra DSL itself.
+Now we install our dependencies. In this case we need to install two gems, [Bundler](http://rubygems.org/gems/bundler), which will manage our app dependencies, and [Sinatra](http://rubygems.org/gems/sinatra), which contains the Sinatra DSL itself.
 
-	$ gem install bundler
-	[sudo] password for fa: 
+	$ gem install bundler 
 	Fetching: bundler-1.2.1.gem (100%)
 	Successfully installed bundler-1.2.1
 	1 gem installed
@@ -63,8 +63,8 @@ get '/' do
 end
 ~~~
 
-## Declare dependencies with Pip
-As you are building a Rack-based app, the [cloudControl-platform][cloudControl] recognizes your dependencies by the file called Gemfile and your settings by the file called config.ru, both in your project-root. 
+## Declare dependencies and configuration
+As you are building a [Rack](http://rack.github.com/)-based app, the [cloudControl-platform][cloudControl] recognizes your dependencies by the file called `Gemfile` and your server settings by the file called `config.ru`, both in your project-root. 
 
 Let's create them: 
 
@@ -90,66 +90,60 @@ with this name in your project-root.
 
 Here is the one for our test-application: 
 
-    web: python server.py 
+    web: bundle exec ruby helloworld.rb -p $PORT 
 
 
-## Store your app in Git
-First we need to ignore the virtualenv and compiled python-files: 
-Create a File called `.gitignore` with these contents: 
+## Prepare your app and store it in Git
+First we need to install and lock all dependencies using Bundler:
+    
+    $ bundle install
+    Fetching gem metadata from http://rubygems.org/.....
+    Using rack (1.4.1) 
+    Using rack-protection (1.2.0) 
+    Using tilt (1.3.3) 
+    Using sinatra (1.3.3) 
+    Using bundler (1.2.1) 
+    Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
 
-    venv
-    *.pyc
-
-Now there are the three major components of a python-app left. 
-*   `requirements.txt`
-    containing our requirements
-*   `Procfile`
-    declaration of our web-process
-*   `server.py`
-    our web-server itself
-
-Let's put them into git: 
+Let's put the app files into git: 
 
     $ git init
     $ git add .
-    $ git commit -m "init"
+    $ git commit -m "first commit"
 
 
 ## Deploy to cloudControl
 Create the app: 
 
-    $ cctrlapp APP_NAME create python
+    $ cctrlapp APP_NAME create ruby
     
 **Note:** App names have to be unique because they are used as the `.cloudcontrolled.com` subdomain. Choose one for your name and replace the APP_NAME placeholder accordingly.
 
 Push your code to [cloudControl][cloudControl]:
 
     $ cctrlapp APP_NAME/default push
-        Counting objects: 7, done.
-        Delta compression using up to 4 threads.
-        Compressing objects: 100% (5/5), done.
-        Writing objects: 100% (6/6), 614 bytes, done.
-        Total 6 (delta 1), reused 0 (delta 0)
-            
-        -----> Receiving push
-        -----> Preparing Python interpreter (2.7.2)
-        -----> Creating Virtualenv version 1.7.2
-               New python executable in .heroku/venv/bin/python2.7
-               Also creating executable in .heroku/venv/bin/python
-               Installing distribute.........done.
-               Installing pip................done.
-               Running virtualenv with interpreter /usr/bin/python2.7
-        -----> Activating virtualenv
-        -----> Installing dependencies using pip version 1.1
-               ...
-               Successfully installed Flask Jinja2 Werkzeug distribute
-               Cleaning up...
-        -----> Building image
-        -----> Uploading image (3.2M)
-            
-        To ssh://APP_NAME@cloudcontrolled.com/repository.git
-        460bdac..28dd4d5  master -> master
-
+      Counting objects: 4, done.
+      Delta compression using up to 4 threads.
+      Compressing objects: 100% (3/3), done.
+      Writing objects: 100% (3/3), 391 bytes, done.
+      Total 3 (delta 1), reused 0 (delta 0)
+     
+      -----> Receiving push
+      -----> Installing dependencies using Bundler version 1.2.1
+             Running: bundle install --without development:test --path vendor/bundle --binstubs bin/ --deployment
+             Fetching gem metadata from http://rubygems.org/.....
+             Installing rack (1.4.1)
+             Installing rack-protection (1.2.0)
+             Installing tilt (1.3.3)
+             Installing sinatra (1.3.3)
+             Using bundler (1.2.1)
+             Your bundle is complete! It was installed into ./vendor/bundle
+             Cleaning up the bundler cache.
+      -----> Building image
+      -----> Uploading image (712K)
+       
+      To ssh://APP_NAME@cloudcontrolled.com/repository.git
+         65aefe5..0a71d5b  master -> master
 
 To allow your app to be accessed via web you have to deploy it: 
 
@@ -162,25 +156,29 @@ We can see what's going on by looking at the deploy- and error-logs.
 
 ~~~
 $ cctrlapp APP_NAME/default log deploy 
-    [Thu Dec 24 12:31:34] repo-1 INFO Initialized deployment
-    [Thu Dec 24 12:46:57] lxc-199 INFO Deploying ...
-    [Thu Dec 24 12:46:59] lxc-199 INFO Deployed version: 28dd4d532c54b87e8f06e6ddbaa076be5579269d
-    [Thu Dec 24 12:47:12] lb-1 INFO Routing requests to new version
-    [Thu Dec 24 12:47:41] lb-1 INFO Routing requests to new version
-    [Thu Dec 24 12:47:54] lb-4-new INFO Routing requests to new version
-    [Thu Dec 24 12:48:38] lb-4-new INFO Routing requests to new version
+    [Fri Sep 28 11:11:16 2012] repo-dev-1 INFO Initialized deployment
+    [Fri Sep 28 11:14:21 2012] lxc-dev-134 INFO Deploying ...
+    [Fri Sep 28 11:14:24 2012] lxc-dev-134 INFO Deployed version: 65aefe5e7f3cae422c7747c24052d1a466c7b5e9
+    [Fri Sep 28 11:14:24 2012] ip-10-53-143-27 INFO Routing requests to new version
+    [Fri Sep 28 11:14:26 2012] ip-10-234-178-109 INFO Routing requests to new version
+
 ~~~
 
 ~~~
 $ cctrlapp APP_NAME/default log error 
-    [Thu Dec 24 12:46:59 2012] deploy ***** Deployed 28dd4d532c54b87e8f06e6ddbaa076be5579269d *****
-    [Thu Dec 24 12:47:01 2012] info  * Running on http://0.0.0.0:21692/
-~~~
+    [Fri Sep 28 11:14:24 2012] deploy ***** Deployed 65aefe5e7f3cae422c7747c24052d1a466c7b5e9 *****
+    [Fri Sep 28 11:14:25 2012] info [2012-09-28 11:14:25] INFO  WEBrick 1.3.1
+    [Fri Sep 28 11:14:25 2012] info [2012-09-28 11:14:25] INFO  ruby 1.9.3 (2011-10-30) [x86_64-linux]
+    [Fri Sep 28 11:14:25 2012] info == Sinatra/1.3.3 has taken the stage on 12605 for production with backup from WEBrick
+    [Fri Sep 28 11:14:25 2012] info 
+    [Fri Sep 28 11:14:25 2012] info [2012-09-28 11:14:25] INFO  WEBrick::HTTPServer#start: pid=15 port=12605
+    [Fri Sep 28 11:14:32 2012] info 178.19.208.122 - - [28/Sep/2012 11:14:32] "GET / HTTP/1.1" 200 12 0.0039
 
+~~~
 
 You can now reach your application via `http://APP_NAME.cloudcontrolled.com`.
 
-## scaling 
+## Scaling 
 Scaling on [cloudControl][cloudControl] is easy. 
 Just pick the number of clones and the desired amount of memory per clone and redeploy: 
 
@@ -193,5 +191,3 @@ Which means "run 4 clones which get 256 MB RAM each".
 [rubygems]: http://rubygems.org/
 [cloudControl]: http://www.cloudcontrol.com
 [cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the cloudControl-command-line-client"
-[virtualenv]: http://pypi.python.org/pypi/virtualenv
-[virtualenvwrapper]: http://www.doughellmann.com/projects/virtualenvwrapper/
