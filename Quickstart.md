@@ -68,7 +68,7 @@ $ cctrlapp APP_NAME create [Java, PHP, Python, Ruby]
 
 If the `APP_NAME` is already taken, please pick another one.
 
-Change to the working directory of the App you want to deploy. You can find simple hello world examples for [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Hello%20World), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Hello%20World), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Hello%20World) and [Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Hello%20World).
+Change to the working directory of the App you want to deploy. You can find simple hello world examples for [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/HelloWorld), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/HelloWorld), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/HelloWorld) and [Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/HelloWorld).
 
 ~~~
 $ cd PATH_TO/YOUR_APP
