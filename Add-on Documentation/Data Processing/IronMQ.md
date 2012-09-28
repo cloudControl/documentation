@@ -8,7 +8,7 @@ IronMQ can be added to every deployment with:
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add iron_mq.OPTION
-~~
+~~~
 
 ## Upgrade IronMQ
 
