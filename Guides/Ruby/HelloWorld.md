@@ -8,11 +8,11 @@ the requirements, creating the Procfile and deploying your app on
 
 
 ## Prerequisites
-* Basic Ruby knowledge
-* Installed [Ruby](http://www.ruby-lang.org/). For this tutorial we'll use 1.9 version.
-* [Rubygems][rubygems] installed. See [this guide](http://rubygems.org/pages/download) to install and get your gems up to date.
+* Basic Ruby knowledge.
+* Installed [Ruby](http://www.ruby-lang.org/). For this tutorial 1.9+ version is required.
+* [Rubygems][rubygems] installed. See [this link](http://rubygems.org/pages/download) to install and get your gems up to date.
 *   A [cloudControl][cloudControl] user account.
-*   Installed [cloudControl-command-line-client][cloudControl-doc-cmdline]
+*   Installed [cloudControl-command-line-client][cloudControl-doc-cmdline].
 *   A [Git client](http://git-scm.com/), whether command-line or GUI. 
 
 
@@ -24,7 +24,7 @@ First create an empty directory for your application and switch to it:
 
 	$ mkdir hello-ruby && cd hello-ruby
 
-Now we install our dependencies. In this case we need to install two gems, [Bundler](http://rubygems.org/gems/bundler), which will manage our app dependencies, and [Sinatra](http://rubygems.org/gems/sinatra), which contains the Sinatra DSL itself.
+Now we install our dependencies. In this case we need to install two gems, [Bundler](http://rubygems.org/gems/bundler), which will manage our app dependencies, and [Sinatra](http://rubygems.org/gems/sinatra), which contains the Sinatra DSL itself (run these commands as superuser in case you are using a GNU/Linux OS).
 
 	$ gem install bundler 
 	Fetching: bundler-1.2.1.gem (100%)
