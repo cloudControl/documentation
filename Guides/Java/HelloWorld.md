@@ -46,6 +46,12 @@ $ cd PROJECTDIR ; rm -rf src/test
 
 ![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/project.png)
 		
+If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
+
+`cd PROJECTDIR ; mvn eclipse:eclipse`
+
+This will create Eclipse project files. Right now you can proceed using Eclipse.
+		
 ##Extend pom.xml with missing dependencies and build directive:
 
 You have to specify maven dependencies to include Jetty server and Servlet library. Add build directive specifying [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
