@@ -466,12 +466,7 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
 ##7. Review the Deployment
 
-With that completed, then have a look at both your deployments to ensure that they're working. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldlzf.cloudcontrolled.com](http://cloudcontroldlzf.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldlzf.cloudcontrolled.com](http://testing.cloudcontroldlzf.cloudcontrolled.com)  |  Testing  |
+With that completed, then have a look at both your deployments to ensure that they're working. 
 
 You should see output similar to that below, in figure 2.
 
