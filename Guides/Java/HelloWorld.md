@@ -48,7 +48,9 @@ $ cd PROJECTDIR ; rm -rf src/test
 		
 If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
 
-`cd PROJECTDIR ; mvn eclipse:eclipse`
+~~~
+cd PROJECTDIR ; mvn eclipse:eclipse
+~~~
 
 This will create Eclipse project files. Right now you can proceed using Eclipse.
 		
