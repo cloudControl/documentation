@@ -38,7 +38,7 @@ For Windows we offer an installer. Please download the latest version of the ins
 
 #### Quick Installation Linux/Mac
 
-On Linux and Mac OS we recommend installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
+On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
 
 ~~~
 $ sudo pip install -U cctrl
