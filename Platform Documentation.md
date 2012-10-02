@@ -41,14 +41,14 @@ For Windows we offer an installer. Please download the latest version of the ins
 On Linux and Mac OS we recommend installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
 
 ~~~
-$ pip install cctrl
+$ sudo pip install -U cctrl
 ~~~
 
 If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
 
 ~~~
-$ easy_install pip
-$ pip install cctrl
+$ sudo easy_install pip
+$ sudo pip install -U cctrl
 ~~~
 
 The command line client features a detailed online help. Just append --help or -h to any command.
