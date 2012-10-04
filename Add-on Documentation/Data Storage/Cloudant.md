@@ -8,8 +8,9 @@ The database comes in different sizes and prices. It can be added by executing t
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add cloudant.OPTION
-".option" represents the plan size, e.g. cloudant.basic
 ~~~
+*.option* represents the plan size, e.g. cloudant.basic
+
 
 ## Upgrade the Cloudant Add-on
 
