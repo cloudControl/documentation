@@ -30,7 +30,7 @@
 
 To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called *cctrl*. Additionally we also offer a [web console](https://console.cloudcontrolled.com). Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries](https://github.com/cloudControl).
 
-Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For detailed installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
+Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. 
 
 #### Quick Installation Windows
 
