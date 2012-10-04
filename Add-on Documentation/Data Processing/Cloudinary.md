@@ -6,8 +6,11 @@ Cloudinary is a cloud service that offers a solution to an applications's entire
 
 The Add-on comes in different sizes and prices. It can be added by executing the command addon.add:
 
+~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add cloudinary.OPTION
-".option" represents the plan size, e.g. cloudinary.test
+~~~
+*.option* represents the plan size, e.g. cloudinary.test
+
 
 ## Upgrade the Cloudinary Add-on
 
