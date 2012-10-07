@@ -13,6 +13,7 @@
 <li class=""><a href="#scaling">Scaling</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
+<li class=""><a href"#controlling-processes-using-a-procfile">Controlling Processes using a Procfile</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
 </ul>
@@ -219,7 +220,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 
 To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
-Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
+Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#controlling-processes-using-a-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
 **Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
@@ -485,6 +486,19 @@ When caching requests client side or in a caching proxy, the URL is usually used
 As part of the set of [environment variables](#environment-variables) in the deployment runtime environment the DEP_VERSION is made available to the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
 
 This technique works for URLs as well as keys in in-memory caches like Memcached. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache you would lose all cached values. Including the DEP_VERSION as part of the key of the cached values you want refreshed is an easy way to ensure the cache gets refreshed.
+
+## Controlling processes using a Procfile
+
+**TL;DR:**
+
+ * Processes are started according to the buildpack's default or as specified in the *Procfile*
+ * Create a ``web:`` entry to launch your application server
+ 
+While a *Procfile* is not necessary to launch the application server of most deployments, it will give you more control over your processes.
+A *Procfile* contains of lines in the format *Process-Name*:*Command to execute*. For a Ruby on Rails web process, the *Procfile* could look like this:
+~~~
+web: bundle exec rails server -p $PORT
+~~~
 
 ## Scheduled Jobs and Background Workers
 
