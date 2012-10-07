@@ -491,14 +491,23 @@ This technique works for URLs as well as keys in in-memory caches like Memcached
 
 **TL;DR:**
 
- * Processes are started according to the buildpack's default or as specified in the *Procfile*
+ * Processes are started according to the buildpack's default or as specified in the ``Procfile``
  * Create a ``web:`` entry to launch your application server
+ * Create a ``worker:``entry to launch a background-worker
  
-While a *Procfile* is not necessary to launch the application server of most deployments, it will give you more control over your processes.
-A *Procfile* contains of lines in the format *Process-Name*:*Command to execute*. For a Ruby on Rails web process, the *Procfile* could look like this:
+While a ``Procfile`` is not necessary to launch the application server of most deployments, it will give you more control over your processes.
+A ``Procfile``contains of lines in the format ``PROCESS_NAME: COMMAND_TO_EXECUTE``. For a Ruby on Rails web process, the ``Procfile`` could look like this:
 ~~~
 web: bundle exec rails server -p $PORT
 ~~~
+
+If you want to use Puma as application server, the ``Procfile`` would look like this:
+~~~
+web: bundle exec puma -p $PORT
+~~~
+
+
+Keep in mind, that the filename ``Procfile` is case-sensitive and that it is not possible to launch background workers in normal clones. See the next section on more information about launching background workers.
 
 ## Scheduled Jobs and Background Workers
 
