@@ -501,13 +501,13 @@ A ``Procfile``contains of lines in the format ``PROCESS_NAME: COMMAND_TO_EXECUTE
 web: bundle exec rails server -p $PORT
 ~~~
 
-If you want to use Puma as application server, the ``Procfile`` would look like this:
+If you wanted to use Puma as application server, the ``Procfile`` would look like this:
 ~~~
 web: bundle exec puma -p $PORT
 ~~~
 
 
-Keep in mind, that the filename ``Procfile` is case-sensitive and that it is not possible to launch background workers in normal clones. See the next section on more information about launching background workers.
+Keep in mind, that the filename ``Procfile`` is case-sensitive and that it is not possible to launch background workers in normal clones. See the next section on more information about launching background workers.
 
 ## Scheduled Jobs and Background Workers
 
