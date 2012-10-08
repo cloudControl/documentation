@@ -334,13 +334,7 @@ After this, stage all the files in Git and commit them with a suitable commit me
 
 ##7. Review the Deployment
 
-With that completed, then have a look at both your deployments to ensure that they're working. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldlsymfony.cloudcontrolled.com](http://cloudcontroldlsymfony.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldlsymfony.cloudcontrolled.com](http://testing.cloudcontroldlsymfony.cloudcontrolled.com)  |  Testing  |
-
+With that completed, then have a look at both your deployments to ensure that they're working. 
 You should see output similar to that below, in figure 2.
 
 ![Successful Deployment](images/symfony1.png)

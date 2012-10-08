@@ -1,6 +1,6 @@
 #Deploying Kohana 3.2.0
 
-![Successful Deployment](images/Kohana-homepage.png)
+![Successful Deployment](images/kohana-homepage.png)
 
 If you're looking for a very fast, light, highly configurable and effective PHP Framework for your projects, look no further than [Kohana](http://kohanaframework.org/). Now at [version 3.2.0](http://dev.kohanaframework.org/attachments/download/1670/kohana-3.2.0.zip) it comes with a variety of features to speed up your application development, including:
 
@@ -548,11 +548,6 @@ In this view file, we output some simple HTML and then iterate the value of the 
         
 ##7. Review the Deployment
 
-After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldlkohana.cloudcontrolled.com](http://cloudcontroldlkohana.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldlkohana.cloudcontrolled.com](http://testing.cloudcontroldlkohana.cloudcontrolled.com)  |  Testing  |
+After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well. 
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and cloudControl. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
