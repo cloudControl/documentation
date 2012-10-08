@@ -370,7 +370,7 @@ $creds = json_decode($string, true);
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
 ~~~
 
-The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detailed examples how to configure various frameworks using the *creds.json* file. To see the format and contents of the *creds.json* file locally use the addon.creds command.
+The [guides section](https://www.cloudcontrol.com/dev-center/Guides/) has detailed examples about how to read the *creds.json* file in different languages or frameworks. To see the format and contents of the *creds.json* file locally use the addon.creds command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
@@ -443,9 +443,9 @@ All HTTP requests made to apps on the platform are routed via the routing tier. 
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
 
-The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
 
-Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefor highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
+Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
 If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --min >= 2.
 
