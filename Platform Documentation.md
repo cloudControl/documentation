@@ -406,7 +406,7 @@ You can use custom domains to access your deployments. To add a domain like `www
 
 All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verfification code as a TXT record.
 
-Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Alias) for detailed instructions on how to setup CNAME and TXT records.
 
 ## Scaling
 
