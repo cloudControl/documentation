@@ -498,11 +498,11 @@ Since web requests taking longer than 120s are killed by the routing tier, longe
 
 ### Cron
 
-For tasks that are guaranteed to finish within the timelimit the [Cron add-on](https://www.cloudcontrol.com/add-ons/cron) is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on or if you have more specific scheduling needs please refer to the [Cron add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/cron)
+For tasks that are guaranteed to finish within the timelimit the [Cron add-on](https://www.cloudcontrol.com/add-ons/cron) is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on or if you have more specific scheduling needs please refer to the [Cron add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Cron)
 
 ### Workers
 
-Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. More details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/worker)
+Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. More details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data+Processing/Worker)
 
 ## Stacks
 
