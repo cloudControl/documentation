@@ -10,15 +10,16 @@ You can add this code wherever you want within your Ruby application to get thes
   require 'json'
 
   begin
-    json_str = File.open(ENV["CRED_FILE"]).read
-    creds = JSON.parse(json_str)["ADDON_NAME"]
+    cred_file = File.open(ENV["CRED_FILE"]).read
+    creds = JSON.parse(cred_file)["ADDON_NAME"]
     config = {
       :var1_name => creds["ADDON_NAME_PARAMETER1"],
       :var2_name => creds["ADDON_NAME_PARAMETER2"],
       :var3_name => creds["ADDON_NAME_PARAMETER3"]
-      # e.g for MYSQLS: :hostname => creds[MYSQLS_HOSTNAME]
+      # e.g. for MYSQLS: :hostname => creds[MYSQLS_HOSTNAME]
     }
   rescue
     puts "Could not open file"
   end
 ~~~
+

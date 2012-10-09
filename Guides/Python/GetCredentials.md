@@ -11,15 +11,16 @@ You can add this code wherever you want within your Python application to get th
   import json
 
   try:
-      json_str = open(os.environ["CRED_FILE"])
-      data = json.load(json_str)
+      cred_file = open(os.environ["CRED_FILE"])
+      data = json.load(cred_file)
       creds = data['ADDON_NAME']
       config = {
         'var1_name': creds['ADDON_NAME_PARAMETER1'],
         'var2_name': creds['ADDON_NAME_PARAMETER2'],
         'var3_name': creds['ADDON_NAME_PARAMETER3']
-        # e.g for MYSQLS: 'hostname': creds[MYSQLS_HOSTNAME]
+        # e.g. for MYSQLS: 'hostname': creds[MYSQLS_HOSTNAME]
       }
   except IOError:
       print 'Could not open file'
 ~~~
+
