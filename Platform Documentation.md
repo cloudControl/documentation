@@ -13,7 +13,7 @@
 <li class=""><a href="#scaling">Scaling</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
-<li class=""><a href"#controlling-processes-using-a-procfile">Controlling Processes using a Procfile</a></li>
+<li class=""><a href="#controlling-processes-using-a-procfile">Controlling Processes using a Procfile</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
 </ul>
