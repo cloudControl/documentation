@@ -1,6 +1,7 @@
 <aside>
 <ul>
 <li class=""><a href="#command-line-client-web-console-and-api">Command line client, web console and API</a></li>
+<li class=""><a href="#user-accounts">User Accounts</a></li>
 <li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
 <li class=""><a href="#version-control--images">Version Control & Images</a></li>
 <li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
@@ -53,6 +54,30 @@ $ sudo pip install -U cctrl
 ~~~
 
 The command line client features a detailed online help. Just append --help or -h to any command.
+
+## User Accounts
+
+**TL;DR:**
+
+ * Every developer has its own user account
+ * User accounts can be created via the [Console](https://console.cloudcontrolled.com/register) or via ``cctrluser create``
+ * User accounts can be deleted via ``cctrluser delete``
+
+To access control surfaces and source code repositories on platform a user account is needed. User accounts can be created via the [Console](https://console.cloudcontrolled.com/register) or using the following CLI command:
+~~~
+cctrluser create
+~~~
+
+After this, an activation eMail is sent to the given eMail address. Click the link in the eMail or use the following CLI command to activate the account:
+
+~~~
+cctrluser USER_NAME ACTIVATION_CODE``
+~~~
+
+If you want to delete your user account, please use the following CLI command:
+~~~
+$ cctrluser delete
+~~~
 
 ## Apps, Users and Deployments
 
