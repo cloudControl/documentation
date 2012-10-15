@@ -71,7 +71,7 @@ cctrluser create
 After this, an activation eMail is sent to the given eMail address. Click the link in the eMail or use the following CLI command to activate the account:
 
 ~~~
-cctrluser USER_NAME ACTIVATION_CODE``
+cctrluser USER_NAME ACTIVATION_CODE
 ~~~
 
 If you want to delete your user account, please use the following CLI command:
