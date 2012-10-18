@@ -54,8 +54,9 @@ public class Credentials {
 
 	public Object getCredential(String param, String addon) {
 		String upper_param = param.toUpperCase();
-		JSONObject addonJSON = getAddon(credFile, addon);
-		Object credential = addonJSON.get(addon + "_" + upper_param);
+		String upper_addon = addon.toUpperCase();
+		JSONObject addonJSON = getAddon(credFile, upper_addon);
+		Object credential = addonJSON.get(upper_addon + "_" + upper_param);
 		return credential;
 	}
 
