@@ -80,7 +80,7 @@ $ cctrluser delete
 
 ### Password Reset
 
-To reset your password please got to [https://api.cloudcontrol.com/reset_password/].
+To reset your password please got to https://api.cloudcontrol.com/reset_password/.
 
 ## Apps, Users and Deployments
 
