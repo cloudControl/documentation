@@ -78,6 +78,10 @@ If you want to delete your user account, please use the following CLI command:
 $ cctrluser delete
 ~~~
 
+### Password Reset
+
+To reset your password please got to [https://api.cloudcontrol.com/reset_password/].
+
 ## Apps, Users and Deployments
 
 **TL;DR:**
