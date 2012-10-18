@@ -14,7 +14,6 @@
 <li class=""><a href="#scaling">Scaling</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
-<li class=""><a href="#controlling-processes-using-a-procfile">Controlling Processes using a Procfile</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
 </ul>
@@ -94,7 +93,7 @@ cloudControl PaaS uses a distinct set of naming conventions. To understand how t
 
 Apps are a container for the repository and its branches, deployments and users. Creating an app allows you to add or remove users to an app giving them access to the source code as well as allowing them to manage the deployments.
 
-Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks) to use.
+Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
 
 ~~~
 $ cctrlapp APP_NAME create php
@@ -208,7 +207,7 @@ If yours starts with `ssh://` and ends with `.git` it's using Git. If it starts 
 
 ### Image Building
 
-On each push to one of your branches a deployment image is built automatically. This image then can be deployed with the deploy command to the deployment matching the branch name. Remember for Git the default deployment uses the master branch. The deployment image includes your apps code as well as your dependencies pulled in by the [buildpack](#buildpacks).
+On each push to one of your branches a deployment image is built automatically. This image then can be deployed with the deploy command to the deployment matching the branch name. Remember for Git the default deployment uses the master branch. The deployment image includes your apps code as well as your dependencies pulled in by the [buildpack](#buildpacks-and-the-procfile).
 
 You can either use the cctrlapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
 
@@ -227,13 +226,23 @@ $ bzr push --remember REPO_URL
 
 Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
 
-#### Buildpacks
+#### Buildpacks and the Procfile
 
 During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how a specific language or framework has to be prepared for and deployed on the cloudControl platform. Most of the buildpacks have originally been created for the Heroku platform, but to make it easier for the open source community to write custom buildpacks for specific frameworks we support the same [buildpack API](https://devcenter.heroku.com/articles/buildpack-api).
 
 Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
 
 Which buildpack is going to be used is determined by the application type set when creating the app.
+
+A required part of the image is a file called `Procfile` in the root directory of the image. It is used to determine how to start the actual application in the container. For a container to be able to receive requests from the routing tier it needs at least the following content:
+
+```
+web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
+```
+
+For more specific examples of a `Procfile` please refer to the language and framework [guides](https://www.cloudcontrol.com/dev-center/Guides).
+
+At the end of the buildpack process, the image is ready to be deployed.
 
 ## Deploying New Versions
 
@@ -245,7 +254,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 
 To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
-Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#controlling-processes-using-a-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
+Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
 **Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
@@ -512,28 +521,6 @@ As part of the set of [environment variables](#environment-variables) in the dep
 
 This technique works for URLs as well as keys in in-memory caches like Memcached. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache you would lose all cached values. Including the DEP_VERSION as part of the key of the cached values you want refreshed is an easy way to ensure the cache gets refreshed.
 
-## Controlling processes using a Procfile
-
-**TL;DR:**
-
- * Processes are started according to the buildpack's default or as specified in the ``Procfile``
- * Create a ``web:`` entry to launch your application server
- * Create a ``worker:``entry to launch a background-worker
- 
-While a ``Procfile`` is not necessary to launch the application server of most deployments, it will give you more control over your processes.
-A ``Procfile``contains of lines in the format ``PROCESS_NAME: COMMAND_TO_EXECUTE``. For a Ruby on Rails web process, the ``Procfile`` could look like this:
-~~~
-web: bundle exec rails server -p $PORT
-~~~
-
-If you wanted to use Puma as application server, the ``Procfile`` would look like this:
-~~~
-web: bundle exec puma -p $PORT
-~~~
-
-
-Keep in mind, that the filename ``Procfile`` is case-sensitive and that it is not possible to launch background workers in normal clones. See the next section on more information about launching background workers.
-
 ## Scheduled Jobs and Background Workers
 
 **TL;DR:**
@@ -558,7 +545,7 @@ Tasks that will take longer than 120s or are triggered by a user request and sho
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
- * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks).
+ * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
 
 A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 

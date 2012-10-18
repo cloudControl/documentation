@@ -14,16 +14,18 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add worker.single
 
 ## Starting a Worker
 
-Workers can be started via the command line client'S worker.add command.
+Workers can be started via the command line client's worker.add command. 
+
+For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`. But for apps on the Pinky stack, first specifiy how to start the worker by adding a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_FILE [WORKER_PARAMS]
+$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
 ~~~
 
 Enclose multiple WORKER_PARAMS in double quotes.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_FILE "PARAM1 PARAM2 PARAM3"
+$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME "PARAM1 PARAM2 PARAM3"
 ~~~
 
 ## List Running Workers
@@ -43,7 +45,7 @@ You can also get all the worker details by appending the WRK_ID to the worker co
 $ cctrlapp APP_NAME/DEP_NAME worker WRK_ID
 Worker
 wrk_id   : WRK_ID
-command  : WORKER_FILE
+command  : WORKER_NAME
 params   : "PARAM1 PARAM2 PARAM3"
 ~~~
 
@@ -77,7 +79,7 @@ As already explained in the [Logging section](https://www.cloudcontrol.com/dev-c
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME log worker
-[Fri Dec 17 13:39:41 2010] WRK_ID Started Worker (command: 'WORKER_FILE', parameter: 'PARAM1 PARAM2 PARAM3')
+[Fri Dec 17 13:39:41 2010] WRK_ID Started Worker (command: 'WORKER_NAME', parameter: 'PARAM1 PARAM2 PARAM3')
 [Fri Dec 17 13:39:42 2010] WRK_ID Hello PARAM1 PARAM2 PARAM3
 [...]
 ~~~
@@ -121,9 +123,9 @@ while(true) {
 Running this worker with the exit code set to 2 would result in the following output and the worker stopping itself.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_FILE 2
+$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME 2
 $ cctrlapp APP_NAME/DEP_NAME log worker
-[Tue Apr 12 09:15:54 2011] WRK_ID Started Worker (command: 'WORKER_FILE', parameter: '2')
+[Tue Apr 12 09:15:54 2011] WRK_ID Started Worker (command: 'WORKER_NAME', parameter: '2')
 [Tue Apr 12 09:15:54 2011] WRK_ID step: 1
 [Tue Apr 12 09:15:55 2011] WRK_ID step: 2
 [Tue Apr 12 09:15:56 2011] WRK_ID step: 3
