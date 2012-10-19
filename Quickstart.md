@@ -60,7 +60,7 @@ The command line client will determine if you already have a public key and uplo
 
 ## Create the First Application on cloudControl
 
-Create a new application on the cloudControl platform by giving it a unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
+Create a new application on the cloudControl platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
 
 ~~~ 
 $ cctrlapp APP_NAME create [Java, PHP, Python, Ruby]
@@ -68,23 +68,22 @@ $ cctrlapp APP_NAME create [Java, PHP, Python, Ruby]
 
 If the `APP_NAME` is already taken, please pick another one.
 
-Change to the working directory of the App you want to deploy. You can find simple hello world examples for [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/HelloWorld), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/HelloWorld), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/HelloWorld) and [Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/HelloWorld).
+Change to the working directory where you want to store your source code.
 
 ~~~
-$ cd PATH_TO/YOUR_APP
+$ cd PATH_TO/YOUR_WORKDIR
 ~~~
 
-Initialize the git repository (if not already done), add, commit and push the changes.
+Clone one of the example Apps in your preferred programming language, add, commit and push the changes.
 
 ~~~
-$ git init
-$ git add .
-$ git commit -m “Initial commit“
+$ git clone git://github.com/cloudControl/[java, php, python, ruby]_hello_world_app.git
+$ cd [java, php, python, ruby]_hello_world_app.git
 $ cctrlapp APP_NAME push
-[...]
 ~~~
 
 The push fires a hook that prepares your application for deployment like pulling in requirements and more. You can see the output of the build process in your terminal.
+
 
 ## Deploy Your Application on cloudControl
 
