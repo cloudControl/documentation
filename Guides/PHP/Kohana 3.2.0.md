@@ -471,7 +471,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
         {
             $this->template->message = 'hello, world!';
     
-            $db = Database::instance(Kohana::$environment);
+            //$db = Database::instance(Kohana::$environment);
             
             // Change the default cache driver to memcache
             Cache::$default = 'apc';
@@ -502,7 +502,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
                 print '<br />Deleted the module';
             }
     
-            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute($db);
+            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute();
             $this->template->users = $results->as_array();
         }
     }
