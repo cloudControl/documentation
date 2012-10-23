@@ -189,6 +189,7 @@ App
 
  * Git and Bazaar are the supported version control systems.
  * When you push a branch an image of your code is built ready to be deployed.
+ * Images are limited to 100mb compressed. Use a `.cctrlignore` file to exclude assets.
 
 ### Supported Version Control Systems
 
@@ -228,7 +229,14 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output. If the image exceeds the 100mb limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
+
+~~~
+*.psd
+*.pdf
+test
+spec
+~~~
 
 #### Buildpacks and the Procfile
 
