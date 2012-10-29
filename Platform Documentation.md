@@ -16,6 +16,7 @@
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
+<li class=""><a href="#run-command">Run command</a></li>
 </ul>
 </aside>
 
@@ -582,3 +583,99 @@ To change the stack of a deployment simply append the --stack command line optio
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
+
+
+## Run command
+Run commands provide a way to execute arbitrary console commands in an environment that is logically identical that of the web servers. Interactive commands are aslo supported.
+Run commands are useful for debugging, experiments or manually interaction with a shared resources (e.g. database migrations).
+
+Each run command runs in a new container, specially started for this command. Consequently, all the changes to the local environment (e.g. writing to the local files) are going to be lost after execution of the command is over. This also means that normally all kinds of experiments can be made without the fear of damaging the running application. The only exception are the commands that somehow interact with resources shared between all instances/web servers, e.g. databases.
+
+Run commands can run any command that is available in the web servers' environment. Examples include shells, command line tools/commands, interactive programming shells, etc.
+
+### Examples
+
+To list the files in the working directory:
+~~~
+$ cctrlapp APP_NAME/DEPLOYMENT run "ls"
+Connecting...
+Warning: Permanently added '[10.62.45.100]:29879' (RSA) to the list of known hosts.
+app  config	db   Gemfile	   lib	Procfile  Rakefile     script  tmp
+bin  config.ru	doc  Gemfile.lock  log	public	  README.rdoc  test    vendor
+Connection to 10.62.45.100 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+To list the environment variables:
+~~~
+$ cctrlapp APP_NAME/DEPLOYMENT run "env | sort"
+Connecting...
+Warning: Permanently added '[10.250.134.126]:10346' (RSA) to the list of known hosts.
+CRED_FILE=/srv/creds/creds.json
+DEP_ID=dep8xxzcqz9
+DEP_NAME=ikliverails3doc/default
+DEP_VERSION=9d5ada800eff9fc57849b3102a2f27ff43ec141f
+DOMAIN=cloudcontrolled.com
+GEM_PATH=vendor/bundle/ruby/1.9.1
+HOME=/srv
+HOSTNAME=dep8xxzcqz9-10346
+LANG=en_US.UTF-8
+LOGNAME=u10346
+MAIL=/var/mail/u10346
+OLDPWD=/srv
+PAAS_VENDOR=cloudControl
+PATH=bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin
+PORT=10346
+PWD=/srv/www
+RACK_ENV=production
+RAILS_ENV=production
+SHELL=/bin/sh
+SSH_CLIENT=10.32.47.197 59378 10346
+SSH_CONNECTION=10.32.47.197 59378 10.250.134.126 10346
+SSH_TTY=/dev/pts/0
+TERM=xterm
+TMP_DIR=/srv/tmp
+TMPDIR=/srv/tmp
+USER=u10346
+WRK_ID=wrkkttk6sfx
+Connection to 10.250.134.126 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+As you can see in the previous and in the next example, different ways of chaining the commands also work:
+
+~~~
+$ cctrlapp APP_NAME/DEPLOYMENT run "which ls && ls"
+Connecting...
+Warning: Permanently added '[10.252.74.22]:22359' (RSA) to the list of known hosts.
+/bin/ls
+app  config	db   Gemfile	   lib	Procfile  Rakefile     script  tmp
+bin  config.ru	doc  Gemfile.lock  log	public	  README.rdoc  test    vendor
+Connection to 10.252.74.22 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+Interactive commands are supported as well:
+~~~
+$ cctrlapp APP_NAME/DEPLOYMENT run bash
+Connecting...
+Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
+u25832@dep8xxzcqz9-25832:~/www$ echo "interactive commands work as well"
+interactive commands work as well
+u25832@dep8xxzcqz9-25832:~/www$ exit
+exit
+Connection to 10.62.45.100 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+As you can see from the previous example, if there is only one argument, quotes are optional. Commands can include the qoute characters, but they should be escaped first:
+~~~
+$ cctrlapp APP_NAME/DEPLOYMENT run "echo \"hello\""
+Connecting...
+Warning: Permanently added '[10.248.62.150]:23568' (RSA) to the list of known hosts.
+hello
+Connection to 10.248.62.150 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+There are many ways to use a run command, experiment to see what works for you.
