@@ -563,7 +563,7 @@ The container is identical to the web or worker containers but starts an SSH dae
 To start a shell (e.g. bash) use `run bash`.
 
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run bash
+$ cctrlapp APP_NAME/DEP_NAME run bash
 Connecting...
 Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
 u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
@@ -578,17 +578,17 @@ It's also possible to execute a command directly and have the container exit aft
 
 Listing the environment variables using `"env | sort"` works. Also note, how the use of quotes is required for command that include spaces.
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run "env | sort"
+$ cctrlapp APP_NAME/DEP_NAME run "env | sort"
 Connecting...
 Warning: Permanently added '[10.250.134.126]:10346' (RSA) to the list of known hosts.
 CRED_FILE=/srv/creds/creds.json
-DEP_ID=dep8xxzcqz9
-DEP_NAME=ikliverails3doc/default
+DEP_ID=DEP_ID
+DEP_NAME=APP_NAME/DEP_NAME
 DEP_VERSION=9d5ada800eff9fc57849b3102a2f27ff43ec141f
 DOMAIN=cloudcontrolled.com
 GEM_PATH=vendor/bundle/ruby/1.9.1
 HOME=/srv
-HOSTNAME=dep8xxzcqz9-10346
+HOSTNAME=DEP_ID-10346
 LANG=en_US.UTF-8
 LOGNAME=u10346
 MAIL=/var/mail/u10346
@@ -607,7 +607,7 @@ TERM=xterm
 TMP_DIR=/srv/tmp
 TMPDIR=/srv/tmp
 USER=u10346
-WRK_ID=wrkkttk6sfx
+WRK_ID=WRK_ID
 Connection to 10.250.134.126 closed.
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
