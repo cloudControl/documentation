@@ -15,8 +15,8 @@
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
+<li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
-<li class=""><a href="#run-command">Run command</a></li>
 </ul>
 </aside>
 
@@ -552,61 +552,31 @@ For tasks that are guaranteed to finish within the timelimit the [Cron add-on](h
 
 Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. More details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data+Processing/Worker)
 
-## Stacks
+## Secure Shell (SSH)
 
-**TL;DR:**
+The distributed nature of the cloudControl platform means it's not possible to SSH into the actual server. Instead, we offer the run command, that allows to launch a new container and connect to that via SSH.
 
- * Stacks define the common runtime environment.
- * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
- * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
-
-A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
-
-Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes when necessary for security or performance reasons to optimize the stack for its specific purpose on our platform.
-
-### Available Stacks
-
- * **Luigi** based on [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
- * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
-
-You can change the stack per deployment. This is handy for testing new stacks before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
-
-~~~
-$ cctrlapp APP_NAME/DEP_NAME details
- name: APP_NAME/DEP_NAME
- stack: luigi
- [...]
-~~~
-
-To change the stack of a deployment simply append the --stack command line option to the deploy command.
-
-~~~
-$ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
-~~~
-
-
-## Run command
-Run commands provide a way to execute arbitrary console commands in an environment that is logically identical that of the web servers. Interactive commands are aslo supported.
-Run commands are useful for debugging, experiments or manually interaction with a shared resources (e.g. database migrations).
-
-Each run command runs in a new container, specially started for this command. Consequently, all the changes to the local environment (e.g. writing to the local files) are going to be lost after execution of the command is over. This also means that normally all kinds of experiments can be made without the fear of damaging the running application. The only exception are the commands that somehow interact with resources shared between all instances/web servers, e.g. databases.
-
-Run commands can run any command that is available in the web servers' environment. Examples include shells, command line tools/commands, interactive programming shells, etc.
+The container is identical to the web or worker containers but starts an SSH daemon instead of one of the Procfile commands. Its based on the same stack image and deployment image and does also provides the Add-on credentials.
 
 ### Examples
 
-To list the files in the working directory:
+To start a shell (e.g. bash) use `run bash`.
+
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run "ls"
+$ cctrlapp APP_NAME/DEPLOYMENT run bash
 Connecting...
-Warning: Permanently added '[10.62.45.100]:29879' (RSA) to the list of known hosts.
-app  config	db   Gemfile	   lib	Procfile  Rakefile     script  tmp
-bin  config.ru	doc  Gemfile.lock  log	public	  README.rdoc  test    vendor
+Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
+u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
+interactive commands work as well
+u25832@DEP_ID-25832:~/www$ exit
+exit
 Connection to 10.62.45.100 closed.
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
 
-To list the environment variables:
+It's also possible to execute a command directly and have the container exit after the command finished. This is very useful for database migrations and other one time tasks for example.
+
+Listing the environment variables using `"env | sort"` works. Also note, how the use of quotes is required for command that include spaces.
 ~~~
 $ cctrlapp APP_NAME/DEPLOYMENT run "env | sort"
 Connecting...
@@ -642,40 +612,35 @@ Connection to 10.250.134.126 closed.
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
 
-As you can see in the previous and in the next example, different ways of chaining the commands also work:
+## Stacks
+
+**TL;DR:**
+
+ * Stacks define the common runtime environment.
+ * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
+ * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
+
+A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
+
+Stacks are based on Ubuntu releases and have the same first letter as the release they are based on. Each stack is named after a super hero sidekick. We try to keep them as close to the Ubuntu release as possible, but do make changes when necessary for security or performance reasons to optimize the stack for its specific purpose on our platform.
+
+### Available Stacks
+
+ * **Luigi** based on [Ubuntu 10.04 LTS Lucid Lynx](http://releases.ubuntu.com/lucid/)
+ * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin](http://releases.ubuntu.com/precise/)
+
+You can change the stack per deployment. This is handy for testing new stacks before migrating the production deployment. To see what stack a deployment is using refer to the deployment details.
 
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run "which ls && ls"
-Connecting...
-Warning: Permanently added '[10.252.74.22]:22359' (RSA) to the list of known hosts.
-/bin/ls
-app  config	db   Gemfile	   lib	Procfile  Rakefile     script  tmp
-bin  config.ru	doc  Gemfile.lock  log	public	  README.rdoc  test    vendor
-Connection to 10.252.74.22 closed.
-Connection to ssh.cloudcontrolled.net closed.
+$ cctrlapp APP_NAME/DEP_NAME details
+ name: APP_NAME/DEP_NAME
+ stack: luigi
+ [...]
 ~~~
 
-Interactive commands are supported as well:
+To change the stack of a deployment simply append the --stack command line option to the deploy command.
+
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run bash
-Connecting...
-Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
-u25832@dep8xxzcqz9-25832:~/www$ echo "interactive commands work as well"
-interactive commands work as well
-u25832@dep8xxzcqz9-25832:~/www$ exit
-exit
-Connection to 10.62.45.100 closed.
-Connection to ssh.cloudcontrolled.net closed.
+$ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
 
-As you can see from the previous example, if there is only one argument, quotes are optional. Commands can include the qoute characters, but they should be escaped first:
-~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run "echo \"hello\""
-Connecting...
-Warning: Permanently added '[10.248.62.150]:23568' (RSA) to the list of known hosts.
-hello
-Connection to 10.248.62.150 closed.
-Connection to ssh.cloudcontrolled.net closed.
-~~~
-
-There are many ways to use a run command, experiment to see what works for you.
