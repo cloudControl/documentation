@@ -9,6 +9,13 @@ To run rails server, create a file named "Procfile" with the following content:
 web: bundle exec rails s -p $PORT
 ~~~
 
+## Asset pipeline
+
+If asset pipeline is used, "config/application.rb" file should contain the following line:
+~~~ruby
+config.assets.initialize_on_precompile = false
+~~~
+
 ## Database
 
 To use a database in a Rails applications, "config/database.yml" file needs to be modified.
@@ -37,8 +44,10 @@ production:
   host: <%= ENV["MYSQLS_HOSTNAME"] %>
   port: <%= ENV["MYSQLS_PORT"] %>
   username: <%= ENV["MYSQLS_USERNAME"] %>
-  password: <%= ENV["MYSQLS_PASSWORD"] %>
+  password: <%= "'#{ ENV['MYSQLS_PASSWORD'] }'" %>
 ~~~
+
+NOTE: String in the embedded ruby snippet for the password is surounded by the single quotes so YAML markup characters can also be used in the password.
 
 ## Environments
 
