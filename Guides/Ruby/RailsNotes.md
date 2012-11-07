@@ -40,10 +40,10 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: <%= "'#{ ENV["MYSQLS_DATABASE"] }'" %>
-  host: <%= "'#{ ENV["MYSQLS_HOSTNAME"] }'" %>
-  port: <%= "'#{ ENV["MYSQLS_PORT"] }'" %>
-  username: <%= "'#{ ENV["MYSQLS_USERNAME"] }'" %>
+  database: <%= "'#{ ENV['MYSQLS_DATABASE'] }'" %>
+  host: <%= "'#{ ENV['MYSQLS_HOSTNAME'] }'" %>
+  port: <%= "'#{ ENV['MYSQLS_PORT'] }'" %>
+  username: <%= "'#{ ENV['MYSQLS_USERNAME'] }'" %>
   password: <%= "'#{ ENV['MYSQLS_PASSWORD'] }'" %>
 ~~~
 
