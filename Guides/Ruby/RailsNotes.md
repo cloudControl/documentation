@@ -40,14 +40,14 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: 5
-  database: <%= ENV["MYSQLS_DATABASE"] %>
-  host: <%= ENV["MYSQLS_HOSTNAME"] %>
-  port: <%= ENV["MYSQLS_PORT"] %>
-  username: <%= ENV["MYSQLS_USERNAME"] %>
+  database: <%= "'#{ ENV["MYSQLS_DATABASE"] }'" %>
+  host: <%= "'#{ ENV["MYSQLS_HOSTNAME"] }'" %>
+  port: <%= "'#{ ENV["MYSQLS_PORT"] }'" %>
+  username: <%= "'#{ ENV["MYSQLS_USERNAME"] }'" %>
   password: <%= "'#{ ENV['MYSQLS_PASSWORD'] }'" %>
 ~~~
 
-NOTE: String in the embedded ruby snippet for the password is surounded by the single quotes so YAML markup characters can also be used in the password.
+NOTE: Strings in the embedded ruby snippet are enclosed in single quotes because YAML markup characters can be used in the password.
 
 ## Environments
 
@@ -59,3 +59,4 @@ cctrlapp APP_NAME/DEPLOYMENT addon.add config.free --RACK_ENV=some_env --RAILS_E
 NOTE: Gems in development and test environments are excluded from bundle install process.
 
 For more information refer to other guides in Ruby section.
+
