@@ -128,7 +128,6 @@ Without the `memcachier` gem, you’ll need to pass the proper credentials to Da
     config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
                         {:username => ENV["MEMCACHIER_USERNAME"],
                          :password => ENV["MEMCACHIER_PASSWORD"]}
-~~~
 
 Python
 -----
@@ -198,7 +197,8 @@ PHP
 
 Memcached provided by MemCachier can be used like this:
 
-~~~ :::php
+~~~
+:::php
     <?php
          $string = file_get_contents($_ENV['CRED_FILE'], false);
         if ($string == false) {
@@ -231,6 +231,7 @@ Memcached provided by MemCachier can be used like this:
     <p>This is visit number <?php print $current_count ?>.</p>
     </body>
     </html>
+~~~
 
 More information on how to use php-memcached can be found on [php.net](http://php.net/manual/en/book.memcached.php).
 
@@ -367,6 +368,7 @@ Once your build system is configured, you can start by adding caching to your Ja
             return count;
         }
     }
+~~~
 
 You also need to follow the [Getting Add-on credentials](https://github.com/cloudControl/documentation/blob/master/Guides/Java/GetCredentials.md) in order to authenticate your Add-on.
 
