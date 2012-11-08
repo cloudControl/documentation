@@ -42,12 +42,12 @@ production:
   pool: 5
   database: <%= "'#{ ENV['MYSQLS_DATABASE'] }'" %>
   host: <%= "'#{ ENV['MYSQLS_HOSTNAME'] }'" %>
-  port: <%= "'#{ ENV['MYSQLS_PORT'] }'" %>
+  port: <%= ENV["MYSQLS_PORT"] %>
   username: <%= "'#{ ENV['MYSQLS_USERNAME'] }'" %>
   password: <%= "'#{ ENV['MYSQLS_PASSWORD'] }'" %>
 ~~~
 
-NOTE: Strings in the embedded ruby snippet are enclosed in single quotes because YAML markup characters can be used in the password.
+NOTE: Strings in the embedded ruby snippet are enclosed in single quotes because YAML markup characters can be used in the password. Since the port is required to be an integer, it's not enclosed in quotes here.
 
 ## Environments
 
@@ -57,6 +57,4 @@ cctrlapp APP_NAME/DEPLOYMENT addon.add config.free --RACK_ENV=some_env --RAILS_E
 ~~~
 
 NOTE: Gems in development and test environments are excluded from bundle install process.
-
-For more information refer to other guides in Ruby section.
 
