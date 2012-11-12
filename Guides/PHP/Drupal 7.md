@@ -1,7 +1,7 @@
 #Deploying Drupal 7
 ![Successful Deployment](images/drupal7.png)
 
-If you're looking for a flexible, friendly and powerful content management platform, built in PHP, for your projects, you really can't go past [Drupal](http://Drupal 7.org/). Having been consistently growing and evolving since it was first created by Dries Buytaert in January 2001, Drupal 7 is the latest iteration and comes packed with a variety of features to speed up your application development, including:
+If you're looking for a flexible, friendly and powerful content management platform, built in PHP, for your projects, you really can't go past [Drupal](http://drupal.org/). Having been consistently growing and evolving since it was first created by Dries Buytaert in January 2001, Drupal 7 is the latest iteration and comes packed with a variety of features to speed up your application development, including:
 
  * A host of core and third party modules
  * Localised into 55 languages
@@ -293,12 +293,7 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
 ##8. Review the Deployment
 
-With that completed, then you'll be able to have a look at both your deployments to ensure that they're working. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldldrupal.cloudcontrolled.com](http://cloudcontroldlDrupal 7.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldldrupal.cloudcontrolled.com](http://testing.cloudcontroldlDrupal 7.cloudcontrolled.com)  |  Testing  |
+With that completed, then you'll be able to have a look at both your deployments to ensure that they're working. 
 
 You should see output similar to that below, in figure 2.
 

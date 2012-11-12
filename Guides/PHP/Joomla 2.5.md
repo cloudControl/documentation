@@ -255,13 +255,7 @@ This will show you the tables from the SQL file. Now that that's done, commit th
 
 ##7. Review the Deployment
 
-With that completed, then have a look at both your deployments to ensure that they're working. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldljoomla.cloudcontrolled.com](http://cloudcontroldljoomla.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldljoomla.cloudcontrolled.com](http://testing.cloudcontroldljoomla.cloudcontrolled.com)  |  Testing  |
-
+With that completed, then have a look at both your deployments to ensure that they're working. 
 You should see output similar to that below, in figure 2.
 
 ![Successful Deployment](images/joomla-running.png)

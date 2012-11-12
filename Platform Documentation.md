@@ -1,6 +1,7 @@
 <aside>
 <ul>
 <li class=""><a href="#command-line-client-web-console-and-api">Command line client, web console and API</a></li>
+<li class=""><a href="#user-accounts">User Accounts</a></li>
 <li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
 <li class=""><a href="#version-control--images">Version Control & Images</a></li>
 <li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
@@ -14,6 +15,7 @@
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#performance--caching">Performance & Caching</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
+<li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
 <li class=""><a href="#stacks">Stacks</a></li>
 </ul>
 </aside>
@@ -30,7 +32,7 @@
 
 To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via the command line client called *cctrl*. Additionally we also offer a [web console](https://console.cloudcontrolled.com). Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries](https://github.com/cloudControl).
 
-Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. For detailed installation instructions please refer to the [cctrl installation guide](https://www.cloudcontrol.com/dev-center/guides/cctrl-installation-guide).
+Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. Installing cctrl is easy and works on Mac/Linux as well as on Windows. 
 
 #### Quick Installation Windows
 
@@ -38,20 +40,48 @@ For Windows we offer an installer. Please download the latest version of the ins
 
 #### Quick Installation Linux/Mac
 
-On Linux and Mac OS we recommend installing cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
+On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+](http://python.org/download/).
 
 ~~~
-$ pip install cctrl
+$ sudo pip install -U cctrl
 ~~~
 
 If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
 
 ~~~
-$ easy_install pip
-$ pip install cctrl
+$ sudo easy_install pip
+$ sudo pip install -U cctrl
 ~~~
 
 The command line client features a detailed online help. Just append --help or -h to any command.
+
+## User Accounts
+
+**TL;DR:**
+
+ * Every developer has its own user account
+ * User accounts can be created via the [Console](https://console.cloudcontrolled.com/register) or via ``cctrluser create``
+ * User accounts can be deleted via ``cctrluser delete``
+
+To access control surfaces and source code repositories on platform a user account is needed. User accounts can be created via the [Console](https://console.cloudcontrolled.com/register) or using the following CLI command:
+~~~
+cctrluser create
+~~~
+
+After this, an activation eMail is sent to the given eMail address. Click the link in the eMail or use the following CLI command to activate the account:
+
+~~~
+cctrluser USER_NAME ACTIVATION_CODE
+~~~
+
+If you want to delete your user account, please use the following CLI command:
+~~~
+$ cctrluser delete
+~~~
+
+### Password Reset
+
+To reset your password please got to https://api.cloudcontrol.com/reset_password/.
 
 ## Apps, Users and Deployments
 
@@ -68,7 +98,7 @@ cloudControl PaaS uses a distinct set of naming conventions. To understand how t
 
 Apps are a container for the repository and its branches, deployments and users. Creating an app allows you to add or remove users to an app giving them access to the source code as well as allowing them to manage the deployments.
 
-Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks) to use.
+Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
 
 ~~~
 $ cctrlapp APP_NAME create php
@@ -160,6 +190,7 @@ App
 
  * Git and Bazaar are the supported version control systems.
  * When you push a branch an image of your code is built ready to be deployed.
+ * Images are limited to 100mb compressed. Use a `.cctrlignore` file to exclude assets.
 
 ### Supported Version Control Systems
 
@@ -182,7 +213,7 @@ If yours starts with `ssh://` and ends with `.git` it's using Git. If it starts 
 
 ### Image Building
 
-On each push to one of your branches a deployment image is built automatically. This image then can be deployed with the deploy command to the deployment matching the branch name. Remember for Git the default deployment uses the master branch. The deployment image includes your apps code as well as your dependencies pulled in by the [buildpack](#buildpacks).
+On each push to one of your branches a deployment image is built automatically. This image then can be deployed with the deploy command to the deployment matching the branch name. Remember for Git the default deployment uses the master branch. The deployment image includes your apps code as well as your dependencies pulled in by the [buildpack](#buildpacks-and-the-procfile).
 
 You can either use the cctrlapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
 
@@ -199,15 +230,32 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output.
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output. If the image exceeds the 100mb limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
 
-#### Buildpacks
+~~~
+*.psd
+*.pdf
+test
+spec
+~~~
+
+#### Buildpacks and the Procfile
 
 During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how a specific language or framework has to be prepared for and deployed on the cloudControl platform. Most of the buildpacks have originally been created for the Heroku platform, but to make it easier for the open source community to write custom buildpacks for specific frameworks we support the same [buildpack API](https://devcenter.heroku.com/articles/buildpack-api).
 
 Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
 
 Which buildpack is going to be used is determined by the application type set when creating the app.
+
+A required part of the image is a file called `Procfile` in the root directory of the image. It is used to determine how to start the actual application in the container. For a container to be able to receive requests from the routing tier it needs at least the following content:
+
+```
+web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
+```
+
+For more specific examples of a `Procfile` please refer to the language and framework [guides](https://www.cloudcontrol.com/dev-center/Guides).
+
+At the end of the buildpack process, the image is ready to be deployed.
 
 ## Deploying New Versions
 
@@ -219,7 +267,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 
 To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
-Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
+Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
 **Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
@@ -369,7 +417,7 @@ $creds = json_decode($string, true);
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
 ~~~
 
-The [guides section](https://www.cloudcontrol.com/dev-center/guides/) has detailed examples how to configure various frameworks using the *creds.json* file. To see the format and contents of the *creds.json* file locally use the addon.creds command.
+The [guides section](https://www.cloudcontrol.com/dev-center/Guides/) has detailed examples about how to read the *creds.json* file in different languages or frameworks. To see the format and contents of the *creds.json* file locally use the addon.creds command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
@@ -406,7 +454,7 @@ You can use custom domains to access your deployments. To add a domain like `www
 
 All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verfification code as a TXT record.
 
-Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) for detailed instructions on how to setup CNAME and TXT records.
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the [Alias Add-on Documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Alias) for detailed instructions on how to setup CNAME and TXT records.
 
 ## Scaling
 
@@ -442,9 +490,9 @@ All HTTP requests made to apps on the platform are routed via the routing tier. 
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
 
-The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefor only in one availability zone.
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
 
-Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefor highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
+Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
 If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --min >= 2.
 
@@ -498,11 +546,71 @@ Since web requests taking longer than 120s are killed by the routing tier, longe
 
 ### Cron
 
-For tasks that are guaranteed to finish within the timelimit the [Cron add-on](https://www.cloudcontrol.com/add-ons/cron) is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on or if you have more specific scheduling needs please refer to the [Cron add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/cron)
+For tasks that are guaranteed to finish within the timelimit the [Cron add-on](https://www.cloudcontrol.com/add-ons/cron) is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on or if you have more specific scheduling needs please refer to the [Cron add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Cron)
 
 ### Workers
 
-Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. More details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/worker)
+Tasks that will take longer than 120s or are triggered by a user request and should be handled asyncronously to not keep the user waiting are best handled by the [Worker add-on](https://www.cloudcontrol.com/add-ons/worker). Workers are long running processes started in containers just like the web processes but are not listening on a port and do not receive http requests. You can use workers to e.g. poll a queue and execute tasks in the background or handle long running periodical calculations. More details on usage scenarios and available queuing add-ons are available as part of the [Worker add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data+Processing/Worker)
+
+## Secure Shell (SSH)
+
+The distributed nature of the cloudControl platform means it's not possible to SSH into the actual server. Instead, we offer the run command, that allows to launch a new container and connect to that via SSH.
+
+The container is identical to the web or worker containers but starts an SSH daemon instead of one of the Procfile commands. Its based on the same stack image and deployment image and does also provides the Add-on credentials.
+
+### Examples
+
+To start a shell (e.g. bash) use `run bash`.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME run bash
+Connecting...
+Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
+u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
+interactive commands work as well
+u25832@DEP_ID-25832:~/www$ exit
+exit
+Connection to 10.62.45.100 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+It's also possible to execute a command directly and have the container exit after the command finished. This is very useful for database migrations and other one time tasks for example.
+
+Listing the environment variables using `"env | sort"` works. Also note, how the use of quotes is required for command that include spaces.
+~~~
+$ cctrlapp APP_NAME/DEP_NAME run "env | sort"
+Connecting...
+Warning: Permanently added '[10.250.134.126]:10346' (RSA) to the list of known hosts.
+CRED_FILE=/srv/creds/creds.json
+DEP_ID=DEP_ID
+DEP_NAME=APP_NAME/DEP_NAME
+DEP_VERSION=9d5ada800eff9fc57849b3102a2f27ff43ec141f
+DOMAIN=cloudcontrolled.com
+GEM_PATH=vendor/bundle/ruby/1.9.1
+HOME=/srv
+HOSTNAME=DEP_ID-10346
+LANG=en_US.UTF-8
+LOGNAME=u10346
+MAIL=/var/mail/u10346
+OLDPWD=/srv
+PAAS_VENDOR=cloudControl
+PATH=bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin
+PORT=10346
+PWD=/srv/www
+RACK_ENV=production
+RAILS_ENV=production
+SHELL=/bin/sh
+SSH_CLIENT=10.32.47.197 59378 10346
+SSH_CONNECTION=10.32.47.197 59378 10.250.134.126 10346
+SSH_TTY=/dev/pts/0
+TERM=xterm
+TMP_DIR=/srv/tmp
+TMPDIR=/srv/tmp
+USER=u10346
+WRK_ID=WRK_ID
+Connection to 10.250.134.126 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
 
 ## Stacks
 
@@ -510,7 +618,7 @@ Tasks that will take longer than 120s or are triggered by a user request and sho
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
- * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks).
+ * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
 
 A stack defines the common runtime environment for all deployments. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
@@ -535,3 +643,4 @@ To change the stack of a deployment simply append the --stack command line optio
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
+

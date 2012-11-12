@@ -1,4 +1,4 @@
-# OpenRedis (Alpha)
+# OpenRedis (Beta)
 
 OpenRedis provides hosted Redis services available to all cloudControl apps.
 

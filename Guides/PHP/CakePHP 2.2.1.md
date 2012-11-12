@@ -423,12 +423,7 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
 ##7. Review the Deployment
 
-With that completed, then have a look at both your deployments to ensure that they're working. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontrolledcakephp.cloudcontrolled.com](http://cloudcontrolledcakephp.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontrolledcakephp.cloudcontrolled.com](http://testing.cloudcontrolledcakephp.cloudcontrolled.com)  |  Testing  |
+With that completed, then have a look at both your deployments to ensure that they're working. 
 
 You should see output similar to that below, in figure 2.
 

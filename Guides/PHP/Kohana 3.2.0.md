@@ -1,6 +1,6 @@
 #Deploying Kohana 3.2.0
 
-![Successful Deployment](images/Kohana-homepage.png)
+![Successful Deployment](images/kohana-homepage.png)
 
 If you're looking for a very fast, light, highly configurable and effective PHP Framework for your projects, look no further than [Kohana](http://kohanaframework.org/). Now at [version 3.2.0](http://dev.kohanaframework.org/attachments/download/1670/kohana-3.2.0.zip) it comes with a variety of features to speed up your application development, including:
 
@@ -170,8 +170,9 @@ Now that this is done, we're ready to make some changes to our code to make use 
 
 In ``application/bootstrap.php``, search for the following line:
 
-    if (!empty($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localdomain') !== FALSE) {
-       $env = Kohana::DEVELOPMENT; 
+    if (isset($_SERVER['KOHANA_ENV']))
+    {
+        Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
     }
     
 After you've found it, replace them with the following. I'll go through the code afterwards.
@@ -470,9 +471,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
         public function action_index()
         {
             $this->template->message = 'hello, world!';
-    
-            $db = Database::instance(Kohana::$environment);
-            
+                
             // Change the default cache driver to memcache
             Cache::$default = 'apc';
             
@@ -502,7 +501,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
                 print '<br />Deleted the module';
             }
     
-            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute($db);
+            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute();
             $this->template->users = $results->as_array();
         }
     }
@@ -548,11 +547,6 @@ In this view file, we output some simple HTML and then iterate the value of the 
         
 ##7. Review the Deployment
 
-After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well. You can find these at the following urls:
-
-| URL | Deployment |
-| ------ | ------ |
-|  [http://cloudcontroldlkohana.cloudcontrolled.com](http://cloudcontroldlkohana.cloudcontrolled.com)  |  Production  |
-|  [http://testing.cloudcontroldlkohana.cloudcontrolled.com](http://testing.cloudcontroldlkohana.cloudcontrolled.com)  |  Testing  |
+After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well. 
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and cloudControl. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).

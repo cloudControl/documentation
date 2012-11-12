@@ -60,28 +60,41 @@ The command line client will determine if you already have a public key and uplo
 
 ## Create the First Application on cloudControl
 
-Create a new application on the cloudControl platform by giving it a unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
+Create a new application on the cloudControl platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
 
 ~~~ 
-$ cctrlapp APP_NAME create [Java, PHP, Python, Ruby]
+$ cctrlapp APP_NAME create [java, php, python, ruby]
 ~~~
 
 If the `APP_NAME` is already taken, please pick another one.
 
-Change to the working directory of the App you want to deploy. You can find simple hello world examples for [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/HelloWorld), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/HelloWorld), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/HelloWorld) and [Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/HelloWorld).
+Change to the working directory where you want to store your source code.
 
 ~~~
-$ cd PATH_TO/YOUR_APP
+$ cd PATH_TO/YOUR_WORKDIR
 ~~~
 
-Initialize the git repository (if not already done), add, commit and push the changes.
+Clone one of the example apps in your preferred programming language and push it to the cloudControl platform.
 
 ~~~
-$ git init
-$ git add .
-$ git commit -m “Initial commit“
+# for Java
+$ git clone git://github.com/cloudControl/java_hello_world_app.git
+$ cd java_hello_world_app
+
+# for PHP
+$ git clone git://github.com/cloudControl/php_hello_world_app.git
+$ cd php_hello_world_app
+
+# for Python
+$ git clone git://github.com/cloudControl/python_hello_world_app.git
+$ cd python_hello_world_app
+
+# for Ruby
+$ git clone git://github.com/cloudControl/ruby_hello_world_app.git
+$ cd ruby_hello_world_app
+
+# now push
 $ cctrlapp APP_NAME push
-[...]
 ~~~
 
 The push fires a hook that prepares your application for deployment like pulling in requirements and more. You can see the output of the build process in your terminal.
@@ -102,7 +115,7 @@ http[s]://APP_NAME.cloudcontrolled.com
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](cctrl_cheatsheet.pdf) to have the most important command line client commands handy at all times.
+Grab [our cheatsheet (PDF)](https://www.cloudcontrol.com/dev-center/cctrl_cheatsheet.pdf) to have the most important command line client commands handy at all times.
 
 ## Documentation
 

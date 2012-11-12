@@ -19,33 +19,34 @@ You can start with more memory if you know you’ll need it:
 
 Next, setup your app to start using the cache. We have documentation for the following languages and frameworks:
 
-* [Ruby](#ruby)
-#* [Rails](#rails)
-* [Python](#python)
-#* [Django](#django)
-* [PHP](#php)
-* [Java](#java)
+ * [Ruby](#ruby)
+ * [Rails](#rails)
+ * [Python](#python)
+ * [Django](#django)
+ * [PHP](#php)
+ * [Java](#java)
 
-<p class="note">Your credentials may take up to three (3) minutes to be synced to our servers. You may see authentication errors if you start using the cache immediately.</p>
+Your credentials may take up to three (3) minutes to be synced to our servers. You may see authentication errors if you start using the cache immediately.
 
 Ruby
 ------
 
 Start by adding the [memcachier](https://github.com/memcachier/memcachier-gem) and [dalli](http://github.com/mperham/dalli) gems to your Gemfile.
 
-    :::ruby
-    gem 'memcachier'
-    gem 'dalli'
+~~~ruby
+gem 'memcachier'
+gem 'dalli'
+~~~
 
 Then bundle install:
 
-    :::term
-    $ bundle install
+~~~
+$ bundle install
+~~~
 
 `Dalli` is a Ruby memcache client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you can start writing code. The following is a basic example using Dalli.
 
-~~~
-    :::ruby
+~~~ruby
      require 'sinatra'
      require 'memcachier'
      require 'dalli'
@@ -94,102 +95,105 @@ Then bundle install:
 Rails
 -----
 
-<p class="callout" markdown="1">
-We’ve built a small Rails example here: [MemCachier Rails Sample App](https://github.com/memcachier/memcachier-gis).
-</p>
+Start by adding the [memcachier](https://github.com/memcachier/memcachier-gem) and [dalli](http://github.com/mperham/dalli) gems to your Gemfile. We’ve built a small Rails example here: [MemCachier Rails Sample App](https://github.com/memcachier/memcachier-gis).
 
-Start by adding the [memcachier](https://github.com/memcachier/memcachier-gem) and [dalli](http://github.com/mperham/dalli) gems to your Gemfile.
-
-    :::ruby
-    gem 'memcachier'
-    gem 'dalli'
+~~~ruby
+gem 'memcachier'
+gem 'dalli'
+~~~
 
 Then bundle install:
 
-    :::term
-    $ bundle install
+~~~term
+$ bundle install
+~~~
 
 `Dalli` is a Ruby memcache client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you’ll want to configure the Rails cache_store appropriately. Modify `config/environments/production.rb` with the following:
 
-    :::ruby
-    config.cache_store = :dalli_store
+~~~ruby
+config.cache_store = :dalli_store
+~~~
 
-<p class="callout" markdown="1">In your development environment, Rails.cache defaults to a simple in-memory store and so it doesn’t require a running memcached.</p>
+In your development environment, Rails.cache defaults to a simple in-memory store and so it doesn’t require a running memcached.
 
 From here you can use the following code examples to use the cache in your Rails app:
 
-    :::ruby
-    Rails.cache.write("foo", "bar")
-    puts Rails.cache.read("foo")
+~~~ruby
+Rails.cache.write("foo", "bar")
+puts Rails.cache.read("foo")
+~~~
 
 Without the `memcachier` gem, you’ll need to pass the proper credentials to Dalli in `config/environments/production.rb`:
 
-    :::ruby
-    config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
-                        {:username => ENV["MEMCACHIER_USERNAME"],
-                         :password => ENV["MEMCACHIER_PASSWORD"]}
+~~~ruby
+config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
+                    {:username => ENV["MEMCACHIER_USERNAME"],
+                     :password => ENV["MEMCACHIER_PASSWORD"]}
+~~~
 
 Python
 -----
 
 You can use many memcached clients for python. In this example we are gonig to use `Python-Binary-Memcached` client with built in SASL support. Run the following commands on your local machine:
 
-    :::term
-    $ pip install python-binary-memcached
-    $ pip freeze > requirements.txt
+~~~
+$ pip install python-binary-memcached
+$ pip freeze > requirements.txt
+~~~
 
 Make sure your `requirements.txt` file contains this requirement (note that your versions may differ than what’s below):
 
-    python-binary-memcached==0.14
+~~~
+python-binary-memcached==0.14
+~~~
 
 Then you can put this code in you server.py and start caching:
 
-~~~
-    :::python
-    import os
-    import cgi
-    import json
-    import bmemcached
-    from flask import Flask
-    from flask import request
-    from random import randint
+~~~python
+import os
+import cgi
+import json
+import bmemcached
+from flask import Flask
+from flask import request
+from random import randint
 
-    app = Flask(__name__)
+app = Flask(__name__)
 
-    @app.route('/')
-    def hello():
-     try:
-         cred_file = open(os.environ["CRED_FILE"])
-         data = json.load(cred_file)
-         creds = data['MEMCACHIER']
-         config = {
-                 'srv': creds['MEMCACHIER_SERVERS'],
-                 'usr': creds['MEMCACHIER_USERNAME'],
-                 'pwd': creds['MEMCACHIER_PASSWORD']
-                 }
-     except IOError:
-         print 'Could not open file'
+@app.route('/')
+def hello():
+ try:
+     cred_file = open(os.environ["CRED_FILE"])
+     data = json.load(cred_file)
+     creds = data['MEMCACHIER']
+     config = {
+             'srv': creds['MEMCACHIER_SERVERS'],
+             'usr': creds['MEMCACHIER_USERNAME'],
+             'pwd': creds['MEMCACHIER_PASSWORD']
+             }
+ except IOError:
+     print 'Could not open file'
 
-     client = bmemcached.Client('{0}:11211'.format(config['srv']),str(config['usr']),str(config['pwd']))
+ client = bmemcached.Client('{0}:11211'.format(config['srv']),str(config['usr']),str(config['pwd']))
 
-     ipaddr=request.headers['X-Forwarded-For']
-     count=1
-     if client.get(ipaddr) is not None:
-         count=int(client.get(ipaddr))+1
+ ipaddr=request.headers['X-Forwarded-For']
+ count=1
+ if client.get(ipaddr) is not None:
+     count=int(client.get(ipaddr))+1
 
-     client.set(ipaddr,str(count))
-     return "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n\
-             <HTML>\n\
-             <HEAD><TITLE>Python Memcachier example</TITLE></HEAD>\n\
-             <BODY>\n\
-             <h1>Hello " + ipaddr + "</h1>\n\
-             This is visit " + str(count) +"\n\
-             </BODY>\n\
-             </HTML>"
+ client.set(ipaddr,str(count))
+ return "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n\
+         <HTML>\n\
+         <HEAD><TITLE>Python Memcachier example</TITLE></HEAD>\n\
+         <BODY>\n\
+         <h1>Hello " + ipaddr + "</h1>\n\
+         This is visit " + str(count) +"\n\
+         </BODY>\n\
+         </HTML>"
 
-    if __name__ == '__main__':
-     port = int(os.environ.get('PORT', 5000))
-     app.run(host='0.0.0.0', port=port)
+if __name__ == '__main__':
+ port = int(os.environ.get('PORT', 5000))
+ app.run(host='0.0.0.0', port=port)
 ~~~
 
 PHP
@@ -197,43 +201,42 @@ PHP
 
 Memcached provided by MemCachier can be used like this:
 
+~~~php
+<?php
+     $string = file_get_contents($_ENV['CRED_FILE'], false);
+    if ($string == false) {
+        die('FATAL: Could not read credentials file');
+    }
+
+    $creds = json_decode($string, true);
+
+    # ['MEMCACHIER_SERVERS', 'MEMCACHIER_USERNAME', 'MEMCACHIER_PASSWORD']
+    $config = array(
+        'SERVERS' => $creds['MEMCACHIER']['MEMCACHIER_SERVERS'],
+        'USER' => $creds['MEMCACHIER']['MEMCACHIER_USERNAME'],  
+        'PSWD' => $creds['MEMCACHIER']['MEMCACHIER_PASSWORD'],
+    );
+
+    $m = new Memcached();
+    $m->setOption(Memcached::OPT_BINARY_PROTOCOL, 1);
+    $m->setSaslData($config['USER'], $config['PSWD']);
+    $m->addServer($config['SERVERS'], 11211);
+    $current_count = (int) $m->get($_SERVER['HTTP_X_FORWARDED_FOR']);
+    $current_count += 1;
+    $m->set($_SERVER['HTTP_X_FORWARDED_FOR'], $current_count);
+?>
+<html>
+<head>
+<title>Memcachier Example</title>
+</head>
+<body>
+<h1>Hello <?php print $_SERVER['HTTP_X_FORWARDED_FOR'] ?>!</h1>
+<p>This is visit number <?php print $current_count ?>.</p>
+</body>
+</html>
 ~~~
-:::php
-    <?php
-         $string = file_get_contents($_ENV['CRED_FILE'], false);
-        if ($string == false) {
-            die('FATAL: Could not read credentials file');
-        }
 
-        $creds = json_decode($string, true);
-
-        # ['MEMCACHIER_SERVERS', 'MEMCACHIER_USERNAME', 'MEMCACHIER_PASSWORD']
-        $config = array(
-            'SERVERS' => $creds['MEMCACHIER']['MEMCACHIER_SERVERS'],
-            'USER' => $creds['MEMCACHIER']['MEMCACHIER_USERNAME'],  
-            'PSWD' => $creds['MEMCACHIER']['MEMCACHIER_PASSWORD'],
-        );
-
-        $m = new Memcached();
-        $m->setOption(Memcached::OPT_BINARY_PROTOCOL, 1);
-        $m->setSaslData($config['USER'], $config['PSWD']);
-        $m->addServer($config['SERVERS'], 11211);
-        $current_count = (int) $m->get($_SERVER['HTTP_X_FORWARDED_FOR']);
-        $current_count += 1;
-        $m->set($_SERVER['HTTP_X_FORWARDED_FOR'], $current_count);
-    ?>
-    <html>
-    <head>
-    <title>Memcachier Example</title>
-    </head>
-    <body>
-    <h1>Hello <?php print $_SERVER['HTTP_X_FORWARDED_FOR'] ?>!</h1>
-    <p>This is visit number <?php print $current_count ?>.</p>
-    </body>
-    </html>
-~~~
-
-More information on how to use php-memcached can be found on [php.net](http://php.net/manual/en/book.memcached.php).
+More information on how to use php-memcached can be found on [php.net](http://php.net/manual/en/book.memcached.php). The php-memcached extension is part of the cloudControl stacks.
 
 Java
 ----
@@ -244,135 +247,139 @@ Java
 
 For `maven` however, start by adding the proper `spymemcached` repository to your pom.xml:
 
-    <repository>
-      <id>spy</id>
-      <name>Spy Repository</name>
-      <layout>default</layout>
-      <url>http://files.couchbase.com/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
+~~~
+<repository>
+  <id>spy</id>
+  <name>Spy Repository</name>
+  <layout>default</layout>
+  <url>http://files.couchbase.com/maven2/</url>
+  <snapshots>
+    <enabled>false</enabled>
+  </snapshots>
+</repository>
+~~~
 
 Then add the `spymemcached` library to your dependencies:
 
-    <dependency>
-      <groupId>spy</groupId>
-      <artifactId>spymemcached</artifactId>
-      <version>2.8.1</version>
-      <scope>provided</scope>
-    </dependency>
+~~~
+<dependency>
+  <groupId>spy</groupId>
+  <artifactId>spymemcached</artifactId>
+  <version>2.8.1</version>
+  <scope>provided</scope>
+</dependency>
+~~~
 
 Once your build system is configured, you can start by adding caching to your Java app:
 
-~~~ :::java
-    package com.NAME.SPACE.PACKAGE;
+~~~java
+package com.NAME.SPACE.PACKAGE;
 
-    import java.io.IOException;
-    import java.io.PrintWriter;
-    import java.util.HashMap;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 
-    import javax.servlet.ServletException;
-    import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
 
-    import org.eclipse.jetty.server.Server;
-    import org.eclipse.jetty.servlet.*;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.*;
 
-    import net.spy.memcached.AddrUtil;
-    import net.spy.memcached.MemcachedClient;
-    import net.spy.memcached.ConnectionFactoryBuilder;
-    import net.spy.memcached.auth.PlainCallbackHandler;
-    import net.spy.memcached.auth.AuthDescriptor;
+import net.spy.memcached.AddrUtil;
+import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.auth.PlainCallbackHandler;
+import net.spy.memcached.auth.AuthDescriptor;
 
-    /*
-    * Java WEB application with embedded Jetty server and MemCachier addon
-    *
-    */
-    public class App extends HttpServlet
+/*
+* Java WEB application with embedded Jetty server and MemCachier addon
+*
+*/
+public class App extends HttpServlet
+{
+
+    private static final long serialVersionUID = -96650638989718048L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-
-        private static final long serialVersionUID = -96650638989718048L;
-
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+      
+        String ipAddress  = req.getHeader("X-FORWARDED-FOR");
+        if(ipAddress == null)
         {
-          
-            String ipAddress  = req.getHeader("X-FORWARDED-FOR");
-            if(ipAddress == null)
-            {
-                ipAddress = req.getRemoteAddr();
-            }
-
-            System.out.println("Request received from: "+req.getLocalAddr());
-            resp.setContentType("text/html");
-            PrintWriter out = resp.getWriter();
-            out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-            out.println("<HTML>");
-            out.println(" <HEAD><TITLE>Java Memcachier example</TITLE></HEAD>");
-            out.println(" <BODY>");
-            out.print("<center>");
-            out.print("<h1>Hello " + ipAddress + "</h1>");
-            out.print("This is visit number " + getVisit(ipAddress) + ".");
-            out.print("</center>");
-            out.println(" </BODY>");
-            out.println("</HTML>");
-            out.flush();
-            out.close();
+            ipAddress = req.getRemoteAddr();
         }
 
-        public static void main(String[] args) throws Exception
-        {
-          
-            Server server = new Server(Integer.valueOf(System.getenv("PORT")));
-            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-            context.setContextPath("/");
-            server.setHandler(context);
-            context.addServlet(new ServletHolder(new App()),"/*");
-            server.start();
-            server.join();
-            System.out.println("Application started");
-        }
-
-        private int getVisit(String ipAddr) throws IOException{
-            Credentials cr = Credentials.getInstance();
-            String addon = "MEMCACHIER"; // capital letters not required
-            HashMap<String, Object> creds = new HashMap<String, Object>();
-            creds.put("srv", cr.getCredential("servers", addon));
-            creds.put("usr", cr.getCredential("username", addon));
-            creds.put("pwd", cr.getCredential("password", addon));
-
-            AuthDescriptor ad = new AuthDescriptor(new String[] { "PLAIN" },
-                    new PlainCallbackHandler((String)creds.get("usr"),
-                        (String)creds.get("pwd")));
-
-            int count=0;
-
-            try {
-                MemcachedClient mc = new MemcachedClient(new ConnectionFactoryBuilder()
-                        .setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
-                        .setAuthDescriptor(ad).build(), AddrUtil.getAddresses(
-                            (String)creds.get("srv") + ":11211"));
-
-                if(mc.get(ipAddr)!=null){
-                    count=(Integer)mc.get(ipAddr);
-                }
-
-                count++;
-                mc.set(ipAddr,0,count);
-
-            } catch (IOException ioe) {
-                System.out.println("Couldn't create a connection to MemCachier: \nIOException "
-                        + ioe.getMessage());
-            }
-
-            return count;
-        }
+        System.out.println("Request received from: "+req.getLocalAddr());
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
+        out.println("<HTML>");
+        out.println(" <HEAD><TITLE>Java Memcachier example</TITLE></HEAD>");
+        out.println(" <BODY>");
+        out.print("<center>");
+        out.print("<h1>Hello " + ipAddress + "</h1>");
+        out.print("This is visit number " + getVisit(ipAddress) + ".");
+        out.print("</center>");
+        out.println(" </BODY>");
+        out.println("</HTML>");
+        out.flush();
+        out.close();
     }
+
+    public static void main(String[] args) throws Exception
+    {
+      
+        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        context.addServlet(new ServletHolder(new App()),"/*");
+        server.start();
+        server.join();
+        System.out.println("Application started");
+    }
+
+    private int getVisit(String ipAddr) throws IOException{
+        Credentials cr = Credentials.getInstance();
+        String addon = "MEMCACHIER"; // capital letters not required
+        HashMap<String, Object> creds = new HashMap<String, Object>();
+        creds.put("srv", cr.getCredential("servers", addon));
+        creds.put("usr", cr.getCredential("username", addon));
+        creds.put("pwd", cr.getCredential("password", addon));
+
+        AuthDescriptor ad = new AuthDescriptor(new String[] { "PLAIN" },
+                new PlainCallbackHandler((String)creds.get("usr"),
+                    (String)creds.get("pwd")));
+
+        int count=0;
+
+        try {
+            MemcachedClient mc = new MemcachedClient(new ConnectionFactoryBuilder()
+                    .setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
+                    .setAuthDescriptor(ad).build(), AddrUtil.getAddresses(
+                        (String)creds.get("srv") + ":11211"));
+
+            if(mc.get(ipAddr)!=null){
+                count=(Integer)mc.get(ipAddr);
+            }
+
+            count++;
+            mc.set(ipAddr,0,count);
+
+        } catch (IOException ioe) {
+            System.out.println("Couldn't create a connection to MemCachier: \nIOException "
+                    + ioe.getMessage());
+        }
+
+        return count;
+    }
+}
 ~~~
 
 You also need to follow the [Getting Add-on credentials](https://github.com/cloudControl/documentation/blob/master/Guides/Java/GetCredentials.md) in order to authenticate your Add-on.
 
-You may wish to look the `spymemcached` [JavaDocs](http://dustin.github.com/java-memcached-client/apidocs/) or some more [example code](https://code.google.com/p/spymemcached/wiki/Examples) to help in using MemCachier effectively.
+You may wish to take a look at the `spymemcached` [JavaDocs](http://dustin.github.com/java-memcached-client/apidocs/) or some more [example code](https://code.google.com/p/spymemcached/wiki/Examples) for more details on using MemCachier effectively.
 
 Library support
 -----
@@ -404,7 +411,7 @@ MemCachier will work with any memcached binding that supports [SASL authenticati
 <tr>
 <td>PHP</td>
 <td>
-  <a href="http://github.com/ronnywang/PHPMemcacheSASL">PHPMemcacheSASL</a>
+  <a href="http://php.net/manual/en/book.memcached.php">PHP-Memcached</a>
 </td>
 </tr>
 <tr>
@@ -421,28 +428,29 @@ Local setup
 
 To test against your cloudControl application locally, you will need to run a local memcached process. MemCachier can only run in cloudControl But because MemCachier and memcached speak the same protocol, you shouldn’t have any issues testing locally.  Installation depends on your platform.
 
-<p class="callout" markdown="1">This will install memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.</p>
+This will install memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.
 
 On Ubuntu:
 
-    :::term
-    $ sudo apt-get install memcached
+~~~
+$ sudo apt-get install memcached
+~~~
 
 Or on OS X (with Homebrew):
 
-    :::term
-    $ brew install memcached
+~~~
+$ brew install memcached
+~~~
 
 Or for Windows please refer to [these instructions](http://www.codeforest.net/how-to-install-memcached-on-windows-machine).
 
-For further information and resources (such as the memcached source
-code) please refer to the [Memcache.org
-homepage](http://memcached.org)
+For further information and resources (such as the memcached sourcecode) please refer to the [Memcache.org homepage](http://memcached.org)
 
 To run memcached simply execute the following command:
 
-    :::term
-    $ memcached -v
+~~~
+$ memcached -v
+~~~
 
 Usage analytics
 ------
@@ -468,6 +476,7 @@ Changing your plan, either by upgrading or downgrading, requires no code changes
 Support
 -------
 
-All Memcachier support and runtime issues should be submitted via on of the cloudControl Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
+All Memcachier support and runtime issues should be submitted via one of the cloudControl Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
 
 Any issues related to Memcachier service are reported at [Memcachier Status](http://status.memcachier.com/).
+
