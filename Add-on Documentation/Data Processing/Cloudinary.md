@@ -1,4 +1,4 @@
-# Cloudinary (Alpha)
+# Cloudinary (Beta)
 
 Cloudinary is a cloud service that offers a solution to an applications's entire image management pipeline.
 
@@ -42,3 +42,4 @@ Internal access credentials
 
 It's recommended to the read database credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/platform-documentation#add-on-credentials) in the general documentation.
 
+For more detailed information please refer to the [documentation on Cloudinary](http://cloudinary.com/documentation/cloudcontrol_integration).
