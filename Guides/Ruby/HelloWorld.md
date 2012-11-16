@@ -187,7 +187,7 @@ Just pick the number of clones and the desired amount of memory per clone and re
 Which means "run 4 clones which get 256 MB RAM each".
 
 
-[sinatra]: http://http://www.sinatrarb.com/
+[sinatra]: http://www.sinatrarb.com/
 [rubygems]: http://rubygems.org/
 [cloudControl]: http://www.cloudcontrol.com
 [cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the cloudControl-command-line-client"
