@@ -10,7 +10,7 @@ The DBInsights Add-on can be added to every deployment with:
 $ cctrlapp APP_NAME/DEP_NAME addon.add dbinsights.PLAN
 ~~~
 
-When added, DBInsights automatically creates a new user account with your email adress. You can access the insights for the database within the [web console](https://www.cloudcontrolled.com/console/apps/) (go to the specific deployment and click the link "dbinsights.OPTION").
+When added, DBInsights automatically creates a new user account with your email adress. You can access the insights for the database within the [web console](https://console.cloudcontrolled.com) (go to the specific deployment and click the link "dbinsights.OPTION").
 
 ## Upgrade DBInsights
 
@@ -36,7 +36,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove dbinsights.OPTION
 
 ## Internal access credentials
 
-It's recommended to the read database credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/platform-documentation#add-on-credentials) in the general documentation.
+It's recommended to the read database credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) in the general documentation.
 
 The JSON file has the following structure:
 
