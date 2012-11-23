@@ -8,14 +8,14 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME alias APP_NAME.cloudcontrolled.com
+ $ cctrlapp APP_NAME/default alias APP_NAME.cloudcontrolled.com
  ~~~
 
  The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
 
  1. Add it as a TXT record to your root domain.
  
- Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your root domain. This is an example of a valid TXT record as used for our own `www.cloudcontrol.com` domain. Please not how the TXT record is set for `cloudcontrol.com` but used to verify `www.cloudcontrol.com`.
+ Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your root domain. This is an example of a valid TXT record as used for our own `www.cloudcontrol.com` domain. Please note how the TXT record is set for `cloudcontrol.com` but used to verify `www.cloudcontrol.com`.
  
  ~~~
  cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"

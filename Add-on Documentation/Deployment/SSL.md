@@ -1,6 +1,6 @@
 # SSL Add-on
 
-SSL encryption is available for improved security when transmitting passwords and other sensitive data. As part of the provided `.cloudcontrolled.com` subdomain all deployments have access to piggyback SSL using a `*.cloudconrolled.com` wildcard certificate. To use this, simply point your browser to `https://APP_NAME.cloudcontrolled.com`. SSL support for custom domains is available through the SSL add-on.
+SSL encryption is available for improved security when transmitting passwords and other sensitive data. As part of the provided `.cloudcontrolled.com` subdomain all deployments have access to piggyback SSL using a `*.cloudconrolled.com` wildcard certificate. To use this, simply point your browser to `https://APP_NAME.cloudcontrolled.com` for the default deployment or to `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments (please note the dash between DEP_NAME and APP_NAME). SSL support for custom domains is available through the SSL add-on.
 
 ## Custom Domain Certificates
 
