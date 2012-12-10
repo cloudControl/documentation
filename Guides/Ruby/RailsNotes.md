@@ -13,8 +13,9 @@ web: bundle exec rails s -p $PORT
 
 If asset pipeline is used, "config/application.rb" file should contain the following line:
 ~~~ruby
-config.assets.initialize_on_precompile = false
+config.assets.initialize_on_precompile = false if ENV['BUILDPACK_RUNNING']
 ~~~
+This line disables the intialization on precompile only during the build process (while in the buildpack), but does not affect the normal code executions, e.g. running a web server or a run command.
 
 ## Database
 
