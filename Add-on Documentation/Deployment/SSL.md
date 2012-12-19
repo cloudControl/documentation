@@ -6,37 +6,28 @@ SSL encryption is available for improved security when transmitting passwords an
 
 To enable SSL support for custom domains like `www.example.com` or `secure.example.com` you need the SSL add-on. Root or naked domains like `example.com` are not supported.
 
-Currently the SSL add-on is not fully automated but needs manual approval by one of our support engineers.
-
-Please follow the following simple steps to add SSL support to your deployment.
+Please follow the following steps to add SSL support to your deployment.
 
  1. Acquire a signed certificate from your certificate authority of trust.
- 1. Ensure the key is not protected by a passphrase.
- 1. Upload the certificate-, key- and certificate-chain files.
- 
- To securely upload the files we provide SFTP access to a private directory for every deployment. Use the deployment details command to get the SFTP URL.
+ 2. Ensure the key is not protected by a passphrase.
+ 3. Add the Add-on via cctrlapp
  
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME details
- [...]
- private files: sftp://DEP_ID@cloudcontrolled.com/
- [...]
+ $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert /path/to/server.crt --key /path/to/server.key --chain /path/to/server.crt.chain
  ~~~
+ Note: If you are uploading a self-signed certificate you are not supposed to upload a chain.
  
- Use any SFTP compatible client to upload the files to the /private directory. It expects the same SSH key that is used for pushing for authentication. The private directory is only accessible via SFTP. Even the deployment itself can not access this directory.
- 
+ A short time after that, your loadbalancer is ready. You can check this by having a look at the add-on's details.
+ Please note that the time to live (TTL) for all of our DNS records is one hour by default. So it will take some time until your domain becomes reachable.
+
  ~~~
- $ sftp DEP_ID@cloudcontrolled.com
- Connected to cloudcontrolled.com.
- sftp> cd /private
- sftp> put CERT_FILE
- sftp> put KEY_FILE
- sftp> put CHAIN_FILE
+ $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
+   [...]
+   SSL_CERT_INCEPTS	: (inception date)
+   SSL_DNS_DOMAIN		: (loadbalancer domain name)
+   SSL_CERT_EXPIRES	: (expiration date)
+   [...]
  ~~~
- 
- 1. Send an e-mail to [support@cloudcontrol.de] to request activation.
- 
- Please provide the common APP_NAME/DEP_NAME string as part of your e-mail.
 
 ## HTTPS Redirects
 
