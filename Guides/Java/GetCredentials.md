@@ -8,7 +8,7 @@ Follow these steps, so you can get and use these credentials within your Java ap
 
 * ### Prepare your app for reading JSON files
 
-    In this case we'll use [json-simple](http://code.google.com/p/json-simple/), a simple Java tookit to encode or decode JSON text easily. You have to add the privided [JAR file](http://code.google.com/p/json-simple/downloads/detail?name=json_simple-1.1.jar) to your project build path ([how to](http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-%28Java%29)).
+    In this case we'll use [json-simple](http://code.google.com/p/json-simple/), a simple Java tookit to encode or decode JSON text easily. You have to add the provided [JAR file](http://code.google.com/p/json-simple/downloads/detail?name=json_simple-1.1.jar) to your project build path ([how to](http://www.wikihow.com/Add-JARs-to-Project-Build-Paths-in-Eclipse-%28Java%29)).
     You may also need to add the dependency to your 'pom.xml' file:
 ~~~xml
 <dependencies>
