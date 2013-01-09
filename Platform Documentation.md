@@ -333,11 +333,11 @@ The access log shows each access to your app in an Apache compatible log format.
 
 ### Error Log
 
-The error log shows errors from all components of your app. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the [deploy log](#deploy-log).
+The error log shows all output redirected to stdout, stderr and syslog inside the container. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the [deploy log](#deploy-log).
 
 ### Worker Log
 
-Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, stdout and stderr is redirected to this log. The worker log shows the timestamp of when the message was written, the *wrk_id* of the worker the message came from as well as the actual log line.
+Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, its stdout, stderr and syslog output is redirected to this log. The worker log shows the timestamp of when the message was written, the *wrk_id* of the worker the message came from as well as the actual log line.
 
 ### Deploy Log
 
