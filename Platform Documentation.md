@@ -130,13 +130,13 @@ Users
  user3                                    user3@example.com
 ~~~
 
-To add a user please use his email address. If the user already is registered with that address he will be added to the app. If not, he will first receive an email invitation and will be added as soon as he has registered and activated his account.
+Add a user by providing their email address. If the user is already registered they will be added to the app immediately. Otherwise they will receive an invitation email first.
 
 ~~~
 $ cctrlapp APP_NAME user.add user4@example.com
 ~~~
 
-To remove a user, please use his username.
+To remove a user, please use their username.
 
 ~~~
 $ cctrlapp APP_NAME user.remove user3
@@ -144,7 +144,7 @@ $ cctrlapp APP_NAME user.remove user3
 
 #### Roles
 
- * **Owner**: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for all his apps' consumption. If you plan to have multiple developers work on the same app, it's recommended to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
+ * **Owner**: Creating an app makes you the owner and gives you full access. The owner can not be removed from the app and gets charged for all their apps' consumption. If you plan to have multiple developers work on the same app, it's recommended to have a seperate admin-like account as the owner of all your apps and add the additional developers including your own seperately.
  * **Developer**: The default role for users added to an app is the developer role. Developers have full access to the repository as well as all the deployments. Developers can add more developers or even remove existing ones. They can even delete deployments and also the app itself. Developers however can not change the associated billing account or remove the owner.
 
 #### Keys
