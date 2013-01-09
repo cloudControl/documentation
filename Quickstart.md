@@ -19,7 +19,7 @@ Install Git from the [official site](http://git-scm.com/) or your package reposi
 
 **Linux/Mac OS X:** We recommend installing cctrl via pip.
 
-~~~
+~~~bash
 # if you don't have pip yet
 $ sudo easy_install pip
 $ sudo pip install cctrl
@@ -31,7 +31,7 @@ $ sudo pip install cctrl
 
 You can register on the website or directly from the command line. Provide the required values when prompted.
 
-~~~
+~~~bash
 $ cctrluser create
 Username: USERNAME
 Email   : EMAIL
@@ -42,7 +42,7 @@ User has been created. Please check you e-mail for your confirmation code.
 
 Activate your user account with the activate command.
 
-~~~
+~~~bash
 $ cctrluser activate USERNAME ACTIVATION_CODE
 ~~~
 
@@ -50,7 +50,7 @@ Replace `USERNAME` and `ACTIVATION_CODE` with the values form the activation e-m
 
 ## Add a Public Key
 
-~~~
+~~~bash
 $ cctrluser key.add
 Email   : EMAIL
 Password: PASSWORD
@@ -62,7 +62,7 @@ The command line client will determine if you already have a public key and uplo
 
 Create a new application on the cloudControl platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
 
-~~~ 
+~~~bash
 $ cctrlapp APP_NAME create [java, php, python, ruby]
 ~~~
 
@@ -70,13 +70,13 @@ If the `APP_NAME` is already taken, please pick another one.
 
 Change to the working directory where you want to store your source code.
 
-~~~
+~~~bash
 $ cd PATH_TO/YOUR_WORKDIR
 ~~~
 
 Clone one of the example apps in your preferred programming language and push it to the cloudControl platform.
 
-~~~
+~~~bash
 # for Java
 $ git clone git://github.com/cloudControl/java_hello_world_app.git
 $ cd java_hello_world_app
@@ -101,15 +101,15 @@ The push fires a hook that prepares your application for deployment like pulling
 
 ## Deploy Your Application on cloudControl
 
-Deploy your app with 
+Deploy your app with
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME deploy
 ~~~
 
 **Congratulations, your app is now up and running.**
 
-~~~ 
+~~~bash
 http[s]://APP_NAME.cloudcontrolled.com
 ~~~
 
