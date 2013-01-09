@@ -8,20 +8,20 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME alias APP_NAME.cloudcontrolled.com
+ $ cctrlapp APP_NAME/default alias APP_NAME.cloudcontrolled.com
  ~~~
 
  The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
 
- 1. Add it as a TXT record to your domain.
+ 1. Add it as a TXT record to your root domain.
  
- Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your domain. This is an example of a valid TXT record as used for our own www.cloudcontrol.com domain.
+ Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your root domain. This is an example of a valid TXT record as used for our own `www.cloudcontrol.com` domain. Please note how the TXT record is set for `cloudcontrol.com` but used to verify `www.cloudcontrol.com`.
  
  ~~~
  cloudcontrol.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
  ~~~
  
- Setting the TXT record on the root domain automatically works if you want to verifiy multiple domains like e.g. `www.example.com` and `secure.example.com` with just one TXT record.
+ Since we are going to use a CNAME to point the custom domain to the provided `.cloudcontrolled.com` subdomain all additional record types will be ignored. It's therefor required to set the TXT record on the root domain. This has the added benefit, that if you can verifiy multiple domains like e.g. `www.example.com` and `secure.example.com` with just one TXT record set for `example.com`.
  
  1. Add a CNAME pointing to the provided `.cloudcontrolled.com` subdomain.
  
@@ -40,7 +40,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  DEP_NAME.APP_NAME.cloudcontrolled.com                               1        1
  ~~~
  
- The resulting CNAME record should look something like this.
+ The resulting CNAME record should look something like this example.
  
  ~~~
  www.cloudcontrol.com.	1593	IN	CNAME	www2.cloudcontrolled.com.
@@ -101,4 +101,6 @@ Then add the wildcard domain itself as an alias.
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME alias.add *.example.com
 ~~~
+
+The TXT record requirement also applies to wildcard domains, so please follow the steps above accordingly.
 

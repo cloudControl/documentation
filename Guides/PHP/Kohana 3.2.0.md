@@ -170,8 +170,9 @@ Now that this is done, we're ready to make some changes to our code to make use 
 
 In ``application/bootstrap.php``, search for the following line:
 
-    if (!empty($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'localdomain') !== FALSE) {
-       $env = Kohana::DEVELOPMENT; 
+    if (isset($_SERVER['KOHANA_ENV']))
+    {
+        Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
     }
     
 After you've found it, replace them with the following. I'll go through the code afterwards.
@@ -470,9 +471,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
         public function action_index()
         {
             $this->template->message = 'hello, world!';
-    
-            $db = Database::instance(Kohana::$environment);
-            
+                
             // Change the default cache driver to memcache
             Cache::$default = 'apc';
             
@@ -502,7 +501,7 @@ Under ``application/classes/controller`` create a new controller file called ``h
                 print '<br />Deleted the module';
             }
     
-            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute($db);
+            $results = DB::select('id', 'emailAddress')->from('tblUsers')->execute();
             $this->template->users = $results->as_array();
         }
     }

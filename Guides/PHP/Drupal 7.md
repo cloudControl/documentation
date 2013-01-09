@@ -301,13 +301,3 @@ You should see output similar to that below, in figure 2.
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
 
-##Links
- 
-If you need any further information on Drupal 7, have a look at the links below which will help:
- 
- * [http://www.dereuromark.de/2010/08/17/development-vs-productive-setup/](http://www.dereuromark.de/2010/08/17/development-vs-productive-setup/)
- * [http://book.Drupal 7.org/2.0/en/development/sessions.html](http://book.Drupal 7.org/2.0/en/development/sessions.html)
- * [http://php.refulz.com/Drupal 7-error-the-requested-address-was-not-found-on-this-server/](http://php.refulz.com/Drupal 7-error-the-requested-address-was-not-found-on-this-server/)
- * [http://bakery.Drupal 7.org/articles/stevena0/2010/08/29/use-different-configs-for-different-environments](http://bakery.Drupal 7.org/articles/stevena0/2010/08/29/use-different-configs-for-different-environments)
- * [http://www.jamesfairhurst.co.uk/posts/view/using_the_database_for_sessions_in_Drupal 7/](http://www.jamesfairhurst.co.uk/posts/view/using_the_database_for_sessions_in_Drupal 7/)
- * [https://bitbucket.org/sebnil/Drupal 7-database-logger/wiki/Home](https://bitbucket.org/sebnil/Drupal 7-database-logger/wiki/Home)
