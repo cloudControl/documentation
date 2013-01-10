@@ -44,6 +44,22 @@ Config parameters are accepted in three formats and result in the respective JSO
 </tbody>
 </table>
 
+### Setting the content from a file
+
+For the value a filename can be used. In that case the whole content of the file
+is read and assigned to specified config variable.
+
+Let's say there exists a file `test.txt` with the following content:
+~~~
+This is a test file
+with multiple lines.
+~~~
+
+To add the file's content to a variable SOME_VAR, run the following command:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SOME_VAR=test.txt
+~~~
+
 
 ## Listing Config Parameters
 
@@ -67,3 +83,25 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove config.free
 
 This will remove all custom config values.
 
+## Adding custom syslog logging
+
+The config addon can be used to specify an additional endpoint where error and worker logs will be sent.
+This is done by setting the config variable "RSYSLOG_REMOTE". The content should contain valid [rsyslog](http://www.rsyslog.com/) configuration and can span multiple lines.
+
+E.g. to forward the logs to [Logentries](https://logentries.com/) over a TLS connection, create a temp file with the following content:
+~~~
+$DefaultNetstreamDriverCAFile /app/LOGENTRIES_CERTIFICATE_PATH
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$ActionSendStreamDriverAuthMode x509/name
+$template LogentriesFormat, "LOGENTRIES_TOKEN %syslogtag%%msg%\n"
+*.* @@api.logentries.com:20000;LogentriesFormat
+~~~
+where "LOGENTRIES_TOKEN" should be replaced with the actual token and "LOGENTRIES_CERTIFICATE_PATH" should be the path to a logentries certificate file in you repository.
+
+Use that file's name (let's say it's named `logentries.cfg`) as a value of "RSYSLOG_REMOTE" config variable:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --RSYSLOG_REMOTE=logentries.cfg
+~~~
+
+From now on all new logs should be visible in logentries.
