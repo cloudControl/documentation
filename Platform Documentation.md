@@ -8,8 +8,8 @@
 <li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
 <li class=""><a href="#non-persistent-filesystem">Non Persistent Filesystem</a></li>
 <li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
-<li class=""><a href="#logging">Logging</a></li>
 <li class=""><a href="#add-ons">Add-ons</a></li>
+<li class=""><a href="#logging">Logging</a></li>
 <li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
 <li class=""><a href="#scaling">Scaling</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
@@ -314,35 +314,6 @@ To enable you to determine programatically which deployment your app currently r
  * **DEP_ID**: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
  * **WRK_ID**: The internal worker ID. Only set for worker containers.
 
-## Logging
-
-**TL;DR:**
-
- * There are four different log types (access, error, worker and deploy) available.
-
-To see the log output in a *tail -f* like fashion use the log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
-
-~~~
-$ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
-[...]
-~~~
-
-### Access Log
-
-The access log shows each access to your app in an Apache compatible log format.
-
-### Error Log
-
-The error log shows all output redirected to stdout, stderr and syslog inside the container. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the [deploy log](#deploy-log).
-
-### Worker Log
-
-Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, its stdout, stderr and syslog output is redirected to this log. The worker log shows the timestamp of when the message was written, the *wrk_id* of the worker the message came from as well as the actual log line.
-
-### Deploy Log
-
-The deploy log gives detailed information on the deploy process. With it you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the [new version](#deploying-new-versions).
-
 ## Add-ons
 
 **TL;DR:**
@@ -440,6 +411,40 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
     }
 }
 ~~~
+
+## Logging
+
+**TL;DR:**
+
+ * There are four different log types (access, error, worker and deploy) available.
+
+To see the log output in a *tail -f* like fashion use the log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
+[...]
+~~~
+
+### Access Log
+
+The access log shows each access to your app in an Apache compatible log format.
+
+### Error Log
+
+The error log shows all output redirected to stdout, stderr and syslog inside the container. It also includes markers for when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the [deploy log](#deploy-log).
+
+### Worker Log
+
+Workers are long running background processes. As such, they are not accessible via http from the outside. To make worker output accessible to you, its stdout, stderr and syslog output is redirected to this log. The worker log shows the timestamp of when the message was written, the *wrk_id* of the worker the message came from as well as the actual log line.
+
+### Deploy Log
+
+The deploy log gives detailed information on the deploy process. With it you can see on which and how many nodes your deployment is deployed. How long it took each node to get the deployment image and start the container and also when the loadbalancers started sending traffic to the [new version](#deploying-new-versions).
+
+### Customizing logging
+
+Some Add-ons in the [Big Data & Analytics](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Big%20Data%20&%20Analytics/DBInsights) category as well as the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) can be used to forward error and worker logs to external logging services.
+
 
 ## Provided Subdomains and Custom Domains
 
