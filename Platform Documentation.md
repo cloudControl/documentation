@@ -81,7 +81,7 @@ $ cctrluser delete
 
 ### Password Reset
 
-To reset your password please got to https://api.cloudcontrol.com/reset_password/.
+To reset your password please go to https://api.cloudcontrol.com/reset_password/.
 
 ## Apps, Users and Deployments
 
@@ -230,7 +230,7 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output. If the image exceeds the 100mb limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
+Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output. If the image exceeds the 100mb limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without support for the negation operator `!`. Here’s an example `.cctrlignore`:
 
 ~~~
 *.psd
