@@ -1,6 +1,6 @@
-#Deploying Java WEB application with embedded Jetty server
+#Deploying a Jetty application
 
-If you're looking for a fast and light Java WEB server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 7.6.0](http://dist.codehaus.org/jetty/jetty-hightide-7.6.0/), it provides a variety of features to speed up and simplify your application development, including:
+If you're looking for a fast and lightweight Java web server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 7.6.0](http://dist.codehaus.org/jetty/jetty-hightide-7.6.0/), it provides a variety of features to speed up and simplify your application development, including:
 
 * Open source 
 * Commercially usable 
@@ -8,33 +8,23 @@ If you're looking for a fast and light Java WEB server / Servlet container for y
 * Enterprise scalable 
 * Integrated with Eclipse
 
-In this tutorial, we're going to take you through deploying Java WEB application with embedded Jetty server to [the cloudControl platform](http://www.cloudcontrol.com).
+In this tutorial we're going to show you how to deploy a Jetty application on [cloudControl](https://www.cloudcontrol.com/). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
 
 ##Prerequisites
-
-You're going to need only a few things to following along with this tutorial. These are:
-
- * A [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
- * A [Maven3](http://maven.apache.org/download.html)
- * A cloudControl client - `easy_install cctrl` or `pip install cctrl`
- * A cloudControl user account. You can creat it via [cloudControl web page](https://www.cloudcontrol.com/sign-up) or cloudControl client:
+ * cloudControl [user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
+ * [cloudControl command line client](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#command-line-client-web-console-and-api)
+ * [git](https://help.github.com/articles/set-up-git)
+ * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+ * [Maven3](http://maven.apache.org/download.html)
+  
+##Creating a Hello World application
  
-~~~
-$ cctrluser create [--name USERNAME] [--email EMAIL] [--password PWD]
-~~~
-	
-~~~
-$ cctrluser activate USERNAME ACTIVATION_CODE
-~~~
- 
-##Create your application structure using maven:
- 
-Execute:
+Create application using maven:
 
 ~~~ 
 mvn archetype:generate \
     -DarchetypeGroupId=org.apache.maven.archetypes \
-    -DgroupId=com.cloudcontrol.example \
+    -DgroupId=com.cloudcontrolled.java.jetty.example \
     -DartifactId=APP_NAME
 ~~~
 		
@@ -44,7 +34,19 @@ Accept all default options proposed by maven. This should create given project s
 $ cd PROJECTDIR ; rm -rf src/test
 ~~~
 
-![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/project.png)
+~~~
+PROJECTDIR
+├── pom.xml
+└── src
+    └── main
+        └── java
+            └── com
+                └── cloudcontrolled
+                    └── java
+                        └── jetty
+                            └── example
+                                └── App.java
+~~~
 		
 If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
 
@@ -54,7 +56,7 @@ cd PROJECTDIR ; mvn eclipse:eclipse
 
 This will create Eclipse project files. Right now you can proceed using Eclipse.
 		
-##Extend pom.xml with missing dependencies and build directive:
+###Extending pom.xml with missing dependencies and build directive:
 
 You have to specify maven dependencies to include Jetty server and Servlet library. Add build directive specifying [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
 
@@ -64,7 +66,7 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.cloudcontrol.example</groupId>
+	<groupId>com.cloudcontrolled.java.jetty.example</groupId>
 	<artifactId>APP_NAME</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<dependencies>
@@ -107,10 +109,10 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 </project>
 ~~~
 
-##Write your web application:
+###Write your web application:
 
 ~~~
-package com.cloudcontrol.example;
+package com.cloudcontrolled.java.jetty.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -121,157 +123,90 @@ import javax.servlet.http.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.*;
 
-/**
-* Java WEB application with embedded Jetty server
-*
-*/
+
 public class App extends HttpServlet
 {
 
-	private static final long serialVersionUID = -96650638989718048L;
+	private static final long serialVersionUID = -1;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-	{
-    	System.out.println("Request received from: "+req.getLocalAddr());
-    	resp.setContentType("text/html");
-    	PrintWriter out = resp.getWriter();
-    	out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-    	out.println("<HTML>");
-    	out.println(" <HEAD><TITLE>Java WEB/Jetty example</TITLE></HEAD>");
-    	out.println(" <BODY>");
-    	out.print("<center>");
-    	out.print(" This is Java WEB application with embedded Jetty server deployed in cloudControl platform");
-    	out.print("</center>");
-    	out.println(" </BODY>");
-    	out.println("</HTML>");
-    	out.flush();
-    	out.close();
-	}
-
-	public static void main(String[] args) throws Exception
-	{
-    	Server server = new Server(Integer.valueOf(System.getenv("PORT")));
-    	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-    	context.setContextPath("/");
-    	server.setHandler(context);
-    	context.addServlet(new ServletHolder(new App()),"/*");
-    	server.start();
-    	server.join();
-    	System.out.println("Application started");
-	}
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.print("Hello world");
+        out.flush();
+        out.close();
+    }
+	
+    public static void main(String[] args) throws Exception
+    {
+        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        context.addServlet(new ServletHolder(new App()),"/*");
+        server.start();
+        server.join();
+    }
 }
 ~~~
 	
-##Deploy application locally
-
-* **Build and package application with maven:**
-
-~~~
-$ cd PROJECTDIR ; mvn package
-~~~
-	
-* **Deploy it**
+###Defining the process type
+CloudControl uses a `Procfile` to know how to start your process. Create a file called Procfile:
 
 ~~~
-$ cd PROJECTDIR
-$ export PORT=8888
-$ java -cp target/classes:target/dependency/* com.cloudcontrol.example.App
+web:    java -cp target/classes:target/dependency/* com.cloudcontrolled.java.jetty.example.App
 ~~~
 	
-	You should see:
+###Initializing git repository
+Initialize a new git repository in the project directory and commit the files you have just created.
 
 ~~~
-2012-09-27 15:37:16.165:INFO:oejs.Server:jetty-7.6.0.v20120127
-2012-09-27 15:37:16.227:INFO:oejsh.ContextHandler:started o.e.j.s.ServletContextHandler{/,null}
-2012-09-27 15:37:16.251:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8888
+$ git init
+$ git add pom.xml Procfile src
+$ git commit -am "Initial commit"
 ~~~
-		
-* **Test it**
-
-	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/local_test.png)	
 	
-##Deploy application to cloudControl
-
-* **Create application:**
+##Pushing and deploying your app
+Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
 ~~~
 $ cctrlapp APP_NAME create java
 ~~~
 
-* **Create a file called 'Procfile' in the project dir with the following contents to specify the start command:**
-
-~~~
-web:    java -cp target/classes:target/dependency/* com.cloudcontrol.example.App
-~~~
-
-* **Init git repository:**
-
-~~~
-$ cd PROJECTDIR ; git init ; git add pom.xml Procfile src/ ; git commit -am "MSG"
-~~~
-
-* **Push code to cloudControl:**
+Push your code to the application's repository:
 
 ~~~
 $ cctrlapp APP_NAME/default push
+
+-----> Receiving push
+-----> Installing OpenJDK 1.6...done
+-----> Installing settings.xml... done
+-----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
+       [INFO] Scanning for projects...
+       [INFO]                                                                         
+       [INFO] ------------------------------------------------------------------------
+       [INFO] Building APP_NAME 1.0-SNAPSHOT
+       [INFO] ------------------------------------------------------------------------
+       ...
+       [INFO] ------------------------------------------------------------------------
+       [INFO] BUILD SUCCESS
+       [INFO] ------------------------------------------------------------------------
+       [INFO] Total time: 5:57.950s
+       [INFO] Finished at: Fri Jan 11 14:09:05 UTC 2013
+       [INFO] Final Memory: 10M/56M
+-----> Building image
+-----> Uploading image (39M)
+       
+To ssh://APP_NAME@cloudcontrolled.com/repository.git
+   54b0da2..d247825  master -> master
 ~~~
 
-* **Deploy application:**
+Deploy your app:
 
 ~~~
-$ cctrlapp APP_NAME/default deploy
+$ cctrlapp APP_NAME/default deploy 
 ~~~
 
-* **Check deployment details (it can take a few seconds to change status to "deployed"):**
-
-~~~
-$ cctrlapp APP_NAME/default details
-Deployment
-	name: APP_NAME/default
-	stack: pinky
-	branch: ssh://APP_NAME@cloudcontrolled.com/repository.git
-	private files: sftp://DEP_ID@cloudcontrolled.com/
-	last modified: 2012-09-27 11:27:38
-	current version: ddb81c1c510d9c845492d2322a6bdc1cfaba4bdc
-	current state: deployed
-	min boxes: 1
-	max boxes: 1
-~~~
-  
-* **Test it:**
-
-	![[image]](https://raw.github.com/mkorszun/documentation/master/Guides/Java/images/test.png)
-
-
-##Monitor your application
-
-* **Deploy logs:**
-
-~~~
-$ cctrlapp APP_NAME/default log deploy
-[Thu Sep 27 12:10:23 2012] lxc-dev-136 INFO Deploying ...
-[Thu Sep 27 12:10:35 2012] lxc-dev-136 INFO Deployed version: f2b73a2d941a67ad5a2e2a400b9b88cc665caf6f
-[Thu Sep 27 12:10:36 2012] ip-10-53-143-27 INFO Routing requests to new version
-[Thu Sep 27 12:10:38 2012] ip-10-234-178-109 INFO Routing requests to new version
-~~~
-		
-* **Access logs:**
-
-~~~
-$ cctrlapp APP_NAME/default log access
-178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APP_NAME.cloudcontrolled.com/ HTTP/1.1" 200 39 "" "Mozilla/5.0 		(Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
-178.19.208.122 - - [27/Sep/2012:12:11:37 +0000] "GET http://APP_NAME.cloudcontrolled.com/favicon.ico HTTP/1.1" 200 39 ""		"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"
-~~~
-
-* **Error / Application logs:**
-
-~~~
-$ cctrlapp APP_NAME/default log error
-[Thu Sep 27 12:10:37 2012] info 2012-09-27 12:10:37.914:INFO:oejs.Server:jetty-7.6.0.v20120127
-[Thu Sep 27 12:10:38 2012] info 2012-09-27 12:10:38.066:INFO:oejsh.ContextHandler:started o.e.j.s.ServletContextHandler{/,null}
-[Thu Sep 27 12:10:38 2012] info 2012-09-27 12:10:38.127:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:29492
-[Thu Sep 27 12:11:37 2012] info Request received from: 10.238.105.194
-[Thu Sep 27 12:11:37 2012] info Request received from: 10.238.105.194	
-~~~
- 
+**Congratulations, you should now be able to reach your application at http://APP_NAME.cloudcontrolled.com.**
