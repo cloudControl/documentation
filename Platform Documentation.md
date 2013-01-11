@@ -443,8 +443,30 @@ The deploy log gives detailed information on the deploy process. With it you can
 
 ### Customizing logging
 
-Some Add-ons in the [Big Data & Analytics](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Big%20Data%20&%20Analytics/DBInsights) category as well as the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) can be used to forward error and worker logs to external logging services.
+Some Add-ons in the [Deployment category](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment) as well as the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) can be used to forward error and worker logs to the external logging services.
 
+#### Adding custom syslog logging with Custom Config Add-on
+
+The Custom Config Add-on can be used to specify an additional endpoint where error and worker logs will be sent.
+This is done by setting the config variable "RSYSLOG_REMOTE". The content should contain valid [rsyslog](http://www.rsyslog.com/) configuration and can span multiple lines.
+
+E.g. to forward the logs to [Logentries](https://logentries.com/) over a [TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security) connection, create a temporary file with the following content:
+~~~
+$DefaultNetstreamDriverCAFile /app/LOGENTRIES_CERTIFICATE_PATH
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$ActionSendStreamDriverAuthMode x509/name
+$template LogentriesFormat, "LOGENTRIES_TOKEN %syslogtag%%msg%\n"
+*.* @@api.logentries.com:20000;LogentriesFormat
+~~~
+where "LOGENTRIES_TOKEN" should be replaced with the actual token and "LOGENTRIES_CERTIFICATE_PATH" should be the path to a logentries certificate file in you repository.
+
+Use that file's name (let's say it's named `logentries.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --RSYSLOG_REMOTE=logentries.cfg
+~~~
+
+From now on all new logs should be visible in logentries.
 
 ## Provided Subdomains and Custom Domains
 
