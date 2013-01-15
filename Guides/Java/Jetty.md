@@ -24,28 +24,30 @@ Create application using maven:
 ~~~ 
 mvn archetype:generate \
     -DarchetypeGroupId=org.apache.maven.archetypes \
-    -DgroupId=com.cloudcontrolled.java.jetty.example \
+    -DgroupId=com.cloudcontrolled.sample.jetty \
     -DartifactId=APP_NAME
 ~~~
 		
-Accept all default options proposed by maven. This should create given project structure. Get rid of test directories since we will not use them: 
-
-~~~
-$ cd PROJECTDIR ; rm -rf src/test
-~~~
+Accept all default options proposed by maven. This should create given project structure:
 
 ~~~
 PROJECTDIR
 ├── pom.xml
 └── src
-    └── main
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── cloudcontrolled
+    │               └── sample
+    │                   └── jetty
+    │                       └── App.java
+    └── test
         └── java
             └── com
                 └── cloudcontrolled
-                    └── java
+                    └── sample
                         └── jetty
-                            └── example
-                                └── App.java
+                            └── AppTest.java
 ~~~
 		
 If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
@@ -66,7 +68,7 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.cloudcontrolled.java.jetty.example</groupId>
+	<groupId>com.cloudcontrolled.sample.jetty</groupId>
 	<artifactId>APP_NAME</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<dependencies>
@@ -79,6 +81,12 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
         	<groupId>javax.servlet</groupId>
         	<artifactId>servlet-api</artifactId>
         	<version>2.5</version>
+    	</dependency>
+    	<dependency>
+      		<groupId>junit</groupId>
+      		<artifactId>junit</artifactId>
+      		<version>3.8.1</version>
+      		<scope>test</scope>
     	</dependency>
 	</dependencies>
 	<build>
@@ -112,7 +120,7 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 ###Write your web application:
 
 ~~~
-package com.cloudcontrolled.java.jetty.example;
+package com.cloudcontrolled.sample.jetty;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -156,7 +164,7 @@ public class App extends HttpServlet
 CloudControl uses a `Procfile` to know how to start your process. Create a file called Procfile:
 
 ~~~
-web:    java -cp target/classes:target/dependency/* com.cloudcontrolled.java.jetty.example.App
+web:    java -cp target/classes:target/dependency/* com.cloudcontrolled.sample.jetty.App
 ~~~
 	
 ###Initializing git repository
