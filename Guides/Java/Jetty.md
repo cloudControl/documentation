@@ -8,10 +8,10 @@ If you're looking for a fast and lightweight Java web server / Servlet container
 * Enterprise scalable 
 * Integrated with Eclipse
 
-In this tutorial we're going to show you how to deploy a Jetty application on [cloudControl](https://www.cloudcontrol.com/). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
+In this tutorial we're going to show you how to deploy a Jetty application on [cloudControl](https://www.cloudcontrol.com/). You can find the [source code on Github](https://github.com/cloudControl/java-jetty-example-app). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
 
 ##Prerequisites
- * cloudControl [user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
+ * [cloudControl user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
  * [cloudControl command line client](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#command-line-client-web-console-and-api)
  * [git](https://help.github.com/articles/set-up-git)
  * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
@@ -21,7 +21,7 @@ In this tutorial we're going to show you how to deploy a Jetty application on [c
  
 Create application using maven:
 
-~~~ 
+~~~bash
 mvn archetype:generate \
     -DarchetypeGroupId=org.apache.maven.archetypes \
     -DgroupId=com.cloudcontrolled.sample.jetty \
@@ -30,7 +30,7 @@ mvn archetype:generate \
 		
 Accept all default options proposed by maven. This should create given project structure:
 
-~~~
+~~~bash
 PROJECTDIR
 ├── pom.xml
 └── src
@@ -49,20 +49,12 @@ PROJECTDIR
                         └── jetty
                             └── AppTest.java
 ~~~
-		
-If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
+				
+###Extending pom.xml with missing dependencies and build plugins:
 
-~~~
-cd PROJECTDIR ; mvn eclipse:eclipse
-~~~
+You have to specify maven dependencies to include Jetty server and Servlet library. Add build plugins: [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
 
-This will create Eclipse project files. Right now you can proceed using Eclipse.
-		
-###Extending pom.xml with missing dependencies and build directive:
-
-You have to specify maven dependencies to include Jetty server and Servlet library. Add build directive specifying [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
-
-~~~
+~~~xml
 <project 
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -119,7 +111,7 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 
 ###Write your web application:
 
-~~~
+~~~java
 package com.cloudcontrolled.sample.jetty;
 
 import java.io.IOException;
@@ -179,13 +171,13 @@ $ git commit -am "Initial commit"
 ##Pushing and deploying your app
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default push
 
 -----> Receiving push
@@ -213,7 +205,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Deploy your app:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default deploy 
 ~~~
 
