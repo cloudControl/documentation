@@ -2,10 +2,10 @@
 
 Google Web Toolkit (GWT) is a development toolkit for building and optimizing complex browser-based applications. GWT is used by many products at Google, including Google AdWords and Orkut. It's open source, completely free, and used by thousands of developers around the world.
 
-In this tutorial we're going to show you how to create example GWT application, deploy it on embedded Jetty server and run on [cloudControl](https://www.cloudcontrol.com/). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
+In this tutorial we're going to show you how to create example GWT application, deploy it on embedded Jetty server and run on [cloudControl](https://www.cloudcontrol.com/). You can find the [source code on Github](https://github.com/cloudControl/java-gwt-example-app). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
 
 ##Prerequisites
- * cloudControl [user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
+ * [cloudControl user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
  * [cloudControl command line client](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#command-line-client-web-console-and-api)
  * [git](https://help.github.com/articles/set-up-git)
  * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
@@ -16,11 +16,11 @@ In this tutorial we're going to show you how to create example GWT application, 
  
 Use `webAppCreator` provided with GWT SDK to create example application:
 
-~~~ 
+~~~ bash
 webAppCreator -maven -noant -out java-gwt-example-app com.cloudcontrolled.sample.gwt.GreetingEntry
 ~~~
 		
-~~~
+~~~bash
 PROJECTDIR
 ├── pom.xml
 └── src
@@ -60,7 +60,7 @@ PROJECTDIR
 
 For a fast and easy way to run your app, without having to install and administer a Jetty server, use the [Jetty Runner](http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner) - add to build plugins:
 
-~~~
+~~~xml
 ...
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -103,7 +103,7 @@ web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target
 ###Initializing git repository
 Initialize a new git repository in the project directory and commit the files you have just created.
 
-~~~
+~~~bash
 $ git init
 $ git add pom.xml Procfile src
 $ git commit -am "Initial commit"
@@ -112,13 +112,13 @@ $ git commit -am "Initial commit"
 ##Pushing and deploying your app
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default push
 
 -----> Receiving push
@@ -156,7 +156,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Deploy your app:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default deploy 
 ~~~
 
