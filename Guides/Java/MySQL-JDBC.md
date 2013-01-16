@@ -1,6 +1,6 @@
 #Deploying a Java application with MySQLs addon
 
-In this tutorial we're going to show you how to deploy a web application (run on embedded Jetty) integrated with MySQL via JDBC on [cloudControl](https://www.cloudcontrol.com/). MySQL database instance will be provided via [MySQLs Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
+In this tutorial we're going to show you how to deploy a web application (run on embedded Jetty) integrated with MySQL via JDBC on [cloudControl](https://www.cloudcontrol.com/). MySQL database instance will be provided via [MySQLs Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). You can find the [source code on Github](https://github.com/cloudControl/java-mysql-example-app). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
 
 ##Prerequisites
  * [cloudControl user account with billing](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
@@ -13,7 +13,7 @@ In this tutorial we're going to show you how to deploy a web application (run on
  
 Create application using maven:
 
-~~~ 
+~~~bash
 mvn archetype:generate \
     -DarchetypeGroupId=org.apache.maven.archetypes \
     -DgroupId=com.cloudcontrolled.sample.mysql \
@@ -22,7 +22,7 @@ mvn archetype:generate \
 		
 Accept all default options proposed by maven. This should create given project structure:
 
-~~~
+~~~bash
 PROJECTDIR
 ├── pom.xml
 └── src
@@ -44,7 +44,7 @@ PROJECTDIR
 		
 If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
 
-~~~
+~~~bash
 cd PROJECTDIR ; mvn eclipse:eclipse
 ~~~
 
@@ -54,7 +54,7 @@ This will create Eclipse project files. Right now you can proceed using Eclipse.
 
 You have to specify maven dependencies to include Jetty server, Servlet library and JDBC MySQL driver. Add build plugins: [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
 
-~~~
+~~~xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -117,7 +117,7 @@ You have to specify maven dependencies to include Jetty server, Servlet library 
 
 The application will provide HTTP API to write and read message from database. MySQL database credentials are provided by MySQLs Add-on and are accessible via environment variables:
 
-~~~
+~~~java
 package com.cloudcontrolled.sample.mysql;
 
 import java.io.IOException;
@@ -220,7 +220,7 @@ web:    java -cp target/classes:target/dependency/* com.cloudcontrolled.sample.m
 ###Initializing git repository
 Initialize a new git repository in the project directory and commit the files you have just created.
 
-~~~
+~~~bash
 $ git init
 $ git add pom.xml Procfile src
 $ git commit -am "Initial commit"
@@ -229,13 +229,13 @@ $ git commit -am "Initial commit"
 ##Pushing, creating MySQL addon and deploying your app
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default push
 
 -----> Receiving push
@@ -264,19 +264,19 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Create MySQLs addon:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default addon.add mysqls.PLAN
 ~~~
 
 Deploy your app:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/default deploy 
 ~~~
 
 **Congratulations, you can now test your application:**
 
-~~~
+~~~bash
 $ curl APP_NAME.cloudcontrolled.com/read
 Sorry, no message for you!!!
 
