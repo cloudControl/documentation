@@ -11,32 +11,15 @@ Currently the SSL add-on is not fully automated but needs manual approval by one
 Please follow the following simple steps to add SSL support to your deployment.
 
  1. Acquire a signed certificate from your certificate authority of trust.
- 1. Ensure the key is not protected by a passphrase.
- 1. Upload the certificate-, key- and certificate-chain files.
- 
- To securely upload the files we provide SFTP access to a private directory for every deployment. Use the deployment details command to get the SFTP URL.
- 
+ 2. Ensure the key is not protected by a passphrase.
+ 3. Add the SSL addon providing the certificate, the private key and certificate-chain files.
+
+### Adding the SSL addon
+
+To add the SSL addon simply provide the aforementioned files using the respective parameters of the addon.add command.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME details
- [...]
- private files: sftp://DEP_ID@cloudcontrolled.com/
- [...]
+ $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert CERT_FILE --key KEY_FILE --chain CHAIN_FILE
  ~~~
- 
- Use any SFTP compatible client to upload the files to the /private directory. It expects the same SSH key that is used for pushing for authentication. The private directory is only accessible via SFTP. Even the deployment itself can not access this directory.
- 
- ~~~
- $ sftp DEP_ID@cloudcontrolled.com
- Connected to cloudcontrolled.com.
- sftp> cd /private
- sftp> put CERT_FILE
- sftp> put KEY_FILE
- sftp> put CHAIN_FILE
- ~~~
- 
- 1. Send an e-mail to [support@cloudcontrol.de] to request activation.
- 
- Please provide the common APP_NAME/DEP_NAME string as part of your e-mail.
 
 ## HTTPS Redirects
 
@@ -73,4 +56,3 @@ For PHP you can either redirect via Apache's mod_rewrite using a `.htaccess` fil
 
 ?>
 ~~~
-
