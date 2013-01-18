@@ -11,15 +11,15 @@ In this tutorial we're going to show you how to create example GWT application, 
  * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
  * [GWT SDK](https://developers.google.com/web-toolkit/download)
  * [Maven3](http://maven.apache.org/download.html)
-  
+
 ##Creating a sample application
- 
+
 Use `webAppCreator` provided with GWT SDK to create example application:
 
-~~~ bash
+~~~bash
 webAppCreator -maven -noant -out java-gwt-example-app com.cloudcontrolled.sample.gwt.GreetingEntry
 ~~~
-		
+
 ~~~bash
 PROJECTDIR
 ├── pom.xml
@@ -55,7 +55,7 @@ PROJECTDIR
                             └── client
                                 └── GreetingEntryTest.java
 ~~~
-				
+
 ###Extending pom.xml:
 
 For a fast and easy way to run your app, without having to install and administer a Jetty server, use the [Jetty Runner](http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner) - add to build plugins:
@@ -92,14 +92,14 @@ For a fast and easy way to run your app, without having to install and administe
 </plugin>
 ...
 ~~~
-	
+
 ###Defining the process type
 CloudControl uses a `Procfile` to know how to start your process. Create a file called Procfile:
 
 ~~~
 web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/*.war
 ~~~
-	
+
 ###Initializing git repository
 Initialize a new git repository in the project directory and commit the files you have just created.
 
@@ -108,7 +108,7 @@ $ git init
 $ git add pom.xml Procfile src
 $ git commit -am "Initial commit"
 ~~~
-	
+
 ##Pushing and deploying your app
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
@@ -126,7 +126,7 @@ $ cctrlapp APP_NAME/default push
 -----> Installing settings.xml... done
 -----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
        [INFO] Scanning for projects...
-       [INFO]                                                                         
+       [INFO]
        [INFO] ------------------------------------------------------------------------
        [INFO] Building APP_NAME 1.0-SNAPSHOT
        [INFO] ------------------------------------------------------------------------
@@ -138,7 +138,7 @@ $ cctrlapp APP_NAME/default push
        [INFO] Webapp assembled in [938 msecs]
        [INFO] Building war: /srv/tmp/builddir/target/example-1.0-SNAPSHOT.war
        [INFO] WEB-INF/web.xml already added, skipping
-       [INFO] 
+       [INFO]
        ...
        [INFO] ------------------------------------------------------------------------
        [INFO] BUILD SUCCESS
@@ -149,7 +149,7 @@ $ cctrlapp APP_NAME/default push
        [INFO] ------------------------------------------------------------------------
 -----> Building image
 -----> Uploading image (66M)
-       
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
@@ -157,7 +157,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 Deploy your app:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy 
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 **Congratulations, you should now be able to reach your application at http://APP_NAME.cloudcontrolled.com.**

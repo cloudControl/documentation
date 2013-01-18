@@ -16,11 +16,11 @@ In this case we'll use [json-simple](http://code.google.com/p/json-simple/), a s
 
 ~~~xml
 <dependencies>
-	<dependency>
-   		<groupId>com.googlecode.json-simple</groupId>
-    	<artifactId>json-simple</artifactId>
+    <dependency>
+        <groupId>com.googlecode.json-simple</groupId>
+        <artifactId>json-simple</artifactId>
         <version>1.1</version>
-	</dependency>
+    </dependency>
 </dependencies>
 ~~~
 

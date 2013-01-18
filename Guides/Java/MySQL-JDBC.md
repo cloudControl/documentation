@@ -8,9 +8,9 @@ In this tutorial we're going to show you how to deploy a web application (run on
  * [git](https://help.github.com/articles/set-up-git)
  * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
  * [Maven3](http://maven.apache.org/download.html)
-  
+
 ##Creating an application:
- 
+
 Create application using maven:
 
 ~~~bash
@@ -19,7 +19,7 @@ mvn archetype:generate \
     -DgroupId=com.cloudcontrolled.sample.mysql \
     -DartifactId=APP_NAME
 ~~~
-		
+
 Accept all default options proposed by maven. This should create given project structure:
 
 ~~~bash
@@ -41,15 +41,15 @@ PROJECTDIR
                         └── mysql
                             └── AppTest.java
 ~~~
-		
-If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute: 
+
+If you want to develop given example in [Eclipse IDE](http://www.eclipse.org/downloads/) just execute:
 
 ~~~bash
 cd PROJECTDIR ; mvn eclipse:eclipse
 ~~~
 
 This will create Eclipse project files. Right now you can proceed using Eclipse.
-		
+
 ###Extending pom.xml with missing dependencies and build plugins:
 
 You have to specify maven dependencies to include Jetty server, Servlet library and JDBC MySQL driver. Add build plugins: [maven dependency plugin](http://maven.apache.org/plugins/maven-dependency-plugin/) and [maven compiler plugin](http://maven.apache.org/plugins/maven-compiler-plugin/).
@@ -107,7 +107,7 @@ You have to specify maven dependencies to include Jetty server, Servlet library 
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>        
+            </plugin>
         </plugins>
     </build>
 </project>
@@ -209,14 +209,14 @@ public class App {
     }
 }
 ~~~
-	
+
 ###Defining the process type
 CloudControl uses a `Procfile` to know how to start your process. Create a file called Procfile:
 
 ~~~
 web:    java -cp target/classes:target/dependency/* com.cloudcontrolled.sample.mysql.App
 ~~~
-	
+
 ###Initializing git repository
 Initialize a new git repository in the project directory and commit the files you have just created.
 
@@ -225,7 +225,7 @@ $ git init
 $ git add pom.xml Procfile src
 $ git commit -am "Initial commit"
 ~~~
-	
+
 ##Pushing, creating MySQL addon and deploying your app
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
@@ -243,7 +243,7 @@ $ cctrlapp APP_NAME/default push
 -----> Installing settings.xml... done
 -----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
        [INFO] Scanning for projects...
-       [INFO]                                                                         
+       [INFO]
        [INFO] ------------------------------------------------------------------------
        [INFO] Building APP_NAME 1.0-SNAPSHOT
        [INFO] ------------------------------------------------------------------------
@@ -257,7 +257,7 @@ $ cctrlapp APP_NAME/default push
        [INFO] ------------------------------------------------------------------------
 -----> Building image
 -----> Uploading image (40M)
-       
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
    bd556b1..d7b04b5  master -> master
 ~~~
@@ -271,7 +271,7 @@ $ cctrlapp APP_NAME/default addon.add mysqls.PLAN
 Deploy your app:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy 
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 **Congratulations, you can now test your application:**
