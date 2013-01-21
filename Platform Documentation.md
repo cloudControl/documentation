@@ -450,23 +450,23 @@ Some Add-ons in the [Deployment category](https://www.cloudcontrol.com/dev-cente
 The Custom Config Add-on can be used to specify an additional endpoint where error and worker logs will be sent.
 This is done by setting the config variable "RSYSLOG_REMOTE". The content should contain valid [rsyslog](http://www.rsyslog.com/) configuration and can span multiple lines.
 
-E.g. to forward the logs to [Logentries](https://logentries.com/) over a [TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security) connection, create a temporary file with the following content:
+E.g. to forward the logs to custom syslog remote over a [TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security) connection, create a temporary file with the following content:
 ~~~
-$DefaultNetstreamDriverCAFile /app/LOGENTRIES_CERTIFICATE_PATH
+$DefaultNetstreamDriverCAFile /app/CUSTOM_CERTIFICATE_PATH
 $ActionSendStreamDriver gtls
 $ActionSendStreamDriverMode 1
 $ActionSendStreamDriverAuthMode x509/name
-$template LogentriesFormat, "LOGENTRIES_TOKEN %syslogtag%%msg%\n"
-*.* @@api.logentries.com:20000;LogentriesFormat
+$template CustomFormat, "%syslogtag%%msg%\n"
+*.* @@SERVER_ADDRESS:PORT;CustomFormat
 ~~~
-where "LOGENTRIES_TOKEN" should be replaced with the actual token and "LOGENTRIES_CERTIFICATE_PATH" should be the path to a logentries certificate file in you repository.
+where "SERVER_ADDRESS" and "PORT" should be replaced with the concrete values and "CUSTOM_CERTIFICATE_PATH" should be the path to a certificate file for the custom syslog remote in you repository.
 
-Use that file's name (let's say it's named `logentries.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
+Use that file's name (let's say it's named `custom_remote.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --RSYSLOG_REMOTE=logentries.cfg
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --RSYSLOG_REMOTE=custom_remote.cfg
 ~~~
 
-From now on all new logs should be visible in logentries.
+From now on all the new logs should be visible in your custom syslog remote.
 
 ## Provided Subdomains and Custom Domains
 
