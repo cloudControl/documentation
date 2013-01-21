@@ -18,7 +18,7 @@ Please follow the following simple steps to add SSL support to your deployment.
 
 To add the SSL addon simply provide the aforementioned files using the respective parameters of the addon.add command.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert CERT_FILE --key KEY_FILE --chain CHAIN_FILE
+ $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
  ~~~
 
 In order to check the status of the addon you can do the following.
