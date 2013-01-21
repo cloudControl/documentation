@@ -44,6 +44,22 @@ Config parameters are accepted in three formats and result in the respective JSO
 </tbody>
 </table>
 
+### Setting the content from a file
+
+For the value a filename can be used. In that case the whole content of the file
+is read and assigned to specified config variable.
+
+Let's say there exists a file `test.txt` with the following content:
+~~~
+This is a test file
+with multiple lines.
+~~~
+
+To add the file's content to a variable SOME_VAR, run the following command:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SOME_VAR=test.txt
+~~~
+
 
 ## Listing Config Parameters
 
@@ -66,4 +82,3 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove config.free
 ~~~
 
 This will remove all custom config values.
-
