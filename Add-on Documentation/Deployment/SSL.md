@@ -21,7 +21,14 @@ To add the SSL addon simply provide the aforementioned files using the respectiv
  $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert CERT_FILE --key KEY_FILE --chain CHAIN_FILE
  ~~~
 
+In order to check the status of the addon you can do the following.
+ ~~~
+ $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
+ ~~~
+
+
 ## HTTPS Redirects
+
 
 HTTPS termination is done at the routing tier. Requests are then routed via HTTP to one of your app's clones. To determine if a request was made via HTTPS originally the routing tier sets the `X-FORWARDED-PROTO` header to `https`. The header is only set for requests that arrived via HTTPS at the routing tier. This allows you to redirect accordingly.
 
