@@ -28,6 +28,15 @@ In order to check the status of the addon you can do the following.
  $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
  ~~~
 
+When the SSL certificate is expired, you can update it by removing the addon and re-adding it providing the updated certificate. The SSL service is provided for 23 minutes after removing the addon so that it can be updated in the meantime without interrupting the service. To achieve that you have to run the following commands.
+
+ ~~~
+ $ cctrlapp APP_NAME/DEP_NAME addon.remove ssl.host
+ $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+ ~~~
+
+ Note: You need provide the original key and chain again when updating the addon even if those are not changed.
+
 ## HTTPS Redirects
 
 HTTPS termination is done at the routing tier. Requests are then routed via HTTP to one of your app's clones. To determine if a request was made via HTTPS originally the routing tier sets the `X-FORWARDED-PROTO` header to `https`. The header is only set for requests that arrived via HTTPS at the routing tier. This allows you to redirect accordingly.
