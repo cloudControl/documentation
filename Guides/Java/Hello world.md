@@ -1,4 +1,4 @@
-#Deploying a Jetty application
+#Deploying a Java/Jetty application
 
 If you're looking for a fast and lightweight Java web server / Servlet container for your projects, you definitely have to try [Jetty](http://jetty.codehaus.org/jetty/). Now at [version 7.6.0](http://dist.codehaus.org/jetty/jetty-hightide-7.6.0/), it provides a variety of features to speed up and simplify your application development, including:
 
