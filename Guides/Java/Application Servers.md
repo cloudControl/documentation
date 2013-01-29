@@ -1,6 +1,6 @@
 #Deploying Spring/JSP application on embedded Jetty/Tomcat/Glassfish application server
 
-In this tutorial we're going to show you how to deploy Spring/JSP hello world application on embedded Jetty/Tomcat/Glassfish/JBoss application server and run it on [cloudControl](https://www.cloudcontrol.com/). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
+In this tutorial we're going to show you how to deploy Spring/JSP hello world application on embedded Jetty/Tomcat/Glassfish application server and run it on [cloudControl](https://www.cloudcontrol.com/). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
 
 ##Prerequisites
  * [cloudControl user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
@@ -298,7 +298,7 @@ Web container configuration - `web.xml`:
 
 #### Jetty specific
 
-Extend build plugins - provide Jetty runner:
+Extend build plugins in `pom.xml` - provide Jetty runner:
 
 ~~~xml
 <plugin>
@@ -328,7 +328,7 @@ Extend build plugins - provide Jetty runner:
 
 #### Tomcat specific:
 
-Extend build plugins - provide Tomcat runner:
+Extend build plugins in `pom.xml` - provide Tomcat runner:
 
 ~~~xml
 <plugin>
@@ -358,7 +358,7 @@ Extend build plugins - provide Tomcat runner:
 
 #### Glassfish specific:
 
-Extend dependencies - provide embedded Glassfish artifact:
+Extend dependencies in `pom.xml` - provide embedded Glassfish artifact:
 
 ~~~xml
 <dependency>
@@ -396,7 +396,8 @@ public class GlassfishRunner {
      * Embedded Glassfish runner
      *
      * @param args
-     *            - path to *.war archive to be deployed
+     *            - args[0] path to *.war archive to be deployed
+     *            - args[1] optional context root
      * @throws LifecycleException
      * @throws IOException
      */
