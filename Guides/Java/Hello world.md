@@ -112,8 +112,6 @@ You have to specify maven dependencies to include Jetty server and Servlet libra
 ###Write your web application:
 
 ~~~java
-package com.cloudcontrolled.sample.jetty;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -126,14 +124,15 @@ import org.eclipse.jetty.servlet.*;
 
 public class App extends HttpServlet
 {
+    private static final long serialVersionUID = -1;
+    private static final String CSS = "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://raw.github.com/sfriesel/cloudcontrol-documentation/css/Guides/helloworld.css\" media=\"screen\" />";
 
-  private static final long serialVersionUID = -1;
-
-  @Override
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
+        out.print(CSS);
         out.print("Hello world");
         out.flush();
         out.close();
@@ -145,7 +144,7 @@ public class App extends HttpServlet
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         server.setHandler(context);
-        context.addServlet(new ServletHolder(new App()),"/*");
+        context.addServlet(new ServletHolder(new App()),"/");
         server.start();
         server.join();
     }
