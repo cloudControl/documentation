@@ -11,9 +11,16 @@ In this tutorial we're going to show you how to deploy Spring/JSP hello world ap
 
 ##Creating a Hello World application
 
-Create application structure:
+Clone initial [Spring/JSP application](https://github.com/cloudControl/java-spring-jsp-example-app):
 
 ~~~bash
+git clone git@github.com:cloudControl/java-spring-jsp-example-app.git
+~~~
+
+You should have below project structure:
+
+~~~bash
+├── README.md
 ├── pom.xml
 └── src
     └── main
@@ -32,268 +39,6 @@ Create application structure:
                 ├── log4j.xml
                 ├── springSample-servlet.xml
                 └── web.xml
-~~~
-
-###Define pom.xml specifying Spring framework dependencies as well a build plugins:
-
-~~~xml
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.cloudcontrolled.sample.spring</groupId>
-	<artifactId>java-spring-jsp-example-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<properties>
-		<org.springframework.version>3.2.0.RELEASE</org.springframework.version>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-	<repositories>
-		<repository>
-			<id>com.springsource.repository.bundles.release</id>
-			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
-			<url>http://repository.springsource.com/maven/bundles/release</url>
-		</repository>
-		<repository>
-			<id>repository.codehaus.org</id>
-			<name>http://repository.codehaus.org/</name>
-			<url>http://repository.codehaus.org/</url>
-		</repository>
-		<repository>
-			<id>maven.atlassian.com</id>
-			<name>Atlassin</name>
-			<url>http://maven.atlassian.com/repository/public/</url>
-		</repository>
-		<repository>
-			<id>newrelic</id>
-			<name>newrelic</name>
-			<url>http://download.newrelic.com/</url>
-		</repository>
-	</repositories>
-	<dependencies>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j13</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-	</dependencies>
-</project>
-~~~
-
-###Write your web application:
-
-Resource controller - `IndexController.java`:
-
-~~~java
-package com.cloudcontrolled.sample.spring.web;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-@Controller
-public class IndexController {
-
-	@RequestMapping("/")
-	public String index() {
-		return "index";
-	}
-}
-~~~
-
-JSP page - `index.jsp`:
-
-~~~jsp
-<%@ page session="false"%>
-<html>
-<head><title>Spring Java Example</title></head>
-<body>
-Hello World!
-</body>
-</html>
-~~~
-
-Application context - `applicationContext.xml`:
-
-~~~xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
-	<context:component-scan base-package="com.cloudcontrolled.sample.spring.*">
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
-
-</beans>
-~~~
-
-Log4j configuration - `log4j.xml`:
-
-~~~xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p] %C{1}#%M():%L %m%n" />
-		</layout>
-	</appender>
-
-	<root>
-		<priority value="INFO" />
-		<appender-ref ref="console" />
-	</root>
-
-</log4j:configuration>
-~~~
-
-JSP servlet configuration - `springSample-servlet.xml`:
-
-~~~xml
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
-	<context:component-scan base-package="com.cloudcontrolled.sample.spring.*">
-		<context:include-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
-	<context:annotation-config />
-
-	<mvc:annotation-driven />
-
-	<bean id="jspViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="1" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-		<property name="exposeContextBeansAsAttributes" value="true" />
-		<property name="alwaysInclude" value="true" />
-	</bean>
-</beans>
-~~~
-
-Web container configuration - `web.xml`:
-
-~~~xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-	version="2.4">
-
-	<display-name>CloudControl Spring Sample</display-name>
-
-	<context-param>
-		<param-name>log4jConfigLocation</param-name>
-		<param-value>WEB-INF/log4j.xml</param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/applicationContext.xml</param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<servlet>
-		<servlet-name>springSample</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>springSample</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-</web-app>
 ~~~
 
 #### Jetty specific
@@ -434,19 +179,19 @@ public class GlassfishRunner {
 ####Jetty:
 
 ~~~
-web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/java-spring-jsp-example-app-0.0.1-SNAPSHOT.war
+web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/sample-spring-0.0.1-SNAPSHOT.war
 ~~~
 
 ####Tomcat:
 
 ~~~
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/java-spring-jsp-example-app-0.0.1-SNAPSHOT
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/sample-spring-0.0.1-SNAPSHOT
 ~~~
 
 ####Glassfish:
 
 ~~~
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.cloudcontrolled.sample.spring.GlassfishRunner target/java-spring-jsp-example-app-0.0.1-SNAPSHOT.war
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.cloudcontrolled.sample.spring.GlassfishRunner target/sample-spring-0.0.1-SNAPSHOT.war
 ~~~
 
 ###Initializing git repository
@@ -475,4 +220,4 @@ $ cctrlapp APP_NAME/default deploy --max=4
 
 **Congratulations, you should now be able to reach your application at http://APP_NAME.cloudcontrolled.com.**
 
-You can find the source code on Github: [Jetty](https://github.com/cloudControl/java-spring-jsp-example-app), [Tomcat](https://github.com/cloudControl/java-spring-jsp-example-app/tree/tomcat) and [Glassfish](https://github.com/cloudControl/java-spring-jsp-example-app/tree/glassfish).
+You can find the source code on Github: [Jetty](https://github.com/cloudControl/java-spring-jsp-example-app/tree/jetty_guide), [Tomcat](https://github.com/cloudControl/java-spring-jsp-example-app/tree/tomcat_guide) and [Glassfish](https://github.com/cloudControl/java-spring-jsp-example-app/tree/glassfish_guide).
