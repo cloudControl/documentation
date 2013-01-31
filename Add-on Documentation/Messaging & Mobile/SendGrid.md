@@ -34,7 +34,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION
 $ cctrlapp APP_NAME/DEP_NAME addon.remove sendgrid.OPTION
 ~~~
 
-For additional information please visit the SendGrid documentation.
+Once you added a SendGrid plan, you need to login once at http://sendgrid.com with your Add-on credentials (see below) and complete their setup wizard to activate your account. For additional information please visit the SendGrid documentation.
 
 # Add-on credentials
 
