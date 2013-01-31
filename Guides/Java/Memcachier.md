@@ -1,7 +1,7 @@
 #Memcachier
 
 In this short tutorial we will show you have to easily integrate Java application with
-[Memcachier add-on](https://www.cloudcontrol.com/add-ons/memcachier), which manages and scales clusters of [Memcached](http://memcached.org/) servers.
+[Memcachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier), which manages and scales clusters of [Memcached](http://memcached.org/) servers.
 
 ##Memcached Java libraries:
 
@@ -14,7 +14,7 @@ There is a number of Memcached client libraries for Java:
 * [simple-spring-memcached](http://code.google.com/p/simple-spring-memcached/)
 * [memcached-session-manager](http://code.google.com/p/memcached-session-manager/)
 
-In the following tutorial we will use `spymemcached`. To use it in your project, just specify additional dependency in your `pom.xml` file:
+In this tutorial we will use `spymemcached`. To use it in your project, just specify additional dependency in your `pom.xml` file:
 
 ~~~xml
 ...
@@ -26,7 +26,7 @@ In the following tutorial we will use `spymemcached`. To use it in your project,
 ...
 ~~~
 
-##Exmaple application:
+##Example application:
 
 We will modify existing [Java/Jetty hello world application](https://github.com/cloudControl/java-jetty-example-app) to store visits counter in the `Memcached` provied by `Memcachier Add-on`.
 
@@ -80,7 +80,7 @@ class SASLConnectionFactoryBuilder extends ConnectionFactoryBuilder {
 }
 ~~~
 
-Take care of building correct socket addresses (`getAddresses()` method) since list of servers in Add-on credentials contain only hosts, without port. Port is always default one - `11211`.
+Take some care when building the socket addresses (`getAddresses()` method) since list of servers in Add-on credentials contain only hosts, without port. The port is always the default one - `11211`.
 
 ###Use Memcached to track visits counter:
 
@@ -117,9 +117,9 @@ public class VisitCounter {
 }
 ~~~
 
-`Memcachier` credentials are provided via environment variables: `MEMCACHIER_USERNAME`, `MEMCACHIER_PASSWORD` and `MEMCACHIER_SERVERS`. Check [documentation](https://github.com/mkorszun/documentation/blob/review-and-cleanup/Guides/Java/Read%20Configuration.md) for alternative ways of accessing Add-on credentials.
+`Memcachier` credentials are provided via environment variables: `MEMCACHIER_USERNAME`, `MEMCACHIER_PASSWORD` and `MEMCACHIER_SERVERS`. Check [the documentation](https://www.cloudcontrol.com/dev-center/Guides/Java/Read%20Configuration.md) for alternative ways of accessing the Add-on credentials.
 
-###Use in [example application](https://github.com/cloudControl/java-jetty-example-app/blob/memcached/src/main/java/com/cloudcontrolled/sample/jetty/App.java):
+###Using the memcachier in [example application](https://github.com/cloudControl/java-jetty-example-app/blob/memcached/src/main/java/com/cloudcontrolled/sample/jetty/App.java):
 
 ~~~java
 VisitCounter vc = new VisitCounter();
@@ -135,4 +135,4 @@ $ cctrlapp APP_NAME/default addon.add memcachier.PLAN
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-You can also find ready to deply example on [Github](https://github.com/cloudControl/java-jetty-example-app/tree/memcached).
+You can also find ready-to-deply example on [Github](https://github.com/cloudControl/java-jetty-example-app/tree/memcached).
