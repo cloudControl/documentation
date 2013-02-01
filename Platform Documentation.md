@@ -341,7 +341,7 @@ Sometime it's useful for the app to check the deployment it currently runs in, e
 
  * Add-ons give you access to additional services like databases.
  * Each deployment needs its own set of Add-ons.
- * Add-on credentials are automatically available to your app via the *creds.json* file.
+ * Add-on credentials are available to your app via the JSON formatted `$CRED_FILE` (and via environment variables depending on the app's language).
 
 ### Managing Add-ons
 
@@ -390,14 +390,15 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 **Remember:** As in all examples in this documentation, replace all the uppercase placeholders with their respective values.
 
 ### Add-on Credentials
+For many Add-ons you require credentials to connect to their service. The credentials are exported to the deployment in
+a JSON formatted config file. The path to the file can be found in the `CRED_FILE` environment variable. Never
+hardcode these credentials in your application, because they differ over deployments and can change after any redeploy
+without notice.
 
-Of course adding an Add-on is only the first step. You also need to implement the functionality in your application code. To make this easy across different deployments, it's highly recommended to always read the credentials from the *creds.json* file. This ensures that your app is always talking to the right database and you can freely merge your branches without having to worry about keeping the credentials in sync.
-
-The path to the *creds.json* is always available through the CRED_FILE environment variable. Here's a quick example in PHP how to read the file and parse the JSON.
-
+A quick example to get MySQL credentials in PHP:
 ~~~php
 # read the credentials file
-$string = file_get_contents($_ENV['CRED_FILE'], false);
+$string = file_get_contents($_ENV['CRED_FILE']);
 if ($string == false) {
     die('FATAL: Could not read credentials file');
 }
@@ -409,7 +410,19 @@ $creds = json_decode($string, true);
 $MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
 ~~~
 
-The [guides section](https://www.cloudcontrol.com/dev-center/Guides/) has detailed examples showing how to read the *creds.json* file or read the credentials from the environment variables directly in different languages or frameworks. To see the format and contents of the *creds.json* file locally use the addon.creds command.
+#### Enabling/disabling credentials environment variables
+We recommend using the credentials file for security reasons but credentials can also be accessed through environment variables.
+This is disabled by default for PHP and Python apps.
+Accessing the environment is more convenient in most languages, but some reporting tools or wrong security settings in
+your app might print environment variables to external services or even your users. This also applies to any child processes
+of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use
+the credentials file.
+
+Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `False` or `True` to explicitly enable or disable
+this feature.
+
+The [guides section](https://www.cloudcontrol.com/dev-center/Guides/) has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Read%20configuration), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Read%20configuration), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Read%20configuration)).
+To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
@@ -464,7 +477,7 @@ The deploy log gives detailed information on the deploy process. It show on how 
 
 ### Customizing logging
 
-Some Add-ons in the [Deployment category](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment) as well as the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) can be used to forward error and worker logs to the external logging services.
+Some Add-ons in the [Deployment category](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment) as well as the [Custom Config Add-on] can be used to forward error and worker logs to the external logging services.
 
 #### Adding custom syslog logging with Custom Config Add-on
 
@@ -698,3 +711,4 @@ To change the stack of a deployment simply append the --stack command line optio
 $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
 
+[Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
