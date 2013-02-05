@@ -149,7 +149,7 @@ $ cctrlapp APP_NAME user.remove user3
 
 #### Keys
 
-For secure access to the apps repository each developer needs to authenticate via public/private key authentication. Please refer to the [SSH key guide](https://www.cloudcontrol.com/dev-center/guides/ssh-keys) for details how to create and manage your keys. You can simply add your default key to your user account using the command line client. If it can't find one, cctrl will try to help you create a key.
+For secure access to the apps repository each developer needs to authenticate via public/private key authentication. You can simply add your default key to your user account using the command line client. If it can't find one, cctrl will try to help you create a key.
 
 ~~~
 $ cctrluser key add
@@ -551,7 +551,7 @@ You can check if a request was cached in Varnish by checking the response's *X-v
 
 #### In-Memory Caching
 
-To make requests that can't use a cookieless domain faster you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [MemCachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [MemCachier Documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier) has detailed instructions on how to use it within your language and framework of choice.
+To make requests that can't use a cookieless domain faster you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that makes it available also for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [MemCachier Add-on](https://www.cloudcontrol.com/add-ons/memcachier). Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [MemCachier Documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MemCachier) has detailed instructions on how to use it within your language and framework of choice.
 
 ### Cache Breakers
 
