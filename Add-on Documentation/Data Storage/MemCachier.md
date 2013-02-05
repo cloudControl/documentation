@@ -241,145 +241,140 @@ More information on how to use php-memcached can be found on [php.net](http://ph
 Java
 ----
 
- This is an example of how to use the MemCachier Add-on with your Java WEB application.
+#####Memcached Java libraries:
 
- In order to use the addon with Java you need the [SpyMemcached](https://code.google.com/p/spymemcached/) client. We also recommend using the [Apache Maven](https://maven.apache.org/) build manager for working with Java applications. If you aren't using `maven` and are instead using [Apache Ant](https://ant.apache.org/) or your own build system, then simply add the `spymemcached` jar file as a dependency of your application.
+There is a number of Memcached client libraries for Java:
 
-For `maven` however, start by adding the proper `spymemcached` repository to your pom.xml:
+* [spymemcached](http://code.google.com/p/spymemcached/wiki/Examples)
+* [javamemcachedclient](http://code.google.com/p/javamemcachedclient/)
+* [memcache-client-forjava](http://code.google.com/p/memcache-client-forjava/)
+* [xmemcached](http://code.google.com/p/xmemcached/)
+* [simple-spring-memcached](http://code.google.com/p/simple-spring-memcached/)
+* [memcached-session-manager](http://code.google.com/p/memcached-session-manager/)
 
-~~~
-<repository>
-  <id>spy</id>
-  <name>Spy Repository</name>
-  <layout>default</layout>
-  <url>http://files.couchbase.com/maven2/</url>
-  <snapshots>
-    <enabled>false</enabled>
-  </snapshots>
-</repository>
-~~~
+In this tutorial we will use `spymemcached`. To use it in your project, just specify additional dependency in your `pom.xml` file:
 
-Then add the `spymemcached` library to your dependencies:
-
-~~~
+~~~xml
+...
 <dependency>
-  <groupId>spy</groupId>
-  <artifactId>spymemcached</artifactId>
-  <version>2.8.1</version>
-  <scope>provided</scope>
+    <groupId>com.google.code.simple-spring-memcached</groupId>
+    <artifactId>spymemcached</artifactId>
+    <version>2.8.4</version>
 </dependency>
+...
 ~~~
 
-Once your build system is configured, you can start by adding caching to your Java app:
+#####Example application:
+
+We will modify existing [Spring/JSP hello world application](https://github.com/cloudControl/java-spring-jsp-example-app) to store visits counter in the `Memcached`.
+
+Extend your [pom.xml](https://github.com/cloudControl/java-spring-jsp-example-app/blob/memcached_guide/pom.xml) with required `spymemcached` dependency and embedded Jetty runner. Define [Procfile](https://github.com/cloudControl/java-spring-jsp-example-app/blob/memcached_guide/Procfile).
+
+######Create memcached SASL connection:
 
 ~~~java
-package com.NAME.SPACE.PACKAGE;
+package com.cloudcontrolled.sample.spring.memcachier;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.security.auth.callback.CallbackHandler;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.*;
-
-import net.spy.memcached.AddrUtil;
-import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.ConnectionFactory;
 import net.spy.memcached.ConnectionFactoryBuilder;
-import net.spy.memcached.auth.PlainCallbackHandler;
+import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.auth.AuthDescriptor;
+import net.spy.memcached.auth.PlainCallbackHandler;
 
-/*
-* Java WEB application with embedded Jetty server and MemCachier addon
-*
-*/
-public class App extends HttpServlet
-{
+public class MemcachierConnection extends MemcachedClient {
 
-    private static final long serialVersionUID = -96650638989718048L;
+    private static final int PORT = 11211;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
-      
-        String ipAddress  = req.getHeader("X-FORWARDED-FOR");
-        if(ipAddress == null)
-        {
-            ipAddress = req.getRemoteAddr();
-        }
-
-        System.out.println("Request received from: "+req.getLocalAddr());
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-        out.println("<HTML>");
-        out.println(" <HEAD><TITLE>Java Memcachier example</TITLE></HEAD>");
-        out.println(" <BODY>");
-        out.print("<center>");
-        out.print("<h1>Hello " + ipAddress + "</h1>");
-        out.print("This is visit number " + getVisit(ipAddress) + ".");
-        out.print("</center>");
-        out.println(" </BODY>");
-        out.println("</HTML>");
-        out.flush();
-        out.close();
+    public MemcachierConnection(String username, String password, String servers) throws IOException {
+        this(new SASLConnectionFactoryBuilder().build(username, password), getAddresses(servers));
     }
 
-    public static void main(String[] args) throws Exception
-    {
-      
-        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
-        context.addServlet(new ServletHolder(new App()),"/*");
-        server.start();
-        server.join();
-        System.out.println("Application started");
+    public MemcachierConnection(ConnectionFactory cf, List<InetSocketAddress> addrs) throws IOException {
+        super(cf, addrs);
     }
 
-    private int getVisit(String ipAddr) throws IOException{
-        Credentials cr = Credentials.getInstance();
-        String addon = "MEMCACHIER"; // capital letters not required
-        HashMap<String, Object> creds = new HashMap<String, Object>();
-        creds.put("srv", cr.getCredential("servers", addon));
-        creds.put("usr", cr.getCredential("username", addon));
-        creds.put("pwd", cr.getCredential("password", addon));
-
-        AuthDescriptor ad = new AuthDescriptor(new String[] { "PLAIN" },
-                new PlainCallbackHandler((String)creds.get("usr"),
-                    (String)creds.get("pwd")));
-
-        int count=0;
-
-        try {
-            MemcachedClient mc = new MemcachedClient(new ConnectionFactoryBuilder()
-                    .setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
-                    .setAuthDescriptor(ad).build(), AddrUtil.getAddresses(
-                        (String)creds.get("srv") + ":11211"));
-
-            if(mc.get(ipAddr)!=null){
-                count=(Integer)mc.get(ipAddr);
-            }
-
-            count++;
-            mc.set(ipAddr,0,count);
-
-        } catch (IOException ioe) {
-            System.out.println("Couldn't create a connection to MemCachier: \nIOException "
-                    + ioe.getMessage());
+    private static List<InetSocketAddress> getAddresses(String addresses) {
+        List<InetSocketAddress> addrList = new ArrayList<InetSocketAddress>();
+        for (String addr : addresses.split(" ")) {
+            addrList.add(new InetSocketAddress(addr, PORT));
         }
+        return addrList;
+    }
+}
 
-        return count;
+class SASLConnectionFactoryBuilder extends ConnectionFactoryBuilder {
+    public ConnectionFactory build(String username, String password){
+        CallbackHandler ch = new PlainCallbackHandler(username, password);
+        AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, ch);
+        this.setProtocol(Protocol.BINARY);
+        this.setAuthDescriptor(ad);
+        return this.build();
     }
 }
 ~~~
 
-You also need to follow the [Getting Add-on credentials](https://github.com/cloudControl/documentation/blob/master/Guides/Java/GetCredentials.md) in order to authenticate your Add-on.
+Take care to use correct socket addresses (`getAddresses()` method) as list of servers in the Add-on credentials contain only hosts, without the port. The port is always the default one - `11211`.
 
-You may wish to take a look at the `spymemcached` [JavaDocs](http://dustin.github.com/java-memcached-client/apidocs/) or some more [example code](https://code.google.com/p/spymemcached/wiki/Examples) for more details on using MemCachier effectively.
+######Use Memcached to track visits counter:
+
+~~~java
+package com.cloudcontrolled.sample.spring.visitcounter;
+
+import java.io.IOException;
+import com.cloudcontrolled.sample.spring.memcachier.MemcachierConnection;
+
+public class VisitCounter {
+
+    private static final String KEY = "count";
+    private MemcachierConnection mc;
+
+    public VisitCounter() throws IOException {
+        String user = System.getenv("MEMCACHIER_USERNAME");
+        String pass = System.getenv("MEMCACHIER_PASSWORD");
+        String addr = System.getenv("MEMCACHIER_SERVERS");
+        mc = new MemcachierConnection(user, pass, addr);
+    }
+
+    public int getVisitCount() {
+        if (mc.get(KEY) == null) {
+            return 0;
+        } else {
+            return (Integer) mc.get(KEY);
+        }
+    }
+
+    public void updateVisitCount() {
+        int count = getVisitCount();
+        mc.set(KEY, 0, count + 1);
+    }
+}
+~~~
+
+`Memcachier` credentials are provided via environment variables: `MEMCACHIER_USERNAME`, `MEMCACHIER_PASSWORD` and `MEMCACHIER_SERVERS`. Check [the documentation](https://cloudcontrol.com/dev-center/Guides/Java/Read%20Configuration.md) for alternative ways of accessing the Add-on credentials.
+
+######Use Memcachier in [example application](https://github.com/cloudControl/java-spring-jsp-example-app/blob/memcached_guide/src/main/java/com/cloudcontrolled/sample/spring/web/IndexController.java):
+
+~~~java
+VisitCounter vc = new VisitCounter();
+vc.getVisitCount();
+vc.updateVisitCount();
+~~~
+
+######Push, add Memcachier Add-on and deply:
+~~~bash
+$ cctrlapp APP_NAME/default push
+$ cctrlapp APP_NAME/default addon.add memcachier.PLAN
+$ cctrlapp APP_NAME/default deploy --max=4
+~~~
+
+You can also find ready-to-deply example on [Github](https://github.com/cloudControl/java-spring-jsp-example-app/tree/memcached_guide).
 
 Library support
 -----
