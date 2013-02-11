@@ -14,7 +14,7 @@ In this tutorial we're going to show you how to deploy Spring/JSP hello world ap
 Clone initial [Spring/JSP application](https://github.com/cloudControl/java-spring-jsp-example-app):
 
 ~~~bash
-git clone git@github.com:cloudControl/java-spring-jsp-example-app.git
+git clone https://github.com/cloudControl/java-spring-jsp-example-app.git
 ~~~
 
 You should have below project structure:
