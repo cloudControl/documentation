@@ -13,7 +13,7 @@ In this tutorial we're going to show you how to deploy a Jetty application on [c
 First, clone the hello world app from our repository:
 
 ~~~bash
-$ git clone git@github.com:cloudControl/java-jetty-example-app.git
+$ git clone https://github.com/cloudControl/java-jetty-example-app.git
 $ cd java-jetty-example-app
 ~~~
 
