@@ -26,18 +26,31 @@ Follow the [Amazon Guide](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/Devel
 
 ## Example usage:
 
-First create an AWS account and provide your credentials in properties file:
+First create an AWS account and make your credentials accessible by your application. The recommended way is to provide them via environment variables. To do this, use [Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config):
 
-~~~java
-accessKey=
-secretKey=
+~~~bash
+$ cctrlapp APP_NAME/default addon.add config.free --AWS_SECRET_KEY=[YOUR_SECRET_KEY] --AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
 ~~~
 
 Now try out some operations on buckets and objects:
 
 ~~~java
+
+// Get access credentials from environment variables
+AWSCredentials creds = new AWSCredentials(){
+    @Override
+    public String getAWSAccessKeyId() {
+        return System.getenv("AWS_ACCESS_KEY");
+    }
+
+    @Override
+    public String getAWSSecretKey() {
+        return System.getenv("AWS_SECRET_KEY");
+    }
+};
+
 // S3 client connection
-AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(new File("credentials.properties")));
+AmazonS3 s3 = new AmazonS3Client(creds);
 String BUCKET = "testbucket" + UUID.randomUUID(), KEY = "key";
 
 // Create bucket
@@ -65,6 +78,7 @@ s3.deleteBucket(new DeleteBucketRequest(BUCKET));
 ~~~
 
 Here is a simple helper function that can be used to read the content of the S3 object:
+
 ~~~java
 private static String getContent(S3ObjectInputStream fin) throws IOException {
     int ch;
