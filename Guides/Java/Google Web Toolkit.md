@@ -94,7 +94,7 @@ For a fast and easy way to run your app, without having to install and administe
 ~~~
 
 ###Defining the process type
-CloudControl uses a `Procfile` to know how to start your process.
+cloudControl uses a `Procfile` to know how to start your process.
 
 Create a file called `Procfile` with the following content:
 ~~~
