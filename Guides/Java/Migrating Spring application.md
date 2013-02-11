@@ -73,7 +73,7 @@ Go to the application context configuration file `src/main/resources/META-INF/sp
 
 ###Adjust logger configuration
 
-Logging to a file is not recommended since the deployment [file system](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem) is not persistent. That is why default logger configuration - `src/main/resources/log4j.properties` should be modified to log either to stdout/stderr or to syslog:
+Logging to a file is not recommended since the container's [file system](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem) is not persistent. That is why default logger configuration - `src/main/resources/log4j.properties` should be modified to log either to stdout/stderr or to syslog:
 
 ~~~xml
 log4j.rootLogger=DEBUG, stdout
