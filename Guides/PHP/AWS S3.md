@@ -1,4 +1,4 @@
-# PHP data storage solution
+# PHP AWS S3 - data storage solution
 
 If your application is hosted on a horizontally scaled network, you might need to store the data in one centralized place.
 E.g. if you want to store user-created images, it makes no sense to store them on the file system, as the images created on one node are not available on another node.
