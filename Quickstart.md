@@ -78,20 +78,20 @@ Clone one of the example apps in your preferred programming language and push it
 
 ~~~bash
 # for Java
-$ git clone git://github.com/cloudControl/java_hello_world_app.git
-$ cd java_hello_world_app
+$ git clone git://github.com/cloudControl/java-jetty-example-app.git
+$ cd java-jetty-example-app
 
 # for PHP
-$ git clone git://github.com/cloudControl/php_hello_world_app.git
-$ cd php_hello_world_app
+$ git clone git://github.com/cloudControl/php-silex-example-app.git
+$ cd php-silex-example-app
 
 # for Python
-$ git clone git://github.com/cloudControl/python_hello_world_app.git
-$ cd python_hello_world_app
+$ git clone git://github.com/cloudControl/python-flask-example-app.git
+$ cd python-flask-example-app
 
 # for Ruby
-$ git clone git://github.com/cloudControl/ruby_hello_world_app.git
-$ cd ruby_hello_world_app
+$ git clone git://github.com/cloudControl/ruby-sinatra-example-app.git
+$ cd ruby-sinatra-example-app
 
 # now push
 $ cctrlapp APP_NAME push

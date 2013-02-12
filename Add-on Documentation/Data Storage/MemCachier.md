@@ -241,145 +241,23 @@ More information on how to use php-memcached can be found on [php.net](http://ph
 Java
 ----
 
- This is an example of how to use the MemCachier Add-on with your Java WEB application.
+To migrate official [Java Jetty Memcache Example](https://github.com/memcachier/memcachier-fibonacci) application just clone it to your local machine:
 
- In order to use the addon with Java you need the [SpyMemcached](https://code.google.com/p/spymemcached/) client. We also recommend using the [Apache Maven](https://maven.apache.org/) build manager for working with Java applications. If you aren't using `maven` and are instead using [Apache Ant](https://ant.apache.org/) or your own build system, then simply add the `spymemcached` jar file as a dependency of your application.
-
-For `maven` however, start by adding the proper `spymemcached` repository to your pom.xml:
-
-~~~
-<repository>
-  <id>spy</id>
-  <name>Spy Repository</name>
-  <layout>default</layout>
-  <url>http://files.couchbase.com/maven2/</url>
-  <snapshots>
-    <enabled>false</enabled>
-  </snapshots>
-</repository>
+~~~bash
+$ git clone https://github.com/memcachier/memcachier-fibonacci
 ~~~
 
-Then add the `spymemcached` library to your dependencies:
+Create applicaton on cloudControl platform, push, create Add-on and deploy:
 
-~~~
-<dependency>
-  <groupId>spy</groupId>
-  <artifactId>spymemcached</artifactId>
-  <version>2.8.1</version>
-  <scope>provided</scope>
-</dependency>
-~~~
-
-Once your build system is configured, you can start by adding caching to your Java app:
-
-~~~java
-package com.NAME.SPACE.PACKAGE;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.*;
-
-import net.spy.memcached.AddrUtil;
-import net.spy.memcached.MemcachedClient;
-import net.spy.memcached.ConnectionFactoryBuilder;
-import net.spy.memcached.auth.PlainCallbackHandler;
-import net.spy.memcached.auth.AuthDescriptor;
-
-/*
-* Java WEB application with embedded Jetty server and MemCachier addon
-*
-*/
-public class App extends HttpServlet
-{
-
-    private static final long serialVersionUID = -96650638989718048L;
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-    {
-      
-        String ipAddress  = req.getHeader("X-FORWARDED-FOR");
-        if(ipAddress == null)
-        {
-            ipAddress = req.getRemoteAddr();
-        }
-
-        System.out.println("Request received from: "+req.getLocalAddr());
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-        out.println("<HTML>");
-        out.println(" <HEAD><TITLE>Java Memcachier example</TITLE></HEAD>");
-        out.println(" <BODY>");
-        out.print("<center>");
-        out.print("<h1>Hello " + ipAddress + "</h1>");
-        out.print("This is visit number " + getVisit(ipAddress) + ".");
-        out.print("</center>");
-        out.println(" </BODY>");
-        out.println("</HTML>");
-        out.flush();
-        out.close();
-    }
-
-    public static void main(String[] args) throws Exception
-    {
-      
-        Server server = new Server(Integer.valueOf(System.getenv("PORT")));
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/");
-        server.setHandler(context);
-        context.addServlet(new ServletHolder(new App()),"/*");
-        server.start();
-        server.join();
-        System.out.println("Application started");
-    }
-
-    private int getVisit(String ipAddr) throws IOException{
-        Credentials cr = Credentials.getInstance();
-        String addon = "MEMCACHIER"; // capital letters not required
-        HashMap<String, Object> creds = new HashMap<String, Object>();
-        creds.put("srv", cr.getCredential("servers", addon));
-        creds.put("usr", cr.getCredential("username", addon));
-        creds.put("pwd", cr.getCredential("password", addon));
-
-        AuthDescriptor ad = new AuthDescriptor(new String[] { "PLAIN" },
-                new PlainCallbackHandler((String)creds.get("usr"),
-                    (String)creds.get("pwd")));
-
-        int count=0;
-
-        try {
-            MemcachedClient mc = new MemcachedClient(new ConnectionFactoryBuilder()
-                    .setProtocol(ConnectionFactoryBuilder.Protocol.BINARY)
-                    .setAuthDescriptor(ad).build(), AddrUtil.getAddresses(
-                        (String)creds.get("srv") + ":11211"));
-
-            if(mc.get(ipAddr)!=null){
-                count=(Integer)mc.get(ipAddr);
-            }
-
-            count++;
-            mc.set(ipAddr,0,count);
-
-        } catch (IOException ioe) {
-            System.out.println("Couldn't create a connection to MemCachier: \nIOException "
-                    + ioe.getMessage());
-        }
-
-        return count;
-    }
-}
+~~~bash
+$ cd memcachier-fibonacci
+$ cctrlapp APP_NAME create java
+$ cctrlapp APP_NAME/default push
+$ cctrlapp APP_NAME/default addon.add memcachier.PLAN
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
-You also need to follow the [Getting Add-on credentials](https://github.com/cloudControl/documentation/blob/master/Guides/Java/GetCredentials.md) in order to authenticate your Add-on.
-
-You may wish to take a look at the `spymemcached` [JavaDocs](http://dustin.github.com/java-memcached-client/apidocs/) or some more [example code](https://code.google.com/p/spymemcached/wiki/Examples) for more details on using MemCachier effectively.
+Congratulations, you should now be able to reach your application at **http://APP_NAME.cloudcontrolled.com**.
 
 Library support
 -----
