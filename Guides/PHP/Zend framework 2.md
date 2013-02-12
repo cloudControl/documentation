@@ -551,7 +551,7 @@ $ cctrlapp APP_NAME/development deploy
 
 ###8.1 Review _development_ deployment
 
-Visit the new website at [development.APP_NAME.cloudcontrolled.com/check](http://development.APP_NAME.cloudcontrolled.com/check/). Check the list to test if all is working as it should.
+Visit the new website at _development.APP_NAME.cloudcontrolled.com/check/_. Check the list to test if all is working as it should.
 
 The session counter should increase at every reload.
 
@@ -578,5 +578,5 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-On the production branch you can check the environment change by watching the cloudControl log and sending a log message with [APP_NAME.cloudcontrolled.com/check](http://APP_NAME.cloudcontrolled.com/check). The cloudControl log should contain only the error messages.
+On the production branch you can check the environment change by watching the cloudControl log and sending a log message with _APP_NAME.cloudcontrolled.com/check/_. The cloudControl log should contain only the error messages.
 

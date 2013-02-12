@@ -185,9 +185,9 @@ if (!empty($_SERVER['HTTP_HOST']) && isset($_ENV['CRED_FILE'])) {
     $database_password = $creds["MYSQLS"]["MYSQLS_PASSWORD"];
 } else {
     $database_host = 'localhost';
-    $database_name = '<local_symfony_database_name>';
-    $database_user = '<local_symfony_database_user>';
-    $database_password = '<local_symfony_database_password>';
+    $database_name = '<local_yii_database_name>';
+    $database_user = '<local_yii_database_user>';
+    $database_password = '<local_yii_database_password>';
 }
 ~~~
 
@@ -476,5 +476,5 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Check the _production_ deployment at _http://APP_NAME.cloudcontrolled.com/index.php?r=site/check_.
+Check the _production_ deployment at _APP_NAME.cloudcontrolled.com/index.php?r=site/check_.
 Take a look at your cloudControl log, it should contain fewer messages now. That's the proof that the environment detection is working.

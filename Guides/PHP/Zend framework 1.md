@@ -494,7 +494,7 @@ $ cctrlapp APP_NAME/development deploy
 
 ###8.1 Review _development_ deployment
 
-Visit the new website _http://development.APP_NAME.cloudcontrolled.com/check/_. Check if:
+Visit the new website _development.APP_NAME.cloudcontrolled.com/check/_. Check if:
 
 * At every reload the session counter should increase.
 * Sent log line is present in cloudControl log. It should look similar to:
@@ -506,7 +506,7 @@ $ cctrlapp APP_NAME/development log error
 ~~~
 On the _production_ deployment you should only see the info log entry.
 
-If you address a non-existing check action _http://development.APP_NAME.cloudcontrolled.com/check/aaaa_ you should get a fatal error on the website and in the cloudControl log.
+If you address a non-existing check action _development.APP_NAME.cloudcontrolled.com/check/aaaa_ you should get a fatal error on the website and in the cloudControl log.
 
 ###8.2 Merge to _production_ deployment
 
@@ -518,4 +518,4 @@ $ git merge development
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
-On the _production_ branch you can check the environment change by watching the cloudControl log and addressing a wrong controller action  _http://APP_NAME.cloudcontrolled.com/check/aaaa_. The fatal error should not appear on the website nor in the cloudControl log (there will be a notice on the website though).
+On the _production_ branch you can check the environment change by watching the cloudControl log and addressing a wrong controller action  _APP_NAME.cloudcontrolled.com/check/aaaa_. The fatal error should not appear on the website nor in the cloudControl log (there will be a notice on the website though).

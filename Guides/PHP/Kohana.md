@@ -111,8 +111,8 @@ To ssh://APP_NAME2@cloudcontrolled.com/repository.git
 
 Both deployments have been created. You can take a look at:
 
- * _http://APP_NAME.cloudcontrolled.com/_  - for the production deployment
- * _http://development.APP_NAME.cloudcontrolled.com/_  - for the development deployment
+ * _APP_NAME.cloudcontrolled.com/_  - for the production deployment
+ * _development.APP_NAME.cloudcontrolled.com/_  - for the development deployment
 
 You should see the installation page and the Environment Tests should pass. Once your install page reports that your environment is set up correctly you need to either rename or delete install.php in the root directory.
 ~~~bash
@@ -512,7 +512,7 @@ $ cctrlapp APP_NAME/development push
 $ cctrlapp APP_NAME/development deploy
 ~~~
 
-After deploying you can review the changes at _http://development.APP_NAME.cloudcontrolled.com/Check_. Make sure that everything is working.
+After deploying you can review the changes at _development.APP_NAME.cloudcontrolled.com/Check_. Make sure that everything is working.
 
 * Reload the page, the visits counter should increase.
 * The Environment should be "`DEVELOPMENT (40)`"
@@ -531,7 +531,7 @@ $ git merge development
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
-Check the results at _http://APP_NAME.cloudcontrolled.com/Check_.
+Check the results at _APP_NAME.cloudcontrolled.com/Check_.
 
 * Reload the page, the visits counter should increase.
 * The Environment should be "`PRODUCTION (10)`"

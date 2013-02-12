@@ -72,9 +72,9 @@ $ git add -A
 $ git commit -m "Initial commit"
 ~~~
 
-Now that the code is under version control, you're going to create a testing branch as well, so that we have testing separated from production. Run the following command:
+Now that the code is under version control, you're going to create a development branch as well, so that we have development separated from production. Run the following command:
 ~~~bash
-$ git checkout -b testing
+$ git checkout -b development
 ~~~
 
 We use two different deployments on the platform.
@@ -91,18 +91,18 @@ $ cctrlapp APP_NAME create php
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy --stack=pinky
 
-# deploy the testing branch
-$ cctrlapp APP_NAME/testing push
-$ cctrlapp APP_NAME/testing deploy --stack=pinky
+# deploy the development branch
+$ cctrlapp APP_NAME/development push
+$ cctrlapp APP_NAME/development deploy --stack=pinky
 ~~~
 
-From now until everything is working as intended, you'll be working on the testing branch. Only then should the testing branch be merged to master.
+From now until everything is working as intended, you'll be working on the development branch. Only then should the development branch be merged to master.
 
 ### Symfony auto-detected
 
 When you do the push, you'll see the output similar to the following:
 ~~~bash
-$ cctrlapp APP_NAME/testing push
+$ cctrlapp APP_NAME/development push
     Counting objects: 85, done.
     Delta compression using up to 8 threads.
     Compressing objects: 100% (73/73), done.
@@ -145,7 +145,7 @@ To initialise the MySQLs Add-on, run the following commands:
 ~~~bash
 # Add the mysqls.free addon for both deployments
 $ cctrlapp APP_NAME/default addon.add mysqls.free
-$ cctrlapp APP_NAME/testing addon.add mysqls.free
+$ cctrlapp APP_NAME/development addon.add mysqls.free
 ~~~
 
 ## Environment configuration
@@ -247,7 +247,7 @@ Next you should create the session table.
 ~~~bash
 # Retrieve the MySQL credentials
 $ cctrlapp APP_NAME/default addon mysqls.free
-$ cctrlapp APP_NAME/testing addon mysqls.free
+$ cctrlapp APP_NAME/development addon mysqls.free
 ~~~
 
 The output of each of the commands will look like this:
@@ -481,20 +481,20 @@ Stage all the files in Git and commit them with a suitable commit message.
 $ git add -A
 $ git commit -m "Migrate to cloudControl"
 ~~~
-Next, push and deploy the new version of the testing deployment.
+Next, push and deploy the new version of the development deployment.
 ~~~bash
-$ cctrlapp APP_NAME/testing push
-$ cctrlapp APP_NAME/testing deploy
+$ cctrlapp APP_NAME/development push
+$ cctrlapp APP_NAME/development deploy
 ~~~
 
 ## Review the Deployment
 
-Now visit [testing.APP_NAME.cloudcontrolled.com](http://testing.APP_NAME.cloudcontrolled.com).
+Now visit _development.APP_NAME.cloudcontrolled.com_.
 By reloading, the simple session based visitor counter should increase.
 The environment should be displayed as 'dev'.
 When writing a log message and submitting the form, the log entry should appear in the error log:
 ~~~
-$ cctrlapp APP_NAME/default log error
+$ cctrlapp APP_NAME/development log error
     ...
     [Mon Jan 21 10:02:42 2013] info app.INFO: date: 2013-01-21 11:02:42, message: This is my log info message [] []\n
 ~~~
@@ -502,9 +502,9 @@ $ cctrlapp APP_NAME/default log error
 When all the checks are completed successfully, merge the changes to the master branch and deploy it:
 ~~~bash
 $ git checkout master
-$ git merge testing
+$ git merge development
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-You can check this deployment at [APP_NAME.cloudcontrolled.com](http://APP_NAME.cloudcontrolled.com). The session test shouldn't differ from the testing deployment, but the environment name should be 'prod' and the loglines will not appear in cctrlapp log error (if you defined '_error_' as log level in `/app/config/config_prod.yml`).
+You can check this deployment at _APP_NAME.cloudcontrolled.com_. The session test shouldn't differ from the development deployment, but the environment name should be 'prod' and the loglines will not appear in cctrlapp log error (if you defined '_error_' as log level in `/app/config/config_prod.yml`).
