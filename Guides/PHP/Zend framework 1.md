@@ -84,7 +84,7 @@ $ git add -A
 $ git commit -m "Initial commit"
 ~~~
 
-##3.1 Create a CloudControl Application
+##3.1 Create a cloudControl application
 
 In this example we are using the application name's placeholder __APP_NAME__. You will of course have to use some other name instead.
 Now you need to create a deployment on the cloudControl platform. First create the application, then push and deploy the `APP_NAME/default` deployment, also called _production_ deployment. Run the following commands:
@@ -156,54 +156,57 @@ The output of the commands will be similar to:
 
 ###5.1 Read database connection parameter from credentials file
 
-Normally, the database adapter is configured in `application/configs/application.ini`, but on the platform, you have to read the connection parameters from the credentials file. To configure the database adapter, edit the `application/Bootstrap.php` file. Add the following method to the `Bootstrap` class:
+Normally, the database adapter is configured in `application/configs/application.ini`, but on the platform, you have to read the connection parameters from the credentials file. To configure the database connection parameters just before loading other resources like session, edit the `public/index.php` file, so that it looks like.
+:
 ~~~php
-    protected function _initDb() {
-        if (!empty($_SERVER['HTTP_HOST']) && isset($_ENV['CRED_FILE'])) {
-            // read the credentials file
-            $string = file_get_contents($_ENV['CRED_FILE'], false);
-            if ($string == false) {
-                throw new Exception('Could not read credentials file');
-            }
+...
+/** Zend_Application */
+require_once 'Zend/Application.php';
+require_once 'Zend/Config/Ini.php';
 
-            // the file contains a JSON string, decode it and return an associative array
-            $creds = json_decode($string, true);
+$config = new Zend_Config_Ini(
+	APPLICATION_PATH . '/configs/application.ini',
+	APPLICATION_ENV,
+	array('allowModifications' => true)
+);
 
-            $error = json_last_error();
-            if ($error != JSON_ERROR_NONE){
-                $json_errors = array(
-                    JSON_ERROR_DEPTH => 'The maximum stack depth has been exceeded',
-                    JSON_ERROR_STATE_MISMATCH => 'Invalid or malformed JSON',
-                    JSON_ERROR_CTRL_CHAR => 'Control character error, possibly incorrectly encoded',
-                    JSON_ERROR_SYNTAX => 'Syntax error',
-                    JSON_ERROR_UTF8 => 'Malformed UTF-8 characters, possibly incorrectly encoded'
-                );
-                throw new Exception(sprintf('A json error occured while reading the credentials file: %s', $json_errors[$error]));
-            }
-
-            if (!array_key_exists('MYSQLS', $creds)){
-                throw new Exception('No MySQL credentials found. Please make sure you have added the mysqls addon.');
-            }
-
-            $database_host = $creds["MYSQLS"]["MYSQLS_HOSTNAME"];
-            $database_name = $creds["MYSQLS"]["MYSQLS_DATABASE"];
-            $database_user = $creds["MYSQLS"]["MYSQLS_USERNAME"];
-            $database_password = $creds["MYSQLS"]["MYSQLS_PASSWORD"];
-        } else {
-            $database_host = 'localhost';
-            $database_name = '<local_database_name>';
-            $database_user = '<local_database_user>';
-            $database_password = '<local_database_password>';
-        }
-        $dbAdapter = Zend_Db::factory('Pdo_Mysql', array(
-                'host'     => $database_host,
-                'username' => $database_user,
-                'password' => $database_password,
-                'dbname'   => $database_name
-        ));
-        Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
-        Zend_Registry::set("db", $dbAdapter);
+if (!empty($_SERVER['HTTP_HOST']) && isset($_ENV['CRED_FILE'])) {
+    // read the credentials file
+    $string = file_get_contents($_ENV['CRED_FILE'], false);
+    if ($string == false) {
+        throw new Exception('Could not read credentials file');
     }
+    // the file contains a JSON string, decode it and return an associative array
+    $creds = json_decode($string, true);
+    $error = json_last_error();
+    if ($error != JSON_ERROR_NONE){
+        $json_errors = array(
+            JSON_ERROR_DEPTH => 'The maximum stack depth has been exceeded',
+            JSON_ERROR_STATE_MISMATCH => 'Invalid or malformed JSON',
+            JSON_ERROR_CTRL_CHAR => 'Control character error, possibly incorrectly encoded',
+            JSON_ERROR_SYNTAX => 'Syntax error',
+            JSON_ERROR_UTF8 => 'Malformed UTF-8 characters, possibly incorrectly encoded'
+        );
+        throw new Exception(sprintf('A json error occured while reading the credentials file: %s', $json_errors[$error]));
+    }
+
+    if (!array_key_exists('MYSQLS', $creds)){
+        throw new Exception('No MySQL credentials found. Please make sure you have added the mysqls addon.');
+    }
+    $config->resources->db->params->host = $creds["MYSQLS"]["MYSQLS_HOSTNAME"];
+    $config->resources->db->params->username = $creds["MYSQLS"]["MYSQLS_USERNAME"];
+    $config->resources->db->params->password = $creds["MYSQLS"]["MYSQLS_PASSWORD"];
+    $config->resources->db->params->dbname = $creds["MYSQLS"]["MYSQLS_DATABASE"];
+}
+
+// Create application, bootstrap, and run
+$application = new Zend_Application(
+    APPLICATION_ENV,
+    $config
+);
+$application->bootstrap()
+            ->run();
+...
 ~~~
 
 ###5.2. Configure session handler
@@ -245,27 +248,22 @@ You should also do this for the `APP_NAME/default` deployment.
 
 ##6. Logging to syslog
 
-To configure the syslog logger you have to edit the `application/Bootstrap.php` file. Add to the `Bootstrap` class the following method:
-~~~php
-    protected function _initLog() {
-        $syslog = new Zend_Log_Writer_Syslog();
-        $logger = new Zend_Log($syslog);
-        Zend_Registry::set('logger', $logger);
+To configure the syslog logger you have to edit the `application/configs/application.ini` file and add to the `production` section:
+~~~ini
+resources.log.syslog.writerName = "Syslog"
+resources.log.syslog.writerParams.application = "MyApp"
+resources.log.syslog.writerParams.facility = 8
+resources.log.syslog.filterName = 'Priority'
+resources.log.syslog.filterParams.priority = 3
+~~~
+The priority filter is set to `ZEND_LOG::ERR`, that means only error messages and higher (critical, alert, emergency) will be logged.
 
-        register_shutdown_function(function () use ($logger) {
-            if ($e = error_get_last()) {
-                $msg = $e['message'] . " in " . $e['file'] . ' line ' . $e['line'];
-                foreach(explode("\n", $msg) as $l){
-                    $logger->err($l);
-                }
-                $logger->__destruct();
-            }
-        });
-        return $logger;
-    }
+To change the priority for the _development_ environment to `ZEND_LOG::DEBUG` add the line in the `development : production` section:
+~~~ini
+resources.log.syslog.filterParams.priority = 7
 ~~~
 
-It is also recommended to differentiate the logging behaviour of the _development_ and _production_ environment. You can do this by editing the `application/configs/application.ini`. In the `production` section add the following lines:
+Additionaly, it is also recommended to differentiate the exception handling behaviour of the _development_ and _production_ environment. You can do this by editing the `application/configs/application.ini`. In the `production` section add the following lines:
 ~~~ini
 resources.frontController.throwExceptions = 0
 resources.frontController.params.useDefaultControllerAlways = 1
@@ -275,9 +273,21 @@ In the `development : production` section add the line:
 resources.frontController.throwExceptions = 1
 ~~~
 
+Finally, to use the logger in a controller you should register the logger. To do this, edit the `application/Bootstrap.php` file and add the following method to the `Bootstrap` class:
+~~~php
+protected function _initLog()
+{
+	if($this->hasPluginResource('log')){
+		$logResource = $this->getPluginResource('log');
+		$logger = $logResource->getLog();
+        Zend_Registry::set('logger', $logger);			
+	}
+}
+~~~
+
 ##7. Auto-magically determine the environment and set the configuration
 
-At the startup of the application the environment has to be chosen automatically. This can be done by editing your ``public/index.php`` file to look like:
+At the startup of the application the environment has to be chosen automatically. This can be done by editing your `public/index.php` file to look like:
 ~~~php
 <?php
 
@@ -315,14 +325,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 /** Zend_Application */
 require_once 'Zend/Application.php';
-
-// Create application, bootstrap, and run
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
-);
-$application->bootstrap()
-            ->run();
+require_once 'Zend/Config/Ini.php';
+...
 ~~~
 
 In the previously listed code there is a mapping of the deployment's name to the predefined environments. If you have deployments named _testing_ or _staging_ you can leave as it is; deployments named _default_ or _production_ are mapped to the _production_ environment and all the other deployments are mapped to the _development_ environment.
@@ -400,7 +404,8 @@ class CheckController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $logger = Zend_Registry::get('logger');
-                $logger->info($form->getValue('logentry'));
+                $logger->log($form->getValue('logentry'), Zend_Log::INFO);
+                $logger->log($form->getValue('logentry'), Zend_Log::ERR);
                 $this->view->flashMessenger->addMessage(sprintf("Your logentry was sent. Check in your cloudControl console by 'cctrlapp %s log error'", $_SERVER['DEP_NAME']));
                 return $this->_helper->redirector('');
             }
@@ -489,17 +494,19 @@ $ cctrlapp APP_NAME/development deploy
 
 ###8.1 Review _development_ deployment
 
-Visit the new website [development.APP_NAME.cloudcontrolled.com/check](http://development.APP_NAME.cloudcontrolled.com/check/). Check if:
+Visit the new website _http://development.APP_NAME.cloudcontrolled.com/check/_. Check if:
 
 * At every reload the session counter should increase.
 * Sent log line is present in cloudControl log. It should look similar to:
 
 ~~~bash
 $ cctrlapp APP_NAME/development log error
-    [Mon Jan 28 15:23:24 2013] info Das ist meine Lognachricht
+[Tue Feb 12 16:13:17 2013] info This is my custom log message
+[Tue Feb 12 16:13:17 2013] error This is my custom log message
 ~~~
+On the _production_ deployment you should only see the info log entry.
 
-If you address a non-existing check action [development.APP_NAME.cloudcontrolled.com/check/aaaa](http://development.APP_NAME.cloudcontrolled.com/check/aaaa) you should get a fatal error on the website and in the cloudControl log.
+If you address a non-existing check action _http://development.APP_NAME.cloudcontrolled.com/check/aaaa_ you should get a fatal error on the website and in the cloudControl log.
 
 ###8.2 Merge to _production_ deployment
 
@@ -507,7 +514,8 @@ If everything until now was ok, you can merge the development branch to the mast
 ~~~bash
 $ git checkout master
 $ git merge development
+# git commits the merge automatically, so you can push right now
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
-On the _production_ branch you can check the environment change by watching the cloudControl log and addressing a wrong controller action [APP_NAME.cloudcontrolled.com/check/aaaa](http://APP_NAME.cloudcontrolled.com/check/aaaa). The fatal error should not appear on the website nor in the cloudControl log (there will be a notice though).
+On the _production_ branch you can check the environment change by watching the cloudControl log and addressing a wrong controller action  _http://APP_NAME.cloudcontrolled.com/check/aaaa_. The fatal error should not appear on the website nor in the cloudControl log (there will be a notice on the website though).
