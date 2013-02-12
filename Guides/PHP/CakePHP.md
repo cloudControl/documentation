@@ -79,7 +79,7 @@ $ cctrlapp APP_NAME/development push
 $ cctrlapp APP_NAME/development deploy --stack pinky
 ~~~
 
-If you visit newly deployed website _development.APP_NAME.cloudcontrolled.com_, you'll get an error. The `app/tmp` folder with the cache and log files is ignored by git by default. This will be solved when the APC cache is used.
+If you visit newly deployed website `http://development-APP_NAME.cloudcontrolled.com`, you'll get an error. The `app/tmp` folder with the cache and log files is ignored by git by default. This will be solved when the APC cache is used.
 
 ##4. Improvements
 
@@ -514,7 +514,7 @@ $ cctrlapp APP_NAME/development push
 $ cctrlapp APP_NAME/development deploy
 ~~~
 
-Check the development deployment: _development.APP_NAME.cloudcontrolled.com/Check_.
+Check the development deployment: `http://development-APP_NAME.cloudcontrolled.com/Check`.
 
 * Reload the page; the visits counter should increase.
 * Send a log line; in the _development_ deployment's log should appear both alert and info messages:
@@ -533,7 +533,7 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Take a look at your _production_ deployment to ensure that it is working: _APP_NAME.cloudcontrolled.com/Check_
+Take a look at your _production_ deployment to ensure that it is working: `http://APP_NAME.cloudcontrolled.com/Check`.
 
 * Reload the page; the visits counter should increase.
 * Send a log line; in the _production_ deployment, only the alert log message should appear:
@@ -542,4 +542,4 @@ $ cctrlapp APP_NAME/default log error
 ~~~
 * The debug level in the _production_ deployment is set to 0. That's why on the page bottom the SQL log shouldn't appear.
 
-If you go to _APP_NAME.cloudcontrolled.com_, you should seen an error in the browser but not in the cloudControl log.
+If you go to `http://APP_NAME.cloudcontrolled.com`, you should seen an error in the browser but not in the cloudControl log.

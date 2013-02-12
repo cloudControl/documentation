@@ -449,7 +449,7 @@ $ cctrlapp APP_NAME/testing push
 $ cctrlapp APP_NAME/testing deploy
 ~~~
 
-All the changes are deployed now. Go to _http://testing.APP_NAME.cloudcontrolled.com/_ and navigate to your new _Check_ page. When reloading, the visitor count should increase. Send a log message and watch the log:
+All the changes are deployed now. Go to `http://testing-APP_NAME.cloudcontrolled.com/` and navigate to your new _Check_ page. When reloading, the visitor count should increase. Send a log message and watch the log:
 ~~~bash
 $ cctrlapp APP_NAME/testing log error
 ~~~
@@ -476,5 +476,5 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Check the _production_ deployment at _APP_NAME.cloudcontrolled.com/index.php?r=site/check_.
+Check the _production_ deployment at `http://APP_NAME.cloudcontrolled.com/index.php?r=site/check`.
 Take a look at your cloudControl log, it should contain fewer messages now. That's the proof that the environment detection is working.

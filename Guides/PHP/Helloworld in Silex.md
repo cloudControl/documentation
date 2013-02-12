@@ -104,7 +104,7 @@ Deploy the app on the pinky stack:
 $ cctrlapp APP_NAME/default deploy --stack pinky
 ~~~
 
-Congratulations, you should now be able to reach your application at APP_NAME.cloudcontrolled.com.
+Congratulations, you should now be able to reach your application at `http://APP_NAME.cloudcontrolled.com`.
 
 
 [silex]: http://silex.sensiolabs.org/

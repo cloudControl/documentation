@@ -225,7 +225,7 @@ return array(
 );
 ~~~
 In the code listed above, we read the values for AWS keys and region from credentials file.
-The credentials file itself will be populated later, when we create the app on the platform, and expose the following variables: 'AWS_KEY', 'AWS_SECRET_KEY' and 'AWS_REGION'.
+The credentials file itself will be populated later, when we create the app on the platform, and expose the following variables: `AWS_KEY`, `AWS_SECRET_KEY` and `AWS_REGION`.
 
 Next, to route all requests to `public/index.php` create a file `public/.htaccess` with:
 ~~~bash
@@ -273,6 +273,6 @@ to add the AWS variables to your environment:
 $ cctrlapp APP_NAME/default addon.add config.free --AWS_KEY=YOUR_AWS_KEY --AWS_SECRET_KEY=YOUR_AWS_SECRET_KEY --AWS_REGION=YOUR_AWS_REGION
 ~~~
 
-That's all, now you can list your buckets at APP_NAME.cloudcontrolled.com. You can also upload files or list the bucket objects via links.
+That's all, now you can list your buckets at `http://APP_NAME.cloudcontrolled.com`. You can also upload files or list the bucket objects via links.
 
 Have fun :-)

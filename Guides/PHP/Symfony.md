@@ -489,7 +489,7 @@ $ cctrlapp APP_NAME/development deploy
 
 ## Review the Deployment
 
-Now visit _development.APP_NAME.cloudcontrolled.com_.
+Now visit `http://development-APP_NAME.cloudcontrolled.com`.
 By reloading, the simple session based visitor counter should increase.
 The environment should be displayed as 'dev'.
 When writing a log message and submitting the form, the log entry should appear in the error log:
@@ -507,4 +507,4 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-You can check this deployment at _APP_NAME.cloudcontrolled.com_. The session test shouldn't differ from the development deployment, but the environment name should be 'prod' and the loglines will not appear in cctrlapp log error (if you defined '_error_' as log level in `/app/config/config_prod.yml`).
+You can check this deployment at `http://APP_NAME.cloudcontrolled.com`. The session test shouldn't differ from the development deployment, but the environment name should be 'prod' and the loglines will not appear in cctrlapp log error (if you defined '_error_' as log level in `/app/config/config_prod.yml`).
