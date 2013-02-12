@@ -212,10 +212,10 @@ if (!empty($_SERVER['HTTP_HOST']) && isset($_ENV['CRED_FILE'])) {
     $database_user = $creds["MYSQLS"]["MYSQLS_USERNAME"];
     $database_password = $creds["MYSQLS"]["MYSQLS_PASSWORD"];
 } else {
-    $database_host = 'mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com';
-    $database_name = 'dep94e9vdav';
-    $database_user = 'dep94e9vdav';
-    $database_password = 'G_TwC29VGgtY';
+    $database_host = 'localhost';
+    $database_name = '<local_zf2_database_name>';
+    $database_user = '<local_zf2_database_user>';
+    $database_password = '<local_zf2_database_password>';
 }
 
 return array(
