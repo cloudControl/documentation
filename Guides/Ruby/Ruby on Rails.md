@@ -1,4 +1,4 @@
-# Migrating a Ruby on Rails application
+# Deploying a Ruby on Rails application
 [Ruby on Rails][rails] is an open-source web framework that's optimized for programmer happiness and sustainable productivity.
 
 In this tutorial we're going to show you how to migrate an existing Rails
@@ -213,7 +213,7 @@ $ cctrlapp APP_NAME/default run "rake db:migrate"
 That's all, now you app is using the MySQL database.
 
 
-For additional information take a look at [Notes for Rails][rails-notes] and
+For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].
 
 
@@ -231,7 +231,7 @@ other [ruby-specific documents][ruby-guides].
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
 [database-conf]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/Read%20configuration#adding-relational-databases
 [example-app]: https://github.com/cloudControl/ruby-rails-example-app
-[rails-notes]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/Notes%20-%20Rails
+[rails-notes]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/Ruby%20on%20Rails%20notes
 [Rails tutorial]: http://ruby.railstutorial.org/
 [postres-addon]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/ElephantSQL
 [ruby-guides]: https://www.cloudcontrol.com/dev-center/Guides/Ruby

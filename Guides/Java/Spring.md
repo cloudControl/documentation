@@ -1,4 +1,4 @@
-#Migrating a Spring application
+#Deploying a Spring application
 
 [Spring](http://www.springsource.org/) is the most popular application development framework for enterprise Java™. Millions of developers use it to create high performing, easily testable, reusable code without any lock-in.
 

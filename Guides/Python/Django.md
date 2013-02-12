@@ -1,4 +1,4 @@
-# Migrating a Django application
+# Deploying a Django application
 [Django][django] is the Web framework for perfectionists with deadlines.
 
 In this tutorial we're going to show you how to migrate an existing Django
@@ -144,7 +144,7 @@ Congratulations, you should now be able to reach the app at APP_NAME.cloudcontro
 You can login to the admin console at APP_NAME.cloudcontrolled.com/admin and
 look at the polls at APP_NAME.cloudcontrolled.com/polls.
 
-For additional information take a look at [Notes for Django][django-notes] and
+For additional information take a look at [Django Notes][django-notes] and
 other [python-specific documents][python-guides].
 
 
@@ -158,7 +158,7 @@ other [python-specific documents][python-guides].
 [data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
 [mysqls]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
 [example-app]: https://github.com/cloudControl/python-django-example-app
-[django-notes]: https://www.cloudcontrol.com/dev-center/Guides/Python/Notes%20-%20Django
+[django-notes]: https://www.cloudcontrol.com/dev-center/Guides/Python/Django%20notes
 [get-conf]: https://www.cloudcontrol.com/dev-center/Guides/Python/Read%20configuration
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
 [python-guides]: https://www.cloudcontrol.com/dev-center/Guides/Python
