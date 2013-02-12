@@ -93,6 +93,11 @@ reason being the [Non Persistent Filesystem][filesystem].
 
 To use a database you should choose an Add-on from [Data Storage category][data-storage-addons].
 
+You can use MySQL or PostgreSQL databases. The following section shows how to use
+PostgreSQL, and the next one how to use MySQL. If you want, you can skip one of them.
+
+
+#### PostgreSQL database
 Let's use PostgresSQL with the [ElephantSQL Add-on][postres-addon].
 
 First add the free option of the Add-on to the "default" deployment:
@@ -177,9 +182,9 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you should now be able to reach the app at http://APP_NAME.cloudcontrolled.com.
 
 
-### Changing the production database
+#### MySQL database
 
-Now you're going to change the production database from PostgreSQL to MySQL.
+Now you're going to change the production database to MySQL.
 
 To do so, first add the Add-on. For this app, your are going to use the
 [Shared MySQL Add-on][mysqls] with the free option:
@@ -187,7 +192,8 @@ To do so, first add the Add-on. For this app, your are going to use the
 $ cctrlapp APP_NAME/default addon.add mysqls.free
 ~~~
 
-You also need to replace the 'pg' gem with the 'mysql2' gem in the Gemfile.
+You need to add the 'mysql2' gem in the Gemfile.  If you followed the previous
+section and used the PostgreSQL database, you can also remove the 'pg' gem.
 Do not forget to run the `bundle install` command.
 
 The `database.yml` needs to be modified as well. Set the production adapter to
