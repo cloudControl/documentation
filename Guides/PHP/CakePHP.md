@@ -44,15 +44,13 @@ $ cctrlapp APP_NAME/DEPLOYMENT_NAME log error
 
 ###2.3 Auto-magically determine the environment and set the configuration
 
-CakePHP has no built-in support for different environments.
-
-Having different environments is often really convenient, e.g to account for differences between development, staging and production.
+CakePHP has no built-in support for different environments, but having different environments is often really convenient, e.g to account for differences between development, staging and production.
 It is likely that each environment will have different configuration settings. For that reason, we need to be able to differentiate between all the environments.
 The app should know the environment it runs in to set up the proper configuration options. That way the same code will run in all the environments.
 
 ##3. Put the code under git
 
-In your CakePHP directory you will find a `.gitignore` file. The file needs to be modified as it currently isn't suitable to be used with the cloudControl platform. **Remove the `app/Config` entry** to enable tracking and pushing of the configuration files. Make sure that the `plugins` and `vendors` folders are also being tracked by git.
+In your CakePHP directory you will find a `.gitignore` file. The file needs to be modified as it currently isn't suitable to be used with the cloudControl platform. **Remove the `app/Config` entry** to enable tracking and pushing of the configuration files.
 
 You'll start by putting the code under git version control system. Run the following commands:
 ~~~bash
@@ -125,7 +123,7 @@ $engine = 'Apc';
 
 ##5. Auto-magically determine the environment and set the configuration
 
-As mentioned before, CakePHP doesn't differentiate between different environments out of the box, so we'll do that by using different bootstrap files, such as **`index.php`**, **`index-test.php`** etc.
+As mentioned before, CakePHP doesn't differentiate between different environments out of the box, so we'll do that by using different bootstrap files, such as **index.php**, **index-test.php** etc.
 
 The app should know the environment it runs in to set proper configuration options. That way the code will run in every environment.
 
@@ -133,13 +131,13 @@ First, you're going to extend the bootstrap process to be able to determine whic
 
 ###5.1 `app/Config/environment.php`
 
-Create a new file `app/Config/environment.php` within a new class, called **ENVIRONMENT_CONFIG**, that will be later used by the database config. Note that we have 5 environments: **local, default, development, testing** and **production**.
+Create a new file `app/Config/environment.php` within a new class, called **ENVIRONMENT_CONFIG**, that will be later used by the database config. Note that we have 5 environments: **local, default, development** and **testing** (the _default_ environment corresponds to the _production_ deployment).
 ~~~php
 <?php
 
 class ENVIRONMENT_CONFIG {
 
-    private static $environments = array('local', 'default', 'development', 'testing', 'production');
+    private static $environments = array('local', 'default', 'development', 'testing');
     private static $creds = array();
 
     public static function getCredentials() {
@@ -516,7 +514,7 @@ $ cctrlapp APP_NAME/development push
 $ cctrlapp APP_NAME/development deploy
 ~~~
 
-Check the development deployment: [development.APP_NAME.cloudcontrolled.com/Check](http://development.APP_NAME.cloudcontrolled.com/Check).
+Check the development deployment: _http://development.APP_NAME.cloudcontrolled.com/Check_.
 
 * Reload the page; the visits counter should increase.
 * Send a log line; in the _development_ deployment's log should appear both alert and info messages:
@@ -535,7 +533,7 @@ $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Take a look at your _production_ deployment to ensure that it is working: [APP_NAME.cloudcontrolled.com/Check](http://APP_NAME.cloudcontrolled.com/Check)
+Take a look at your _production_ deployment to ensure that it is working: _http://APP_NAME.cloudcontrolled.com/Check_
 
 * Reload the page; the visits counter should increase.
 * Send a log line; in the _production_ deployment, only the alert log message should appear:
@@ -544,4 +542,4 @@ $ cctrlapp APP_NAME/default log error
 ~~~
 * The debug level in the _production_ deployment is set to 0. That's why on the page bottom the SQL log shouldn't appear.
 
-If you go to [APP_NAME.cloudcontrolled.com](http://APP_NAME.cloudcontrolled.com), you should seen an error in the browser but not in the cloudControl log.
+If you go to _http://APP_NAME.cloudcontrolled.com_, you should seen an error in the browser but not in the cloudControl log.
