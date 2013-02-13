@@ -27,7 +27,7 @@ cloudControl uses a [Procfile] to know how to start the app's processes.
 The example code also already includes a file called `Procfile` at the top level of your repository. It looks like this:
 
 ~~~
-web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL
+web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --auth=$FLOWER_AUTH_EMAIL
 worker: celery -A tasks worker --loglevel=info
 ~~~
 
@@ -75,8 +75,11 @@ $ cctrlapp APP_NAME/default addon.add worker.single
 
 Since we are reading the AMQP URL for the broker from the environment in both, the `Procfile` and the Python code we have to enable providing Add-on credentials as environment variables which is disabled per default for Python apps.
 
+We also set another environment variable called `FLOWER_AUTH_EMAIL` that is passed to the Flower web process for authentication purposes. Without this, the web interface would be public showing your secret AMQP credentials and allowing people to stop your workers.
+
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS
+$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS --FLOWER_AUTH_EMAIL=YOUR_EMAIL_HERE
+# seperate multiple emails by comma
 ~~~
 
 This is it. The example code will now find all necessary credentials to connect to the AMQP service automatically in the runtime environment.
