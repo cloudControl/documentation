@@ -1,4 +1,4 @@
-# Deploying a Tornado application
+# Deploying a Tornado Application
 [Tornado] is an open source version of the scalable, non-blocking web server and tools that power FriendFeed written in Python.
 
 In this tutorial we're going to show you how to deploy a simple Tornado based application on [cloudControl].
