@@ -19,6 +19,7 @@ Here is a full example in which multiple commands are run in bash:
 $ cctrlapp APP_NAME/DEPLOYMENT run bash
 Connecting...
 Warning: Permanently added '[10.250.134.126]:19845' (RSA) to the list of known hosts.
+
 u19845@dep8xxzcqz9-19845:~/www$ rails g scaffold Post title:string content:text
       invoke  active_record
 Connecting to database specified by database.yml
@@ -51,6 +52,7 @@ Connecting to database specified by database.yml
       create      app/assets/stylesheets/posts.css
       invoke  css
       create    app/assets/stylesheets/scaffold.css
+
 u19845@dep8xxzcqz9-19845:~/www$ rake db:migrate
 Connecting to database specified by database.yml
 Migrating to CreatePosts (20121029153226)
@@ -76,6 +78,7 @@ irb(main):004:0> Post.all
   Post Load (1.3ms)  SELECT `posts`.* FROM `posts`
 => [#<Post id: 1, title: "my title", content: "my content", created_at: "2012-10-29 15:33:42", updated_at: "2012-10-29 15:33:42">]
 irb(main):005:0> exit
+
 u19845@dep8xxzcqz9-19845:~/www$ exit
 Connection to 10.250.134.126 closed.
 Connection to ssh.cloudcontrolled.net closed.
