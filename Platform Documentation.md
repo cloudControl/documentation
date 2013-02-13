@@ -272,6 +272,12 @@ A required part of the image is a file called `Procfile` in the root directory o
 web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
 ~~~
 
+It is only allowed to use one command per process. If you need to invoke more than one you have to source them out to an external shell script, which you execute at the `Procfile`:
+
+~~~
+web: ./run_application.sh
+~~~
+
 For more specific examples of a `Procfile` please refer to the language and framework [guides](https://www.cloudcontrol.com/dev-center/Guides).
 
 At the end of the buildpack process, the image is ready to be deployed.
