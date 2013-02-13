@@ -28,7 +28,7 @@ cctrlapp APP_NAME/DEPLOYMENT_NAME run "python manage.py syncdb"
 
 ## Databases
 To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
-To get the credentials of your database, refer to the [Read Configuration][read-config] article.
+To get the credentials of your database, refer to the [Add-on credentials][add-on-credentials] article.
 
 ## Email
 You can't use a local SMTP server, instead choose one of our [email Add-ons][messaging-addons].
@@ -39,5 +39,5 @@ You can't use a local SMTP server, instead choose one of our [email Add-ons][mes
 [procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [messaging-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Messaging%20&%20Mobile/
 [data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[read-config]: https://www.cloudcontrol.com/dev-center/Guides/Python/Read%20configuration
+[add-on-credentials]: https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials.md
 [cloudControl]: https://www.cloudcontrol.com/
