@@ -38,13 +38,14 @@ Luckily, CakePHP is written in a very straight-forward and configurable manner, 
 ###2.2 Logging to syslog
 
 CakePHP by default stores the logs to the file system. The cloudControl platform provides a syslog to write the logs to a database and it is recommended to configure CakePHP to log to syslog. You can read the log by:
+
 ~~~bash
 $ cctrlapp APP_NAME/DEPLOYMENT_NAME log error
 ~~~
 
 ###2.3 Auto-magically determine the environment and set the configuration
 
-CakePHP has no built-in support for different environments, but having different environments is often really convenient, e.g to account for differences between development, staging and production.
+CakePHP has no built-in support for different environments, but having different environments is often really convenient, e.g to account for differences between *development*, *staging* and *production*.
 It is likely that each environment will have different configuration settings. For that reason, we need to be able to differentiate between all the environments.
 The app should know the environment it runs in to set up the proper configuration options. That way the same code will run in all the environments.
 
@@ -60,7 +61,7 @@ $ git add -A
 $ git commit -m "Initial commit"
 ~~~
 
-In this example we are using the application name's placeholder __APP_NAME__. You will of course have to use some other name instead.
+In this example we are using the application name's placeholder `APP_NAME`. You will of course have to use some other name instead.
 Now you need to create a deployment on the cloudControl platform. First create the application, then push and deploy the `APP_NAME/default` deployment, also called _production_ deployment. Run the following commands:
 ~~~bash
 # create the application
@@ -535,11 +536,14 @@ $ cctrlapp APP_NAME/default deploy
 
 Take a look at your _production_ deployment to ensure that it is working: `http://APP_NAME.cloudcontrolled.com/Check`.
 
-* Reload the page; the visits counter should increase.
-* Send a log line; in the _production_ deployment, only the alert log message should appear:
+* Each time you reload the page, the visitor counter should increase.
+* It will also write a log line (please not the different log levels for the _production_ and _development_ deployment).
+
 ~~~bash
 $ cctrlapp APP_NAME/default log error
+[...]
 ~~~
+
 * The debug level in the _production_ deployment is set to 0. That's why on the page bottom the SQL log shouldn't appear.
 
 If you go to `http://APP_NAME.cloudcontrolled.com`, you should seen an error in the browser but not in the cloudControl log.
