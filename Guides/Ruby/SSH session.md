@@ -5,17 +5,17 @@ Here are some examples how it can be used for everyday ruby tasks such as
 running the migrations or using the rails console.
 
 To migrate the database:
-~~~
+~~~bash
 $ ctrlapp APP_NAME/DEPLOYMENT run "rake db:migrate"
 ~~~
 
 To run the rails console:
-~~~
+~~~bash
 $ cctrlapp APP_NAME/DEPLOYMENT run "rails c"
 ~~~
 
 Here is a full example in which multiple commands are run in bash:
-~~~
+~~~bash
 $ cctrlapp APP_NAME/DEPLOYMENT run bash
 Connecting...
 Warning: Permanently added '[10.250.134.126]:19845' (RSA) to the list of known hosts.
@@ -82,7 +82,7 @@ Connection to ssh.cloudcontrolled.net closed.
 ~~~
 
 The same could be accomplished if all the individual commands were chained:
-~~~
+~~~bash
 $ cctrlapp APP_NAME/DEPLOYMENT run "rails g scaffold Post title:string content:text && rake db:migrate && rails c"
 ~~~
 
