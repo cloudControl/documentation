@@ -11,7 +11,7 @@ $ git clone git://github.com/cloudControl/python-tornado-example-app.git
 $ cd python-tornado-example-app
 ~~~
 
-The code from the example repository is ready to be deployed. Let's still go through the different files and their purpose real quick.
+The code from the example repository is ready to be deployed. Lets still go through the different files and their purpose real quick.
 
 ### Dependency Tracking
 The [Python buildpack] tracks dependencies via pip and the `requirements.txt` file. It needs to be placed in the root directory of your repository. The example app specifies only Tornado itself as a dependency. The one you cloned as part of the example app looks like this:
