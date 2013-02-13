@@ -241,23 +241,80 @@ More information on how to use php-memcached can be found on [php.net](http://ph
 Java
 ----
 
-To migrate official [Java Jetty Memcache Example](https://github.com/memcachier/memcachier-fibonacci) application just clone it to your local machine:
+In thi short example we will show you how to integrate your Java application with Memcachier Add-on. We will use `spymemcached` library with SASL authentication support. To use it in your project, just specify additional dependency in your `pom.xml` file:
 
-~~~bash
-$ git clone https://github.com/memcachier/memcachier-fibonacci
+~~~xml
+...
+<dependency>
+    <groupId>com.google.code.simple-spring-memcached</groupId>
+    <artifactId>spymemcached</artifactId>
+    <version>2.8.4</version>
+</dependency>
+...
 ~~~
 
-Create applicaton on cloudControl platform, push, create Add-on and deploy:
+#####Create memcached SASL connection:
 
-~~~bash
-$ cd memcachier-fibonacci
-$ cctrlapp APP_NAME create java
-$ cctrlapp APP_NAME/default push
-$ cctrlapp APP_NAME/default addon.add memcachier.PLAN
-$ cctrlapp APP_NAME/default deploy
+~~~java
+package com.cloudcontrolled.sample.spring.memcachier;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.security.auth.callback.CallbackHandler;
+
+import net.spy.memcached.ConnectionFactory;
+import net.spy.memcached.ConnectionFactoryBuilder;
+import net.spy.memcached.MemcachedClient;
+import net.spy.memcached.auth.AuthDescriptor;
+import net.spy.memcached.auth.PlainCallbackHandler;
+
+public class MemcachierConnection extends MemcachedClient {
+
+    private static final int PORT = 11211;
+
+    public MemcachierConnection(String username, String password, String servers) throws IOException {
+        this(new SASLConnectionFactoryBuilder().build(username, password), getAddresses(servers));
+    }
+
+    public MemcachierConnection(ConnectionFactory cf, List<InetSocketAddress> addrs) throws IOException {
+        super(cf, addrs);
+    }
+
+    private static List<InetSocketAddress> getAddresses(String addresses) {
+        List<InetSocketAddress> addrList = new ArrayList<InetSocketAddress>();
+        for (String addr : addresses.split(" ")) {
+            addrList.add(new InetSocketAddress(addr, PORT));
+        }
+        return addrList;
+    }
+}
+
+class SASLConnectionFactoryBuilder extends ConnectionFactoryBuilder {
+    public ConnectionFactory build(String username, String password){
+        CallbackHandler ch = new PlainCallbackHandler(username, password);
+        AuthDescriptor ad = new AuthDescriptor(new String[]{"PLAIN"}, ch);
+        this.setProtocol(Protocol.BINARY);
+        this.setAuthDescriptor(ad);
+        return this.build();
+    }
+}
 ~~~
 
-Congratulations, you should now be able to reach your application at **http://APP_NAME.cloudcontrolled.com**.
+Take care to use correct socket addresses (`getAddresses()` method) as list of servers in the Add-on credentials contain only hosts, without the port. The port is always the default one - `11211`.
+
+#####Use Memcachier:
+
+~~~java
+String user = System.getenv("MEMCACHIER_USERNAME");
+String pass = System.getenv("MEMCACHIER_PASSWORD");
+String addr = System.getenv("MEMCACHIER_SERVERS");
+MemcachierConnection mc = new MemcachierConnection(user, pass, addr);
+~~~
+
+You can also find ready-to-deply example on [Github](https://github.com/cloudControl/java-spring-jsp-example-app/tree/memcached_guide).
 
 Library support
 -----
