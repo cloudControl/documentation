@@ -127,6 +127,8 @@ At this point you can see web interface at `http://APP_NAME.cloudcontrolled.com`
 ## Scaling Celery Workers
 Scaling Celery workers on cloudControl is easy enough luckily. We have already defined how to run one in the `Procfile` earlier. So we can now go ahead and start the first one.
 
+### Adding Workers
+
 ~~~bash
 $ cctrlapp APP_NAME/default worker.add worker
 # you can always list running workers like this
@@ -163,6 +165,8 @@ To handle more tasks simultaneously you can always just add more workers. (Pleas
 $ cctrlapp APP_NAME/default worker.add worker
 ~~~
 
+### Removing Workers
+
 To stop a worker you can stop it from the command line.
 
 ~~~bash
@@ -196,6 +200,8 @@ USER@HOSTNAME:~/www$ celery --broker=$CLOUDAMQP_URL status
 USER@HOSTNAME:~/www$ exit
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
+
+## Résumé
 
 This guide showed how to run both Flower aswell as a Celery worker on cloudControl by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
 
