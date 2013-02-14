@@ -138,25 +138,25 @@ $ cctrlapp APP_NAME/default worker.add worker
 $ cctrlapp APP_NAME/default worker
 # and also check the worker's log output with
 $ cctrlapp APP_NAME/default log worker
-[TIMESTAMP] DEP_ID Started worker (command: 'celery -A tasks worker --loglevel=info ', parameter: '')
-[TIMESTAMP] DEP_ID 
-[TIMESTAMP] DEP_ID  -------------- celery@HOSTNAME v3.0.15 (Chiastic Slide)
-[TIMESTAMP] DEP_ID ---- **** -----
-[TIMESTAMP] DEP_ID --- * ***  * -- [Configuration]
-[TIMESTAMP] DEP_ID -- * - **** --- . broker:      amqp://CLOUDAMQP_URL
-[TIMESTAMP] DEP_ID - ** ---------- . app:         tasks:0x1357890
-[TIMESTAMP] DEP_ID - ** ---------- . concurrency: 2 (processes)
-[TIMESTAMP] DEP_ID - ** ---------- . events:      OFF (enable -E to monitor this worker)
-[TIMESTAMP] DEP_ID - ** ----------
-[TIMESTAMP] DEP_ID - *** --- * --- [Queues]
-[TIMESTAMP] DEP_ID -- ******* ---- . celery:      exchange:celery(direct) binding:celery
-[TIMESTAMP] DEP_ID --- ***** -----
-[TIMESTAMP] DEP_ID 
-[TIMESTAMP] DEP_ID [Tasks]
-[TIMESTAMP] DEP_ID   . tasks.add
-[TIMESTAMP] DEP_ID [TIMESTAMP: WARNING/MainProcess] celery@HOSTNAME ready.
-[TIMESTAMP] DEP_ID [TIMESTAMP: INFO/MainProcess] consumer: Connected to amqp://CLOUDAMQP_URL
-[TIMESTAMP] DEP_ID [TIMESTAMP: INFO/MainProcess] Events enabled by remote.
+[TIMESTAMP] WRK_ID Started worker (command: 'celery -A tasks worker --loglevel=info ', parameter: '')
+[TIMESTAMP] WRK_ID 
+[TIMESTAMP] WRK_ID  -------------- celery@HOSTNAME v3.0.15 (Chiastic Slide)
+[TIMESTAMP] WRK_ID ---- **** -----
+[TIMESTAMP] WRK_ID --- * ***  * -- [Configuration]
+[TIMESTAMP] WRK_ID -- * - **** --- . broker:      amqp://CLOUDAMQP_URL
+[TIMESTAMP] WRK_ID - ** ---------- . app:         tasks:0x1357890
+[TIMESTAMP] WRK_ID - ** ---------- . concurrency: 2 (processes)
+[TIMESTAMP] WRK_ID - ** ---------- . events:      OFF (enable -E to monitor this worker)
+[TIMESTAMP] WRK_ID - ** ----------
+[TIMESTAMP] WRK_ID - *** --- * --- [Queues]
+[TIMESTAMP] WRK_ID -- ******* ---- . celery:      exchange:celery(direct) binding:celery
+[TIMESTAMP] WRK_ID --- ***** -----
+[TIMESTAMP] WRK_ID 
+[TIMESTAMP] WRK_ID [Tasks]
+[TIMESTAMP] WRK_ID   . tasks.add
+[TIMESTAMP] WRK_ID [TIMESTAMP: WARNING/MainProcess] celery@HOSTNAME ready.
+[TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] consumer: Connected to amqp://CLOUDAMQP_URL
+[TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] Events enabled by remote.
 ~~~
 
 If you refresh the web interface at `http://APP_NAME.cloudcontrolled.com` you should be able to see the worker now.
