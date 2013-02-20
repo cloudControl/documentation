@@ -1,30 +1,30 @@
-# PHP AWS S3 - data storage solution
+# AWS S3 Guide for PHP
 
-If your application is hosted on a horizontally scaled network, you might need to store the data in one centralized place.
-E.g. if you want to store user-created images, it makes no sense to store them on the file system, as the images created on one node are not available on another node.
+[AWS Simple Storage Service (S3)](http://aws.amazon.com/s3/) is a web service to store and retrieve data. S3 or similiar services are a key building block for scalable Cloud applications and perfectly complement cloudControl's [non persistent filesystem](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem).
 
-A handy solution for this problem is using a storage service provider:
-
-_"A Storage Service Provider (SSP) is any company that provides computer storage space and related management services. SSPs also offer periodic backup and archiving.
-Advantages of managed storage are that more space can be ordered as required. Depending upon your SSP, backups may also be managed. Faster data access can be ordered as required. Also, maintenance costs may be reduced, particularly for larger organizations who store a large or increasing volumes of data. Another advantage is that best practices are likely to be followed. Disadvantages are that the cost may be prohibitive, for small organizations or individuals who deal with smaller amounts or static volumes of data and that there's less control of data systems."_ -- _[Storage service provider on wikipedia](http://en.wikipedia.org/wiki/Storage_service_provider)_
-
-We recommend using [Amazon Simple Storage Service (Amazon S3)](http://aws.amazon.com/en/s3/).
-
-_"Amazon S3 provides a simple web services interface that can be used to store and retrieve any amount of data, at any time, from anywhere on the web. It gives any developer access to the same highly scalable, reliable, secure, fast, inexpensive infrastructure that Amazon uses to run its own global network of web sites. The service aims to maximize benefits of scale and to pass those benefits on to developers."_ -- [Amazon S3](http://aws.amazon.com/en/s3/)
-
-## PHP Amazon S3 Integration
-
-Amazon provides SDK to simplify the Amazon Web Services (AWS) usage. The SDK helps to remove the complexity from the code with a powerful suite of PHP classes for many AWS services including Amazon S3. The single, downloadable package includes the AWS PHP Library and documentation.
+ The single, downloadable package includes the AWS PHP Library and documentation.
 
 ### Getting Started
 
-For installation and basic usage read the [Amazon SDK for PHP 2 documentation](https://github.com/aws/aws-sdk-php). This guide shows how to start building PHP applications on the Amazon Web Services platform with the AWS SDK for PHP 2.
+Amazon provides a [PHP SDK](https://github.com/aws/aws-sdk-php) to simplify the Amazon Web Services (AWS) usage. The SDK helps to remove the complexity from the code with a powerful suite of PHP classes for many AWS services including Amazon S3. This guide shows how to store data from PHP applications on S3 using the PHP SDK.
+
+For obvious reasons this guide requires you to have an S3 account. Go ahead and [register](https://portal.aws.amazon.com/gp/aws/developer/subscription/index.html?productCode=AmazonS3) for a free one if you haven't already.
 
 ### Example App Using Amazon S3
 
-In this example app you can list all your buckets, list the keys of a bucket and upload a file to a bucket. We use the Silex framework to simplify some steps. When the application is fully implemented, you can deploy it on the cloudControl platform to see how it's working.
+The example app lists buckets and the files names (ids) inside a bucket. Uploading or viewing the content of a file functionalities have been omitted because the app is not protected by any form of authentication. The exaplce code is based on the Silex framework and is ready to be deployed on the [cloudControl PaaS](https://www.cloudcontrol.com).
 
-In the root folder create `composer.json` file with the following content:
+Let's clone the example code from Github.
+
+~~~bash
+$ git clone git://github.com/cloudControl/php-s3-example-app.git
+$ cd php-s3-example-app
+~~~
+
+#### Tracking Dependencies
+
+The example app specifies the required dependencies in the `composer.json` file.
+
 ~~~json
 {
     "require": {
@@ -37,16 +37,17 @@ In the root folder create `composer.json` file with the following content:
 }
 ~~~
 
-If you don't have the composer already, you need to download it:
+To install the dependencies locally install and run Composer. Please note how the `vendor` directory is ignored via the `.gitignore` file because the [PHP buildpack](https://github.com/cloudControl/buildpack-php) will pull in the dependencies via [Composer](http://getcomposer.org/) automatically during the push later.
+
 ~~~bash
 $ curl -s https://getcomposer.org/installer | php
-~~~
-and install the requirements:
-~~~bash
 $ php composer.phar install
 ~~~
 
-Next, create a public folder and the file called `public/index.php`:
+#### Example Application Logic
+
+The simple application logic to list buckets or files lives in `public/index.php`. The code is easy to read and mostly self explanatory.
+
 ~~~php
 <?php
 require_once __DIR__.'/../vendor/autoload.php';
@@ -91,94 +92,17 @@ $app->get('/list/{bucketname}', function ($bucketname) use ($app) {
         'objects' => $objects));
 });
 
-/**
- * Upload File To S3
-*/
-$app->match('/upload/{bucketname}', function (Request $request, $bucketname) use ($app) {
-    $form = $app['form.factory']->createBuilder('form')
-    ->add('fileUpload', 'file', array('label' => " "))
-    ->getForm();
-
-    if ('POST' == $request->getMethod()) {
-        $form->bind($request);
-        if ($form->isValid()) {
-            $data = $form->getData();
-            // do something with the data
-            $file = $data['fileUpload'];
-            if ($file->isValid()){
-                $s3 = Aws::factory('../awsconfig.php')->get('s3');
-                $s3->putObject(array(
-                    'Bucket' => $bucketname,
-                    'Key'    => $file->getClientOriginalName(),
-                    'Body'   => fopen($file->getPathname(), 'r'),
-                    'ACL'    => CannedAcl::PUBLIC_READ
-                ));
-            }
-            return $app->redirect('/');
-        }
-    }
-    return $app['twig']->render('upload.twig', array(
-        'bucketname' => $bucketname,
-        'form' => $form->createView()));
-});
-
 $app->run();
 ~~~
 
-Now you need the views. Create a folder `views` that contains `views/index.twig`:
-~~~html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head></head>
-  <body>
-    <h1>Your Current Bucket List</h1>
-    {% for bucket in buckets %}
-      <a href="/upload/{{ bucket['Name'] }}">[U]</a> - <a href="/list/{{ bucket['Name'] }}">{{ bucket['Name'] }}</a><br/>
-    {% endfor %}
-    </br>
-    <span style="font-size:90%">Click on [U] to upload a file to the bucket.
-  </body>
-</html>
-~~~
+#### Reading S3 Credentials from Environment
 
-`views/list.twig`:
-~~~html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head></head>
-  <body>
-    <h1>Your Buckets "{{ bucketname }}" Object List</h1>
-    {% for object in objects %}
-      {{ object['Key'] }}<br/>
-    {% endfor %}
-  </body>
-</html>
-~~~
+To access your S3 account you obviously need to have your AWS credentials available to the app.
 
-and `views/upload.twig`:
-~~~html
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head></head>
-  <body>
-    <h1>Upload a File to "{{ bucketname }}"</h1>
-    <form action="/upload/{{ bucketname }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
-        <input type="submit" value="{{ 'Send'|trans }}">
-    </form>
-  </body>
-</html>
-~~~
+On cloudControl it's highly recommended to not have credentials in the repository but instead have them as part of the environment. We'll set the credentials via the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) later.
 
+For now, let's take a look at the file `awsconfig.php` that will read the `AWS_KEY`, `AWS_SECRET_KEY` and `AWS_REGION` credentials from the environment once the application has been deployed.
 
-#### Amazon credentials
-To connect to your AWS account you need to have your AWS credentials available in the app.
-
-You shouldn't hard-code the credentials as they will appear in your code repository.
-The proper way to solve this is to have them as variables available in the environment.
-This way your credentials are tied to the deployment and not to the code.
-
-For now, let's create a file `awsconfig.php` with the following content:
 ~~~php
 <?php
 $aws_key = '';
@@ -224,55 +148,30 @@ return array(
     )
 );
 ~~~
-In the code listed above, we read the values for AWS keys and region from credentials file.
-The credentials file itself will be populated later, when we create the app on the platform, and expose the following variables: `AWS_KEY`, `AWS_SECRET_KEY` and `AWS_REGION`.
-
-Next, to route all requests to `public/index.php` create a file `public/.htaccess` with:
-~~~bash
-RewriteEngine On
-RewriteRule ^.*$ index.php [NC,L]
-~~~
-
-You have to set the document root to the `public`. Create the directory structure and the file `.buildpack/apache/conf/custom_document_root.conf` with the following content:
-~~~
-DocumentRoot /app/www/public
-<Directory /app/www/public>
-    AllowOverride All
-    Options SymlinksIfOwnerMatch
-    Order Deny,Allow
-    Allow from All
-    DirectoryIndex index.php index.html index.htm
-</Directory>
-~~~
 
 ### Deploy the App
 
-CloudControl will download the required libraries, so you need to git-ignore the `vendor` folder:
-~~~bash
-$ echo "vendor/*" >> .gitignore
-~~~
+Let's create a new application, push it and deploy it. As always replace `APP_NAME` with a creative and unique name of your choice.
 
-Use git:
-~~~bash
-$ git init
-$ git add -A
-$ git commit -am "Initial commit"
-~~~
-
-In this example we are using the application name's placeholder APP_NAME. You will of course have to use some other name instead.
-Create a new cloudControl application with your cloudControl account.
 ~~~bash
 $ cctrlapp APP_NAME create php
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default deploy --stack pinky
 ~~~
 
-Don't forget to use the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config)
-to add the AWS variables to your environment:
+Now use the Custom Config Add-on to add the AWS variables to your environment. Replace `YOUR_AWS_KEY`, `YOUR_AWS_SECRET_KEY` with the respective values from your AWS account.
+
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --AWS_KEY=YOUR_AWS_KEY --AWS_SECRET_KEY=YOUR_AWS_SECRET_KEY --AWS_REGION=YOUR_AWS_REGION
+$ cctrlapp APP_NAME/default addon.add config.free --AWS_KEY=YOUR_AWS_KEY --AWS_SECRET_KEY=YOUR_AWS_SECRET_KEY --AWS_REGION="eu-west-1"
 ~~~
 
-That's all, now you can list your buckets at `http://APP_NAME.cloudcontrolled.com`. You can also upload files or list the bucket objects via links.
+Finally checkout your app under `http://APP_NAME.cloudcontrolled.com`.
 
-Have fun :-)
+Tip: If you plan to use the S3 bucket for anything else at a later point in time it's probably a good idea to delete the app and not have all current and future bucket and file names publicly available.
+
+~~~bash
+$ cctrlapp APP_NAME/default undeploy
+Do you really want to delete this deployment? This will delete everything including files and the database. Type "Yes" without the quotes to delete: Yes
+$ cctrlapp APP_NAME delete
+Do you really want to delete this application? Type "Yes" without the quotes to delete: Yes
+~~~
