@@ -1,6 +1,6 @@
 #Deploying Yii to cloudControl
 
-If you're looking for a lightning fast, light and effective PHP Framework for your projects, one without a lot of the cruft and legacy overhead of some of the other popular PHP frameworks available today, you can't go past [Yii Framework](http://www.yiiframework.com/). Now at version 1.1.13 it comes with a variety of features to speed up your application development, including:
+If you're looking for a lightning fast, effective and light PHP Framework for your projects, one without a lot of the cruft and legacy overhead of some of the other popular PHP frameworks available today, you can't get past [Yii Framework](http://www.yiiframework.com/). Now at version 1.1.13 it comes with a variety of features to speed up your application development, e.g:
 
  * Baked in Security
  * Clear MVC approach
@@ -8,7 +8,7 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
  * Loads of plugins and Add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through the process of deploying the Yii Framework v1.1.11 to [the cloudControl platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through the process of deploying the Yii Framework v1.1.11 on the [cloudControl](http://www.cloudcontrol.com) platform.
 
 ##1. Install Yii Framework
 
