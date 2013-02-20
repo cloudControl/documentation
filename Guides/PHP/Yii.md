@@ -10,12 +10,6 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
 
 In this tutorial, we're going to take you through the process of deploying the Yii Framework v1.1.11 to [the cloudControl platform](http://www.cloudcontrol.com).
 
-##Prerequisites
-
- * [cloudControl user account](https://www.cloudcontrol.com/for-developers)
- * [Git client](http://git-scm.com/)
- * MySQL client, such as [MySQL Workbench](http://dev.mysql.com/downloads/workbench/) or the command-line tools
-
 ##1. Install Yii Framework
 
 Download a copy of the latest, stable release. You can `git clone` it:
