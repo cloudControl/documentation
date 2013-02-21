@@ -12,7 +12,7 @@ In this tutorial, we're going to take you through the process of deploying the Y
 
 ##1. Install Yii Framework
 
-Download a copy of the latest, stable release. You can `git clone` it:
+Download a copy of the latest stable release. 
 ~~~bash
 $ cd <your projects directory>
 $ wget https://github.com/yiisoft/yii/archive/1.1.13.tar.gz
