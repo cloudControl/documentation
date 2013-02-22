@@ -27,6 +27,7 @@ $ curl -s https://getcomposer.org/installer | php
 ~~~
 
 ###1.2. Create the project
+#### Official method
 ~~~bash
 $ php composer.phar create-project --repository-url="http://packages.zendframework.com" zendframework/skeleton-application <path/to/install>
 $ cd <path/to/install>
@@ -35,6 +36,17 @@ $ cd <path/to/install>
 Now you also have a compose in your project directory. To avoid error messages while pushing to cloudControl you should update the composer in project directory:
 ~~~bash
 $ php composer.phar self-update
+~~~
+
+#### Alternative method
+The previously described method is the currently officialy recommended method to install Zend Framework 2. But from our experiences there can occure a 'File Not Found' error. If this happen, 
+there is an alternative method. You can clone the repository and manually invoke composer using the shipped composer.phar:
+~~~bash
+$ cd your/project/dir
+$ git clone git://github.com/zendframework/ZendSkeletonApplication.git
+$ cd ZendSkeletonApplication
+$ php composer.phar self-update
+$ php composer.phar install
 ~~~
 
 ###1.3. Check the installation
