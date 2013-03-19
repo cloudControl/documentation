@@ -1,5 +1,5 @@
 # Deploying a Pyramid application
-[Pyramid] prides itself of being a "small, fast, down-to-earth, open-source Python web application development framework." And it is as fast and down-to-earth to make Pyramid work on clouControl! 
+[Pyramid] prides itself of being a "small, fast, down-to-earth, open-source Python web application development framework." And it is as fast and down-to-earth to make Pyramid work on cloudControl! 
 
 Within minutes, you are going to deploy a simple "Hello World!" Pyramid application on [cloudControl]. 
 
@@ -18,7 +18,7 @@ $ git clone git://github.com/annatraussnig/python-pyramid-example-app.git
 $ cd python-pyramid-example-app
 ~~~
 
-In addition to the original source code of the app, app.py, you can see there are two more interesting files in the folder:
+In addition to the original source code of the app, `app.py`, you can see there are two more interesting files in the folder:
 + requirements.txt
 + Procfile
 
@@ -26,7 +26,7 @@ Those files provide information on dependency requirements and process type, ess
 
 
 ### Dependency declaration with Pip
-'requirements.txt' lists our dependency requirements. The file should always be saved in the project's root directory.
+`requirements.txt` lists our dependency requirements. The file should always be saved in the project's root directory.
 In our case, this Pyramid app is simple enough to have only one requirement: Pyramid!
 
 ~~~pip
@@ -89,7 +89,7 @@ Now deploy and watch:
 $ cctrlapp APP_NAME/default deploy 
 ~~~
 
-##Reaching the application
+##Finishing up
 And... that's it, really! You should now be able to reach your application at: `http://APP_NAME.cloudcontrolled.com`.
 
 To prompt "Hello world!" as explained in this [Pyramid tutorial], visit `http://APP_NAME.cloudcontrolled.com/hello/world`.
