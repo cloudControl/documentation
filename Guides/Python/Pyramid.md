@@ -1,7 +1,8 @@
 # Deploying a Pyramid application
 [Pyramid] is described as a "small, fast, down-to-earth, open-source Python web application development framework." And it is as fast and down-to-earth to make Pyramid work on clouControl! 
 Within minutes, you are going to deploy a simple "Hello World!" Pyramid application on [cloudControl]. 
-(To learn more about features, please consult our documentation on [Python buildpack].)
+
+(To learn more about supported features, please consult our documentation on [Python buildpack].)
 
 ## Prerequisites
 Feel free to simply read through this document... However, if you wish to finish this tutorial, you may need:
@@ -10,7 +11,7 @@ Feel free to simply read through this document... However, if you wish to finish
 + Installed [cloudControl-command-line-client]
 
 ## Cloning a simple application
-We begin by cloning the python-pyramid-example-app folder from our repository:
+We begin by cloning the python-pyramid-example-app folder:
 
 ~~~bash
 $ git clone git://github.com/cloudControl/python-pyramid-example-app.git
@@ -20,6 +21,7 @@ $ cd python-pyramid-example-app
 In addition to the original source code of the app, app.py, you can see there are two more interesting files in the folder:
 + requirements.txt
 + Procfile
+
 Those files provide information on dependency requirements and process type, essential to cloudControl. Once you've got this part sorted, you are practically done!
 
 
