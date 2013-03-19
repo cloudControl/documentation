@@ -5,8 +5,7 @@ Within minutes, you are going to deploy a simple "Hello World!" Pyramid applicat
 (To learn more about supported features, please consult our documentation on [Python buildpack].)
 
 ## Prerequisites
-You may need a couple of things to finish the tutorial:
-+ A [Git client]. Command-line or GUI, it's up to you to decide!
++ A [Git client]. Command-line or GUI, it's up to you!
 + A [cloudControl] user account.
 + Installed [cloudControl-command-line-client]
 
