@@ -91,8 +91,7 @@ $ cctrlapp APP_NAME/default deploy
 ##Reaching the application
 And... that's it, really! You should now be able to reach your application at: `http://APP_NAME.cloudcontrolled.com`.
 
-To prompt "Hello world!" as explained in this [Pyramid tutorial], visit:
-http://testpyramid.cloudcontrolled.com/hello/world
+To prompt "Hello world!" as explained in this [Pyramid tutorial], visit `http://APP_NAME.cloudcontrolled.com/hello/world`.
 
 
 [Pyramid]: http://www.pylonsproject.org/projects/pyramid/about
