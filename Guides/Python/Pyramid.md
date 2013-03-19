@@ -1,5 +1,6 @@
 # Deploying a Pyramid application
-[Pyramid] is described as a "small, fast, down-to-earth, open-source Python web application development framework." And it is as fast and down-to-earth to make Pyramid work on clouControl! 
+[Pyramid] prides itself of being a "small, fast, down-to-earth, open-source Python web application development framework." And it is as fast and down-to-earth to make Pyramid work on clouControl! 
+
 Within minutes, you are going to deploy a simple "Hello World!" Pyramid application on [cloudControl]. 
 
 (To learn more about supported features, please consult our documentation on [Python buildpack].)
