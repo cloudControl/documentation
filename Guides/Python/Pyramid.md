@@ -5,7 +5,7 @@ Within minutes, you are going to deploy a simple "Hello World!" Pyramid applicat
 (To learn more about supported features, please consult our documentation on [Python buildpack].)
 
 ## Prerequisites
-Feel free to simply read through this document... However, if you wish to finish this tutorial, you may need:
+You may need a couple of things to finish the tutorial:
 + A [Git client]. Command-line or GUI, it's up to you to decide!
 + A [cloudControl] user account.
 + Installed [cloudControl-command-line-client]
@@ -14,7 +14,7 @@ Feel free to simply read through this document... However, if you wish to finish
 We begin by cloning the python-pyramid-example-app folder:
 
 ~~~bash
-$ git clone git://github.com/cloudControl/python-pyramid-example-app.git
+$ git clone git://github.com/annatraussnig/python-pyramid-example-app.git
 $ cd python-pyramid-example-app
 ~~~
 
@@ -57,11 +57,11 @@ Push your code to the application's repository, which creates a deployment image
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-    Counting objects: 8, done.
-    Delta compression using up to 4 threads.
-    Compressing objects: 100% (5/5), done.
-    Writing objects: 100% (6/6), 614 bytes, done.
-    Total 6 (delta 1), reused 0 (delta 0)
+    Counting objects: 14, done.
+    Delta compression using up to 2 threads.
+    Compressing objects: 100% (10/10), done.
+    Writing objects: 100% (14/14), 1.45 KiB, done.
+    Total 14 (delta 5), reused 0 (delta 0)
         
     -----> Receiving push
     -----> Preparing Python interpreter (2.7.2)
@@ -89,8 +89,10 @@ Now deploy and watch:
 $ cctrlapp APP_NAME/default deploy 
 ~~~
 
-And... that's it, really! You should now be able to reach your application at: 
-`http://APP_NAME.cloudcontrolled.com`. However, you won't see much except for a 404 Error. To prompt "Hello world!" as explained in this [Pyramid tutorial], visit:
+##Reaching the application
+And... that's it, really! You should now be able to reach your application at: `http://APP_NAME.cloudcontrolled.com`.
+
+To prompt "Hello world!" as explained in this [Pyramid tutorial], visit:
 http://testpyramid.cloudcontrolled.com/hello/world
 
 
