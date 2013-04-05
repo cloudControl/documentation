@@ -39,7 +39,7 @@ Installing cctrl is easy and works on Mac/Linux as well as on Windows.
 
 #### Quick Installation Windows
 
-For Windows we offer an installer. Please download [the latest version](https://github.com/cloudControl/cctrl/downloads) of the installer from the Github. The file is named cctrl-x.x-setup.exe.
+For Windows we offer an installer. Please download [the latest version](http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/) of the installer from S3. The file is named cctrl-x.x-setup.exe.
 
 #### Quick Installation Linux/Mac
 
