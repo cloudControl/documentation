@@ -36,5 +36,5 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove newrelic.OPTION
 
 ## PHP API
 
-cloudControl takes care of the whole installation and settings process. Therefore, some settings can't be edited by you. However, you can optionally use a set of PHP functions for influencing its data collection and recording for an even better integration. A detailed description of the available methods that can be used is listed in [New Relic's PHP documentation](http://support.newrelic.com/kb/docs/php-agent) under "PHP API".
+cloudControl takes care of the whole installation and settings process. Therefore, some settings can't be edited by you. However, you can optionally use a set of PHP functions for influencing its data collection and recording for an even better integration. A detailed description of the available methods that can be used is listed in [New Relic's PHP documentation](https://newrelic.com/docs/php/the-php-api).
 
