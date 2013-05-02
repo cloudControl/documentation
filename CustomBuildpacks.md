@@ -25,6 +25,7 @@ Here is a list of verified and recommended buildpacks for the cloudControl platf
 |Lua|[https://github.com/leafo/heroku-buildpack-lua](https://github.com/leafo/heroku-buildpack-lua)|
 |C|[https://github.com/atris/heroku-buildpack-C](https://github.com/atris/heroku-buildpack-://github.com/atris/heroku-buildpack-C)|
 |Haskell|[https://github.com/pufuwozu/heroku-buildpack-haskell](https://github.com/pufuwozu/heroku-buildpack-haskell)|
+|Perl|[https://github.com/fern4lvarez/buildpack-perl](https://github.com/fern4lvarez/buildpack-perl)|
 
 ## Using a custom Buildpack
 
