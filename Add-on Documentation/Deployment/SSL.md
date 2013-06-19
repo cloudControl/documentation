@@ -35,7 +35,7 @@ When the SSL certificate is expired, you can update it by removing the addon and
  $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
  ~~~
 
- Note: You need provide the original key and chain again when updating the addon even if those are not changed.
+Note: Chain file is optional, but it is highly recommended to provide it [[1]](http://www.nczonline.net/blog/2012/08/15/setting-up-ssl-on-an-amazon-elastic-load-balancer/). You need provide the original key and chain again when updating the addon even if those are not changed.
 
 ## HTTPS Redirects
 
@@ -72,3 +72,7 @@ For PHP you can either redirect via Apache's mod_rewrite using a `.htaccess` fil
 
 ?>
 ~~~
+
+## Useful links:
+
+[1] [Setting up SSL on an Amazon Elastic Load Balancer](http://www.nczonline.net/blog/2012/08/15/setting-up-ssl-on-an-amazon-elastic-load-balancer/)
