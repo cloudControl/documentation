@@ -23,7 +23,7 @@ the cloudControl Platform. The application in question is a fork of Michael Hart
 
 To start, first clone the application from the previously mentioned git repository:
 ~~~bash
-$ git git://github.com/cloudControl/ruby-rails-example-app.git
+$ git clone git://github.com/cloudControl/ruby-rails-example-app.git
 $ cd ruby-rails-example-app
 ~~~
 
