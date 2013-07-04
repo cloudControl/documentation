@@ -8,7 +8,7 @@ The example app is a fork of the official ZendSkeletonApplication available on [
 
 Let's clone the example code from Github and walk through some of the changes.
 
-~~~
+~~~bash
 $ git clone https://github.com/cloudControl/php-zend2-example-app.git
 $ cd php-zend2-example-app
 ~~~
@@ -18,7 +18,8 @@ $ cd php-zend2-example-app
 To be able to run the app locally, we need to supply local database credentials, install the dependencies using Composer, initialize the session table and then enter the `public/` directory, and start the PHP 5.4 built-in web server.
 
 Put something like this in `config/autoload/local.php`. Make sure to replace `DATABASE`, `USERNAME` and `PASSWORD`.
-~~~
+
+~~~php
 <?php
 
 return array(
@@ -50,7 +51,7 @@ The code in `config/autoload/global.php` is pretty straightforward. If the envir
 
 We also configure the logger to log to syslog.
 
-~~~
+~~~php
 <?php
 	
 function get_credentials() {
@@ -120,7 +121,7 @@ To avoid this, the app is preconfigured to store sessions using the previously c
 
 The respective code lives in `module/Application/Module.php`. It uses the global database credentials and sets the built-in Zend 2 database session save handler as the default.
 
-~~~
+~~~php
 [...]
 
 class Module
