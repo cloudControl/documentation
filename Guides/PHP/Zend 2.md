@@ -6,19 +6,20 @@ The example app is a fork of the official ZendSkeletonApplication available on [
 
 ## The Example App
 
-Let's clone the example code from Github and walk through some of the changes.
+Let's clone the example code from Github and walk through the cloudControl platform relevant changes.
 
-~~~
+~~~bash
 $ git clone https://github.com/cloudControl/php-zend2-example-app.git
 $ cd php-zend2-example-app
 ~~~
 
 ### Optional: Start the App Locally Using the PHP 5.4 Built-in Webserver
 
-To be able to run the app locally, we need to supply local database credentials, install the dependencies using Composer, initialize the session table and then enter the `public/` directory, and start the PHP 5.4 built-in web server.
+The app can be run locally with the PHP 5.4 built-in web server. Simply provide the local db credentials, install the dependencies using Composer, initialize the session table and then start the PHP 5.4 built-in web server.
 
-Put something like this in `config/autoload/local.php`. Make sure to replace `DATABASE`, `USERNAME` and `PASSWORD`.
-~~~
+Create the file `config/autoload/local.php` with the following code. Make sure to replace the `DATABASE`, `USERNAME` and `PASSWORD` placeholders.
+
+~~~php
 <?php
 
 return array(
@@ -42,15 +43,15 @@ $ cd public/
 $ php -S localhost:8888
 ~~~
 
-Open [localhost:8888](http://localhost:8888/) to visit the local app
+Open [localhost:8888](http://localhost:8888/) in your browser to visit the local app.
 
 ### Read Credentials from the Environment and Write the Log to Syslog
 
-The code in `config/autoload/global.php` is pretty straightforward. If the environment variable `CRED_FILE` is set, the `get_credentials()` method is used to cread the JSON file and prepare a db config array in the format that Zend 2 expects.
+The code in `config/autoload/global.php` is pretty straightforward. If the environment variable `CRED_FILE` is set, the `get_credentials()` method is used to read the JSON file and return the db credentials as part of the Zend 2 config.
 
 We also configure the logger to log to syslog.
 
-~~~
+~~~php
 <?php
 	
 function get_credentials() {
@@ -120,7 +121,7 @@ To avoid this, the app is preconfigured to store sessions using the previously c
 
 The respective code lives in `module/Application/Module.php`. It uses the global database credentials and sets the built-in Zend 2 database session save handler as the default.
 
-~~~
+~~~php
 [...]
 
 class Module
@@ -139,15 +140,9 @@ class Module
 [...]
 ~~~
 
-### A Simple Controller and View
-
-To test the session handler the `IndexController` stores a username in the session and displays a personal greeting if the user has a session. It also has a nice helper function to initialize the session database table, that you already might have used during the local setup earlier.
-
-After the short walkthrough of the code, lets go ahead and deploy the app to cloudControl.
-
 ## Deploy the Zend 2 Example App to cloudControl
 
-Make sure to pick a unique and exciting `APP_NAME`.
+After the short walkthrough of the code, lets go ahead and deploy the app to cloudControl. Make sure to pick a unique and exciting `APP_NAME`.
 
 ~~~bash
 # create the application
@@ -192,7 +187,7 @@ $ cctrlapp APP_NAME/default deploy --stack pinky
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It's a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container.
 
