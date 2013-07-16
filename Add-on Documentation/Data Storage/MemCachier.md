@@ -195,36 +195,34 @@ Memcached provided by MemCachier can be used like this:
 
 ~~~php
 <?php
-     $string = file_get_contents($_ENV['CRED_FILE'], false);
-    if ($string == false) {
-        die('FATAL: Could not read credentials file');
-    }
+  $string = file_get_contents($_ENV['CRED_FILE'], false);
+  if ($string == false) {
+      die('FATAL: Could not read credentials file');
+  }
 
-    $creds = json_decode($string, true);
+  $creds = json_decode($string, true);
 
-    # ['MEMCACHIER_SERVERS', 'MEMCACHIER_USERNAME', 'MEMCACHIER_PASSWORD']
-    $config = array(
-        'SERVERS' => $creds['MEMCACHIER']['MEMCACHIER_SERVERS'],
-        'USER' => $creds['MEMCACHIER']['MEMCACHIER_USERNAME'],  
-        'PSWD' => $creds['MEMCACHIER']['MEMCACHIER_PASSWORD'],
-    );
+  $config = array(
+      'SERVERS' => array_map(function($x) {return explode(":", $x);}, explode(",", $creds['MEMCACHIER']['MEMCACHIER_SERVERS'])),
+      'USERNAME' => $creds['MEMCACHIER']['MEMCACHIER_USERNAME'],
+      'PASSWORD' => $creds['MEMCACHIER']['MEMCACHIER_PASSWORD'],
+  );
+  $m = new Memcached();
+  $m->setOption(Memcached::OPT_BINARY_PROTOCOL, 1);
+  $m->setSaslAuthData($config['USERNAME'], $config['PASSWORD']);
+  $m->addServers($config['SERVERS']);
 
-    $m = new Memcached();
-    $m->setOption(Memcached::OPT_BINARY_PROTOCOL, 1);
-    $m->setSaslData($config['USER'], $config['PSWD']);
-    $m->addServer($config['SERVERS'], 11211);
-    $current_count = (int) $m->get($_SERVER['HTTP_X_FORWARDED_FOR']);
-    $current_count += 1;
-    $m->set($_SERVER['HTTP_X_FORWARDED_FOR'], $current_count);
+  $current_count = (int)$m->get('count') + 1;
+  $m->set('count', $current_count);
 ?>
 <html>
-<head>
-<title>Memcachier Example</title>
-</head>
-<body>
-<h1>Hello <?php print $_SERVER['HTTP_X_FORWARDED_FOR'] ?>!</h1>
-<p>This is visit number <?php print $current_count ?>.</p>
-</body>
+  <head>
+    <title>Memcachier Example</title>
+  </head>
+  <body>
+    <h1>Hello <?php print $_SERVER['HTTP_X_FORWARDED_FOR'] ?>!</h1>
+    <p>This is visit number <?php print $current_count ?>.</p>
+  </body>
 </html>
 ~~~
 
