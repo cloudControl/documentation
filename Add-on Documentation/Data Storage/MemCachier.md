@@ -156,26 +156,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
+ count=1
  try:
      cred_file = open(os.environ["CRED_FILE"])
      data = json.load(cred_file)
      creds = data['MEMCACHIER']
      config = {
-             'srv': creds['MEMCACHIER_SERVERS'],
-             'usr': creds['MEMCACHIER_USERNAME'],
-             'pwd': creds['MEMCACHIER_PASSWORD']
+             'srv': str(creds['MEMCACHIER_SERVERS']).split(','),
+             'usr': str(creds['MEMCACHIER_USERNAME']),
+             'pwd': str(creds['MEMCACHIER_PASSWORD'])
              }
  except IOError:
      print 'Could not open file'
 
- client = bmemcached.Client('{0}:11211'.format(config['srv']),str(config['usr']),str(config['pwd']))
-
- ipaddr=request.headers['X-Forwarded-For']
- count=1
+ client=bmemcached.Client(config['srv'], config['usr'], config['pwd'])
+ ipaddr=str(request.headers['X-Forwarded-For'])
  if client.get(ipaddr) is not None:
      count=int(client.get(ipaddr))+1
+ client.set(ipaddr, str(count))
 
- client.set(ipaddr,str(count))
  return "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n\
          <HTML>\n\
          <HEAD><TITLE>Python Memcachier example</TITLE></HEAD>\n\
@@ -185,9 +184,8 @@ def hello():
          </BODY>\n\
          </HTML>"
 
-if __name__ == '__main__':
- port = int(os.environ.get('PORT', 5000))
- app.run(host='0.0.0.0', port=port)
+app.debug = True
+app.run(host='0.0.0.0', port=int(os.environ['PORT']))
 ~~~
 
 PHP
