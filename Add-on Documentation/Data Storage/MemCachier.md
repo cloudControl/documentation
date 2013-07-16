@@ -47,49 +47,43 @@ $ bundle install
 `Dalli` is a Ruby memcache client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you can start writing code. The following is a basic example using Dalli.
 
 ~~~ruby
-     require 'sinatra'
-     require 'memcachier'
-     require 'dalli'
-     require 'json'
-     
-     def getVisits()
-     
-         begin
-             cred_file = File.open(ENV["CRED_FILE"]).read
-             creds = JSON.parse(cred_file)["MEMCACHIER"]
-             config = {
-                 :srv => creds["MEMCACHIER_SERVERS"],
-                 :usr => creds["MEMCACHIER_USERNAME"],
-                 :pwd => creds["MEMCACHIER_PASSWORD"]
-             }
-         rescue
-             puts "Could not open file"
-         end
-     
-         cache=Dalli::Client.new(config[:srv],{:username => config[:usr], :password => config[:pwd]})
-     
-         count=cache.get(request.ip)
-         if count.nil?
-             count=0
-         end
-     
-         count+=1
-         cache.set(request.ip,count)
-     
-         return count
-     end
-    
-      get '/' do
-         count=getVisits
-         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">"+
-         "<HTML>"+
-         "<HEAD><TITLE>Ruby Memcachier example</TITLE></HEAD>"+
-         "<BODY>"+
-         "<h1>Hello #{request.ip} </h1>"+
-         "This is visit #{count}"+
-         "</BODY>"+
-         "</HTML>"
-     end
+require 'sinatra'
+require 'dalli'
+require 'json'
+require 'memcachier'
+
+def getVisits()
+
+ config = {
+   :srv => ENV["MEMCACHIER_SERVERS"],
+   :usr => ENV["MEMCACHIER_USERNAME"],
+   :pwd => ENV["MEMCACHIER_PASSWORD"]
+ }
+
+ cache=Dalli::Client.new(config[:srv],{:username => config[:usr],:password => config[:pwd]})
+
+ count=cache.get(request.ip)
+ if count.nil?
+     count=0
+ end
+
+ count+=1
+ cache.set(request.ip,count)
+
+ return count
+end
+
+get '/' do
+ count=getVisits
+ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">"+
+ "<HTML>"+
+ "<HEAD><TITLE>Ruby Memcachier example</TITLE></HEAD>"+
+ "<BODY>"+
+ "<h1>Hello #{request.ip} </h1>"+
+ "This is visit #{count}"+
+ "</BODY>"+
+ "</HTML>"
+end
 ~~~
 
 Rails
