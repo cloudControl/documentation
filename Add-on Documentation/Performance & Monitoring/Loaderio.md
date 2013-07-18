@@ -7,12 +7,8 @@ Loader.io is a simple cloud-based load testing tool for your apps - by SendGrid 
 
 The Add-on is free. It can be added by executing the command addon.add:
 
-
-
 ~~~
-
 $ cctrlapp APP_NAME/DEP_NAME addon.add loaderio.test
-
 ~~~
 
 When added, Loader.io automatically creates a new account and login configuration including access token. You can access Loader.io for your deployment within the [web console](https://console.cloudcontrolled.com) (go to the specific deployment, choose "Add-Ons" tab and click Loader.io login).
@@ -25,18 +21,13 @@ Similarily, an Add-on can also be removed from the deployment easily:
 
 
 ~~~
-
 $ cctrlapp APP_NAME/DEP_NAME addon.remove loaderio.test
-
 ~~~
 
 
 
-# Add-on Credentials
 
-
-
-## Internal access credentials
+### Internal access credentials
 
 
 
