@@ -22,7 +22,6 @@ Next, setup your app to start using the cache. We have documentation for the fol
  * [Ruby](#ruby)
  * [Rails](#rails)
  * [Python](#python)
- * [Django](#django)
  * [PHP](#php)
  * [Java](#java)
 
@@ -387,7 +386,6 @@ We've built a number of working sample apps, too:
 
 * [Sinatra Memcache Example](http://github.com/memcachier/memcachier-social)
 * [Rails Memcache Example](http://github.com/memcachier/memcachier-gis)
-* [Django Memcache Example](http://github.com/memcachier/memcachier_algebra)
 * [PHP Memcache Example](http://github.com/memcachier/memcachier-primes)
 * [Java Jetty Memcache Example](https://github.com/memcachier/memcachier-fibonacci)
 
