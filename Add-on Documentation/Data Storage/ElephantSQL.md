@@ -43,4 +43,4 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove elephantsql.OPTION
 
 It's recommended to the read database credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) in the general documentation.
 
-You can also find ready-to-deply example application on [Github](https://github.com/ElephantSQL/ruby-postgresql-example.git).
+You can also find ready-to-deploy example application on [Github](https://github.com/ElephantSQL/ruby-postgresql-example.git).
