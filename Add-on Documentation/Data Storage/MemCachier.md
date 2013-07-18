@@ -349,7 +349,7 @@ MemCachier will work with any memcached binding that supports [SASL authenticati
 Local setup
 -----
 
-To test against your cloudControl application locally, you will need to run a local memcached process. MemCachier can only run in cloudControl But because MemCachier and memcached speak the same protocol, you shouldn’t have any issues testing locally.  Installation depends on your platform.
+To test against your cloudControl application locally, you will need to run a local memcached process. MemCachier can only run on cloudControl but because MemCachier and memcached speak the same protocol, you shouldn't have any issues testing it locally.  Installation depends on your platform.
 
 This will install memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.
 
