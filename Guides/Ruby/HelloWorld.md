@@ -19,7 +19,7 @@ Now you have a small but fully functional Sinatra application.
 ### Dependency Tracking
 Sinatra tracks dependencies via [Bundler]. Requirements are read from the `Gemfile` (and `Gemfile.lock`) in the project's root directory. Our simple application depends only on Sinatra:
 ~~~ruby
-source :rubygems
+source 'https://rubygems.org'
 gem 'sinatra'
 ~~~
 
@@ -33,7 +33,7 @@ cloudControl uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 ~~~
-web: bundle exec ruby server.rb -p $PORT
+web: bundle exec ruby server.rb -e production -p $PORT
 ~~~
 
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
