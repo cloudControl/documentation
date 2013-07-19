@@ -1,6 +1,6 @@
 # MemCachier Add-on
 
-[MemCachier](http://www.memcachier.com) is an implementation of the [Memcache](http://memcached.org) in-memory key/value store used for caching data. It is a key technology in modern web applications for scaling and reducing server loads. The MemCachier Add-on manages and scales clusters of memcache servers so you can focus on your app. Tell us how much memory you need and get started for free instantly. Add capacity later as you need it.
+[MemCachier](http://www.memcachier.com) is an implementation of the [Memcached](http://memcached.org) in-memory key/value store used for caching data. It is a key technology in modern web applications for scaling and reducing server loads. The MemCachier Add-on manages and scales clusters of Memcached servers so you can focus on your app. Tell us how much memory you need and get started for free instantly. Add capacity later as you need it.
 
 The information below will quickly get you up and running with the MemCachier Add-on for cloudControl. For information on the benefits of MemCachier and how it works, please refer to the more extensive [User Guide](http://www.memcachier.com/documentation/memcache-user-guide/).
 
@@ -9,12 +9,12 @@ Getting started
 
 Start by installing the Add-on:
 
-    $ cctrlapp App_Name/Dep_Name addon.add memcachier.dev
+    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.dev
 
-You can start with more memory if you know you’ll need it:
+You can start with more memory if you know you'll need it:
 
-    $ cctrlapp App_Name/Dep_Name addon.add memcachier.100mb
-    $ cctrlapp App_Name/Dep_Name addon.add memcachier.250mb
+    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.100mb
+    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.250mb
      ... etc ...
 
 Next, setup your app to start using the cache. We have documentation for the following languages and frameworks:
@@ -43,7 +43,7 @@ Then bundle install:
 $ bundle install
 ~~~
 
-`Dalli` is a Ruby memcache client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you can start writing code. The following is a basic example using Dalli.
+`Dalli` is a Ruby Memcached client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you can start writing code. The following is a basic example using Dalli.
 
 ~~~ruby
 require 'sinatra'
@@ -101,13 +101,13 @@ Then bundle install:
 $ bundle install
 ~~~
 
-`Dalli` is a Ruby memcache client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you’ll want to configure the Rails cache_store appropriately. Modify `config/environments/production.rb` with the following:
+`Dalli` is a Ruby Memcached client, and the `memcachier` gem modifies the environment (`ENV`) such that the environment variables set by MemCachier will work with Dalli. Once these gems are installed you'll want to configure the Rails cache_store appropriately. Modify `config/environments/production.rb` with the following:
 
 ~~~ruby
 config.cache_store = :dalli_store
 ~~~
 
-In your development environment, Rails.cache defaults to a simple in-memory store and so it doesn’t require a running memcached.
+In your development environment, Rails.cache defaults to a simple in-memory store and so it doesn't require a running Memcached.
 
 From here you can use the following code examples to use the cache in your Rails app:
 
@@ -127,7 +127,7 @@ config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
 Python
 -----
 
-You can use many memcached clients for python. In this example we are gonig to use `Python-Binary-Memcached` client with built in SASL support. Run the following commands on your local machine:
+You can use many Memcached clients for python. In this example we are gonig to use `Python-Binary-Memcached` client with built in SASL support. Run the following commands on your local machine:
 
 ~~~
 $ pip install python-binary-memcached
@@ -183,8 +183,9 @@ def hello():
          </BODY>\n\
          </HTML>"
 
-app.debug = True
-app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+if __name__ == '__main__':
+ port = int(os.environ.get('PORT', 5000))
+ app.run(host='0.0.0.0', port=port)
 ~~~
 
 PHP
@@ -194,12 +195,12 @@ Memcached provided by MemCachier can be used like this:
 
 ~~~php
 <?php
-  $string = file_get_contents($_ENV['CRED_FILE'], false);
-  if ($string == false) {
+  $creds_content = file_get_contents($_ENV['CRED_FILE'], false);
+  if ($creds_content == false) {
       die('FATAL: Could not read credentials file');
   }
 
-  $creds = json_decode($string, true);
+  $creds = json_decode($creds_content, true);
 
   $config = array(
       'SERVERS' => array_map(function($x) {return explode(":", $x);}, explode(",", $creds['MEMCACHIER']['MEMCACHIER_SERVERS'])),
@@ -242,7 +243,7 @@ In this short example we will show you how to integrate your Java application wi
 ...
 ~~~
 
-#####Create memcached SASL connection:
+#####Create Memcached SASL connection:
 
 ~~~java
 package com.cloudcontrolled.sample.spring.memcachier;
@@ -301,12 +302,12 @@ String addr = System.getenv("MEMCACHIER_SERVERS");
 MemcachierConnection mc = new MemcachierConnection(user, pass, addr);
 ~~~
 
-You can also find ready-to-deply example on [Github](https://github.com/cloudControl/java-spring-jsp-example-app/tree/memcached_guide).
+You can also find a ready-to-deploy example on [Github](https://github.com/cloudControl/java-spring-jsp-example-app/tree/memcached_guide).
 
 Library support
 -----
 
-MemCachier will work with any memcached binding that supports [SASL authentication](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) and the [binary protocol](https://code.google.com/p/memcached/wiki/MemcacheBinaryProtocol). We have tested MemCachier with the following language bindings, although the chances are good that other SASL binary protocol packages will also work.
+MemCachier will work with any Memcached binding that supports [SASL authentication](https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer) and the [binary protocol](https://code.google.com/p/memcached/wiki/MemcacheBinaryProtocol). We have tested MemCachier with the following language bindings, although the chances are good that other SASL binary protocol packages will also work.
 
 <table>
 <tbody>
@@ -348,9 +349,9 @@ MemCachier will work with any memcached binding that supports [SASL authenticati
 Local setup
 -----
 
-To test against your cloudControl application locally, you will need to run a local memcached process. MemCachier can only run on cloudControl but because MemCachier and memcached speak the same protocol, you shouldn't have any issues testing it locally.  Installation depends on your platform.
+To test against your cloudControl application locally, you will need to run a local Memcached process. MemCachier can only run on cloudControl but because MemCachier and Memcached speak the same protocol, you shouldn't have any issues testing it locally.  Installation depends on your platform.
 
-This will install memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.
+This will install Memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and Memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.
 
 On Ubuntu:
 
@@ -368,7 +369,7 @@ Or for Windows please refer to [these instructions](http://www.codeforest.net/ho
 
 For further information and resources (such as the memcached sourcecode) please refer to the [Memcache.org homepage](http://memcached.org)
 
-To run memcached simply execute the following command:
+To run Memcached simply execute the following command:
 
 ~~~
 $ memcached -v
@@ -384,10 +385,10 @@ Sample apps
 
 We've built a number of working sample apps, too:
 
-* [Sinatra Memcache Example](http://github.com/memcachier/memcachier-social)
-* [Rails Memcache Example](http://github.com/memcachier/memcachier-gis)
-* [PHP Memcache Example](http://github.com/memcachier/memcachier-primes)
-* [Java Jetty Memcache Example](https://github.com/memcachier/memcachier-fibonacci)
+* [Sinatra Memcached Example](http://github.com/memcachier/memcachier-social)
+* [Rails Memcached Example](http://github.com/memcachier/memcachier-gis)
+* [PHP Memcached Example](http://github.com/memcachier/memcachier-primes)
+* [Java Jetty Memcached Example](https://github.com/memcachier/memcachier-fibonacci)
 
 Upgrading and downgrading
 ------
