@@ -59,7 +59,7 @@ PHP:
 
 Java: 
 
-For reading CloudControl cardentials you can use Cardentials class as described in [Reading the Credentials](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials) article.
+For reading CloudControl credentials you can use the Credentials class as described in [Reading the Credentials](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials) article.
 
 ```java
     Credentials credentials = Credentials.getInstance();
