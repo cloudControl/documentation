@@ -1,4 +1,4 @@
- q 		# MongoSoup
+# MongoSoup
 
 MongoSoup is the first German-based MongoDB cloud hosting solution. Supported by a team of experts from 10gen’s first German partner comSysto you can have a running MongoDB database in virtually no time.
 
@@ -44,7 +44,7 @@ Here are some snippets of code to help you get started:
 
 PHP:
 
-~~~
+```php
 	<?php
 	$credfile = file_get_contents($_ENV['CRED_FILE'], false);
 	$credentials = json_decode($credfile, true);
@@ -55,11 +55,13 @@ PHP:
 	$cursor = $col->find();
 	foreach ($cursor as $doc) { echo $doc, "</br>"; }
 	?> 
-~~~
+```
 
-Java:
+Java: 
 
-~~~
+For reading CloudControl cardentials you can use Cardentials class as described in [Reading the Credentials](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials) article.
+
+```java
     Credentials credentials = Credentials.getInstance();
 	String uriString = credentials.getCredential("url","mongosoup").toString();
 	MongoClientURI uri = new MongoClientURI(uriString);
@@ -71,45 +73,30 @@ Java:
 		DBObject obj = cur.next();
 		...
 	}
-~~~
+```
+
 
 Python:
 
-~~~
-	cred_file = open(os.environ["CRED_FILE"])
-    data = json.load(cred_file)
-    creds = data['MONGOSOUP']
-    uriString = str(creds['MONGOSOUP_URL'])
-    mongo = MongoClient(uriString);
-    db = mongo['myDbName']
-    collection = db['myCollection']
-    for obj in collection.find():
-		...   
-~~~
+```python
+cred_file = open(os.environ["CRED_FILE"])
+data = json.load(cred_file)
+creds = data['MONGOSOUP']
+uriString = str(creds['MONGOSOUP_URL'])
+mongo = MongoClient(uriString);
+db = mongo['myDbName']
+collection = db['myCollection']
+for obj in collection.find():
+	...   
+```
 
 Ruby:
 
-~~~
-	uriString = ENV['MONGOSOUP_URL']
-	client = MongoClient.from_uri(uriString)
-	db = client.db('myDbName')
-	db.myCollection.each { ... }
-~~~
-
-Test:
-
-```java
-Credentials credentials = Credentials.getInstance();
-String uriString = credentials.getCredential("url","mongosoup").toString();
-MongoClientURI uri = new MongoClientURI(uriString);
-MongoClient mongo = new MongoClient(uri);
-DB db = mongo.getDB("myDbName"); 
-DBColection collection = db.getCollection("myCollection");
-DBCursor cur = collection.find();
-while(cur.hasNext()){
-	DBObject obj = cur.next();
-	...
-}
+```ruby
+uriString = ENV['MONGOSOUP_URL']
+client = MongoClient.from_uri(uriString)
+db = client.db('myDbName')
+db.myCollection.each { ... }
 ```
 
 ## Upgrading to a larger MongoSoup plan
