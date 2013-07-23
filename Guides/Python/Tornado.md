@@ -25,7 +25,7 @@ file. It needs to be placed in the root directory of your repository. The
 example app specifies only Tornado itself as a dependency. The one you cloned
 as part of the example app looks like this:
 ~~~pip
-tornado==3.1
+tornado==2.4.1
 ~~~
 
 ### Process Type Definition
@@ -51,31 +51,29 @@ Finally, we define the command line parameter to specify the port as
 seen in the `Procfile` above, instantiate the HTTP server, make it listen on
 the specified port and start the server forking one process per CPU core.
 ~~~python
-from tornado.options import define, options, parse_command_line
+from tornado.options import define, options
 import tornado.ioloop
 import tornado.web
 import tornado.httpserver
-import os
-
-define("port", default=8888, help="Port to listen on", type=int)
 
 
 class MainHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render('hello.html', app_type='Tornado')
+        self._async_callback()
+
+    def _async_callback(self):
+        self.write("Hello, world!")
+        self.finish()
+
+app = tornado.web.Application([
+    (r"/", MainHandler),
+])
+
+define("port", default="5555", help="Port to listen on")
 
 if __name__ == "__main__":
-    parse_command_line()
-    app = tornado.web.Application(
-        [
-            (r"/", MainHandler),
-        ],
-        template_path=os.path.join(os.path.dirname(__file__), "templates"),
-        static_path=os.path.join(os.path.dirname(__file__), "static"),
-        xsrf_cookies=True,
-    )
-
+    tornado.options.parse_command_line()
     server = tornado.httpserver.HTTPServer(app)
     server.bind(options.port)
     # autodetect cpu cores and fork one process per core
@@ -114,7 +112,7 @@ Total 7 (delta 4), reused 0 (delta 0)
        Running virtualenv with interpreter /usr/bin/python2.7
 -----> Activating virtualenv
 -----> Installing dependencies using pip version 1.2.1
-       Requirement already satisfied (use --upgrade to upgrade): tornado==3.1 in ./.heroku/venv/lib/python2.7/site-packages (from -r requirements.txt (line 1))
+       Requirement already satisfied (use --upgrade to upgrade): tornado==2.4.1 in ./.heroku/venv/lib/python2.7/site-packages (from -r requirements.txt (line 1))
        Cleaning up...
 -----> Building image
 -----> Uploading image (2.4M)
