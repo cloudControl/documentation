@@ -287,7 +287,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 To deploy a specific version, append your version control systems identifier (full commit-SHA1 for Git or an integer for Bazaar).
 If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
 
-For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--min setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile).
+For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile).
 After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version.
 A log message in the [deploy log](#deploy-log) appears when this process has finished.
 
@@ -527,18 +527,18 @@ When scaling your apps you have two options. You can either scale horizontally b
 
 ### Horizontal Scaling
 
-Horizontal scaling is controlled by the --min parameter.
+Horizontal scaling is controlled by the --containers parameter.
 It specifies the number of containers you have running.
-Raising --min also increases the availability in case of node failures.
-Deployments with --min 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --min value to at least 2 if you want to avoid downtime in such situations.
+Raising --containers also increases the availability in case of node failures.
+Deployments with --containers 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --containers value to at least 2 if you want to avoid downtime in such situations.
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --max parameter. Valid values are 1 <= x <= 8 and result in x times 128MB of memory. So setting --max to 1 will result in 128MB of RAM available to each one of your containers, while --max 4 or 8 will give you 512MB or 1024MB of RAM respectively.
+In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --size parameter. Valid values are 1 <= x <= 8 and result in x times 128MB of memory. So setting --size to 1 will result in 128MB of RAM available to each one of your containers, while --size 4 or 8 will give you 512MB or 1024MB of RAM respectively.
 
 ### Choosing Optimal Settings
 
-You can use the [Blitz.io](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io) and New [Relic Add-ons](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic) to run synthetic load tests against your deployments and analyze how well they perform with the current --min and --max settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
+You can use the [Blitz.io](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io) and New [Relic Add-ons](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic) to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --size settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
 
 ## Routing Tier
 
@@ -553,11 +553,11 @@ All HTTP requests made to apps on the platform are routed via the routing tier. 
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the added latency as low as possible.
 
-The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
 
 Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
-If a container is not available due to an underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set the --min option to at least 2.
+If a container is not available due to an underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --containers 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set the --containers option to at least 2.
 
 ### Remote Address
 

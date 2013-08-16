@@ -133,7 +133,7 @@ vc.updateVisitCount();
 ~~~bash
 $ cctrlapp APP_NAME/default push
 $ cctrlapp APP_NAME/default addon.add memcachier.PLAN
-$ cctrlapp APP_NAME/default deploy --max=4
+$ cctrlapp APP_NAME/default deploy --size=4
 ~~~
 
 You can also find ready-to-deply example on [Github](https://github.com/cloudControl/java-spring-jsp-example-app/tree/memcached_guide).

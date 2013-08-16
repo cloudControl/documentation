@@ -225,7 +225,7 @@ Push your code to the application's repository and deploy it (increase web conta
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-$ cctrlapp APP_NAME/default deploy --max=4
+$ cctrlapp APP_NAME/default deploy --size=4
 ~~~
 
 **Congratulations, you should now be able to reach your application at http://APP_NAME.cloudcontrolled.com.**
