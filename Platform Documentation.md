@@ -136,10 +136,10 @@ Add a user by providing their email address. If the user is already registered t
 $ cctrlapp APP_NAME user.add user4@example.com
 ~~~
 
-To remove a user, please use their username.
+To remove a user, provide their email address as well.
 
 ~~~
-$ cctrlapp APP_NAME user.remove user3
+$ cctrlapp APP_NAME user.remove user3@example.com
 ~~~
 
 #### Roles
@@ -190,7 +190,7 @@ App
 
  * Git and Bazaar are the supported version control systems.
  * When you push a branch an image of your code is built ready to be deployed.
- * Images are limited to 100mb compressed. Use a `.cctrlignore` file to exclude assets.
+ * Images are limited to 200MB compressed. Use a `.cctrlignore` file to exclude assets.
 
 ### Supported Version Control Systems
 
@@ -230,7 +230,7 @@ $ git push cctrl dev
 $ bzr push --remember REPO_URL
 ~~~
 
-Images are limited to 100mb (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50mb. The image size is printed as part of the image build processes' output. If the image exceeds the 100mb limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without support for the negation operator `!`. Here’s an example `.cctrlignore`:
+Images are limited to 200MB (compressed) in size. Smaller images result in faster deploys both while deploying a new version as well as when the platform replaces containers to recover from a node failure. We recommend to keep images below 50MB. The image size is printed as part of the image build processes' output. If the image exceeds the 200MB limit, the push is cancelled. To exclude assets that are used for development and tracked in version control but not needed during runtime you can use a `.cctrlignore` file. The format is similar to `.gitignore`, but without support for the negation operator `!`. Here’s an example `.cctrlignore`:
 
 ~~~
 *.psd
@@ -267,7 +267,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 
 To deploy a specific version append your version control systems identifier (a hash-string for Git or an integer for Bazaar). If not specified deploy defaults to the latest image available (the one built during the last push).
 
-Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --min setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
+Every time a new version is deployed, the latest or the specified image is downloaded to as many of the platform's nodes as required by the --containers setting (refer to the [scaling section](#scaling) for details) and started according to the buildpack's default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) informs when this process has finished.
 
 **Important:** All data that has been written during runtime of the old version into the old container's file system will be lost. This is very handy for code, templates, css, images, javascript files and the like, because it ensures they are always the latest version after each deploy, but prevents use of the filesystem for storage of user uploads.
 
@@ -494,15 +494,15 @@ When scaling your apps you have two options. You can either scale horizontally b
 
 ### Horizontal Scaling
 
-Horizontal scaling is controlled by the --min parameter. It specifies the number of containers you have running. Raising --min also increases the availabiltiy in case of node failures. Deployments with --min 1 (the default) are unavailable for a few minutes after a node failure until the failover process has finished. Set --min >=2 if you want to avoid downtime like this.
+Horizontal scaling is controlled by the --containers parameter. It specifies the number of containers you have running. Raising --containers also increases the availabiltiy in case of node failures. Deployments with --containers 1 (the default) are unavailable for a few minutes after a node failure until the failover process has finished. Set --containers >=2 if you want to avoid downtime like this.
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --max parameter. Valid values are 1 <= x <= 8 and result in x times 128mb. So setting --max to 1 will result in 128mb of RAM available to each one of your containers, while --max 4 or 8 will give you 512mb or 1024mb RAM respectively. To determine the optimal --max value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
+In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specificed using the --memory parameter, being possible to choose from 128MB to 1024MB. To determine the optimal --memory value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
 
 ### Choosing Optimal Settings
 
-You can use the Blitz.io and New Relic Add-ons to run synthetic load tests against your deployments and analyze how well they perform with the current --min and --max settings under load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
+You can use the Blitz.io and New Relic Add-ons to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --memory settings under load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
 
 ## Routing Tier
 
@@ -517,11 +517,11 @@ All HTTP requests made to apps on the platform are routed via the routing tier. 
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the additional latency as low as possible.
 
-The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --min 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
+The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
 
 Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
-If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --min 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --min >= 2.
+If a container is not available due to a underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --containers 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set --containers >= 2.
 
 ### Remote Address
 
