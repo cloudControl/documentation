@@ -156,7 +156,7 @@ $ cctrlapp APP_NAME/default addon.add mysqls.PLAN
 Deploy your app:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy --size=6
+$ cctrlapp APP_NAME/default deploy --memory 768MB
 ~~~
 
 Increase container size to meet high memory consumption by Spring framework.

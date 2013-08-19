@@ -534,11 +534,11 @@ Deployments with --containers 1 (the default) are unavailable for a few minutes 
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the size of a container. Container sizes are specificed using the --size parameter. Valid values are 1 <= x <= 8 and result in x times 128MB of memory. So setting --size to 1 will result in 128MB of RAM available to each one of your containers, while --size 4 or 8 will give you 512MB or 1024MB of RAM respectively.
+In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specificed using the --memory parameter, being possible to choose from 128MB to 1024MB. To determine the optimal --memory value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
 
 ### Choosing Optimal Settings
 
-You can use the [Blitz.io](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io) and New [Relic Add-ons](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic) to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --size settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
+You can use the [Blitz.io](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io) and New [Relic Add-ons](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic) to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --memory settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial](https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app) that explains this in more detail.
 
 ## Routing Tier
 
