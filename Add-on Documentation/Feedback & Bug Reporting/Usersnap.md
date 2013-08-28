@@ -68,7 +68,7 @@ Provisioning Usersnap sets up a default email subscription for screenshots. To s
 ## Example for PHP web sites
 Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
 
-```javascript
+```php
 <?php
 # read the credentials file
 $string = file_get_contents($_ENV['CRED_FILE'], false);
