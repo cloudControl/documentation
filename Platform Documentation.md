@@ -1,26 +1,20 @@
-<aside>
-<ul>
-<li class=""><a href="#platform-access">Platform Access</a></li>
-<li class=""><a href="#user-accounts">User Accounts</a></li>
-<li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
-<li class=""><a href="#version-control--images">Version Control & Images</a></li>
-<li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
-<li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
-<li class=""><a href="#non-persistent-filesystem">Non Persistent Filesystem</a></li>
-<li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
-<li class=""><a href="#add-ons">Add-ons</a></li>
-<li class=""><a href="#logging">Logging</a></li>
-<li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
-<li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#routing-tier">Routing Tier</a></li>
-<li class=""><a href="#performance--caching">Performance & Caching</a></li>
-<li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
-<li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
-<li class=""><a href="#stacks">Stacks</a></li>
-</ul>
-</aside>
+# CloudControl Platform Documentation
 
-# cloudControl Documentation
+CloudControl is a PaaS platform that enables seamless deployment and scaling of apps written in any programming language. With CloudControl, you can get your apps up and running in minutes without worrying about the underlying server infrastructure. In addition, CloudControl also gives you also get full control of your apps - simple management and monitoring of all your app deployments using the easy-to-use interface. 
+This document serves as a guide to administrators and developers on how to configure, deploy, and run your apps on CloudControl. If you’re new to CloudControl and would like to get started 
+with CloudControl, you should check out the [CloudControl quickstart guide](https://github.com/cloudControl/documentation/blob/master/Quickstart.md).
+
+Before we go into the details of CloudControl, let’s go over the high level architecture of the platform - 
+
+##CloudControl Platform Architecture
+CloudControl is a multi-tenant PaaS platform that is architected for high resiliency, superior performance, and scale. Following are some components of CloudControl’s architecture that make it unique -
+
+###Client Architecture - Connecting to the cloud 
+Client server communication in the CloudControl platform is based on the REST protocol.  Using REST, the client must include all information for the server to fulfill the request including state.  
+
+There are several ways to connect to the CloudControl platform such as -  
+* Command Line Interface (CLI)
+The command line interface tool cctrl is the primary way of managing apps in CloudControl. It directly interacts with the RESTful API in the CloudControl environment, allowing you to control CloudControl environment features like creating users, configuring add-ons, logging, caching, and routing. In addition, you can also control the app deployment and lifecycle.  The CLI consists of 2 parts : cctrlapp and cctrluser as shown in the figures below.
 
 ## Platform Access
 
