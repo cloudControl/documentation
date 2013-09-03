@@ -15,27 +15,45 @@ Client server communication in the CloudControl platform is based on the REST pr
 ![](http://oi42.tinypic.com/n6uxrt.jpg)
 
 There are several ways to connect to the CloudControl platform such as -  
+
 ####Command Line Interface (CLI)
 The command line interface tool *cctrl* is the primary way of managing apps in CloudControl. It directly interacts with the RESTful API in the CloudControl environment, allowing you to control CloudControl environment features like creating users, configuring add-ons, logging, caching, and routing. In addition, you can also control the app deployment and lifecycle.  The CLI consists of 2 parts : *cctrlapp* and *cctrluser* as shown in the figures below.
 
 ![](http://oi44.tinypic.com/29ehaqg.jpg)
 ![](http://oi42.tinypic.com/dfeoft.jpg)
 
-####Installing the command line interface 
-If you’re using *Windows*, we offer a setup exe that can be downloaded from here. 
+#####Installing the command line interface 
+If you’re using *Windows*, we offer a setup exe that can be downloaded from [here](https://github.com/cloudControl/cctrl/downloads). 
 
-For *Linux/Mac*, we recommend installing and updating cctrl via pip. As a prerequisite, cctrl requires python 2.6 or higher.
+For *Linux/Mac*, we recommend installing and updating cctrl via pip. As a prerequisite, cctrl requires [python 2.6](http://www.python.org/download/releases/2.6/) or higher.
 
 ~~~
 $sudo pip install -U cctrl
 ~~~
 
-If you don’t have pip, you can install pip using easy_install. To install pip -
+If you don’t have pip, you can install pip using [easy_install](https://pythonhosted.org/setuptools/easy_install.html). To install pip -
 
 ~~~
 $ sudo easy_install pip
 $ sudo pip install -U cctrl
 ~~~
+
+####Web Console
+In addition to the command line interface, the CloudControl platform also provides a web console to manage and control your apps. As shown in the figure below, user *dodil* has deployed two apps - *donsampleapp* and *hellodon* app. The git repository for the app’s source is also listed in the console. 
+
+Todo image
+
+By clicking the name of the app, you can get more details about the app such as the number of containers used, memory consumed, add-ons applied, and the cost of running the app.
+
+Todo image
+
+Using the web console, you can add users to your app, assign different roles to these users and drop users. If you are no longer using the app, you can also delete the app. 
+
+Todo image
+
+<span style="color: Red"> *Remember* Every app needs to have an owner. If you delete an app on the CloudControl platform, it will be permanently deleted and you will not be able to access it on the *.cloudcontrol.com domain.</span>
+
+
 
 
 ## Platform Access
