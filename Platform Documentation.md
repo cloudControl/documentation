@@ -12,12 +12,30 @@ CloudControl is a multi-tenant PaaS platform that is architected for high resili
 ###Client Architecture - Connecting to the cloud 
 Client server communication in the CloudControl platform is based on the REST protocol.  Using REST, the client must include all information for the server to fulfill the request including state.  
 
+![](http://oi42.tinypic.com/n6uxrt.jpg)
+
 There are several ways to connect to the CloudControl platform such as -  
 ####Command Line Interface (CLI)
 The command line interface tool *cctrl* is the primary way of managing apps in CloudControl. It directly interacts with the RESTful API in the CloudControl environment, allowing you to control CloudControl environment features like creating users, configuring add-ons, logging, caching, and routing. In addition, you can also control the app deployment and lifecycle.  The CLI consists of 2 parts : *cctrlapp* and *cctrluser* as shown in the figures below.
 
-![](http://oi42.tinypic.com/n6uxrt.jpg)
+![](http://oi44.tinypic.com/29ehaqg.jpg)
+![](http://oi42.tinypic.com/dfeoft.jpg)
 
+####Installing the command line interface 
+If you’re using *Windows*, we offer a setup exe that can be downloaded from here. 
+
+For *Linux/Mac*, we recommend installing and updating cctrl via pip. As a prerequisite, cctrl requires python 2.6 or higher.
+
+~~~
+$sudo pip install -U cctrl
+~~~
+
+If you don’t have pip, you can install pip using easy_install. To install pip -
+
+~~~
+$ sudo easy_install pip
+$ sudo pip install -U cctrl
+~~~
 
 
 ## Platform Access
