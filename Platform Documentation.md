@@ -228,3 +228,173 @@ Applications typically have a common lifecycle consisting of development, stagin
 Add-ons enrich the capabilities of your app and make them more powerful. There are over 50 different add-ons for CloudControl platform including databases, caching, performance monitoring, logging and even APIs for billing. Each deployment on the CloudControl platform needs its own set of add-ons.
 
 ![](http://oi41.tinypic.com/119z8ye.jpg) If your app needs a MySQL database and you have a production, a development and a staging environment, all three need their own MySQL add-ons. Each add-on has different options, allowing you to choose a more powerful database for your high traffic production deployment and a smaller database for your development and staging needs.
+
+####Managing Add-ons
+You can see the list of available add-ons for CloudControl on the [add-on marketplace website](https://www.cloudcontrol.com/add-ons) or with the addon.list command.
+
+~~~
+$cctrlapp APP_NAME/DEP_NAME addon.list
+[...]
+~~~
+
+To add an add-on to your deployment, use the following command - 
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
+~~~
+
+To get the list of current Add-ons for a deployment use the add-on command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon
+Addon                    : alias.free
+Addon                    : newrelic.standard
+[...]
+Addon                    : blitz.250
+[...]
+Addon                    : memcachier.dev
+[...]
+~~~
+
+To upgrade an add-on, use the respective command - 
+
+~~~
+# upgrade
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
+~~~
+
+In the example above, FROM_SMALL_ADDON is the name of the add-on you have upgraded from. TO_BIG_ADDON is the name of the add-on you have upgraded to.
+
+Similarly, to downgrade an add-on, use the respective command - 
+
+~~~
+# downgrade
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
+~~~
+
+Many add-ons require you to have credentials to connect to their service. The credentials are exported to the deployment in a JSON formatted config file and is accessed via the CRED_FILE environment variable using the app’s language. Here's a quick example in PHP how to read the file and parse the JSON.
+
+~~~
+# read the credentials file
+$string = file_get_contents($_ENV['CRED_FILE'], false);
+if ($string == false) {
+    die('FATAL: Could not read credentials file');
+}
+
+# the file contains a JSON string, decode it and return an associative array
+$creds = json_decode($string, true);
+
+# now use the $creds array to configure your app e.g.:
+$MYSQL_HOSTNAME = $creds['MYSQLS']['MYSQLS_HOSTNAME'];
+~~~
+
+Reading the credentials from the creds.json file as shown above ensures that your app is always talking to the right database and you can freely merge your branches without having to worry about keeping the credentials in sync.
+
+![](http://oi39.tinypic.com/2n8v96p.jpg) The path to the add-on credential file can be found using the CRED_FILE environment variable. You should never hard-code credentials or path of the credential file in your app. The path of the credential file can change over deployments or during automatic redeploy by the CloudControl platform.
+
+To get more information about the different add-ons supported on the CloudControl platform, check the add-ons page [here](https://www.cloudcontrol.com/add-ons). 
+
+The [guides section](https://www.cloudcontrol.com/dev-center/Guides/) has detailed examples about how to read the creds.json file in different languages or frameworks. To see the format and contents of the creds.json file locally use the addon.creds command as shown below.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.creds
+{
+    "BLITZ": {
+        "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
+        "BLITZ_API_USER": "SOME_USER_ID"
+    },
+    "MEMCACHIER": {
+        "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MEMCACHIER_SERVERS": "SOME_HOST.eu.ec2.memcachier.com",
+        "MEMCACHIER_USERNAME": "SOME_USERNAME"
+    },
+    "MYSQLS": {
+        "MYSQLS_DATABASE": "SOME_DB_NAME",
+        "MYSQLS_HOSTNAME": "SOME_HOST.eu-west-1.rds.amazonaws.com",
+        "MYSQLS_PASSWORD": "SOME_SECRET_PASSWORD",
+        "MYSQLS_PORT": "3306",
+        "MYSQLS_USERNAME": "SOME_USERNAME"
+    }
+}
+~~~
+
+###Scheduling and background tasks
+
+CloudControl supports scheduling of short tasks that need to be run periodically as well as long running transactions. Scheduled jobs are supported through different add-ons as discussed below. For long running asynchronous tasks, background workers should be used.
+
+**Short timespan cron tasks** 
+For tasks that are guaranteed to finish within a time limit, the cron add-on offers a simple solution. It calls a predefined URL daily or hourly and executes a task periodically.
+
+**Asynchronous task workers** 
+Tasks that will take longer than 120 seconds to execute are killed by the routing tier. Tasks triggered by user requests should be handled asynchronously by a worker add-on. Workers are long running processes that started in containers just like the web processes but do not listen on a port or receive http requests. 
+
+For example, workers can be used to poll a queue and execute tasks in the background or handle long running periodical calculations.
+
+![](http://oi39.tinypic.com/2n8v96p.jpg) The maximum timeout limit for a web request to complete is 120 seconds. If a web request takes longer than 120 seconds to execute, it should be handled asynchronously by a worker task.
+
+###Secure Shell (SSH)
+CloudControl is a distributed cloud platform. This makes it hard to SSH into the actual physical server. Instead, we offer a run command, that allows users to launch a new container and connect to that via SSH. This container is identical to the web or worker containers but it starts an SSH daemon instead of one of the Procfile commands. It is based on the same stack  and runs the same deployment image without any add-on credentials.
+
+####To start an SSH shell on the CloudControl platform -
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME run bash
+Connecting...
+Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
+u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
+interactive commands work as well
+u25832@DEP_ID-25832:~/www$ exit
+exit
+Connection to 10.62.45.100 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+It is also possible to execute a command directly and have the container exit after the command has finished. This can come in handy one time tasks like database migrations. You can also list and sort environment variables in the shell using “env | sort”.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME run "env | sort"
+Connecting...
+Warning: Permanently added '[10.250.134.126]:10346' (RSA) to the list of known hosts.
+CRED_FILE=/srv/creds/creds.json
+DEP_ID=DEP_ID
+DEP_NAME=APP_NAME/DEP_NAME
+DEP_VERSION=9d5ada800eff9fc57849b3102a2f27ff43ec141f
+DOMAIN=cloudcontrolled.com
+GEM_PATH=vendor/bundle/ruby/1.9.1
+HOME=/srv
+HOSTNAME=DEP_ID-10346
+LANG=en_US.UTF-8
+LOGNAME=u10346
+MAIL=/var/mail/u10346
+OLDPWD=/srv
+PAAS_VENDOR=cloudControl
+PATH=bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin
+PORT=10346
+PWD=/srv/www
+RACK_ENV=production
+RAILS_ENV=production
+SHELL=/bin/sh
+SSH_CLIENT=10.32.47.197 59378 10346
+SSH_CONNECTION=10.32.47.197 59378 10.250.134.126 10346
+SSH_TTY=/dev/pts/0
+TERM=xterm
+TMP_DIR=/srv/tmp
+TMPDIR=/srv/tmp
+USER=u10346
+WRK_ID=WRK_ID
+Connection to 10.250.134.126 closed.
+Connection to ssh.cloudcontrolled.net closed.
+~~~
+
+###CloudControl for Administrators
+The CloudControl web console provides IT admins with the tools they need to manage apps on CloudControl. Administrators have privileges to manage users accounts, apps and deployments. 
+This section goes over these capabilities.
+
+####Creating an app
+Creating an app makes you the app owner and gives you full access. The owner can not be removed from the app and is responsible for the billing associated with the app. If you plan on having multiple developers working on the same app, it's recommended to have a separate admin-like account for the owner of all your apps and add the additional developers (including yourself) for each app separately.
+
+For example, as shown in the figure below, donsampleapp was created by user dodil and dodil is the owner of the app. 
+
+
+
+
