@@ -459,9 +459,45 @@ A deployment is the running version of one of your branches made accessible via 
 $ cctrlapp APP_NAME details
 ~~~
 
+###CloudControl for Developers
 
+Developers write apps on the CloudControl platform. By default, when users are added to an app, they are added into the developer role. They have full access to the code repository and to all deployments. Developers can add more developers and remove existing ones. They can also delete the deployment as well as the app. Developers cannot remove or change the owner of the app.
 
+The cloudControl platform supports zero downtime deploys for all deployments. To deploy a new version use the following cctrlapp deploy command -
 
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy
+~~~
+
+To deploy a specific version, append your version control systems identifier (full commit-SHA1 for Git or an integer for Bazaar). If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
+
+When an app is deployed, the image is downloaded to as many of the platform’s nodes based on the container settings and started according to default buildpack’s configuration. After the new containers are up and running, the loadbalancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the deploy log appears when this process has finished.
+
+To scale your apps on the CloudControl platform, you have two options - you can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally the cloudControl loadbalancing and routing tier ensures efficient distribution of incoming requests across all available containers.
+
+To scale horizontally, you can control the number of containers you have for an app with the --containers parameter. In addition, you can also scale vertically by controlling the memory size of a container. Container sizes are specified using the --memory parameter and can range from 128MB to 1024MB. Determining the optimal memory size for your container can be challenging. One option is to use the [New Relic add-on](https://www.cloudcontrol.com/add-ons/newrelic) to monitor the memory consumption for your app and tune these settings accordingly after sufficient testing. 
+
+####Rolling back to the last working version
+If for some reason a new version does not work as expected, you can *rollback* a deployment to a previous version in a matter of seconds. To rollback, you can check the deploy log for the previously deployed version (or get it from the version control system directly) and then simply use the Git or Bazaar version identifier which is part of the log output to redeploy this version using the deploy command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
+~~~
+
+####Version control and images
+The CloudControl platform supports two source control systems - Git and Bazaar. When an app gets created, the command line tools try to determine the source control system you are using by checking for the existence of a .git or .bzr directory in your current working directory. It then creates the app using the detected version control system. If it can't determine the version control system you are using, Git is used as the default but it can always be overwritten using the --repo command line switch.
+
+~~~
+$ cctrlapp APP_NAME create php [--repo [git,bzr]]
+~~~
+
+It is easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
+
+~~~
+$ cctrlapp APP_NAME details
+~~~
+
+To push the app, you can use the cctrlapp push command or the source control push command (git/bzr push). The repositories support all other remote operations like pulling and cloning as well.Whenever an updated branch is pushed, an image is built. The image is compressed and is limited to 200MB in size. The image can be deployed with the deploy command to the deployment matching the branch name. The contents of the image gets generated using the buildpack and usually includes the binary code for the app and any dependencies that were installed by the buildpack. 
 
 
 
