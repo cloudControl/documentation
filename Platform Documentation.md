@@ -51,7 +51,7 @@ Using the web console, you can add users to your app, assign different roles to 
 
 ![](http://oi44.tinypic.com/344pef4.jpg)
 
-![](http://oi39.tinypic.com/2n8v96p.jpg) Every app needs to have an owner. If you delete an app on the CloudControl platform, it will be permanently deleted and you will not be able to access it on the *\*.cloudcontrol.com* domain.
+![](http://oi39.tinypic.com/2n8v96p.jpg) Every app needs to have an owner. If you delete an app on the CloudControl platform, it will be permanently deleted and you will not be able to access it on the '*.cloudcontrol.com' domain.
 
 ###Server Architecture - In the cloud
 On the surface, CloudControl makes it easy for developers to build and deploy their apps on the platform. But, there are several components in the background that make this possible. This section goes over them -
