@@ -393,7 +393,75 @@ This section goes over these capabilities.
 ####Creating an app
 Creating an app makes you the app owner and gives you full access. The owner can not be removed from the app and is responsible for the billing associated with the app. If you plan on having multiple developers working on the same app, it's recommended to have a separate admin-like account for the owner of all your apps and add the additional developers (including yourself) for each app separately.
 
-For example, as shown in the figure below, donsampleapp was created by user dodil and dodil is the owner of the app. 
+For example, as shown in the figure below, donsampleapp was created by user *dodil* and *dodil* is the owner of the app. 
+
+![](http://oi41.tinypic.com/208bqfl.jpg)
+
+To add another developer to this app, another CloudControl user account must be created and this user must be added to the app. 
+
+####User accounts
+To work on and manage your applications on the CloudControl platform, a user account is needed. User accounts on the CloudControl platform can be created via the web console or via cctrluser create. 	
+
+~~~
+$cctrluser create
+~~~
+
+After the account is created using cctrluser create, an activation e-mail is sent to the e-mail address associated with the account. The account can be activated either by clicking the link in the e-mail or using the CLI command to activate the account.
+
+~~~
+$cctrluser USER_NAME_ACTIVATION_CODE
+~~~
+
+If the user account is no longer need, it can also be deleted via the web console or via cctrluser delete. 
+
+~~~
+$cctrluser delete
+~~~
+
+In cases where you might have forgotten your password and might need to reset it, visit the password reset page [here](https://api.cloudcontrol.com/reset_password/) to reset your password.
+
+####Tying it all together - Apps, Users and Deployment
+Apps have a repository, deployments and users. The repository is where your code lives, organized in branches. A deployment is a running version of your application, based on the branch with the same name. 
+
+![](http://oi39.tinypic.com/2n8v96p.jpg) The default deployment is based on the master branch.
+
+Users can be added to apps to gain access to the repository, branches and deployments. Creating an app allows you to add or remove users to that app, giving them access to the source code as well as allowing them to manage the deployments. Creating an app is easy. Simply specify a name and the desired type to determine which buildpack to use.
+
+~~~
+$ cctrlapp APP_NAME create php
+~~~ 
+
+You can also create an app using the web console as shown below -
+
+![](http://oi42.tinypic.com/23tpc91.jpg)
+
+By adding users to an app you can grant your fellow app developers access to the source code in the repository, allow them to deploy new versions and modify the deployments including their add-ons. User are based on the user's roles.
+
+There are two kinds of user roles in CloudControl - *admin* and *read-only* roles. Admin accounts have full access to the control surfaces for the app as well as source code repositories associated with the app. Read-only users only have read only access to the app’s source code. 	
+
+To add a user to your app in a specific role, you can use the admin console as shown below. Type in the e-mail address associated with the user’s account, select the role and add the user to your app.
+
+![](http://oi42.tinypic.com/oab4lk.jpg)
+
+After adding the user as an administrator, you will see something like the following - 
+
+![](http://oi43.tinypic.com/jjbdad.jpg)
+
+The owner can list, add and remove app users using the command line client.
+
+~~~
+$ cctrlapp APP_NAME user
+~~~
+
+A deployment is the running version of one of your branches made accessible via a provided subdomain. The name of the subdomain is based on the branch, with the master branch used for the default deployment. Deployments run independently from each other. They have  separate runtime environments, file system storage and add-ons. This allows you to have different versions of your app running at the same time without them interfering with each other. You can list all the deployments with the details command.
+
+~~~
+$ cctrlapp APP_NAME details
+~~~
+
+
+
+
 
 
 
