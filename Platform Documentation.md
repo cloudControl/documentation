@@ -41,17 +41,18 @@ $ sudo pip install -U cctrl
 ####Web Console
 In addition to the command line interface, the CloudControl platform also provides a web console to manage and control your apps. As shown in the figure below, user *dodil* has deployed two apps - *donsampleapp* and *hellodon* app. The git repository for the app’s source is also listed in the console. 
 
-Todo image
+![](http://oi42.tinypic.com/2mplwk2.jpg)
 
 By clicking the name of the app, you can get more details about the app such as the number of containers used, memory consumed, add-ons applied, and the cost of running the app.
 
-Todo image
+![](http://oi41.tinypic.com/24w7llu.jpg)
 
 Using the web console, you can add users to your app, assign different roles to these users and drop users. If you are no longer using the app, you can also delete the app. 
 
-Todo image
+![](http://oi44.tinypic.com/344pef4.jpg)
 
-<span style="color: Red"> *Remember* Every app needs to have an owner. If you delete an app on the CloudControl platform, it will be permanently deleted and you will not be able to access it on the *.cloudcontrol.com domain.</span>
+![](http://oi39.tinypic.com/2n8v96p.jpg) Every app needs to have an owner. If you delete an app on the CloudControl platform, it will be permanently deleted and you will not be able to access it on the *.cloudcontrol.com domain.
+
 
 
 
