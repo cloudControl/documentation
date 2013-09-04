@@ -207,6 +207,6 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add mongolab.OPTION
 ~~~
 
 For OPTION, select one of MongoLab's plan offerings: free, small, medium, large, or xlarge. When added, MongoLab automatically creates a new user account and launches a MongoDB database on an Amazon EC2 instance. By clicking the MongoLab add-on entry on the apps’s deployment page, you can manage the MongoDB database and take a look at the data stored. 
-The MongoLab database connection URI is provided in the CRED_FILE environment variable, a JSON document that stores credentials for the add-on providers. You can find more information about MongoLab add-on for CloudControl (here)[https://www.cloudcontrol.com/add-ons/mongolab].
+The MongoLab database connection URI is provided in the CRED_FILE environment variable, a JSON document that stores credentials for the add-on providers. You can find more information about MongoLab add-on for CloudControl [here](https://www.cloudcontrol.com/add-ons/mongolab).
 
 
