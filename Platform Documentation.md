@@ -134,7 +134,7 @@ The following environment variables are available for use by each app running on
 
 <table>
   <tr>
-    <th>Environment variable name</th><th>Description</th>
+    <th>Environment variable</th><th>Description</th>
   </tr>
   <tr>
     <td>TMPDIR</td><td>The path to the TMP directory</td>
