@@ -156,4 +156,57 @@ The following environment variables are available for use by each app running on
   </tr>
 </table>
 
+####Containers
+Containers are used to run apps in the CloudControl environment. They receive requests from the routing tier. Following are the different kinds of containers available on the CloudControl platform - 
+
+**Web Containers** run web components for apps on the CloudControl platform. If you’re running a web app, the routing tier routes requests to the web container on specific ports specified in the http requests. For a container to be able to receive requests from the routing tier, you need to start the app in the container to listen on a port using the following command - 
+
+~~~
+web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
+~~~
+
+**Worker containers** run long running asynchronous processes. They are typically used for executing background tasks such as sending emails to running heavy calculations or rebuilding caches. Increasing the number of workers increases the amount of background work done.
+
+On the CloudControl platform, each worker is started via the worker add-on and runs in a separate container. Each container has exactly the same runtime environment as defined by the stack chosen and the buildpack that is used. Each container also has the same access to all of the deployment add-ons. 
+
+Before you can start a single worker, add the worker add-on with the addon.add command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add worker.single
+~~~
+
+Multiple workers can be started by setting the WORKER_PARAMS value in the worker.add command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
+~~~
+
+Workers can be either stopped via the command line client or by exiting the process with a zero exit code. To stop a running worker via the command line use the worker.remove command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME worker.remove WRK_ID
+~~~
+
+To remove the worker add-on use the addon.remove command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.remove worker.single
+~~~
+
+####File systems
+To store, update and retrieve data files for your app, you need to have filesystem. Typically, one file system per container. CloudControl supports both persistent and non-persistent file systems.
+
+Persistent file systems like Amazon’s S3 or MongoLab’s GridFS are available on the CloudControl platform through add-ons. 
+
+GridFS is a module for MongoDB that allows to store large files in the database. It breaks large files into manageable chunks. When you query for a file, GridFS queries the chunks and returns the file one piece at a time. GridFS is useful especially for storing files over 4MB. 
+
+The MongoLab add-on can be added to any deployment from the cctrlapp command line using -
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add mongolab.OPTION
+~~~
+
+For OPTION, select one of MongoLab's plan offerings: free, small, medium, large, or xlarge. When added, MongoLab automatically creates a new user account and launches a MongoDB database on an Amazon EC2 instance. By clicking the MongoLab add-on entry on the apps’s deployment page, you can manage the MongoDB database and take a look at the data stored. 
+The MongoLab database connection URI is provided in the CRED_FILE environment variable, a JSON document that stores credentials for the add-on providers. You can find more information about MongoLab add-on for CloudControl (here)[https://www.cloudcontrol.com/add-ons/mongolab].
+
 
