@@ -196,7 +196,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove worker.single
 ####File systems
 To store, update and retrieve data files for your app, you need to have filesystem. Typically, one file system per container. CloudControl supports both persistent and non-persistent file systems.
 
-Persistent file systems like Amazon’s S3 or MongoLab’s GridFS are available on the CloudControl platform through add-ons. 
+**Persistent file systems** like Amazon’s S3 or MongoLab’s GridFS are available on the CloudControl platform through add-ons. 
 
 GridFS is a module for MongoDB that allows to store large files in the database. It breaks large files into manageable chunks. When you query for a file, GridFS queries the chunks and returns the file one piece at a time. GridFS is useful especially for storing files over 4MB. 
 
@@ -209,4 +209,22 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add mongolab.OPTION
 For OPTION, select one of MongoLab's plan offerings: free, small, medium, large, or xlarge. When added, MongoLab automatically creates a new user account and launches a MongoDB database on an Amazon EC2 instance. By clicking the MongoLab add-on entry on the apps’s deployment page, you can manage the MongoDB database and take a look at the data stored. 
 The MongoLab database connection URI is provided in the CRED_FILE environment variable, a JSON document that stores credentials for the add-on providers. You can find more information about MongoLab add-on for CloudControl [here](https://www.cloudcontrol.com/add-ons/mongolab).
 
+S3 is an online file storage service from Amazon. You can store arbitrary objects up to 5Tb in size. Files in S3 are organized into buckets and identified within each bucket by a unique key. Files can be created, listed, and retrieved using a REST interface. S3 can be used for a wide variety of uses, ranging from Web applications to media files. To learn more about how you can add S3 credentials to your deployment, check the custom config add-on for CloudControl [here](https://www.cloudcontrol.com/add-ons/config).
 
+![](http://oi39.tinypic.com/2n8v96p.jpg) For customer uploads like profile pictures, user profiles, and other info, you should use a persistent file system such as Amazon’s S3 or MongoLab’s GridFS.
+
+**Non-persistent file systems** hold temporary data that may or may not be accessible again in future requests. Depending on how the routing tier routes requests across available containers, data might not be available and could be deleted after each deploy. This does not include just manual deploys but also re-deploys that are automatically done by the platform during normal operation.
+
+###The lifecycle of an app on the CloudControl platform
+Applications typically have a common lifecycle consisting of development, staging and production phases. CloudControl is built from the ground-up to meets these requirements and powers the entire application lifecycle by bridging the gap between software testing and deployment. CloudControl supports multiple deployments via git thus enabling each deployment to be delivered from a different git branch. This provides more agility for your development teams.
+
+![](http://oi41.tinypic.com/2pq5hck.jpg)
+
+![](http://oi41.tinypic.com/119z8ye.jpg) To work on new feature start by creating a new branch in git. The new version can then be deployed as its own deployment ensuring that the newly deployed feature does not interfere with the older versions that already exist.
+
+![](http://oi39.tinypic.com/2n8v96p.jpg) More importantly, it also provides a way to ensure that the new code will run without any issues because each deployment uses the same stack and runs in an identical runtime environment.
+
+###Add-Ons
+Add-ons enrich the capabilities of your app and make them more powerful. There are over 50 different add-ons for CloudControl platform including databases, caching, performance monitoring, logging and even APIs for billing. Each deployment on the CloudControl platform needs its own set of add-ons.
+
+![](http://oi41.tinypic.com/119z8ye.jpg) If your app needs a MySQL database and you have a production, a development and a staging environment, all three need their own MySQL add-ons. Each add-on has different options, allowing you to choose a more powerful database for your high traffic production deployment and a smaller database for your development and staging needs.
