@@ -499,6 +499,32 @@ $ cctrlapp APP_NAME details
 
 To push the app, you can use the cctrlapp push command or the source control push command (git/bzr push). The repositories support all other remote operations like pulling and cloning as well.Whenever an updated branch is pushed, an image is built. The image is compressed and is limited to 200MB in size. The image can be deployed with the deploy command to the deployment matching the branch name. The contents of the image gets generated using the buildpack and usually includes the binary code for the app and any dependencies that were installed by the buildpack. 
 
+![](http://oi41.tinypic.com/119z8ye.jpg) Smaller images can be deployed faster, so it is recommended to keep the image size below 50MB. The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
 
+You can decrease the size of your image by making sure that unnecessary files such as  caches, logs, and backup files are not included in the image. If you need files to be tracked in the source control repository but not included in the image, add them to the *.cctrlignore* file in the project root directory.
 
+####Logging
+If your app suddenly fails abnormally or if you are just troubleshooting your app, error logs can really be handy. There are four different types of logging on the CloudControl platform -  access, error, worker and deploy. 
+
+* Access Log
+The access log shows each access to your app in an Apache compatible log format.
+
+* Error Log
+The error log shows all output your app prints to stdout, stderr and syslog. It also shows when a new version has been deployed to make it easy to determine if a problem existed already before or only after the last deploy. More detailed information on deploys can be found in the deploy log.
+
+* Worker Log
+To make worker output accessible to you, its stdout, stderr and syslog output is redirected to this log. The worker log shows the timestamp of when the message was written, the wrk_id of the worker the message came from as well as the actual log line.
+
+* Deploy Log
+The deploy log gives detailed information on the deploy process. It shows on how many nodes your deployment is deployed and lists the nodes themselves, how long it took for each of the nodes to start the container and get the deployment running and also when the load balancers kicked in and started sending traffic to the new version.
+
+**Customized Logging**, 
+Some add-ons in the deployment category as well as the custom-config add-on can be used to forward error and worker logs to the external logging services.
+
+####Subdomains and Custom domains
+Each deployment gets a *.cloudcontrolled.com* subdomain. The default deployment always found at *APP_NAME.cloudcontrolled.com*. Other additional deployments get the *DEP_NAME-APP_NAME.cloudcontrolled.com* subdomain.
+
+Custom domains can be used to access the deployments. To add a domain like *www.example.com*, *app.example.com* or *secure.example.com* to one of the deployments, simply add each one as an alias and add a CNAME for each entry that points to your deployment's subdomain. For example, if you want to point www.example.com to the default deployment of the app called awesomeapp add a CNAME for www.example.com pointing to awesomeapp.cloudcontrolled.com. 
+
+The alias add-on also supports mapping wildcard domains like *.example.com to one of your deployments. All custom domains need to be verified before they start working. To verify a domain it is required to also add the cloudControl verification code as a TXT record. Changes to DNS can take up to 24 hours until they have effect.
 
