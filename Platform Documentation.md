@@ -134,13 +134,25 @@ The following environment variables are available for use by each app running on
 
 <table>
   <tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
+    <th>Environment variable name</th><th>Description</th>
   </tr>
   <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+    <td>TMPDIR</td><td>The path to the TMP directory</td>
   </tr>
   <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+    <td>CRED_FILE</td><td>Path of the creds.json file containing add-on credentials</td>
+  </tr>
+  <tr>
+    <td>DEP_VERSION</td><td>GIT or BAZAAR version the image was build from</td>
+  </tr>
+  <tr>
+    <td>DEP_NAME</td><td>The deployment name in the same format as used by the command client. For example: myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name</td>
+  </tr>
+  <tr>
+    <td>DEP_ID</td><td>Internal deployment ID. This one stays the same for deployments lifetime but changes when undeploying and deploying with same name</td>
+  </tr>
+  <tr>
+    <td>WRK_ID</td><td>Internal worker ID. Only set for worker containers</td>
   </tr>
 </table>
 
