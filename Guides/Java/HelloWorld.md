@@ -75,7 +75,8 @@ Push your code to the application's repository, which triggers the deployment im
 $ cctrlapp APP_NAME/default push
 
 -----> Receiving push
------> Installing OpenJDK 1.6...done
+-----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
+-----> Installing Maven (maven_3_1_with_cache_1.tar.gz)... done
 -----> Installing settings.xml... done
 -----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
        [INFO] Scanning for projects...

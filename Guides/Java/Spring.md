@@ -93,15 +93,21 @@ Push your code to the application's repository:
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
+Counting objects: 223, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (212/212), done.
+Writing objects: 100% (223/223), 99.59 KiB, done.
+Total 223 (delta 107), reused 0 (delta 0)
 
 -----> Receiving push
------> Installing OpenJDK 1.6...done
+-----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
+-----> Installing Maven (maven_3_1_with_cache_1.tar.gz)... done
 -----> Installing settings.xml... done
 -----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
        [INFO] Scanning for projects...
        [INFO]
        [INFO] ---------------------------------------------------------------
-       [INFO] Building APP_NAME 1.0-SNAPSHOT
+       [INFO] Building petclinic 0.1.0-SNAPSHOT
        [INFO] ---------------------------------------------------------------
        ...
        [INFO] Packaging webapp

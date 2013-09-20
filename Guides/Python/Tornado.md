@@ -96,29 +96,25 @@ Push your code to the application's repository, which triggers the deployment
 image build process:
 ~~~bash
 $ cctrlapp APP_NAME/default push
-Counting objects: 10, done.
+Counting objects: 7, done.
 Delta compression using up to 4 threads.
-Compressing objects: 100% (6/6), done.
-Writing objects: 100% (7/7), 1.08 KiB, done.
-Total 7 (delta 4), reused 0 (delta 0)
-
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (7/7), 1.01 KiB, done.
+Total 7 (delta 0), reused 7 (delta 0)
+       
 -----> Receiving push
------> Preparing Python interpreter (2.7.2)
------> Creating Virtualenv version 1.7.2
-       New python executable in .heroku/venv/bin/python2.7
-       Not overwriting existing python script .heroku/venv/bin/python (you must use .heroku/venv/bin/python2.7)
-       Installing distribute..................................................................................................................................................................................................done.
-       Installing pip................done.
-       Running virtualenv with interpreter /usr/bin/python2.7
------> Activating virtualenv
------> Installing dependencies using pip version 1.2.1
-       Requirement already satisfied (use --upgrade to upgrade): tornado==2.4.1 in ./.heroku/venv/lib/python2.7/site-packages (from -r requirements.txt (line 1))
+-----> No runtime.txt provided; assuming python-2.7.3.
+-----> Using Python runtime (python-2.7.3)
+-----> Installing dependencies using Pip (1.3.1)
+       Downloading/unpacking tornado==2.4.1 (from -r requirements.txt (line 1))
+       ...
+       Successfully installed tornado
        Cleaning up...
 -----> Building image
------> Uploading image (2.4M)
-
+-----> Uploading image (25M)
+       
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
-   a624133..1e0630f  master -> master
+ + [new branch] master -> master
 ~~~
 
 Last but not least deploy the latest version of the app with the cctrlapp

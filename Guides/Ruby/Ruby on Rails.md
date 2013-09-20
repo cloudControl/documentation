@@ -124,30 +124,43 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-Counting objects: 5, done.
+Counting objects: 62, done.
 Delta compression using up to 4 threads.
-Compressing objects: 100% (2/2), done.
-Writing objects: 100% (3/3), 296 bytes, done.
-Total 3 (delta 1), reused 0 (delta 0)
+Compressing objects: 100% (51/51), done.
+Writing objects: 100% (62/62), 15.14 KiB, done.
+Total 62 (delta 2), reused 0 (delta 0)
 
 -----> Receiving push
------> Installing dependencies using Bundler version 1.2.1
-       Running: bundle install --without development:test --path vendor/bundle --binstubs bin/ --deployment
-       Using rake (10.1.0)
-       Using multi_json (1.2.0)
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.2
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+       Fetching gem metadata from https://rubygems.org/..........
+       Fetching gem metadata from https://rubygems.org/..
+       Installing rake (10.0.3)
        ...
-       Using will_paginate (3.0.4)
+       Installing rails (3.1.10)
+       ...
+       Installing uglifier (1.3.0)
+
        Your bundle is complete! It was installed into ./vendor/bundle
+       Post-install message from rdoc:
+       Depending on your version of ruby, you may need to install ruby rdoc/ri data:
+       <= 1.8.6 : unsupported
+       = 1.8.7 : gem install rdoc-data; rdoc-data --install
+       = 1.9.1 : gem install rdoc-data; rdoc-data --install
+       >= 1.9.2 : nothing to do! Yay!
+
        Cleaning up the bundler cache.
 -----> Preparing app for Rails asset pipeline
        Running: rake assets:precompile
-       /usr/bin/ruby1.9.1 /srv/tmp/builddir/vendor/bundle/ruby/1.9.1/bin/rake assets:precompile:nondigest RAILS_ENV=production RAILS_GROUPS=assets
-       Asset precompilation completed (3.73s)
------> Rails plugin injection
-       Injecting rails_log_stdout
-       Injecting rails3_serve_static_assets
+       Asset precompilation completed (6.34s)
+       Cleaning assets
+-----> WARNINGS:
+       You have not declared a Ruby version in your Gemfile.
+       To set your Ruby version add this line to your Gemfile:
+       ruby '2.0.0'
 -----> Building image
------> Uploading image (8.7M)
+-----> Uploading image (34M)
 
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master

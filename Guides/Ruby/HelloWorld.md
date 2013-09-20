@@ -54,20 +54,25 @@ Writing objects: 100% (14/14), 258.14 KiB, done.
 Total 14 (delta 0), reused 14 (delta 0)
        
 -----> Receiving push
------> Installing dependencies using Bundler version 1.2.1
-       Running: bundle install --without development:test --path vendor/bundle --binstubs bin/ --deployment
-       Fetching gem metadata from http://rubygems.org/..........
-       Fetching gem metadata from http://rubygems.org/..
+-----> Using Ruby version: ruby-2.0.0
+-----> Installing dependencies using Bundler version 1.3.2
+       Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin --deployment
+       Fetching gem metadata from https://rubygems.org/.........
+       Fetching gem metadata from https://rubygems.org/..
        Installing rack (1.5.2)
-       Installing rack-protection (1.3.2)
-       Installing tilt (1.3.3)
-       Installing sinatra (1.3.4)
-       Using bundler (1.2.1)
+       Installing rack-protection (1.5.0)
+       Installing tilt (1.4.1)
+       Installing sinatra (1.4.3)
+       Using bundler (1.3.2)
        Your bundle is complete! It was installed into ./vendor/bundle
        Cleaning up the bundler cache.
+-----> WARNINGS:
+       You have not declared a Ruby version in your Gemfile.
+       To set your Ruby version add this line to your Gemfile:
+       ruby '2.0.0'
 -----> Building image
------> Uploading image (1020K)
-       
+-----> Uploading image (31M)
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~

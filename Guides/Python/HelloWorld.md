@@ -47,30 +47,28 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-Counting objects: 7, done.
+Counting objects: 16, done.
 Delta compression using up to 4 threads.
-Compressing objects: 100% (5/5), done.
-Writing objects: 100% (6/6), 614 bytes, done.
-Total 6 (delta 1), reused 0 (delta 0)
-
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (16/16), 258.30 KiB, done.
+Total 16 (delta 2), reused 16 (delta 2)
+       
 -----> Receiving push
------> Preparing Python interpreter (2.7.2)
------> Creating Virtualenv version 1.7.2
-       New python executable in .heroku/venv/bin/python2.7
-       Also creating executable in .heroku/venv/bin/python
-       Installing distribute.........done.
-       Installing pip................done.
-       Running virtualenv with interpreter /usr/bin/python2.7
------> Activating virtualenv
------> Installing dependencies using pip version 1.1
+-----> No runtime.txt provided; assuming python-2.7.3.
+-----> Preparing Python runtime (python-2.7.3)
+-----> Installing Distribute (0.6.36)
+-----> Installing Pip (1.3.1)
+-----> Installing dependencies using Pip (1.3.1)
+       Downloading/unpacking Flask==0.9 (from -r requirements.txt (line 1))
        ...
-       Successfully installed Flask Jinja2 Werkzeug distribute
+       Successfully installed Flask Werkzeug Jinja2 markupsafe
        Cleaning up...
 -----> Building image
------> Uploading image (3.2M)
-
+-----> Uploading image (25M)
+       
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
-460bdac..28dd4d5  master -> master
+ * [new branch]      master -> master
+
 ~~~
 
 Last but not least deploy the latest version of the app with the cctrlapp deploy command:
