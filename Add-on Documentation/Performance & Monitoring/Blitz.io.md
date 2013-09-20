@@ -11,7 +11,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add blitz.OPTION
 ~~~
 Replace `blitz.OPTION` with a valid option, e.g. `blitz.250`.
 
-When added, Blitz.io automatically creates a new user account with your email adress. You can manage the load tests for your deployment within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "blitz.OPTION").
+When added, Blitz.io automatically creates a new user account with your email adress. You can manage the load tests for your deployment within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "blitz.OPTION").
 
 ## Upgrading the Blitz.io Add-on
 

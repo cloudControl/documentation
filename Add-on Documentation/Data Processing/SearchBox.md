@@ -11,7 +11,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add searchbox.OPTION
 ~~~
 Replace `searchbox.OPTION` with a valid option, e.g. `searchbox.micro`.
 
-When added, SearchBox ElasticSearch automatically creates a new user account. You can manage the Add-on within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "searchbox.OPTION").
+When added, SearchBox ElasticSearch automatically creates a new user account. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "searchbox.OPTION").
 
 ## Upgrading the SearchBox ElasticSearch Add-on
 

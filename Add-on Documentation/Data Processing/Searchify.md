@@ -13,7 +13,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add searchify.OPTION
 ~~~
 Replace `searchify.OPTION` with a valid option, e.g. `searchify.small`.
 
-When added, Searchify automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "searchify.OPTION").
+When added, Searchify automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "searchify.OPTION").
 
 ## Upgrading the Searchify Add-on
 

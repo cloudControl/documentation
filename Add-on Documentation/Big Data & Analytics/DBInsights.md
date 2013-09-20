@@ -10,7 +10,7 @@ The DBInsights Add-on can be added to every deployment with:
 $ cctrlapp APP_NAME/DEP_NAME addon.add dbinsights.PLAN
 ~~~
 
-When added, DBInsights automatically creates a new user account with your email adress. You can access the insights for the database within the [web console](https://console.cloudcontrolled.com) (go to the specific deployment and click the link "dbinsights.OPTION").
+When added, DBInsights automatically creates a new user account with your email adress. You can access the insights for the database within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "dbinsights.OPTION").
 
 ## Upgrade DBInsights
 

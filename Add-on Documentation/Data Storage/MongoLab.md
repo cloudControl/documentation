@@ -18,7 +18,7 @@ For your OPTION, select one of MongoLab's plan offerings: free, small, medium, l
 $ cctrlapp APP_NAME/DEP_NAME addon.add mongolab.large
 ~~~
 
-When added, MongoLab automatically creates a new user account and database in an Amazon EC2 cloud. You can manage your database and data easily from the [web console](https://console.cloudcontrolled.com/) by clicking the MongoLab add-on entry on your app's deployment page, and you gain immediate access to MongoLab customer support. Email [support@mongolab.com](mailto:support@mongolab.com) with any questions.
+When added, MongoLab automatically creates a new user account and database in an Amazon EC2 cloud. You can manage your database and data easily from the [web console](https://www.cloudcontrol.com/console) by clicking the MongoLab add-on entry on your app's deployment page, and you gain immediate access to MongoLab customer support. Email [support@mongolab.com](mailto:support@mongolab.com) with any questions.
 
 ## Internal access credentials
 

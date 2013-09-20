@@ -9,7 +9,7 @@ The Logentries Add-On can be added to every deployment with:
 $ cctrlapp APP_NAME/DEP_NAME addon.add logentries.PLAN
 ~~~
 
-When added, Logentries automatically creates a new account and log configuration including access token. After Add-on creation all stdout, stderr and syslog output within the container will be available in Logentries. You can access Logentries for your deployment within the [web console](https://console.cloudcontrolled.com) (go to the specific deployment, choose "Add-Ons" tab and click Logentries login).
+When added, Logentries automatically creates a new account and log configuration including access token. After Add-on creation all stdout, stderr and syslog output within the container will be available in Logentries. You can access Logentries for your deployment within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment, choose "Add-Ons" tab and click Logentries login).
 
 ## Removing Logentries
 

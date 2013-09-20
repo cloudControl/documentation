@@ -13,7 +13,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add elephantsql.OPTION
 ~~~
 Replace `elephantsql.OPTION` with a valid option, e.g. `elephantsql.turtle`.
 
-When added, ElephantSQL automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "elephantsql.OPTION").
+When added, ElephantSQL automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "elephantsql.OPTION").
 
 ## Upgrading the ElephantSQL Add-on
 

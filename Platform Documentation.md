@@ -718,7 +718,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
 [Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
-[web console]: https://console.cloudcontrolled.com
+[web console]: https://www.cloudcontrol.com/console
 [API libraries]: https://github.com/cloudControl
 [the latest version]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/
 [Python 2.6+]: http://python.org/download/

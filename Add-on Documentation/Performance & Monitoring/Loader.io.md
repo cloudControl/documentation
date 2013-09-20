@@ -13,7 +13,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add loaderio.test
 
 When added, Loader.io automatically creates a new account and login
 configuration including access token. You can access Loader.io for your
-deployment within the [web console](https://console.cloudcontrolled.com) (go to
+deployment within the [web console](https://www.cloudcontrol.com/console) (go to
 the specific deployment, choose "Add-Ons" tab and click Loader.io login).
 
 ## Removing the Loader.io Add-on

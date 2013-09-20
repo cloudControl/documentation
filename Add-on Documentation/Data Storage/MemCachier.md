@@ -378,7 +378,7 @@ $ memcached -v
 Usage analytics
 ------
 
-Our analytics dashboard is a simple tool that gives you more insight into how you’re using memcache. Just open your application's dashboard on our [web interface](https://console.cloudcontrolled.com/).
+Our analytics dashboard is a simple tool that gives you more insight into how you’re using memcache. Just open your application's dashboard on our [web interface](https://www.cloudcontrol.com/console).
 
 Sample apps
 -----
