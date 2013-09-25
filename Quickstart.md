@@ -25,7 +25,7 @@ $ sudo easy_install pip
 $ sudo pip install cctrl
 ~~~
 
-**Windows:** Please download the provided [installer](https://www.cloudcontrol.com/download/win). The file is named cctrl-x.x-setup.exe.
+**Windows:** Please download the provided [installer](https://www.cloudcontrol.com/download/win).
 
 ## Create a User Account (if you haven't already)
 
