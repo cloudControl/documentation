@@ -65,7 +65,12 @@ On CloudControl, one even doesn't have to take care of the API key because it is
 
 Provisioning Usersnap sets up a default email subscription for screenshots. To set up more advanced delivery methods just use the add-on's administration interface. You can open it in the resources view of your app. One single click on the Usersnap add-on opens the configuration view.
 
-## Example for PHP web sites
+## Install Usersnap to your Web App
+Usersnap works with every web project, regardless of the backend language. All you need to do is include the
+Usersnap JavaScript code right before the closing `</body>` tag of your main template.
+
+ 
+### Example for PHP web sites
 Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
 
 ```php
@@ -104,6 +109,98 @@ $USERSNAP_APIKEY = $creds['USERSNAP']['USERSNAP_APIKEY'];
 </body>
 </html>
 ```
+You can learn more about getting addon credentials with PHP in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
 
+### Example for Python web sites (Example for mako templates)
+Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
+
+```python
+<%
+import os
+import json
+
+apikey = ""
+try:
+    cred_file = open(os.environ['CRED_FILE'])
+    creds = json.load(cred_file)
+    apikey = creds.get("USERSNAP", {}).get("USERSNAP_APIKEY", "");
+except IOError:
+    print "Could not open the creds.json file!"
+
+%>
+
+<script type="text/javascript">
+   var _usersnapconfig = {
+       apiKey: "${apikey}",
+       valign: 'bottom',
+       halign: 'right',
+       tools: ["pen", "highlight", "note"],
+       lang: 'en',
+       commentBox: true,
+       emailBox: true
+   }; 
+   (function() {
+       var s = document.createElement('script');
+       s.type = 'text/javascript';
+       s.async = true;
+       s.src = '//api.usersnap.com/usersnap.js';
+       var x = document.getElementsByTagName('head')[0];
+       x.appendChild(s);
+   })();
+</script>
+</body>
+</html>
+```
+
+You can learn more about getting addon credentials with Python in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
+
+### Example for Ruby on Rails websites
+Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
+
+```ruby
+<%
+require 'json'
+apikey = ""
+begin
+  cred_file = File.open(ENV["CRED_FILE"]).read
+  creds = JSON.parse(cred_file)["USERSNAP"]
+  apikey = creds["USERSNAP_APIKEY"]
+rescue
+  puts "Could not open the creds.json file"
+end
+%>
+
+<script type="text/javascript">
+   var _usersnapconfig = {
+       apiKey: "<%= apikey %>",
+       valign: 'bottom',
+       halign: 'right',
+       tools: ["pen", "highlight", "note"],
+       lang: 'en',
+       commentBox: true,
+       emailBox: true
+   }; 
+   (function() {
+       var s = document.createElement('script');
+       s.type = 'text/javascript';
+       s.async = true;
+       s.src = '//api.usersnap.com/usersnap.js';
+       var x = document.getElementsByTagName('head')[0];
+       x.appendChild(s);
+   })();
+</script>
+</body>
+</html>
+```
+
+Tip: Save this snippet in a file named `_usersnap.html.erb` and you can include it in other templates
+by adding this line to your main template:
+
+```ruby
+<%= render :partial => "usersnap" %>
+```
+
+
+You can learn more about getting addon credentials with Ruby in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
 
 
