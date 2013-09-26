@@ -1,15 +1,28 @@
 # Usersnap
-[Usersnap](http://usersnap.com) is an [add-on](https://www.cloudcontrol.com/add-ons/usersnap) to allow your users to give visual feedback in a comfortable and easy way: directly in their browser.
+[Usersnap](http://usersnap.com) is an [add-on](https://www.cloudcontrol.com/add-ons/usersnap)
+to allow your users to give visual feedback in a comfortable and easy way:
+directly in their browser.
 
-Stop wasting time trying to understand unclear bug reports. Screenshots with comments from your users and testers delivered directly to your bug tracker help you to fix problems faster and speed up your development cycle. Understand the reported issues immediately by seeing it. Usersnap reduces expensive communication overhead significantly.
+Stop wasting time trying to understand unclear bug reports. Screenshots with
+comments from your users and testers delivered directly to your bug tracker
+help you to fix problems faster and speed up your development cycle.
+Understand the reported issues immediately by seeing it. Usersnap
+reduces expensive communication overhead significantly.
 
-Usersnap integrates seamlessly with your existing Bug Tracker and causes no switching costs. Connect Usersnap with one of our supported tools and you will get issue reports in a familiar place. 
+Usersnap integrates seamlessly with your existing Bug Tracker and causes
+no switching costs. Connect Usersnap with one of our supported tools and
+you will get issue reports in a familiar place. 
 
 [Learn more about all supported tools](http://usersnap.com/support/docs/apicfg)
-Usersnap provides simple and yet powerful tools which allow anybody to report bugs and issues. All bug reports contain additional information such as the used browser and the source URL of the screenshot making it easy to reproduce the reported issues. [Learn more about Usersnap's features](http://usersnap.com/support/docs/javascript#tools). 
+Usersnap provides simple and yet powerful tools which allow anybody to
+report bugs and issues. All bug reports contain additional information
+such as the used browser and the source URL of the screenshot making it
+easy to reproduce the reported issues. 
+[Learn more about Usersnap's features](http://usersnap.com/support/docs/javascript#tools). 
 
 ## Adding or removing the Usersnap Add-on
-The Add-on comes in different sizes and prices. It can be added by executing the command addon.add:
+The Add-on comes in different sizes and prices. It can be added by 
+executing the command addon.add:
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add usersnap.OPTION
 ~~~
@@ -66,12 +79,15 @@ On CloudControl, one even doesn't have to take care of the API key because it is
 Provisioning Usersnap sets up a default email subscription for screenshots. To set up more advanced delivery methods just use the add-on's administration interface. You can open it in the resources view of your app. One single click on the Usersnap add-on opens the configuration view.
 
 ## Install Usersnap to your Web App
-Usersnap works with every web project, regardless of the backend language. All you need to do is include the
-Usersnap JavaScript code right before the closing `</body>` tag of your main template.
+Usersnap works with every web project, regardless of the backend language. 
+All you need to do is include the Usersnap JavaScript code right before
+the closing `</body>` tag of your main template.
 
  
 ### Example for PHP web sites
-Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
+Include this snippet in your base template, right before the closing `</body>`
+tag (you can easily configure the snippet to your needs with the 
+[Usersnap Configurator](http://usersnap.com/configurator)):
 
 ```php
 <?php
@@ -109,10 +125,13 @@ $USERSNAP_APIKEY = $creds['USERSNAP']['USERSNAP_APIKEY'];
 </body>
 </html>
 ```
-You can learn more about getting addon credentials with PHP in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
+You can learn more about getting addon credentials with PHP in the 
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
 
 ### Example for Python web sites (Example for mako templates)
-Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
+Include this snippet in your base template, right before the closing `</body>`
+tag (you can easily configure the snippet to your needs with the 
+[Usersnap Configurator](http://usersnap.com/configurator)):
 
 ```python
 <%
@@ -152,10 +171,13 @@ except IOError:
 </html>
 ```
 
-You can learn more about getting addon credentials with Python in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
+You can learn more about getting addon credentials with Python in the 
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
 
 ### Example for Ruby on Rails websites
-Include this snippet in your base template, right before the closing `</body>` tag (you can easily configure the snippet to your needs with the [Usersnap Configurator](http://usersnap.com/configurator)):
+Include this snippet in your base template, right before the closing `</body>` 
+tag (you can easily configure the snippet to your needs with the 
+[Usersnap Configurator](http://usersnap.com/configurator)):
 
 ```ruby
 <%
@@ -193,14 +215,50 @@ end
 </html>
 ```
 
-Tip: Save this snippet in a file named `_usersnap.html.erb` and you can include it in other templates
-by adding this line to your main template:
+Tip: Save this snippet in a file named `_usersnap.html.erb` and you can include
+it in other templates by adding this line to your main template:
 
 ```ruby
 <%= render :partial => "usersnap" %>
 ```
 
 
-You can learn more about getting addon credentials with Ruby in the [cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
+You can learn more about getting addon credentials with Ruby in the 
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
 
+### Example for Java, NodeJS and all other web languages 
+Include this snippet in your base template, right before the closing `</body>` tag
+(you can easily configure the snippet to your needs with the 
+[Usersnap Configurator](http://usersnap.com/configurator)):
+
+```html
+<script type="text/javascript">
+   var _usersnapconfig = {
+       apiKey: "YOUR-APIKEY-HERE",
+       valign: 'bottom',
+       halign: 'right',
+       tools: ["pen", "highlight", "note"],
+       lang: 'en',
+       commentBox: true,
+       emailBox: true
+   }; 
+   (function() {
+       var s = document.createElement('script');
+       s.type = 'text/javascript';
+       s.async = true;
+       s.src = '//api.usersnap.com/usersnap.js';
+       var x = document.getElementsByTagName('head')[0];
+       x.appendChild(s);
+   })();
+</script>
+</body>
+</html>
+```
+
+Make sure to replace `YOUR-APIKEY-HERE` with the addon credential value stored in the `USERSNAP.USERSNAP_APIKEY`
+option. [How to get add on credentials in cloudControl](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons)
+
+## Support
+If you need help installing the Usersnap snippet or you have further questions, 
+please get in touch with the [Usersnap team](https://usersnap.com/support). 
 
