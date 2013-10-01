@@ -93,6 +93,10 @@ $ cd python_hello_world_app
 $ git clone git://github.com/cloudControl/ruby_hello_world_app.git
 $ cd ruby_hello_world_app
 
+# for Node.js
+$ git clone git://github.com/cloudControl/node-js-sample.git
+$ cd node-js-sample
+
 # now push
 $ cctrlapp APP_NAME push
 ~~~
