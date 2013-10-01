@@ -93,6 +93,10 @@ $ cd python-flask-example-app
 $ git clone git://github.com/cloudControl/ruby-sinatra-example-app.git
 $ cd ruby-sinatra-example-app
 
+# for Node.js
+$ git clone git://github.com/cloudControl/node-js-sample.git
+$ cd node-js-sample
+
 # now push
 $ cctrlapp APP_NAME push
 ~~~
