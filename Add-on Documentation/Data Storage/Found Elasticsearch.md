@@ -1,3 +1,5 @@
+# Found Elasticsearch
+
 [Elasticsearch](http://www.elasticsearch.org) is an open source, distributed, REST-ful search engine. In addition to being an excellent search engine, it is also great for analytics, storing logs, etc. — a general "NoSQL" store.
 
 [Found Elasticsearch](http://www.found.no/) provides dedicated clusters with reserved memory and storage, ensuring predictable performance. You can easily scale your search cluster up or down using the web console, with no downtime. We provide replication and automatic failover for production and mission critical environments, protecting your cluster against unplanned downtime.
