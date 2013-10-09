@@ -1,3 +1,5 @@
+#RabbitMQ Bigwig
+
 [RabbitMQ Bigwig](http://www.cloudcontrol.com/add-ons/rabbitmq-bigwig) is an [Add-on](http://www.cloudcontrol.com/add-ons/) for adding an AMQP message broker to  your application.
 
 RabbitMQ provides robust messaging for applications. It is easy to use and supported on all major operating systems and developer platforms.
