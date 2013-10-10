@@ -189,4 +189,4 @@ Please submit all RabbitMQ Bigwig support and runtime issues via one of the [clo
 Additional resources are available at:
 
 * [RabbitMQ website](http://www.rabbitmq.com/)
-* [Bigwig documentation[(http://bigwig.io/)
+* [Bigwig documentation](http://bigwig.io/)
