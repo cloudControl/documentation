@@ -8,19 +8,21 @@ In this tutorial we're going to show you how to deploy a Hello World Node.js
 application on [cloudControl]. Check out the [Node.js buildpack] for supported
 features.
 
-## Cloning a Hello World application
-First, clone the hello world app from our repository:
+## The Node.js App Explained
 
+### Get the App
+First, clone the Node.js App from our repositoryon Github:
 ~~~bash
 $ git clone git://github.com/cloudControl/node-js-sample
 $ cd node-js-sample
 ~~~
 
-### Dependency declaration with NPM
-The requirements of your application must be defined in a `package.json`-file
-in your project's root directory.  For this simple app the only requirement is
-Express itself:
+Now you have a small but fully functional Node.js application.
 
+### Dependency Tracking
+Node.js tracks dependencies vi [npm]. The requirements of your application must
+be defined in a `package.json`-file in your project's root directory.  For this
+simple app the only requirement is Express itself:
 ~~~json
 {
   "name": "node-js-sample",
@@ -39,12 +41,11 @@ You should always specify the versions of your dependencies, if you want your
 builds to be reproducable and to prevent unexpected errors caused by version
 changes.
 
-### Process type definitions
+### Process Type Definition
 cloudControl uses a [Procfile] to know how to start your processes.
 
 There must be a file called `Procfile` at the top level of your repository,
 with the following content:
-
 ~~~
 web: node web.js
 ~~~
@@ -52,7 +53,7 @@ web: node web.js
 The web process type is required and specifies the command that will be
 executed when the app is deployed.
 
-## Pushing and deploying your app
+## Pushing and Deploying your App
 Choose a unique name (from now on called `APP_NAME`) for your application and
 create it on the cloudControl platform:
 
@@ -60,9 +61,8 @@ create it on the cloudControl platform:
 $ cctrlapp APP_NAME create nodejs
 ~~~
 
-Push your code to the application's repository, which creates a deployment
-image:
-
+Push your code to the application's repository, which triggers the deployment
+image build process:
 ~~~bash
 $ cctrlapp APP_NAME/default push
 Counting objects: 307, done.
@@ -101,16 +101,17 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Deploy your app:
-
+Last but not least deploy the latest version of the app with the cctrlapp
+deploy command:
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you should now be able to reach your application at
-`http://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Flask app running at
+`http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Node.js]: http://nodejs.org/
+[npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
