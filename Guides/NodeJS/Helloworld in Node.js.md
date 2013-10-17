@@ -107,7 +107,7 @@ deploy command:
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Flask app running at
+Congratulations, you can now see your Express app running at
 `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Node.js]: http://nodejs.org/
