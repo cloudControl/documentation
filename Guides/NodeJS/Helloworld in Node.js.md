@@ -13,7 +13,7 @@ features.
 ### Get the App
 First, clone the Node.js App from our repositoryon Github:
 ~~~bash
-$ git clone git://github.com/cloudControl/node-js-sample
+$ git clone git://github.com/cloudControl/nodejs-express-example-app
 $ cd node-js-sample
 ~~~
 
