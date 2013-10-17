@@ -7,7 +7,7 @@ In this tutorial we're going to show you how to deploy a Hello World Node.js app
 First, clone the hello world app from our repository:
 
 ~~~bash
-$ git clone git://github.com/cloudControl/node-js-sample
+$ git clone git://github.com/cloudControl/nodejs-express-example-app
 $ cd node-js-sample
 ~~~
 
