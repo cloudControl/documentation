@@ -178,7 +178,7 @@ You can also list the available key ids and remove existing keys using the key i
 $ cctrluser key
 Keys
  Dohyoonuf7
- 
+
 $ cctrluser key Dohyoonuf7
 ssh-rsa AAA[...]
 
@@ -190,7 +190,7 @@ $ cctrluser key.remove Dohyoonuf7
 A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains).
 It is based on the branch of the same name. Exception: the default deployment is based on the master (Git) / trunk (Bazaar).
 
-Deployments run independently from each other, including seperate runtime environments, file system storage and Add-ons (e.g. databases and caches).
+Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches).
 This allows you to have different versions of your app running at the same time without interfering with each other.
 Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
 
@@ -252,7 +252,7 @@ $ cctrlapp APP_NAME/dev push
 # get the REPO_URL from the output of cctrlapp APP_NAME details
 
 # with git:
-$ git remote add cctrl REPO_URL  
+$ git remote add cctrl REPO_URL
 $ git push cctrl dev
 
 # with bzr:
@@ -326,7 +326,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
  * The filesystem is not persistent.
  * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests across available containers, and is deleted after each deploy. This does include deploys you trigger manually, but also re-deploys done by the platfom itself during normal operation.
+Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests across available containers, and is deleted after each deploy. This does include deploys you trigger manually, but also re-deploys done by the platform itself during normal operation.
 
 For customer uploads (e.g. user profile pictures) we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on].
 
@@ -340,7 +340,7 @@ For customer uploads (e.g. user profile pictures) we recommend object stores lik
 
 ### Development, Staging and Production: The Application Lifecycle
 
-Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier, each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on a new feature it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More importantly even, these development/feature or staging deployments also help ensure that the new code will work in producion because each deployment using the same [stack](#stacks) has the same runtime environment.
+Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier, each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on a new feature it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More importantly even, these development/feature or staging deployments also help ensure that the new code will work in production because each deployment using the same [stack](#stacks) has the same runtime environment.
 
 ### Environment Variables
 
@@ -513,7 +513,7 @@ From now on all the new logs should be visible in your custom syslog remote.
  * Each deployment is provided a `.cloudcontrolled.com` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment gets a `.cloudcontrolled.com` subdomain. The `APP_NAME.cloudcontrolled.com` will point to the `default` deployment while any additional deployment can be accesed with a prefixed subdomain: `DEP_NAME-APP_NAME.cloudcontrolled.com`.
+Each deployment gets a `.cloudcontrolled.com` subdomain. The `APP_NAME.cloudcontrolled.com` will point to the `default` deployment while any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.cloudcontrolled.com`.
 
 You can also use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments, simply add each one as an alias and add a CNAME for each pointing to your deployment's subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp* add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com`. The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one of your deployments.
 
@@ -539,7 +539,7 @@ Deployments with --containers 1 (the default) are unavailable for a few minutes 
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specificed using the --memory parameter, being possible to choose from 128MB to 1024MB. To determine the optimal --memory value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
+In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specified using the --memory parameter, being possible to choose from 128MB to 1024MB. To determine the optimal --memory value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
 
 ### Choosing Optimal Settings
 
@@ -549,8 +549,9 @@ You can use the [Blitz.io] and [New Relic Add-ons] to run synthetic load tests a
 
 **TL;DR:**
 
- * All HTTP requests are routed via the routing tier.
- * `*.cloudcontrolled.com` is round robin across available routing tier nodes.
+ * All HTTP requests are routed via one of our routing tiers based on the `cloudcontrolled.com` and `cloudcontrolapp.com` domains, respectively.
+ * `cloudcontrolled.com` routing tier provides http caching via Varnish.
+ * `cloudcontrolapp.com` routing tier introduces container health checker, lower timeouts and WebSocket support.
  * Requests are routed based on the `Host` header.
  * Use the `X-Forwarded-For` header to get the client IP.
 
@@ -560,13 +561,81 @@ The routing tier is designed to be robust against single node and even complete 
 
 The `*.cloudcontrolled.com` subdomains resolve in a round robin fashion to the current list of routing tier node IP addresses. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run in one container and therefore only in one availability zone.
 
-Because of the elastic nature of the routing tier the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
-
-If a container is not available due to an underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to the other available containers of the deployment. Deployments running on --containers 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure set the --containers option to at least 2.
+Because of the elastic nature of the routing tier, the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
 ### Remote Address
 
-Because client requests don't hit your app directly, but are forwarded via the routing tier, you can't access the clients IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available the routing tier sets the `X-Forwarded-For` header to the original clients IP.
+Given that client requests don't hit your app directly, but are forwarded via the routing tier, you can't access the client's IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available, the routing tier sets the `X-Forwarded-For` header to the original client's IP.
+
+### Reverse Proxy timeouts
+
+Our routing tiers come with a reverse proxy that accepts and forwards user requests to your application. To do this in an efficient way, we set strict timeouts to the read/ write operations. The values differ a little between the classic and our new routing tier. You can find them below.
+
+ * __Connect timeout__ - the time within a connection to your application has to be established. If your containers are up, but hanging, then this timeout will not apply as the connection to the endpoints has been made already.
+ * __Read timeout__ - time to retrieve a response from your application. It determines how long the routing tier will wait to get the response to a request. The timeout is established not for an entire response, but only between two operations of reading.
+ * __Send timeout__ - maximum time between two write operations of a request. If your application does not take new data within this time, the routing tier will shutdown the connection.
+
+
+### Requests distribution
+
+Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable service resolving domain names in a round robin fashion. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run on one container and therefore are only hosted in one availability zone.
+
+### cloudcontrolled.com Routing Tier
+
+#### Failover
+
+If a container is not available due to an underlying node failure or a problem with the code in the container itself, the routing tier automatically routes requests to another available container of the deployment. Deployments running on --containers 1 will be unavailable for a couple of minutes until a replacement container has been started. To avoid even short downtimes in the event of a single node or container failure, set the --containers option to at least 2.
+
+#### Timeouts:
+
+|Parameter|Value [s]|
+|:---------|:----------:|
+|Connect timeout|60|
+|Send timeout|60|
+|Read timeout|120|
+
+### cloudcontrolapp.com Routing Tier
+
+When using `*.cloudcontrolapp.com` subdomains, requests go through a different routing tier that provides several new features. This routing tier is still in _Beta_ phase, so its functionality and performance may vary in the future, but it is already stable enough for production usage.
+
+#### Active health checks
+
+This routing tier includes a container health checker. Incoming requests will only be forwarded to healthy instances. If your application is running into timeouts or returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502` or `greater 503`, we will start inspecting the container. Our health checker will send requests to it in order to assure that they are up and ready to receive requests. Because of this, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent. Only deployments with more than one container running (see the [scaling section](#scaling) for details) will take advantage of this mechanism.
+
+#### Timeouts:
+
+|Parameter|Value [s]|
+|:---------|:----------:|
+|Connect timeout|20|
+|Send timeout|55|
+|Read timeout|55|
+
+#### WebSockets
+
+Apart from our new health check strategy and updated request timeouts, the `cloudcontrolapp.com` routing tier now introduces support for WebSockets on the cloudControl platform.
+
+WebSocket connections use standard HTTP ports (80 and 443) like normal browsers. In order to establish a WebSocket connection on our platform, the client has to explicitly set `Upgrade` and `Connection` [hop-by-hop](http://tools.ietf.org/html/rfc2616#section-13.5.1) headers in the request. Those headers instruct our reverse-proxy to upgrade the protocol from HTTP to WebSocket. Once the protocol upgrade handshake is completed, data frames can be sent between the client and the server in full-duplex mode.
+
+All the request timeouts described above also apply for WebSocket connections, but with different effects:
+
+|Parameter|Value [s]|Description|
+|:--------|:--------|:---------:|
+|Send timeout|55|Timeout between two consecutive chunks of data being sent by the client|
+|Read timeout|55|Timeout between two consecutive chunks of data being sent back to the client|
+
+
+To overcome any timeout limitations, you can explicitly implement the WebSocket [Ping-Pong control](http://tools.ietf.org/html/rfc6455#page-36) mechanism, which keeps connections alive. Nevertheless, many of the WebSocket libraries or clients implemented in many languages already offer this feature out of the box.
+
+#### Secure WebSockets
+
+Conventional WebSockets do not offer any kind of protocol specific authentication or data encryption. You are encouraged to use standard HTTP authentication mechanisms like cookies, basic/diggest or TLS. The same comes for data encryption where SSL is your obvious choice. While a conventional WebSocket connection is established via HTTP, a protected one uses HTTPS. The distinction is based on the URI schemes:
+
+~~~
+Normal connection: ws://{host}:{port}/{path to the server}
+Secure connection: wss://{host}:{port}/{path to the server}
+~~~
+
+Please note that Secure WebSockets connections can only be established using `*.cloudcontrolapp.com` subdomains, not custom ones, at least for the time being. It is highly recommended to use them, not only for data security reasons. Secure WebSockets are 100% proxy transparent, which puts your containers in full control of WebSocket `upgrade handshake` in case some of the proxies do not handle it properly.
 
 ## Performance & Caching
 
@@ -578,11 +647,11 @@ Because client requests don't hit your app directly, but are forwarded via the r
 
 ### Reduce the Number of Requests
 
-Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. Common techniques to do this is combining and minimizing javascript and css files into one file each and using sprites for images.
+Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. One common technique to accomplish this is combining and minimizing javascript and css files into one file each and using sprites for images.
 
 ### Caching Early
 
-After you have reduced the total number of requests it's recommended to cache as far away from your database as possible. Using far future expire headers to avoid that browsers request ressources at all. The next best way of reducing the number of requests that hit your backends is to cache complete responses in the loadbalancer. For this we offer caching directly in the loadbalancing and routing tier.
+After you have reduced the total number of requests, it's recommended to cache as far away from your database as possible. Using far-future `expires` headers avoids that browsers request resources at all. The next best way of reducing the number of requests that hit your containers is to cache complete responses in the loadbalancer. For this we offer caching directly in the loadbalancing and routing tier.
 
 #### Caching Proxy
 
@@ -592,19 +661,22 @@ You can check if a request was cached in Varnish by checking the response's *X-v
 
 #### In-Memory Caching
 
-To make requests that can't use a cookieless domain faster, you can use in memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests accross all available containers it is recommended to cache data in a way that the cache is also available for requests that are routed to different containers. A battle tested solution for this is Memcached which is available via the [MemCachier Add-on]. Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [MemCachier Documentation] has detailed instructions on how to use it for your language and framework of choice.
-
+To make requests that can't use a cookieless domain faster, you can use in-memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests across all available containers it is recommended to cache data in a way that the cache is also available for requests that are routed to different containers. A battle-tested solution for this is Memcached which is available via the [MemCachier Add-on]. Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. Also the [MemCachier Documentation] has detailed instructions on how to use it for your language and framework of choice.
 
 ### Cache Breakers
 
-When caching requests on client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same and the cached response has not expired, the request is answered from cache. As part of every deployment all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. But when using far future expire headers as recommended above this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
+When caching requests on client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same and the cached response has not expired, the request is answered from cache. As part of every deployment, all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. But when using far-future `expires` headers as recommended above, this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
 
 The [environment variables](#environment-variables) of the deployment runtime environment contain the DEP_VERSION of the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
 
 This technique works for URLs as well as for the keys in in-memory caches like `Memcached`.
 Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version.
-Since Memcached only allows flushing the complete cache you would lose all cached values.
+Since Memcached only allows flushing the complete cache, you would lose all cached values.
 Including the DEP_VERSION in the key is an easy way to ensure that the cache is clear for new version without flushing.
+
+### Caching in cloudcontrolapp.com routing tier
+
+The `cloudcontrolapp.com` routing tier does not include caching components, so caching is not available by default. However, it is still possible to provide caching for static assets via cookieless domain. For this purpose you can simply use `*.cloudcontrolled.com` subdomain of your deployment. Alternatively you can setup fresh new cookieless subdomain repeating steps as described [above](#caching-proxy).
 
 ## Scheduled Jobs and Background Workers
 
@@ -618,7 +690,7 @@ Since a web request taking longer than 120s is killed by the routing tier, longe
 
 ### Cron
 
-For tasks that are guaranteed to finish within the timelimit, the [Cron add-on] is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on please refer to the [Cron add-on documentation].
+For tasks that are guaranteed to finish within the time limit, the [Cron add-on] is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron add-on please refer to the [Cron add-on documentation].
 
 ### Workers
 
@@ -730,7 +802,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 [MongoLab Add-on]: https://www.cloudcontrol.com/add-ons/mongolab
 [Add-on marketplace]: https://www.cloudcontrol.com/add-ons
 [Deployment category]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment
-[rsyslog]: http://www.rsyslog.com/ 
+[rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
 [Alias Add-on]: https://www.cloudcontrol.com/add-ons/alias
 [Blitz.io]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io
