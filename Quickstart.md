@@ -78,23 +78,23 @@ Clone one of the example apps in your preferred programming language and push it
 
 ~~~bash
 # for Java
-$ git clone git://github.com/cloudControl/java_hello_world_app.git
+$ git clone https://github.com/cloudControl/java_hello_world_app.git
 $ cd java_hello_world_app
 
 # for PHP
-$ git clone git://github.com/cloudControl/php_hello_world_app.git
+$ git clone https://github.com/cloudControl/php_hello_world_app.git
 $ cd php_hello_world_app
 
 # for Python
-$ git clone git://github.com/cloudControl/python_hello_world_app.git
+$ git clone https://github.com/cloudControl/python_hello_world_app.git
 $ cd python_hello_world_app
 
 # for Ruby
-$ git clone git://github.com/cloudControl/ruby_hello_world_app.git
+$ git clone https://github.com/cloudControl/ruby_hello_world_app.git
 $ cd ruby_hello_world_app
 
 # for Node.js
-$ git clone git://github.com/cloudControl/node-js-sample.git
+$ git clone https://github.com/cloudControl/node-js-sample.git
 $ cd node-js-sample
 
 # now push

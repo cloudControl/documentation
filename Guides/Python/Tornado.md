@@ -11,7 +11,7 @@ application on [cloudControl].
 ### Get the App
 First, lets clone the example code from Github.
 ~~~bash
-$ git clone git://github.com/cloudControl/python-tornado-example-app.git
+$ git clone https://github.com/cloudControl/python-tornado-example-app.git
 $ cd python-tornado-example-app
 ~~~
 

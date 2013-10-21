@@ -282,7 +282,7 @@ This will tell it to use a class called DatabaseLogger and form the basis of tel
 
     cd app/Plugin;
     
-    git clone git://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin database_logger
+    git clone https://github.com/webtechnick/CakePHP-DatabaseLogger-Plugin database_logger
 
 Now you'll have a copy of the files, ready to go.
 

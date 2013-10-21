@@ -9,7 +9,7 @@ In this tutorial we're going to show you how to deploy a Django application on [
 First, clone the Django application from our repository on Github:
 
 ~~~bash
-$ git clone git://github.com/cloudControl/python-django-example-app.git
+$ git clone https://github.com/cloudControl/python-django-example-app.git
 $ cd python-django-example-app
 ~~~
 

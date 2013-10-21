@@ -12,7 +12,7 @@ supported features.
 First, let's clone the Flask App from our repository on Github:
 
 ~~~bash
-$ git clone git://github.com/cloudControl/python-flask-example-app.git
+$ git clone https://github.com/cloudControl/python-flask-example-app.git
 $ cd python-flask-example-app
 ~~~
 

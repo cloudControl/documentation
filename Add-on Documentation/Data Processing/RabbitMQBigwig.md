@@ -57,7 +57,7 @@ After modifying `Gemfile`, run `bundle install` to update `Gemfile.lock`:
 
 For a full example of using Bigwig and the Bunny gem with Rails, please check out our [example rails application](https://github.com/lshift/rabbitmq-service-rails-sample). Once that's checked out, you'll be able to deploy that to cloudControl by running the following shell commands:
 
-    $ git clone git://github.com/lshift/rabbitmq-service-rails-sample.git
+    $ git clone https://github.com/lshift/rabbitmq-service-rails-sample.git
     ...
     $ cd rabbitmq-service-rails-sample
     $ cctrlapp bigwigrailssample/default create ruby

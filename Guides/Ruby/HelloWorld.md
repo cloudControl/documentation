@@ -10,7 +10,7 @@ In this tutorial we're going to show you how to deploy a Sinatra application on
 ### Get the App
 First, let’s clone the Sinatra App from our repository on Github:
 ~~~bash
-$ git clone git://github.com/cloudControl/ruby-sinatra-example-app.git
+$ git clone https://github.com/cloudControl/ruby-sinatra-example-app.git
 $ cd ruby-sinatra-example-app
 ~~~
 

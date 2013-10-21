@@ -13,7 +13,7 @@ out the [php buildpack] for supported features.
 ###Get the App
 First, let’s clone the Silex App from our repository on Github:
 ~~~bash
-$ git clone git://github.com/cloudControl/php-silex-example-app.git
+$ git clone https://github.com/cloudControl/php-silex-example-app.git
 $ cd php-silex-example-app
 ~~~
 
