@@ -10,7 +10,7 @@ In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate ap
 First, clone the Spring application from our repository:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/java-spring-hibernate-example-app
+$ git clone git://github.com/cloudControl/java-spring-hibernate-example-app
 $ cd java-spring-hibernate-example-app
 ~~~
 

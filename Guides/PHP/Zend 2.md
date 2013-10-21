@@ -11,7 +11,7 @@ The [example app] is a ready to deploy fork of the official ZendSkeletonApplicat
 First, clone the Zend2 application from our repository:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/php-zend2-example-app.git
+$ git clone git://github.com/cloudControl/php-zend2-example-app.git
 $ cd php-zend2-example-app
 ~~~
 

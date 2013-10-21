@@ -9,7 +9,7 @@ In this tutorial we're going to show you how to deploy a [Ruby on Rails] applica
 First, clone the Rails application from our repository on Github:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/ruby-rails-example-app.git
+$ git clone git://github.com/cloudControl/ruby-rails-example-app.git
 $ cd ruby-rails-example-app
 ~~~
 
