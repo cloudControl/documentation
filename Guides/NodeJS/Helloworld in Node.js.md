@@ -14,7 +14,7 @@ features.
 First, clone the Node.js App from our repositoryon Github:
 ~~~bash
 $ git clone git://github.com/cloudControl/nodejs-express-example-app
-$ cd node-js-sample
+$ cd nodejs-express-example-app
 ~~~
 
 Now you have a small but fully functional Node.js application.
@@ -25,8 +25,8 @@ be defined in a `package.json`-file in your project's root directory.  For this
 simple app the only requirement is Express itself:
 ~~~json
 {
-  "name": "node-js-sample",
-  "version": "0.0.1",
+  "name": "nodejs-express-example-app",
+  "version": "0.0.2",
   "dependencies": {
     "express": "~3.3.4"
   },
