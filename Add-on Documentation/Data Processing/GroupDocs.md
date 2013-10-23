@@ -1,44 +1,39 @@
-#Groupdocs
+#GroupDocs
 
-This quickstart will get you going with the GroupDocs Java sample app on cloudcontrol.
+GroupDocs is a one-stop-shop for your document management requirements.
 
-## Prerequisites
+## Adding GroupDocs
 
-* A cloudcontrol user account with [cloudcontrol toolbelt](https://toolbelt.cloudcontrol.com/) installed on the local workstation.
-* Add GroupDocs addon to your app.
+GroupDocs can be added by executing the command addon.add:
 
-## Add GroupDocs Add-on to your app
+    $ cctrlapp APP_NAME/DEPLOYMENT addon.add groupdocs.PLAN_NAME
 
-	:::term
-    $ cctrlapp APP_NAME/DEPLOYMENT addons.add groupdocs.PLAN
-    -----> Adding groupdocs to sharp-mountain-4006... done
+## Removing GroupDocs
 
-## Clone the sample repository to your local folder
+Similarly, the Add-on can be removed from the deployment easily using addon.remove:
 
-	:::term
+    $ cctrlapp APP_NAME/DEPLOYMENT addon.remove groupdocs.PLAN_NAME
+
+## Sample GroupDocs app
+
+If you just want to try GroupDocs out but haven't got any app running yet, you can clone the GroupDocs sample app:
+
 	$ git clone git://github.com/groupdocs/groupdocs-cloudcontrol-examples-for-python.git
 
-## Store Your App in Git
+Store the app on Git:
 
-    :::term
 	$ cd groupdocs-cloudcontrol-examples-for-python
     $ git init
     $ git add .
     $ git commit -m "init"
 
-## Deploy to cloudcontrol/default
+Create your app on the Python cloudControl stack:
 
-Create the app on the default stack:
-
-    :::term
     $ cctrlapp APP_NAME create python
-    Git remote cloudcontrol added
 
-Deploy your code:
+Push and deploy the code:
 
-    :::term
     $ cctrlapp APP_NAME push
 	$ cctrlapp APP_NAME deploy
 
-## Live running app
-This sample app is also running live on cloudcontrol. To view and try, please open [http://groupdocspython.cloudcontrolapp.com/](http://groupdocspython.cloudcontrolapp.com/).
+This sample app is also running live on cloudControl. To view and try, please open [http://groupdocspython.cloudcontrolapp.com/](http://groupdocspython.cloudcontrolapp.com/).
