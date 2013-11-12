@@ -7,18 +7,18 @@ Don't bother with the administrative operations or reliability issues of a searc
 To add the Searchly ElasticSearch Add-on use the addon.add command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add Searchly.OPTION
+$ cctrlapp APP_NAME/DEP_NAME addon.add searchly.OPTION
 ~~~
-Replace `Searchly.OPTION` with a valid option, e.g. `Searchly.micro`.
+Replace `searchly.OPTION` with a valid option, e.g. `searchly.micro`.
 
-When added, Searchly ElasticSearch automatically creates a new user account. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "Searchly.OPTION").
+When added, Searchly ElasticSearch automatically creates a new user account. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "searchly.OPTION").
 
 ## Upgrading the Searchly ElasticSearch Add-on
 
 To upgrade from a smaller to a more powerful plan use the addon.upgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade Searchly.OPTION_OLD Searchly.OPTION_NEW
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade searchly.OPTION_OLD searchly.OPTION_NEW
 ~~~
 
 ## Downgrading the Searchly ElasticSearch Add-on
@@ -26,7 +26,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade Searchly.OPTION_OLD Searchly.OPTION_N
 To downgrade to a smaller plan use the addon.downgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade Searchly.OPTION_OLD Searchly.OPTION_NEW
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade searchly.OPTION_OLD searchly.OPTION_NEW
 ~~~
 
 ## Removing the Searchly ElasticSearch Add-on
@@ -34,7 +34,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade Searchly.OPTION_OLD Searchly.OPTION
 The Searchly ElasticSearch Add-on can be removed from the deployment by using the addon.remove command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove Searchly.OPTION
+$ cctrlapp APP_NAME/DEP_NAME addon.remove searchly.OPTION
 ~~~
 
 ## Internal Access
@@ -43,4 +43,4 @@ It's recommended to the read database credentials from the creds.json file. The 
 
 ## Searchly ElasticSearch Code Examples
 
-You will find examples on how to use Searchly ElasticSearch within your app at [dev center](http://dev.Searchly.io).
+You will find examples on how to use Searchly ElasticSearch within your app at [dev center](http://dev.searchly.io).
