@@ -91,20 +91,20 @@ To initialise mysqls, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
     cctrlapp cloudcontroldldrupal/default addon.add mysql.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldldrupal/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
     cctrlapp cloudcontroldldrupal/testing addon.add mysql.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldldrupal/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
     Addon                    : mysqls.free
-       
+
      Settings
        MYSQLS_DATABASE          : <database_name>
        MYSQLS_PASSWORD          : <database_password>
@@ -117,12 +117,12 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldldrupal/default addon.add config.free --APPLICATION_ENV=production
+    cctrlapp cloudcontroldldrupal/default config.add APPLICATION_ENV=production
 
-    // Set the testing environment setting    
-    cctrlapp cloudcontroldldrupal/testing addon.add config.free --APPLICATION_ENV=testing
+    // Set the testing environment setting
+    cctrlapp cloudcontroldldrupal/testing config.add APPLICATION_ENV=testing
 
-Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
+Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
 ##5. Environment Configuration
 

@@ -40,10 +40,10 @@ Some examples for database Add-ons can be seen in the last section.
 
 ## Reading the Credentials from Environment Variables
 
-The default for Python is to not expose Add-on credentials as envrionment
+The default for Python is to not expose Add-on credentials as environment
 variables. To overwrite this default use the following command:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS
+$ cctrlapp APP_NAME/DEP_NAME config.add SET_ENV_VARS
 ~~~
 
 You can look up the individual environment variable names in the respective

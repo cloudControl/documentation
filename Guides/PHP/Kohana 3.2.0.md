@@ -133,10 +133,10 @@ Now that that's done, we need to configure two addons, config and mysqls. The co
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Add the APPLICATION_ENV variable to production
-    cctrlapp cloudcontroldlkohana/default addon.add config.free --APPLICATION_ENV=production
+    cctrlapp cloudcontroldlkohana/default config.add APPLICATION_ENV=production
 
     // Add the APPLICATION_ENV variable to testing
-    cctrlapp cloudcontroldlkohana/testing addon.add config.free --APPLICATION_ENV=testing
+    cctrlapp cloudcontroldlkohana/testing config.add APPLICATION_ENV=testing
 
 ###4.1 Check the Add-on Configuration
 

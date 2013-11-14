@@ -83,18 +83,18 @@ Now, we need to make our first deployment of both branches to the cloudControl p
 
     // switch to the master branch
     git checkout master
-    
+
     // create the application
     cctrlapp cloudcontroldlyii create php
-    
+
     // deploy the default branch
-    cctrlapp cloudcontroldlyii/default push    
+    cctrlapp cloudcontroldlyii/default push
     cctrlapp cloudcontroldlyii/default deploy --stack luigi
-    
+
     // deploy the testing branch
-    cctrlapp cloudcontroldlyii/testing push    
+    cctrlapp cloudcontroldlyii/testing push
     cctrlapp cloudcontroldlyii/testing deploy --stack luigi
-    
+
 You should see output as below:
 
     $ cctrlapp cloudcontroldlyii/default push
@@ -103,7 +103,7 @@ You should see output as below:
     Compressing objects: 100% (2131/2131), done.
     Writing objects: 100% (2257/2257), 5.42 MiB | 117 KiB/s, done.
     Total 2257 (delta 735), reused 0 (delta 0)
-           
+
     >> Receiving push
     >> Compiling PHP
          INFO: Yii Framework detected
@@ -111,7 +111,7 @@ You should see output as below:
          INFO: Required directory missing, creating 'testdrive/protected/runtime'.
     >> Building image
     >> Uploading image (4.1M)
-           
+
     To ssh://cloudcontroldlyii@cloudcontrolled.com/repository.git
      * [new branch]      master -> master
 
@@ -125,20 +125,20 @@ Now let's be sure that everything is in order by having a look at the add-on con
 
     // Initialise the mysqls.free addon for the default deployment
     cctrlapp cloudcontroldlyii/default addon.add mysqls.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldlyii/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
     cctrlapp cloudcontroldlyii/testing addon.add mysqls.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldlyii/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
     Addon                    : mysqls.free
-       
+
      Settings
        MYSQLS_DATABASE          : <database_name>
        MYSQLS_PASSWORD          : <database_password>
@@ -151,12 +151,12 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldlyii/default addon.add config.free --APPLICATION_ENV=main
+    cctrlapp cloudcontroldlyii/default config.add APPLICATION_ENV=main
 
-    // Set the testing environment setting    
-    cctrlapp cloudcontroldlyii/testing addon.add config.free --APPLICATION_ENV=testing
+    // Set the testing environment setting
+    cctrlapp cloudcontroldlyii/testing config.add APPLICATION_ENV=testing
 
-Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
+Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
 ##5. Environment Configuration
 

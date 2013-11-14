@@ -59,7 +59,7 @@ Alternatively you can use the [cloudcontrol-rails] gem.
 Rails server can be run in different environments. Production is the default one but you can change it by setting `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://www.cloudcontrol.com/add-ons/config). For example:
 
 ~~~
-cctrlapp APP_NAME/DEPLOYMENT addon.add config.free --RACK_ENV=some_env --RAILS_ENV=some_env
+cctrlapp APP_NAME/DEPLOYMENT config.add RACK_ENV=some_env RAILS_ENV=some_env
 ~~~
 
 NOTE: Gems in development and test environments are excluded from bundle install process.

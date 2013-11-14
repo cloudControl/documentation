@@ -158,16 +158,16 @@ Now, we need to make our first deployment of both branches to the cloudControl p
 
     // switch to the master branch
     git checkout master
-    
+
     // create the application
     cctrlapp cloudcontroldljoomla create php
-    
+
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push    
+    cctrlapp cloudcontroldljoomla/default push
     cctrlapp cloudcontroldljoomla/default deploy
-    
+
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push    
+    cctrlapp cloudcontroldljoomla/testing push
     cctrlapp cloudcontroldljoomla/testing deploy
 
 ##4. Initialise the Required Add-ons
@@ -180,20 +180,20 @@ Now let's be sure that everything is in order by having a look at the add-on con
 
     // Initialise the mysqls.free addon for the default deployment
     cctrlapp cloudcontroldljoomla/default addon.add mysql.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldljoomla/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
     cctrlapp cloudcontroldljoomla/testing addon.add mysql.free
-    
+
     // Retrieve the settings
     cctrlapp cloudcontroldljoomla/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
     Addon                    : mysqls.free
-       
+
      Settings
        MYSQLS_DATABASE          : <database_name>
        MYSQLS_PASSWORD          : <database_password>
@@ -206,10 +206,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldljoomla/default addon.add config.free --APPLICATION_ENV=production
+    cctrlapp cloudcontroldljoomla/default config.add APPLICATION_ENV=production
 
-    // Set the testing environment setting    
-    cctrlapp cloudcontroldljoomla/testing addon.add config.free --APPLICATION_ENV=testing
+    // Set the testing environment settings
+    cctrlapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 

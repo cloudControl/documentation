@@ -428,7 +428,7 @@ your app might print environment variables to external services or even your use
 of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use
 the credentials file.
 
-Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `False` or `True` to explicitly enable or disable
+Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
 this feature.
 
 The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
@@ -507,7 +507,7 @@ Where "SERVER_ADDRESS" and "PORT" should be replaced with the concrete values an
 
 Use the name of the file (for example `custom_remote.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --RSYSLOG_REMOTE=custom_remote.cfg
+$ cctrlapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
 ~~~
 
 From now on all the new logs should be visible in your custom syslog remote.

@@ -24,7 +24,7 @@ boto==2.9.8
 The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config):
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --AWS_SECRET_KEY=[YOUR_SECRET_KEY] --AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
+$ cctrlapp APP_NAME/default config.add AWS_SECRET_KEY=[YOUR_SECRET_KEY] AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
 ~~~
 
 Now let's show some operations on buckets and objects:

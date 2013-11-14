@@ -160,10 +160,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp     cloudcontroldlsymfony/default addon.add config.free --APPLICATION_ENV=production
+    cctrlapp     cloudcontroldlsymfony/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting    
-    cctrlapp     cloudcontroldlsymfony/testing addon.add config.free --APPLICATION_ENV=testing
+    cctrlapp     cloudcontroldlsymfony/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 

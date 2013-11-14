@@ -128,10 +128,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontrolledcakephp/default addon.add config.free --CAKE_ENV=production
+    cctrlapp cloudcontrolledcakephp/default config.add CAKE_ENV=production
 
     // Set the testing environment setting    
-    cctrlapp cloudcontrolledcakephp/testing addon.add config.free --CAKE_ENV=testing
+    cctrlapp cloudcontrolledcakephp/testing config.add CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 

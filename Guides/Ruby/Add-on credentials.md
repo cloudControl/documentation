@@ -18,7 +18,7 @@ database Add-ons can be seen in the last section.
 In case you don't want to expose these credentials in the environment, you can
 disable them by executing:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS 0
+$ cctrlapp APP_NAME/DEP_NAME config.add SET_ENV_VARS=false
 ~~~
 
 The Add-on credentials can still be read from the credentials file, as explained in the next section.
