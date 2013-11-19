@@ -52,7 +52,7 @@ The JSON file has the following structure:
 
 ~~~
 {
-   "quotaguard":{
+   "QUOTAGUARD":{
       "QUOTAGUARD_URL":"http://username:password@proxy.quotaguard.com:9292"
    }
 }
