@@ -1,10 +1,10 @@
 # Java Amazon S3 integration
 
-[Amazon S3](http://aws.amazon.com/s3/) is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve any amount of data, at any time, from anywhere on the web.
+[Amazon S3](http://aws.amazon.com/s3/) is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
 
 ## Amazon S3 SDK
 
-There are a few java SDKs for Amazon S3, the first being the official one:
+For Java you can choose between different SDKs for Amazon S3:
 * [Amazon S3 Java SDK](http://aws.amazon.com/sdkforjava/)
 * [JetS3t](http://jets3t.s3.amazonaws.com/index.html)
 * [s3lib](http://code.google.com/p/s3lib/)
@@ -12,7 +12,7 @@ There are a few java SDKs for Amazon S3, the first being the official one:
 
 ## Getting started
 
-To use the official Amazon S3 SDK in your project just specify additional maven dependency in your `pom.xml`:
+To use the official Amazon S3 SDK in your project, just specify an additional Maven dependency in your `pom.xml`:
 
 ~~~xml
 <dependency>
@@ -22,17 +22,17 @@ To use the official Amazon S3 SDK in your project just specify additional maven 
 </dependency>
 ~~~
 
-Follow the [Amazon Guide](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-setup.html) to setup an account and get the [AWS access credentials](http://aws.amazon.com/security-credentials).
+Follow the [Amazon Guide](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/java-dg-setup.html) to setup an account and get your [AWS access credentials](http://aws.amazon.com/security-credentials).
 
 ## Example usage:
 
-First create an AWS account and make your credentials accessible by your application. The recommended way is to provide them via environment variables. To do this, use [Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config):
+The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config):
 
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add config.free --AWS_SECRET_KEY=[YOUR_SECRET_KEY] --AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
 ~~~
 
-Now try out some operations on buckets and objects:
+Now let's show some operations on buckets and objects:
 
 ~~~java
 
@@ -51,7 +51,8 @@ AWSCredentials creds = new AWSCredentials(){
 
 // S3 client connection
 AmazonS3 s3 = new AmazonS3Client(creds);
-String BUCKET = "testbucket" + UUID.randomUUID(), KEY = "key";
+final String BUCKET = "testbucket" + UUID.randomUUID();
+final String KEY    = "key";
 
 // Create bucket
 s3.createBucket(BUCKET);
@@ -77,7 +78,7 @@ s3.deleteObject(BUCKET, KEY);
 s3.deleteBucket(new DeleteBucketRequest(BUCKET));
 ~~~
 
-Here is a simple helper function that can be used to read the content of the S3 object:
+We use this simple helper function to read the content of the S3 object:
 
 ~~~java
 private static String getContent(S3ObjectInputStream fin) throws IOException {

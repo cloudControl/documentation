@@ -1,165 +1,152 @@
-# Deploying a Django application
-[Django][django] is the Web framework for perfectionists with deadlines.
+# Deploying a Django Application
 
-In this tutorial we're going to show you how to migrate an existing Django
-application to the [cloudControl] platform. You can find the complete
-[source code][example-app] of the application on Github.
+In this tutorial we're going to show you how to deploy a Django application on [cloudControl]. You can find the [source code on Github][example-app] and check out the [Python buildpack][python buildpack] for supported features. The application follows the official [Django tutorial] and allows you to create, use and manage simple polls.
 
-All the steps described in this tutorial can be followed in the git repository using the commit history.
+## The Django Application Explained
 
+### Get the App
 
-## Prerequisites
-*   [cloudControl user account][cloudControl-doc-user]
-*   [cloudControl command line client][cloudControl-doc-cmdline]
-*   [git]
-*   familiarity with the Django framework
+First, clone the Django application from our repository on Github:
 
-
-## Original application
-
-The goal of this tutorial is to migrate a [Django tutorial] application to
-the cloudControl platform. The application allows to create, use and manage simple polls.
-
-To start, first clone the application from the previously mentioned git repository:
 ~~~bash
-$ git clone git://github.com/cloudControl/python-django-example-app.git
+$ git clone https://github.com/cloudControl/python-django-example-app.git
 $ cd python-django-example-app
 ~~~
 
-Prepare the database by running:
-~~~bash
-$ python manage.py syncdb
-~~~
-When asked, create an admin user.
+### Dependency Tracking
 
-Finally, run the server locally to make sure that the app is working:
-~~~bash
-$ python manage.py runserver
-~~~
+The Python buildpack tracks dependencies via [pip] and the `requirements.txt` file. It needs to be placed in the root directory of your repository. The example app specifies [Django][django], [MySQL driver][mysql-driver] and [gunicorn] as dependencies. The one you cloned as part of the example app looks like this:
 
-Now you can access [/polls](http://localhost:8000/polls/) or [/admin](http://localhost:8000/admin/) to test the app locally. It's time to prepare it for deployment on the platform.
-
-
-## Creating the app on cloudControl
-
-Choose a unique name (from now on called APP_NAME) for your application and create
-it on the platform. Be sure that you're inside of the git repository when
-running the command:
-~~~bash
-$ cctrlapp APP_NAME create python
-~~~
-
-
-### Managing dependencies
-The [python buildpack] uses [pip] to manage dependencies.
-
-Create a `requirements.txt` file with the following content:
-~~~
-Django==1.4.3
-~~~
-
-Install all the necessary dependencies via `sudo pip install -r requirements.txt` command.
-
-
-### Production server
-
-In a production environment you normally don't want to use the development server.
-In this tutorial you are going to use [gunicorn] as the production server.
-
-To do so, add the following line to the `requirements.txt` file:
-~~~
-gunicorn==0.17.2
-~~~
-
-And finally add `gunicorn` to the list of installed applications (`INSTALLED_APPS`
-in `mysite/settings.py`).
-
-
-### Defining the process type
-
-cloudControl uses a [Procfile] to know how to start your processes.
-
-Create a file called `Procfile` with the following content:
-~~~
-web: python manage.py run_gunicorn -b 0.0.0.0:$PORT
-~~~
-
-This file specifies a _web_ command that will be executed to start the server
-once the app is deployed.
-
-
-### Production database
-
-Now it's time to configure the production database.
-
-The application currently uses SQLite as the database in all environments, even the production one.
-It is not possible to use a SQLite database on cloudControl because the filesystem is [not persistent][filesystem].
-
-To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
-
-Let's use the [Shared MySQL Add-on][mysqls] with the free option.
-To add this Add-on, run the following command:
-~~~bash
-$ cctrlapp APP_NAME/default addon.add mysqls.free
-~~~
-
-Now modify the `requirements.txt` to its final version:
 ~~~
 Django==1.4.3
 gunicorn==0.17.2
 MySQL-python==1.2.4
 ~~~
-Don't forget to run the `sudo pip install -r requirements.txt` command again.
 
-Next, modify the `mysite/settings.py` file to [get the MySQL credentials][get-conf] when running
-on the platform. The required changes can be seen in the [respective commit in the example repository][db-commit].
+### Production Server
 
-Do not forget to commit the changes:
-~~~bash
-$ git add .
-$ git commit -m 'Migrate to cloudControl'
+In a production environment you normally don't want to use the development server. We have decided to use gunicorn for this purpose. To do so we had to include it in the list of installed applications (`INSTALLED_APPS` in `mysite/settings.py`):
+
+~~~python
+INSTALLED_APPS = (
+    ...
+    'gunicorn'
+    ...
+)
 ~~~
 
-As a final step, you can compare your working directory with the `migrated` branch
-to be sure you didn't make any mistakes along the way:
-~~~bash
-$ git diff migrated
+### Process Type Definition
+
+cloudControl uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile at the top level of your repository. It looks like this:
+
+~~~
+web: python manage.py run_gunicorn -b 0.0.0.0:$PORT
 ~~~
 
-Now the app is ready to be deployed on the platform.
-To do this, run the following commands:
+Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
+
+### Production Database
+
+The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on cloudControl because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
+
+In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at `mysite/settings.py` so you can find out how to [get the MySQL credentials][get-conf] provided by MySQLs Add-on:
+
+~~~python
+# Django Settings for mysite Project.
+
+import os
+import json
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    # production settings
+    f = os.environ['CRED_FILE']
+    db_data = json.load(open(f))['MYSQLS']
+
+    db_config = {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': db_data['MYSQLS_DATABASE'],
+        'USER': db_data['MYSQLS_USERNAME'],
+        'PASSWORD': db_data['MYSQLS_PASSWORD'],
+        'HOST': db_data['MYSQLS_HOSTNAME'],
+        'PORT': db_data['MYSQLS_PORT'],
+    }
+except KeyError, IOError:
+    # development/test settings:
+    db_config = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': '{0}/mysite.sqlite3'.format(PROJECT_ROOT),
+    }
+...
+DATABASES = {
+    'default': db_config,
+}
+...
+~~~
+
+## Pushing and Deploying your App
+
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+
 ~~~bash
-$ git remote add cctrl ssh://APP_NAME@cloudcontrolled.com/repository.git
-$ git push cctrl dev:master
+$ cctrlapp APP_NAME create python
+~~~
+
+Push your code to the application's repository, which triggers the deployment image build process:
+
+~~~bash
+$ cctrlapp APP_NAME/default push
+Counting objects: 31, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (25/25), done.
+Writing objects: 100% (31/31), 7.11 KiB, done.
+Total 31 (delta 3), reused 24 (delta 0)
+
+-----> Receiving push
+-----> No runtime.txt provided; assuming python-2.7.3.
+-----> Preparing Python runtime (python-2.7.3)
+-----> Installing Distribute (0.6.36)
+-----> Installing Pip (1.3.1)
+-----> Installing dependencies using Pip (1.3.1)
+       Downloading/unpacking Django==1.4.3 (from -r requirements.txt (line 1))
+         Running setup.py egg_info for package Django
+       ...
+-----> Building image
+-----> Uploading image (30M)
+
+To ssh://APP_NAME@cloudcontrolled.com/repository.git
+ * [new branch]      master -> master
+~~~
+
+Add MySQLs Add-on with `free` plan to your deployment and deploy it:
+~~~bash
+$ cctrlapp APP_NAME/default addon.add mysqls.free
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Finally, prepare the database using the [Run command][ssh-session]:
+Finally, prepare the database using the [Run command][ssh-session] (when prompted create admin user):
+
 ~~~bash
 $ cctrlapp APP_NAME/default run "python manage.py syncdb"
 ~~~
 
-Congratulations, you should now be able to reach the app at APP_NAME.cloudcontrolled.com.
+You can login to the admin console at `APP_NAME.cloudcontrolled.com/admin`, create some polls and see them at `APP_NAME.cloudcontrolled.com/polls`.
 
-You can login to the admin console at APP_NAME.cloudcontrolled.com/admin and
-look at the polls at APP_NAME.cloudcontrolled.com/polls.
-
-For additional information take a look at [Django Notes][django-notes] and
-other [python-specific documents][python-guides].
-
+For additional information take a look at [Django Notes][django-notes] and other [python-specific documents][python-guides].
 
 [django]: https://www.djangoproject.com/
 [cloudControl]: http://www.cloudcontrol.com
 [cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
 [cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
-[procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem
 [data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
 [mysqls]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
 [example-app]: https://github.com/cloudControl/python-django-example-app
 [django-notes]: https://www.cloudcontrol.com/dev-center/Guides/Python/Django%20notes
-[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/Python/Read%20configuration
+[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
 [python-guides]: https://www.cloudcontrol.com/dev-center/Guides/Python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
@@ -168,3 +155,4 @@ other [python-specific documents][python-guides].
 [worker]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
 [db-commit]: https://github.com/cloudControl/python-django-example-app/commit/983f45e46ce0707476cec167ea062e19adcb53c9
 [ssh-session]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh
+[mysql-driver]: https://pypi.python.org/pypi/MySQL-python/1.2.4

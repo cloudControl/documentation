@@ -25,7 +25,7 @@ $ sudo easy_install pip
 $ sudo pip install cctrl
 ~~~
 
-**Windows:** Please download the provided [installer](http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/). The file is named cctrl-x.x-setup.exe.
+**Windows:** Please download the provided [installer](https://www.cloudcontrol.com/download/win).
 
 ## Create a User Account (if you haven't already)
 
@@ -78,20 +78,24 @@ Clone one of the example apps in your preferred programming language and push it
 
 ~~~bash
 # for Java
-$ git clone git://github.com/cloudControl/java-jetty-example-app.git
+$ git clone https://github.com/cloudControl/java-jetty-example-app.git
 $ cd java-jetty-example-app
 
 # for PHP
-$ git clone git://github.com/cloudControl/php-silex-example-app.git
+$ git clone https://github.com/cloudControl/php-silex-example-app.git
 $ cd php-silex-example-app
 
 # for Python
-$ git clone git://github.com/cloudControl/python-flask-example-app.git
+$ git clone https://github.com/cloudControl/python-flask-example-app.git
 $ cd python-flask-example-app
 
 # for Ruby
-$ git clone git://github.com/cloudControl/ruby-sinatra-example-app.git
+$ git clone https://github.com/cloudControl/ruby-sinatra-example-app.git
 $ cd ruby-sinatra-example-app
+
+# for Node.js
+$ git clone https://github.com/cloudControl/nodejs-express-example-app.git
+$ cd nodejs-express-example-app
 
 # now push
 $ cctrlapp APP_NAME push

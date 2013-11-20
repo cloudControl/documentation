@@ -1,36 +1,23 @@
-#Deploying a Spring application
+#Deploying a Spring Application
 
-[Spring](http://www.springsource.org/) is the most popular application development framework for enterprise Java™. Millions of developers use it to create high performing, easily testable, reusable code without any lock-in.
+In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate application on [cloudControl]. The example app is a ready to deploy project based on the [Spring Roo petclinic] example.
 
-In this tutorial we're going to show you how to create an example Spring/MVC/Hibernate application using [Spring Roo](http://www.springsource.org/spring-roo), integrate it with the [MySQLs Add-on](https://www.cloudcontrol.com/add-ons/mysqls), deploy it on an [embedded Jetty server](http://jetty.codehaus.org/jetty/) and run it on [cloudControl](https://www.cloudcontrol.com/). You can find the [source code on Github](https://github.com/cloudControl/java-spring-hibernate-example-app). Check out the [buildpack-java](https://github.com/cloudControl/buildpack-java) for supported features.
+## The Spring Application Explained
 
-##Prerequisites
- * [cloudControl user account](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#user-accounts)
- * [cloudControl command line client](https://github.com/cloudControl/documentation/blob/master/Platform%20Documentation.md#command-line-client-web-console-and-api)
- * [git](https://help.github.com/articles/set-up-git)
- * [J2SE JDK/JVM](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
- * [Spring Roo](http://www.springsource.org/spring-roo)
- * [Maven3](http://maven.apache.org/download.html)
+### Get the App
 
-##Creating a sample application using Spring Roo
 
-Download Spring Roo, extract it and use the `bin/roo.sh` script to create the "Petclinic" example application:
+First, clone the Spring application from our repository:
 
 ~~~bash
-$ export PATH=SPRING_ROO_PATH/bin:$PATH
-$ mkdir PROJECTDIR; cd PROJECTDIR;
-$ roo.sh script --file clinic.roo
+$ git clone https://github.com/cloudControl/java-spring-hibernate-example-app
+$ cd java-spring-hibernate-example-app
 ~~~
 
-Generate data source configuration for [Hibernate](http://www.hibernate.org/) / MySQL
 
-~~~bash
-$ roo.sh persistence setup --provider HIBERNATE --database MYSQL
-~~~
+### Production Server
 
-###Prepare to run on Jetty
-
-For a fast and easy way to run your app, without having to install and administer a Jetty server, use the [Jetty Runner](http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner) - add it to build plugins in `pom.xml`:
+The [Jetty Runner] provides a fast and easy way to run your app in an application server. We've added a dependency to the build plugins section in the `pom.xml`:
 
 ~~~xml
 ...
@@ -61,9 +48,11 @@ For a fast and easy way to run your app, without having to install and administe
 </build>
 ~~~
 
-###Adjust data source configuration to MySQLs Add-on
 
-Go to the application context configuration file `src/main/resources/META-INF/spring/applicationContext.xml` and modify the datasource properties `username`, `password` and `url` to use the credentials provided by MySQLs Add-on:
+
+### Production Database
+
+In this tutorial we use the [Shared MySQL Add-on]. We have changed the `src/main/resources/META-INF/spring/applicationContext.xml` to read the [Database credentials] provided by MySQLs Add-on:
 
 ~~~xml
 <property name="url" value="jdbc:mysql://${MYSQLS_HOSTNAME}:${MYSQLS_PORT}/${MYSQLS_DATABASE}"/>
@@ -71,36 +60,28 @@ Go to the application context configuration file `src/main/resources/META-INF/sp
 <property name="password" value="${MYSQLS_PASSWORD}"/>
 ~~~
 
-###Adjust logger configuration
+### Adjust Logger Configuration
 
-Logging to a file is not recommended since the container's [file system](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem) is not persistent. That is why default logger configuration - `src/main/resources/log4j.properties` should be modified to log either to stdout/stderr or to syslog:
-
+Logging to a file is not recommended since the container's [file system] is not persistent. 
+The default logger configuration - `src/main/resources/log4j.properties` is modified to log to `stdout/stderr`. 
+Then cloudcontrol can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
 ~~~xml
-log4j.rootLogger=DEBUG, stdout
+og4j.rootLogger=DEBUG, stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-log4j.appender.stdout.layout.ConversionPattern=%p [%t] (%c) - %m%n
+log4j.appender.stdout.layout.ConversionPattern=%p [%t] (%c) - %m%n%
 ~~~
 
-###Defining the process type
+### Process Type Definition
 
-cloudControl uses a `Procfile` to know how to start your process. Create a file called Procfile in the project root:
+cloudControl uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Jetty Runner:
 
 ~~~
 web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/*.war
 ~~~
 
-###Initializing git repository
 
-Initialize a new git repository in the project directory and commit the files you have just created.
-
-~~~bash
-$ git init
-$ git add pom.xml Procfile src
-$ git commit -am "Initial commit"
-~~~
-
-##Pushing and deploying your app
+## Pushing and Deploying your App
 
 Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
 
@@ -112,16 +93,22 @@ Push your code to the application's repository:
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
+Counting objects: 223, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (212/212), done.
+Writing objects: 100% (223/223), 99.59 KiB, done.
+Total 223 (delta 107), reused 0 (delta 0)
 
 -----> Receiving push
------> Installing OpenJDK 1.6...done
+-----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
+-----> Installing Maven (maven_3_1_with_cache_1.tar.gz)... done
 -----> Installing settings.xml... done
 -----> executing /srv/tmp/buildpack-cache/.maven/bin/mvn -B -Duser.home=/srv/tmp/builddir -Dmaven.repo.local=/srv/tmp/buildpack-cache/.m2/repository -s /srv/tmp/buildpack-cache/.m2/settings.xml -DskipTests=true clean install
        [INFO] Scanning for projects...
        [INFO]
-       [INFO] ------------------------------------------------------------------------
-       [INFO] Building APP_NAME 1.0-SNAPSHOT
-       [INFO] ------------------------------------------------------------------------
+       [INFO] ---------------------------------------------------------------
+       [INFO] Building petclinic 0.1.0-SNAPSHOT
+       [INFO] ---------------------------------------------------------------
        ...
        [INFO] Packaging webapp
        [INFO] Assembling webapp [petclinic] in [/srv/tmp/builddir/target/petclinic-0.1.0.BUILD-SNAPSHOT]
@@ -133,13 +120,13 @@ $ cctrlapp APP_NAME/default push
        [INFO]
        [INFO] --- maven-dependency-plugin:2.3:copy (default) @ petclinic ---
        ...
-       [INFO] ------------------------------------------------------------------------
+       [INFO] ---------------------------------------------------------------
        [INFO] BUILD SUCCESS
-       [INFO] ------------------------------------------------------------------------
+       [INFO] ---------------------------------------------------------------
        [INFO] Total time: 3:38.174s
-       [INFO] Finished at: Thu Jan 24 10:16:16 UTC 2013
+       [INFO] Finished at: Thu Juli 20 11:23:02 UTC 2013
        [INFO] Final Memory: 20M/229M
-       [INFO] ------------------------------------------------------------------------
+       [INFO] ---------------------------------------------------------------
 -----> Building image
 -----> Uploading image (84M)
 
@@ -147,18 +134,22 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-You need the [MySQLs Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs) to use MySQL for your deployment. Check out the marketplace for [availalbe plans](https://www.cloudcontrol.com/add-ons/mysqls) and then add the Add-on:
+Add MySQLs Add-on with free plan to your deployment and deploy it:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mysqls.PLAN
+$ cctrlapp APP_NAME/default addon.add mysqls.free
+$ cctrlapp APP_NAME/default deploy --memory=768MB
 ~~~
 
-Deploy your app:
+The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.
 
-~~~bash
-$ cctrlapp APP_NAME/default deploy --memory 768MB
-~~~
+Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com` .
 
-Increase container size to meet high memory consumption by Spring framework.
 
-**Congratulations, you should now be able to reach your application at http://APP_NAME.cloudcontrolled.com.**
+[Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample
+[Database credentials]: Add-on%20credentials
+[Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
+[cloudControl]: /
+[file system]: ../../Platform%20Documentation#non-persistent-filesystem
+[log command]: ../../Platform%20Documentation#logging
+[Shared MySQL Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs

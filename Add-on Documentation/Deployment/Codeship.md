@@ -11,7 +11,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add codeship.OPTION
 ~~~
 Replace `codeship.OPTION` with a valid option, e.g. `codeship.test`.
 
-When added, Codeship automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "codeship.OPTION").
+When added, Codeship automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "codeship.OPTION").
 
 ## Upgrading the Codeship Add-on
 

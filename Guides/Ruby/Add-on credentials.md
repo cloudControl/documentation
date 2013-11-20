@@ -1,22 +1,42 @@
-# Getting the Add-on credentials
+# Getting the Add-on Credentials
 
 Each deployment gets different credentials for each Add-on. Providers can
 change these credentials at any time, so they shouldn't be hard-coded in the
 source code. If the credentials are not in the source code, they also won't
 appear in the version control and cause potential security issues.
 
-There are two ways to get the Add-on credentials in a ruby app.
+There are two ways to get the [Add-on credentials] in a Ruby app.
 
-## Reading the credentials from creds file
 
-All the Add-on credentials can be found in a provided JSON file.
+## Reading the Credentials from Environment Variables
 
-The path to the JSON file can be found in the `CRED_FILE` environment variable.
-To see the JSON data locally, use the
-addon.creds command, `cctrlapp APP_NAME/DEP_NAME addon.creds`.
+By default, each Add-on exposes its credentials in the environment. You can
+look up the individual environment variable names in the respective Add-on
+documentation. To read them, simply access Ruby's `ENV` hash. Some examples for
+database Add-ons can be seen in the last section.
 
-You can use the following code wherever you want to get the credentials in your Ruby app.
+In case you don't want to expose these credentials in the environment, you can
+disable them by executing:
+~~~bash
+$ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS 0
+~~~
 
+The Add-on credentials can still be read from the credentials file, as explained in the next section.
+
+Note that there are some other interesting [environment variables]
+available in your deployment containers.
+
+
+## Reading the Credentials from the Credentials File
+
+All the [Add-on credentials] can be found in a provided JSON file as well, which path is exposed in
+the `CRED_FILE` environment variable. You can see the format of that file locally with the command:
+~~~bash
+$ cctrlapp APP_NAME/DEP_NAME addon.creds
+~~~
+
+You can use the following code wherever you want to get the credentials in your
+Ruby app:
 ~~~ruby
 require 'json'
 
@@ -34,22 +54,18 @@ rescue
 end
 ~~~
 
-## Reading the credentials from environment variables
 
-An alternative (and simpler) way of reading the Add-on credentials is reading them from
-the environment variables. Each Add-on exposes some environment variables, the same
-ones that are nested under specific sections in cred file. To read them, simply
-access Ruby's `ENV` hash. An example for two database Add-ons can be seen in the next section.
+# Examples
 
-Note that there are some other interesting [variables][env-vars] available in a deployment's environment.
+cloudControl offers a number of data storage solutions via the [Add-on Marketplace].
+Below you can see how to access Add-on credentials on two examples for MySQL and PostgreSQL.
 
-# Adding relational databases
+## MySQL
 
-### MySQL
+To add a MySQL database, use the [MySQL Dedicated Add-on] or [MySQL Shared Add-on].
 
-To add a MySQL database, use the [MySQL Dedicated Add-on](https://www.cloudcontrol.com/add-ons/mysqld) or [MySQL Shared Add-on](https://www.cloudcontrol.com/add-ons/mysqls).
-
-Here's a ruby snippet that reads the database settings and stores them in 'db_config' hash:
+Here's a Ruby snippet that reads the database settings and stores them in the
+`db_config` hash:
 ~~~ruby
 db_config = {
   database: ENV["MYSQLD_DATABASE"],
@@ -59,13 +75,15 @@ db_config = {
   password: ENV["MYSQLD_PASSWORD"]
 }
 ~~~
-It the previous example, MySQLd Add-on was used. This can be seen in the names of the environment variables.
 
-### PostgreSQL
+The example used the MySQLd Add-on. Variable names for MySQLs differ. Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
-To add a PostgreSQL database, use the [ElephantSQL Add-on](https://www.cloudcontrol.com/add-ons/elephantsql).
+## PostgreSQL
 
-Here is a ruby snippet that reads the database settings and stores them in a `db_config` hash:
+To add a PostgreSQL database, use the [ElephantSQL Add-on].
+
+With this Ruby snippet you can read the PostgreSQL settings and store them in the
+`db_config` hash:
 ~~~ruby
 require 'uri'
 
@@ -79,4 +97,12 @@ db_config = {
 }
 ~~~
 
-[env-vars]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
+You can also find a working example application on [Github][ruby-postgresql-example].
+
+[Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
+[environment variables]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
+[Add-on Marketplace]: https://www.cloudcontrol.com/add-ons/?c=1
+[MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
+[MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls
+[ElephantSQL Add-on]: https://www.cloudcontrol.com/add-ons/elephantsql
+[ruby-postgresql-example]: https://github.com/ElephantSQL/ruby-postgresql-example

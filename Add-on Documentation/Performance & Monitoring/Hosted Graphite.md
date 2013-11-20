@@ -11,7 +11,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add hostedgraphite.OPTION
 ~~~
 Replace `hostedgraphite.OPTION` with a valid option, e.g. `hostedgraphite.free`.
 
-When added, Hosted Graphite automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://console.cloudcontrolled.com/) (go to the specific deployment and click the link "hostedgraphite.OPTION").
+When added, Hosted Graphite automatically creates a new user account with your email adress. You can manage the Add-on within the [web console](https://www.cloudcontrol.com/console) (go to the specific deployment and click the link "hostedgraphite.OPTION").
 
 ## Upgrading the Hosted Graphite Add-on
 

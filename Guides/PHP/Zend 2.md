@@ -1,12 +1,14 @@
-# Deploying Zend Framework 2 to cloudControl
+# Deploying a Zend2 Application
 
-In this tutorial, we're going to walk you through the process of deploying a Zend Framework 2 based app to the [cloudControl PaaS](https://www.cloudcontrol.com).
+In this tutorial we're going to show you how to deploy a Zend2 application on [cloudControl].
 
-The example app is a fork of the official ZendSkeletonApplication available on [github](https://github.com/zendframework/ZendSkeletonApplication) ready to be deployed on cloudControl.
+The [example app] is a ready to deploy fork of the official ZendSkeletonApplication available on [github](https://github.com/zendframework/ZendSkeletonApplication).
 
-## The Example App
+## The Zend2 Application Explained
 
-Let's clone the example code from Github and walk through the cloudControl platform relevant changes.
+### Get the App
+
+First, clone the Zend2 application from our repository:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/php-zend2-example-app.git
@@ -56,12 +58,12 @@ We also configure the logger to log to syslog.
 	
 function get_credentials() {
 	// read the credentials file
-	$string = file_get_contents($_ENV['CRED_FILE'], false);
-	if ($string == false) {
+	$creds_content = file_get_contents($_ENV['CRED_FILE'], false);
+	if ($creds_content == false) {
 		throw new Exception('Could not read credentials file');
 	}
 	// the file contains a JSON string, decode it and return an associative array
-	$creds = json_decode($string, true);
+	$creds = json_decode($creds_content, true);
 
 	if (!array_key_exists('MYSQLS', $creds)){
 		throw new Exception('No MySQL credentials found. Please make sure you have added the mysqls addon.');
@@ -140,18 +142,16 @@ class Module
 [...]
 ~~~
 
-## Deploy the Zend 2 Example App to cloudControl
-
-After the short walkthrough of the code, lets go ahead and deploy the app to cloudControl. Make sure to pick a unique and exciting `APP_NAME`.
+## Pushing and Deploying your App
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
 
 ~~~bash
-# create the application
 $ cctrlapp APP_NAME create php
-Email   : EMAIL
-Password: PASSWORD
-Git configuration found! Using "Git" as repository type.
+~~~
 
-# push the code
+Push your code to the application's repository, which triggers the deployment image build process:
+
+~~~bash
 $ cctrlapp APP_NAME/default push
 Counting objects: 2208, done.
 Delta compression using up to 4 threads.
@@ -167,9 +167,7 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
        Installing dependencies (including require-dev)
          - Installing zendframework/zendframework (2.2.1)
            Downloading: 100%
-       
-       [...]
-
+       ...
        Writing lock file
        Generating autoload files
 -----> Zend 2.x Framework detected
@@ -178,9 +176,12 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
        
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
+~~~
 
-# deploy the app
-$ cctrlapp APP_NAME/default deploy --stack pinky
+Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+
+~~~bash
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 ## Add the Required MySQL Database Add-on and Initialize the Session Table
@@ -189,7 +190,7 @@ To store the sessions we need to add a database Add-on and initialize the table.
 
 We are going to use [the MySQLs Add-on's free plan](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
 
-Creating the session table is easy by executing the included init-session-table command in a run-container.
+Creating the session table is easy by executing the included init-session-table command in a run-container:
 
 ~~~bash
 # add the Add-on
@@ -201,4 +202,9 @@ Connecting...
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolapp.com`.
+Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com`.
+
+[PHP buildpack]: https://github.com/cloudControl/buildpack-php
+[cloudControl]: https://www.cloudcontrol.com/
+[example app]: https://github.com/cloudControl/php-zend2-example-app.git
+

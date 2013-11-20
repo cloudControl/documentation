@@ -53,7 +53,7 @@ Here is an example on how to use an IndexDepot Apache Solr search index with PHP
 
 ## Step 1: Loading Data into Apache Solr
 
-Before indexing some sample data into Apache Solr make sure to configure new fields in schema.xml. When the add-on is added to your deployment, IndexDepot automatically creates a new user account and Solr search index in an Amazon EC2 cloud. You can manage your search index easily from the [web console](https://console.cloudcontrolled.com/) by clicking the IndexDepot add-on entry on your app's deployment page, and you gain immediate access to IndexDepot control panel. Then you can configure new fields for indexing by clicking on *Edit configuration files*. Add a new field name to schema.xml.
+Before indexing some sample data into Apache Solr make sure to configure new fields in schema.xml. When the add-on is added to your deployment, IndexDepot automatically creates a new user account and Solr search index in an Amazon EC2 cloud. You can manage your search index easily from the [web console](https://www.cloudcontrol.com/console) by clicking the IndexDepot add-on entry on your app's deployment page, and you gain immediate access to IndexDepot control panel. Then you can configure new fields for indexing by clicking on *Edit configuration files*. Add a new field name to schema.xml.
 
 ~~~
  <fields>
