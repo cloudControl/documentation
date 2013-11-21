@@ -1,6 +1,6 @@
 # QuotaGuard
 
-QuotaGuard is a proxy service for outgoing API calls. By routing your calls through our distributed proxy network we guarantee that your quotas with any IP limiting services are not shared with other CloudControl users and you get consistent, reliable access to critical third party APIs like Google Maps Geocoding.
+QuotaGuard is a proxy service for outgoing API calls. By routing your calls through our distributed proxy network we guarantee that your quotas with any IP limiting services are not shared with other cloudControl users and you get consistent, reliable access to critical third party APIs like Google Maps Geocoding.
 
 ## Adding QuotaGuard
 
@@ -15,7 +15,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add quotaguard.OPTION
 Upgrading to another version of QuotaGuard is easy and instant:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguard.OPTION_OLD quotaguard.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguard.OPTION_OLD quotaguard.OPTION_NEW
 ~~~
 
 ## Downgrade QuotaGuard
@@ -23,7 +23,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguard.OPTION_OLD quotaguard.OPTI
 Downgrading to another version of QuotaGuard is easy and instant:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade quotaguard.OPTION_OLD quotaguard.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade quotaguard.OPTION_OLD quotaguard.OPTION_NEW
 ~~~
 
 ## Removing QuotaGuard
@@ -42,7 +42,7 @@ QuotaGuard provisioning provides you with a unique login to our proxy service ex
 Geocoder.configure(
   ...
   :http_proxy => ENV['QUOTAGUARD_URL'].sub(/^http:\/\//, ''),
-  :timeout => 5 
+  :timeout => 5
 )
 ~~~
 
@@ -59,7 +59,7 @@ The JSON file has the following structure:
 ~~~
 ## Monitoring QuotaGuard
 
-Most of our plans include analytics via our dashboard. Access this by logging in to your CloudControl console and clicking on the QuotaGuard add-on from within one of your deployments. This will take you to our dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
+Most of our plans include analytics via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard add-on from within one of your deployments. This will take you to our dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
 
 ## QuotaGuard Code Examples
 ### Using with Rails
@@ -74,7 +74,7 @@ Once you have completed the standard setup of Ruby Geocoder you can use QuotaGua
 Geocoder.configure(
   ...
   :http_proxy => ENV['QUOTAGUARD_URL'].sub(/^http:\/\//, ''),
-  :timeout => 5 
+  :timeout => 5
 )
 ~~~
 _RubyGeoder currently expects no protocol in the URL hence why we have to strip it. This restriction will be removed in an upcoming gem release._
