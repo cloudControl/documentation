@@ -1,4 +1,4 @@
-# Getting the add-on credentials 
+# Getting the Add-on credentials 
 
 ## Introduction
 Each deployment gets different credentials for each Add-on. Providers can change these credentials at any time, so they shouldn't be hard-coded in the source code. If the credentials are not in the source code, they also won't appear in the version control and cause potential security issues.
