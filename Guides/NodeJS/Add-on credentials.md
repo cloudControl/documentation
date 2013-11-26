@@ -3,7 +3,10 @@
 ## Introduction
 Each deployment gets different credentials for each Add-on. Providers can change these credentials at any time, so they shouldn't be hard-coded in the source code. If the credentials are not in the source code, they also won't appear in the version control and cause potential security issues.
 
-There are two ways to get the Add-on credentials in a Node.js app.
+There are two ways to get the Add-on credentials in a Node.js app:
+
+ - Reading the credentials from environment variables
+ - Reading the credentials from a credential file
 
 ## Reading the credentials from environment variables 
 By default, each Add-on exposes its credentials in the environment. You can look up the individual environment variable names in the respective Add-on documentation. To read them, simply use ***process.env.ENVIRONMENT_VARIABLE_NAME* **in your code. Some examples for database Add-ons can be seen in the last section.
