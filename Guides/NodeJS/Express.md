@@ -1,7 +1,7 @@
 # Node.js and MongoDB on cloudControl
 
 ## Introduction
-This example demonstrates how to build a simple cloudControl Node.js app with a MongoDB backend.
+This example demonstrates how to build a simple cloudControl Node.js app with a [MongoDB] backend.
 
 ## Prerequisites
 Before we get started, you need to get access to the Node.js code for the app in Github.
@@ -18,7 +18,7 @@ Now you have a small, but fully functional Node.js application.
 ### Declaring dependencies using NPM
 The next step is to declare app dependencies. Node.js tracks dependencies using [npm]. The dependency requirements must be specified in a `package.json`-file in your project's root directory.   
 
-Modify the dependencies section of the package.json file as shown below to add the app dependencies (jade and mongodb) -
+Modify the dependencies section of the package.json file as shown below to add the app dependencies (express and mongodb) -
 
 ~~~
 "dependencies": {
@@ -125,7 +125,7 @@ Congratulations, you can now see your Node.js app running with mongoDB at
 
 
 ## Next Steps
-Read our platform docs for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
+Read our [platform docs] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
 
 
 [Node.js]: http://nodejs.org/
@@ -133,3 +133,5 @@ Read our platform docs for a technical overview of the concepts you’ll encount
 [cloudControl]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[platform docs]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
+[MongoDB]: https://www.cloudcontrol.com/add-ons/mongodb/
