@@ -1,4 +1,4 @@
-# Node.js and MongoDB on cloudControl
+# Node.js, Express and MongoDB on cloudControl
 
 ## Introduction
 This example demonstrates how to build a simple cloudControl Node.js app with a [MongoDB] backend.
@@ -8,7 +8,7 @@ Before we get started, you need to get access to the Node.js code for the app in
 
 To make a clone of the Node.js app from the repository using bash - 
 
-~~~
+~~~bash
 $ git clone git://github.com/cloudControl/node-js-sample node-js-mongodb-sample
 $ cd node-js-mongodb-sample
 ~~~
@@ -20,7 +20,7 @@ The next step is to declare app dependencies. Node.js tracks dependencies using 
 
 Modify the dependencies section of the package.json file as shown below to add the app dependencies (express and mongodb) -
 
-~~~
+~~~json
 "dependencies": {
     "express": "~3.3.4",
     "mongodb": "1.3.19"
@@ -41,7 +41,7 @@ web: node web.js
 ### Creating the dataprovider.js file
 Now we need to create our provider that will be capable to using MongoDB. Make sure this file is located in the same directory as web.js.
 
-~~~
+~~~node.js
 var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
@@ -98,33 +98,33 @@ db.open(function(err, db) {
 });
 ~~~
 
-### Pushing and deploying your app
+### Pushing and deploying your Express app
 
 Before you deploy your app, you have to give it a unique name (from now on called `APP_NAME`) for your application.
 
-~~~
-bash$ cctrlapp APP_NAME create nodemongo
+~~~bash
+$ cctrlapp APP_NAME create nodemongo
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
-~~~
-bash$ cctrlapp APP_NAME/default push
+~~~bash
+$ cctrlapp APP_NAME/default push
 ...
 ~~~
 
 Finally, don’t forget to add the mongoDB add-on for cloudControl and deploy the latest version of the app -
 
-~~~
-bash$ cctrlapp APP_NAME/default addon.add mongolab.free
-bash$ cctrlapp APP_NAME/default deploy
+~~~bash
+$ cctrlapp APP_NAME/default addon.add mongolab.free
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Node.js app running with mongoDB at
 **`http[s]://APP_NAME.cloudcontrolled.com`**.
 
 
-## Next Steps
+## Next steps
 Read our [platform docs] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
 
 

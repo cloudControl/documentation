@@ -27,8 +27,7 @@ Now you have a small but fully functional Node.js application.
 ### Declaring dependencies using NPM
 The next step is to declare app dependencies. Node.js tracks dependencies using npm. The dependency requirements must be specified in a `package.json`-file in your project's root directory.  For the Hello World application, the only requirement is Express. This is shown in the json file below -
 
-~~~
-json
+~~~json
 {
   "name": "node-js-sample",
   "version": "0.0.1",
@@ -56,14 +55,14 @@ web: node web.js
 ### Pushing and deploying your app
 Before you deploy your app, you have to give it a unique name (from now on called `APP_NAME`) for your application.
 
-~~~
-bash$ cctrlapp APP_NAME create nodejs
+~~~bash
+$ cctrlapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
-~~~
-bash$ cctrlapp APP_NAME/default push
+~~~bash
+$ cctrlapp APP_NAME/default push
 Counting objects: 307, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (261/261), done.
@@ -102,8 +101,8 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
-~~~
-bash$ cctrlapp APP_NAME/default deploy
+~~~bash
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Node.js app running at
