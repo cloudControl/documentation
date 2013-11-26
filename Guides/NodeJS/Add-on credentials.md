@@ -22,7 +22,7 @@ The Add-on credentials can still be read from the credentials file, as explained
 ## Examples 
 cloudControl offers a number of data storage solutions via the Add-on Marketplace. Below is an example on how to access credentials for MySQL. 
 
-###MySQL
+###Reading from the credentials file for MySQL
 To add a MySQL database, use the MySQL Dedicated Add-on or MySQL Shared Add-on.
 Here's a Node.js snippet that reads the database settings from the credentials file -
 
