@@ -21,11 +21,11 @@ The Add-on credentials can still be read from the credentials file, as explained
 
 ## Reading the credentials from a credential file 
 
-cloudControl offers a number of data storage solutions via the Add-on Marketplace. Below is an example on how to access credentials for MySQL from a credential file. 
+cloudControl offers a number of data storage solutions via the [Add-on Marketplace]. Below is an example on how to access credentials for MySQL from a credential file. 
 
 ###MySQL
 To add a MySQL database, use the MySQL Dedicated Add-on or MySQL Shared Add-on.
-Here's a Node.js snippet that reads the database settings from the credentials file -
+Here's a Node.js snippet that reads the database settings from the credentials file:
 
 ~~~node.js
 var fs, configurationFile;
@@ -47,3 +47,5 @@ var password = configuration.MYSQLD.MYSQLD_password;
 The example used the MySQLd Add-on. Variable names for MySQLs differ. Remember, you can always refer to the addon.creds command to see the actual variable names and values.
 
 Similarly, for other databases such as Postgres, credentials can be accessed from the credentials file. 
+
+[Add-on Marketplace]: https://www.cloudcontrol.com/add-ons

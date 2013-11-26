@@ -6,7 +6,7 @@ This example demonstrates how to build a simple cloudControl Node.js app with a 
 ## Prerequisites
 Before we get started, you need to get access to the Node.js code for the app in Github.
 
-To make a clone of the Node.js app from the repository using bash - 
+To make a clone of the Node.js app from the repository using bash:
 
 ~~~bash
 $ git clone git://github.com/cloudControl/node-js-sample node-js-mongodb-sample
@@ -18,7 +18,7 @@ Now you have a small, but fully functional Node.js application.
 ### Declaring dependencies using NPM
 The next step is to declare app dependencies. Node.js tracks dependencies using [npm]. The dependency requirements must be specified in a `package.json`-file in your project's root directory.   
 
-Modify the dependencies section of the package.json file as shown below to add the app dependencies (express and mongodb) -
+Modify the dependencies section of the package.json file as shown below to add the app dependencies (express and mongodb):
 
 ~~~json
 "dependencies": {
@@ -113,7 +113,7 @@ $ cctrlapp APP_NAME/default push
 ...
 ~~~
 
-Finally, don’t forget to add the mongoDB add-on for cloudControl and deploy the latest version of the app -
+Finally, don’t forget to add the mongoDB add-on for cloudControl and deploy the latest version of the app:
 
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mongolab.free

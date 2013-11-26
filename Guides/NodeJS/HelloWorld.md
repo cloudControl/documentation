@@ -15,7 +15,7 @@ Before we dive into the details of building the Hello World app, here are a few 
 ## Building the Hello World app
 To start building the Hello World app, you first need to get access to the Node.js code for the app in Github.
 
-Make a clone of the Node.js app from the repository using - 
+Make a clone of the Node.js app from the repository using:
 
 ~~~bash
 $ git clone git://github.com/cloudControl/node-js-sample
@@ -25,7 +25,7 @@ $ cd node-js-sample
 Now you have a small but fully functional Node.js application.
 
 ### Declaring dependencies using NPM
-The next step is to declare app dependencies. Node.js tracks dependencies using npm. The dependency requirements must be specified in a `package.json`-file in your project's root directory.  For the Hello World application, the only requirement is Express. This is shown in the json file below -
+The next step is to declare app dependencies. Node.js tracks dependencies using npm. The dependency requirements must be specified in a `package.json`-file in your project's root directory.  For the Hello World application, the only requirement is Express. This is shown in the json file below:
 
 ~~~json
 {
