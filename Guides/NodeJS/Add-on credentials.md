@@ -10,7 +10,7 @@ By default, each Add-on exposes its credentials in the environment. You can look
 
 In case you don't want to expose these credentials in the environment, you can disable them by executing:
 
-~~~
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS 0
 ~~~
 
@@ -23,7 +23,7 @@ cloudControl offers a number of data storage solutions via the Add-on Marketplac
 To add a MySQL database, use the MySQL Dedicated Add-on or MySQL Shared Add-on.
 Here's a Node.js snippet that reads the database settings from the credentials file -
 
-~~~
+~~~node.js
 var fs, configurationFile;
  
 configurationFile = process.env.CRED_FILE; 
