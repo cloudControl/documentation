@@ -19,10 +19,11 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS 0
 
 The Add-on credentials can still be read from the credentials file, as explained in the next section. Note that there are some other interesting environment variables available in your deployment containers, such as the path to the credential file.
 
-## Examples 
-cloudControl offers a number of data storage solutions via the Add-on Marketplace. Below is an example on how to access credentials for MySQL. 
+## Reading the credentials from a credential file 
 
-###Reading from the credentials file for MySQL
+cloudControl offers a number of data storage solutions via the Add-on Marketplace. Below is an example on how to access credentials for MySQL from a credential file. 
+
+###MySQL
 To add a MySQL database, use the MySQL Dedicated Add-on or MySQL Shared Add-on.
 Here's a Node.js snippet that reads the database settings from the credentials file -
 
