@@ -41,7 +41,7 @@ web: node web.js
 ### Creating the dataprovider.js file
 Now we need to create our provider that will be capable to using MongoDB. Make sure this file is located in the same directory as web.js.
 
-~~~node.js
+~~~javascript
 var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,

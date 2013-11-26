@@ -28,7 +28,7 @@ To add a MySQL database, use the [MySQL Dedicated Add-on] or [MySQL Shared Add-o
 
 Here's a Node.js snippet that reads the database settings from the credentials file:
 
-~~~node.js
+~~~javascript
 var fs, configurationFile;
  
 configurationFile = process.env.CRED_FILE; 
