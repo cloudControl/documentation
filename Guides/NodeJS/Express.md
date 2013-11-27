@@ -1,19 +1,19 @@
-# Node.js, Express and MongoDB on cloudControl
+# Deploying an Express  Application
 
 ## Introduction
-This example demonstrates how to build a simple cloudControl Node.js app with a [MongoDB] backend.
+This example demonstrates how to build a simple cloudControl Express app with a [MongoDB]. Express is the Node.js web framework, and MongoDB is the backend database.
 
 ## Prerequisites
-Before we get started, you need to get access to the Node.js code for the app in Github.
+Before we get started, you need to get access to the app code in Github.
 
-To make a clone of the Node.js app from the repository using bash:
+To make a clone of the Express app from the repository, execute the following commands using bash:
 
 ~~~bash
 $ git clone git://github.com/cloudControl/node-js-sample node-js-mongodb-sample
 $ cd node-js-mongodb-sample
 ~~~
 
-Now you have a small, but fully functional Node.js application.
+Now you have a small, but fully functional Express application.
 
 ### Declaring dependencies using NPM
 The next step is to declare app dependencies. Node.js tracks dependencies using [npm]. The dependency requirements must be specified in a `package.json`-file in your project's root directory.   
@@ -26,8 +26,6 @@ Modify the dependencies section of the package.json file as shown below to add t
     "mongodb": "1.3.19"
   }
 ~~~
-
-In this example app, Express is the Node.js web framework, and MongoDB is the backend database.
 
 ### Starting processes in cloudControl
 A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the top level of your repository.
@@ -98,7 +96,7 @@ db.open(function(err, db) {
 });
 ~~~
 
-### Pushing and deploying your Express app
+### Pushing and Deploying your Express App
 
 Before you deploy your app, you have to give it a unique name (from now on called `APP_NAME`) for your application.
 
@@ -113,7 +111,7 @@ $ cctrlapp APP_NAME/default push
 ...
 ~~~
 
-Finally, don’t forget to add the mongoDB add-on for cloudControl and deploy the latest version of the app:
+Finally, don’t forget to add the mongoDB Add-on for cloudControl and deploy the latest version of the app:
 
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mongolab.free
