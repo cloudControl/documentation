@@ -5,7 +5,7 @@
 
 In this tutorial, we're going to show you how to build and deploy a simple Hello World Node.js application on [cloudControl]. Check out the [Node.js buildpack] for supported features.
 
-## Pre-requisites
+## Prerequisites
 Before we dive into the details of building the Hello World app, here are a few prerequisites that are needed:  
 
  - Basic Node.js knowledge, including an installed version of Node.js and [npm].

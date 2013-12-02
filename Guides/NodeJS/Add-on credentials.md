@@ -8,7 +8,7 @@ There are two ways to get the [Add-on credentials] in a Node.js app:
  - Reading the credentials from environment variables
  - Reading the credentials from a credential file
 
-## Reading the credentials from environment variables 
+## Reading the Credentials from Environment Variables 
 By default, each Add-on exposes its credentials in the environment. You can look up the individual environment variable names in the respective Add-on documentation. To use a particular environment variable, you can refer to it using  `process.env.ENVIRONMENT_VARIABLE_NAME` in your code. Some examples for database Add-ons can be seen in the last section.
 
 In case you don't want to expose these credentials in the environment, you can disable them by executing:
@@ -19,7 +19,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add config.free --SET_ENV_VARS 0
 
 The Add-on credentials can still be read from the credentials file, as explained in the next section. Note that there are some other interesting environment variables available in your deployment containers, such as the path to the credential file.
 
-## Reading the credential from a credential file 
+## Reading the Credentials from a Credential File 
 
 cloudControl offers a number of data storage solutions via the [Add-on Marketplace]. Below is an example on how to access the credentials for MySQL from a credential file. 
 
@@ -50,7 +50,7 @@ The example used the MySQLd Add-on. Variable names for MySQLs differ. Remember, 
 
 Similarly, for other databases such as Postgres, credentials can be accessed from the credential file. 
 
-###Postgres
+###PostgreSQL
 To add a PostgreSQL database, use the [ElephantSQL Add-on].
 
 This sets the `ELEPHANTSQL_URL` environment variable which can be used in your code as shown below:

@@ -15,10 +15,10 @@ $ cd node-js-mongodb-sample
 
 Now you have a small, but fully functional Express application.
 
-### Declaring dependencies using NPM
+### Declaring Dependencies Using NPM
 The next step is to declare app dependencies. Node.js tracks dependencies using [npm]. The dependency requirements must be specified in a `package.json`-file in your project's root directory.   
 
-Modify the dependencies section of the package.json file as shown below to add the app dependencies (express and mongodb):
+Modify the dependencies section of the package.json file as shown below to add the app dependencies (`express` and `mongodb`):
 
 ~~~json
 "dependencies": {
@@ -27,7 +27,7 @@ Modify the dependencies section of the package.json file as shown below to add t
   }
 ~~~
 
-### Starting processes in cloudControl
+### Starting Processes in cloudControl
 A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the top level of your repository.
 
 In the case of the Node.js app, it is important to invoke the node process as shown below. Note that the process is of type web, which means it is a web app.
@@ -36,7 +36,7 @@ In the case of the Node.js app, it is important to invoke the node process as sh
 web: node web.js
 ~~~
 
-### Creating the dataprovider.js file
+### Creating the dataprovider.js File
 Now we need to create our provider that will be capable to using MongoDB. Make sure this file is located in the same directory as web.js.
 
 ~~~javascript
@@ -111,18 +111,18 @@ $ cctrlapp APP_NAME/default push
 ...
 ~~~
 
-Finally, don’t forget to add the mongoDB Add-on for cloudControl and deploy the latest version of the app:
+Finally, don’t forget to add the MongoDB Add-on for cloudControl and deploy the latest version of the app:
 
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mongolab.free
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Node.js app running with mongoDB at
+Congratulations, you can now see your Express app running with MongoDB at
 **`http[s]://APP_NAME.cloudcontrolled.com`**.
 
 
-## Next steps
+## Next Steps
 Read our [platform docs] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
 
 
