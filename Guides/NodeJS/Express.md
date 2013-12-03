@@ -1,7 +1,7 @@
 # Deploying an Express  Application
 
 ## Introduction
-This example demonstrates how to build a simple cloudControl Express app with a [MongoDB]. Express is the Node.js web framework, and MongoDB is the backend database.
+This example demonstrates how to build a simple cloudControl Express app. The app uses Express, which is a Node.js web framework, and MongoDB as the backend database.
 
 ## Prerequisites
 Before we get started, you need to get access to the app code in Github.
