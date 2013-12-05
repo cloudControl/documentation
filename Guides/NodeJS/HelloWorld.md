@@ -1,35 +1,26 @@
 # Deploying a Node.js Application
-
-## Introduction
 [Node.js] is a platform built on Chrome's JavaScript runtime for building fast and scalable network applications. Its event-driven, non-blocking I/O model makes it a lightweight and efficient framework for building data-intensive real-time cloud apps.
 
 In this tutorial, we're going to show you how to build and deploy a simple Hello World Node.js application on [cloudControl]. Check out the [Node.js buildpack] for supported features.
 
-## Prerequisites
-Before we dive into the details of building the Hello World app, here are a few prerequisites that are needed:  
+## The Node.js App Explained
 
- - Basic Node.js knowledge, including an installed version of Node.js and [npm].
- - Your application will use npm to manage dependencies.
- - A cloudControl user account. If you don’t have one yet, [sign up here] for free.
-
-## Building a Hello World App
-To start building the Hello World app, you first need to get access to the Node.js code for the app in Github.
-
-Make a clone of the Node.js app from the repository using:
+### Get the App
+First, let's clone the Node.js App from our repository on Github:
 
 ~~~bash
-$ git clone git://github.com/cloudControl/node-js-sample
-$ cd node-js-sample
+$ git clone https://github.com/cloudControl/nodejs-express-example-app.git
+$ cd nodejs-express-example-app
 ~~~
 
 Now you have a small, but fully functional Node.js application.
 
-### Declaring Dependencies using NPM
-The next step is to declare app dependencies. Node.js tracks dependencies using npm. The dependency requirements must be specified in a `package.json`-file in your project's root directory.  For the Hello World application, the only requirement is Express. This is shown in the json file below:
+### Dependency Tracking
+The next step is to declare app dependencies. Node.js tracks dependencies using [npm]. The dependency requirements must be specified in a `package.json`-file in your project's root directory.  For the Hello World application, the only requirement is Express. This is shown in the json file below:
 
 ~~~json
 {
-  "name": "node-js-sample",
+  "name": "nodejs-express-example-app",
   "version": "0.0.1",
   "dependencies": {
     "express": "~3.3.4"
@@ -43,7 +34,7 @@ The next step is to declare app dependencies. Node.js tracks dependencies using 
 
 You should always specify the versions of your dependencies if you want your builds to be reproducible and to prevent unexpected errors caused by version changes.
 
-### Starting Processes in cloudControl
+### Process Type Definition
 A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the top level of your repository.
 
 In the case of the Node.js app, it is important to invoke the node process as shown below. Note that the process is of type web, which means it is a web app.
@@ -51,6 +42,8 @@ In the case of the Node.js app, it is important to invoke the node process as sh
 ~~~
 web: node web.js
 ~~~
+
+Left from the colon we specified the **required** process type called web followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
 ## Pushing and Deploying your App
 Before you deploy your app, you have to give it a unique name (from now on called `APP_NAME`) for your application and create it on the cloudControl platform:
@@ -108,12 +101,6 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Node.js app running at
 `http[s]://APP_NAME.cloudcontrolled.com`.
 
-[Node.js]: http://nodejs.org/
-[npm]: https://npmjs.org/
-[cloudControl]: http://www.cloudcontrol.com
-[Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-
 ## Next Steps
 Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform docs] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
 Good luck building your apps using Node.js and cloudControl.
@@ -126,4 +113,3 @@ Good luck building your apps using Node.js and cloudControl.
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [platform docs]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
-[sign up here]: https://www.cloudcontrol.com/sign-up
