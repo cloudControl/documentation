@@ -1,53 +1,63 @@
 # Deploying an Express  Application
 
-## Introduction
-This example demonstrates how to build a simple cloudControl Express app. The
-app uses Express, which is a Node.js web framework, and MongoDB as the backend
-database.
+This example demonstrates how to build a simple [cloudControl] Express app. The
+app uses [Express], which is a [Node.js] web framework, and MongoDB as the
+backend database.
 
-## Prerequisites
-Before we get started, you need to get access to the app code in Github.
+## The Express Application Explained
 
-To make a clone of the Express app from the repository, execute the following
-commands using bash:
-
+Before we get started, you need to clone to the Express app code from our
+Github repository and execute the following commands from your command line:
 ~~~bash
-$ git clone git://github.com/cloudControl/node-js-sample node-js-mongodb-sample
-$ cd node-js-mongodb-sample
+$ git clone git@github.com:cloudControl/nodejs-express-mongodb-example-app.git
+$ cd nodejs-express-mongodb-example-app
 ~~~
 
 Now you have a small, but fully functional Express application.
 
-### Declaring Dependencies Using NPM
+### Dependency Tracking
+
 The next step is to declare app dependencies. Node.js tracks dependencies using
-[npm]. The dependency requirements must be specified in a `package.json`-file
-in your project's root directory.   
-
-Modify the dependencies section of the package.json file as shown below to add
-the app dependencies (`express` and `mongodb`):
-
+[npm]. The dependency requirements must be specified in a `package.json` file
+in your project's root directory. It should look like this:
 ~~~json
-"dependencies": {
-    "express": "~3.3.4",
+{
+  "name": "ExpressTut",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "jade": "*",
     "mongodb": "1.3.19"
   }
+}
 ~~~
 
-### Starting Processes in cloudControl
+### Process Type Definition
+
 A [Procfile] is required to start processes on the cloudControl platform. There
 must be a file called `Procfile` at the top level of your repository.
 
 In the case of the Node.js app, it is important to invoke the node process as
 shown below. Note that the process is of type web, which means it is a web app.
-
 ~~~
-web: node web.js
+web: node app.js
 ~~~
 
-### Creating the dataprovider.js File
-Now we need to create our provider that will be capable to using MongoDB. Make
-sure this file is located in the same directory as web.js.
+### MongoDB Database
 
+Node.js and MongoDB are an excellent combination, considering that JSON
+(JavaScript Object Notation) is a subset of JavaScript, and storing and
+retrieving the objects is trivial. MongoDB is provided by [MongoSoup] and
+[MongoLab] which can be found on cloudControl's Add-on marketplace under the
+category [Data Storage].
+
+For this is example we are gonna use the MongoLab Add-on. In the
+`employeeprovider.js` file, you can find how the connection to the database is
+established:
 ~~~javascript
 var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
@@ -61,22 +71,27 @@ var Db = require('mongodb').Db,
     BSON = require('mongodb').pure().BSON,
     assert = require('assert');
 
-DataProvider = function() {
+EmployeeProvider = function() {
   var that = this;
-    MongoClient.connect(process.env.MONGOLAB_URI, function(err, db){
+  mongodbUri = process.env.MONGOLAB_URI || 'mongodb://localhost';
+  MongoClient.connect(mongodbUri, function(err, db){
     if(err) { return console.dir(err); }
     that.db = db;
   })
 };
 ~~~
 
+For more information related to getting Add-on credentials in JavaScript you
+can check our [guide][get-conf].
+
+
 ### Pushing and Deploying your Express App
 
-Before you deploy your app, you have to give it a unique name (from now on
-called `APP_NAME`) for your application.
+Choose a unique name to replace the `APP_NAME` placeholder for your application
+and create it on the cloudControl platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create nodemongo
+$ cctrlapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment
@@ -84,12 +99,38 @@ image build process:
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-...
+Counting objects: 73, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (35/35), done.
+Writing objects: 100% (73/73), 267.28 KiB | 0 bytes/s, done.
+Total 73 (delta 30), reused 73 (delta 30)
+
+-----> Receiving push
+-----> Resolving engine versions
+
+       WARNING: No version of Node.js specified in package.json,
+
+       Using Node.js version: 0.10.15
+       Using npm version: 1.3.5
+-----> Fetching Node.js binaries
+-----> Vendoring node into slug
+-----> Installing dependencies with npm
+       npm WARN package.json ExpressTut@0.0.1 No repository field.
+       npm http GET https://registry.npmjs.org/jade
+       npm http GET https://registry.npmjs.org/mongodb/1.3.19
+       npm http GET https://registry.npmjs.org/express/3.4.0
+       ...
+       Dependencies installed
+-----> Building runtime environment
+-----> Building image
+-----> Uploading image (17M)
+
+To ssh://APP_NAME@cloudcontrolled.com/repository.git
+ * [new branch]      master -> master
 ~~~
 
-Finally, don’t forget to add the MongoDB Add-on for cloudControl and deploy the
+Finally, don’t forget to add the MongoLab Add-on for cloudControl and deploy the
 latest version of the app:
-
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mongolab.free
 $ cctrlapp APP_NAME/default deploy
@@ -106,9 +147,13 @@ applications.
 
 
 [Node.js]: http://nodejs.org/
+[Express]: http://expressjs.com/
 [npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
+[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [platform docs]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
-[MongoDB]: https://www.cloudcontrol.com/add-ons/mongodb/
+[Data Storage]: https://www.cloudcontrol.com/add-ons?c=1
+[MongoLab]: https://www.cloudcontrol.com/add-ons/mongolab
+[MongoSoup]: https://www.cloudcontrol.com/add-ons/mongosoup
