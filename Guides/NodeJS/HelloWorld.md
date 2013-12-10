@@ -106,7 +106,7 @@ Building a data app with Node.js? Check out our next [example on how to use Node
 Good luck building your apps using Node.js and cloudControl.
 
 
-[example on how to use Node.js with MongoDB]: https://github.com/cloudControl/documentation/blob/master/Guides/NodeJS/Express.md
+[example on how to use Node.js with MongoDB]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Express
 [Node.js]: http://nodejs.org/
 [npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
