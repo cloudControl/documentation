@@ -1,13 +1,15 @@
-# Deploying an Express  Application
+# Deploying an Express Application
 
-This example demonstrates how to build a simple [cloudControl] Express app. The
+This example demonstrates how to build a simple Express app on [cloudControl]. The
 app uses [Express], which is a [Node.js] web framework, and MongoDB as the
 backend database.
 
 ## The Express Application Explained
 
-Before we get started, you need to clone to the Express app code from our
-Github repository and execute the following commands from your command line:
+### Get the App
+First, clone the Express application from our
+Github repository by executing the following commands from your command line:
+
 ~~~bash
 $ git clone git@github.com:cloudControl/nodejs-express-mongodb-example-app.git
 $ cd nodejs-express-mongodb-example-app
@@ -17,9 +19,10 @@ Now you have a small, but fully functional Express application.
 
 ### Dependency Tracking
 
-The next step is to declare app dependencies. Node.js tracks dependencies using
-[npm]. The dependency requirements must be specified in a `package.json` file
-in your project's root directory. It should look like this:
+The Node.js buildpack tracks dependencies using
+[npm]. The dependency requirements are defined in a `package.json` file which needs to be located
+in the root of your repository. The one you cloned as part of the example app looks like this:
+
 ~~~json
 {
   "name": "ExpressTut",
@@ -39,25 +42,26 @@ in your project's root directory. It should look like this:
 ### Process Type Definition
 
 A [Procfile] is required to start processes on the cloudControl platform. There
-must be a file called `Procfile` at the top level of your repository.
+must be a file called `Procfile` at the root of your repository. It looks like this:
 
-In the case of the Node.js app, it is important to invoke the node process as
-shown below. Note that the process is of type web, which means it is a web app.
 ~~~
 web: node app.js
 ~~~
 
+Left of the colon, we specified the **required** process type called `web`followed by the command that starts the app.
+
 ### MongoDB Database
 
-Node.js and MongoDB are an excellent combination, considering that JSON
-(JavaScript Object Notation) is a subset of JavaScript, and storing and
-retrieving the objects is trivial. MongoDB is provided by [MongoSoup] and
-[MongoLab] which can be found on cloudControl's Add-on marketplace under the
+Node.js and MongoDB are an excellent combination because JSON
+(JavaScript Object Notation) is a subset of JavaScript, making storage and
+retrieval of the objects very simple. MongoDB is provided by [MongoSoup] and
+[MongoLab] which can be found in cloudControl's Add-on Marketplace under the
 category [Data Storage].
 
-For this is example we are gonna use the MongoLab Add-on. In the
+This example uses the MongoLab Add-on. In the
 `employeeprovider.js` file, you can find how the connection to the database is
 established:
+
 ~~~javascript
 var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
@@ -81,8 +85,8 @@ EmployeeProvider = function() {
 };
 ~~~
 
-For more information related to getting Add-on credentials in JavaScript you
-can check our [guide][get-conf].
+For more information related to getting Add-on credentials in JavaScript, you
+can refer to the Node.js Add-on credentials [guide][get-conf].
 
 
 ### Pushing and Deploying your Express App
@@ -131,13 +135,14 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Finally, don’t forget to add the MongoLab Add-on for cloudControl and deploy the
 latest version of the app:
+
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mongolab.free
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Express app running with MongoDB at
-**`http[s]://APP_NAME.cloudcontrolled.com`**.
+`http[s]://APP_NAME.cloudcontrolled.com`.
 
 
 ## Next Steps

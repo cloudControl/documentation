@@ -22,13 +22,20 @@ Note that there are some other interesting [environment variables] available in 
 
 All the [Add-on credentials] can be found in a provided JSON file as well, which path is exposed in
 the `CRED_FILE` environment variable. You can see the format of that file locally with the command:
+
 ~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
+You can use the following code wherever you want to get the credentials in your Node.js app:
+
+~~~javascript
+$ CODE BLOCK HERE!!
+~~
+
 # Examples
 
-cloudControl offers a number of data storage solutions via the [Add-on Marketplace]. Below is an example on how to access the credentials for MySQL from a credentials file.
+cloudControl offers a number of data storage solutions via the [Add-on Marketplace]. Below you can see how to access Add-on credentials on two examples, for MySQL and PostgreSQL.
 
 ##MySQL
 To add a MySQL database, use the [MySQL Dedicated Add-on] or [MySQL Shared Add-on].
@@ -51,9 +58,7 @@ var port = configuration.MYSQLD.MYSQLD_PORT;
 
 ~~~
 
-The example used the MySQLd Add-on. Variable names for MySQLs differ. Remember, you can always refer to the addon.creds command to see the actual variable names and values.
-
-Similarly, for other databases such as Postgres, credentials can be accessed from the credential file.
+The example used the MySQLd Add-on. Variable names for MySQLs differ. Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
 ##PostgreSQL
 To add a PostgreSQL database, use the [ElephantSQL Add-on].
