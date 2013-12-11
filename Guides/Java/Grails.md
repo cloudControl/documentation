@@ -4,17 +4,18 @@ In this tutorial we're going to show you how to deploy a Grails  application on 
 
 ## The Grails Application Explained
 ### Get the App
-First, clone the hello world app from our repository:
+First, clone the Grails application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/grails_example_app.git
 $ cd grails_example_app
 ~~~
 
-Now you have a small but fully functional Grails application.
+Now you have a small, but fully functional Grails application.
 
 ### Dependency Tracking
-As it is the default for grails applications, you define your dependencies and versions in `grails-app/conf/BuildConfig.groovy`.
+Dependencies in the grails-buildpack are resolved using [Ivy]. You should put your definition into the file `grails-app/conf/BuildConfig.groovy` in your application. 
+
 ~~~groovy
 grails.servlet.version = "2.5" 
 grails.project.target.level = 1.6
@@ -59,7 +60,7 @@ The example code already includes the `Procfile` at the top level of your reposi
 web: java $JAVA_OPTS -jar server/webapp-runner.jar --port $PORT target/*.war
 ~~~
 
-The `web` process type is required and specifies the command that will be executed when the app is deployed.
+The `web` process type is required and specifies the command that will be executed when the app is deployed. The environment variable `$PORT` defines the port the application-server should listen to.
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
@@ -91,16 +92,17 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Grails Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Grails application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Grails buildpack]: https://github.com/cloudControl/buildpack-grails
 [cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Ivy]: http://ant.apache.org/ivy/

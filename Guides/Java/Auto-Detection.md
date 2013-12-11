@@ -1,10 +1,8 @@
-# Autodetection for JVM-Based applications
+# Autodetection for JVM-Based Applications
 
-By default on cloudControl, the apptype defines exactly what buildpack is used and so what runtime is created. Due to the language mixing and diversity for JVM-based applications, the behavior is different for these apps. 
+For most officially supported languages on the cloudControl platform, the application type defines exactly which buildpack is used, and thus which runtime is created. Due to the diversity of JVM-based applications and the mix of languages used, these types of apps are an exception to this rule.
 
-Each of the Java-buildpacks defines a so-called "detect" script which is used to determine the buildpack to use for your application. 
-
-In short the application has to follow these conventions: 
+To determine the right buildpack to use for JVM-based applications, each of the Java buildpacks defines a "detect" script. In order for the platform to determine the correct buildpack, your application must follow these conventions:
 
 |Technology|Detection|
 |:---------|:----------:|
@@ -15,7 +13,7 @@ In short the application has to follow these conventions:
 |[Scala][buildpack-scala]|`/*.sbt`, or `project/*.scala` or `.sbt/*.scala`|
 |[Play!][buildpack-play]|`*/conf/application.conf` inside your application (not modules). |
 
-For more detail, check the `detect` script of the corresponding buildpack. 
+For more details, check the `detect` script of the corresponding buildpack. 
 
 [buildpack-clojure]: https://github.com/cloudControl/buildpack-clojure
 [buildpack-gradle]: https://github.com/cloudControl/buildpack-gradle

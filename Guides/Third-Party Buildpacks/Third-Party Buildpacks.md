@@ -1,14 +1,13 @@
 # Third-Party Custom Buildpacks
 
-[cloudControl][cloudControl] supports following App-Types natively via the [Pinky stack][PinkyStack]. 
+[cloudControl] officially supports the following application types via the [Pinky Stack][PinkyStack].
 
-- Java-based (Java with maven or Gradle, Grails, Scala, Play, Clojure)
+- Java-based (Java with Maven, Gradle, Grails, Scala, Play! or Clojure)
 - Ruby
 - PHP
 - Python
  
-However you can deploy apps developed on languages and technologies beyond the default ones using the custom buildpacks
-feature.
+However, you can deploy apps developed on languages and technologies beyond the officially supported ones using the third-party custom buildpacks feature.
 
 ## Verified Buildpacks
 
