@@ -30,8 +30,17 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 You can use the following code wherever you want to get the credentials in your Node.js app:
 
 ~~~javascript
-$ CODE BLOCK HERE!!
-~~
+var fs = require('fs');
+
+var creds = JSON.parse(
+    fs.readFileSync(process.env.CRED_FILE)
+);
+
+var param1 = creds.ADDON_NAME.ADDON_NAME_PARAMETER1;
+var param2 = creds.ADDON_NAME.ADDON_NAME_PARAMETER2;
+var param3 = creds.ADDON_NAME.ADDON_NAME_PARAMETER3;
+// e.g. for MYSQLS: var hostname = creds.MYSQLS.MYSQLS_HOSTNAME
+~~~
 
 # Examples
 
@@ -43,18 +52,17 @@ To add a MySQL database, use the [MySQL Dedicated Add-on] or [MySQL Shared Add-o
 Here's a Node.js snippet that reads the database settings from the credentials file:
 
 ~~~javascript
-
 var fs = require('fs');
 
-var configuration = JSON.parse(
+var creds = JSON.parse(
     fs.readFileSync(process.env.CRED_FILE)
 );
 
-var host = configuration.MYSQLD.MYSQLD_HOST;
-var database = configuration.MYSQLD.MYSQLD_DATABASE;
-var user = configuration.MYSQLD.MYSQLD_USER;
-var password = configuration.MYSQLD.MYSQLD_PASSWORD;
-var port = configuration.MYSQLD.MYSQLD_PORT;
+var host = creds.MYSQLD.MYSQLD_HOST;
+var database = creds.MYSQLD.MYSQLD_DATABASE;
+var user = creds.MYSQLD.MYSQLD_USER;
+var password = creds.MYSQLD.MYSQLD_PASSWORD;
+var port = creds.MYSQLD.MYSQLD_PORT;
 
 ~~~
 
@@ -66,14 +74,13 @@ To add a PostgreSQL database, use the [ElephantSQL Add-on].
 This sets the `ELEPHANTSQL_URL` environment variable which can be used in your code as shown below:
 
 ~~~javascript
-
 var fs = require('fs');
 var url = require('url');
 
-var configuration = JSON.parse(
+var creds = JSON.parse(
     fs.readFileSync(process.env.CRED_FILE)
 );
-var elephantSQLUrl = url.parse(configuration.ELEPHANTSQL.ELEPHANTSQL_URL);
+var elephantSQLUrl = url.parse(creds.ELEPHANTSQL.ELEPHANTSQL_URL);
 
 var host = elephantSQLUrl.hostname;
 var database = elephantSQLUrl.pathname.substr(1);
