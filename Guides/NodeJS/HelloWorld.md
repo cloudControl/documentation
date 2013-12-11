@@ -45,7 +45,7 @@ A [Procfile] is required to start processes on the cloudControl platform. There 
 web: node web.js
 ~~~
 
-Left from the colon, we specified the **required** process type called web followed by the command that starts the app.
+Left from the colon, we specified the **required** process type called `web` followed by the command that starts the app.
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application

@@ -49,7 +49,7 @@ code you already cloned it looks like this:
 web: node app.js
 ~~~
 
-Left of the colon, we specified the **required** process type called `web`followed by the command that starts the app.
+Left of the colon, we specified the **required** process type called `web` followed by the command that starts the app.
 
 ### MongoDB Database
 
