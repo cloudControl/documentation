@@ -89,7 +89,7 @@ For more information related to getting Add-on credentials in JavaScript, you
 can refer to the Node.js Add-on credentials [guide][get-conf].
 
 
-### Pushing and Deploying your Express App
+## Pushing and Deploying your Express App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the cloudControl platform:
@@ -146,7 +146,7 @@ Congratulations, you can now see your Express app running with MongoDB at
 
 
 ## Next Steps
-Read our [platform docs] for a technical overview of the concepts you’ll
+Read our [platform documentation] for a technical overview of the concepts you’ll
 encounter while writing, configuring, deploying and running your Node.js
 applications.
 
@@ -158,7 +158,7 @@ applications.
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [get-conf]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform docs]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
+[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
 [Data Storage]: https://www.cloudcontrol.com/add-ons?c=1
 [MongoLab]: https://www.cloudcontrol.com/add-ons/mongolab
 [MongoSoup]: https://www.cloudcontrol.com/add-ons/mongosoup
