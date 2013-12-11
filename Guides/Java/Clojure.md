@@ -4,17 +4,17 @@ In this tutorial we're going to show you how to deploy a Clojure  application on
 
 ## The Clojure Application Explained
 ### Get the App
-First, clone the hello world app from our repository:
+First, clone the Clojure application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/clojure-sample.git
 $ cd clojure-sample
 ~~~
 
-Now you have a small but fully functional Clojure application.
+Now you have a small, but fully functional Clojure application.
 
 ### Dependency Tracking
-The dependencies are defined in the `project.clj`
+Clojure tracks your dependencies with the help of [Leiningen]. They are defined in the `project.clj`
 ~~~clojure
 (defproject clojure-sample "1.0.1"
   :description "Hello World Clojure Web App"
@@ -65,16 +65,17 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Clojure Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Clojure application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Clojure buildpack]: https://github.com/cloudControl/buildpack-clojure
 [cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Leiningen]: http://leiningen.org/

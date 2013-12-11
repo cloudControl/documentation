@@ -6,17 +6,17 @@ If you want to deploy a Play! V2 application, see the [Scala Tutorial].
 
 ## The Play! Application Explained
 ### Get the App
-First, clone the hello world app from our repository:
+First, clone the Play! application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/devcenter-play.git
 $ cd devcenter-play
 ~~~
 
-Now you have a small but fully functional Play! application.
+Now you have a small, but fully functional Play! application.
 
 ### Dependency Tracking
-Dependency tracking for Play! applications happens in `conf/dependencies.yml`. 
+Dependencies in Play! applications are resolved using [Ivy]. You can define yours in the file  `conf/dependencies.yml`. 
 
 ~~~yaml
 require:
@@ -32,7 +32,7 @@ The example code already includes the `Procfile` at the top level of your reposi
 web: play run --http.port=$PORT $PLAY_OPTS
 ~~~
 
-The `web` process type is required and specifies the command that will be executed when the app is deployed.
+The `web` process type is required and specifies the command that will be executed when the app is deployed. The environment variable `$PORT` defines the port the application-server should listen to.
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
@@ -70,13 +70,13 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Play! Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Play! application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play
@@ -84,3 +84,4 @@ Congratulations, you can now see your Play! Application running at `http[s]://AP
 [cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Ivy]: http://ant.apache.org/ivy/

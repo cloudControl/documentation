@@ -4,14 +4,14 @@ In this tutorial we're going to show you how to deploy a Scala application on [c
 
 ## The Scala Application Explained
 ### Get the App
-First, clone the hello world app from our repository:
+First, clone the Scala application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/scalatra-example.git
 $ cd scalatra-example
 ~~~
 
-Now you have a small but fully functional Scala application.
+Now you have a small, but fully functional Scala application.
 
 ### Dependency Tracking
 Scala applications are built by [sbt], so you define your dependencies in a `build.sbt`.
@@ -70,13 +70,13 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Scala Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Scala application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Scala buildpack]: https://github.com/cloudControl/buildpack-scala
