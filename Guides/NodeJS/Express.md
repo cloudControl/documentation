@@ -42,7 +42,8 @@ in the root of your repository. The one you cloned as part of the example app lo
 ### Process Type Definition
 
 A [Procfile] is required to start processes on the cloudControl platform. There
-must be a file called `Procfile` at the root of your repository. It looks like this:
+must be a file called `Procfile` at the root of your repository. In the example
+code you already cloned it looks like this:
 
 ~~~
 web: node app.js

@@ -16,9 +16,11 @@ $ cd nodejs-express-example-app
 Now you have a small, but fully functional Node.js application.
 
 ### Dependency Tracking
-The Node.js buildpack tracks dependencies using
-[npm]. The dependency requirements are defined in a `package.json` file which needs to be located
-in the root of your repository. For the Hello World application, the only requirement is Express. This is shown in the json file below:
+The Node.js buildpack tracks dependencies using [npm]. The dependency
+requirements are defined in a `package.json` file which needs to be located in
+the root of your repository. For the Hello World application, the only
+requirement is Express. The `package.json` you cloned as part of the example
+app looks like this:
 
 ~~~json
 {
@@ -37,7 +39,7 @@ in the root of your repository. For the Hello World application, the only requir
 You should always specify the versions of your dependencies if you want your builds to be reproducible and to prevent unexpected errors caused by version changes.
 
 ### Process Type Definition
-A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the root of your repository. It looks like this:
+A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
 
 ~~~
 web: node web.js
@@ -103,7 +105,7 @@ Congratulations, you can now see your Node.js app running at
 `http[s]://APP_NAME.cloudcontrolled.com`.
 
 ## Next Steps
-Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform documentaton] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
+Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform documentation] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
 Good luck building your apps using Node.js and cloudControl.
 
 
@@ -113,4 +115,4 @@ Good luck building your apps using Node.js and cloudControl.
 [cloudControl]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform docs]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
+[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
