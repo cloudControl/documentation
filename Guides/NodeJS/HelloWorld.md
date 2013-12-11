@@ -1,32 +1,31 @@
-# Deploying a Node.js application
-[Node.js] is a platform built on Chrome's JavaScript runtime for easily
-building fast, scalable network applications. Node.js uses an event-driven,
-non-blocking I/O model that makes it lightweight and efficient, perfect for
-data-intensive real-time applications that run across distributed devices.
+# Deploying a Node.js Application
+[Node.js] is a platform built on Chrome's JavaScript runtime for building fast and scalable network applications. Its event-driven, non-blocking I/O model makes it a lightweight and efficient framework for building data-intensive real-time cloud apps.
 
-In this tutorial we're going to show you how to deploy a Hello World Node.js
-application on [cloudControl]. Check out the [Node.js buildpack] for supported
-features.
+This tutorial demonstrates how to build and deploy a simple Hello World Node.js application on [cloudControl]. Check out the [Node.js buildpack] for supported features.
 
 ## The Node.js App Explained
 
 ### Get the App
-First, clone the Node.js App from our repositoryon Github:
+First, clone the Node.js App from our repository on Github:
+
 ~~~bash
 $ git clone https://github.com/cloudControl/nodejs-express-example-app.git
 $ cd nodejs-express-example-app
 ~~~
 
-Now you have a small but fully functional Node.js application.
+Now you have a small, but fully functional Node.js application.
 
 ### Dependency Tracking
-Node.js tracks dependencies vi [npm]. The requirements of your application must
-be defined in a `package.json`-file in your project's root directory.  For this
-simple app the only requirement is Express itself:
+The Node.js buildpack tracks dependencies using [npm]. The dependency
+requirements are defined in a `package.json` file which needs to be located in
+the root of your repository. For the Hello World application, the only
+requirement is Express. The `package.json` you cloned as part of the example
+app looks like this:
+
 ~~~json
 {
   "name": "nodejs-express-example-app",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "dependencies": {
     "express": "~3.3.4"
   },
@@ -37,32 +36,27 @@ simple app the only requirement is Express itself:
 }
 ~~~
 
-You should always specify the versions of your dependencies, if you want your
-builds to be reproducable and to prevent unexpected errors caused by version
-changes.
+You should always specify the versions of your dependencies if you want your builds to be reproducible and to prevent unexpected errors caused by version changes.
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
 
-There must be a file called `Procfile` at the top level of your repository,
-with the following content:
 ~~~
 web: node web.js
 ~~~
 
-The web process type is required and specifies the command that will be
-executed when the app is deployed.
+Left from the colon, we specified the **required** process type called web followed by the command that starts the app.
 
 ## Pushing and Deploying your App
-Choose a unique name (from now on called `APP_NAME`) for your application and
-create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application
+and create it on the cloudControl platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create nodejs
 ~~~
 
-Push your code to the application's repository, which triggers the deployment
-image build process:
+Push your code to the application's repository, which triggers the deployment image build process:
+
 ~~~bash
 $ cctrlapp APP_NAME/default push
 Counting objects: 307, done.
@@ -101,17 +95,24 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp
-deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
+
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Express app running at
+Congratulations, you can now see your Node.js app running at
 `http[s]://APP_NAME.cloudcontrolled.com`.
 
+## Next Steps
+Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform documentation] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
+Good luck building your apps using Node.js and cloudControl.
+
+
+[example on how to use Node.js with MongoDB]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Express
 [Node.js]: http://nodejs.org/
 [npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
