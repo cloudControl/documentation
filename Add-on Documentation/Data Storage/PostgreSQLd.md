@@ -11,9 +11,8 @@ the self managed RDS instance available to your app.
 
 ## Adding the PostgreSQLd Add-on
 
-To add the PostgreSQLd add-on use the addon.add command.
-
-~~~
+To add the PostgreSQLd add-on use the `addon.add` command:
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.add postgresqld.OPTION
 ~~~
 Replace `postgresqld.OPTION` with a valid option, e.g. `postgresqld.small`.
@@ -24,9 +23,8 @@ available after the instance is up and running.
 
 ## Upgrading the PostgreSQLd Add-on
 
-To upgrade from a smaller to a more powerful plan use the addon.upgrade command.
-
-~~~
+To upgrade from a smaller to a more powerful plan use the `addon.upgrade` command:
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade postgresqld.OPTION_OLD postgresqld.OPTION_NEW
 ~~~
 
@@ -37,9 +35,8 @@ can take up to 30 minutes and can involve a 3 to 10 minute downtime.
 
 ## Downgrading the PostgreSQLd Add-on
 
-To downgrade to a smaller plan use the addon.downgrade command.
-
-~~~
+To downgrade to a smaller plan use the `addon.downgrade` command:
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.downgrade postgresqld.OPTION_OLD postgresqld.OPTION_NEW
 ~~~
 
@@ -47,13 +44,12 @@ Please note: Downgrading is only possible to plans with matching storage sizes.
 
 ## Removing the PostgreSQLd Add-on
 
-The PostgreSQLd add-on can be removed from the deployment by using the addon.remove command.
-
-**Attention:** Removing the PostgreSQLd add-on deletes all data in the database.
-
-~~~
+The PostgreSQLd add-on can be removed from the deployment by using the `addon.remove` command:
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon.remove postgresqld.OPTION
 ~~~
+
+**Attention:** Removing the PostgreSQLd add-on deletes all data in the database.
 
 ## Replication and Failover
 
@@ -77,22 +73,13 @@ in the general documentation.
 ### External Access
 
 External access to the PostgreSQLd add-on is available through an SSL encrypted
-connection by following these simple steps.
-
- 1. Download the [certificate
- file](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem) to your
- local machine.
- 1. Connect to the database using an SSL encrypted connection.
-
-The following example uses the MySQL command line tool.
-
-~~~
-$ mysql -u MYSQLD_USERNAME -p --host=MYSQLD_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem
+connection by using the `psql` command line client:
+~~~bash
+$ psql "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME
 ~~~
 
-Replace the uppercase variables with the corresponding values shown by the addon command.
-
-~~~
+Replace the uppercase variables with the corresponding values shown by the addon command:
+~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon postgresqld.OPTION
 Addon                    : postgresqld.small
  Settings
@@ -100,18 +87,18 @@ Addon                    : postgresqld.small
    POSTGRESQLD_USER              : SOME_SECRET_USER
    POSTGRESQLD_HOST              : SOME_HOST.eu-west-1.rds.amazonaws.com
    POSTGRESQLD_DATABASE          : SOME_DATABASE_NAME
-   POSTGRESQLD_PORT              : 3306
+   POSTGRESQLD_PORT              : 5432
 ~~~
 
 Likewise imports and exports are equally simple.
 
-To **export** your data use the mysqldump command.
-~~~
-$ mysqldump -u MYSQLD_USERNAME -p --host=MYSQLD_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLD_DATABASE > MYSQLD_DATABASE.sql
+To **export** your data use the `pg_dump` command:
+~~~bash
+$ pg_dump "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME > PG_DUMP
 ~~~
 
-To **import** an sql file into a PostgreSQL database use the following command.
-~~~
-$ mysql -u MYSQLD_USER -p --host=MYSQLD_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLD_DATABASE < MYSQLD_DATABASE.sql
+To **import** an sql file into a PostgreSQL database use the following command:
+~~~bash
+$ psql "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME < PG_DUMP
 ~~~
 
