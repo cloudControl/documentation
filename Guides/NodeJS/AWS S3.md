@@ -32,7 +32,7 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 ~~~
 
-Now let's do some operations on S3 buckets and objects:
+Now, let's do some operations on S3 buckets and objects:
 
 ~~~javascript
  s3.createBucket({Bucket: 'myBucket'}, function() {
