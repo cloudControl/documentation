@@ -1,4 +1,4 @@
-# Node.js Amazon S3 integration 
+# Node.js Amazon S3 Integration 
 
 ## Introduction
 [Amazon S3] is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
