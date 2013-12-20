@@ -3,7 +3,7 @@
 ## Introduction
 [Amazon S3] is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
 
-This article show how to integrate Amazon S3 with your Node.js app. 
+This article shows how to integrate Amazon S3 with your Node.js app. 
 
 ## Getting Started
 To use the official Amazon S3 SDK in your project, you should install the AWS SDK for Node.js using the [npm package manager]. 
