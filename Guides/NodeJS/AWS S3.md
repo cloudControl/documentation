@@ -1,12 +1,12 @@
-# Node Amazon S3 integration 
+# Node.js Amazon S3 integration 
 
 ## Introduction
 [Amazon S3] is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
 
-This article show how to integrate Amazon S3 with your Node app. 
+This article show how to integrate Amazon S3 with your Node.js app. 
 
 ## Getting Started
-To use the official Amazon S3 SDK in your project, you should install the AWS SDK for Node using the [npm package manager]. 
+To use the official Amazon S3 SDK in your project, you should install the AWS SDK for Node.js using the [npm package manager]. 
 To install the SDK, type the following into a terminal window : 
 
 ~~~bash
@@ -25,7 +25,7 @@ AWS_SECRET_ACCESS_KEY=[YOUR_ACCESS_KEY]
 AWS_REGION='eu-west-1' 
 ~~~
 
-To load the AWS library in your Node app, use the require function as shown below:
+To load the AWS library in your Node.js app, use the require function as shown below:
 
 ~~~javascript
 var AWS = require('aws-sdk');
