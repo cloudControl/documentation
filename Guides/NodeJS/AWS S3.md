@@ -45,6 +45,9 @@ Now, let's do some operations on S3 buckets and objects:
  });
 ~~~
 
+## Next Steps
+You can build rich Node.js apps using more advanced S3 operations. To learn more, check out the Node.js [Amazon Guide]. Good luck.
+
 [Amazon S3]: http://aws.amazon.com/s3/
 [npm package manager]: https://npmjs.org/
 [Amazon Guide]: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-intro.html
