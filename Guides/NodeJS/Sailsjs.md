@@ -1,21 +1,25 @@
 # Deploying a Sails.js Application
 
-[Sails.js] is real time [Node.js] MVC framework, designed to mimic pattern of frameworks like [Ruby on Rails].
+## Introduction
+[Sails.js] is real time [Node.js] MVC framework, designed to mimic pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
 
-## The Example App Explained
+## Prerequisites
+If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
-### Get the App
-First, let's clone the example code from Github.
+cloudControl supports running Sails.js applications through the Node.js buildpack. Before we get started, you need to get access to the sample app code in Github.
+
+To make a clone of the Sails.js application from the repository, execute the following commands using bash:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/nodejs-sails-example-app.git
 $ cd nodejs-sails-example-app
 ~~~
 
-The code from the example repository is ready to be deployed. Let's still go
-through the different files and their purpose real quick.
+The code from the example repository is ready to be deployed.
 
-### Dependency Tracking
+### Dependency Tracking Using NPM
+The next step is to declare app dependencies. Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory.   
+Modify the dependencies section of the package.json file as shown below: 
 
 [npm] depedencies
 `package.json`:
@@ -44,24 +48,22 @@ through the different files and their purpose real quick.
 }
 ~~~
 
-
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes.
+cloudControl uses a [Procfile] to know how to start the app's processes. The `Proffile` can be found at the top level of your repository.
 
-The example code already includes a file called `Procfile` at the top level of
-your repository. It looks like this:
+To start the sails server, you need to use the `sails lift` command. This command can be included in the procfile definition as shown below: 
+
 ~~~
 web:  export NODE_ENV=production; sails lift
 ~~~
 
-Left from the colon we specified the **required** process type called `web`
-followed by the command that starts the app.
+Left from the colon we specified the **required** process type called `web` for a web app and followed by the command that starts the app server.
 
-### Production Database
+### Connecting the Sails.js Application to a Database
+Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. In this guide, we will show you how to connect your Sails.js application to a MySQL database using the cloudControl [Shared MySQL Add-on]. 
 
-In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at
-`config/adapter.js` so you can find out how to [get the MySQL
-credentials][get-conf] provided by MySQLs Add-on:
+Have a look at the `config/adapter.js` file so you can find out how to [get the MySQL credentials] provided by MySQLs Add-on:
+
 ~~~javascript
 module.exports.adapters = {
 
@@ -91,31 +93,30 @@ module.exports.adapters = {
 };
 ~~~
 
-### Socket.io and websocket support
+### Socket.io and Websocket Support
 
-Client / backend communication is done via [socket.io](http://socket.io/) (websockets), so it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details please visit our [Websockets documentaion](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#websockets).
+In Sails.js, client-backend communication is done using [websockets]. In order to use sockets, it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details please check out the [cloudControl websockets documentation].
 
 ## Pushing and Deploying the App
+To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
 ~~~bash
 $ cctrlapp APP_NAME create nodejs
 ~~~
 
-Push your code to the application's repository, which triggers the deployment
-image build process:
+Push your code to the application's repository, which triggers the deployment image build process:
+
 ~~~bash
 $ cctrlapp APP_NAME/default push
 ...
 ~~~
 
-add mysql
+Add the add [MySQL] add-on
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mysqls.free
 ~~~
 
-deploy
+Deploy the Sails.js application
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
@@ -125,9 +126,12 @@ Congratulations, you can now see your Sails.js app running at
 
 [Node.js]: http://nodejs.org/
 [Sails.js]: http://sailsjs.org/
+[Sails getting started page]: http://sailsjs.org/#!getStarted
 [Ruby on Rails]: http://rubyonrails.org/
 [npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
-[mysqls]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[get the MySQL credentials]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
+[websockets]: http://socket.io/
+[cloudControl websockets documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#websockets
+[MySQL]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
