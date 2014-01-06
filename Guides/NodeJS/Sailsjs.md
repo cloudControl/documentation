@@ -6,7 +6,7 @@
 ## Prerequisites
 If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
-cloudControl supports running Sails.js applications through the Node.js buildpack. Before we get started, you need to get access to the sample app code in Github.
+cloudControl supports running Sails.js applications through the Node.js buildpack. Before we get started, you need to get access to the sample application code in Github.
 
 To make a clone of the Sails.js application from the repository, execute the following commands using bash:
 
@@ -18,7 +18,8 @@ $ cd nodejs-sails-example-app
 The code from the example repository is ready to be deployed.
 
 ### Dependency Tracking Using NPM
-The next step is to declare app dependencies. Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory.   
+The next step is to declare application dependencies. Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory.   
+
 Modify the dependencies section of the package.json file as shown below: 
 
 [npm] depedencies
@@ -49,7 +50,7 @@ Modify the dependencies section of the package.json file as shown below:
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes. The `Proffile` can be found at the top level of your repository.
+cloudControl uses a [Procfile] to know how to start the application processes. The `Procfile` can be found at the top level of your repository.
 
 To start the sails server, you need to use the `sails lift` command. This command can be included in the procfile definition as shown below: 
 
@@ -57,7 +58,7 @@ To start the sails server, you need to use the `sails lift` command. This comman
 web:  export NODE_ENV=production; sails lift
 ~~~
 
-Left from the colon we specified the **required** process type called `web` for a web app and followed by the command that starts the app server.
+Left from the colon we specified the **required** process type called `web` for a web application and followed by the command that starts the Sails server.
 
 ### Connecting the Sails.js Application to a Database
 Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. In this guide, we will show you how to connect your Sails.js application to a MySQL database using the cloudControl [Shared MySQL Add-on]. 
@@ -121,7 +122,7 @@ Deploy the Sails.js application
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Sails.js app running at
+Congratulations, you can now see your Sails.js application running at
 `http://APP_NAME.cloudcontrolapp.com`.
 
 [Node.js]: http://nodejs.org/
