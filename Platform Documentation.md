@@ -316,10 +316,16 @@ A log message in the [deploy log](#deploy-log) appears when this process has fin
 
 ## Emergency Rollback
 
-If for some reason a new version does not work as expected, you can rollback any deployment to a previous version in a matter of seconds. To do so you can check the [deploy log](#deploy-log) for the previously deployed version (or get it from the version control system directly) and then simply use the Git or Bazaar version identifier that's part of the log output. You can redeploy this version using the deploy command.
+If your newest version breaks unexpectedly, you can use the rollback command to revert to the previous version in a matter of seconds:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION
+$ cctrlapp APP_NAME/DEP_NAME rollback
+~~~
+
+It is also possible to deploy any other prior version. To find the version identifier you need, simply check the [deploy log](#deploy-log) for a previously deployed version, or get it directly from the version control system. You can redeploy this version using the deploy command:
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 ~~~
 
 
