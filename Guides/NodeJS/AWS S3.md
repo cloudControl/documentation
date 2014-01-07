@@ -1,13 +1,12 @@
 # Node.js Amazon S3 Integration 
 
-## Introduction
-[Amazon S3 Node SDK] is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
+[Amazon S3] is a Storage-as-a-Service solution. It provides a simple web service interface that can be used to store and retrieve data from anywhere on the web.
 
 This guide shows how to integrate Amazon S3 with your Node.js app. 
 
 ## Amazon S3 SDK
 For Node you can choose between different SDKs for Amazon S3:
-* [Amazon S3 Node SDK]
+* [Amazon S3]
 * [Fog]
 * [Knox S3]
 
@@ -38,7 +37,7 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 ~~~
 
-Now, let's do some operations on S3 using Node.js. First, lets create a bucket called myBucket and put a new object in it with Key = 'myKey'. If any error occurs, the error is written to the console. If a key gets successfully added to the bucket, a success message gets written to the console.
+Now, let's do some operations on S3 using Node.js. First, let's create a bucket called myBucket and put a new object in it with Key = 'myKey'. If any error occurs, the error is written to the console. If a key gets successfully added to the bucket, a success message gets written to the console.
 
 ~~~javascript
  s3.createBucket({Bucket: 'myBucket'}, function() {
@@ -54,7 +53,7 @@ Now, let's do some operations on S3 using Node.js. First, lets create a bucket c
 ## Next Steps
 You can build rich Node.js apps using more advanced S3 operations. To learn more, check out the Node.js [Amazon Guide]. Good luck.
 
-[Amazon S3 Node SDK]: http://aws.amazon.com/s3/
+[Amazon S3]: http://aws.amazon.com/s3/
 [Fog]: https://docs.appfog.com/languages/node
 [Knox S3]: https://github.com/LearnBoost/knox
 [npm package manager]: https://npmjs.org/
