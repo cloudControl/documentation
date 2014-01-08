@@ -15,12 +15,6 @@ Here is a list of verified and recommended buildpacks for the cloudControl platf
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
-|Node.js|[https://github.com/heroku/heroku-buildpack-nodejs][buildpack-nodejs]|
-|Grails|[https://github.com/heroku/heroku-buildpack-grails][buildpack-grails]|
-|Scala|[https://github.com/heroku/heroku-buildpack-scala][buildpack-scala]|
-|Play|[https://github.com/heroku/heroku-buildpack-play][buildpack-play]|
-|Gradle|[https://github.com/heroku/heroku-buildpack-gradle][buildpack-gradle]|
-|Clojure|[https://github.com/heroku/heroku-buildpack-clojure][buildpack-clojure]|
 |Go|[https://github.com/kr/heroku-buildpack-go][buildpack-go]|
 |Erlang|[https://github.com/cloudControl/buildpack-erlang-kernel][buildpack-erlang]|
 |Common Lisp|[https://github.com/mtravers/heroku-buildpack-cl][buildpack-common-lisp]|
