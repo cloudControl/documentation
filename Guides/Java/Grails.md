@@ -14,7 +14,7 @@ $ cd grails_example_app
 Now you have a small, but fully functional Grails application.
 
 ### Dependency Tracking
-Dependencies in the grails-buildpack are resolved using [Ivy]. You should put your definition into the file `grails-app/conf/BuildConfig.groovy` in your application. 
+Dependencies in Grails applications are resolved using [Ivy]. The dependency requirements are defined in the `grails-app/conf/BuildConfig.groovy` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this:
 
 ~~~groovy
 grails.servlet.version = "2.5" 

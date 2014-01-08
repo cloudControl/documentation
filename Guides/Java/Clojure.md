@@ -14,7 +14,7 @@ $ cd clojure-sample
 Now you have a small, but fully functional Clojure application.
 
 ### Dependency Tracking
-Clojure tracks your dependencies with the help of [Leiningen]. They are defined in the `project.clj`
+Clojure tracks your dependencies with the help of [Leiningen]. They are defined in the `project.clj` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this: 
 ~~~clojure
 (defproject clojure-sample "1.0.1"
   :description "Hello World Clojure Web App"

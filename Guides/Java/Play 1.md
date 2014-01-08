@@ -16,7 +16,7 @@ $ cd devcenter-play
 Now you have a small, but fully functional Play! application.
 
 ### Dependency Tracking
-Dependencies in Play! applications are resolved using [Ivy]. You can define yours in the file  `conf/dependencies.yml`. 
+Dependencies in Play! applications are resolved using [Ivy]. The dependency requirements are defined in the `conf/dependencies.yml` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this:
 
 ~~~yaml
 require:

@@ -14,7 +14,8 @@ $ cd scalatra-example
 Now you have a small, but fully functional Scala application.
 
 ### Dependency Tracking
-Scala applications are built by [sbt], so you define your dependencies in a `build.sbt`.
+Dependencies in Scala applications are resolved using [sbt]. The dependency requirements are defined in the `build.sbt` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this:
+
 ~~~scala
 import com.typesafe.startscript.StartScriptPlugin
 seq(StartScriptPlugin.startScriptForClassesSettings: _*)
