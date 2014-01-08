@@ -170,7 +170,7 @@ $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, cctrlapp will offer to create one.
 
 ~~~
-$ cctrluser key add
+$ cctrluser key.add
 ~~~
 
 You can also list the available key ids and remove existing keys using the key id.
