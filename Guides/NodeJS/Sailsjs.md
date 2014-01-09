@@ -1,11 +1,14 @@
 # Deploying a Sails.js Application
 
-[Sails.js] is real time [Node.js] MVC framework, designed to mimic pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
+In this guide we're going to show you how to deploy a [Sails.js] application on cloudControl. [Sails.js] is real time [Node.js] MVC framework, designed to mimic pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
 
-## Prerequisites
 If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
+## The Sails.js App Explained
+
 cloudControl supports running Sails.js applications through the Node.js buildpack. Before we get started, you need to get access to the sample application code in Github.
+
+### Get the App
 
 To make a clone of the Sails.js application from the repository, execute the following commands using bash:
 
@@ -14,12 +17,11 @@ $ git clone https://github.com/cloudControl/nodejs-sails-example-app.git
 $ cd nodejs-sails-example-app
 ~~~
 
-The code from the example repository is ready to be deployed.
+Now you have a small, but fully functional Sails.js application.
 
-### Dependency Tracking Using NPM
-The next step is to declare application dependencies. Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory.   
+### Dependency Tracking
 
-Modify the dependencies section of the package.json file as shown below: 
+Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory. Modify the dependencies section of the package.json file as shown below: 
 
 [npm] depedencies
 `package.json`:
@@ -49,7 +51,7 @@ Modify the dependencies section of the package.json file as shown below:
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the application processes. The `Procfile` can be found at the top level of your repository.
+cloudControl uses a [Procfile] to start the application processes. The `Procfile` can be found at the root level of your repository.
 
 To start the sails server, you need to use the `sails lift` command. This command can be included in the procfile definition as shown below: 
 
@@ -108,7 +110,29 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-...
+Counting objects: 73, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (35/35), done.
+Writing objects: 100% (73/73), 267.28 KiB | 0 bytes/s, done.
+Total 73 (delta 30), reused 73 (delta 30)
+
+-----> Receiving push
+-----> Resolving engine versions
+
+       WARNING: No version of Node.js specified in package.json,
+
+       Using Node.js version: 0.10.15
+       Using npm version: 1.3.5
+-----> Fetching Node.js binaries
+-----> Installing dependencies with npm
+       ...
+       Dependencies installed
+-----> Building runtime environment
+-----> Building image
+-----> Uploading image (17M)
+
+To ssh://APP_NAME@cloudcontrolled.com/repository.git
+ * [new branch]      master -> master
 ~~~
 
 Add the add [MySQL] add-on
@@ -134,4 +158,4 @@ Congratulations, you can now see your Sails.js application running at
 [get the MySQL credentials]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
 [websockets]: http://socket.io/
 [cloudControl websockets documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#websockets
-[MySQL]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[Shared MySQL Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
