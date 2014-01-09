@@ -99,7 +99,7 @@ module.exports.adapters = {
 
 In Sails.js, client-backend communication is done using [websockets]. In order to use sockets, it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details, take a look at the [cloudControl websockets documentation].
 
-## Pushing and Deploying the App
+## Pushing and Deploying your Sails.js App
 To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
 
 ~~~bash
