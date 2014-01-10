@@ -37,7 +37,7 @@ var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
 ~~~
 
-Now, let's do some operations on S3 using Node.js. First, let's create a bucket called myBucket and put a new object in it with Key = 'myKey'. If any error occurs, the error is written to the console. If a key gets successfully added to the bucket, a success message gets written to the console.
+Now, let's do some operations on S3 using Node.js. In the example below, we show how to create a new bucket, list existing buckets, add a key into a bucket, read the key from the bucket, delete the key from the bucket, and delete a bucket.   
 
 ~~~javascript
    //Create an S3 bucket named myBucket
