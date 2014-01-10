@@ -40,14 +40,49 @@ var s3 = new AWS.S3();
 Now, let's do some operations on S3 using Node.js. First, let's create a bucket called myBucket and put a new object in it with Key = 'myKey'. If any error occurs, the error is written to the console. If a key gets successfully added to the bucket, a success message gets written to the console.
 
 ~~~javascript
- s3.createBucket({Bucket: 'myBucket'}, function() {
-   var params = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
-   s3.putObject(params, function(err, data) {
+   //Create an S3 bucket named myBucket
+   s3.createBucket({Bucket: 'myBucket'}, function(err, data) {
+    if (err) throw new Error(err);
+   });
+    
+   //List existing S3 buckets
+   s3.ListBuckets(function(err, data) {
+    if (err) throw new Error(err);
+
+    var buckets = data.Body.ListAllMyBucketsResult.Buckets.Bucket;
+    buckets.forEach(function(bucket) {
+        console.log('%s : %s', bucket.CreationDate, bucket.Name);
+    });
+   });
+
+   //Add a key to myBucket
+   var putparams = {Bucket: 'myBucket', Key: 'myKey', Body: 'Hello!'};
+   s3.putObject(putparams, function(err, data) {
        if (err)       
            console.log(err)     
        else       console.log("Successfully uploaded data to myBucket/myKey");   
     });
- });
+
+   //Read the key from myBucket
+   var getparams = {Bucket: 'myBucket', Key: 'myKey'};
+   s3.getObject(getparams, function (err, url) {
+  	if (err)
+	   console.log(err)
+	else	  console.log("The key is", url);
+   });
+
+   //Delete key from myBucket
+   var delparams = {Bucket: 'myBucket', Key: 'myKey'};
+   s3.deleteObject(delparams, function(err, data) {
+        console.log(err, data)
+   });
+
+   //Delete bucket myBucket
+   s3.deleteBucket({Bucket: bucket}, function (err, data) {
+   if (err)
+           console.log("error deleting bucket " + err);
+   else    console.log("delete the bucket " + data);
+   });
 ~~~
 
 ## Next Steps

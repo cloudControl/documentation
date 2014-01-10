@@ -1,6 +1,6 @@
 # Deploying a Sails.js Application
 
-In this guide we're going to show you how to deploy a [Sails.js] application on cloudControl. [Sails.js] is real time [Node.js] MVC framework, designed to mimic pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
+In this guide we're going to show you how to deploy a [Sails.js] application on cloudControl. [Sails.js] is a real-time [Node.js] MVC framework, designed to mimic the pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
 
 If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
@@ -21,10 +21,9 @@ Now you have a small, but fully functional Sails.js application.
 
 ### Dependency Tracking
 
-Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory. Modify the dependencies section of the package.json file as shown below: 
+Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory. 
+Modify the dependencies section of the package.json file as shown below: 
 
-[npm] depedencies
-`package.json`:
 ~~~json
 {
     "name": "sails-todomvc",
@@ -62,7 +61,7 @@ web:  export NODE_ENV=production; sails lift
 Left from the colon we specified the **required** process type called `web` for a web application and followed by the command that starts the Sails server.
 
 ### Connecting the Sails.js Application to a Database
-Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. In this guide, we will show you how to connect your Sails.js application to a MySQL database using the cloudControl [Shared MySQL Add-on]. 
+Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. Here, we show you how to connect your Sails.js application to a MySQL database using the cloudControl [Shared MySQL Add-on]. 
 
 Have a look at the `config/adapter.js` file so you can find out how to [get the MySQL credentials] provided by MySQLs Add-on:
 
@@ -135,12 +134,12 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Add the add [MySQL] add-on
+Add the [MySQL] Add-on:
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mysqls.free
 ~~~
 
-Deploy the Sails.js application
+Finally, deploy the Sails.js application:
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
 ~~~
