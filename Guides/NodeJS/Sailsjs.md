@@ -96,7 +96,7 @@ module.exports.adapters = {
 
 ### Socket.io and Websocket Support
 
-In Sails.js, client-backend communication is done using [websockets]. In order to use sockets, it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details, take a look at the [cloudControl websockets documentation].
+In Sails.js, client-backend communication is done using [websockets]. In order to use websockets, it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details, take a look at the [cloudControl websockets documentation].
 
 ## Pushing and Deploying your Sails.js App
 To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
@@ -134,7 +134,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Add the [MySQL] Add-on:
+Add the [Shared MySQL Add-on]:
 ~~~bash
 $ cctrlapp APP_NAME/default addon.add mysqls.free
 ~~~
