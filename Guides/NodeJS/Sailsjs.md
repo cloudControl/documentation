@@ -22,7 +22,7 @@ Now you have a small, but fully functional Sails.js application.
 ### Dependency Tracking
 
 Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory. 
-Modify the dependencies section of the package.json file as shown below: 
+The one you cloned as part of the example app looks like this:
 
 ~~~json
 {
