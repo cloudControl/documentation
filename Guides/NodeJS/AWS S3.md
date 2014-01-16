@@ -5,7 +5,7 @@
 This guide shows how to integrate Amazon S3 with your Node.js app. 
 
 ## Amazon S3 SDK
-For Node you can choose between different SDKs for Amazon S3:
+For Node.js you can choose between different SDKs for Amazon S3:
 * [Amazon S3]
 * [Fog]
 * [Knox S3]

@@ -10,7 +10,7 @@ cloudControl supports running Sails.js applications through the Node.js buildpac
 
 ### Get the App
 
-To make a clone of the Sails.js application from the repository, execute the following commands using bash:
+First, clone the Sails.js application from our repository:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/nodejs-sails-example-app.git
