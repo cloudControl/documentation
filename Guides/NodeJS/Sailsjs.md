@@ -6,8 +6,6 @@ If you are new to Sails.js, first, check out the [Sails getting started page] fo
 
 ## The Sails.js App Explained
 
-cloudControl supports running Sails.js applications through the Node.js buildpack. Before we get started, you need to get access to the sample application code in Github.
-
 ### Get the App
 
 First, clone the Sails.js application from our repository:
@@ -52,7 +50,7 @@ The one you cloned as part of the example app looks like this:
 ### Process Type Definition
 cloudControl uses a [Procfile] to start the application processes. The `Procfile` can be found at the root level of your repository.
 
-To start the sails server, you need to use the `sails lift` command. This command can be included in the procfile definition as shown below: 
+To start the sails server, you need to use the `sails lift` command. This command is included in the procfile definition as shown below: 
 
 ~~~
 web:  export NODE_ENV=production; sails lift
