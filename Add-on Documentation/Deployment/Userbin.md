@@ -37,7 +37,6 @@ bundle install
 ```
 
 Create `config/initializers/userbin.rb` and configure your credentials.
-> If you don't configure the `app_id` and `api_secret`, the Userbin module will read the `USERBIN_APP_ID` and `USERBIN_API_SECRET` environment variables.
 
 ```ruby
 Userbin.configure do |config|
@@ -45,6 +44,8 @@ Userbin.configure do |config|
   config.api_secret = "YOUR_API_SECRET"
 end
 ```
+
+> If you don't configure the `app_id` and `api_secret`, the Userbin module will read the `USERBIN_APP_ID` and `USERBIN_API_SECRET` environment variables.
 
 Implement getter and setter for your user model. For more information about the available attributes in the profile see the [Userbin profile](https://userbin.com/docs/profile) documentation.
 
@@ -183,50 +184,19 @@ Download Userbin into your project:
 $ curl -O https://raw.github.com/userbin/userbin-php/master/userbin.php
 ```
 
-Download the configuration file to the same directory:
-
-```bash
-$ curl -O https://raw.github.com/userbin/userbin-php/master/userbin.conf.php
-```
-
-Configure the Userbin module with the credentials you got from signing up.
-
-```php
-<?php
-$config = array(
-  'app_id'     => 'YOUR APP ID',
-  'app_secret' => 'YOUR APP SECRET',
-);
-```
-
-Implement getter and setter for your user model. For more information about the available attributes in the profile see the [Userbin profile](https://userbin.com/docs/profile) documentation.
-
-```php
-<?php
-$config = array(
-  'find_user' => function($id) {
-    $user = User::model()->find('id=?', array($id));
-    return $user;
-  },
-
-  'create_user' => function($profile) {
-    $user = new User;
-    $user->email = $profile['email'];
-    $user->image = $profile['image'];
-    $user->save();
-    return $user->id;
-  },
-);
-```
-
-> If you don't configure the `appId` and `apiSecret`, the Userbin module will read the `USERBIN_APP_ID` and `USERBIN_API_SECRET` environment variables.
-
 All you need to is to include `userbin.php` at the top of your files, configure it with you App ID and API secret, and finally run the Userbin authentication sync. The `authenticate` method will make sure that the user session is refreshed when it expires.
 
 > If you're not using [output buffering](http://php.net/manual/en/book.outcontrol.php) this needs to be done before any output has been written since Userbin will modify headers.
 
 ```php
-<?php require_once 'userbin.php'; ?>
+<?php
+require_once('userbin.php');
+
+Userbin::set_app_id('YOUR_APP_ID');
+Userbin::set_api_secret('YOUR_API_SECRET');
+
+Userbin::authenticate();
+?>
 ```
 
 Include [Userbin.js](https://userbin.com/js/v0) at the bottom of all your web pages to enable form helpers and session handling.
@@ -240,10 +210,6 @@ Include [Userbin.js](https://userbin.com/js/v0) at the bottom of all your web pa
 
 
 ### Authenticating users
-
-```php
-<?php Userbin::authenticate(); ?>
-```
 
 Userbin keeps track of the currently logged in user:
 
