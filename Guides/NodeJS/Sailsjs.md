@@ -1,6 +1,6 @@
 # Deploying a Sails.js Application
 
-In this guide we're going to show you how to deploy a [Sails.js] application on cloudControl. [Sails.js] is a real-time [Node.js] MVC framework, designed to mimic the pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
+In this guide we're going to show you how to deploy a [Sails.js] application on [cloudControl]. Sails.js is a real-time [Node.js] MVC framework, designed to mimic the pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
 
 If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
@@ -115,8 +115,6 @@ Total 73 (delta 30), reused 73 (delta 30)
 
 -----> Receiving push
 -----> Resolving engine versions
-
-       WARNING: No version of Node.js specified in package.json,
 
        Using Node.js version: 0.10.15
        Using npm version: 1.3.5
