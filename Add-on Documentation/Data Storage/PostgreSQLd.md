@@ -2,11 +2,10 @@
 
 High-availability, dedicated PostgreSQL databases are available for
 mission-critical production deployments. The dedicated PostgreSQL Add-on is
-based on [Amazon RDS](http://aws.amazon.com/rds/) and uses master-slave
-replicated Multi-AZ instances. Read slaves or reserved instances are currently
-not supported via the Add-on, but you can always create a custom RDS instance
-in the EU region and connect your app to it. We recommend using the [Config
-Add-on](https://www.cloudcontrol.com/add-ons/config) to make the credentials of
+based on [Amazon RDS] and uses master-slave replicated Multi-AZ instances. Read
+slaves or reserved instances are currently not supported via the Add-on, but
+you can always create a custom RDS instance in the EU region and connect your
+app to it. We recommend using the [Config Add-on] to make the credentials of
 the self-managed RDS instance available to your app.
 
 ## Features of the cloudControl PostgreSQLd Add-on
@@ -23,12 +22,12 @@ The PostgreSQLd Add-on comes with the following features:
 
 2. Fast, Predictable Performance
     - Provisioned IOPS - You can provision up to 3TB storage and 30,000 IOPS
-    per database. Mail us for more details.
+    per database. [Mail us] for more details.
 
 3. Backup & Recovery
     - Automated Backups - Turned on by default, the automated backup feature
     enables point-in-time recovery for your instance.
-    - DB Snapshots - DB Snapshots are available. Mail us for more details.
+    - DB Snapshots - DB Snapshots are available. [Mail us] for more details.
 
 4. High Availability
     - Multi-AZ Deployments - Once you create or modify your DB Instance, we
@@ -64,8 +63,7 @@ To add the PostgreSQLd Add-on, use the `addon.add` command:
 $ cctrlapp APP_NAME/DEP_NAME addon.add postgresqld.OPTION
 ~~~
 Replace `postgresqld.OPTION` with a valid option, e.g. `postgresqld.small`. See
-[PostgreSQLd](https://www.cloudcontrol.com/add-ons/postgresqld) in the Add-on
-Marketplace for pricing and options.
+[PostgreSQLd] in the Add-on Marketplace for pricing and options.
 
 Please note: After adding a dedicated PostgreSQL database, it can take up to 30
 minutes before the instance is available. Also, the credentials will only be
@@ -118,9 +116,8 @@ It's recommended to the read database credentials from the creds.json file. The
 location of the file is available in the `CRED_FILE` environment variable.
 Reading the credentials from the creds.json file ensures your app is always
 using the correct credentials. For detailed instructions on how to use the
-creds.json file, please refer to the section about [Add-on
-Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons)
-in the general documentation.
+creds.json file, please refer to the section about [Add-on Credentials] in the
+general documentation.
 
 ### External Access
 
@@ -154,3 +151,8 @@ To **import** an sql file into a PostgreSQL database use the following command:
 $ psql "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME < PG_DUMP
 ~~~
 
+[Amazon RDS]: http://aws.amazon.com/rds/
+[Config Add-on]: https://www.cloudcontrol.com/add-ons/config
+[PostgreSQLd]: https://www.cloudcontrol.com/add-ons/postgresqld
+[Add-on Credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons
+[Mail us]: mailto:support@cloudcontrol.de
