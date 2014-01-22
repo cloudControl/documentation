@@ -20,23 +20,19 @@ The PostgreSQLd Add-on comes with the following features:
     PostgreSQL software powering your deployment stays up-to-date with the
     latest patches.
 
-2. Fast, Predictable Performance
-    - Provisioned IOPS - You can provision up to 3TB storage and 30,000 IOPS
-    per database. [Mail us] for more details.
-
-3. Backup & Recovery
+2. Backup & Recovery
     - Automated Backups - Turned on by default, the automated backup feature
     enables point-in-time recovery for your instance.
     - DB Snapshots - DB Snapshots are available. [Mail us] for more details.
 
-4. High Availability
+3. High Availability
     - Multi-AZ Deployments - Once you create or modify your DB Instance, we
     will automatically provision and manage a “standby” replica in a
     different Availability Zone (independent infrastructure in a physically
     separate location). Database updates are made concurrently on the primary
     and standby resources to prevent replication lag.
 
-5. PostgreSQL Features Supported
+4. PostgreSQL Features Supported
     - PostGIS - PostGIS is a spatial database extender for PostgreSQL
     object-relational database. It adds support for geographic objects
     allowing you to run location queries to be run in SQL.
