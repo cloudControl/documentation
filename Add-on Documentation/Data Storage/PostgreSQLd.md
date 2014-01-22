@@ -9,6 +9,54 @@ in the EU region and connect your app to it. We recommend using the [Config
 Add-on](https://www.cloudcontrol.com/add-ons/config) to make the credentials of
 the self-managed RDS instance available to your app.
 
+## Features of the cloudControl PostgreSQLd Add-on
+
+The PostgreSQLd Add-on comes with the following features:
+
+1. Easy, Managed Deployments
+    - Pre-configured Parameters - You can simply launch a PostgreSQL Instance
+    and connect your application within minutes without additional
+    configuration.
+    - Automatic Software Patching - cloudControl will make sure that the
+    PostgreSQL software powering your deployment stays up-to-date with the
+    latest patches.
+
+2. Fast, Predictable Performance
+    - Provisioned IOPS - You can provision up to 3TB storage and 30,000 IOPS
+    per database. Mail us for more details.
+
+3. Backup & Recovery
+    - Automated Backups - Turned on by default, the automated backup feature
+    enables point-in-time recovery for your instance.
+    - DB Snapshots - DB Snapshots are available. Mail us for more details.
+
+4. High Availability
+    - Multi-AZ Deployments - Once you create or modify your DB Instance, we
+    will automatically provision and manage a “standby” replica in a
+    different Availability Zone (independent infrastructure in a physically
+    separate location). Database updates are made concurrently on the primary
+    and standby resources to prevent replication lag.
+
+5. PostgreSQL Features Supported
+    - PostGIS - PostGIS is a spatial database extender for PostgreSQL
+    object-relational database. It adds support for geographic objects
+    allowing you to run location queries to be run in SQL.
+    - Language Extensions - PostgreSQL allows procedural languages to be loaded
+    into the database through extensions. Three language extensions are
+    included with PostgreSQL to support Perl, pgSQL and Tcl.
+    - Full Text Search Dictionaries - PostgreSQL supports Full Text Searching
+    that provides the capability to identify natural-language documents that
+    satisfy a query, and optionally to sort them by relevance to the query.
+    Dictionaries, besides improving search quality, normalization and removal
+    of stop words also improve performance of queries.
+    - HStore, JSON Data Types - PostgreSQL includes support for ‘JSON’ data
+    type and two JSON functions. These allow return of JSON directly from the
+    database server. PostgreSQL has an extension that implements the ‘hstore’
+    data type for storing sets of key/value pairs within a single PostgreSQL
+    value.
+    - Core PostgreSQL engine features - For a detailed list of PostgreSQL core
+    engine features, please refer here.
+
 ## Adding the PostgreSQLd Add-on
 
 To add the PostgreSQLd Add-on, use the `addon.add` command:
