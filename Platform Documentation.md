@@ -283,7 +283,7 @@ spec
 
 During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how an app in a specific language or framework has to be prepared for deployment on the cloudControl platform. With custom buildpacks, support for new programming languages can be added or custom runtime environments can be build. To support many PaaS with one buildpack, we recommend following the [Heroku buildpack API] which is compatible with cloudControl and other platforms.
 
-Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for node.js, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
+Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for Node.js, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
 
 Which buildpack is going to be used is determined by the application type set when creating the app.
 
@@ -437,7 +437,7 @@ the credentials file.
 Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
 this feature.
 
-The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
+The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Node.js](https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~

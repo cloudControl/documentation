@@ -63,7 +63,7 @@ The command line client will determine if you already have a public key and uplo
 Create a new application on the cloudControl platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
 
 ~~~bash
-$ cctrlapp APP_NAME create [java, php, python, ruby]
+$ cctrlapp APP_NAME create [java, php, python, ruby, nodejs]
 ~~~
 
 If the `APP_NAME` is already taken, please pick another one.
