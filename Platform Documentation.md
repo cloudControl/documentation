@@ -317,7 +317,7 @@ A log message in the [deploy log](#deploy-log) appears when this process has fin
 
 Deployments running on a single web container, have memory size equal to 1 and
 are inactive within a period of 1 hour, get automatically hibernated.  This
-results to a temporary suspesion of the container where the application is
+results in a temporary suspension of the container where the application is
 running, without affecting the add-ons or workers related to this deployment.
 
 With a new HTTP request coming for this deployment, the awakening of the
