@@ -313,6 +313,29 @@ For every deploy, the image is downloaded to as many of the platform’s nodes a
 After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version.
 A log message in the [deploy log](#deploy-log) appears when this process has finished.
 
+### Idling containers
+
+Deployments running on a single web container and have memory size eqaul to 1
+and are inactive within a period of 1 hour, get automatically hibernated.  This
+results to a temporary suspesion of the container where the app is running,
+without affecting the add-ons or workers related to this deployment.
+
+With a new HTTP request coming for this deployment, the awakening of the
+application will be triggered. This process causes a slight delay until the
+first request is served, however the following ones will perform normally.
+
+You can see the state of your application with the following command:
+~~~
+$ cctrlapp APP_NAME/DEP_NAME details
+Deployment
+ name: APP_NAME/DEP_NAME
+ [...]
+ current state: hibernated
+ [...]
+~~~
+
+Scaling your deployment will prevent its hibernation, which is recommended for
+any production system.
 
 ## Emergency Rollback
 
