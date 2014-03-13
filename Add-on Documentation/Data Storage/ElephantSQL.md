@@ -23,6 +23,11 @@ To upgrade from a smaller to a more powerful plan use the addon.upgrade command.
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade elephantsql.OPTION_OLD elephantsql.OPTION_NEW
 ~~~
 
+Please note: Upgrading works only between shared plans or between dedicated
+plans. To upgrade from a shared to a dedicated plan, you would need to export
+your data from the shared plan first and reimport it to the dedicated plan
+later.
+
 ## Downgrading the ElephantSQL Add-on
 
 To downgrade to a smaller plan use the addon.downgrade command.
