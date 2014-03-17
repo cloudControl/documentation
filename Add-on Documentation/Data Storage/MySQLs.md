@@ -83,6 +83,6 @@ $ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIF
 
 To **import** an sql file into a MySQL database use the following command.
 ~~~
-$ mysql -u MYSQLS_USER -p --host=MYSQLS_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
 ~~~
 
