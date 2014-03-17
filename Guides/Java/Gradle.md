@@ -1,6 +1,6 @@
 # Deploying a Gradle application
 
-In this tutorial we're going to show you how to deploy a Gradle application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/gradle-example-app) and check out the [Gradle buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Gradle Application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/gradle-example-app) and check out the [Gradle buildpack] for supported features.
 
 ## The Gradle Application Explained
 ### Get the App
@@ -38,15 +38,15 @@ task stage(dependsOn: ['clean', 'installApp'])
 ### Process Type Definition
 cloudControl uses a [Procfile] to know how to start your processes.
 
-The example code already includes the `Procfile` at the top level of your repository. It looks like this:
+The example code already includes the `Procfile` at the root of your repository. It looks like this:
 
 ~~~
 web: ./build/install/app/bin/app
 ~~~
 
-The `web` process type is required and specifies the command that will be executed when the app is deployed. The environment variable `$PORT` defines the port the application-server should listen to.
+The `web` process type is required and specifies the command that will be executed when the app is deployed. 
 
-## Pushing and Deploying your App
+## Pushing and Deploying your Gradle App
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
 
 ~~~bash
@@ -56,7 +56,7 @@ $ cctrlapp APP_NAME create java
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME push
+$ cctrlapp APP_NAME/DEP_NAME push
 [...]
 -----> Receiving push
 -----> Installing OpenJDK 1.6... 
