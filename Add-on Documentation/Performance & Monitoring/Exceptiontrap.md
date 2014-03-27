@@ -18,7 +18,7 @@ When added, cloudControl automatically creates a new user account with your emai
 
 ## Using with Rails 2.3+, Rails 3 and Rails 4
 
-You can find the documentation on our [Exceptiontrap Gem](https://github.com/itmLABS/exceptiontrap) GitHub page. The api key is already set in the CloudControl environment. So you can just use "cloudcontrol" as the api key string while generating the exceptiontrap config file.
+You can find the documentation on our [Exceptiontrap Gem](https://github.com/itmLABS/exceptiontrap) GitHub page. The api key is already set in the cloudControl environment. So you can just use "cloudcontrol" as the api key string while generating the exceptiontrap config file.
 
 ## Using with PHP, Zend Framework & other frameworks
 
