@@ -77,6 +77,7 @@ Addon                    : mysqld.small
    MYSQLD_HOST              : SOME_HOST.eu-west-1.rds.amazonaws.com
    MYSQLD_DATABASE          : SOME_DATABASE_NAME
    MYSQLD_PORT              : 3306
+   MYSQLD_URL               : SOME_DATABASE_URL
 ~~~
 
 Likewise imports and exports are equally simple.

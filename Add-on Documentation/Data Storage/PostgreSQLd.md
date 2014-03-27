@@ -23,7 +23,7 @@ The PostgreSQLd Add-on comes with the following features:
 2. Backup & Recovery
     - Automated Backups - Turned on by default, the automated backup feature
     enables point-in-time recovery for your instance.
-    - DB Snapshots - DB Snapshots are available. [Mail us] for more details.
+    - DB Snapshots - DB Snapshots are available. [Email us] for more details.
 
 3. High Availability
     - Multi-AZ Deployments - Once you create or modify your DB Instance, we
@@ -123,6 +123,11 @@ connection by using the `psql` command line client:
 $ psql "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME
 ~~~
 
+Or alternatively using URL:
+~~~bash
+$ psql POSTGRESQLD_URL
+~~~
+
 Replace the uppercase variables with the corresponding values shown by the `addon` command:
 ~~~bash
 $ cctrlapp APP_NAME/DEP_NAME addon postgresqld.OPTION
@@ -133,6 +138,7 @@ Addon                    : postgresqld.small
    POSTGRESQLD_HOST              : SOME_HOST.eu-west-1.rds.amazonaws.com
    POSTGRESQLD_DATABASE          : SOME_DATABASE_NAME
    POSTGRESQLD_PORT              : 5432
+   POSTGRESQLD_URL               : SOME_DATABASE_URL
 ~~~
 
 Similarly, imports and exports are equally simple.
@@ -141,14 +147,22 @@ To **export** your data use the `pg_dump` command:
 ~~~bash
 $ pg_dump "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME > PG_DUMP
 ~~~
+Or export your data using URL:
+~~~bash
+$ pg_dump POSTGRESQLD_URL > PG_DUMP
+~~~
 
 To **import** an sql file into a PostgreSQL database use the following command:
 ~~~bash
 $ psql "host=POSTGRESQLD_HOST dbname=POSTGRESQLD_DATABASE sslmode=require" -U POSTGRESQLD_USERNAME < PG_DUMP
+~~~
+Or import your data using URL:
+~~~bash
+$ psql POSTGRESQLD_URL < PG_DUMP
 ~~~
 
 [Amazon RDS]: http://aws.amazon.com/rds/
 [Config Add-on]: https://www.cloudcontrol.com/add-ons/config
 [PostgreSQLd]: https://www.cloudcontrol.com/add-ons/postgresqld
 [Add-on Credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons
-[Mail us]: mailto:support@cloudcontrol.de
+[Email us]: mailto:support@cloudcontrol.de
