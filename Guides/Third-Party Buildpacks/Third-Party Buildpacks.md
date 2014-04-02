@@ -1,9 +1,13 @@
 # Third-Party Custom Buildpacks
 
-[cloudControl][cloudControl] supports Java, Ruby, PHP and Python apps natively
-via the [Pinky stack][PinkyStack]. However you can deploy apps developed on
-languages and technologies beyond the default ones using the custom buildpacks
-feature.
+[cloudControl] officially supports the following application types via the [Pinky Stack][PinkyStack].
+
+- Java-based (Java with Maven, Gradle, Grails, Scala, Play! or Clojure)
+- Ruby
+- PHP
+- Python
+ 
+However, you can deploy apps developed on languages and technologies beyond the officially supported ones using the third-party custom buildpacks feature.
 
 ## Verified Buildpacks
 
@@ -11,12 +15,6 @@ Here is a list of verified and recommended buildpacks for the cloudControl platf
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
-|Node.js|[https://github.com/heroku/heroku-buildpack-nodejs][buildpack-nodejs]|
-|Grails|[https://github.com/heroku/heroku-buildpack-grails][buildpack-grails]|
-|Scala|[https://github.com/heroku/heroku-buildpack-scala][buildpack-scala]|
-|Play|[https://github.com/heroku/heroku-buildpack-play][buildpack-play]|
-|Gradle|[https://github.com/heroku/heroku-buildpack-gradle][buildpack-gradle]|
-|Clojure|[https://github.com/heroku/heroku-buildpack-clojure][buildpack-clojure]|
 |Go|[https://github.com/kr/heroku-buildpack-go][buildpack-go]|
 |Erlang|[https://github.com/cloudControl/buildpack-erlang-kernel][buildpack-erlang]|
 |Common Lisp|[https://github.com/mtravers/heroku-buildpack-cl][buildpack-common-lisp]|
