@@ -7,8 +7,8 @@ In this tutorial we're going to show you how to deploy a Scala application on [c
 First, clone the Scala application from our repository on Github:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/scalatra-example.git
-$ cd scalatra-example
+$ git clone https://github.com/cloudControl/scalatra-example-app.git
+$ cd scalatra-example-app
 ~~~
 
 Now you have a small, but fully functional Scala application.
@@ -57,7 +57,7 @@ $ cctrlapp APP_NAME create java
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME push
+$ cctrlapp APP_NAME/default push
 [...]
 -----> Receiving push
 -----> Installing OpenJDK 1.6...

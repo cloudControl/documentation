@@ -72,7 +72,7 @@ $ cctrlapp APP_NAME create java
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME push
+$ cctrlapp APP_NAME/default push
 [...]
 -----> Receiving push
 -----> Grails 2.2.0 app detected

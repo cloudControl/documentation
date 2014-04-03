@@ -9,8 +9,8 @@ If you want to deploy a Play! V2 application, see the [Scala Tutorial].
 First, clone the Play! application from our repository on Github:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/devcenter-play.git
-$ cd devcenter-play
+$ git clone https://github.com/cloudControl/play-example-app.git
+$ cd play-example-app
 ~~~
 
 Now you have a small, but fully functional Play! application.
@@ -44,7 +44,7 @@ $ cctrlapp APP_NAME create java
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME push
+$ cctrlapp APP_NAME/default push
 [...]
 -----> Receiving push
 -----> Installing OpenJDK 1.6...

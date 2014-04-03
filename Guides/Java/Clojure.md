@@ -7,8 +7,8 @@ In this tutorial we're going to show you how to deploy a Clojure  application on
 First, clone the Clojure application from our repository on Github:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/clojure-sample.git
-$ cd clojure-sample
+$ git clone https://github.com/cloudControl/clojure-example-app.git
+$ cd clojure-example-app
 ~~~
 
 Now you have a small, but fully functional Clojure application.

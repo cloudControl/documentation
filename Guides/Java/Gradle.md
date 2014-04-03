@@ -56,7 +56,7 @@ $ cctrlapp APP_NAME create java
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME push
+$ cctrlapp APP_NAME/default push
 [...]
 -----> Receiving push
 -----> Installing OpenJDK 1.6... 
