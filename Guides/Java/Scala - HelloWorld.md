@@ -1,6 +1,6 @@
 # Deploying a Scala application
 
-In this tutorial we're going to show you how to deploy a Scala application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/scalatra-example) and check out the [Scala buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Scala application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/scalatra-example-app) and check out the [Scala buildpack] for supported features.
 
 ## The Scala Application Explained
 ### Get the App

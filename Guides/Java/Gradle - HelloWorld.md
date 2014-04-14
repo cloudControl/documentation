@@ -8,7 +8,7 @@ First, clone the Gradle application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/gradle-example-app.git
-$ cd gradle_example_app
+$ cd gradle-example-app
 ~~~
 
 Now you have a small, but fully functional Gradle application.

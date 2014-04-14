@@ -1,6 +1,6 @@
 # Deploying a Play! V1 application
 
-In this tutorial we're going to show you how to deploy a Play! application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/devcenter-play) and check out the [Play buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Play! application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/play-example-app) and check out the [Play buildpack] for supported features.
 
 If you want to deploy a Play! V2 application, see the [Scala Tutorial]. 
 

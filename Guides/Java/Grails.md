@@ -1,14 +1,14 @@
 # Deploying a Grails application
 
-In this tutorial we're going to show you how to deploy a Grails  application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/grails_example_app) and check out the [Grails buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Grails  application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/grails-example-app) and check out the [Grails buildpack] for supported features.
 
 ## The Grails Application Explained
 ### Get the App
 First, clone the Grails application from our repository on Github:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/grails_example_app.git
-$ cd grails_example_app
+$ git clone https://github.com/cloudControl/grails-example-app
+$ cd grails-example-app
 ~~~
 
 Now you have a small, but fully functional Grails application.

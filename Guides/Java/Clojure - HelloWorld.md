@@ -1,6 +1,6 @@
 # Deploying a Clojure application
 
-In this tutorial we're going to show you how to deploy a Clojure  application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/clojure-sample) and check out the [Clojure buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Clojure  application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/clojure-example-app) and check out the [Clojure buildpack] for supported features.
 
 ## The Clojure Application Explained
 ### Get the App
