@@ -52,6 +52,9 @@ The PostgreSQLd Add-on comes with the following features:
     - Core PostgreSQL engine features - For a detailed list of PostgreSQL core
     engine features, please refer here.
 
+5. Dashboard
+    - View key operational metrics like CPU/ Memory/ Storage/ Connections for your DB Instance deployments via [Webconsole].
+
 ## Adding the PostgreSQLd Add-on
 
 To add the PostgreSQLd Add-on, use the `addon.add` command:
@@ -166,3 +169,4 @@ $ psql POSTGRESQLD_URL < PG_DUMP
 [PostgreSQLd]: https://www.cloudcontrol.com/add-ons/postgresqld
 [Add-on Credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons
 [Email us]: mailto:support@cloudcontrol.de
+[Webconsole]: https://www.cloudcontrol.com/console/login
