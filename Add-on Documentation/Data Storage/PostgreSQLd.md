@@ -53,7 +53,7 @@ The PostgreSQLd Add-on comes with the following features:
     engine features, please refer here.
 
 5. Dashboard
-    - View key operational metrics like CPU/ Memory/ Storage/ Connections for your DB Instance deployments via [Webconsole].
+    - View key operational metrics like CPU/ Memory/ Storage/ Connections/ Upgrade status for your DB Instance deployments via [Webconsole].
 
 ## Adding the PostgreSQLd Add-on
 
@@ -78,7 +78,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade postgresqld.OPTION_OLD postgresqld.OP
 Please note: Upgrading the instance types is a multi-step process that first
 upgrades the secondary, then promotes the secondary to the new master. After
 this, the old master is updated and becomes the new secondary. This process
-can take up to 30 minutes and can involve a 3 to 10 minute downtime.
+can take up to 65 minutes and can involve a 3 to 10 minute downtime.
 
 ## Downgrading the PostgreSQLd Add-on
 

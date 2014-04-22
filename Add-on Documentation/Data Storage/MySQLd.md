@@ -33,7 +33,7 @@ The MySQLd Add-on comes with the following features:
     and standby resources to prevent replication lag.
 
 4. Dashboard
-    - View key operational metrics like CPU/ Memory/ Storage/ Connections for your DB Instance deployments via [Webconsole].
+    - View key operational metrics like CPU/ Memory/ Storage/ Connections/ Upgrade status for your DB Instance deployments via [Webconsole].
 
 ## Adding the MySQLd Add-on
 
@@ -55,7 +55,7 @@ To upgrade from a smaller to a more powerful plan use the `addon.upgrade` comman
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade mysqld.OPTION_OLD mysqld.OPTION_NEW
 ~~~
 
-Please note: Upgrading the instance types is a multi step process that first upgrades the secondary, then promotes the secondary to the new master and after that upgrades also the old master and makes it the new secondary. This process can take up to 30 minutes and can involve a 3 to 10 minute downtime.
+Please note: Upgrading the instance types is a multi step process that first upgrades the secondary, then promotes the secondary to the new master and after that upgrades also the old master and makes it the new secondary. This process can take up to 65 minutes and can involve a 3 to 10 minute downtime.
 
 ## Downgrading the MySQLd Add-on
 
