@@ -1,7 +1,7 @@
 # Deploying a Node.js Application
 [Node.js] is a platform built on Chrome's JavaScript runtime for building fast and scalable network applications. Its event-driven, non-blocking I/O model makes it a lightweight and efficient framework for building data-intensive real-time cloud apps.
 
-This tutorial demonstrates how to build and deploy a simple Hello World Node.js application on [cloudControl]. Check out the [Node.js buildpack] for supported features.
+This tutorial demonstrates how to build and deploy a simple Hello World Node.js application on [exoscale]. Check out the [Node.js buildpack] for supported features.
 
 ## The Node.js App Explained
 
@@ -39,7 +39,7 @@ app looks like this:
 You should always specify the versions of your dependencies if you want your builds to be reproducible and to prevent unexpected errors caused by version changes.
 
 ### Process Type Definition
-A [Procfile] is required to start processes on the cloudControl platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
+A [Procfile] is required to start processes on the exoscale platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
 
 ~~~
 web: node web.js
@@ -49,16 +49,16 @@ Left from the colon, we specified the **required** process type called `web` fol
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
+and create it on the exoscale platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create nodejs
+$ exoapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 Counting objects: 307, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (261/261), done.
@@ -91,28 +91,23 @@ Total 307 (delta 18), reused 307 (delta 18)
 -----> Building image
 -----> Uploading image (4.3M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the exoapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Node.js app running at
-`http[s]://APP_NAME.cloudcontrolled.com`.
-
-## Next Steps
-Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform documentation] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.
-Good luck building your apps using Node.js and cloudControl.
+`http[s]://APP_NAME.app.exo.io`.
 
 
-[example on how to use Node.js with MongoDB]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Express
 [Node.js]: http://nodejs.org/
 [npm]: https://npmjs.org/
-[cloudControl]: http://www.cloudcontrol.com
+[exoscale]: http://www.exoscale.ch
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
+[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[platform documentation]: https://www.exoscale.ch/dev-center/Platform%20Documentation

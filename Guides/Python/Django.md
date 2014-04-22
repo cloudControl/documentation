@@ -1,6 +1,6 @@
 # Deploying a Django Application
 
-In this tutorial we're going to show you how to deploy a Django application on [cloudControl]. You can find the [source code on Github][example-app] and check out the [Python buildpack][python buildpack] for supported features. The application follows the official [Django tutorial] and allows you to create, use and manage simple polls.
+In this tutorial we're going to show you how to deploy a Django application on [exoscale]. You can find the [source code on Github][example-app] and check out the [Python buildpack][python buildpack] for supported features. The application follows the official [Django tutorial] and allows you to create, use and manage simple polls.
 
 ## The Django Application Explained
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = (
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile at the top level of your repository. It looks like this:
+exoscale uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile at the top level of your repository. It looks like this:
 
 ~~~
 web: python manage.py run_gunicorn -b 0.0.0.0:$PORT
@@ -47,7 +47,7 @@ Left from the colon we specified the **required** process type called `web` foll
 
 ### Production Database
 
-The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on cloudControl because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
+The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on exoscale because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
 
 In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at `mysite/settings.py` so you can find out how to [get the MySQL credentials][get-conf] provided by MySQLs Add-on:
 
@@ -87,16 +87,16 @@ DATABASES = {
 
 ## Pushing and Deploying your App
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ cctrlapp APP_NAME create python
+$ exoapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 Counting objects: 31, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (25/25), done.
@@ -115,44 +115,44 @@ Total 31 (delta 3), reused 24 (delta 0)
 -----> Building image
 -----> Uploading image (30M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
  * [new branch]      master -> master
 ~~~
 
 Add MySQLs Add-on with `free` plan to your deployment and deploy it:
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mysqls.free
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default addon.add mysqls.free
+$ exoapp APP_NAME/default deploy
 ~~~
 
 Finally, prepare the database using the [Run command][ssh-session] (when prompted create admin user):
 
 ~~~bash
-$ cctrlapp APP_NAME/default run "python manage.py syncdb"
+$ exoapp APP_NAME/default run "python manage.py syncdb"
 ~~~
 
-You can login to the admin console at `APP_NAME.cloudcontrolled.com/admin`, create some polls and see them at `APP_NAME.cloudcontrolled.com/polls`.
+You can login to the admin console at `APP_NAME.app.exo.io/admin`, create some polls and see them at `APP_NAME.app.exo.io/polls`.
 
 For additional information take a look at [Django Notes][django-notes] and other [python-specific documents][python-guides].
 
 [django]: https://www.djangoproject.com/
-[cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[exoscale]: http://www.exoscale.ch
+[exoscale-doc-user]: https://www.exoscale.ch/dev-center/Platform%20Documentation#user-accounts
+[exoscale-doc-cmdline]: https://www.exoscale.ch/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
-[filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[mysqls]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[filesystem]: https://www.exoscale.ch/dev-center/Platform%20Documentation#non-persistent-filesystem
+[data-storage-addons]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/
+[mysqls]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
 [example-app]: https://github.com/cloudControl/python-django-example-app
-[django-notes]: https://www.cloudcontrol.com/dev-center/Guides/Python/Django%20notes
-[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials
+[django-notes]: https://www.exoscale.ch/dev-center/Guides/Python/Django%20notes
+[get-conf]: https://www.exoscale.ch/dev-center/Guides/Python/Add-on%20credentials
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
-[python-guides]: https://www.cloudcontrol.com/dev-center/Guides/Python
+[python-guides]: https://www.exoscale.ch/dev-center/Guides/Python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [gunicorn]: http://gunicorn.org/
-[worker]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
+[worker]: https://www.exoscale.ch/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
 [db-commit]: https://github.com/cloudControl/python-django-example-app/commit/983f45e46ce0707476cec167ea062e19adcb53c9
-[ssh-session]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh
+[ssh-session]: https://www.exoscale.ch/dev-center/Platform%20Documentation#secure-shell-ssh
 [mysql-driver]: https://pypi.python.org/pypi/MySQL-python/1.2.4

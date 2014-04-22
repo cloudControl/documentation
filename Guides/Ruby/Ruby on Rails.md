@@ -1,6 +1,6 @@
 # Deploying a Ruby on Rails Application
 
-In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [cloudControl]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
+In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [exoscale]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
 
 ## The Rails Application Explained
 
@@ -10,7 +10,7 @@ First, clone the Rails application from our repository on Github:
 
 ~~~bash
 $ git clone https://github.com/cloudControl/ruby-rails-example-app.git
-$ cd ruby-rails-example-app
+$ cd ruby-rails-example-app; git checkout mysql;
 ~~~
 
 ### Dependency Tracking
@@ -41,8 +41,8 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
-  gem 'cloudcontrol-rails', '0.0.6'
+  gem 'mysql2'
+  gem 'cloudcontrol-rails', '0.0.5'
 end
 
 group :assets do
@@ -65,11 +65,11 @@ $ bundle exec rake db:test:prepare
 $ bundle exec rspec spec/
 ~~~
 
-Now that the app is working, lets have a look at changes we have made to deploy it on cloudControl.
+Now that the app is working, lets have a look at changes we have made to deploy it on exoscale.
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
+exoscale uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
 
 ~~~
 web: bundle exec rails s -p $PORT
@@ -98,14 +98,14 @@ end
 
 ### Production Database
 
-By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on cloudControl because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [Data Storage category][data-storage-addons].
+By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on exoscale because the filesystem is [not persistent][filesystem]. 
 
-In this tutorial we use PostgresSQL with the [ElephantSQL Add-on][postgres-addon]. This is why we have modified the `Gemfile` by moving the `sqlite3` line to ":development, :test" block and added a new ":production" group with "pg" and ["cloudcontrol-rails"][gem itself] gems.
+In this tutorial we use MySQL with the [MySQL Shared Add-on]. This is why we have modified the `Gemfile` by moving the `sqlite3` line to ":development, :test" block and added a new ":production" group with "mysql2" and ["cloudcontrol-rails"][gem itself] gems.
 
-Additionally we have changed the "production" section of `config/database.yml` to use the postgresql adapter:
+Additionally we have changed the "production" section of `config/database.yml` to use the mysql adapter:
 ~~~
 production:
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   pool: 5
 ~~~
@@ -114,16 +114,16 @@ The 'cloudcontrol-rails' gem will provide the database credentials.
 
 ## Pushing and Deploying your App
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create ruby
+$ exoapp APP_NAME create ruby
 ~~~
 
-Push your code to the application's repository, which triggers the deployment image build process:
+Push your code to the application's repository, which triggers the deployment image build process (do it with `mysql` deployment name since we use the same branch in application repo):
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/mysql push
 Counting objects: 62, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (51/51), done.
@@ -162,39 +162,38 @@ Total 62 (delta 2), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (34M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
- * [new branch]      master -> master
+To ssh://APP_NAME@app.exo.io/repository.git
+ * [new branch]      mysql -> mysql
 ~~~
 
-Add ElephantSQL Add-on with `turtle` plan to your deployment and deploy it:
+Add MySQLs Add-on with `free` plan to your deployment and deploy it:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add elephantsql.turtle
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/mysql addon.add mysqls.free
+$ exoapp APP_NAME/mysql deploy
 ~~~
 
 Finally, prepare the database by running migrations using the [Run command][run command]:
 
 ~~~bash
-$ cctrlapp APP_NAME/default run "rake db:migrate"
+$ exoapp APP_NAME/mysql run "rake db:migrate"
 ~~~
 
-Congratulations, you can now access the app at http://APP_NAME.cloudcontrolled.com.
+Congratulations, you can now access the app at http://mysql-APP_NAME.app.exo.io.
 
 For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].
 
 [Ruby on Rails]: http://rubyonrails.org/
-[cloudControl]: http://www.cloudcontrol.com
+[exoscale]: http://www.exoscale.ch
 [example-app]: https://github.com/cloudControl/ruby-rails-example-app
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/
 [Bundler]: http://bundler.io/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[postgres-addon]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/ElephantSQL
-[run command]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/RunCommand
-[rails-notes]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/RailsNotes
-[ruby-guides]: https://www.cloudcontrol.com/dev-center/Guides/Ruby
+[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[filesystem]: https://www.exoscale.ch/dev-center/Platform%20Documentation#non-persistent-filesystem
+[run command]: https://www.exoscale.ch/dev-center/Guides/Ruby/RunCommand
+[rails-notes]: https://www.exoscale.ch/dev-center/Guides/Ruby/RailsNotes
+[ruby-guides]: https://www.exoscale.ch/dev-center/Guides/Ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
+[MySQL Shared Add-on]: https://www.exoscale.ch/add-ons/mysqls

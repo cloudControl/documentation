@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the cloudControl platform](http://www.cloudcontrol.com). 
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the exoscale platform](http://www.exoscale.ch). 
 
 ##Prerequisites
 
@@ -29,14 +29,14 @@ If you use an IDE, then it's best to open up the source as a project in it. In t
 
 ##2. Amend the Code
 
-A few changes need to be made to the default CakePHP configuration and code to accommodate cloudControl deployment. These changes are as follows:
+A few changes need to be made to the default CakePHP configuration and code to accommodate exoscale deployment. These changes are as follows:
 
  * Store session and log files in a database, not on the filesystem
  * Auto-magically determine the environment and set the configuration
 
 ###2.1 Store session and log files in a database, not on the filesystem
 
-We need to do this because CakePHP, by default, stores its session files on the filesystem. However, this approach isn’t recommended on cloud platforms like cloudControl.
+We need to do this because CakePHP, by default, stores its session files on the filesystem. However, this approach isn’t recommended on cloud platforms like exoscale.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store both the session and log files in a two-level cache, composed of MySQL and APC. 
 
@@ -46,7 +46,7 @@ Thankfully, CakePHP is written in a very straight-forward and configurable manne
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. CakePHP does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on. 
 
-On cloudControl, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
+On exoscale, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code under Git Control
 
@@ -74,23 +74,22 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontrolledcakephp`` in this example. You will of course have to use some different name. 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments.
 By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
     
     // create the application
-    cctrlapp cloudcontrolledcakephp create php
+    exoapp APP_NAME create php
     
     // deploy the default branch
-    cctrlapp cloudcontrolledcakephp/default push    
-    cctrlapp cloudcontrolledcakephp/default deploy 
-    
+    exoapp APP_NAME/default push
+    exoapp APP_NAME/default deploy
+
     // deploy the testing branch
-    cctrlapp cloudcontrolledcakephp/testing push    
-    cctrlapp cloudcontrolledcakephp/testing deploy 
+    exoapp APP_NAME/testing push
+    exoapp APP_NAME/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -101,16 +100,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontrolledcakephp/default addon.add mysql.free
+    exoapp APP_NAME/default addon.add mysqls.free
     
     // Retrieve the settings
-    cctrlapp cloudcontrolledcakephp/default addon mysql.free
+    exoapp APP_NAME/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontrolledcakephp/testing addon.add mysql.free
+    exoapp APP_NAME/testing addon.add mysqls.free
     
     // Retrieve the settings
-    cctrlapp cloudcontrolledcakephp/testing addon mysql.free
+    exoapp APP_NAME/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -128,10 +127,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontrolledcakephp/default config.add CAKE_ENV=production
+    exoapp APP_NAME/default config.add CAKE_ENV=production
 
     // Set the testing environment setting    
-    cctrlapp cloudcontrolledcakephp/testing config.add CAKE_ENV=testing
+    exoapp APP_NAME/testing config.add CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 
@@ -149,7 +148,7 @@ We then create a new class, **BASE_CONFIG**, that the database config, will late
         var $default = array();
 
 
-In the function, ``getEnvironmentName``, if we're not in a local, development, environment, as indicated by having '**localdomain**' in the URL, we retrieve [the credentials file](https://github.com/cloudControl/add_on_cred_file/blob/master/_config.php) from the environment, which is part of a standard cloudControl deployment.
+In the function, ``getEnvironmentName``, if we're not in a local, development, environment, as indicated by having '**localdomain**' in the URL, we retrieve [the credentials file](https://github.com/cloudControl/add_on_cred_file/blob/master/_config.php) from the environment, which is part of a standard exoscale deployment.
 
 We then look in there for a value called **CAKE_ENV**, which determines the active environment and we store that in an application environment setting and return the value determined.
 
@@ -176,7 +175,7 @@ We then look in there for a value called **CAKE_ENV**, which determines the acti
         return $environment;
     }
      
-Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in ``app/Config/database.php``. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all cloudControl environments. 
+Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in ``app/Config/database.php``. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all exoscale environments. 
 
 When we configured the add ons earlier (*mysqls* and *config*) the settings were automatically persisted to the running server environments. So we're now able to retrieve these settings, when we're not in a local development environment, and configure our database connection to use them. It's really handy as we don't need to do too much to make use of the options.
 
@@ -235,7 +234,7 @@ An example is provided below:
     		'host' => 'localhost',
     		'login' => 'cc_dev',
     		'password' => 'cc _dev',
-    		'database' => 'cloudcontrol_cakephp',
+    		'database' => 'exoscale_cakephp',
     		'prefix' => '',
     		'encoding' => 'utf8',
     	);
@@ -244,7 +243,7 @@ An example is provided below:
 
 ###5.2 app/Config/bootstrap.php
 
-The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching is using the filesystem as storage. What we're going to do is to make use of the built-in APC module that comes with cloudControl and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
+The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching is using the filesystem as storage. What we're going to do is to make use of the built-in APC module that comes with exoscale and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
 
 Go down in the file until you find a line similar to below:
 
@@ -356,7 +355,7 @@ What this does is to extend the DatabaseSession class so that we can use both AP
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_cloudcontrol_init.sql``, ready to be used to initialise the database next. 
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_exoscale_init.sql``, ready to be used to initialise the database next. 
 
     CREATE TABLE `cake_sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
@@ -393,7 +392,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_exoscale_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -411,31 +410,25 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontrolledcakephp/default push    
-    cctrlapp cloudcontrolledcakephp/default deploy
+    exoapp APP_NAME/default push    
+    exoapp APP_NAME/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    cctrlapp cloudcontrolledcakephp/testing push    
-    cctrlapp cloudcontrolledcakephp/testing deploy
+    exoapp APP_NAME/testing push    
+    exoapp APP_NAME/testing deploy
 
 ##7. Review the Deployment
 
 With that completed, then have a look at both your deployments to ensure that they're working. 
 
-You should see output similar to that below, in figure 2.
-
-![Successful Deployment](images/cake-deployed-successfully.png)
-
 ###7.1 Deployment Problems
 
-If you see output similar to figure 3, then double check your database configuration settings and run through commit and deploy again.
+If you see any errors, then double check your database configuration settings and run through commit and deploy again.
 
-![Misconfigured Database](images/misconfigured-database.png)
-
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the cloudControl Github repository. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the exoscale Github repository. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
 
 ##Links
  

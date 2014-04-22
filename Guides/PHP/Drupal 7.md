@@ -9,7 +9,7 @@ If you're looking for a flexible, friendly and powerful content management platf
  * Auto-update notification
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Drupal 7 to [the cloudControl platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying Drupal 7 to [the exoscale platform](http://www.exoscale.ch).
 
 ##Prerequisites
 
@@ -64,22 +64,21 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldldrupal`` in this example. You will of course have to use some different name. 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
     
     // create the application, indicating it's PHP-based
-    cctrlapp cloudcontroldldrupal create php
+    exoapp APP_NAME create php
     
     // deploy the default branch
-    cctrlapp cloudcontroldldrupal/default push    
-    cctrlapp cloudcontroldldrupal/default deploy
+    exoapp APP_NAME/default push    
+    exoapp APP_NAME/default deploy
     
     // deploy the testing branch
-    cctrlapp cloudcontroldldrupal/testing push    
-    cctrlapp cloudcontroldldrupal/testing deploy
+    exoapp APP_NAME/testing push    
+    exoapp APP_NAME/testing deploy
 
 ##4. Initialise the Required Addons
 
@@ -90,16 +89,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 To initialise mysqls, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldldrupal/default addon.add mysql.free
+    exoapp APP_NAME/default addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldldrupal/default addon mysql.free
+    exoapp APP_NAME/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldldrupal/testing addon.add mysql.free
+    exoapp APP_NAME/testing addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldldrupal/testing addon mysql.free
+    exoapp APP_NAME/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -117,10 +116,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldldrupal/default config.add APPLICATION_ENV=production
+    exoapp APP_NAME/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting
-    cctrlapp cloudcontroldldrupal/testing config.add APPLICATION_ENV=testing
+    exoapp APP_NAME/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -156,7 +155,7 @@ Have a look at it and we'll go through it together.
 
 Firstly, we set the environment to default to production. Then, if we're in a local development environment, as determined, rather simply, by having ``localdomain`` in the URL, then we set the environment to development.
 
-Otherwise, we will retrieve the setting contained in the cloudControl credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
+Otherwise, we will retrieve the setting contained in the exoscale credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
 
 With this code in place, we can now bootstrap multiple environments. Following this, we need to configure the database,.
 
@@ -232,13 +231,13 @@ Two examples are provided below:
 
 ###6.3 Database Schema
 
-Ok, next we need to create a basic database schema for storing the session and log information as well as the other configuration and user data settings that Drupal stores. Download [the file](drupal_cloudcontrol_init.sql), ready to be used to initialise the database. 
+Ok, next we need to create a basic database schema for storing the session and log information as well as the other configuration and user data settings that Drupal stores. Download [the file](drupal_exoscale_init.sql), ready to be used to initialise the database. 
 
 Now, in the shell, we're going to load the data in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both **default** and **testing**:
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < drupal_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < drupal_exoscale_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -281,23 +280,19 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlDrupal 7/default push    
-    cctrlapp cloudcontroldlDrupal 7/default deploy
+    exoapp APP_NAME/default push    
+    exoapp APP_NAME/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    cctrlapp cloudcontroldlDrupal 7/testing push    
-    cctrlapp cloudcontroldlDrupal 7/testing deploy
+    exoapp APP_NAME/testing push    
+    exoapp APP_NAME/testing deploy
 
 ##8. Review the Deployment
 
 With that completed, then you'll be able to have a look at both your deployments to ensure that they're working. 
 
-You should see output similar to that below, in figure 2.
-
-![Successful Deployment](images/drupal7-running.png)
-
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
 

@@ -2,7 +2,7 @@
 
 If you're looking for a fast and lightweight Java web server / Servlet container for your projects, you definitely have to try [Jetty].
 
-In this tutorial we're going to show you how to deploy a Jetty application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/java-jetty-example-app) and check out the [Java buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Jetty application on [exoscale]. You can find the [source code on Github](https://github.com/cloudControl/java-jetty-jsp-example-app.git) and check out the [Java buildpack] for supported features.
 
 
 ## The Jetty Application Explained
@@ -10,25 +10,45 @@ In this tutorial we're going to show you how to deploy a Jetty application on [c
 First, clone the hello world app from our repository:
 
 ~~~bash
-$ git clone https://github.com/cloudControl/java-jetty-example-app.git
-$ cd java-jetty-example-app
+$ git https://github.com/cloudControl/java-jetty-jsp-example-app.git
+$ cd java-jetty-jsp-example-app
 ~~~
 
 Now you have a small but fully functional Java/Jetty application.
 
 
 ### Dependency Tracking
-To create this application we had to provide Jetty server and Servlet library as Maven dependencies in the `pom.xml`.
+To create this application we had to provide Spring framework and Log4j as Maven dependencies in the `pom.xml`.
 ~~~xml
 <dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-servlet</artifactId>
-    <version>7.6.0.v20120127</version>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>${org.springframework.version}</version>
 </dependency>
 <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>servlet-api</artifactId>
-    <version>2.5</version>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>${org.springframework.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>${org.springframework.version}</version>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>${org.springframework.version}</version>
+</dependency>
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-log4j13</artifactId>
+    <version>1.0.1</version>
 </dependency>
 ~~~
 
@@ -50,29 +70,29 @@ To create this application we had to provide Jetty server and Servlet library as
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+exoscale uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your repository. It looks like this:
 
 ~~~
-web:  java -cp target/classes:target/dependency/*  com.cloudcontrolled.sample.jetty.App
+web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/java-jetty-jsp-example-app-0.0.1-SNAPSHOT.war
 ~~~
 
 The `web` process type is required and specifies the command that will be executed when the app is deployed.
-The java command starts the 'com.cloudcontrolled.sample.jetty.App' with the classpath set to the compiled Java classes and dependencies.
+The java command starts the 'com.exo.sample.jetty.App' with the classpath set to the compiled Java classes and dependencies.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ cctrlapp APP_NAME create java
+$ exoapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 
 -----> Receiving push
 -----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
@@ -94,22 +114,22 @@ $ cctrlapp APP_NAME/default push
 -----> Building image
 -----> Uploading image (39M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
    54b0da2..d247825  master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the exoapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.app.exo.io`.
 
 [Jetty]: http://jetty.codehaus.org/jetty/
-[cloudControl]: https://www.cloudcontrol.com/
+[exoscale]: https://www.exoscale.ch/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[exoscale-command-line-client]: https://www.exoscale.ch/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Maven dependency plugin]: http://maven.apache.org/plugins/maven-dependency-plugin/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

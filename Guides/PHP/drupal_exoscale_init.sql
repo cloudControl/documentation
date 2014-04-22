@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.62, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: cloudcontrol_drupal
+-- Host: localhost    Database: exoscale_drupal
 -- ------------------------------------------------------
 -- Server version	5.1.62-0ubuntu0.11.10.1-log
 

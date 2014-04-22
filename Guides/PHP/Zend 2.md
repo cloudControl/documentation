@@ -1,6 +1,6 @@
 # Deploying a Zend2 Application
 
-In this tutorial we're going to show you how to deploy a Zend2 application on [cloudControl].
+In this tutorial we're going to show you how to deploy a Zend2 application on [exoscale].
 
 The [example app] is a ready to deploy fork of the official ZendSkeletonApplication available on [github](https://github.com/zendframework/ZendSkeletonApplication).
 
@@ -87,7 +87,7 @@ function get_credentials() {
 
 $config = array();
 
-// If the app is running on the cloudControl PaaS read the credentials
+// If the app is running on the exoscale PaaS read the credentials
 // from the environment. Local db credentials should be put in local.php
 if (isset($_ENV['CRED_FILE'])) {
 	$config['db'] = get_credentials();
@@ -117,7 +117,7 @@ return $config;
 
 ### Store Sessions in the Database
 
-Storing sessions on the local filesystem does not work well on a horizontally scaling platform like cloudControl. Additionally the filesystem on cloudControl is not persitent across deploys so all sessions are lost after each deploy.
+Storing sessions on the local filesystem does not work well on a horizontally scaling platform like exoscale. Additionally the filesystem on exoscale is not persitent across deploys so all sessions are lost after each deploy.
 
 To avoid this, the app is preconfigured to store sessions using the previously configured connection in the database.
 
@@ -143,16 +143,16 @@ class Module
 ~~~
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ cctrlapp APP_NAME create php
+$ exoapp APP_NAME create php
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 Counting objects: 2208, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (771/771), done.
@@ -174,37 +174,37 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
 -----> Building image
 -----> Uploading image (3.1M)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the exoapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default deploy
 ~~~
 
 ## Add the Required MySQL Database Add-on and Initialize the Session Table
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on's free plan](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container:
 
 ~~~bash
 # add the Add-on
-$ cctrlapp APP_NAME/default addon.add mysqls.free
+$ exoapp APP_NAME/default addon.add mysqls.free
 # initialize the session table
-$ cctrlapp APP_NAME/default run "php code/public/index.php init-session-table"
+$ exoapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
-Connection to ssh.cloudcontrolled.net closed.
+Connection to sshforwarder.app.exo.io closed.
 ~~~
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io`.
 
 [PHP buildpack]: https://github.com/cloudControl/buildpack-php
-[cloudControl]: https://www.cloudcontrol.com/
+[exoscale]: https://www.exoscale.ch/
 [example app]: https://github.com/cloudControl/php-zend2-example-app.git
 

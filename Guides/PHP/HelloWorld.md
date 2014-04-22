@@ -1,10 +1,10 @@
-#Deploying a Silex application on cloudControl
+#Deploying a Silex application on exoscale
 
 [Silex] is a PHP microframework for PHP 5.3. It is inspired by sinatra and
 built on the shoulders of Symfony2 and Pimple.
 
 In this tutorial we're going to show you how to deploy a Silex application on
-[cloudControl]. You can find the [source code on Github][example-app] and check
+[exoscale]. You can find the [source code on Github][example-app] and check
 out the [php buildpack] for supported features.
 
 
@@ -67,14 +67,14 @@ DocumentRoot /app/www/web
 For more information check out [the buildpack documentation][php buildpack].
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
 ~~~bash
-$ cctrlapp APP_NAME create php
+$ exoapp APP_NAME create php
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 ~~~
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 Counting objects: 29, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (21/21), done.
@@ -99,24 +99,24 @@ Total 29 (delta 5), reused 18 (delta 0)
 -----> Building image
 -----> Uploading image (14M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
 * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the exoapp deploy command:
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.app.exo.io`.
 
 
 [silex]: http://silex.sensiolabs.org/
-[cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the cloudControl-command-line-client"
+[exoscale]: http://www.exoscale.ch
+[exoscale-doc-user]: https://www.exoscale.ch/dev-center/Platform%20Documentation#user-accounts
+[exoscale-doc-cmdline]: https://www.exoscale.ch/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the exoscale-command-line-client"
 [php buildpack]: https://github.com/cloudControl/buildpack-php
-[procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [composer]: http://getcomposer.org/
 [example-app]: https://github.com/cloudControl/php-silex-example-app

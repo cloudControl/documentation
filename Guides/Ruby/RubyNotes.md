@@ -3,7 +3,7 @@
 
 ## Procfile
 
-The cloudControl platform uses a file named `Procfile` to determine how to run your
+The exoscale platform uses a file named `Procfile` to determine how to run your
 application. This `Procfile` uses the YAML format to specify the desired
 configuration.
 
@@ -100,10 +100,10 @@ Alternatively you can use the [cloudcontrol-rails] gem.
 
 ## Environments
 
-Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://www.cloudcontrol.com/add-ons/config). For example:
+Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://www.exoscale.ch/add-ons/config). For example:
 
 ~~~
-cctrlapp APP_NAME/DEPLOYMENT config.add RACK_ENV=some_env RAILS_ENV=some_env
+exoapp APP_NAME/DEP_NAME config.add RACK_ENV=some_env RAILS_ENV=some_env
 ~~~
 
 NOTE: Gems in development and test environments are excluded from bundle install process.
@@ -111,6 +111,6 @@ NOTE: Gems in development and test environments are excluded from bundle install
 
 
 [cloudcontrol-rails]: https://rubygems.org/gems/cloudcontrol-rails
-[procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#version-control--images
+[procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#version-control--images
 [rails-procfile]: #rails-procfile
 [ruby-buildpack]: https://github.com/cloudControl/buildpack-ruby

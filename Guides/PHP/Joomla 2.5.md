@@ -1,4 +1,4 @@
-#Deploying Joomla 2.5 to cloudControl
+#Deploying Joomla 2.5 to exoscale
 
 ![Successful Deployment](images/joomla-logo.png)
 
@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Joomla v2.5 to [the cloudControl platform](http://www.cloudcontrol.com). 
+In this tutorial, we're going to take you through deploying Joomla v2.5 to [the exoscale platform](http://www.exoscale.ch). 
 
 ##Prerequisites
 
@@ -32,7 +32,7 @@ Once you have a copy of the Joomla source available locally, setup a VHost (or e
 
 ##2. Update the Configuration
 
-A few changes need to be made to the default Joomla configuration and code to accommodate cloudControl deployment. These changes are as follows:
+A few changes need to be made to the default Joomla configuration and code to accommodate exoscale deployment. These changes are as follows:
 
  * Store sessions in the database
  * Store Cache Information in APC
@@ -59,7 +59,7 @@ Click **Save & Close**.
 
 ###2.3 Update the Configuration Code
 
-Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the cloudControl environment becomes a, little, bit tricky. 
+Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the exoscale environment becomes a, little, bit tricky. 
 
 What we can do, though an impermanent solution if we're upgrading our version of Joomla, is to update the file that is responsible for writing the configuration.php file, so that though a new constructor it can elect to return either the original information or the retrieve the database data from the environment and return that instead. 
 
@@ -153,22 +153,21 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldljoomla`` in this example. You will of course have to use some different name. 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldljoomla create php
+    exoapp APP_NAME create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push
-    cctrlapp cloudcontroldljoomla/default deploy
+    exoapp APP_NAME/default push
+    exoapp APP_NAME/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push
-    cctrlapp cloudcontroldljoomla/testing deploy
+    exoapp APP_NAME/testing push
+    exoapp APP_NAME/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -179,16 +178,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldljoomla/default addon.add mysql.free
+    exoapp APP_NAME/default addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldljoomla/default addon mysql.free
+    exoapp APP_NAME/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldljoomla/testing addon.add mysql.free
+    exoapp APP_NAME/testing addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldljoomla/testing addon mysql.free
+    exoapp APP_NAME/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -206,10 +205,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldljoomla/default config.add APPLICATION_ENV=production
+    exoapp APP_NAME/default config.add APPLICATION_ENV=production
 
     // Set the testing environment settings
-    cctrlapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
+    exoapp APP_NAME/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 
@@ -222,12 +221,12 @@ Where it may become interesting is if/when you start to use more than one clone 
 Now, in the shell, we're going to dump the database that the install routine created and load it in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both default and testing:
 
     -- the database dump (SQL) file
-    mysqldump -u <database_username> -p <database_name> > joomla_cloudcontrol_init.sql 
+    mysqldump -u <database_username> -p <database_name> > joomla_exoscale_init.sql 
 
     -- load the database dump (SQL) file in to the remote environment database
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_exoscale_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -243,22 +242,19 @@ This will show you the tables from the SQL file. Now that that's done, commit th
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push    
-    cctrlapp cloudcontroldljoomla/default deploy
+    exoapp APP_NAME/default push    
+    exoapp APP_NAME/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push    
-    cctrlapp cloudcontroldljoomla/testing deploy
+    exoapp APP_NAME/testing push    
+    exoapp APP_NAME/testing deploy
 
 ##7. Review the Deployment
 
 With that completed, then have a look at both your deployments to ensure that they're working. 
-You should see output similar to that below, in figure 2.
-
-![Successful Deployment](images/joomla-running.png)
 
 ###7.1 Deployment Problems
 
@@ -268,11 +264,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    cctrlapp cloudcontroldljoomla/default log deploy
+    exoapp APP_NAME/default log deploy
 
 ####7.1.1 Errors
 
-    cctrlapp cloudcontroldljoomla/default log error
+    exoapp APP_NAME/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output. 
 

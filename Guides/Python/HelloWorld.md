@@ -3,7 +3,7 @@
 intentions.
 
 In this tutorial we're going to show you how to deploy a Flask
-application on [cloudControl]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
+application on [exoscale]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
 supported features.
 
 ## The Flask App Explained
@@ -26,7 +26,7 @@ Flask==0.9
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+exoscale uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 
@@ -37,16 +37,16 @@ web: python server.py
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create python
+$ exoapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ exoapp APP_NAME/default push
 Counting objects: 16, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (10/10), done.
@@ -66,21 +66,21 @@ Total 16 (delta 2), reused 16 (delta 2)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@app.exo.io/repository.git
  * [new branch]      master -> master
 
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the exoapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ exoapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.app.exo.io`.
 
 [Flask]: http://flask.pocoo.org/
-[cloudControl]: http://www.cloudcontrol.com
+[exoscale]: http://www.exoscale.ch
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

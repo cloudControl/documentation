@@ -9,23 +9,23 @@ Each worker started via the Worker add-on runs in a seperate isolated container.
 Before you can start a worker, add the add-on with the addon.add command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add worker.single
+$ exoapp APP_NAME/DEP_NAME addon.add worker.single
 ~~~
 
 ## Starting a Worker
 
-Workers can be started via the command line client's worker.add command. 
+Workers can be started via the command line client's worker.add command.
 
-For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`. But for apps on the Pinky stack, first specifiy how to start the worker by adding a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
+To specify how to start a worker add a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
+$ exoapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
 ~~~
 
 Enclose multiple WORKER_PARAMS in double quotes.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME "PARAM1 PARAM2 PARAM3"
+$ exoapp APP_NAME/DEP_NAME worker.add WORKER_NAME "PARAM1 PARAM2 PARAM3"
 ~~~
 
 ## List Running Workers
@@ -33,7 +33,7 @@ $ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME "PARAM1 PARAM2 PARAM3"
 To get a list of currently running workers use the worker command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker
+$ exoapp APP_NAME/DEP_NAME worker
 Workers
  nr. wrk_id
    1 WRK_ID
@@ -42,7 +42,7 @@ Workers
 You can also get all the worker details by appending the WRK_ID to the worker command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker WRK_ID
+$ exoapp APP_NAME/DEP_NAME worker WRK_ID
 Worker
 wrk_id   : WRK_ID
 command  : WORKER_NAME
@@ -58,7 +58,7 @@ Workers can be either stopped via the command line client or by exiting the proc
 To stop a running worker via the command line use the worker.remove command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.remove WRK_ID
+$ exoapp APP_NAME/DEP_NAME worker.remove WRK_ID
 ~~~
 
 To get the WRK_ID refer to the listing workers section above.
@@ -75,10 +75,10 @@ For more details refer to the [PHP example](#php-worker-example) below.
 
 ## Worker log
 
-As already explained in the [Logging section](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the log command.
+As already explained in the [Logging section](https://www.exoscale.ch/dev-center/Platform%20Documentation#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the log command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME log worker
+$ exoapp APP_NAME/DEP_NAME log worker
 [Fri Dec 17 13:39:41 2010] WRK_ID Started Worker (command: 'WORKER_NAME', parameter: 'PARAM1 PARAM2 PARAM3')
 [Fri Dec 17 13:39:42 2010] WRK_ID Hello PARAM1 PARAM2 PARAM3
 [...]
@@ -89,7 +89,7 @@ $ cctrlapp APP_NAME/DEP_NAME log worker
 To remove the Worker add-on use the addon.remove command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove worker.single
+$ exoapp APP_NAME/DEP_NAME addon.remove worker.single
 ~~~
 
 ## PHP Worker Example
@@ -123,8 +123,8 @@ while(true) {
 Running this worker with the exit code set to 2 would result in the following output and the worker stopping itself.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME 2
-$ cctrlapp APP_NAME/DEP_NAME log worker
+$ exoapp APP_NAME/DEP_NAME worker.add WORKER_NAME 2
+$ exoapp APP_NAME/DEP_NAME log worker
 [Tue Apr 12 09:15:54 2011] WRK_ID Started Worker (command: 'WORKER_NAME', parameter: '2')
 [Tue Apr 12 09:15:54 2011] WRK_ID step: 1
 [Tue Apr 12 09:15:55 2011] WRK_ID step: 2

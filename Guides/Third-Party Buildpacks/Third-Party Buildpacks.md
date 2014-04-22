@@ -1,17 +1,18 @@
 # Third-Party Custom Buildpacks
 
-[cloudControl] officially supports the following application types via the [Pinky Stack][PinkyStack].
+[exoscale] officially supports the following application types via the [Pinky Stack][PinkyStack].
 
 - Java-based (Java with Maven, Gradle, Grails, Scala, Play! or Clojure)
 - Ruby
 - PHP
 - Python
+- NodeJS
  
 However, you can deploy apps developed on languages and technologies beyond the officially supported ones using the third-party custom buildpacks feature.
 
 ## Verified Buildpacks
 
-Here is a list of verified and recommended buildpacks for the cloudControl platform covering the following languages and technologies:
+Here is a list of verified and recommended buildpacks for the exoscale platform covering the following languages and technologies:
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
@@ -28,7 +29,7 @@ Here is a list of verified and recommended buildpacks for the cloudControl platf
 In order to create an app using a custom buildpack you have to choose the `custom` app type and then provide the desired buildpack URL:
 
 ~~~bash
-$ cctrlapp APP_NAME create custom --buildpack BUILDPACK_URL
+$ exoapp APP_NAME create custom --buildpack BUILDPACK_URL
 ~~~
 
 **Note:** `BUILDPACK_URL` has to be a non-ssh git repository.
@@ -37,8 +38,8 @@ You can use any of the aforementioned buildpacks, fork them and make changes acc
 
 Before using any third party buildpack you should inspect their source code and proceed with caution.
 
-[cloudControl]: https://www.cloudcontrol.com
-[PinkyStack]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#stacks
+[exoscale]: https://www.exoscale.ch
+[PinkyStack]: https://www.exoscale.ch/dev-center/Platform%20Documentation#stacks
 [buildpack-java]: https://github.com/cloudControl/buildpack-java
 [buildpack-python]: https://github.com/cloudControl/buildpack-python
 [buildpack-ruby]: https://github.com/cloudControl/buildpack-ruby
