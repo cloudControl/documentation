@@ -222,3 +222,26 @@ file or directly in your PHP code.
     }
 ?>
 ~~~
+
+### Rails Example
+
+For Rails you can find several ways to force requests to be redirected via HTTPS protocol.
+As of version 3.10, [`force_ssl`](http://api.rubyonrails.org/classes/ActionController/ForceSSL/ClassMethods.html)
+provides this functionality. This can be added to a particular controller or to the whole application via configuration.
+
+#### At the Controller Level
+~~~ruby
+MyController < ApplicationController
+  force_ssl
+end
+~~~
+
+#### At the Application Level
+~~~ruby
+# config/application.rb
+module MyApp
+  class Application < Rails::Application
+    config.force_ssl = true
+  end
+end
+~~~
