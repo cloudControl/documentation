@@ -27,7 +27,8 @@ app looks like this:
   "name": "nodejs-express-example-app",
   "version": "0.0.1",
   "dependencies": {
-    "express": "~3.3.4"
+    "express": "~3.3.4",
+    "ejs": "*"
   },
   "engines": {
     "node": "0.10.13",
