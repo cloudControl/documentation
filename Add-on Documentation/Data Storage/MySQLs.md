@@ -54,3 +54,43 @@ using the correct credentials. For detailed instructions on how to use the
 creds.json file please refer to the section about
 [Add-on Credentials](https://community.exoscale.ch/apps/Platform%20Documentation#add-ons)
 in the general documentation.
+
+### External Access
+
+External access to the MySQLs add-on is available through an SSL encrypted connection by following these simple steps.
+
+ 1. Download the [certificate file](https://to.be.filled.com/ca-cert.pem) to your local machine.
+ 1. Connect to the database using an SSL encrypted connection.
+
+The following example uses the MySQL command line tool.
+
+~~~
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/ca-cert.pem
+~~~
+
+Replace the uppercase variables with the corresponding values shown by the addon command.
+
+~~~
+$ exoapp APP_NAME/DEP_NAME addon mysqls.OPTION
+Addon : mysqls.512mb
+
+Settings
+
+MYSQLS_DATABASE    : SOME_DATABASE_NAME
+MYSQLS_HOSTNAME    : mysql.app.exo.io
+MYSQLS_PORT        : 3306
+MYSQLS_PASSWORD    : SOME_SECRET_PASSWORD
+MYSQLS_USERNAME    : SOME_SECRET_USERNAME
+~~~
+
+Likewise imports and exports are equally simple.
+
+To **export** your data use the mysqldump command.
+~~~
+$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/ca-cert.pem MYSQLS_DATABASE > MYSQLS_DATABASE.sql
+~~~
+
+To **import** an sql file into a MySQL database use the following command.
+~~~
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/ca-cert.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
+~~~
