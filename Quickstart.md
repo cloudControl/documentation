@@ -113,7 +113,7 @@ http[s]://APP_NAME.app.exo.io
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](https://www.exoscale.ch/dev-center/exo_cheatsheet.pdf)
+Grab [our cheatsheet (PDF)](/static/apps/exo_cheatsheet.pdf)
 to have the most important command line client commands handy at all times.
 
 ## Documentation

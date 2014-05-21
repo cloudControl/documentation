@@ -1,6 +1,6 @@
 #Deploying Yii 1.1.10 to exoscale
 
-![Successful Deployment](images/yii-framework-logo.png)
+![Successful Deployment](/static/apps/images/yii-framework-logo.png)
 
 If you're looking for a lightning fast, light and effective PHP Framework for your projects, one without a lot of the cruft and legacy overhead of some of the other popular PHP frameworks available today, you can't go past [Yii Framework](http://www.yiiframework.com/). Now at [version 1.1.11](http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz](http://yii.googlecode.com/files/yii-1.1.11.58da45.tar.gz). After that, extract it to your local file sytem.
 
-![Source files](images/yii-framework-source.png)
+![Source files](/static/apps/images/yii-framework-source.png)
 
 
 ##Create a Basic Application
@@ -329,7 +329,7 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 With that completed, then have a look at both your deployments to ensure that they're working.
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/yii-framework-running.png)
+![Successful Deployment](/static/apps/images/yii-framework-running.png)
 
 ###7.1 Deployment Problems
 

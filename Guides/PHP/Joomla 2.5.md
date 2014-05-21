@@ -1,6 +1,6 @@
 #Deploying Joomla 2.5 to exoscale
 
-![Successful Deployment](images/joomla-logo.png)
+![Successful Deployment](/static/apps/images/joomla-logo.png)
 
 If you're looking for a fast, light and effective PHP Framework for your projects, you can't go past [Joomla](http://www.joomla.org/download.html). Now at [version 2.5](http://www.joomla.org/download.html) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://www.joomla.org/download.html](http://www.joomla.org/download.html). After that, extract it to your local file sytem. 
 
-![Successful Deployment](images/joomla-source.png)
+![Successful Deployment](/static/apps/images/joomla-source.png)
 
 
 ##Create a Basic Application

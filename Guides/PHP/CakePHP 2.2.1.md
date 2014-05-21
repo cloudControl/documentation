@@ -1,6 +1,6 @@
 #Deploying CakePHP 2.2.1
 
-![Successful Deployment](images/cake-homepage.png)
+![Successful Deployment](/static/apps/images/cake-homepage.png)
 
 If you're looking for a fast, light and effective PHP Framework for your projects, you can't go past [CakePHP](http://cakephp.org/). Now at [version 2.2.1](https://github.com/cakephp/cakephp/zipball/2.2.1) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release, 2.2.1 at the time or publishing. You can find it at: [https://github.com/cakephp/cakephp/zipball/2.2.1](https://github.com/cakephp/cakephp/zipball/2.2.1). After that, extract it to your local file sytem. 
 
-![Source files](images/expanded-sourcefile.png)
+![Source files](/static/apps/images/expanded-sourcefile.png)
 
 If you use an IDE, then it's best to open up the source as a project in it. In this tutorial, I'm using SublimeText2.
 

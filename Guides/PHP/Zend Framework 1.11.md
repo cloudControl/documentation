@@ -1,6 +1,6 @@
 #Deploying Zend Framework 1.11 to exoscale
 
-![Successful Deployment](images/ZendFramework-logo.png)
+![Successful Deployment](/static/apps/images/ZendFramework-logo.png)
 
 If you're looking for a feature-rich, flexible and capable PHP Framework for your projects, you can't go past [Zend Framework](http://framework.zend.com/). Now at [version 1.11](http://framework.zend.com/download/latest) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://framework.zend.com/download/latest](http://framework.zend.com/download/latest). After that, extract it to your local file system.
 
-![Source files](images/zf-source-files.png)
+![Source files](/static/apps/images/zf-source-files.png)
 
 ##Create a Basic Application
 
@@ -467,7 +467,7 @@ With that completed, then have a look at both your deployments to ensure that th
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/zf-deployed.png)
+![Successful Deployment](/static/apps/images/zf-deployed.png)
 
 ###7.1 Deployment Problems
 

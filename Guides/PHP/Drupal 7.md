@@ -1,5 +1,5 @@
 #Deploying Drupal 7
-![Successful Deployment](images/drupal7.png)
+![Successful Deployment](/static/apps/images/drupal7.png)
 
 If you're looking for a flexible, friendly and powerful content management platform, built in PHP, for your projects, you really can't go past [Drupal](http://drupal.org/). Having been consistently growing and evolving since it was first created by Dries Buytaert in January 2001, Drupal 7 is the latest iteration and comes packed with a variety of features to speed up your application development, including:
 
@@ -22,7 +22,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release, 7.14 at the time or publishing. You can find it at: [http://ftp.drupal.org/files/projects/drupal-7.14.tar.gz](http://ftp.drupal.org/files/projects/drupal-7.14.tar.gz). After that, extract it to your local filesystem. 
 
-![Source files](images/drupal7-files.png)
+![Source files](/static/apps/images/drupal7-files.png)
 
 After this, in your local development environment, perform a standard installation of Drupal, as covered in the [online installation documentation](http://drupal.org/documentation/install). 
 
@@ -231,7 +231,9 @@ Two examples are provided below:
 
 ###6.3 Database Schema
 
-Ok, next we need to create a basic database schema for storing the session and log information as well as the other configuration and user data settings that Drupal stores. Download [the file](drupal_exoscale_init.sql), ready to be used to initialise the database. 
+Ok, next we need to create a basic database schema for storing the session and
+log information as well as the other configuration and user data settings that
+Drupal stores. Download [the file](/static/apps/drupal_exoscale_init.sql), ready to be used to initialise the database. 
 
 Now, in the shell, we're going to load the data in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both **default** and **testing**:
 
