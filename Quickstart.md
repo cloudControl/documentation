@@ -1,4 +1,4 @@
-# exoscale Quickstart
+# exoscale Apps Quickstart
 
 It's easy to start with exoscale. Follow this 5 minute quickstart to get your
 first app running on exoscale PaaS.

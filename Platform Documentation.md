@@ -2,8 +2,8 @@
 <ul>
 <li class=""><a href="#platform-access">Platform Access</a></li>
 <li class=""><a href="#user-accounts">User Accounts</a></li>
-<li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
-<li class=""><a href="#version-control--images">Version Control & Images</a></li>
+<li class=""><a href="#apps-and-deployments">Apps and Deployments</a></li>
+<li class=""><a href="#version-control-images">Version Control & Images</a></li>
 <li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
 <li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
 <li class=""><a href="#non-persistent-filesystem">Non-Persistent Filesystem</a></li>
@@ -21,7 +21,7 @@
 </ul>
 </aside>
 
-# exoscale Documentation
+# exoscale Apps Documentation
 
 ## Platform Access
 

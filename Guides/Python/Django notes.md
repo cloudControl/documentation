@@ -27,7 +27,7 @@ To use a database, have a look at the [Shared MySQL Add-on][Shared MySQL Add-on]
 [pip]: http://www.pip-installer.org/
 [procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [messaging-addons]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Messaging%20&%20Mobile/
-[Shared MySQL Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs
+[Shared MySQL Add-on]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
 [add-on-credentials]: https://www.exoscale.ch/dev-center/Guides/Python/Add-on%20credentials
 [exoscale]: https://www.exoscale.ch/
 [worker]: https://www.exoscale.ch/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
