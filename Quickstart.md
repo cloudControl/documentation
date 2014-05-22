@@ -70,8 +70,8 @@ it to the exoscale platform.
 
 ~~~bash
 # for Java
-$ git clone https://github.com/cloudControl/java-jetty-example-app.git
-$ cd java-jetty-example-app
+$ git clone https://github.com/cloudControl/java-jetty-jsp-example-app.git
+$ cd java-jetty-jsp-example-app
 
 # for PHP
 $ git clone https://github.com/cloudControl/php-silex-example-app.git
