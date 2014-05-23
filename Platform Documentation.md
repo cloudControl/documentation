@@ -418,11 +418,11 @@ this feature.
 
 The guides section has detailed examples about how to get the credentials in
 different languages
-([Ruby](https://www.exoscale.ch/dev-center/Guides/Ruby/Add-on%20credentials),
-[Python](https://www.exoscale.ch/dev-center/Guides/Python/Add-on%20credentials),
-[Node.js](https://www.exoscale.ch/dev-center/Guides/NodeJS/Add-on%20credentials),
-[Java](https://www.exoscale.ch/dev-center/Guides/Java/Add-on%20credentials),
-[PHP](https://www.exoscale.ch/dev-center/Guides/PHP/Add-on%20credentials)).
+([Ruby](https://community.exoscale.ch/apps/Guides/Ruby/Add-on%20credentials),
+[Python](https://community.exoscale.ch/apps/Guides/Python/Add-on%20credentials),
+[Node.js](https://community.exoscale.ch/apps/Guides/NodeJS/Add-on%20credentials),
+[Java](https://community.exoscale.ch/apps/Guides/Java/Add-on%20credentials),
+[PHP](https://community.exoscale.ch/apps/Guides/PHP/Add-on%20credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~
@@ -749,21 +749,21 @@ $ exoapp APP_NAME/DEP_NAME details
 ~~~
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
-[web console]: https://www.exoscale.ch/console
+[Custom Config Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config
+[web console]: https://portal.exoscale.ch/applications
 [API libraries]: https://github.com/cloudControl
 [the latest version]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/
 [Python 2.6+]: http://python.org/download/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
-[guides]: https://www.exoscale.ch/dev-center/Guides
-[Add-on marketplace]: https://www.exoscale.ch/add-ons
-[Deployment category]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Deployment
+[guides]: https://community.exoscale.ch/apps/Guides
+[Add-on marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation
+[Deployment category]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
-[Alias Add-on]: https://www.exoscale.ch/add-ons/alias
-[Cron Add-on]: https://www.exoscale.ch/add-ons/cron
-[Cron Add-on documentation]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Deployment/Cron
-[Worker Add-on]: https://www.exoscale.ch/add-ons/worker
-[Worker Add-on documentation]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Processing/Worker
+[Alias Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Alias/
+[Cron Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron/
+[Cron Add-on documentation]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron
+[Worker Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Processing/Worker/
+[Worker Add-on documentation]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Processing/Worker
 [Ubuntu 12.04 LTS Precise Pangolin]: http://releases.ubuntu.com/precise/

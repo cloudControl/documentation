@@ -94,4 +94,4 @@ You can build rich Node.js apps using more advanced S3 operations. To learn more
 [npm package manager]: https://npmjs.org/
 [Amazon Guide]: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-intro.html
 [AWS access credentials]: http://aws.amazon.com/security-credentials
-[Config Add-on]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
+[Config Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config

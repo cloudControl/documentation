@@ -109,5 +109,5 @@ Congratulations, you can now see your Node.js app running at
 [npm]: https://npmjs.org/
 [exoscale]: http://www.exoscale.ch
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform documentation]: https://www.exoscale.ch/dev-center/Platform%20Documentation
+[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[platform documentation]: https://community.exoscale.ch/apps/Platform%20Documentation

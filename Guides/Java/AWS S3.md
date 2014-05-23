@@ -26,7 +26,7 @@ Follow the [Amazon Guide](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/Devel
 
 ## Example usage:
 
-The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://www.exoscale.ch/dev-center/Add-on%20Documentation/Deployment/Custom%20Config):
+The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config):
 
 ~~~bash
 $ exoapp APP_NAME/default config.add AWS_SECRET_KEY=[YOUR_SECRET_KEY] AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]

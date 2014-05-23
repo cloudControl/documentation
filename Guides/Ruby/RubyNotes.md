@@ -100,7 +100,7 @@ Alternatively you can use the [cloudcontrol-rails] gem.
 
 ## Environments
 
-Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://www.exoscale.ch/add-ons/config). For example:
+Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config/). For example:
 
 ~~~
 exoapp APP_NAME/DEP_NAME config.add RACK_ENV=some_env RAILS_ENV=some_env
@@ -111,6 +111,6 @@ NOTE: Gems in development and test environments are excluded from bundle install
 
 
 [cloudcontrol-rails]: https://rubygems.org/gems/cloudcontrol-rails
-[procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#version-control-images
+[procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#version-control-images
 [rails-procfile]: #rails-procfile
 [ruby-buildpack]: https://github.com/cloudControl/buildpack-ruby

@@ -82,5 +82,5 @@ Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.a
 [Flask]: http://flask.pocoo.org/
 [exoscale]: http://www.exoscale.ch
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

@@ -78,7 +78,7 @@ db_config = {
 
 Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
-[Add-on credentials]: https://www.exoscale.ch/dev-center/Platform%20Documentation#add-on-credentials
-[environment variables]: https://www.exoscale.ch/dev-center/Platform%20Documentation#environment-variables
-[Add-on Marketplace]: https://www.exoscale.ch/add-ons/?c=1
-[MySQL Shared Add-on]: https://www.exoscale.ch/add-ons/mysqls
+[Add-on credentials]: https://community.exoscale.ch/apps/Platform%20Documentation#add-on-credentials
+[environment variables]: https://community.exoscale.ch/apps/Platform%20Documentation#environment-variables
+[Add-on Marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation/
+[MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/

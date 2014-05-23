@@ -149,8 +149,8 @@ Congratulations, you can now see your Sails.js application running at
 [Ruby on Rails]: http://rubyonrails.org/
 [npm]: https://npmjs.org/
 [exoscale]: http://www.exoscale.ch
-[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[get the MySQL credentials]: https://www.exoscale.ch/dev-center/Guides/NodeJS/Add-on%20credentials
+[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[get the MySQL credentials]: https://community.exoscale.ch/apps/Guides/NodeJS/Add-on%20credentials
 [websockets]: http://socket.io/
-[exoscale websockets documentation]: https://www.exoscale.ch/dev-center/Platform%20Documentation#websockets
-[Shared MySQL Add-on]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[exoscale websockets documentation]: https://community.exoscale.ch/apps/Platform%20Documentation#websockets
+[Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs

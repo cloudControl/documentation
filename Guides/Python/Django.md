@@ -137,22 +137,22 @@ For additional information take a look at [Django Notes][django-notes] and other
 
 [django]: https://www.djangoproject.com/
 [exoscale]: http://www.exoscale.ch
-[exoscale-doc-user]: https://www.exoscale.ch/dev-center/Platform%20Documentation#user-accounts
-[exoscale-doc-cmdline]: https://www.exoscale.ch/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
-[Procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[exoscale-doc-user]: https://community.exoscale.ch/apps/Platform%20Documentation#user-accounts
+[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/Platform%20Documentation#command-line-client-web-console-and-api
+[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
-[filesystem]: https://www.exoscale.ch/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/
-[mysqls]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[filesystem]: https://community.exoscale.ch/apps/Platform%20Documentation#non-persistent-filesystem
+[data-storage-addons]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/
+[mysqls]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
 [example-app]: https://github.com/cloudControl/python-django-example-app
-[django-notes]: https://www.exoscale.ch/dev-center/Guides/Python/Django%20notes
-[get-conf]: https://www.exoscale.ch/dev-center/Guides/Python/Add-on%20credentials
+[django-notes]: https://community.exoscale.ch/apps/Guides/Python/Django%20notes
+[get-conf]: https://community.exoscale.ch/apps/Guides/Python/Add-on%20credentials
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
-[python-guides]: https://www.exoscale.ch/dev-center/Guides/Python
+[python-guides]: https://community.exoscale.ch/apps/Guides/Python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [gunicorn]: http://gunicorn.org/
-[worker]: https://www.exoscale.ch/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
+[worker]: https://community.exoscale.ch/apps/Platform%20Documentation#scheduled-jobs-and-background-workers
 [db-commit]: https://github.com/cloudControl/python-django-example-app/commit/983f45e46ce0707476cec167ea062e19adcb53c9
-[ssh-session]: https://www.exoscale.ch/dev-center/Platform%20Documentation#secure-shell-ssh
+[ssh-session]: https://community.exoscale.ch/apps/Platform%20Documentation#secure-shell-ssh
 [mysql-driver]: https://pypi.python.org/pypi/MySQL-python/1.2.4
