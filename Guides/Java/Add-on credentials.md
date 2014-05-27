@@ -74,10 +74,10 @@ String password = System.getenv("MYSQLS_PASSWORD");
 Remember, you can always refer to the addon.creds command to see the actual variable names and values.
 
 [Java application with MySQL]: https://github.com/cloudControl/java-mysql-example-app
-[Add-on Marketplace]: https://www.exoscale.ch/add-ons/?c=1
-[environment variables]: https://www.exoscale.ch/dev-center/Platform%20Documentation#environment-variables
-[Add-on credentials]: https://www.exoscale.ch/dev-center/Platform%20Documentation#add-on-credentials
-[cred-env-vars]: https://www.exoscale.ch/dev-center/Platform%20Documentation#enabling-disabling-credentials-environment-variables
+[Add-on Marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation/
+[environment variables]: https://community.exoscale.ch/apps/Platform%20Documentation#environment-variables
+[Add-on credentials]: https://community.exoscale.ch/apps/Platform%20Documentation#add-on-credentials
+[cred-env-vars]: https://community.exoscale.ch/apps/Platform%20Documentation#enabling-disabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
 [exoscale credentials helper class]: https://gist.github.com/b350762c61fcc069b427
-[MySQL Shared Add-on]: https://www.exoscale.ch/add-ons/mysqls
+[MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/

@@ -87,10 +87,10 @@ Congratulations, you can now see your Sinatra App running at `http[s]://APP_NAME
 
 [sinatra]: http://www.sinatrarb.com/
 [exoscale]: http://www.exoscale.ch
-[exoscale-doc-user]: https://www.exoscale.ch/dev-center/Platform%20Documentation#user-accounts
-[exoscale-doc-cmdline]: https://www.exoscale.ch/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[exoscale-doc-user]: https://community.exoscale.ch/apps/Platform%20Documentation#user-accounts
+[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/Platform%20Documentation#command-line-client-web-console-and-api
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
-[procfile]: https://www.exoscale.ch/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [bundler]: http://gembundler.com/
 [example-app]: https://github.com/cloudControl/ruby-sinatra-example-app

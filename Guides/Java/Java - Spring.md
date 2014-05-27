@@ -150,6 +150,6 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io` .
 [Database credentials]: Add-on%20credentials
 [Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
 [exoscale]: http://exoscale.ch
-[file system]: https://www.exoscale.ch/dev-center/Platform%20Documentation#non-persistent-filesystem
-[log command]: https://www.exoscale.ch/dev-center/Platform%20Documentation#logging
-[Shared MySQL Add-on]: https://www.exoscale.ch/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[file system]: https://community.exoscale.ch/apps/Platform%20Documentation#non-persistent-filesystem
+[log command]: https://community.exoscale.ch/apps/Platform%20Documentation#logging
+[Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs

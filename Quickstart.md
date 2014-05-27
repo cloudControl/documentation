@@ -120,6 +120,6 @@ to have the most important command line client commands handy at all times.
 
 To learn more about all the platform features and how to integrate it
 seamlessly into the development life cycle please refer to the extensive
-[platform documentation](https://www.exoscale.ch/dev-center/Platform%20Documentation).
+[platform documentation](https://community.exoscale.ch/apps/Platform%20Documentation).
 
 [installer]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/

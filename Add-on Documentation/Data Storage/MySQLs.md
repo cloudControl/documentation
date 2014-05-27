@@ -52,5 +52,5 @@ location of the file is available in the `CRED_FILE` environment variable.
 Reading the credentials from the creds.json file ensures your app is always
 using the correct credentials. For detailed instructions on how to use the
 creds.json file please refer to the section about
-[Add-on Credentials](https://www.exoscale.ch/dev-center/Platform%20Documentation#add-ons)
+[Add-on Credentials](https://community.exoscale.ch/apps/Platform%20Documentation#add-ons)
 in the general documentation.

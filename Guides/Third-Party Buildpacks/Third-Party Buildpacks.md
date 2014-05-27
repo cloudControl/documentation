@@ -39,7 +39,7 @@ You can use any of the aforementioned buildpacks, fork them and make changes acc
 Before using any third party buildpack you should inspect their source code and proceed with caution.
 
 [exoscale]: https://www.exoscale.ch
-[PinkyStack]: https://www.exoscale.ch/dev-center/Platform%20Documentation#stacks
+[PinkyStack]: https://community.exoscale.ch/apps/Platform%20Documentation#stacks
 [buildpack-java]: https://github.com/cloudControl/buildpack-java
 [buildpack-python]: https://github.com/cloudControl/buildpack-python
 [buildpack-ruby]: https://github.com/cloudControl/buildpack-ruby
