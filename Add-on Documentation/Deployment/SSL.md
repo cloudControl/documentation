@@ -6,35 +6,13 @@ Overview:
  * You need to have an RSA Private Key, an SSL Certificate and a Certificate Chain.
  * Add the Add-on to your deployment via our CLI with the [addon.add command](#adding-the-ssl-add-on).
 
-Secure Socket Layer (SSL) encryption is available for improved security when
-transmitting passwords and other sensitive data.
+Custom domains added via the [Alias Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Alias) can be used to access a
+deployment, but a certificate warning will be shown if it is accessed
+with HTTPS because the matching SSL certificate is missing.
 
-As part of the provided `.cloudcontrolled.com` subdomain, all deployments have
-access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate.
-To use this, simply point your browser to:
-* `https://APP_NAME.cloudcontrolled.com` for the default deployment
-* `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments
-
-    Please note the **dash** between DEP_NAME and APP_NAME.
-
-SSL support for custom domains is available through the SSL Add-on.
+Use this Add-on to provide an SSL certificate for your custom domains.
 
 ## Custom Domain Certificates
-
-To enable SSL support for custom domains like `www.example.com` or
-`secure.example.com`, you need the SSL Add-on.
-
-Please go through the following steps, which are described in the upcoming
-sections, to add SSL support to your deployment:
-
- * Acquire a signed certificate from your certificate authority of trust.
- * Add the SSL Add-on providing the certificate, the private key and the
-   certificate-chain files.
- * Set your DNS entry to point to your SSL DNS Domain.
-
-Note: Please allow up to one hour for DNS changes to propagate before they take
-effect. Root or naked domains like `example.com` without a subdomain are not
-supported.
 
 ### Acquiring an SSL Certificate
 
