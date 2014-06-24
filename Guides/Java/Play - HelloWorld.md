@@ -80,7 +80,7 @@ Congratulations, you can now see your Play! application running at `http[s]://AP
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play
-[Scala tutorial]: Scala
+[Scala tutorial]: https://www.cloudcontrol.com/dev-center/Guides/Java/Scala%20-%20HelloWorld
 [cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
