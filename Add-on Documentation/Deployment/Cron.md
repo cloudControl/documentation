@@ -36,7 +36,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add cron.OPTION
 As always the different options are listed on the [Cron
 Add-on](https://www.cloudcontrol.com/add-ons/cron) page.
 
-## Adding a url for the Cron job
+## Adding a URL for the Cron job
 
 To call an URL with the specific interval you write it as the parameter:
 
@@ -48,7 +48,7 @@ $ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAM
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
-recommended to use https when sending credentials.
+recommended to use https when sending credentials. Please, note that URL must be fully encoded.
 
 ## List Cron overview
 
