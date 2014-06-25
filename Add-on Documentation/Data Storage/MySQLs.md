@@ -59,7 +59,7 @@ in the general documentation.
 
 External access to the MySQLs add-on is available through an SSL encrypted connection by following these simple steps.
 
- 1. Download the [certificate file](https://to.be.filled.com/ca-cert.pem) to your local machine.
+ 1. Download the [certificate file](https://community.exoscale.ch/static/apps/ca-cert.pem) to your local machine.
  1. Connect to the database using an SSL encrypted connection.
 
 The following example uses the MySQL command line tool.
