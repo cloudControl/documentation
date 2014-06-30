@@ -1,40 +1,22 @@
 # SSL Add-on
 
-Overview:
+This add-on provides SSL support for custom domains (e.g. "www.example.com")
+that you have added to your application using the [alias addon](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Alias).
 
- * This Add-on provides SSL support for custom domains.
- * You need to have an RSA Private Key, an SSL Certificate and a Certificate Chain.
- * Add the Add-on to your deployment via our CLI with the [addon.add command](#adding-the-ssl-add-on).
 
-Secure Socket Layer (SSL) encryption is available for improved security when
-transmitting passwords and other sensitive data.
-
-As part of the provided `.cloudcontrolled.com` subdomain, all deployments have
-access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate.
-To use this, simply point your browser to:
-* `https://APP_NAME.cloudcontrolled.com` for the default deployment
-* `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments
-
-    Please note the **dash** between DEP_NAME and APP_NAME.
-
-SSL support for custom domains is available through the SSL Add-on.
-
-## Custom Domain Certificates
-
-To enable SSL support for custom domains like `www.example.com` or
-`secure.example.com`, you need the SSL Add-on.
+## Overview
 
 Please go through the following steps, which are described in the upcoming
-sections, to add SSL support to your deployment:
+sections, to add SSL support for custom domains to your deployment:
 
  * Acquire a signed certificate from your certificate authority of trust.
- * Add the SSL Add-on providing the certificate, the private key and the
+ * Add the SSL add-on providing the certificate, the private key and the
    certificate-chain files.
  * Set your DNS entry to point to your SSL DNS Domain.
 
-Note: Please allow up to one hour for DNS changes to propagate before they take
-effect. Root or naked domains like `example.com` without a subdomain are not
-supported.
+Root or naked domains like `example.com` without a subdomain are not
+directly supported. For details, please see the [alias addon](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Alias) documentation.
+
 
 ### Acquiring an SSL Certificate
 
@@ -169,9 +151,9 @@ In order to check the status of the Add-on, you can do the following.
  Addon                    : ssl.host
 
  Settings
-   SSLDEV_CERT_EXPIRES      : 2016-01-01 10:00:00
-   SSLDEV_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
-   SSLDEV_CERT_INCEPTS      : 2013-01-01 10:00:00
+   SSL_CERT_EXPIRES      : 2016-01-01 10:00:00
+   SSL_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
+   SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
  ~~~
 
 When the SSL certificate is expired, you can update it by removing the Add-on
@@ -186,6 +168,14 @@ following commands:
 
 Note: You need to provide the original key and chain again when updating the
 Add-on even if those are not changed.
+
+
+### Setup your DNS
+
+As a final step, create a corresponding CNAME entry and point it to the
+SSL_DNS_DOMAIN shown in the configuration for your SSL add-on as seen
+above.
+
 
 ## HTTPS Redirects
 
