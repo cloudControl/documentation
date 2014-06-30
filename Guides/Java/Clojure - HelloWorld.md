@@ -16,11 +16,12 @@ Now you have a small, but fully functional Clojure application.
 ### Dependency Tracking
 Clojure tracks your dependencies with the help of [Leiningen]. They are defined in the `project.clj` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this: 
 ~~~clojure
-(defproject clojure-sample "1.0.1"
+(defproject clojure-sample "1.1.0"
   :description "Hello World Clojure Web App"
-  :dependencies [[org.clojure/clojure "1.4.0"]
-                 [compojure "1.1.1"]
-                 [ring/ring-jetty-adapter "1.1.2"]]
+  :min-lein-version "2.0.0"
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [compojure "1.1.8"]
+                 [ring/ring-jetty-adapter "1.3.0"]]
   :main ^:skip-aot sample.app)
 ~~~
 
@@ -36,7 +37,8 @@ web: lein run
 The `web` process type is required and specifies the command that will be executed when the app is deployed.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the
+cloudControl platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -46,23 +48,24 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-
 [...]
 -----> Receiving push
------> Installing OpenJDK 1.7...
+-----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
+done
 -----> Installing Leiningen
-       Downloading: leiningen-1.7.1-standalone.jar
-       Downloading: rlwrap-0.3.7
+       Downloading: leiningen-2.4.2-standalone.jar
        Writing: lein script
 -----> Building with Leiningen
-       Running: lein deps
+       Running: lein with-profile production compile :all
+       (Retrieving org/clojure/clojure/1.6.0/clojure-1.6.0.pom from central)
        [...]
-       Copying 20 files to /srv/tmp/builddir/lib
+       Compiling app
 -----> Building image
------> Uploading image (54M)
+-----> Uploading image (59M)
 
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
+
 ~~~
 
 Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
