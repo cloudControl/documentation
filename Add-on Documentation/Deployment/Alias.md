@@ -1,6 +1,9 @@
 # Alias Add-on
 
-Adding custom domains to a deployment is supported via the Alias add-on. The process requires basic knowledge about how the DNS system works. To add a custom domain follow the following simple steps **for each domain**.
+Adding custom domains to a deployment is supported via the Alias add-on. The
+process requires basic knowledge about how the DNS system works. To add a
+custom domain follow the following simple steps **for each domain**.
+
 
 ## Adding an Alias
 

@@ -555,6 +555,22 @@ All custom domains need to be verified before they start working. To verify a do
 
 Changes to DNS can take up to 24 hours until they have effect. Please refer to the Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
 
+### Root Domains
+
+Root domains (e.g. "example.com") can also be added but are not directly
+supported. While you theoretically can add a CNAME record for your root
+domain, you have to be aware that no other record for this domain can
+be set then. ("A CNAME record is not allowed to coexist with any other
+data", http://tools.ietf.org/html/rfc1912). From the point you set a
+CNAME, all standard-compliant DNS servers will ignore any other entry you
+might have set for your zone (e.g. SOA, NS or MX records).
+
+You can circumvent this limitation by using a DNS provider which provides
+CNAME-like functionality for root domains, often called ANAME or ALIAS.
+
+An alternative is to use a redirection service to send users from the
+root to the configured subdomain (e.g. example.org -> www.example.org).
+
 
 ## Routing Tier
 
@@ -570,6 +586,25 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
 All HTTP requests made to apps on the platform are routed via our routing tier. The routing tier is designed as a cluster of reverse proxy loadbalancers which orchestrate the forwarding of user requests to your applications. It takes care of routing the request to one of the application's containers based on matching the `Host` header against the list of the deployment's aliases. This is accomplished via the `*.cloudcontrolled.com` or `*.cloudcontrolapp.com` subdomains.
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the added latency as low as possible.
+
+### SSL
+
+Transport Layer Security (TLS / SSL) is available to encrypt traffic between
+users and applications.
+
+As part of the provided `.cloudcontrolled.com` subdomain, all deployments have
+access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate.
+To use this, simply point your browser to:
+* `https://APP_NAME.cloudcontrolled.com` for the default deployment
+* `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments
+
+    Please note the **dash** between DEP_NAME and APP_NAME.
+
+SSL support for custom domains is available through the
+[SSL add-on](https://www.cloudcontrol.com/add-ons/ssl).
+
+Instructions on how to add HTTPS redirects to your application can be
+found in the [SSL add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/SSL#https-redirects).
 
 ### Elastic Addresses
 
