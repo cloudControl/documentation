@@ -1,6 +1,7 @@
 # MySQLs: Shared MySQL Add-on
 
-Every deployment can access a highly available shared MySQL add-on with databases guaranteed to be located in Exoscale datacenters in Switzerland.
+Every deployment can access a highly available shared MySQL add-on with
+databases guaranteed to be located in exoscale datacenters in Switzerland.
 
 ## Adding the MySQLs Add-on
 
