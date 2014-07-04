@@ -1,6 +1,6 @@
 # MySQLs: Shared MySQL Add-on
 
-Every deployment can access a highly available shared MySQL add-on.
+Every deployment can access a highly available shared MySQL add-on with databases guaranteed to be located in Exoscale datacenters in Switzerland.
 
 ## Adding the MySQLs Add-on
 
@@ -39,9 +39,8 @@ $ exoapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
 
 ## Replication and Failover
 
-All instances are master-slave replicated. In case of a failure of the master, 
-an automatic failover to the slave will trigger to restore availability. 
-This failover process takes usually between 3 and 10 minutes.
+All data is synchronously replicated in our robust multi master 
+[MariaDB](https://mariadb.org/) [Galera](http://galeracluster.com/) cluster. No slave lag or lost transactions. We provide high available access with our smart load balancers. By periodically checks, nodes in maintenance or failure state are automatically excluded from the load balancers database backend pool. That assures that requests are routed to healthy nodes only.
 
 ## Database Credentials
 
@@ -54,6 +53,12 @@ using the correct credentials. For detailed instructions on how to use the
 creds.json file please refer to the section about
 [Add-on Credentials](https://community.exoscale.ch/apps/Platform%20Documentation#add-ons)
 in the general documentation.
+
+Most database drivers provide a reconnect on connection issues when you add **autoReconnect=true** parameter to your database uri. This should be enabled to have the most stable setup. For example with Java:
+~~~
+jdbc:mysql://{MYSQLS_HOSTNAME}:{MYSQLS_PORT}/{MYSQLS_DATABASE}?autoReconnect=true
+~~~
+
 
 ### External Access
 
