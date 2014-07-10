@@ -13,7 +13,7 @@
 <li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#performance">Performance</a></li>
+<li class=""><a href="#performance--caching">Performance & Caching</a></li>
 <li class=""><a href="#websockets">WebSockets</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
@@ -504,16 +504,32 @@ From now on all the new logs should be visible in your custom syslog remote.
 
 **TL;DR:**
 
- * Each deployment is provided with a `*.app.exo.io` subdomain.
+ * Each deployment is provided with both a `*.app.exo.io` and `*.fastapp.exo.io` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment is provided per default with a `*.app.exo.io` subdomain. The `APP_NAME.app.exo.io` will point to the `default` deployment while any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io`.
+Each deployment is provided per default with both a `*.app.exo.io` and `*.fastapp.exo.io` subdomain. The `APP_NAME.app.exo.io` or `APP_NAME.fastapp.exo.io` will point to the `default` deployment while any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io` or `DEP_NAME-APP_NAME.fastapp.exo.io`.
 
-You can also use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments, simply add each one as an alias and add a CNAME for each pointing to your deployment's subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.app.exo.io`. The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one of your deployments.
+You can also use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments, simply add each one as an alias and add a CNAME for each pointing to your deployment's subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.app.exo.io` or `awesomeapp.fastapp.exo.io`. The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one of your deployments.
 
 All custom domains need to be verified before they start working. To verify a domain, it is required to also add the exoscale verification code as a TXT record.
 
 Changes to DNS can take up to 24 hours until they have effect. Please refer to the Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
+
+### Root Domains
+
+Root domains (e.g. "example.com") can also be added but are not directly
+supported. While you theoretically can add a CNAME record for your root
+domain, you have to be aware that no other record for this domain can
+be set then. ("A CNAME record is not allowed to coexist with any other
+data", http://tools.ietf.org/html/rfc1912). From the point you set a
+CNAME, all standard-compliant DNS servers will ignore any other entry you
+might have set for your zone (e.g. SOA, NS or MX records).
+
+You can circumvent this limitation by using a DNS provider which provides
+CNAME-like functionality for root domains, often called ANAME or ALIAS.
+
+An alternative is to use a redirection service to send users from the
+root to the configured subdomain (e.g. example.org -> www.example.org).
 
 
 ## Routing Tier
@@ -521,12 +537,13 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
 **TL;DR:**
 
  * All HTTP requests are routed via our routing tier.
- * Within the routing tier, requests are routed via the `*.app.exo.io` subdomain.
+ * Within the routing tier, you can choose to route requests via the `*.app.exo.io` or `*.fastapp.exo.io` subdomains.
  * The `*.app.exo.io` subdomain provides WebSocket support.
+ * The `*.fastapp.exo.io` subdomain provides support for HTTP caching via Varnish.
  * Requests are routed based on the `Host` header.
  * Use the `X-Forwarded-For` header to get the client IP.
 
-All HTTP requests made to apps on the platform are routed via our routing tier. The routing tier is designed as a cluster of reverse proxy loadbalancers which orchestrate the forwarding of user requests to your applications. It takes care of routing the request to one of the application's containers based on matching the `Host` header against the list of the deployment's aliases. This is accomplished via the `*.app.exo.io` subdomain.
+All HTTP requests made to apps on the platform are routed via our routing tier. The routing tier is designed as a cluster of reverse proxy loadbalancers which orchestrate the forwarding of user requests to your applications. It takes care of routing the request to one of the application's containers based on matching the `Host` header against the list of the deployment's aliases. This is accomplished via the `*.app.exo.io` or `*.fastapp.exo.io` subdomains.
 
 The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the added latency as low as possible.
 
@@ -540,7 +557,7 @@ Given that client requests don't hit your application directly, but are forwarde
 
 ### Reverse Proxy timeouts
 
-Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and forwarding of user requests to your applications. To do this in an efficient way, we set strict timeouts to the read/ write operations. You can find them below.
+Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and forwarding of user requests to your applications. To do this in an efficient way, we set strict timeouts to the read/ write operations. The values differ slightly between the `*.app.exo.io` and `*.fastapp.exo.io` subdomains. You can find them below.
 
  * __Connect timeout__ - time within a connection to your application has to be established. If your containers are up, but hanging, then this timeout will not apply as the connection to the endpoints has already been made.
  * __Read timeout__ - time to retrieve a response from your application. It determines how long the routing tier will wait to get the response to a request. The timeout is established not for an entire response, but only between two operations of reading.
@@ -554,21 +571,33 @@ Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acc
 |Send timeout|55|
 |Read timeout|55|
 
+#### Timeouts for `*.fastapp.exo.io` subdomain:
+
+|Parameter|Value [s]|
+|:---------|:----------:|
+|Connect timeout|60|
+|Send timeout|60|
+|Read timeout|120|
+
 ### Requests distribution
 
 Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable service resolving domain names in a round robin fashion. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run on one container and therefore are only hosted in one availability zone.
 
 ### High Availability
 
-The routing tier provides a Health Checker to ensure high availability. Because this mechanism depends on having multiple containers available to route requests, only deployments with more than one container running (see the [scaling section](#scaling) for details) can take advantage of high availability.
+The routing tier provides two mechanisms to ensure high availability, depending on the provided subdomain. These are Health Checker (for the `*.app.exo.io` subdomain) and Failover (for the `*.fastapp.exo.io` subdomain). Because these mechanisms depend on having multiple containers available to route requests, only deployments with more than one container running (see the [scaling section](#scaling) for details) can take advantage of high availability.
 
 In the event of a single node or container failure, the platform will start a replacement container. Deployments running on --containers 1 will be unavailable for a few minutes while the platform starts the replacement. To avoid even short downtimes, set the --containers option to at least 2.
 
-#### Health Checker
+#### `*.app.exo.io` subdomain
 
 For the `*.app.exo.io` subdomain, failed requests will cause an error message to be returned to the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests. Subsequent requests are routed to an available container of the deployment. Once the health checker notices that the container has recovered, the container will be re-included in the list to receive requests.
 
 Because the health checker actively monitors containers where an application is running into timeouts or returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502` or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
+
+#### `*.fastapp.exo.io` subdomain
+
+For the `*.fastapp.exo.io` subdomain, failed requests are automatically re-routed to alternate containers via a failover mechanism.  Requests will be retried with a different container within the set timeouts. It will also ensure the next request is not sent to the slow/faulty container for a given amount of time.
 
 
 ## Scaling
@@ -592,22 +621,46 @@ Deployments with --containers 1 (the default) are unavailable for a few minutes 
 In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specified using the --memory parameter, being possible to choose from 128MB to 1024MB.
 
 
-## Performance
+## Performance & Caching
 
 **TL;DR:**
 
  * Reduce the total number of requests that make up a page view.
+ * Cache as far away from your database as possible.
+ * Try to rely on cache breakers instead of flushing.
 
 ### Reducing the Number of Requests
 
 Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. One common technique to accomplish this is combining and minimizing javascript and css files into one file each and using sprites for images.
+
+### Caching Early
+
+After you have reduced the total number of requests, it's recommended to cache as far away from your database as possible. Using far-future `expires` headers avoids that browsers request resources at all. The next best way of reducing the number of requests that hit your containers is to cache complete responses in the loadbalancer. For this we offer caching directly in the routing tier.
+
+#### Caching Proxy
+
+The routing tier that is in front of all deployments includes a [Varnish] caching proxy. To use this feature, it is necessary to use the `*.fastapp.exo.io` subdomain. To have your requests cached directly in Varnish and speed up the response time through this, ensure you have set correct [cache control headers](http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html) (`Cache-Control`, `Expires`, `Age`) for the request. Also, ensure that the request does not include a cookie. Cookies are often used to keep state across requests (e.g. if a user is logged in). To avoid caching responses for logged-in users and returning them to other users, Varnish is configured to never cache requests with cookies.
+
+To be able to cache requests in Varnish for apps that rely on cookies, we recommend using a [cookieless domain](http://www.ravelrumba.com/blog/static-cookieless-domain/). In this case, you have to register a new domain and configure your DNS database with a `CNAME` record that points to your `APP_NAME.fastapp.exo.io` subdomain `A` record. Then you can update your web application's configuration to serve static resources from your new domain.
+
+You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from the cache, and MISS means it was not.
+
+### Cache Breakers
+
+When caching requests on client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same and the cached response has not expired, the request is answered from cache. As part of every deployment, all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. However, when using far-future `expires` headers as recommended above, this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version, it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
+
+The [environment variables](#environment-variables) of the deployment runtime environment contain the DEP_VERSION of the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
+
+### Caching in app.exo.io subdomain
+
+Requests via the `*.app.exo.io` subdomain cannot be cached in the routing tier. However, it is still possible to provide caching for static assets by utilizing a separate cookieless domain as a CNAME of the `*.fastapp.exo.io`subdomain. For example, you can serve the dynamic requests of your application via www.example.com (a CNAME FOR `example.app.exo.io`) and serve the static assets like CSS, JS and images via `static.example.com` (a CNAME for `example.fastapp.exo.io`).
 
 
 ## WebSockets
 
 **TL;DR:**
 
- * WebSockets are supported via the Routing Tier.
+ * WebSockets are supported via the `*.app.exo.io` subdomain.
  * WebSockets allow real-time, bidirectional communication between clients and servers
  * Additional steps are necessary to secure WebSocket connections
  * It is highly recommended to use the secure `wss://` protocol rather than the insecure `ws://`.
@@ -762,6 +815,7 @@ $ exoapp APP_NAME/DEP_NAME details
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
 [Alias Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Alias/
+[Varnish]: https://www.varnish-cache.org/
 [Cron Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron/
 [Cron Add-on documentation]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron
 [Worker Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Processing/Worker/
