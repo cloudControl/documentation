@@ -13,7 +13,7 @@
 <li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#performance--caching">Performance & Caching</a></li>
+<li class=""><a href="#performance-caching">Performance & Caching</a></li>
 <li class=""><a href="#websockets">WebSockets</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
