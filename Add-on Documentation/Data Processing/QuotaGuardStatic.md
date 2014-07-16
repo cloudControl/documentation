@@ -62,7 +62,7 @@ The JSON file has the following structure:
 ~~~
 ## Monitoring QuotaGuard Static
 
-All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your CloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
+All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
 
 ## HTTP vs. SOCKS5 proxy
 
@@ -276,13 +276,13 @@ $ git commit -m "Add QuotaGuard Static socksify"
 You can provide a standard subnet mask to only route traffic to certain IP subnets via the QUOTAGUARDSTATIC_MASK environment variable.
 
 ~~~bash
-$ heroku config:set QUOTAGUARDSTATIC_MASK="100.30.68.0/24"
+$ cctrlapp app_name/dep_name config.add QUOTAGUARDSTATIC_MASK="100.30.68.0/24"
 ~~~
 
 All outbound traffic to 100.30.68.* would be routed via your Static IPs. Multiple masks can be provided by comma separating the mask values:
 
 ~~~bash
-$ heroku config:set QUOTAGUARDSTATIC_MASK="100.30.68.0/24,99.29.68.0/24"
+$ cctrlapp app_name/dep_name config.add QUOTAGUARDSTATIC_MASK="100.30.68.0/24,99.29.68.0/24"
 ~~~
 
 ###FAQs
@@ -298,7 +298,7 @@ To make sure we grow in harmony with your application QuotaGuard Static operates
 If you repeatedly exceed your limits without upgrading then hard limits may be placed on your account but this is a very last resort.
 
 ####I’ve forgotten what my Static IPs are!
-Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your CloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments.
+Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your cloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments.
 
 ####Why have you given me two Static IP addresses?
 We believe all apps should be built for scalability and high availability. Our commitment to this means we only provide load balanced, high availability services. Load balancing our nodes allows one node to fail or be brought down for maintenance with no impact to your application. Each IP you are given represents one proxy node that is running behind a load balancer.
@@ -309,7 +309,7 @@ Yes we have many users doing this. The easiest way for most languages is to use 
 ###QuotaGuard vs. QuotaGuard Static
 We offer two products on cloudControl, QuotaGuard and QuotaGuard Static.
 
-QuotaGuard routes your traffic through a dynamic set of IP addresses that may change at any time and is intended for accessing APIs like Google Maps that restrict usage based on your IP address. It should be used if you want to access these APIs without your limit being shared with other Heroku apps.
+QuotaGuard routes your traffic through a dynamic set of IP addresses that may change at any time and is intended for accessing APIs like Google Maps that restrict usage based on your IP address. It should be used if you want to access these APIs without your limit being shared with other cloudControl apps.
 
 QuotaGuard Static routes your traffic through a pair of static IP addresses that never change. It should be used if you need your traffic to pass through a known IP address for the purpose of firewall ingress rules or application whitelisting with a third party.
 
