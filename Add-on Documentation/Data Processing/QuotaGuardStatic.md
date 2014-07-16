@@ -1,6 +1,6 @@
 # QuotaGuard Static
 
-QuotaGuard Static is an add-on that allows you to route outbound traffic through a static IP address on cloudControl. You can provide this IP address to an API partner for IP based whitelisting and open your own firewall to access internal resources.
+QuotaGuard Static is an Add-on that allows you to route outbound traffic through a static IP address on cloudControl. You can provide this IP address to an API partner for IP based whitelisting and open your own firewall to access internal resources.
 
 QuotaGuard Static is accessible as an HTTP or SOCKS5 proxy so is language and platform agnostic. There is native support across Ruby, Python, Node.js, Scala, Java and every other mainstream language.
 
@@ -17,7 +17,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add quotaguardstatic.OPTION
 Upgrading to another version of QuotaGuard Static is easy and instant:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguardstatic.OPTION_OLD quotaguardstatic.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguardstatic.OPTION_OLD quotaguardstatic.OPTION_NEW
 ~~~
 
 ## Downgrade QuotaGuard Static
@@ -25,12 +25,12 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade quotaguardstatic.OPTION_OLD quotaguar
 Downgrading to another version of QuotaGuard Static is easy and instant and will not change your IP address:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade quotaguardstatic.OPTION_OLD quotaguardstatic.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade quotaguardstatic.OPTION_OLD quotaguardstatic.OPTION_NEW
 ~~~
 
 ## Removing QuotaGuard Static
 
-Removing QuotaGuard Static will instantly prevent you from accessing our proxy so use with caution. If you re-add the add-on then you may be assigned a different IP address:
+Removing QuotaGuard Static will instantly prevent you from accessing our proxy so use with caution. If you re-add the Add-On then you may be assigned a different IP address:
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.remove quotaguardstatic.OPTION
@@ -49,7 +49,7 @@ res = RestClient.get("http://ip.jsontest.com")
 puts "Your Static IP is: #{res.body}"
 ~~~
 
-Alternatively you can read the QuotaGuard Static credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) in the general documentation.
+Alternatively you can read the QuotaGuard Static credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#Add-Ons) in the general documentation.
 
 The JSON file has the following structure:
 
@@ -62,7 +62,7 @@ The JSON file has the following structure:
 ~~~
 ## Monitoring QuotaGuard Static
 
-All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
+All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard Static Add-On from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
 
 ## HTTP vs. SOCKS5 proxy
 
@@ -217,7 +217,7 @@ sockConn.dispose();
 dbConnection.end();
 ~~~
 ###Using with PHP
-PHP cURL is the easiest way to make HTTP requests via QuotaGuard Static. This example assumes that you have set the QUOTAGUARDSTATIC_URL environment variable which is automatically set for you when you provision the add-on.
+PHP cURL is the easiest way to make HTTP requests via QuotaGuard Static. This example assumes that you have set the QUOTAGUARDSTATIC_URL environment variable which is automatically set for you when you provision the Add-On.
 
 The IP address printed on screen will be one of your two static IP addresses, run it a couple of times and you’ll probably see the other one too
 
@@ -298,7 +298,7 @@ To make sure we grow in harmony with your application QuotaGuard Static operates
 If you repeatedly exceed your limits without upgrading then hard limits may be placed on your account but this is a very last resort.
 
 ####I’ve forgotten what my Static IPs are!
-Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your cloudControl console and clicking on the QuotaGuard Static add-on from within one of your deployments.
+Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your cloudControl console and clicking on the QuotaGuard Static Add-On from within one of your deployments.
 
 ####Why have you given me two Static IP addresses?
 We believe all apps should be built for scalability and high availability. Our commitment to this means we only provide load balanced, high availability services. Load balancing our nodes allows one node to fail or be brought down for maintenance with no impact to your application. Each IP you are given represents one proxy node that is running behind a load balancer.
