@@ -17,13 +17,20 @@ Now you have a small, but fully functional Scala application.
 Dependencies in Scala applications are resolved using [sbt]. The dependency requirements are defined in the `build.sbt` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this:
 
 ~~~scala
-import com.typesafe.startscript.StartScriptPlugin
-seq(StartScriptPlugin.startScriptForClassesSettings: _*)
+import com.typesafe.sbt.SbtStartScript
+
+seq(SbtStartScript.startScriptForClassesSettings: _*)
+
 organization := "org.soichiro"
+
 name := "scalatra"
+
 version := "0.1.0-SNAPSHOT"
+
 scalaVersion := "2.9.1"
+
 seq(webSettings :_*)
+
 libraryDependencies ++= Seq(
   "org.scalatra" %% "scalatra" % "2.0.4",
   "org.scalatra" %% "scalatra-scalate" % "2.0.4",
@@ -33,6 +40,7 @@ libraryDependencies ++= Seq(
   "org.eclipse.jetty" % "jetty-webapp" % "7.6.0.v20120127" % "compile",
   "javax.servlet" % "servlet-api" % "2.5" % "provided"
 )
+
 resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 ~~~
 
@@ -59,10 +67,11 @@ Push your code to the application's repository, which triggers the deployment im
 ~~~bash
 $ cctrlapp APP_NAME/default push
 [...]
+
 -----> Receiving push
------> Installing OpenJDK 1.6...
------> Building app with sbt
------> Running: sbt clean compile stage
+-----> Installing OpenJDK 1.7...done
+-----> Downloading SBT...done
+-----> Running: sbt compile stage
         [...]
 -----> Building image
 -----> Uploading image (80M)
