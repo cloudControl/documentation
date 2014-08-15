@@ -11,7 +11,10 @@ The New Relic add-on can be added to every deployment with:
 $ cctrlapp APP_NAME/DEP_NAME addon.add newrelic.OPTION
 ~~~
 
-When added, cloudControl automatically creates a new user account with your email adress at New Relic. You will be notified by New Relic via email and can log on to New Relic's console to monitor your deployment's performance. It might take a little while until New Relic has collected enough data to show you the first statistics.
+When added, NewRelic automatically creates a new account and login configuration including an
+access token. You can access NewRelic for your deployment in the web console. Navigate to the
+specific deployment, choose "Add-Ons" tab, click on "Settings" link and "Login to dashboard".
+It might take a little while until New Relic has collected enough data to show you the first statistics.
 
 ## Upgrade New Relic
 
