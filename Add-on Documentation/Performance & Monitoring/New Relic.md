@@ -12,9 +12,13 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add newrelic.OPTION
 ~~~
 
 When added, NewRelic automatically creates a new account and login configuration including an
-access token. You can access NewRelic for your deployment in the web console. Navigate to the
-specific deployment, choose "Add-Ons" tab, click on "Settings" link and "Login to dashboard".
+access token. You can access NewRelic for your deployment in the web console via Single Sign-On (SSO).
+Navigate to the specific deployment, choose "Add-Ons" tab, click on "Settings" link and "Login to dashboard".
 It might take a little while until New Relic has collected enough data to show you the first statistics.
+
+With Single Sign-On, you are connecting to NewRelic as the deployment user.
+If you prefer to login directly with your personal account, or you need to add more users,
+simply create additional credentials once you have accessed NewRelic via SSO.
 
 ## Upgrade New Relic
 
