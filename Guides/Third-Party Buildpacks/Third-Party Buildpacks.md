@@ -15,7 +15,7 @@ Here is a list of verified and recommended buildpacks for the cloudControl platf
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
-|Go|[https://github.com/kr/heroku-buildpack-go][buildpack-go]|
+|Go|[https://github.com/cloudControl/buildpack-go][buildpack-go]|
 |Erlang|[https://github.com/cloudControl/buildpack-erlang-kernel][buildpack-erlang]|
 |Common Lisp|[https://github.com/mtravers/heroku-buildpack-cl][buildpack-common-lisp]|
 |Lua|[https://github.com/leafo/heroku-buildpack-lua][buildpack-lua]|
@@ -50,7 +50,7 @@ Before using any third party buildpack you should inspect their source code and 
 [buildpack-scala]: https://github.com/heroku/heroku-buildpack-scala
 [buildpack-play]: https://github.com/heroku/heroku-buildpack-play
 [buildpack-erlang]: https://github.com/cloudControl/buildpack-erlang-kernel
-[buildpack-go]: https://github.com/kr/heroku-buildpack-go
+[buildpack-go]: https://github.com/cloudControl/buildpack-go
 [buildpack-common-lisp]: https://github.com/mtravers/heroku-buildpack-cl
 [buildpack-lua]: https://github.com/leafo/heroku-buildpack-lua
 [buildpack-c]: https://github.com/atris/heroku-buildpack-C
