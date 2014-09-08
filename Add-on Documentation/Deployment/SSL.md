@@ -99,20 +99,27 @@ previous step. Quite often you will also need define the web server you are
 going to use. In this case you should select the Nginx web server, and if this
 is not an option then Apache 2.x should also be OK.
 
-In the end, your CA will provide you with some files including the SSL
-certificate and the certificate chain. Your certificate file should have either
-a `.crt` or `.pem` extension. Our service requires the certificates to be in
-PEM format, so if it isn't, you can transform it with the following command:
- ~~~
- $ openssl x509 -inform PEM -in www_example_com.crt -out www_example_com.pem
- ~~~
+In the end, your CA will provide you with one or more files including the
+SSL certificate and the certificate chain (the intermediate certificate(s)).
 
-The content of the SSL certificate file should look like this:
- ~~~
- -----BEGIN CERTIFICATE-----
- ...
- -----END CERTIFICATE-----
- ~~~
+If you got only one file with both your certificate and all intermediates,
+you have to split this file into two, server.crt (topmost certificate)
+and chain.crt (rest of original file).
+
+The SSL certificates have to be in PEM format and should look like this:
+
+~~~
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+~~~
+
+If your certificates are not in PEM yet, you can transform them with the
+following command:
+
+~~~
+$ openssl x509 -inform PEM -in www_example_com.crt -out www_example_com.pem
+~~~
 
 The certificate chain is a chain of trust which proves that your certificate is
 issued by a trustworthy provider authorized by a Root CA. Root CA certificates
