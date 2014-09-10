@@ -65,4 +65,8 @@ these will require some important changes to your application:
   previously deployed. You can, however, run the same code in a new
   container and interact with the same databases and services, so you
   can still interactively manage and perform data migrations.
-
+* *older versions*: on dotCloud the OS and most of the software was
+  from Ubuntu 10.04LTS (circa 2010). You may find that you need to
+  update your code to use newer versions of your libraries and other
+  dependencies on cloudControl, which runs on Ubuntu 12.04 (or
+  possibly newer by the time you read this).
