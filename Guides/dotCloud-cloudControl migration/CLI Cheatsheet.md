@@ -5,7 +5,7 @@ the cloudControl CLI, listed in the same order as they appear in
 `dotcloud -h`.
 
 `dotcloud -A APP_NAME`| `cctrlapp APP_NAME[/DEP_NAME]`
-----------------------|-------------------------------
+---------------------:|-------------------------------
 `-h, --help, -?` | `-h, --help`
 `setup` | to persist login information, export it to your environment through `CCTRL_EMAIL` and `CCTRL_PASSWORD` or you will be prompted for this information every 15 minutes.
 `check` | N/A
