@@ -197,8 +197,10 @@ your first statement, you can do that in the command of the
 `Procfile`:
 
 ```
-web: cd mydir; run myscript.sh
+web: cd myapproot; run startapp.sh
 ```
+
+(*myapproot* and *startapp.sh* are arbitrary names, just for example)
 
 cloudControl services do not have any magically-created directories
 like the dotCloud services. There are neither `code` nor `current`
@@ -206,49 +208,117 @@ symbolic links. The root of your home directory has the same format
 and contents as the directory which contained your `Procfile`.
 
 
-TODO
-====
-
 ## prebuild, postbuild, postinstall: Build Hooks
 
-prebuild and postbuild can be part of a compile step in a buildpack
-but there isn't a simpler equivalent.
+If you are using a `prebuild` or `postbuild` script in your
+`dotcloud.yml`, that could mean you need to create [your own
+Buildpack](https://www.cloudcontrol.com/dev-center/Guides/Third-Party%20Buildpacks/Third-Party%20Buildpacks). You
+can write a Buildpack from scratch, or you can compose multiple
+Buildpacks together (using [a third party
+meta-buildpack](https://github.com/ddollar/heroku-buildpack-multi)). In
+any case, a Buildpack will enable you to create your own custom
+service type with the software you want pre-installed (like a
+`prebuild` script) and any build and post-build compilation steps you
+need (like your `postbuild` script).
 
-postinstall can be part of your procfile command.
+If you have a `postinstall` script, you can run the same step as part
+of your Procfile command, e.g. Procfile:
+
+```
+web: cd myapproot; postinstall.sh; startapp.sh
+```
 
 ## systempackages
 
-no support for apt-get using a privileged user, so you'll have to
-install everything to user-writeable directories. Should users include
-these binaries as part of their push? Need to test.
+Like `prebuild` and `postbuild` scripts, a `systempackages` section in
+your `dotcloud.yml` file probably means you need to create your own
+Buildpack. A custom Buildpack will enable you to set up the software
+you need, though you may not be able to install it using `apt-get`
+(which is how `systempackages` items get installed). You might need to
+include the source code or binaries as part of your Buildpack. 
 
 ## config
 
-can be set via cctrlapp config.add
-can have multiple configs, one for each deploy
-deploys are tied to branches in git
+There are a couple of replacements for a dotCloud `config` section,
+depending on what needs configuring. Some configuration options may be
+handled explicitly by the type of service -- you should read the
+documentation for the Buildpack you're using. The cloudControl
+buildpacks are [available on
+GitHub](https://github.com/cloudcontrol?query=buildpack). For example,
+you can specify the Python version to use by creating a `runtime.txt`
+file to replace your `dotcloud.yml config: python_version`.
+
+If your configuration could be replaced by setting an environment
+variable, you can do that with the CLI: `cctrlapp config.add` (see
+[the
+docs.](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config))
 
 ## ports
 
-Cannot set ports. An application can only receive connections from
-port 80, and only one service can receive these. There are no
-workarounds.
+If you have a `ports` section in your `dotcloud.yml` then hopefully
+you only have one port listed, a single `http` type port. That is the
+only kind of port allowed on the cloudControl PaaS. You can only have
+one process which listens to an HTTP port. This is pretty common for
+`custom` type apps on dotCloud.
+
+If you do have multiple services each with their own HTTP port, then
+you should consider how to either separate these into different
+applications or how to access each different function via a different
+URL path (e.g. if you used to have an "admin" interface as well as a
+public interface, move your "admin" interface to be part of your
+public interface on another path, like "www.example.com/admin").
+
+Note that cloudControl containers do not expose an SSH port. See the
+[Secure Shell docs](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh).
 
 ## environment
 
-same as config
+If you were setting environment variables in your `dotcloud.yml` then
+you should instead set these via `cctrlapp config.add` (see [the
+docs](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config)).
 
 ## process
 
-maps directly to Procfile command, though "processes" isn't quite the
-same because on CC each would run in its own container instead of as
-separate processes in the same container. Can run own supervisord to
-workaround this (early tests look good, but want to confirm there
-aren't any crazy unexpected behaviors in logging or signals) 
+If your `dotcloud.yml` file includes a `process` or `processes`
+section, you will probably need to install `supervisor` so that you
+can run multiple processes. Other process managers are usable too,
+like foreman (written in Ruby), but if you're coming from the dotCloud
+environment, you're probably already familiar with `supervisor`
+(written in Python).
+
+Each service on the dotCloud platform could generally rely on the
+presence of [`supervisord`](http://supervisord.org/) so it can start
+up multiple processes in the same service. Typical cloudControl apps
+only run one process per service. **But you can install supervisord**
+yourself. This is especially easy on `python` type applications,
+though you could add `python` and `pip` with your own Buildpack if
+necessary. On a `python` type application, you can install supervisor
+by adding this to your `requirements.txt` file:
+
+```
+supervisor
+supervisor-stdout
+```
+
+Then you'll need to add a `supervisor.conf` file which lists each of the
+processes you had in your `dotcloud.yml`.
+
+Note that the dotCloud PaaS code services often ran both `supervisor`
+and `nginx`. `nginx` was typically started by `init.d` and so was not
+explicitly controllable by you, but on cloudControl you can run nginx
+as another process under `supervisor` if you wish. This gets you
+pretty close to a dotCloud environment on cloudControl.
 
 ## requirements
 
-as per buildpacks
+On the dotCloud platform, a `requirements` section can help install
+additional dependencies of your application during build time (after
+`dotcloud push`). On cloudControl you should use the mechanism
+provided by your Buildpack (e.g. Python uses a `requirements.txt`
+file, Ruby uses a `gemfile`).
+
+TODO
+----
 
 # Comparison of build systems
 
