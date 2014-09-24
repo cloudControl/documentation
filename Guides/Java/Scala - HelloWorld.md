@@ -94,3 +94,4 @@ Congratulations, you can now see your Scala application running at `http[s]://AP
 [cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[sbt]: http://www.scala-sbt.org/

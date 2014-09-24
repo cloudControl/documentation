@@ -1,6 +1,6 @@
 # Deploying a Java/Tomcat Application
 
-If you're looking for a full featured Java web server and servlet container,
+If you're looking for a full-featured Java web server and servlet container,
 you definitely have heard of [Tomcat]. Tomcat offers an implementation of the
 Java Servlet and JavaServer Pages (JSP) technologies.
 
@@ -94,7 +94,7 @@ the `pom.xml`:
 ### Java Version
 We are using the latest version of Apache Tomcat 8 which requires Java 7+ in
 order to run. The default Java version on cloudControl is 7 but you can
-explicitly define it into the `system.properties` file like this:
+explicitly define it in the `system.properties` file like this:
 ~~~
 java.runtime.version=1.7
 ~~~
@@ -109,7 +109,7 @@ web: sh target/bin/webapp
 ~~~
 
 The `web` process type is required and specifies the command that will be
-executed when the app is deployed.  The webapp script contains the needed
+executed when the app is deployed.  The webapp script contains the necessary
 commands to start your servlet using the built classes.
 
 ## Pushing and Deploying your App
@@ -156,7 +156,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
    db605ac...6a884f1 master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
 
 ~~~bash
 $ cctrlapp APP_NAME/default deploy
