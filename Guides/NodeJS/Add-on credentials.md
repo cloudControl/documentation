@@ -58,9 +58,9 @@ var creds = JSON.parse(
     fs.readFileSync(process.env.CRED_FILE)
 );
 
-var host = creds.MYSQLD.MYSQLD_HOST;
+var host = creds.MYSQLD.MYSQLD_HOSTNAME;
 var database = creds.MYSQLD.MYSQLD_DATABASE;
-var user = creds.MYSQLD.MYSQLD_USER;
+var user = creds.MYSQLD.MYSQLD_USERNAME;
 var password = creds.MYSQLD.MYSQLD_PASSWORD;
 var port = creds.MYSQLD.MYSQLD_PORT;
 
