@@ -129,7 +129,7 @@ Congratulations, you can now see your Jetty Application running at `http[s]://AP
 [Jetty]: http://jetty.codehaus.org/jetty/
 [exoscale]: https://www.exoscale.ch/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[exoscale-command-line-client]: https://community.exoscale.ch/apps/Platform%20Documentation#command-line-client-web-console-and-api
+[exoscale-command-line-client]: https://community.exoscale.ch/apps/documentation/#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Maven dependency plugin]: http://maven.apache.org/plugins/maven-dependency-plugin/
-[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile

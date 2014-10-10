@@ -190,10 +190,10 @@ other [ruby-specific documents][ruby-guides].
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/
 [Bundler]: http://bundler.io/
-[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
-[filesystem]: https://community.exoscale.ch/apps/Platform%20Documentation#non-persistent-filesystem
-[run command]: https://community.exoscale.ch/apps/Guides/Ruby/RunCommand
-[rails-notes]: https://community.exoscale.ch/apps/Guides/Ruby/RailsNotes
-[ruby-guides]: https://community.exoscale.ch/apps/Guides/Ruby
+[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[filesystem]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
+[run command]: https://community.exoscale.ch/tutorial/ruby-app-runcommand
+[rails-notes]: https://community.exoscale.ch/tutorial/ruby/ruby-app-rubynotes
+[ruby-guides]: https://community.exoscale.ch/tutorials/tagged/ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
 [MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/

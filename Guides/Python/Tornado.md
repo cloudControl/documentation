@@ -128,4 +128,4 @@ Congratulations, you can now see your Tornado app running at `http://APP_NAME.ap
 [Tornado]: http://www.tornadoweb.org
 [exoscale]: http://www.exoscale.ch
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile

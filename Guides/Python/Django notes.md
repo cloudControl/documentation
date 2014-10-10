@@ -22,12 +22,12 @@ exoapp APP_NAME/DEP_NAME run "python manage.py syncdb"
 ## Databases
 To use a database, have a look at the [Shared MySQL Add-on][Shared MySQL Add-on]. To get the credentials of your database, refer to the [Add-on credentials][add-on-credentials] article.
 
-[SSH-session]: https://community.exoscale.ch/apps/Platform%20Documentation#secure-shell-ssh
+[SSH-session]: https://community.exoscale.ch/apps/documentation/#secure-shell-ssh
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
-[procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
 [messaging-addons]: https://community.exoscale.ch/apps/Add-on%20Documentation/Messaging%20&%20Mobile/
 [Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
-[add-on-credentials]: https://community.exoscale.ch/apps/Guides/Python/Add-on%20credentials
+[add-on-credentials]: https://community.exoscale.ch/tutorial/python-app-add-on-credentials
 [exoscale]: https://www.exoscale.ch/
-[worker]: https://community.exoscale.ch/apps/Platform%20Documentation#scheduled-jobs-and-background-workers
+[worker]: https://community.exoscale.ch/apps/documentation/#scheduled-jobs-and-background-workers

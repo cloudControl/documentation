@@ -113,10 +113,10 @@ Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.a
 
 [silex]: http://silex.sensiolabs.org/
 [exoscale]: http://www.exoscale.ch
-[exoscale-doc-user]: https://community.exoscale.ch/apps/Platform%20Documentation#user-accounts
-[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the exoscale-command-line-client"
+[exoscale-doc-user]: https://community.exoscale.ch/apps/documentation/#user-accounts
+[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/documentation/#command-line-client-web-console-and-api "documentation of the exoscale-command-line-client"
 [php buildpack]: https://github.com/cloudControl/buildpack-php
-[procfile]: https://community.exoscale.ch/apps/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [composer]: http://getcomposer.org/
 [example-app]: https://github.com/cloudControl/php-silex-example-app

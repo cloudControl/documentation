@@ -1,26 +1,3 @@
-<aside>
-<ul>
-<li class=""><a href="#platform-access">Platform Access</a></li>
-<li class=""><a href="#user-accounts">User Accounts</a></li>
-<li class=""><a href="#apps-and-deployments">Apps and Deployments</a></li>
-<li class=""><a href="#version-control-images">Version Control & Images</a></li>
-<li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
-<li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
-<li class=""><a href="#non-persistent-filesystem">Non-Persistent Filesystem</a></li>
-<li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
-<li class=""><a href="#add-ons">Add-ons</a></li>
-<li class=""><a href="#logging">Logging</a></li>
-<li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
-<li class=""><a href="#routing-tier">Routing Tier</a></li>
-<li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#performance--caching">Performance & Caching</a></li>
-<li class=""><a href="#websockets">WebSockets</a></li>
-<li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
-<li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
-<li class=""><a href="#stacks">Stacks</a></li>
-</ul>
-</aside>
-
 # exoscale Apps Documentation
 
 ## Platform Access
@@ -418,11 +395,11 @@ this feature.
 
 The guides section has detailed examples about how to get the credentials in
 different languages
-([Ruby](https://community.exoscale.ch/apps/Guides/Ruby/Add-on%20credentials),
-[Python](https://community.exoscale.ch/apps/Guides/Python/Add-on%20credentials),
-[Node.js](https://community.exoscale.ch/apps/Guides/NodeJS/Add-on%20credentials),
-[Java](https://community.exoscale.ch/apps/Guides/Java/Add-on%20credentials),
-[PHP](https://community.exoscale.ch/apps/Guides/PHP/Add-on%20credentials)).
+([Ruby](https://community.exoscale.ch/tutorial/ruby-app-add-on-credentials),
+[Python](https://community.exoscale.ch/tutorial/python-app-add-on-credentials),
+[Node.js](https://community.exoscale.ch/tutorial/nodejs-app-add-on-credentials),
+[Java](https://community.exoscale.ch/tutorial/java-app-add-on-credentials),
+[PHP](https://community.exoscale.ch/tutorial/php-app-add-on-credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~
@@ -809,7 +786,7 @@ $ exoapp APP_NAME/DEP_NAME details
 [Python 2.6+]: http://python.org/download/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
-[guides]: https://community.exoscale.ch/apps/Guides
+[guides]: https://community.exoscale.ch/apps/tutorials
 [Add-on marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation
 [Deployment category]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment
 [rsyslog]: http://www.rsyslog.com/
