@@ -77,7 +77,7 @@ Remember, you can always refer to the addon.creds command to see the actual vari
 [Add-on Marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation/
 [environment variables]: https://community.exoscale.ch/apps/documentation/#environment-variables
 [Add-on credentials]: https://community.exoscale.ch/apps/documentation/#add-on-credentials
-[cred-env-vars]: https://community.exoscale.ch/apps/documentation/#enabling-disabling-credentials-environment-variables
+[cred-env-vars]: https://community.exoscale.ch/apps/documentation/#enablingdisabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
 [exoscale credentials helper class]: https://gist.github.com/b350762c61fcc069b427
 [MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/
