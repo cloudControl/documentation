@@ -619,8 +619,8 @@ Given that client requests don't hit your application directly, but are forwarde
 Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and forwarding of user requests to your applications. To do this in an efficient way, we set strict timeouts to the read/ write operations. The values differ slightly between the `*.cloudcontrolled.com` and `*.cloudcontrolapp.com` subdomains. You can find them below.
 
  * __Connect timeout__ - time within a connection to your application has to be established. If your containers are up, but hanging, then this timeout will not apply as the connection to the endpoints has already been made.
- * __Read timeout__ - time to retrieve a response from your application. It determines how long the routing tier will wait to get the response to a request. The timeout is established not for an entire response, but only between two operations of reading.
  * __Send timeout__ - maximum time between two write operations of a request. If your application does not take new data within this time, the routing tier will shut down the connection.
+ * __Read timeout__ - time to retrieve a response from your application. It determines how long the routing tier will wait to get the response to a request. The timeout is established not for an entire response, but only between two operations of reading.
 
 #### Timeouts for `*.cloudcontrolled.com` subdomain:
 
