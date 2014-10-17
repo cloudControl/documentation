@@ -123,10 +123,10 @@ own unique name, and the same is true on cloudControl. Where the
 service names on dotCloud are fairly arbitrary, on cloudControl there
 is one magic name, `web`. 
 
-**A service with the name `web` will be the one* service which gets
-  HTTP traffic.**
+**A service with the name `web` will be the one service which gets
+HTTP traffic.** See the *ports* section below for more information.
 
-Names for other services can be arbitrary. 
+Names for other (non-http) services can be arbitrary. 
 
 ## type: Very Different on cloudControl
 
@@ -136,7 +136,8 @@ because the name can affect its behavior in the special case of
 **because all the services in a Procfile run in the same type of
 environment**. That is, you cannot create `servicename1` as a `ruby`
 type and `servicename2` as a `python` type. **That's a big difference
-from a `dotcloud.yml` file.**
+from a `dotcloud.yml` file.** If you need multiple languages in the
+same application, you may need to create a custom buildpack
 
 ### Running Code
 
@@ -276,6 +277,10 @@ Note that cloudControl containers do not expose an SSH port. See the
 If you were setting environment variables in your `dotcloud.yml` then
 you should instead set these via `cctrlapp config.add` (see [the
 docs](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config)).
+
+Note that the same variables get set in all your services -- you
+cannot specify that a variable should only be set on one service (as
+you could in a `dotcloud.yml` file).
 
 ## process
 
