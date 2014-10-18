@@ -4,7 +4,7 @@ Before you read this document, you should read the document on *Converting dotcl
 
 ## dotCloud Features
 
-The first task is to determine what dotCloud features you Python service is using. 
+The first task is to determine what dotCloud features your Python service is using. 
 
 ### Nginx
 
