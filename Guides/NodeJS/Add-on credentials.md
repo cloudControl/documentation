@@ -68,7 +68,7 @@ var port = creds.MYSQLS.MYSQLS_PORT;
 
 Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
-[Add-on Marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation
+[Add-on Marketplace]: https://community.exoscale.ch/apps/addons/
 [environment variables]: https://community.exoscale.ch/apps/documentation/#environment-variables
-[MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/
+[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
 [Add-on credentials]:https://community.exoscale.ch/apps/documentation/#add-on-credentials

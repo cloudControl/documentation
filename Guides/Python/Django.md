@@ -47,7 +47,7 @@ Left from the colon we specified the **required** process type called `web` foll
 
 ### Production Database
 
-The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on exoscale because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [the Data Storage category][data-storage-addons].
+The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on exoscale because the filesystem is [not persistent][filesystem]. To use a database, you should choose a data storage Add-on from [the available addons][data-storage-addons].
 
 In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at `mysite/settings.py` so you can find out how to [get the MySQL credentials][get-conf] provided by MySQLs Add-on:
 
@@ -142,8 +142,8 @@ For additional information take a look at [Django Notes][django-notes] and other
 [Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [filesystem]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
-[data-storage-addons]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/
-[mysqls]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
+[data-storage-addons]: https://community.exoscale.ch/apps/addons/
+[mysqls]: https://community.exoscale.ch/tutorial/mysqls-add-on/
 [example-app]: https://github.com/cloudControl/python-django-example-app
 [django-notes]: https://community.exoscale.ch/tutorial/python-app-django-notes
 [get-conf]: https://community.exoscale.ch/tutorial/python-app-add-on-credentials

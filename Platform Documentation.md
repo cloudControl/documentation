@@ -779,7 +779,7 @@ $ exoapp APP_NAME/DEP_NAME details
 ~~~
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config
+[Custom Config Add-on]: https://community.exoscale.ch/tutorial/custom-config-add-on/
 [web console]: https://portal.exoscale.ch/applications
 [API libraries]: https://github.com/cloudControl
 [the latest version]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/
@@ -787,14 +787,13 @@ $ exoapp APP_NAME/DEP_NAME details
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
 [guides]: https://community.exoscale.ch/apps/tutorials
-[Add-on marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation
-[Deployment category]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment
+[Add-on marketplace]: https://community.exoscale.ch/apps/addons/
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
-[Alias Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Alias/
+[Alias Add-on]: https://community.exoscale.ch/tutorial/alias-add-on/
 [Varnish]: https://www.varnish-cache.org/
-[Cron Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron/
-[Cron Add-on documentation]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Cron
-[Worker Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Processing/Worker/
-[Worker Add-on documentation]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Processing/Worker
+[Cron Add-on]: https://community.exoscale.ch/tutorial/cron-add-on/
+[Cron Add-on documentation]: https://community.exoscale.ch/tutorial/cron-add-on/
+[Worker Add-on]: https://community.exoscale.ch/tutorial/worker-add-on/
+[Worker Add-on documentation]: https://community.exoscale.ch/tutorial/worker-add-on/
 [Ubuntu 12.04 LTS Precise Pangolin]: http://releases.ubuntu.com/precise/

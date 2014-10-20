@@ -85,6 +85,6 @@ names and values.
 
 [env-vars]: https://community.exoscale.ch/apps/documentation/#environment-variables
 [Add-on credentials]: https://community.exoscale.ch/apps/documentation/#add-on-credentials
-[Add-on Marketplace]: https://community.exoscale.ch/apps/Add-on%20Documentation/
-[Custom Config Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Deployment/Custom%20Config/
-[MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/
+[Add-on Marketplace]: https://community.exoscale.ch/apps/addons/
+[Custom Config Add-on]: https://community.exoscale.ch/tutorial/custom-config-add-on/
+[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/

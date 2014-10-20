@@ -153,4 +153,4 @@ Congratulations, you can now see your Sails.js application running at
 [get the MySQL credentials]: https://community.exoscale.ch/tutorial/nodejs-app-add-on-credentials/
 [websockets]: http://socket.io/
 [exoscale websockets documentation]: https://community.exoscale.ch/apps/documentation/#websockets
-[Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
+[Shared MySQL Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/

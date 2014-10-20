@@ -26,8 +26,7 @@ To use a database, have a look at the [Shared MySQL Add-on][Shared MySQL Add-on]
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
-[messaging-addons]: https://community.exoscale.ch/apps/Add-on%20Documentation/Messaging%20&%20Mobile/
-[Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
+[Shared MySQL Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
 [add-on-credentials]: https://community.exoscale.ch/tutorial/python-app-add-on-credentials
 [exoscale]: https://www.exoscale.ch/
 [worker]: https://community.exoscale.ch/apps/documentation/#scheduled-jobs-and-background-workers

@@ -188,7 +188,7 @@ $ exoapp APP_NAME/default deploy
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on's free plan](https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://community.exoscale.ch/tutorial/mysqls-add-on/). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container:
 

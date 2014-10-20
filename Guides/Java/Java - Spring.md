@@ -152,4 +152,4 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io` .
 [exoscale]: http://exoscale.ch
 [file system]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
 [log command]: https://community.exoscale.ch/apps/documentation/#logging
-[Shared MySQL Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs
+[Shared MySQL Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/

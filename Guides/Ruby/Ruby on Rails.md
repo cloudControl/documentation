@@ -196,4 +196,4 @@ other [ruby-specific documents][ruby-guides].
 [rails-notes]: https://community.exoscale.ch/tutorial/ruby/ruby-app-rubynotes
 [ruby-guides]: https://community.exoscale.ch/tutorials/tagged/ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
-[MySQL Shared Add-on]: https://community.exoscale.ch/apps/Add-on%20Documentation/Data%20Storage/MySQLs/
+[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
