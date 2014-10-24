@@ -18,7 +18,7 @@ custom domain follow the following simple steps **for each domain**.
 
  1. Add it as a TXT record to your root domain.
  
- Please use the interface of your DNS provider to add a [TXT record](http://de.wikipedia.org/wiki/TXT_Resource_Record) to your root domain. Please note how the TXT record is set for `example.com` but used to verify `www.example.com`.
+ Please use the interface of your DNS provider to add a [TXT record](https://en.wikipedia.org/wiki/TXT_Record) to your root domain. Please note how the TXT record is set for `example.com` but used to verify `www.example.com`.
  
  ~~~
  example.com.	3600	IN	TXT	"cloudControl-verification: 68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
