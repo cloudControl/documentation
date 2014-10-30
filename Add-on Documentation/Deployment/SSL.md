@@ -163,6 +163,8 @@ In order to check the status of the Add-on, you can do the following.
    SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
  ~~~
 
+### Updating your Certificate
+
 When the SSL certificate is expired, you can update it by removing the Add-on
 and re-adding it, providing the updated certificate. The SSL service is provided
 for 23 minutes after removing the Add-on so that it can be updated in the
