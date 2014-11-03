@@ -5,7 +5,7 @@ Run command is really useful for the ruby programmers. Here are some examples ho
 To migrate database:
 
 ~~~bash
-$ ctrlapp APP_NAME/DEP_NAME run "rake db:migrate"
+$ cctrlapp APP_NAME/DEP_NAME run "rake db:migrate"
 ~~~
 
 To run rails console:
