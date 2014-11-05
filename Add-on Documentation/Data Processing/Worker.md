@@ -1,8 +1,18 @@
 # Worker Add-on
 
-Workers are long running background processes. They are typically used for anything from sending emails to running heavy calculations or rebuilding caches in the background.
+Workers are long running background processes. They are typically used for
+anything from sending emails to running heavy calculations or rebuilding caches
+in the background.
 
-Each worker started via the Worker add-on runs in a seperate isolated container. The containers have exactly the same runtime environment defined by the stack chosen and the buildpack used and have the same access to all of the deployments add-ons.
+Each worker started via the Worker add-on runs in a seperate isolated
+container. The containers have exactly the same runtime environment defined by
+the stack chosen and the buildpack used and have the same access to all of the
+deployments add-ons.
+
+Note: Since we regularly exchange (multiple times per month) our backend
+servers, workers sometimes get interruped for a short period of time to be
+moved to another host. This means all your worker operations should be
+idempotent. We send a SIGTERM signal to your worker before the shutdown.
 
 ## Adding the Worker Add-on
 
