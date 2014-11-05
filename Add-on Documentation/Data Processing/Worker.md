@@ -9,10 +9,14 @@ container. The containers have exactly the same runtime environment defined by
 the stack chosen and the buildpack used and have the same access to all of the
 deployments add-ons.
 
-Note: Since we regularly exchange (multiple times per month) our backend
-servers, workers sometimes get interruped for a short period of time to be
-moved to another host. This means all your worker operations should be
-idempotent. We send a SIGTERM signal to your worker before the shutdown.
+Note: Workers sometimes get interrupted and restarted on a different host for
+the following reasons:
+ - single instances can run into issues and need to be replaced
+ - containers are redistributed to provide the best performance
+ - security updates are applied
+
+This means all your worker operations should be idempotent. If possible a `SIGTERM`
+signal is send to your worker before the shutdown.
 
 ## Adding the Worker Add-on
 
