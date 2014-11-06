@@ -1,5 +1,48 @@
 # Converting dotcloud.yml to cloudControl
 
+### App structure on dotCloud
+~~~text
++--------------------------------------------------------------------------------------------------+
+|  dotCloud application                                                                            |
++---------------------+-+---------------------+-+--------------------------+-+---------------------+
++---------------------+ +---------------------+ +--------------------------+ +---------------------+
+|  service web        | |  service support    | |  service worker          | |  service storage    |
+|                     | |                     | |                          | |                     |
+|  type: ruby         | |  type: python       | |  type: python+worker     | |  type: mysql        |
+|  port: 80           | |  port: 8300         | |  port: None              | |  port: 3306         |
+|                     | |                     | |                          | |                     |
+|                     | |                     | |                          | |                     |
+|                     | |                     | |                          | |                     |
++---------------------+ +---------------------+ +--------------------------+ +---------------------+
+~~~
+                                                                                                    
+                                                                                                    
+### App structure on cloudControl
+~~~text
++---------------------+ +--------------------------------------------------+                        
+|  cloudControl app   | | cloudControl app                                 |                        
++---------------------+ +--------------------------------------------------+                        
++---------------------+ +--------------------------------------------------+                        
+|  name: web          | |  name: support                                   |                        
+|                     | |                                                  |                        
+|  buildpack: ruby    | |  buildpack: python                               |                        
+|  port: 80           | |  port: 80                                        |                        
+|                     | |                                                  |                        
+|                     | |  additional: python-worker                       |                        
+|                     | |                                                  |                        
+|                     | |                                                  |                        
++-----------+---------+ +-----------------------------------------+--------+                        
+            |                                                     |                                 
+            | automatically connected to web app                  |                                 
+            | when Add-on is added                                |                                 
+            |                                                     |                                 
++-----------+---------+                                           |                                 
+|                     +-------------------------------------------+                                 
+|  Add-on: MySQL      |  manually connected to python app                                           
+|                     |  via custom config                                                          
++---------------------+                                                                             
+~~~
+
 For a better general understanding, an essential difference between
 an application on dotcloud and an application on cloudControl should
 be emphasized first.
@@ -389,3 +432,4 @@ Node.js | `package.json`
 Java | `pom.xml`
 
 For more information on all supported languages, please check our [Guides](TODO-ADD-LINK-TO-GUIDES).
+
