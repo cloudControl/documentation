@@ -1,4 +1,20 @@
-# Converting dotcloud.yml to cloudControl
+# Converting dotcloud.yml to a cloudControl Procfile
+Your dotcloud.yml build file is a good place to start when converting your dotCloud application to run on cloudControl. This is where you've defined what services you need and sometimes their settings as well. 
+
+This document will show you what you need to know to convert a dotcloud.yml file to a Procfile on cloudControl. We’ll start with the most important differences between the two, then walk you through each section of a dotcloud.yml file with considerations for how to convert to cloudControl configurations. 
+
+The structure of this document will mostly follow the [Build file documentation](http://docs.dotcloud.com/guides/build-file/) in the dotCloud docs. You should be familiar with that document (or all the parts of your dotcloud.yml file) to use this document. **It may help to have your dotcloud.yml file open while reading this so you can follow along**.
+
+## Services on dotCloud versus processes on cloudControl
+To better understand the differences between the dotcloud.yml file and the Procfile on cloudControl, let’s back up a bit and talk about where the differences come from. 
+
+dotCloud applications are built around several service types which you can define in the dotcloud.yml file. Each service runs different a process and has a different end point. This means that a single dotCloud application can combine, for example, a Ruby on Rails and a Python Flask implementation as two services in the same app. 
+
+On cloudControl, each application runs one main process – a web process. Each app also has only one type that you define when you create the app – this depends on which language the app is written in, and determines which [buildpack](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile) will create the image for your deployments on the platform.
+
+To port apps with several different languages onto cloudControl, you’ll need to create several applications – one for each type. However, many dotCloud services that aren’t related to the code itself, such as databases, are handled as [Add-ons](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation) on cloudControl. These integrate directly with your application and don’t require you to create multiple applications.
+
+You can run several [workers](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Processing/Worker) within a single application on cloudControl. These are handled as background processes of the application and use exactly the same runtime environment as the app.
 
 ### App structure on dotCloud
 ~~~text
@@ -15,7 +31,6 @@
 |                     | |                     | |                          | |                     |
 +---------------------+ +---------------------+ +--------------------------+ +---------------------+
 ~~~
-                                                                                                    
                                                                                                     
 ### App structure on cloudControl
 ~~~text
@@ -43,71 +58,17 @@
 +---------------------+                                                                             
 ~~~
 
-For a better general understanding, an essential difference between
-an application on dotcloud and an application on cloudControl should
-be emphasized first.
-In an application on dotcloud several service types can be defined with
-different endpoints. Thus, for example, a dotcloud application can combine
-a Ruby on Rails and a Python Flask implementation as two services.
-In an application on cloudControl you can have multiple deployments of one
-service type. And you can define only one web service per deployment.
-To achieve the same on cloudControl you have to create several applications
-for several service types.
+## dotcloud.yml versus the Procfile
+The dotcloud.yml file corresponds to the Procfile on cloudControl. Just like the dotcloud.yml, it will be located in the root of your repository. The format of the Procfile is much simpler than dotcloud.yml because most of the configuration is handled through the dcapp CLI and the Buildpacks. The Procfile in a cloudControl application is simply used to determine how to start the actual application in the container – both the web and worker processes. 
 
-Your `dotcloud.yml` build file is a good place to start when
-converting your dotCloud application to run on cloudControl. This is
-where you've defined what services you need and sometimes their
-settings as well. This document will walk you through each section of
-a `dotcloud.yml` file with considerations for how to convert to
-cloudControl configurations. The structure of this document will
-mostly follow the [Build file
-documentation](http://docs.dotcloud.com/guides/build-file/) in the
-dotCloud docs. You should be familiar with that document (or all the
-parts of your `dotcloud.yml` file) to use this document.
+You should create a new Procfile at the same level as your dotcloud.yml (in the root of your reposity). We'll talk about what to add to this file in the following sections.
 
-Since the `dotcloud.yml` file also defines some of the build time
-behavior, we will also compare the dotCloud and cloudControl build
-processes.
+## dotcloud.yml format
+Here is the example dotcloud.yml from the dotCloud documentation. We'll walk through each section below. The sections of your own dotcloud.yml may appear in a different order.
 
-In the below document we will use the term "process" to refer to dotcloud "service",
-since in a Procfile you can only define the command to start the
-web process and multiple worker processes.
-
-
-## Location
-
-Your `dotcloud.yml` file is located in the root of your source
-tree. For example:
-
-```
-myapp/
-├── dotcloud.yml
-├── admin/ (source code for adminstration backend)
-└── frontend/ (source code for frontend)
-```
-
-You should open that file and read through it as you read through this
-document.
-
-The corresponding file on cloudControl is the `Procfile`. The format
-of the Procfile is much simpler than `dotcloud.yml` because most of
-the configuration is handled through the `dcapp` CLI and
-Buildpacks, but the basic idea is the same: list web and worker
-processes in the deployment and define some behavior.
-
-You should create a new `Procfile` at the same level as your
-`dotcloud.yml`. We'll talk about what to add to this file below.
-
-
-## `dotcloud.yml` format
-
-Here is the example `dotcloud.yml` from the dotCloud
-documentation. We'll walk through each section below. The sections of
-your own `dotcloud.yml` may appear in a different order.
-
-```
+~~~yaml
 # Required parameters for a service: service name and type
-servicename1:    # Any name up to 16 characters using a-z, 0-9 and _
+servicename1:   # Any name up to 16 characters using a-z, 0-9 and _
   type: ruby     # Must be valid service type.
 
 servicename2:
@@ -158,59 +119,50 @@ servicename2:
   requirements: # Defaults to empty list.
     - dependency_package_name_1
     - dependency_package_2
-```
+~~~
 
-This shows two services, `servicename1` and `servicename2`. Each has a
-type, and `servicename2` has a lot of other parameters related to it.
+This shows two services, servicename1 and servicename2. Each has a type, and servicename2 has a lot of other parameters related to it.
 
-For contrast, here is a similar `Procfile` with two Python services
-instead of a mix of Ruby and Python. We'll talk about why that is
-important in the *type* section below.
+## Procfile format
+For contrast, here is a sample Procfile for a Python Celery app:
 
-Python celery example:
-
-```
+~~~bash
 web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --auth=$FLOWER_AUTH_EMAIL
-worker: celery -A tasks worker --loglevel=info
-```
+worker_a: celery -A tasks worker --loglevel=info
+worker_b: python otherworker.py
+~~~
 
-## servicename, processes and names: A Little Magic
+Note that in the Procfile, only the web and worker processes are defined. Each line in the Procfile is actually a shell command that will run just like you define it. This means you can customize the start options for your processes here.
 
-Your application on dotCloud can have multiple services, each with its own
-unique name. The same is true on cloudControl, where these are also known
-as "processes". Where the service names on dotCloud are fairly arbitrary, on
-cloudControl there is one magic name, `web`.
+## servicename and type
+Your application on dotCloud can have multiple services, each with its own unique name that you define. On dotCloud, service names are fairly arbitrary. On cloudControl, services are handled quite differently because of how the platform is built. There are two types of processes on cloudControl, each of which is specifically defined: web processes, and worker processes. All other services are handled via [Add-ons](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) and are not defined in the Procfile.
 
-**A process with the name `web` will be the one which gets HTTP traffic.**
-See the *ports* section below for more information.
+### Type: (language) / web process
+On cloudControl, each application is based around one main, language-specific web process. This is because the cloudControl platform uses Buildpacks – a language-specific set of scripts that builds the images for your apps based on the language you specify. 
 
-Non-http services are treated as worker and the names can be arbitrary.
+As a result of this, **all the processes in a Procfile run in the same environment**. That means you can’t create servicename1 as a ruby type and servicename2 as a python type. **That's a big difference from a dotcloud.yml file**. If you need multiple languages in your project, you may need to create multiple applications.
 
-## type: Very Different on cloudControl
+On cloudControl, you specify the language when you `dcapp APP_NAME create` the application. You can specify one of the predefined types (buildpacks): java, nodejs, php, python, ruby or custom. This will define the environment for the entire app.
 
-cloudControl does not provide services as we know them in dotCloud.
-Since there is only one type for an entire Procfile, you
-specify the type when you `dcapp create` the application.
-You can specify one of the predefined types (buildpacks):
-`java`, `nodejs`, `php`, `python`, `ruby` or `custom`.
+Once you’ve created the application, you need to set the web process and specify how it will be started by the shell. In the Procfile, this is an actual shell command. **The process with the name web will be the one which gets HTTP traffic**. 
 
-In a `Procfile` the service name is actually called a "process type"
-because the name can affect its behavior in the special case of
-`web`. Procfiles don't actually have the idea of a `type` of service
-**because all the services in a Procfile run in the same type of
-environment**. That is, you cannot create `servicename1` as a `ruby`
-type and `servicename2` as a `python` type. **That's a big difference
-from a `dotcloud.yml` file.** If you need multiple languages in your
-project, you may need to create multiple applications.
+### Type: (language)-worker / worker process
+On cloudControl, you can define multiple workers in the Procfile that will run as background processes in that application. They use the exact same runtime environment as the web process. 
 
-### Running Code
+To use this functionality, you need to add the [Worker Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Processing/Worker) to your app.
 
-In a `Procfile`, both `servicename1` and `servicename2` run in the
-same language type and on the same code base.
-If you only have one web process and the rest are workers, then
-converting to a Procfile is trivial:
+### Non-code services / Add-ons
+In the dotcloud.yml file, you can define many different kinds of services within the app, including databases like MySQL, or other services like Redis. A Procfile on cloudControl only specifies your web and worker processes. This is very different from a dotcloud.yml file.
 
-```
+On cloudControl, "Data Services" like MySQL and Redis, as well as many other types of services like logging, monitoring and even SSL, are handled outside of the Procfile with [Add-ons](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons). You can simply add them to your web app in the CLI with `dcapp addon.add`. This automatically connects the services to your app.
+
+To connect these services to an additional web app (for example if your existing dotCloud app was using multiple http-port code services in different languages), you can connect them manually using the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config).
+
+
+### Example dotcloud.yml to Procfile migration
+In a Procfile, all processes run in the same language type and on the same code base. If the services in your dotCloud app only include one web process and one or more workers, then converting to a Procfile is trivial:
+
+~~~yaml
 servicename1:
    type: python
 
@@ -219,217 +171,72 @@ servicename2:
 
 servicename3:
    type: rabbitmq
-```
-
+~~~
 becomes (for a Python Celery app with a CloudAMQP Add-on for RabbitMQ):
 
-```
+~~~yaml
 web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --auth=$FLOWER_AUTH_EMAIL
 worker: celery -A tasks worker --loglevel=info
-```
+~~~
 
-The entry for the web or worker process will be executed as a shell commandline.
+The entry for the web or worker process will be executed as a shell command.
 
-> For more specific details, please see the porting guide specific to
-Python or your language of choice.
-
-If you need to run some code in a mix of languages, e.g. Ruby and
-Python (as in the example `dotcloud.yml` file above), then you will
-need to create multiple applications with a different type or a single
-application with a custom buildpack to install the languages you need.
-
-### Non-code services
-
-But what if some of your `type`s in your dotcloud.yml are not
-programming languages? What if they are services like MySQL or Redis?
-
-**A `Procfile` only specifies the "code services" of your
-application. This is very different from a `dotcloud.yml` file.**
-
-"Data Services" like MySQL and Redis, as well as many other types of
-services like logging, monitoring, and even SSL are handled outside of
-the `Procfile` with
-[Add-ons](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons)
-via `dcapp addon.add`.
+For more specific details, please see the [porting guides](https://github.com/cloudControl/documentation/tree/master/Guides/dotCloud-cloudControl%20migration) specific to your language of choice. Please note that we will continually update these guides to include all of the languages officially supported on cloudControl.
 
 ## approot
-
-You may have used the `approot` directive in `dotcloud.yml` to tell
-the platform where to find the code to run, but the cloudControl
-`Procfile` lets you set this first command explicitly, so **you don't
-need an `approot`**. If you need to change directory before running
-your first statement, you can do that in the command of the
-`Procfile`:
-
-```
+You may have used the approot directive in dotcloud.yml to tell the platform where to find the code to run, but the cloudControl Procfile lets you set this first command explicitly, so you don't need an approot. If you need to change directory before running your first statement, you can do that in the command of the Procfile:
+~~~yaml
 web: cd myapproot; sh startapp.sh
-```
+~~~
+(myapproot and startapp.sh are arbitrary names, just for example)
 
-(*myapproot* and *startapp.sh* are arbitrary names, just for example)
+If you want to change the approot for PHP-based applications, the process is slightly different. In this case, you’ll need to [manually set the Apache’s DocumentRoot](https://github.com/cloudControl/buildpack-php#manually-setting-the-documentroot). 
 
-For php based applications you have to change the approot in another way.
-Since the php-scripts are executed by php-fpm you have to set the apache's
-`DocumentRoot`, see [Manually Setting the DocumentRoot](https://github.com/cloudControl/buildpack-php#manually-setting-the-documentroot).
-
-cloudControl processes do not have any magically-created directories
-like the dotCloud services. There are neither `code` nor `current`
-symbolic links. The root of your home directory has the same format
-and contents as the directory which contained your `Procfile`.
-
+cloudControl processes do not have any magically created directories like the dotCloud services. There are neither code nor current symbolic links. The root of your home directory has the same format and contents as the directory which contains your Procfile.
 
 ## prebuild, postbuild, postinstall: Build Hooks
+### prebuild and postbuild scripts
+The officially supported Buildpacks on cloudControl consist of a standard set of scripts that are run when the deployment image is being built. Because of this, prebuild and postbuild hooks are not natively supported. 
 
-If you are using a `prebuild` or `postbuild` script in your
-`dotcloud.yml`, that could mean you need to create [your own
-Buildpack](https://www.cloudcontrol.com/dev-center/Guides/Third-Party%20Buildpacks/Third-Party%20Buildpacks).
-You can write a Buildpack from scratch, or you can compose multiple
-Buildpacks together (using [a third party meta-buildpack](https://github.com/ddollar/heroku-buildpack-multi)). In
-any case, a Buildpack will enable you to create your own custom
-service type with the software you want pre-installed (like a
-`prebuild` script) and any build and post-build compilation steps you
-need (like your `postbuild` script).
+If you have applications on dotCloud that use prebuild and postbuild hooks, it’s worthwhile to try pushing and deploying them using one of the officially supported Buildpacks first. The stack may already have the components you need installed and it may work out of the box.
 
-If you have a `postinstall` script, you can run the same step as part
-of your Procfile command, e.g. Procfile:
+If not, you may need make modifications to a standard buildpack and use it as a [custom Buildpack](https://www.cloudcontrol.com/dev-center/Guides/Third-Party%20Buildpacks/Third-Party%20Buildpacks). First download the Buildpack for your app’s language type from [cloudControl’s public Github repo](https://github.com/cloudControl?query=buildpack) and modify the `bin/compile` script according to your needs. (Keep in mind that only the `/app` folder is writeable, so you can’t use the Ubuntu package manager to install libraries.) Upload your new custom Buildpack to a public non-ssh git repository, and create your application with the apptype `custom --buildpack BUILDPACK_URL`.
 
-```
-web: cd myapproot; postinstall.sh; sh startapp.sh
-```
+### postinstall scripts
+If you have a postinstall script, you can run the same step as part of your Procfile command, e.g. Procfile:
+~~~yaml
+web: sh postinstall.sh; sh startapp.sh
+~~~
 
 ## systempackages
-
-Like `prebuild` and `postbuild` scripts, a `systempackages` section in
-your `dotcloud.yml` file probably means you need to create your own
-Buildpack. A custom Buildpack will enable you to set up the software
-you need, though you may not be able to install it using `apt-get`
-(which is how `systempackages` items get installed). You might need to
-include the source code or binaries as part of your Buildpack. For this
-you want to create a [custom Buildpack](https://www.cloudcontrol.com/dev-center/Guides/Third-Party%20Buildpacks/Third-Party%20Buildpacks).
-Depending on your application's language download the accordingly Buildpack from [github cloudControl](https://github.com/cloudControl?query=buildpack)
-and change the `bin/compile` script according to your needs (keep in mind
-that only the `/app` folder is writeable so `apt-get install` will fail).
-Upload the Buildpack to a public non-ssh git repository, and create your
-application with the apptype `custom --buildpack BUILDPACK_URL`
+Like prebuild and postbuild scripts, a systempackages section in your dotcloud.yml file may mean you need to modify a buildpack. See the above section on prebuild and postbuild scripts on how to create a custom buildpack.
 
 ## config
+There are a couple of ways to migrate your dotcloud.yml config section, depending on what you are configuring.
 
-There are a couple of replacements for a dotCloud `config` section,
-depending on what needs configuring. Some configuration options may be
-handled explicitly by the type of service -- you should read the
-documentation for the Buildpack you're using. The cloudControl
-buildpacks are [available on
-GitHub](https://github.com/cloudcontrol?query=buildpack). For example,
-you can specify the Python version to use by creating a `runtime.txt`
-file to replace your `dotcloud.yml config: python_version`.
+If you’re using the config section to specify an interpreter version (e.g. Python 2.6 vs. Python 2.7), check the [cloudControl buildpack documentation on Github](https://github.com/cloudcontrol?query=buildpack) for how to do this with your specific buildpack. For example, you can specify the Python version by creating a runtime.txt file to replace your dotcloud.yml config: python_version.
 
-If your configuration could be replaced by setting an environment
-variable, you can do that with the CLI: `dcapp APP_NAME config.add`. Please read
-[the
-Add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config)
-and our [dedicated guide](TODO-ADD-ENVS-GUIDE) on this topic.
+If you’re using the dotcloud.yml config section to specify how to start your processes, you can accomplish this on cloudControl using the [Custom Config Add-on](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) and the Procfile. First set the variables using Custom Config and add them as part of the shell command that starts the web and worker processes in the Procfile. Note that for some Add-on services, this is done automatically. 
+
+For more information, read our guide on [migrating environment variables](https://github.com/cloudControl/documentation/blob/master/Guides/dotCloud-cloudControl%20migration/Migrating%20environment.md) from dotCloud to cloudControl.
 
 ## ports
+If you have a ports section in your dotcloud.yml then you should only have one port listed, a single http type port. That is the only kind of port allowed on the cloudControl PaaS. You can only have one process which listens to an HTTP port. 
 
-If you have a `ports` section in your `dotcloud.yml` then hopefully
-you only have one port listed, a single `http` type port. That is the
-only kind of port allowed on the cloudControl PaaS. You can only have
-one process which listens to an HTTP port. This is pretty common for
-`custom` type apps on dotCloud.
+If you do have multiple services each with their own HTTP port, then you should consider how to either separate these into different applications or how to access each different function via a different URL path (e.g. if you used to have an "admin" interface as well as a public interface, move your "admin" interface to be part of your public interface on another path, like "www.example.com/admin").
 
-If you do have multiple services each with their own HTTP port, then
-you should consider how to either separate these into different
-applications or how to access each different function via a different
-URL path (e.g. if you used to have an "admin" interface as well as a
-public interface, move your "admin" interface to be part of your
-public interface on another path, like "www.example.com/admin").
-
-Note that cloudControl containers do not expose an SSH port. See the
-[Secure Shell docs](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh).
+Note that cloudControl containers do not expose an SSH port. See the [Secure Shell docs](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh).
 
 ## environment
+If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on cloudControl. Please read the [Add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config) and our [dedicated guide](https://github.com/cloudControl/documentation/blob/master/Guides/dotCloud-cloudControl%20migration/Migrating%20environment.md) on this topic.
 
-If you were setting environment variables in your `dotcloud.yml` then
-you should instead set these via `dcapp APP_NAME config.add`. Please read
-[the
-Add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config)
-and our [dedicated guide](TODO-ADD-ENVS-GUIDE) on this topic.
-
-Note that the same variables get set in all your services (web and worker) -- you
-cannot specify that a variable should only be set on one service (as
-you could in a `dotcloud.yml` file).
-
-## process
-
-If your `dotcloud.yml` file includes a `process` or `processes`
-section, you will probably need to install `supervisor` so that you
-can run multiple processes. Other process managers are usable too,
-like foreman (written in Ruby), but if you're coming from the dotCloud
-environment, you're probably already familiar with `supervisor`
-(written in Python).
-
-Each service on the dotCloud platform could generally rely on the
-presence of [`supervisord`](http://supervisord.org/) so it can start
-up multiple processes in the same service. Typical cloudControl apps
-only run one process per service. **But you can install supervisord**
-yourself. This is especially easy on `python` type applications,
-though you could add `python` and `pip` with your own Buildpack if
-necessary. On a `python` type application, you can install supervisor
-by adding this to your `requirements.txt` file:
-
-```
-supervisor
-supervisor-stdout
-```
-
-Then you'll need to add a `supervisor.conf` file which lists each of the
-processes you had in your `dotcloud.yml`.
-
-Note that the dotCloud PaaS code services often ran both `supervisor`
-and `nginx`. `nginx` was typically started by `init.d` and so was not
-explicitly controllable by you, but on cloudControl you can run nginx
-as another process under `supervisor` if you wish. This gets you
-pretty close to a dotCloud environment on cloudControl.
+Note that the same variables are set in all your application processes (web and worker) -- you cannot specify that a variable should only be set on one process (as you could in a dotcloud.yml file).
 
 ## requirements
-
 On the dotCloud platform, a `requirements` section can help install
 additional dependencies of your application during build time (after
 `dotcloud push`). On cloudControl you should use the mechanism
 provided by your Buildpack.
 
-### Python
-
-The Python Buildpack expects a `requirements.txt` file in your root
-directory (same level as the `Procfile`). This file contains all of
-your deployment dependencies.
-
-This is how a `requirements.txt` file might look like:
-
-~~~
-tornado==3.2
-pymongo==2.6.3
-suds==0.4
-newrelic==2.16.0.12
-logentries==0.2.1
-~~~
-
-You can generate this file automatically by using the `pip freeze` command.
-This will read the installed packages in the current environments and
-print them out. You can store this output directly into your `requirements.txt`
-file with:
-
-~~~bash
-$ pip freeze > requirements.txt
-~~~
-
-### Other buildpacks
-
-Buildpack| Required file
---------:|--------------
-Ruby | `Gemfile`
-PHP | `composer.json`
-Node.js | `package.json`
-Java | `pom.xml`
-
-For more information on all supported languages, please check our [Guides](TODO-ADD-LINK-TO-GUIDES).
+For more information on all supported languages, please check our [Guides](https://github.com/cloudControl/documentation/tree/master/Guides).
 
