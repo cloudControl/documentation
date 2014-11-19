@@ -782,7 +782,7 @@ $ exoapp APP_NAME/DEP_NAME details
 [Custom Config Add-on]: https://community.exoscale.ch/tutorial/custom-config-add-on/
 [web console]: https://portal.exoscale.ch/applications
 [API libraries]: https://github.com/cloudControl
-[the latest version]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/
+[the latest version]: https://www.cloudcontrol.com/download/win
 [Python 2.6+]: http://python.org/download/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
