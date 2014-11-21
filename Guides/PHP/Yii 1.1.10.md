@@ -7,7 +7,7 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
  * Baked in Security
  * Clear MVC approach
  * A large, thriving, community
- * Loads of plugins and add-ons
+ * Lots of plugins and add-ons
  * Easy to read documentation
 
 In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the cloudControl platform](http://www.cloudcontrol.com).
