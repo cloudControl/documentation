@@ -512,6 +512,13 @@ Workers are long running background processes. They are not accessible via http 
 
 The `deploy` log provides detailed information about the deploy process. It shows on how many nodes your deployment is running with additional information about the nodes, startup times and when the loadbalancers begins sending traffic to the [new version](#deploying-new-versions).
 
+### Limits
+
+We use [message
+reduction](http://www.rsyslog.com/doc/rsconf1_repeatedmsgreduction.html), i.e.
+duplicate lines get reduced to "Last line repeated n times". The number of
+messages is limited to 200 within the last 5 seconds.
+
 ### Customizing logging
 
 Some Add-ons in the [Deployment category] as well as the [Custom Config Add-on] can be used to forward error and worker logs to the external logging services.
