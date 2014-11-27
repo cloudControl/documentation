@@ -13,7 +13,7 @@
 <li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
 <li class=""><a href="#routing-tier">Routing Tier</a></li>
 <li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#performance--caching">Performance & Caching</a></li>
+<li class=""><a href="#performance">Performance</a></li>
 <li class=""><a href="#websockets">WebSockets</a></li>
 <li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
 <li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
@@ -522,16 +522,26 @@ From now on all the new logs should be visible in your custom syslog remote.
 
 **TL;DR:**
 
- * Each deployment is provided with both a `*.cloudcontrolled.com` and `*.cloudcontrolapp.com` subdomain.
+ * Each deployment is provided with a `cloudcontrolapp.com` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment is provided per default with both a `*.cloudcontrolled.com` and `*.cloudcontrolapp.com` subdomain. The `APP_NAME.cloudcontrolled.com` or `APP_NAME.cloudcontrolapp.com` will point to the `default` deployment while any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.cloudcontrolled.com` or `DEP_NAME-APP_NAME.cloudcontrolapp.com`.
+Each deployment is provided per default with a `*.cloudcontrolapp.com` subdomain.
+The `APP_NAME.cloudcontrolapp.com` will point to the `default` deployment while
+any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io`.
 
-You can also use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments, simply add each one as an alias and add a CNAME for each pointing to your deployment's subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolled.com` or `awesomeapp.cloudcontrolapp.com`. The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one of your deployments.
+You can also use custom domains to access your deployments. To add a domain
+like `www.example.com`, `app.example.com` or `secure.example.com` to one of your
+deployments, simply add each one as an alias and add a CNAME for each pointing to
+your deployment's subdomain. So to point `www.example.com` to the default deployment
+of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolapp.com`.
+The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one
+of your deployments.
 
-All custom domains need to be verified before they start working. To verify a domain, it is required to also add the cloudControl verification code as a TXT record.
+All custom domains need to be verified before they start working. To verify a domain,
+it is required to also add the exoscale verification code as a TXT record.
 
-Changes to DNS can take up to 24 hours until they have effect. Please refer to the Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the
+Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
 
 ### Root Domains
 
@@ -555,26 +565,31 @@ root to the configured subdomain (e.g. example.org -> www.example.org).
 **TL;DR:**
 
  * All HTTP requests are routed via our routing tier.
- * Within the routing tier, you can choose to route requests via the `*.cloudcontrolled.com` or `*.cloudcontrolapp.com` subdomains.
- * The `*.cloudcontrolled.com` subdomain provides support for HTTP caching via Varnish.
+ * Within the routing tier, requests are routed via the `*.cloudcontrolapp.com` subdomain.
  * The `*.cloudcontrolapp.com` subdomain provides WebSocket support.
  * Requests are routed based on the `Host` header.
  * Use the `X-Forwarded-For` header to get the client IP.
 
-All HTTP requests made to apps on the platform are routed via our routing tier. The routing tier is designed as a cluster of reverse proxy loadbalancers which orchestrate the forwarding of user requests to your applications. It takes care of routing the request to one of the application's containers based on matching the `Host` header against the list of the deployment's aliases. This is accomplished via the `*.cloudcontrolled.com` or `*.cloudcontrolapp.com` subdomains.
+All HTTP requests made to apps on the platform are routed via our routing tier.
+The routing tier is designed as a cluster of reverse proxy loadbalancers which
+orchestrate the forwarding of user requests to your applications. It takes care
+of routing the request to one of the application's containers based on matching
+the `Host` header against the list of the deployment's aliases. This is accomplished
+via the `*.cloudcontrolapp.com` subdomain.
 
-The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the added latency as low as possible.
+The routing tier is designed to be robust against single node and even complete
+datacenter failures while still keeping the added latency as low as possible.
 
 ### SSL
 
 Transport Layer Security (TLS / SSL) is available to encrypt traffic between
 users and applications.
 
-As part of the provided `.cloudcontrolled.com` subdomain, all deployments have
-access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate.
+As part of the provided `.cloudcontrolapp.com` subdomain, all deployments have
+access to piggyback SSL using a `*.cloudcontrolapp.com` wildcard certificate.
 To use this, simply point your browser to:
-* `https://APP_NAME.cloudcontrolled.com` for the default deployment
-* `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments
+* `https://APP_NAME.cloudcontrolapp.com` for the default deployment
+* `https://DEP_NAME-APP_NAME.cloudcontrolapp.com` for non-default deployments
 
     Please note the **dash** between DEP_NAME and APP_NAME.
 
@@ -586,27 +601,34 @@ found in the [SSL add-on documentation](https://www.cloudcontrol.com/dev-center/
 
 ### Elastic Addresses
 
-Because of the elastic nature of the routing tier, the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
+Because of the elastic nature of the routing tier, the list of routing tier addresses
+can change at any time. It is therefore highly discouraged to point custom domains
+directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to
+the [custom domain section](#provided-subdomains-and-custom-domains) for more details
+on the correct DNS configuration.
 
 ### Remote Address
 
-Given that client requests don't hit your application directly, but are forwarded via the routing tier, you can't access the client's IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available, the routing tier sets the `X-Forwarded-For` header to the original client's IP.
+Given that client requests don't hit your application directly, but are forwarded via
+the routing tier, you can't access the client's IP by reading the remote address. The
+remote address will always be the internal IP of one of the routing nodes. To make the
+origin remote address available, the routing tier sets the `X-Forwarded-For` header to
+the original client's IP.
 
 ### Reverse Proxy timeouts
 
-Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and forwarding of user requests to your applications. To do this in an efficient way, we set strict timeouts to the read/ write operations. The values differ slightly between the `*.cloudcontrolled.com` and `*.cloudcontrolapp.com` subdomains. You can find them below.
+Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and
+forwarding of user requests to your applications. To do this in an efficient way, we set
+strict timeouts to the read/ write operations. You can find them below.
 
- * __Connect timeout__ - time within a connection to your application has to be established. If your containers are up, but hanging, then this timeout will not apply as the connection to the endpoints has already been made.
- * __Send timeout__ - maximum time between two write operations of a request. If your application does not take new data within this time, the routing tier will shut down the connection.
- * __Read timeout__ - time to retrieve a response from your application. It determines how long the routing tier will wait to get the response to a request. The timeout is established not for an entire response, but only between two operations of reading.
-
-#### Timeouts for `*.cloudcontrolled.com` subdomain:
-
-|Parameter|Value [s]|
-|:---------|:----------:|
-|Connect timeout|60|
-|Send timeout|60|
-|Read timeout|120|
+ * __Connect timeout__ - time within a connection to your application has to be established.
+ If your containers are up, but hanging, then this timeout will not apply as the connection to
+ the endpoints has already been made.
+ * __Read timeout__ - time to retrieve a response from your application. It determines how long
+ the routing tier will wait to get the response to a request. The timeout is established not
+ for an entire response, but only between two operations of reading.
+ * __Send timeout__ - maximum time between two write operations of a request. If your application
+ does not take new data within this time, the routing tier will shut down the connection.
 
 #### Timeouts for `*.cloudcontrolapp.com` subdomain:
 
@@ -618,23 +640,36 @@ Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acc
 
 ### Requests distribution
 
-Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable service resolving domain names in a round robin fashion. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run on one container and therefore are only hosted in one availability zone.
+Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable
+service resolving domain names in a round robin fashion. All nodes are equally distributed to
+the three different availability zones but can route requests to any container in any other
+availability zone. To keep latency low, the routing tier tries to route requests to containers
+in the same availability zone unless none are available. Deployments running on --containers 1
+(see the [scaling section](#scaling) for details) only run on one container and therefore are
+only hosted in one availability zone.
 
 ### High Availability
 
-The routing tier provides two mechanisms to ensure high availability, depending on the provided subdomain. These are Failover (for the `*.cloudcontrolled.com` subdomain) and Health Checker (for the `*.cloudcontrolapp.com` subdomain). Because these mechanisms depend on having multiple containers available to route requests, only deployments with more than one container running (see the [scaling section](#scaling) for details) can take advantage of high availability.
+The routing tier provides a Health Checker to ensure high availability. Because this mechanism
+depends on having multiple containers available to route requests, only deployments with more
+than one container running (see the [scaling section](#scaling) for details) can take advantage
+of high availability.
 
-In the event of a single node or container failure, the platform will start a replacement container. Deployments running on --containers 1 will be unavailable for a few minutes while the platform starts the replacement. To avoid even short downtimes, set the --containers option to at least 2.
+In the event of a single node or container failure, the platform will start a replacement container.
+Deployments running on --containers 1 will be unavailable for a few minutes while the platform starts
+the replacement. To avoid even short downtimes, set the --containers option to at least 2.
 
-#### `*.cloudcontrolled.com` subdomain
+#### Health Checker
 
-For the `*.cloudcontrolled.com` subdomain, failed requests are automatically re-routed to alternate containers via a failover mechanism.  Requests will be retried with a different container within the set timeouts. It will also ensure the next request is not sent to the slow/faulty container for a given amount of time.
+For the `*.cloudcontrolapp.com` subdomain, failed requests will cause an error message to be returned to
+the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals
+the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests.
+Subsequent requests are routed to an available container of the deployment. Once the health checker notices
+that the container has recovered, the container will be re-included in the list to receive requests.
 
-#### `*.cloudcontrolapp.com` subdomain
-
-For the `*.cloudcontrolapp.com` subdomain, failed requests will cause an error message to be returned to the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests. Subsequent requests are routed to an available container of the deployment. Once the health checker notices that the container has recovered, the container will be re-included in the list to receive requests.
-
-Because the health checker actively monitors containers where an application is running into timeouts or returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502` or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
+Because the health checker actively monitors containers where an application is running into timeouts or
+returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502`
+or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
 
 
 ## Scaling
@@ -662,47 +697,18 @@ In addition to controlling the number of containers you can also specify the mem
 You can use the [Blitz.io] and [New Relic Add-ons] to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --memory settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial] that explains this in more detail.
 
 
-## Performance & Caching
+## Performance
 
 **TL;DR:**
 
  * Reduce the total number of requests that make up a page view.
- * Cache as far away from your database as possible.
- * Try to rely on cache breakers instead of flushing.
 
 ### Reducing the Number of Requests
 
-Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. One common technique to accomplish this is combining and minimizing javascript and css files into one file each and using sprites for images.
-
-### Caching Early
-
-After you have reduced the total number of requests, it's recommended to cache as far away from your database as possible. Using far-future `expires` headers avoids that browsers request resources at all. The next best way of reducing the number of requests that hit your containers is to cache complete responses in the loadbalancer. For this we offer caching directly in the routing tier.
-
-#### Caching Proxy
-
-The routing tier that is in front of all deployments includes a [Varnish] caching proxy. To use this feature, it is necessary to use the `*.cloudcontrolled.com` subdomain. To have your requests cached directly in Varnish and speed up the response time through this, ensure you have set correct [cache control headers](http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html) (`Cache-Control`, `Expires`, `Age`) for the request. Also, ensure that the request does not include a cookie. Cookies are often used to keep state across requests (e.g. if a user is logged in). To avoid caching responses for logged-in users and returning them to other users, Varnish is configured to never cache requests with cookies.
-
-To be able to cache requests in Varnish for apps that rely on cookies, we recommend using a [cookieless domain](http://www.ravelrumba.com/blog/static-cookieless-domain/). In this case, you have to register a new domain and configure your DNS database with a `CNAME` record that points to your `APP_NAME.cloudcontrolled.com` subdomain `A` record. Then you can update your web application's configuration to serve static resources from your new domain.
-
-You can check if a request was cached in Varnish by checking the response's *X-varnish-cache* header. The value HIT means the respons was answered directly from the cache, and MISS means it was not.
-
-#### In-Memory Caching
-
-To speed up requests that can't use a cookieless domain, you can use in-memory caching to store arbitrary data from database query results to complete http responses. Since the cloudControl routing tier distributes requests across all available containers, it is recommended to cache data in a way that the cache is also available for requests that are routed to different containers. A battle-tested solution for this is Memcached, which is available via the [MemCachier Add-on]. Refer to the [managing Add-ons](#managing-add-ons) section on how to add it. In addition the [MemCachier Documentation] has detailed instructions on how to use it for your language and framework of choice.
-
-### Cache Breakers
-
-When caching requests on client side or in a caching proxy, the URL is usually used as the cache identifier. As long as the URL stays the same and the cached response has not expired, the request is answered from cache. As part of every deployment, all containers are started from a clean image. This ensures that all containers have the latest app code including templates, css, image and javascript files. However, when using far-future `expires` headers as recommended above, this doesn't change anything if the response was cached at client or loadbalancer level. To ensure clients get the latest and greatest version, it is recommend to include a changing parameter into the URL. This is commonly referred to as a cache breaker.
-
-The [environment variables](#environment-variables) of the deployment runtime environment contain the DEP_VERSION of the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
-
-This technique works for URLs as well as for the keys in in-memory caches like `Memcached`.
-Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache, you would lose all cached values.
-Including the DEP_VERSION in the key is an easy way to ensure that the cache is clear for a new version without flushing.
-
-### Caching in cloudcontrolapp.com subdomain
-
-Requests via the `*.cloudcontrolapp.com` subdomain cannot be cached in the routing tier. However, it is still possible to provide caching for static assets by utilizing a separate cookieless domain as a CNAME of the `*.cloudcontrolled.com`subdomain. For example, you can serve the dynamic requests of your application via www.example.com (a CNAME FOR `example.cloudcontrolapp.com`) and serve the static assets like CSS, JS and images via `static.example.com` (a CNAME for `example.cloudcontrolled.com`).
+Perceived web application performance is mostly influenced by the frontend. It's very common
+that the highest optimization potential lies in reducing the overall number of requests per
+page view. One common technique to accomplish this is combining and minimizing javascript and
+css files into one file each and using sprites for images.
 
 
 ## WebSockets
@@ -741,19 +747,28 @@ Please note that Secure WebSockets connections can only be established using `*.
 
 **TL;DR:**
 
- * Web requests are subject to a time limit of 120s.
+ * Web requests are subject to a time limit of 55s.
  * Scheduled jobs are supported through different Add-ons.
  * Background workers are the recommended way of handling long running or asynchronous tasks.
 
-Since a web request taking longer than 120s is killed by the routing tier, longer running tasks have to be handled asyncronously.
+Since a web request taking longer than 55s is killed by the routing tier, longer
+running tasks have to be handled asyncronously.
 
 ### Cron
 
-For tasks that are guaranteed to finish within the time limit, the [Cron add-on] is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron Add-on, please refer to the [Cron Add-on documentation].
+For tasks that are guaranteed to finish within the time limit, the [Cron add-on] is a
+simple solution to call a predefined URL daily or hourly and have that task called periodically.
+For a more detailed documentation on the Cron Add-on, please refer to the [Cron Add-on documentation].
 
 ### Workers
 
-Tasks that will take longer than 120s to execute, or that are triggered by a user request and should be handled asyncronously to not keep the user waiting, are best handled by the [Worker add-on]. Workers are long-running processes started in containers. Just like the web processes but they are not listening on any port and therefore do not receive http requests. You can use workers, for example, to poll a queue and execute tasks in the background or handle long-running periodical calculations. More details on usage scenarios and available queuing Add-ons are available as part of the [Worker Add-on documentation].
+Tasks that will take longer than 55s to execute, or that are triggered by a user
+request and should be handled asyncronously to not keep the user waiting, are best
+handled by the [Worker add-on]. Workers are long-running processes started in containers.
+Just like the web processes but they are not listening on any port and therefore do not
+receive http requests. You can use workers, for example, to poll a queue and execute tasks
+in the background or handle long-running periodical calculations. More details on usage
+scenarios and available queuing Add-ons are available as part of the [Worker Add-on documentation].
 
 
 ## Secure Shell (SSH)
@@ -859,7 +874,6 @@ $ cctrlapp APP_NAME/DEP_NAME details
 [Alias Add-on]: https://www.cloudcontrol.com/add-ons/alias
 [Blitz.io]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io
 [MemCachier Add-on]: https://www.cloudcontrol.com/add-ons/memcachier
-[Varnish]: https://www.varnish-cache.org/
 [MemCachier Documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MemCachier
 [New Relic Add-ons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic
 [tutorial]: https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app
