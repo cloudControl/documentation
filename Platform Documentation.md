@@ -338,7 +338,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 
 Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests across available containers, and is deleted after each deploy. This does include deploys you trigger manually, but also re-deploys done by the platform itself during normal operation.
 
-For customer uploads (e.g. user profile pictures) we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoLab Add-on].
+For customer uploads (e.g. user profile pictures) we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoSoup Add-on].
 
 
 ## Development, Staging and Production Environments
@@ -866,7 +866,7 @@ $ cctrlapp APP_NAME/DEP_NAME details
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
 [guides]: https://www.cloudcontrol.com/dev-center/Guides
-[MongoLab Add-on]: https://www.cloudcontrol.com/add-ons/mongolab
+[MongoSoup Add-on]: https://next.dotcloud.com/add-ons/mongosoup
 [Add-on marketplace]: https://www.cloudcontrol.com/add-ons
 [Deployment category]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment
 [rsyslog]: http://www.rsyslog.com/
