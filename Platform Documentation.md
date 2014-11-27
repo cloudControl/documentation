@@ -785,8 +785,7 @@ u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
 interactive commands work as well
 u25832@DEP_ID-25832:~/www$ exit
 exit
-Connection to 10.62.45.100 closed.
-Connection to ssh.cloudcontrolled.net closed.
+Connection to sshforwarder.dotcloudapp.com closed.
 ~~~
 
 It's also possible to execute a command directly and have the container shutdown after the command is finished. This is very useful for database migrations and other one-time tasks.
@@ -795,36 +794,39 @@ For example, passing the `"env | sort"` command will list the environment variab
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME run "env | sort"
 Connecting...
-Warning: Permanently added '[10.250.134.126]:10346' (RSA) to the list of known hosts.
 CRED_FILE=/srv/creds/creds.json
 DEP_ID=DEP_ID
 DEP_NAME=APP_NAME/DEP_NAME
-DEP_VERSION=9d5ada800eff9fc57849b3102a2f27ff43ec141f
-DOMAIN=cloudcontrolled.com
-GEM_PATH=vendor/bundle/ruby/1.9.1
-HOME=/srv
-HOSTNAME=DEP_ID-10346
+DEP_VERSION=91bd71fdb33e3609292660c83956e02d0af65819
+DOMAIN=dotcloudapp.com
+HOME=/srv/www
+HOSTNAME=depxt6zv82r-10680
 LANG=en_US.UTF-8
-LOGNAME=u10346
-MAIL=/var/mail/u10346
-OLDPWD=/srv
+LD_LIBRARY_PATH=/app/.paasprovider/vendor/lib
+LIBRARY_PATH=/app/.paasprovider/vendor/lib
+LOGNAME=u10680
+MAIL=/var/mail/u10680
 PAAS_VENDOR=cloudControl
-PATH=bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin
-PORT=10346
+PATH=/app/.paasprovider/python/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/X11:/usr/games
+PORT=10680
+PS1='[\$DEP_NAME]:\w\$ '
 PWD=/srv/www
-RACK_ENV=production
-RAILS_ENV=production
+PYTHONHASHSEED=random
+PYTHONHOME=/app/.paasprovider/python
+PYTHONPATH=/app/
+PYTHONUNBUFFERED=True
 SHELL=/bin/sh
-SSH_CLIENT=10.32.47.197 59378 10346
-SSH_CONNECTION=10.32.47.197 59378 10.250.134.126 10346
+SIZE=1
+SSH_CLIENT=10.240.134.154 35844 10680
+SSH_CONNECTION=10.240.134.154 35844 10.240.84.84 10680
 SSH_TTY=/dev/pts/0
-TERM=xterm
+TERM=xterm-256color
 TMP_DIR=/srv/tmp
 TMPDIR=/srv/tmp
-USER=u10346
+USER=u10680
 WRK_ID=WRK_ID
-Connection to 10.250.134.126 closed.
-Connection to ssh.cloudcontrolled.net closed.
+Connection to sshforwarder.dotcloudapp.com closed.
+
 ~~~
 
 ## Stacks
