@@ -39,7 +39,7 @@ Installing *cctrl* is easy and works on Mac/Linux as well as on Windows.
 
 #### Quick Installation Windows
 
-For Windows we offer an installer. Please download [the latest version] of the installer from S3. The file is named cctrl-x.x-setup.exe.
+For Windows we offer an installer. Please download [the latest version] of the installer from Cloud Storage. The file is named cctrl-x.x-setup.exe.
 
 #### Quick Installation Linux/Mac
 
@@ -856,7 +856,7 @@ $ cctrlapp APP_NAME/DEP_NAME details
 [Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
 [web console]: https://www.cloudcontrol.com/console
 [API libraries]: https://github.com/cloudControl
-[the latest version]: http://cctrl.s3-website-eu-west-1.amazonaws.com/#windows/
+[the latest version]: https://download.dotcloudapp.com/windows
 [Python 2.6+]: http://python.org/download/
 [reset your password]: https://api.cloudcontrol.com/reset_password/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
