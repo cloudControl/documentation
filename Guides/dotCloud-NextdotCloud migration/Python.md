@@ -4,7 +4,7 @@ Before you read this document, you should read the document on *Converting dotcl
 
 ## dotCloud Features
 
-The first task is to determine what dotCloud features your Python service is using. 
+The first task is to determine what dotCloud features your Python service is using.
 
 ### Nginx
 
@@ -20,7 +20,7 @@ Does your `approot` contain uWSGI configuration information (`*uwsgi.conf`) or d
 
 ## Choose Your Path
 
-If you're not using Nginx, Supervisord, or uWSGI, then you can definitely use the standard Next dotCloud Python service! 
+If you're not using Nginx, Supervisord, or uWSGI, then you can definitely use the standard Next dotCloud Python service!
 For all the other cases, you can use a custom buildpack instead of the default Python service: https://github.com/metalivedev/buildpack-python-cloudcontrol.git#dotcloud
 
 The basic information about how to use that buildpack is in the buildpack's Readme.md.

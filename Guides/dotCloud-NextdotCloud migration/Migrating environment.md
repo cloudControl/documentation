@@ -163,5 +163,3 @@ Please keep in mind that these variables will not be present in `creds.json` fil
     print 'Key 1: {0}'.format(creds['CONFIG']['CONFIG_VARS']['KEY1'])
     print 'Key 2: {0}'.format(os.getenv('KEY2'))
     ~~~
-
- 

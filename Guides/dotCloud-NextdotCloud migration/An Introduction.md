@@ -22,7 +22,7 @@ expanding these guides to include all dotCloud services.
 Yes, but on Next dotCloud, all stateful services are provided as
 "Add-on" services. Some of them are run by Next dotCloud and some are
 third party services, but Next dotCloud will be your single point of
-contact for billing and support. 
+contact for billing and support.
 
 More information about the specifics of porting Add-ons like MySQL,
 Redis, MongoDB, Postgre/PostGIS are in the relevant guides here.
@@ -52,9 +52,9 @@ Yes! Next dotCloud still behaves in all the ways you'd expect.
 
 A good place to start is to read the [Quickstart](https://www.cloudcontrol.com/dev-center/Quickstart)
 and [Platform Documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation)
-to get familiar with the Next dotCloud PaaS. 
+to get familiar with the Next dotCloud PaaS.
 
-Then read the docs [here](https://next.dotcloud.com/dev-center/dotcloud-cloudcontrol-migration/cli-cheatsheet) comparing the dotCloud
+Then read the docs [here](https://next.dotcloud.com/dev-center/dotcloud-nextdotcloud-migration/cli-cheatsheet) comparing the dotCloud
 CLI to the Next dotCloud CLI and `dotcloud.yml` to a `Procfile` (including
 a comparison of build/deploy processes in general).
 
