@@ -1,7 +1,7 @@
-# dotCloud to cloudControl CLI Cheat Sheet
+# dotCloud to Next dotCloud CLI Cheat Sheet
 
 Here are the dotCloud CLI commands translated to their equivalents in
-the cloudControl CLI, listed in the same order as they appear in
+the Next dotCloud CLI, listed in the same order as they appear in
 `dotcloud -h`.
 
 ## User specific commands
@@ -47,4 +47,4 @@ the cloudControl CLI, listed in the same order as they appear in
 `revisions` | N/A. You can `deploy` any of your last 10 pushed git hashes.
 `upgrade` | `deploy --stack STACK_NAME`
 `--debug, -D` | N/A
-`--assume-yes, --assume-no` | N/A. Use the API if you need full scriptability. cloudControl's API is fully supported.
+`--assume-yes, --assume-no` | N/A. Use the API if you need full scriptability. Next dotCloud's API is fully supported.
