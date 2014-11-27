@@ -690,11 +690,7 @@ Deployments with --containers 1 (the default) are unavailable for a few minutes 
 
 ### Vertical Scaling
 
-In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specified using the --memory parameter, being possible to choose from 128MB to 1024MB. To determine the optimal --memory value for your deployment you can use the New Relic Add-on to analyze the memory consumption of your app.
-
-### Choosing Optimal Settings
-
-You can use the [Blitz.io] and [New Relic Add-ons] to run synthetic load tests against your deployments and analyze how well they perform with the current --containers and --memory settings under expected load to determine the optimal scaling settings and adjust accordingly. We have a [tutorial] that explains this in more detail.
+In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specified using the --memory parameter, being possible to choose from 128MB to 1024MB.
 
 
 ## Performance
@@ -872,10 +868,8 @@ $ cctrlapp APP_NAME/DEP_NAME details
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
 [Alias Add-on]: https://www.cloudcontrol.com/add-ons/alias
-[Blitz.io]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io
 [MemCachier Add-on]: https://www.cloudcontrol.com/add-ons/memcachier
 [MemCachier Documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MemCachier
-[New Relic Add-ons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic
 [tutorial]: https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app
 [Cron Add-on]: https://www.cloudcontrol.com/add-ons/cron
 [Cron Add-on documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Cron
