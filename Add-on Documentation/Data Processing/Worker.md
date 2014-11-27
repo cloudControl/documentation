@@ -30,7 +30,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add worker.single
 
 Workers can be started via the command line client's worker.add command. 
 
-For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`. But for apps on the Pinky stack, first specifiy how to start the worker by adding a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
+To specify how to start the worker by adding a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
