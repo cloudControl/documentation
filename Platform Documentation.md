@@ -91,7 +91,7 @@ You can [reset your password], in case you forgot it.
 
  * Applications (apps) have a repository, deployments and users.
  * The repository is where your code lives, organized in branches.
- * A deployment is a running version of your application, based on the branch with the same name. Exception: the default deployment is based on the master (Git) / trunk (Bazaar).
+ * A deployment is a running version of your application, based on the branch with the same name. Exception: the default deployment is based on the master branch.
  * Users can be added to apps to gain access to the repository, branches and deployments.
 
 cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform effectively, it's important to understand the following few basic concepts.
@@ -189,7 +189,7 @@ $ cctrluser key.remove Dohyoonuf7
 ### Deployments
 
 A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains).
-It is based on the branch of the same name. Exception: the default deployment is based on the master (Git) / trunk (Bazaar).
+It is based on the branch of the same name. Exception: the default deployment is based on the master branch.
 
 Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches).
 This allows you to have different versions of your app running at the same time without interfering with each other.
@@ -216,28 +216,9 @@ App
 
 **TL;DR:**
 
- * Git and Bazaar are supported.
+ * Git is the supported VCS.
  * When you push an updated branch, an image of your code gets built, ready to be deployed.
  * Image sizes are limited to 200MB (compressed). Use a `.cctrlignore` file to exclude development assets.
-
-### Supported Version Control Systems
-
-The platform supports Git ([quick Git tutorial]) and Bazaar ([Bazaar in five minutes]). When you create an app we try to determine if the current working directory has a .git or .bzr directory. If it does, we create the app with the detected version control system. If we can't determine this based on the current working directory, Git is used as the default. You can always overwrite this with the --repo command line switch.
-
-~~~
-$ cctrlapp APP_NAME create php [--repo [git,bzr]]
-~~~
-
-It's easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
-
-~~~
-$ cctrlapp APP_NAME details
-App
- Name: APP_NAME                       Type: php        Owner: user1
- Repository: ssh://APP_NAME@cloudcontrolled.com/repository.git
- [...]
-~~~
-If yours starts with `ssh://` and ends with `.git` then Git is being used. If it starts with `bzr+ssh://`, Bazaar is being used.
 
 ### Image Building
 
@@ -256,9 +237,6 @@ $ cctrlapp APP_NAME/dev push
 # with git:
 $ git remote add cctrl REPO_URL
 $ git push cctrl dev
-
-# with bzr:
-$ bzr push --remember REPO_URL
 ~~~
 
 The repositories support all other remote operations like pulling and cloning as well.
@@ -306,7 +284,7 @@ The cloudControl platform supports zero downtime deploys for all deployments. To
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
 
-To deploy a specific version, append your version control systems identifier (full commit-SHA1 for Git or an integer for Bazaar).
+To deploy a specific version, append your version control systems identifier (full commit-SHA1).
 If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
 
 For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile).
@@ -381,7 +359,7 @@ Sometimes you have environment specific configuration, e.g. to enable debugging 
 
  * **TMPDIR**: The path to the tmp directory.
  * **CRED_FILE**: The path of the creds.json file containing the Add-on credentials.
- * **DEP_VERSION**: The Git or Bazaar version the image was built from.
+ * **DEP_VERSION**: The Git version the image was built from.
  * **DEP_NAME**: The deployment name in the same format as used by the command line client. E.g. myapp/default. This one stays the same even when undeploying and creating a new deployment with the same name.
  * **DEP_ID**: The internal deployment ID. This one stays the same for the deployments lifetime but changes when undeploying and creating a new deployment with the same name.
  * **WRK_ID**: The internal worker ID. Only set for worker containers.
@@ -877,7 +855,6 @@ $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 [Python 2.6+]: http://python.org/download/
 [reset your password]: https://api.cloudcontrol.com/reset_password/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
-[Bazaar in five minutes]: http://doc.bazaar.canonical.com/latest/en/mini-tutorial/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
 [guides]: https://www.cloudcontrol.com/dev-center/Guides
 [MongoLab Add-on]: https://www.cloudcontrol.com/add-ons/mongolab
