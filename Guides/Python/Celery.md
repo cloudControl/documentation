@@ -1,41 +1,55 @@
 # Deploying Celery on cloudControl
-[Celery] is an asynchronous task queue/job queue based on distributed message passing. It is focused on real-time operation, but supports scheduling as well.
+[Celery] is an asynchronous task queue/job queue based on distributed message
+passing. It is focused on real-time operation, but supports scheduling as well.
 
-In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and the [Worker Add-on] on [cloudControl].
+In this tutorial we're going to show you how to deploy an example Celery app
+using the [CloudAMQP Add-on] and the [Worker Add-on] on [cloudControl].
 
 ## The Example App Explained
-First, lets clone the example code from Github. It is based on the official [first steps with Celery guide][celeryguide] and also includes [Flower] the Celery web interface.
+First, lets clone the example code from Github. It is based on the official
+[first steps with Celery guide][celeryguide] and also includes [Flower] the
+Celery web interface.
 
 ~~~bash
 $ git clone git://github.com/cloudControl/python-celery-example-app.git
 $ cd python-celery-example-app
 ~~~
 
-The code from the example repository is ready to be deployed. Lets still go through the different files and their purpose real quick.
+The code from the example repository is ready to be deployed. Lets still go
+through the different files and their purpose real quick.
 
 ### Dependency Tracking
-The [Python buildpack] tracks dependencies via pip and the `requirements.txt` file. It needs to be placed in the root directory of your repository. Our example app requires both `celery` itself aswell as `flower` Celery's monitoring web app. The `requirements.txt` you cloned as part of the example app looks like this:
+The [Python buildpack] tracks dependencies via pip and the `requirements.txt`
+file. It needs to be placed in the root directory of your repository. Our
+example app requires both `celery` itself aswell as `flower` Celery's
+monitoring web app. The `requirements.txt` you cloned as part of the example
+app looks like this:
 
 ~~~pip
-celery==3.0.15
-flower==0.4.2
+celery==3.1.16
+flower==0.7.3
 ~~~
 
 ### Process Type Definition
 cloudControl uses a [Procfile] to know how to start the app's processes.
 
-The example code also already includes a file called `Procfile` at the top level of your repository. It looks like this:
+The example code also already includes a file called `Procfile` at the top
+level of your repository. It looks like this:
 
 ~~~
-web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --auth=$FLOWER_AUTH_EMAIL
+web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --basic_auth=$FLOWER_AUTH
 worker: celery -A tasks worker --loglevel=info
 ~~~
 
-We have specified two process types here. One called `web` to start the web interface and additionally one called `worker` used to start the actual Celery worker.
+We have specified two process types here. One called `web` to start the web
+interface and additionally one called `worker` used to start the actual Celery
+worker.
 
 ### The Celery Task
 
-The task is copied from the official Celery tutorial and simply returns the sum of two numbers. It was adjusted to read the Add-on credentials from the runtime environment.
+The task is copied from the official Celery tutorial and simply returns the sum
+of two numbers. It was adjusted to read the Add-on credentials from the runtime
+environment.
 
 ~~~python
 import json
@@ -55,7 +69,8 @@ def add(x, y):
 ~~~
 
 ## Creating the App and Adding the Required Add-ons
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application
+and create it on the cloudControl platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create python
@@ -64,108 +79,128 @@ $ cctrlapp APP_NAME create python
 As we chose to use AMQP as a broker, we add the CloudAMQP Add-on now.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add cloudamqp.lemur
+$ cctrlapp APP_NAME addon.add cloudamqp.lemur
 ~~~
 
 We also need to add the Worker Add-on to be able to start the workers later.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add worker.single
+$ cctrlapp APP_NAME addon.add worker.single
 ~~~
 
-Since we are reading the AMQP URL for the broker from the environment in both, the `Procfile` and the Python code we have to enable providing Add-on credentials as environment variables which is disabled per default for Python apps.
+Since we are reading the AMQP URL for the broker from the environment in both,
+the `Procfile` and the Python code we have to enable providing Add-on
+credentials as environment variables which is disabled per default for Python
+apps.
 
-We also set another environment variable called `FLOWER_AUTH_EMAIL` that is passed to the Flower web process for authentication purposes. Without this, the web interface would be public showing your secret AMQP credentials and allowing people to stop your workers.
+We also set another environment variable called `FLOWER_AUTH` that is
+passed to the Flower web process for authentication purposes. Without this,
+the web interface would be public showing your secret AMQP credentials and
+allowing people to stop your workers.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS --FLOWER_AUTH_EMAIL=YOUR_EMAIL_HERE
+$ cctrlapp APP_NAME config.add SET_ENV_VARS FLOWER_AUTH=USERNAME:PASSWORD
 # seperate multiple emails by comma
 ~~~
 
-This is it. The example code will now find all necessary credentials to connect to the AMQP service automatically in the runtime environment.
+This is it. The example code will now find all necessary credentials to connect
+to the AMQP service automatically in the runtime environment.
 
 ## Pushing and Deploying the App
-Now lets push your code to the application's repository, which triggers the deployment image build process. Your output will look similiar to the following, although we have shortened it for the sake of readability in this guide.
+Now lets push your code to the application's repository, which triggers the
+deployment image build process. Your output will look similiar to the
+following, although we have shortened it for the sake of readability in this
+guide.
 
-The first push will take a couple of seconds, because it will download and compile and install a number of dependencies. So please be patient. Dependencies will be cached for future pushes significantly speeding up the process.
+The first push will take a couple of seconds, because it will download and
+compile and install a number of dependencies. So please be patient.
+Dependencies will be cached for future pushes significantly speeding up the
+process.
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
-Counting objects: 6, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (6/6), 605 bytes, done.
-Total 6 (delta 0), reused 0 (delta 0)
+$ cctrlapp APP_NAME push
+Counting objects: 15, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (15/15), 1.68 KiB | 0 bytes/s, done.
+Total 15 (delta 3), reused 11 (delta 3)
        
 -----> Receiving push
------> Preparing Python interpreter (2.7.2)
------> Creating Virtualenv version 1.7.2
-       New python executable in .heroku/venv/bin/python2.7
-       Also creating executable in .heroku/venv/bin/python
-       Installing distribute..................................................................................................................................................................................................done.
-       Installing pip................done.
-       Running virtualenv with interpreter /usr/bin/python2.7
------> Activating virtualenv
------> Installing dependencies using pip version 1.2.1
+-----> No runtime.txt provided; assuming python-2.7.3.
+-----> Preparing Python runtime (python-2.7.3)
+-----> Installing Distribute (0.6.36)
+-----> Installing Pip (1.3.1)
+-----> Installing dependencies using Pip (1.3.1)
        
        [...]
            
-       Successfully installed celery flower billiard python-dateutil kombu tornado anyjson amqp
+       Successfully installed celery flower pytz billiard kombu tornado anyjson amqp certifi backports.ssl-match-hostname
        Cleaning up...
 -----> Building image
------> Uploading image (4.3M)
+-----> Uploading image (26.9 MB)
        
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command.
+Last but not least deploy the latest version of the app with the cctrlapp
+deploy command.
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy 
+$ cctrlapp APP_NAME deploy
 ~~~
 
-At this point you can see web interface at `http://APP_NAME.cloudcontrolled.com`. But it hasn't got any workers yet.
+At this point you can see web interface at
+`http://APP_NAME.cloudcontrolled.com`. But it hasn't got any workers yet.
 
 ## Scaling Celery Workers
-Scaling Celery workers on cloudControl is easy enough luckily. We have already defined how to run one in the `Procfile` earlier. So we can now go ahead and start the first one.
+Scaling Celery workers on cloudControl is easy enough luckily. We have already
+defined how to run one in the `Procfile` earlier. So we can now go ahead and
+start the first one.
 
 ### Adding Workers
 
 ~~~bash
-$ cctrlapp APP_NAME/default worker.add worker
+$ cctrlapp APP_NAME worker.add worker
 # you can always list running workers like this
-$ cctrlapp APP_NAME/default worker
+$ cctrlapp APP_NAME worker
 # and also check the worker's log output with
-$ cctrlapp APP_NAME/default log worker
+$ cctrlapp APP_NAME log worker
+[TIMESTAMP] WRK_ID Starting worker (command: 'worker', parameter: '') ...
 [TIMESTAMP] WRK_ID Started worker (command: 'celery -A tasks worker --loglevel=info ', parameter: '')
-[TIMESTAMP] WRK_ID 
-[TIMESTAMP] WRK_ID  -------------- celery@HOSTNAME v3.0.15 (Chiastic Slide)
+[TIMESTAMP] WRK_ID
+[TIMESTAMP] WRK_ID  -------------- celery@HOSTNAME v3.1.16 (Cipater)
 [TIMESTAMP] WRK_ID ---- **** -----
-[TIMESTAMP] WRK_ID --- * ***  * -- [Configuration]
-[TIMESTAMP] WRK_ID -- * - **** --- . broker:      amqp://CLOUDAMQP_URL
-[TIMESTAMP] WRK_ID - ** ---------- . app:         tasks:0x1357890
-[TIMESTAMP] WRK_ID - ** ---------- . concurrency: 2 (processes)
-[TIMESTAMP] WRK_ID - ** ---------- . events:      OFF (enable -E to monitor this worker)
-[TIMESTAMP] WRK_ID - ** ----------
-[TIMESTAMP] WRK_ID - *** --- * --- [Queues]
-[TIMESTAMP] WRK_ID -- ******* ---- . celery:      exchange:celery(direct) binding:celery
-[TIMESTAMP] WRK_ID --- ***** -----
-[TIMESTAMP] WRK_ID 
-[TIMESTAMP] WRK_ID [Tasks]
-[TIMESTAMP] WRK_ID   . tasks.add
-[TIMESTAMP] WRK_ID [TIMESTAMP: WARNING/MainProcess] celery@HOSTNAME ready.
-[TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] consumer: Connected to amqp://CLOUDAMQP_URL
-[TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] Events enabled by remote.
+[TIMESTAMP] WRK_ID --- * ***  * -- Linux-3.2.0-63-virtual-x86_64-with-debian-wheezy-sid
+[TIMESTAMP] WRK_ID -- * - **** ---
+[TIMESTAMP] WRK_ID - ** ---------- [config]
+[TIMESTAMP] WRK_ID - ** ---------- .> app:         tasks:0x228cc90
+[TIMESTAMP] WRK_ID - ** ---------- .> transport:   amqp://cxbpaiet:**@bunny.cloudamqp.com:5672/cxbpaiet
+[TIMESTAMP] WRK_ID - ** ---------- .> results:     disabled
+[TIMESTAMP] WRK_ID - *** --- * --- .> concurrency: 4 (prefork)
+[TIMESTAMP] WRK_ID -- ******* ----
+[TIMESTAMP] WRK_ID --- ***** ----- [queues]
+[TIMESTAMP] WRK_ID  -------------- .> celery           exchange=celery(direct) key=celery
+[TIMESTAMP] WRK_ID
+[TIMESTAMP] WRK_ID
+[TIMESTAMP] WRK_ID [tasks]
+[TIMESTAMP] WRK_ID [2014-11-28 11:21:24,001: INFO/MainProcess] Connected to amqp://cxbpaiet:**@bunny.cloudamqp.com:5672/cxbpaiet
+[TIMESTAMP] WRK_ID [2014-11-28 11:21:24,015: INFO/MainProcess] mingle: searching for neighbors
+[TIMESTAMP] WRK_ID [2014-11-28 11:21:25,061: INFO/MainProcess] mingle: all alone
+[TIMESTAMP] WRK_ID [2014-11-28 11:23:01,516: INFO/MainProcess] Events of group {task} enabled by remote.
+
 ~~~
 
-If you refresh the web interface at `http://APP_NAME.cloudcontrolled.com` you should be able to see the worker now.
+If you refresh the web interface at `http://APP_NAME.cloudcontrolled.com` you
+should be able to see the worker now.
 
-To handle more tasks simultaneously you can always just add more workers. (Please note that only the first worker is free, adding additional workers requires a billing account.)
+To handle more tasks simultaneously you can always just add more workers.
+(Please note that only the first worker is free, adding additional workers
+requires a billing account.)
 
 ~~~bash
 # call worker.add to start additional workers one at a time
-$ cctrlapp APP_NAME/default worker.add worker
+$ cctrlapp APP_NAME worker.add worker
 ~~~
 
 ### Removing Workers
@@ -174,14 +209,15 @@ To stop a worker you can stop it from the command line.
 
 ~~~bash
 # use the worker list command to get the WRK_ID
-$ cctrlapp APP_NAME/default worker
-$ cctrlapp APP_NAME/default worker.remove WRK_ID
+$ cctrlapp APP_NAME worker
+$ cctrlapp APP_NAME worker.remove WRK_ID
 ~~~
 
-You can also stop the Celery worker from the web interface, which will also stop the container. Check the worker log output for details.
+You can also stop the Celery worker from the web interface, which will also
+stop the container. Check the worker log output for details.
 
 ~~~bash
-$ cctrlapp APP_NAME/default log worker
+$ cctrlapp APP_NAME log worker
 [...]
 [TIMESTAMP] WRK_ID [TIMESTAMP: WARNING/MainProcess] Got shutdown from remote
 [TIMESTAMP] WRK_ID Container stopped
@@ -191,10 +227,13 @@ $ cctrlapp APP_NAME/default log worker
 
 ## Celery Commands
 
-To run Celery commands use the cctrlapp run command. It will launch an additional container and connect you via SSH. You can then use the Celery commands in the an identical environment as the web interface and the workers itself.
+To run Celery commands use the cctrlapp run command. It will launch an
+additional container and connect you via SSH. You can then use the Celery
+commands in the an identical environment as the web interface and the workers
+itself.
 
 ~~~bash
-$ cctrlapp APP_NAME/default run bash
+$ cctrlapp APP_NAME run bash
 Connecting...
 USER@HOSTNAME:~/www$ celery --broker=$CLOUDAMQP_URL status
 -> WORKER_HOSTNAME: OK
@@ -206,7 +245,11 @@ Connection to ssh.cloudcontrolled.net closed.
 
 ## Résumé
 
-This guide showed how to run both Flower aswell as a Celery worker on cloudControl by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
+This guide showed how to run both Flower aswell as a Celery worker on
+cloudControl by specifying the commands in the `Procfile` and how to connect
+to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided
+in the app's runtime environment. Additionally we learned how we can use the
+cctrlapp run command to use the Celery command line tool.
 
 [Celery]: http://celeryproject.org/
 [CloudAMQP Add-on]: https://www.cloudcontrol.com/add-ons/cloudamqp
