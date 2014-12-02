@@ -12,7 +12,7 @@ The MySQLd Add-on comes with the following features:
     - Pre-configured Parameters - You can simply launch a MySQL Instance
     and connect your application within minutes without additional
     configuration.
-    - Automatic Software Patching - cloudControl will make sure that the
+    - Automatic Software Patching - dotCloud will make sure that the
     MySQL software powering your deployment stays up-to-date with the
     latest patches.
 

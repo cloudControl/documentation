@@ -2,7 +2,7 @@
 
 With [Spring Boot] you can create stand-alone, Spring based applications without most of the boilerplate configuration that was needed before.
 
-In this guide we are going to show you how to deploy a Spring/Hibernate/MySQL/Jetty application on [cloudControl]. The example app is a ready to deploy project based on the Spring-Boot [examples].
+In this guide we are going to show you how to deploy a Spring/Hibernate/MySQL/Jetty application on [dotCloud]. The example app is a ready to deploy project based on the Spring-Boot [examples].
 
 ## The Spring-Boot Application Explained
 
@@ -30,7 +30,7 @@ Spring-Boot can be easily configured to start with an embedded [Jetty server]. W
 ...
 ~~~
 
-The server port is provided by the cloudControl platform via environment variable and is configured in `src/main/resources/application.properties`:
+The server port is provided by the dotCloud platform via environment variable and is configured in `src/main/resources/application.properties`:
 
 ~~~
 server.port = ${PORT}
@@ -71,7 +71,7 @@ spring.datasource.driverClassName=com.mysql.jdbc.Driver
 
 ### Process Type Definition
 
-cloudControl uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Spring-Boot app:
+dotCloud uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Spring-Boot app:
 
 ~~~
 web: java -jar target/spring-boot-example-app-*.jar
@@ -79,7 +79,7 @@ web: java -jar target/spring-boot-example-app-*.jar
 
 ## Pushing and Deploying your App
 
-Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
+Choose a unique name (from now on called APP_NAME) for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -139,6 +139,6 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.c
 [Spring Boot]: http://projects.spring.io/spring-boot/
 [examples]: https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 [Database credentials]: Add-on%20credentials
-[cloudControl]: /
+[dotCloud]: /
 [MySQLs Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs
 [hsqlDB]: http://hsqldb.org/

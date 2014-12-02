@@ -3,7 +3,7 @@
 intentions.
 
 In this tutorial we're going to show you how to deploy a Flask
-application on [cloudControl]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
+application on [dotCloud]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
 supported features.
 
 ## The Flask App Explained
@@ -26,7 +26,7 @@ Flask==0.9
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 
@@ -37,7 +37,7 @@ web: python server.py
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create python
@@ -80,7 +80,7 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Flask]: http://flask.pocoo.org/
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

@@ -1,6 +1,6 @@
 # QuotaGuard Static
 
-QuotaGuard Static is an Add-on that allows you to route outbound traffic through a static IP address on cloudControl. You can provide this IP address to an API partner for IP based whitelisting and open your own firewall to access internal resources.
+QuotaGuard Static is an Add-on that allows you to route outbound traffic through a static IP address on dotCloud. You can provide this IP address to an API partner for IP based whitelisting and open your own firewall to access internal resources.
 
 QuotaGuard Static is accessible as an HTTP or SOCKS5 proxy so is language and platform agnostic. There is native support across Ruby, Python, Node.js, Scala, Java and every other mainstream language.
 
@@ -62,7 +62,7 @@ The JSON file has the following structure:
 ~~~
 ## Monitoring QuotaGuard Static
 
-All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard Static Add-On from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
+All our plans include real-time analytics and log access via our dashboard. Access this by logging in to your dotCloud console and clicking on the QuotaGuard Static Add-On from within one of your deployments. This will take you to your dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
 
 ## HTTP vs. SOCKS5 proxy
 
@@ -298,7 +298,7 @@ To make sure we grow in harmony with your application QuotaGuard Static operates
 If you repeatedly exceed your limits without upgrading then hard limits may be placed on your account but this is a very last resort.
 
 ####I’ve forgotten what my Static IPs are!
-Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your cloudControl console and clicking on the QuotaGuard Static Add-On from within one of your deployments.
+Both IPs are shown on your QuotaGuard Static Dashboard which you can access by logging in to your dotCloud console and clicking on the QuotaGuard Static Add-On from within one of your deployments.
 
 ####Why have you given me two Static IP addresses?
 We believe all apps should be built for scalability and high availability. Our commitment to this means we only provide load balanced, high availability services. Load balancing our nodes allows one node to fail or be brought down for maintenance with no impact to your application. Each IP you are given represents one proxy node that is running behind a load balancer.
@@ -307,9 +307,9 @@ We believe all apps should be built for scalability and high availability. Our c
 Yes we have many users doing this. The easiest way for most languages is to use our SOCKS proxy wrapper(installation details higher up the page). If you are using Node.js you can also configure the SOCKS proxy in your Javascript code without using the wrapper (details also on this page).
 
 ###QuotaGuard vs. QuotaGuard Static
-We offer two products on cloudControl, QuotaGuard and QuotaGuard Static.
+We offer two products on dotCloud, QuotaGuard and QuotaGuard Static.
 
-QuotaGuard routes your traffic through a dynamic set of IP addresses that may change at any time and is intended for accessing APIs like Google Maps that restrict usage based on your IP address. It should be used if you want to access these APIs without your limit being shared with other cloudControl apps.
+QuotaGuard routes your traffic through a dynamic set of IP addresses that may change at any time and is intended for accessing APIs like Google Maps that restrict usage based on your IP address. It should be used if you want to access these APIs without your limit being shared with other dotCloud apps.
 
 QuotaGuard Static routes your traffic through a pair of static IP addresses that never change. It should be used if you need your traffic to pass through a known IP address for the purpose of firewall ingress rules or application whitelisting with a third party.
 

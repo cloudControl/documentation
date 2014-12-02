@@ -1,6 +1,6 @@
 # Deploying a Gradle application
 
-In this tutorial we're going to show you how to deploy a Gradle Application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/gradle-example-app) and check out the [Gradle buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Gradle Application on [dotCloud]. You can find the [source code on Github](https://github.com/cloudControl/gradle-example-app) and check out the [Gradle buildpack] for supported features.
 
 ## The Gradle Application Explained
 ### Get the App
@@ -36,7 +36,7 @@ task stage(dependsOn: ['clean', 'installApp'])
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the root of your repository. It looks like this:
 
@@ -44,10 +44,10 @@ The example code already includes the `Procfile` at the root of your repository.
 web: ./build/install/app/bin/app
 ~~~
 
-The `web` process type is required and specifies the command that will be executed when the app is deployed. 
+The `web` process type is required and specifies the command that will be executed when the app is deployed.
 
 ## Pushing and Deploying your Gradle App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -59,7 +59,7 @@ Push your code to the application's repository, which triggers the deployment im
 $ cctrlapp APP_NAME/default push
 [...]
 -----> Receiving push
------> Installing OpenJDK 1.6... 
+-----> Installing OpenJDK 1.6...
 -----> Installing OpenJDK 1.6(openjdk6.b27.tar.gz)... done
 -----> Installing gradle-1.0-milestone-5..... done
 -----> Building Gradle app...
@@ -91,8 +91,8 @@ $ cctrlapp APP_NAME/default deploy
 
 Congratulations, you can now see your Gradle application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [Gradle buildpack]: https://github.com/cloudControl/buildpack-gradle
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

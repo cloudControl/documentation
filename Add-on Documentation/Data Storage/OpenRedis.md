@@ -1,6 +1,6 @@
 # OpenRedis (Beta)
 
-OpenRedis provides hosted Redis services available to all cloudControl apps.
+OpenRedis provides hosted Redis services available to all dotCloud apps.
 
 ## Adding or removing the OpenRedis Add-on
 

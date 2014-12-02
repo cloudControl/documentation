@@ -8,7 +8,7 @@ you can always create a custom RDS instance in the EU region and connect your
 app to it. We recommend using the [Config Add-on] to make the credentials of
 the self-managed RDS instance available to your app.
 
-## Features of the cloudControl PostgreSQLd Add-on
+## Features of the dotCloud PostgreSQLd Add-on
 
 The PostgreSQLd Add-on comes with the following features:
 
@@ -16,7 +16,7 @@ The PostgreSQLd Add-on comes with the following features:
     - Pre-configured Parameters - You can simply launch a PostgreSQL Instance
     and connect your application within minutes without additional
     configuration.
-    - Automatic Software Patching - cloudControl will make sure that the
+    - Automatic Software Patching - dotCloud will make sure that the
     PostgreSQL software powering your deployment stays up-to-date with the
     latest patches.
 

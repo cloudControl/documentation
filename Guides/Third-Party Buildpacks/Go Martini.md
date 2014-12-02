@@ -3,7 +3,7 @@
 [Martini] is an open source web framework for Go.
 
 In this tutorial we're going to show you how to deploy a simple Martini based
-application on [cloudControl].
+application on [dotCloud].
 
 ## The Example App Explained
 
@@ -54,7 +54,7 @@ as part of the example app looks like this:
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes.
+dotCloud uses a [Procfile] to know how to start the app's processes.
 
 The example code already includes a file called `Procfile` at the top level of
 your repository. It looks like this:
@@ -63,11 +63,11 @@ your repository. It looks like this:
 web: MARTINI_ENV=production go-martini-example-app
 ~~~
 
-Left from the colon we specify the **required** process type called `web` and then set the `$MARTINI_ENV` environment variable to `production` and run the application binary. All web processes on the cloudControl platform are required to listen on the port specified by the `$PORT` environment variable. Martini does this by default.
+Left from the colon we specify the **required** process type called `web` and then set the `$MARTINI_ENV` environment variable to `production` and run the application binary. All web processes on the dotCloud platform are required to listen on the port specified by the `$PORT` environment variable. Martini does this by default.
 
 ### The Actual Application Code
 
-The actual application code is really straight forward. It simply uses the Martini framework to render the HTML output and return it to the client. The `m.Run()` automatically binds to the port specified in the `$PORT` environment variable as is required on [cloudControl].
+The actual application code is really straight forward. It simply uses the Martini framework to render the HTML output and return it to the client. The `m.Run()` automatically binds to the port specified in the `$PORT` environment variable as is required on [dotCloud].
 
 ~~~go
 package main
@@ -94,7 +94,7 @@ func main() {
 ## Pushing and Deploying the App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform using the custom Go buildpack:
+and create it on the dotCloud platform using the custom Go buildpack:
 
 ~~~bash
 $ cctrlapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
@@ -136,6 +136,6 @@ $ cctrlapp APP_NAME/default open
 ~~~
 
 [Martini]: http://martini.codegangsta.io/
-[cloudControl]: https://www.cloudcontrol.com
+[dotCloud]: https://www.cloudcontrol.com
 [Go buildpack]: https://github.com/cloudControl/buildpack-go
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

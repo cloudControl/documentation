@@ -30,7 +30,7 @@ The JSON file has the following structure:
 Upgrading to another version of IndexDepot is easily done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade indexdepot.OPTION_OLD indexdepot.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.upgrade indexdepot.OPTION_OLD indexdepot.OPTION_NEW
 ~~~
 
 ## Downgrade IndexDepot
@@ -38,7 +38,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade indexdepot.OPTION_OLD indexdepot.OPTI
 Downgrading to another version of IndexDepot is easily done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade indexdepot.OPTION_OLD indexdepot.OPTION_NEW 
+$ cctrlapp APP_NAME/DEP_NAME addon.downgrade indexdepot.OPTION_OLD indexdepot.OPTION_NEW
 ~~~
 
 ## Removing IndexDepot
@@ -59,14 +59,14 @@ Before indexing some sample data into Apache Solr make sure to configure new fie
  <fields>
 <fieldname="id" type="string" indexed="true" stored="true" required="true" />
 <fieldname="name" type="string" indexed="true" stored="true" />
-</fields> 
+</fields>
 ~~~
 
 Don\92t forget to reload your search index in the control panel after adding the new field.
 
 ## Step 2: Installing Zend
 
-Let's use the Zend Framework to index and search our first documents. This example assumes that you've downloaded and extracted it to the vendor folder inside the main directory of the cloudControl tutorial app - so you should get similar output if you use *nix:
+Let's use the Zend Framework to index and search our first documents. This example assumes that you've downloaded and extracted it to the vendor folder inside the main directory of the dotCloud tutorial app - so you should get similar output if you use *nix:
 
 ~~~
 $ cd ~/cctrl_tutorial_app/ $ ~/cctrl_tutorial_app: ls vendor/Zend/ Acl Crypt Form Log.php Pdf Test
@@ -107,7 +107,7 @@ $xml = <<<'EOD'
 <add>
 <doc>
 <field name="id">1</field>
-<field name="name">cloudControl</field>
+<field name="name">dotCloud</field>
 </doc>
 <doc>
 <field name="id">2</field>
@@ -147,4 +147,3 @@ $response = $solrHttpClient->request('POST');
 ~~~
 
 Read more on indexing and search in [Solr documentation](http://wiki.apache.org/solr/) and [Solr Tutorial](http://lucene.apache.org/solr/api/doc-files/tutorial.html).
-

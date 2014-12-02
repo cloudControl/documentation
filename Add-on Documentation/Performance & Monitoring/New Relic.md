@@ -1,6 +1,6 @@
 # New Relic
 
-New Relic is an on-demand performance management solution for PHP web applications. The New Relic plugin is seamlesly integrated in the cloudControl platform, enabling immediate and automatic access to comprehensive capabilities for monitoring, troubleshooting and tuning web applications. A complete list of features is displayed on [New Relic's feature overview](http://www.newrelic.com/web-app-monitoring-features.html).
+New Relic is an on-demand performance management solution for PHP web applications. The New Relic plugin is seamlesly integrated in the dotCloud platform, enabling immediate and automatic access to comprehensive capabilities for monitoring, troubleshooting and tuning web applications. A complete list of features is displayed on [New Relic's feature overview](http://www.newrelic.com/web-app-monitoring-features.html).
 
 ## Adding New Relic
 
@@ -43,5 +43,5 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove newrelic.OPTION
 
 ## PHP API
 
-cloudControl takes care of the whole installation and settings process. Therefore, some settings can't be edited by you. However, you can optionally use a set of PHP functions for influencing its data collection and recording for an even better integration. A detailed description of the available methods that can be used is listed in [New Relic's PHP documentation](https://newrelic.com/docs/php/the-php-api).
+dotCloud takes care of the whole installation and settings process. Therefore, some settings can't be edited by you. However, you can optionally use a set of PHP functions for influencing its data collection and recording for an even better integration. A detailed description of the available methods that can be used is listed in [New Relic's PHP documentation](https://newrelic.com/docs/php/the-php-api).
 

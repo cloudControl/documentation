@@ -1,10 +1,10 @@
-#Deploying a Silex application on cloudControl
+#Deploying a Silex application on dotCloud
 
 [Silex] is a PHP microframework for PHP 5.3. It is inspired by sinatra and
 built on the shoulders of Symfony2 and Pimple.
 
 In this tutorial we're going to show you how to deploy a Silex application on
-[cloudControl]. You can find the [source code on Github][example-app] and check
+[dotCloud]. You can find the [source code on Github][example-app] and check
 out the [php buildpack] for supported features.
 
 
@@ -42,7 +42,7 @@ you should run the `composer.phar update` command to update the
 `composer.lock`.  This file must be in your repository and ensures that all the
 developers always use the same versions of all the libraries. It also makes the
 changes visible in git. Also note that your `.gitignore` should contain
-`vendor` as proposed in the 
+`vendor` as proposed in the
 [Composer documentation](http://getcomposer.org/doc/01-basic-usage.md#installing-dependencies),
 since you don't need all that code in your repository.
 
@@ -67,7 +67,7 @@ DocumentRoot /app/www/web
 For more information check out [the buildpack documentation][php buildpack].
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 ~~~bash
 $ cctrlapp APP_NAME create php
 ~~~
@@ -112,9 +112,9 @@ Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.c
 
 
 [silex]: http://silex.sensiolabs.org/
-[cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the cloudControl-command-line-client"
+[dotCloud]: http://www.cloudcontrol.com
+[dotCloud-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
+[dotCloud-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the dotCloud-command-line-client"
 [php buildpack]: https://github.com/cloudControl/buildpack-php
 [procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git

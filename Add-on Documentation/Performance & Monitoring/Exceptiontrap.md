@@ -14,18 +14,18 @@ The Exceptiontrap Add-on can be added to every deployment with:
 $ cctrlapp APP_NAME/DEP_NAME addon.add exceptiontrap.OPTION
 ~~~
 
-When added, cloudControl automatically creates a new user account with your email address at New Relic. You will be notified by New Relic via email and can log on to New Relic's console to monitor your deployment's performance. It might take a little while until New Relic has collected enough data to show you the first statistics.
+When added, dotCloud automatically creates a new user account with your email address at New Relic. You will be notified by New Relic via email and can log on to New Relic's console to monitor your deployment's performance. It might take a little while until New Relic has collected enough data to show you the first statistics.
 
 ## Using with Rails 2.3+, Rails 3 and Rails 4
 
-You can find the documentation on our [Exceptiontrap Gem](https://github.com/itmLABS/exceptiontrap) GitHub page. The API key is already set in the cloudControl environment. So you can just use "cloudcontrol" as the API key string while generating the Exceptiontrap config file.
+You can find the documentation on our [Exceptiontrap Gem](https://github.com/itmLABS/exceptiontrap) GitHub page. The API key is already set in the dotCloud environment. So you can just use "cloudcontrol" as the API key string while generating the Exceptiontrap config file.
 
 ## Using with PHP, Zend Framework & other frameworks
 
 You can find the documentation on our [Exceptiontrap Library](https://github.com/itmLABS/exceptiontrap-php) GitHub page.
-The easiest way to get the API key automatically set by cloudControl and our library is to set the variable `SET_ENV_VARS` to `true` for your application using the `Custom Config Add-on`, which is desribed [here](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) under "Add-on Credentials".
+The easiest way to get the API key automatically set by dotCloud and our library is to set the variable `SET_ENV_VARS` to `true` for your application using the `Custom Config Add-on`, which is desribed [here](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) under "Add-on Credentials".
 
-If you don't want to do this, use the following code snippet to "manually" extract the Exceptiontrap API key from the cloudControl environment variables file.
+If you don't want to do this, use the following code snippet to "manually" extract the Exceptiontrap API key from the dotCloud environment variables file.
 
 ~~~php
 <?php

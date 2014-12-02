@@ -4,7 +4,7 @@
 and tools that power FriendFeed written in Python.
 
 In this tutorial we're going to show you how to deploy a simple Tornado based
-application on [cloudControl].
+application on [dotCloud].
 
 ## The Example App Explained
 
@@ -29,7 +29,7 @@ tornado==2.4.1
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes.
+dotCloud uses a [Procfile] to know how to start the app's processes.
 
 The example code already includes a file called `Procfile` at the top level of
 your repository. It looks like this:
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 ## Pushing and Deploying the App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
+and create it on the dotCloud platform:
 ~~~bash
 $ cctrlapp APP_NAME create python
 ~~~
@@ -126,6 +126,6 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Tornado app running at `http://APP_NAME.cloudcontrolled.com`.
 
 [Tornado]: http://www.tornadoweb.org
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

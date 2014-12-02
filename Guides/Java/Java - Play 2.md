@@ -1,7 +1,7 @@
 # Deploying a Play 2 application
 
 In this tutorial we're going to show you how to deploy a [Play 2.3.x] application on
-[cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/java-play2-example-app)
+[dotCloud]. You can find the [source code on Github](https://github.com/cloudControl/java-play2-example-app)
 and check out the [Scala buildpack] for supported features. The application
 comes from the official Play framework templates that can be found at
 https://github.com/playframework/playframework/tree/2.3.x/templates/play-java-intro,
@@ -46,7 +46,7 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-mocha" % "1.0.0")
 
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your
 repository. It looks like this:
@@ -61,7 +61,7 @@ the required database magritions to happen.
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
+and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -107,9 +107,9 @@ redeploy all changes will be lost. If you want a production database you should
 use one of our available [Data Storage Add-ons].
 
 [Play 2.3.x]: https://www.playframework.com/documentation/2.3.x/Home
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [Scala buildpack]: https://github.com/cloudControl/buildpack-scala
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [sbt]: http://www.scala-sbt.org/

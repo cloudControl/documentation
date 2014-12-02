@@ -1,6 +1,6 @@
 # Deploying a Ruby on Rails Application
 
-In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [cloudControl]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
+In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [dotCloud]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
 
 ## The Rails Application Explained
 
@@ -65,11 +65,11 @@ $ bundle exec rake db:test:prepare
 $ bundle exec rspec spec/
 ~~~
 
-Now that the app is working, lets have a look at changes we have made to deploy it on cloudControl.
+Now that the app is working, lets have a look at changes we have made to deploy it on dotCloud.
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
+dotCloud uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
 
 ~~~
 web: bundle exec rails s -p $PORT
@@ -98,7 +98,7 @@ end
 
 ### Production Database
 
-By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on cloudControl because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [Data Storage category][data-storage-addons].
+By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on dotCloud because the filesystem is [not persistent][filesystem]. To use a database, you should choose an Add-on from [Data Storage category][data-storage-addons].
 
 In this tutorial we use PostgresSQL with the [ElephantSQL Add-on][postgres-addon]. This is why we have modified the `Gemfile` by moving the `sqlite3` line to ":development, :test" block and added a new ":production" group with "pg" and ["cloudcontrol-rails"][gem itself] gems.
 
@@ -114,7 +114,7 @@ The 'cloudcontrol-rails' gem will provide the database credentials.
 
 ## Pushing and Deploying your App
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create ruby
@@ -185,7 +185,7 @@ For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].
 
 [Ruby on Rails]: http://rubyonrails.org/
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [example-app]: https://github.com/cloudControl/ruby-rails-example-app
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/

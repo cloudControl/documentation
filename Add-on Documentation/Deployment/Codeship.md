@@ -1,6 +1,6 @@
 # Codeship: Codeship is a simple to use Continuous Integration and Deployment service.
 
-Whenever you make changes to your application and push your Code we take the latest version of your code, run all your tests and, if you want, push to your staging and/or production application. Test and deploy your applications without the headache of setting up your own test server. Getting started takes less than two minutes and is fully integrated with cloudControl.
+Whenever you make changes to your application and push your Code we take the latest version of your code, run all your tests and, if you want, push to your staging and/or production application. Test and deploy your applications without the headache of setting up your own test server. Getting started takes less than two minutes and is fully integrated with dotCloud.
 
 ## Adding the Codeship Add-on
 

@@ -6,13 +6,13 @@
 
 ## Installing the add-on
 
-To use Found Elasticsearch on cloudControl, install the add-on using the `cctrlapp` command:
+To use Found Elasticsearch on dotCloud, install the add-on using the `cctrlapp` command:
 
     $ cctrlapp APP_NAME/DEP_NAME addon.add foundelasticsearch.option
-    
+
 Replace `option` with a valid plan name, such as `dachs`. A list of all plans available can be found [here](https://www.cloudcontrol.com/add-ons/foundelasticsearch).
 
-Once Found Elasticsearch has been added, a `FOUNDELASTICSEARCH_URL` setting will be available in the app configuration and will contain the canonical URL used to access the newly provisioned cluster. 
+Once Found Elasticsearch has been added, a `FOUNDELASTICSEARCH_URL` setting will be available in the app configuration and will contain the canonical URL used to access the newly provisioned cluster.
 
 ### Specifying version and plugins
 
@@ -36,7 +36,7 @@ The Found Elasticsearch dashboard allows you to manage the cluster, like upgradi
 
 ![Found Elasticsearch Dashboard](https://s3.amazonaws.com/heroku.devcenter/heroku_assets/images/167-original.jpg "Found Elasticsearch Dashboard")
 
-You can access the dashboard through the [cloudControl console](https://www.cloudcontrol.com/console/).
+You can access the dashboard through the [dotCloud console](https://www.cloudcontrol.com/console/).
 
 ## Access control
 
@@ -83,8 +83,8 @@ Elasticsearch should then give us output similar to this:
         {"create":{"_index":"my_index","_type":"my_type","_id":"wOzT31EnTPiOw1ICTGX-qA","_version":1,"ok":true}},
         {"create":{"_index":"my_index","_type":"my_type","_id":"_b-kbI1MREmi9SeixFNEVw","_version":1,"ok":true}}
     ]}
-    
-    
+
+
 ### Updating
 
 To update an existing document in Elasticsearch, simply `POST` the updated document to `http://<cluster_id>.foundcluster.com:9200/my_index/my_type/<id>`, where `<id>` is the `id` of the document. For example, to update the last document indexed above:
@@ -183,7 +183,7 @@ Many higher-level clients have been built on top of this API in various programm
 
     require 'rubygems'
     require 'tire'
-    
+
     Tire::Configuration.url ENV['FOUNDELASTICSEARCH_URL']
 
 Remember to update application dependencies with bundler.
@@ -220,7 +220,7 @@ After indexing the documents, we search for articles that has a title starting w
     s.results.each do |document|
       puts "* #{ document.title } [tags: #{document.tags.join(', ')}]"
     end
-	
+
     # * Two [tags: ruby, python]
 
 

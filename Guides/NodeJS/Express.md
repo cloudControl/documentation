@@ -1,6 +1,6 @@
 # Deploying an Express Application
 
-This example demonstrates how to build a simple Express app on [cloudControl]. The
+This example demonstrates how to build a simple Express app on [dotCloud]. The
 app uses [Express], which is a [Node.js] web framework, and MongoDB as the
 backend database.
 
@@ -41,7 +41,7 @@ in the root of your repository. The one you cloned as part of the example app lo
 
 ### Process Type Definition
 
-A [Procfile] is required to start processes on the cloudControl platform. There
+A [Procfile] is required to start processes on the dotCloud platform. There
 must be a file called `Procfile` at the root of your repository. In the example
 code you already cloned it looks like this:
 
@@ -56,7 +56,7 @@ Left of the colon, we specified the **required** process type called `web` follo
 Node.js and MongoDB are an excellent combination because JSON
 (JavaScript Object Notation) is a subset of JavaScript, making storage and
 retrieval of the objects very simple. MongoDB is provided by [MongoSoup]
-which can be found in cloudControl's Add-on Marketplace under the
+which can be found in dotCloud's Add-on Marketplace under the
 category [Data Storage].
 
 This example uses the MongoSoup Add-on. In the
@@ -93,7 +93,7 @@ can refer to the Node.js Add-on credentials [guide][get-conf].
 ## Pushing and Deploying your Express App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
+and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create nodejs
@@ -134,7 +134,7 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Finally, don’t forget to add the MongoSoup Add-on for cloudControl and deploy the
+Finally, don’t forget to add the MongoSoup Add-on for dotCloud and deploy the
 latest version of the app:
 
 ~~~bash
@@ -155,7 +155,7 @@ applications.
 [Node.js]: http://nodejs.org/
 [Express]: http://expressjs.com/
 [npm]: https://npmjs.org/
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
 [get-conf]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

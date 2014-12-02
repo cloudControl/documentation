@@ -21,7 +21,7 @@
 </ul>
 </aside>
 
-# cloudControl Documentation
+# dotCloud Documentation
 
 ## Platform Access
 
@@ -33,7 +33,7 @@
 
 To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via [the command-line interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) called *cctrl*. Additionally we also offer a [web console]. Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries].
 
-Throughout this documentation we will use the CLI as the primary way of controlling the cloudControl platform. The CLI consists of 2 parts: *cctrlapp* and *cctrluser*. To get help for the command line client, just append --help or -h to any of the commands.
+Throughout this documentation we will use the CLI as the primary way of controlling the dotCloud platform. The CLI consists of 2 parts: *cctrlapp* and *cctrluser*. To get help for the command line client, just append --help or -h to any of the commands.
 
 Installing *cctrl* is easy and works on Mac/Linux as well as on Windows.
 
@@ -94,7 +94,7 @@ You can [reset your password], in case you forgot it.
  * A deployment is a running version of your application, based on the branch with the same name. Exception: the default deployment is based on the master branch.
  * Users can be added to apps to gain access to the repository, branches and deployments.
 
-cloudControl PaaS uses a distinct set of naming conventions. To understand how to work with the platform effectively, it's important to understand the following few basic concepts.
+dotCloud PaaS uses a distinct set of naming conventions. To understand how to work with the platform effectively, it's important to understand the following few basic concepts.
 
 ### Apps
 
@@ -259,7 +259,7 @@ spec
 
 #### Buildpacks and the Procfile
 
-During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how an app in a specific language or framework has to be prepared for deployment on the cloudControl platform. With custom buildpacks, support for new programming languages can be added or custom runtime environments can be build. To support many PaaS with one buildpack, we recommend following the [Heroku buildpack API] which is compatible with cloudControl and other platforms.
+During the push a hook is fired that runs the buildpack. A buildpack is a set of scripts that determine how an app in a specific language or framework has to be prepared for deployment on the dotCloud platform. With custom buildpacks, support for new programming languages can be added or custom runtime environments can be build. To support many PaaS with one buildpack, we recommend following the [Heroku buildpack API] which is compatible with dotCloud and other platforms.
 
 Part of the buildpack scripts is also to pull in dependencies according to the languages or frameworks native way. E.g. pip and a requirements.txt for Python, Maven for Java, npm for Node.js, Composer for PHP and so on. This allows you to fully control the libraries and versions available to your app in the final runtime environment.
 
@@ -278,7 +278,7 @@ At the end of the buildpack process, the image is ready to be deployed.
 
 ## Deploying New Versions
 
-The cloudControl platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
+The dotCloud platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy
@@ -336,7 +336,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
  * The filesystem is not persistent.
  * Don't store uploads on the filesystem.
 
-Deployments on the cloudControl platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests across available containers, and is deleted after each deploy. This does include deploys you trigger manually, but also re-deploys done by the platform itself during normal operation.
+Deployments on the dotCloud platform have access to a writable filesystem. This filesystem however is not persistent. Data written may or may not be accessible again in future requests, depending on how the [routing tier](#routing-tier) routes requests across available containers, and is deleted after each deploy. This does include deploys you trigger manually, but also re-deploys done by the platform itself during normal operation.
 
 For customer uploads (e.g. user profile pictures) we recommend object stores like Amazon S3 or the GridFS feature available as part of the [MongoSoup Add-on].
 
@@ -351,7 +351,7 @@ For customer uploads (e.g. user profile pictures) we recommend object stores lik
 
 ### Development, Staging and Production: The Application Lifecycle
 
-Most apps share a common application lifecycle consisting of development, staging and production phases. The cloudControl platform is designed from the ground up to support this. As we explained earlier, each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on a new feature it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More importantly even, these development/feature or staging deployments also help ensure that the new code will work in production because each deployment using the same [stack](#stacks) has the same runtime environment.
+Most apps share a common application lifecycle consisting of development, staging and production phases. The dotCloud platform is designed from the ground up to support this. As we explained earlier, each app can have multiple deployments. Those deployments match the branches in the version control system. The reason for this is very simple. To work on a new feature it is advisable to create a new branch. This new version can then be deployed as its own deployment making sure the new feature development is not interfering with the existing deployments. More importantly even, these development/feature or staging deployments also help ensure that the new code will work in production because each deployment using the same [stack](#stacks) has the same runtime environment.
 
 ### Environment Variables
 
@@ -679,7 +679,7 @@ or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `clo
  * You can scale up or down at any time by adding more containers (horizontal scaling) or changing the container size (vertical scaling).
  * Use performance monitoring and load testing to determine the optimal scaling settings for your app.
 
-When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally, the cloudControl loadbalancing and [routing tier](#routing-tier) ensures efficient distribution of incoming requests accross all available containers.
+When scaling your apps you have two options. You can either scale horizontally by adding more containers, or scale vertically by changing the container size. When you scale horizontally, the dotCloud loadbalancing and [routing tier](#routing-tier) ensures efficient distribution of incoming requests accross all available containers.
 
 ### Horizontal Scaling
 
@@ -769,7 +769,7 @@ scenarios and available queuing Add-ons are available as part of the [Worker Add
 
 ## Secure Shell (SSH)
 
-The distributed nature of the cloudControl platform means it's not possible to SSH into the actual server. Instead, we offer the run command, that allows you to launch a new container and connect to that via SSH.
+The distributed nature of the dotCloud platform means it's not possible to SSH into the actual server. Instead, we offer the run command, that allows you to launch a new container and connect to that via SSH.
 
 The container is identical to the web or worker containers but starts an SSH daemon instead of one of the Procfile commands. It's based on the same stack image and deployment image and does also provides the Add-on credentials.
 

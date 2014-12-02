@@ -1,6 +1,6 @@
 # Deploying a Zend2 Application
 
-In this tutorial we're going to show you how to deploy a Zend2 application on [cloudControl].
+In this tutorial we're going to show you how to deploy a Zend2 application on [dotCloud].
 
 The [example app] is a ready to deploy fork of the official ZendSkeletonApplication available on [github](https://github.com/zendframework/ZendSkeletonApplication).
 
@@ -87,7 +87,7 @@ function get_credentials() {
 
 $config = array();
 
-// If the app is running on the cloudControl PaaS read the credentials
+// If the app is running on the dotCloud PaaS read the credentials
 // from the environment. Local db credentials should be put in local.php
 if (isset($_ENV['CRED_FILE'])) {
 	$config['db'] = get_credentials();
@@ -117,7 +117,7 @@ return $config;
 
 ### Store Sessions in the Database
 
-Storing sessions on the local filesystem does not work well on a horizontally scaling platform like cloudControl. Additionally the filesystem on cloudControl is not persitent across deploys so all sessions are lost after each deploy.
+Storing sessions on the local filesystem does not work well on a horizontally scaling platform like dotCloud. Additionally the filesystem on dotCloud is not persitent across deploys so all sessions are lost after each deploy.
 
 To avoid this, the app is preconfigured to store sessions using the previously configured connection in the database.
 
@@ -143,7 +143,7 @@ class Module
 ~~~
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform: 
 
 ~~~bash
 $ cctrlapp APP_NAME create php
@@ -205,6 +205,6 @@ Connection to ssh.cloudcontrolled.net closed.
 Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [PHP buildpack]: https://github.com/cloudControl/buildpack-php
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [example app]: https://github.com/cloudControl/php-zend2-example-app.git
 

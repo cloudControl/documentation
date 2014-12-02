@@ -16,7 +16,7 @@ RabbitMQ Bigwig is accessible via an API and has supported client libraries for 
 
 ## Provisioning the add-on
 
-You can attach RabbitMQ Bigwig to a cloudControl application via the CLI:
+You can attach RabbitMQ Bigwig to a dotCloud application via the CLI:
 
 <div class="callout">
 You can find a list of all plans available <a href="http://www.cloudcontrol.com/add-ons/rabbitmq-bigwig">here</a>.
@@ -25,7 +25,7 @@ You can find a list of all plans available <a href="http://www.cloudcontrol.com/
     :::term
     $ cctrlapp bigwigrailssample/default addon.add rabbitmq_bigwig.pipkin
 
-Once you have added RabbitMQ Bigwig you will find `RABBITMQ_BIGWIG_TX_URL` and `RABBITMQ_BIGWIG_RX_URL` settings in the app configuration. These contain the canonical URLs used to access the newly provisioned RabbitMQ Bigwig service instance. You will find these settings in your cloudControl console, at `https://www.cloudcontrol.com/console/app/<app name>/dep/<deploy ID>/addons`.
+Once you have added RabbitMQ Bigwig you will find `RABBITMQ_BIGWIG_TX_URL` and `RABBITMQ_BIGWIG_RX_URL` settings in the app configuration. These contain the canonical URLs used to access the newly provisioned RabbitMQ Bigwig service instance. You will find these settings in your dotCloud console, at `https://www.cloudcontrol.com/console/app/<app name>/dep/<deploy ID>/addons`.
 
 We give you two URLs to ease separating your producers from your consumers. Producers connect to the URL in `RABBITMQ_BIGWIG_TX_URL`, and we shape this connection to provide consistent throughput. Consumers connect to the URL in `RABBITMQ_BIGWIG_RX_URL`. We optimise connections to this URL for the consumer case. This separation of producers and consumers follows [RabbitMQ best practice](http://www.rabbitmq.com/memory.html). You can read more about how and why we shape [here](http://bigwig.lshift.net/message-throughput).
 
@@ -55,7 +55,7 @@ After modifying `Gemfile`, run `bundle install` to update `Gemfile.lock`:
     Your bundle is complete! Use `bundle show [gemname]` to see where
     a bundled gem is installed.
 
-For a full example of using Bigwig and the Bunny gem with Rails, please check out our [example rails application](https://github.com/lshift/rabbitmq-service-rails-sample). Once that's checked out, you'll be able to deploy that to cloudControl by running the following shell commands:
+For a full example of using Bigwig and the Bunny gem with Rails, please check out our [example rails application](https://github.com/lshift/rabbitmq-service-rails-sample). Once that's checked out, you'll be able to deploy that to dotCloud by running the following shell commands:
 
     $ git clone https://github.com/lshift/rabbitmq-service-rails-sample.git
     ...
@@ -156,7 +156,7 @@ You can access the dashboard via the CLI:
     $ cctrlapp bigwigrailssample/default open
     Opening rabbitmq-bigwig for sharp-mountain-4005... [[[FIXME]]]
 
-or by visiting the [cloudControl apps web interface](https://www.cloudcontrol.com/console) and selecting the application in question. Select RabbitMQ Bigwig from the Add-ons menu.
+or by visiting the [dotCloud apps web interface](https://www.cloudcontrol.com/console) and selecting the application in question. Select RabbitMQ Bigwig from the Add-ons menu.
 
 ## Migrating between plans
 
@@ -182,7 +182,7 @@ Please consume all your messages from your queues before removing the add-on as 
 
 ## Support
 
-Please submit all RabbitMQ Bigwig support and runtime issues via one of the [cloudControl Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome at rabbitmq-bigwig@lshift.net.
+Please submit all RabbitMQ Bigwig support and runtime issues via one of the [dotCloud Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome at rabbitmq-bigwig@lshift.net.
 
 ## Additional resources
 

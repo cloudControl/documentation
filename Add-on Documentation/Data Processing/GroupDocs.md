@@ -27,7 +27,7 @@ Store the app on Git:
     $ git add .
     $ git commit -m "init"
 
-Create your app on the Python cloudControl stack:
+Create your app on the Python dotCloud stack:
 
     $ cctrlapp APP_NAME create python
 
@@ -36,4 +36,4 @@ Push and deploy the code:
     $ cctrlapp APP_NAME push
 	$ cctrlapp APP_NAME deploy
 
-This sample app is also running live on cloudControl. To view and try, please open [http://groupdocspython.cloudcontrolapp.com/](http://groupdocspython.cloudcontrolapp.com/).
+This sample app is also running live on dotCloud. To view and try, please open [http://groupdocspython.cloudcontrolapp.com/](http://groupdocspython.cloudcontrolapp.com/).

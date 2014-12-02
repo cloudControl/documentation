@@ -1,6 +1,6 @@
 # Cloudant
 
-With cloudControl, every deployment can feature a highly available hosted CouchDB provided by [Cloudant](https://cloudant.com/).
+With dotCloud, every deployment can feature a highly available hosted CouchDB provided by [Cloudant](https://cloudant.com/).
 
 ## Adding or removing the Cloudant Add-on
 
@@ -54,4 +54,3 @@ The JSON file has the following structure:
    }
 }
 ~~~
-

@@ -5,7 +5,7 @@ you definitely have heard of [Tomcat]. Tomcat offers an implementation of the
 Java Servlet and JavaServer Pages (JSP) technologies.
 
 In this tutorial we're going to show you how to deploy a JSP application running on embedded Tomcat on
-[cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/java-tomcat-example-app)
+[dotCloud]. You can find the [source code on Github](https://github.com/cloudControl/java-tomcat-example-app)
 and check out the [Java buildpack] for supported features.
 
 
@@ -93,14 +93,14 @@ the `pom.xml`:
 
 ### Java Version
 We are using the latest version of Apache Tomcat 8 which requires Java 7+ in
-order to run. The default Java version on cloudControl is 7 but you can
+order to run. The default Java version on dotCloud is 7 but you can
 explicitly define it in the `system.properties` file like this:
 ~~~
 java.runtime.version=1.7
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your
 repository. It looks like this:
@@ -114,7 +114,7 @@ commands to start your servlet using the built classes.
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform:
+and create it on the dotCloud platform:
 ~~~bash
 $ cctrlapp APP_NAME create java
 ~~~
@@ -165,9 +165,9 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your JSP Application running on Tomcat at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Tomcat]: https://tomcat.apache.org/
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Application Assembler Maven Plugin]: http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

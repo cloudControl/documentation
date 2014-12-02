@@ -2,7 +2,7 @@
 
 [MemCachier](http://www.memcachier.com) is an implementation of the [Memcached](http://memcached.org) in-memory key/value store used for caching data. It is a key technology in modern web applications for scaling and reducing server loads. The MemCachier Add-on manages and scales clusters of Memcached servers so you can focus on your app. Tell us how much memory you need and get started for free instantly. Add capacity later as you need it.
 
-The information below will quickly get you up and running with the MemCachier Add-on for cloudControl. For information on the benefits of MemCachier and how it works, please refer to the more extensive [User Guide](http://www.memcachier.com/documentation/memcache-user-guide/).
+The information below will quickly get you up and running with the MemCachier Add-on for dotCloud. For information on the benefits of MemCachier and how it works, please refer to the more extensive [User Guide](http://www.memcachier.com/documentation/memcache-user-guide/).
 
 Getting started
 -----
@@ -226,7 +226,7 @@ Memcached provided by MemCachier can be used like this:
 </html>
 ~~~
 
-More information on how to use php-memcached can be found on [php.net](http://php.net/manual/en/book.memcached.php). The php-memcached extension is part of the cloudControl stacks.
+More information on how to use php-memcached can be found on [php.net](http://php.net/manual/en/book.memcached.php). The php-memcached extension is part of the dotCloud stacks.
 
 Java
 ----
@@ -349,9 +349,9 @@ MemCachier will work with any Memcached binding that supports [SASL authenticati
 Local setup
 -----
 
-To test against your cloudControl application locally, you will need to run a local Memcached process. MemCachier can only run on cloudControl but because MemCachier and Memcached speak the same protocol, you shouldn't have any issues testing it locally.  Installation depends on your platform.
+To test against your dotCloud application locally, you will need to run a local Memcached process. MemCachier can only run on dotCloud but because MemCachier and Memcached speak the same protocol, you shouldn't have any issues testing it locally.  Installation depends on your platform.
 
-This will install Memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and Memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on cloudControl.
+This will install Memcached without SASL authentication support. This is generally what you want as client code can still try to use SASL auth and Memcached will simply ignore the requests which is the same as allowing any credentials. So your client code can run without modification locally and on dotCloud.
 
 On Ubuntu:
 
@@ -398,7 +398,7 @@ Changing your plan, either by upgrading or downgrading, requires no code changes
 Support
 -------
 
-All Memcachier support and runtime issues should be submitted via one of the cloudControl Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
+All Memcachier support and runtime issues should be submitted via one of the dotCloud Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
 
 Any issues related to Memcachier service are reported at [Memcachier Status](http://status.memcachier.com/).
 

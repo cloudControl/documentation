@@ -1,4 +1,4 @@
-#Deploying Joomla 2.5 to cloudControl
+#Deploying Joomla 2.5 to dotCloud
 
 ![Successful Deployment](images/joomla-logo.png)
 
@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Joomla v2.5 to [the cloudControl platform](http://www.cloudcontrol.com). 
+In this tutorial, we're going to take you through deploying Joomla v2.5 to [the dotCloud platform](http://www.cloudcontrol.com).
 
 ##Prerequisites
 
@@ -19,20 +19,20 @@ You're going to need only a few things to following along with this tutorial. Th
  * A [Git client](http://git-scm.com/), whether command-line or GUI.
  * A MySQL client, whether command-line or GUI, such as [MySQL Workbench](http://dev.mysql.com/downloads/workbench/) or the command-line tools.
 
-##1. Grab a Copy of Joomla 
+##1. Grab a Copy of Joomla
 
-So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://www.joomla.org/download.html](http://www.joomla.org/download.html). After that, extract it to your local file sytem. 
+So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://www.joomla.org/download.html](http://www.joomla.org/download.html). After that, extract it to your local file sytem.
 
 ![Successful Deployment](images/joomla-source.png)
 
 
 ##Create a Basic Application
 
-Once you have a copy of the Joomla source available locally, setup a VHost (or equivalent) in your web server of choice and install a copy of it, accepting the default options and inserting your details as appropriate. If you're not that familiar with Joomla, the first time that you view it as a site it will run the installer. 
+Once you have a copy of the Joomla source available locally, setup a VHost (or equivalent) in your web server of choice and install a copy of it, accepting the default options and inserting your details as appropriate. If you're not that familiar with Joomla, the first time that you view it as a site it will run the installer.
 
 ##2. Update the Configuration
 
-A few changes need to be made to the default Joomla configuration and code to accommodate cloudControl deployment. These changes are as follows:
+A few changes need to be made to the default Joomla configuration and code to accommodate dotCloud deployment. These changes are as follows:
 
  * Store sessions in the database
  * Store Cache Information in APC
@@ -44,7 +44,7 @@ Unless something goes awry, you won't have to do anything here as Joomla should 
 
  * Under **Session Settings**:
      * ensure **Session Handler** is set to **Database**
- 
+
 Click Save.
 
 ###2.2 Store Cache Information in APC
@@ -55,13 +55,13 @@ By default, caching in Joomla is turned off. So from "Global Configuration" -> "
      * set **Cache** to **On**
      * set **Cache Handler** to **Alternative PHP Cache**
 
-Click **Save & Close**. 
+Click **Save & Close**.
 
 ###2.3 Update the Configuration Code
 
-Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the cloudControl environment becomes a, little, bit tricky. 
+Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the dotCloud environment becomes a, little, bit tricky.
 
-What we can do, though an impermanent solution if we're upgrading our version of Joomla, is to update the file that is responsible for writing the configuration.php file, so that though a new constructor it can elect to return either the original information or the retrieve the database data from the environment and return that instead. 
+What we can do, though an impermanent solution if we're upgrading our version of Joomla, is to update the file that is responsible for writing the configuration.php file, so that though a new constructor it can elect to return either the original information or the retrieve the database data from the environment and return that instead.
 
 We do this by updating ``libraries/joomla/registry/format/php.php``. Have a look at the modified version of the file below:
 
@@ -85,10 +85,10 @@ We do this by updating ``libraries/joomla/registry/format/php.php``. Have a look
     				$vars .= "\tpublic $" . $k . " = " . $this->getArrayString((array) $v) . ";\n";
     			}
     		}
-    
+
     		$str = "<?php\nclass " . $params['class'] . " {\n";
     		$str .= $vars;
-    		
+
     		//
     		// Include in the generation of the class a call to the __get magic
     		// method, which will read the database settings from the environment
@@ -98,10 +98,10 @@ We do this by updating ``libraries/joomla/registry/format/php.php``. Have a look
             public function __construct()
             {
                 $creds = null;
-        
-                if (!empty($_SERVER[\'HTTP_HOST\']) && 
+
+                if (!empty($_SERVER[\'HTTP_HOST\']) &&
                     strpos($_SERVER[\'HTTP_HOST\'], \'localdomain\') === FALSE) {
-        
+
                     $string = file_get_contents($_ENV[\'CRED_FILE\'], false);
                     if ($string == false) {
                         die(\'FATAL: Could not read credentials file\');
@@ -113,18 +113,18 @@ We do this by updating ``libraries/joomla/registry/format/php.php``. Have a look
                     $this->password = $creds["MYSQLS"]["MYSQLS_PASSWORD"];
                 }
             }' . "\n";
-    		
+
     		$str .= "}";
-    
+
     		// Use the closing tag if it not set to false in parameters.
     		if (!isset($params['closingtag']) || $params['closingtag'] !== false)
     		{
     			$str .= "\n?>";
     		}
-    
+
     		return $str;
     	}
-    
+
 
 
 ##3. Put the Code Under Git Control
@@ -132,29 +132,29 @@ We do this by updating ``libraries/joomla/registry/format/php.php``. Have a look
 Ok, now let's get started making these changes and deploying the application. We'll begin by putting it under Git control. So run the following command to do that:
 
     cd <your Joomla directory>
-    
+
     git init .
-    
+
     git add -A
-    
+
     git commit -m "First addition of the source files"
-    
+
 Now that the code's under version control, we're going to create a testing branch as well, so that we have one to test with and one for production. Run the following command and it will be done:
 
     git checkout -b testing
-    
+
 If you're not familiar with Git, the previous command will checkout a copy of our existing branch, into a new branch, called *testing*. You can confirm that you now have two branches, by running the following command:
 
     git branch
-    
+
 That will show output similar to below:
 
     $ git branch
         master
         * testing
 
-I am using the application name ``cloudcontroldljoomla`` in this example. You will of course have to use some different name. 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and push and deploy both deployments. By running the following commands, this will all be done:
+I am using the application name ``cloudcontroldljoomla`` in this example. You will of course have to use some different name.
+Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -172,7 +172,7 @@ Now, we need to make our first deployment of both branches to the cloudControl p
 
 ##4. Initialise the Required Add-ons
 
-Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on's required for determining the active environment and mysqls for storing our session and logging information. 
+Now that that's done, we need to configure two add-ons, config and mysqls. The config add-on's required for determining the active environment and mysqls for storing our session and logging information.
 
 ###4.1 Check the Add-on Configuration
 
@@ -211,7 +211,7 @@ Now we need to configure the config add-on and store the respective environment 
     // Set the testing environment settings
     cctrlapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
 
-Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
+Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
 ##5. A Note About Logging & Temp Directories
 
@@ -222,7 +222,7 @@ Where it may become interesting is if/when you start to use more than one clone 
 Now, in the shell, we're going to dump the database that the install routine created and load it in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both default and testing:
 
     -- the database dump (SQL) file
-    mysqldump -u <database_username> -p <database_name> > joomla_cloudcontrol_init.sql 
+    mysqldump -u <database_username> -p <database_name> > joomla_cloudcontrol_init.sql
 
     -- load the database dump (SQL) file in to the remote environment database
     mysql -u <database_username> -p \
@@ -234,28 +234,28 @@ In the command above, you can see a reference to a **.pem** file. This can be do
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
         --ssl-ca=mysql-ssl-ca-cert.pem <database_name>
-    
+
     show tables;
-    
+
 This will show you the tables from the SQL file. Now that that's done, commit the changes we made earlier and push and deploy both environments again so that the new information will be used. This can be done quickly with the following commands:
 
     // commit the changes
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push    
+    cctrlapp cloudcontroldljoomla/default push
     cctrlapp cloudcontroldljoomla/default deploy
-    
+
     git checkout testing
     git merge master
-    
+
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push    
+    cctrlapp cloudcontroldljoomla/testing push
     cctrlapp cloudcontroldljoomla/testing deploy
 
 ##7. Review the Deployment
 
-With that completed, then have a look at both your deployments to ensure that they're working. 
+With that completed, then have a look at both your deployments to ensure that they're working.
 You should see output similar to that below, in figure 2.
 
 ![Successful Deployment](images/joomla-running.png)
@@ -274,12 +274,12 @@ To view the information, run the following commands respectively:
 
     cctrlapp cloudcontroldljoomla/default log error
 
-The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output. 
+The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 
 ###7.2 Deployment Considerations
 
 As was mentioned earlier, this isn't the most perfect solution as when you upgrade Joomla, the changes made to php.php will be overwritten and JLog still writes to the filesystem. We are working on a more permanent solution to this situation.
 
 ##Links
- 
+
  * [Joomla](http://www.joomla.org/)

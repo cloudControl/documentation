@@ -1,6 +1,6 @@
 # QuotaGuard
 
-QuotaGuard is a proxy service for outgoing API calls. By routing your calls through our distributed proxy network we guarantee that your quotas with any IP limiting services are not shared with other cloudControl users and you get consistent, reliable access to critical third party APIs like Google Maps Geocoding.
+QuotaGuard is a proxy service for outgoing API calls. By routing your calls through our distributed proxy network we guarantee that your quotas with any IP limiting services are not shared with other dotCloud users and you get consistent, reliable access to critical third party APIs like Google Maps Geocoding.
 
 ## Adding QuotaGuard
 
@@ -59,7 +59,7 @@ The JSON file has the following structure:
 ~~~
 ## Monitoring QuotaGuard
 
-Most of our plans include analytics via our dashboard. Access this by logging in to your cloudControl console and clicking on the QuotaGuard add-on from within one of your deployments. This will take you to our dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
+Most of our plans include analytics via our dashboard. Access this by logging in to your dotCloud console and clicking on the QuotaGuard add-on from within one of your deployments. This will take you to our dashboard on QuotaGuard.com where you will be able to see your real-time and historic usage data.
 
 ## QuotaGuard Code Examples
 ### Using with Rails

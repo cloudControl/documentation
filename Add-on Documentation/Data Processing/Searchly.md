@@ -315,5 +315,5 @@ It's recommended to the read database credentials from the creds.json file. The 
 Please ensure to check our [Searchly Github](https://github.com/searchbox-io) account for sample applications with various languages and frameworks.
 
 ##Support
-All Searchly support and runtime issues should be submitted via one of the cloudControl Support channels](https://www.cloudcontrol.com/dev-center/support).
+All Searchly support and runtime issues should be submitted via one of the dotCloud Support channels](https://www.cloudcontrol.com/dev-center/support).
 Any non-support related issues or product feedback is welcome via email at: support@searchly.com

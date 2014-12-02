@@ -3,7 +3,7 @@
 
 ## Procfile
 
-The cloudControl platform uses a file named `Procfile` to determine how to run your
+The dotCloud platform uses a file named `Procfile` to determine how to run your
 application. This `Procfile` uses the YAML format to specify the desired
 configuration.
 

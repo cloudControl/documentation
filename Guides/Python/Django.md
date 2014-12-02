@@ -1,7 +1,7 @@
 # Deploying a Django Application
 
 In this tutorial we're going to show you how to deploy a Django application on
-[cloudControl]. You can find the [source code on Github][example-app] and check
+[dotCloud]. You can find the [source code on Github][example-app] and check
 out the [Python buildpack][python buildpack] for supported features. The
 application follows the official [Django tutorial] and allows you to create,
 use and manage simple polls.
@@ -48,7 +48,7 @@ INSTALLED_APPS = (
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes. The example
+dotCloud uses a [Procfile] to know how to start your processes. The example
 code already includes a file called Procfile at the top level of your
 repository. It looks like this:
 
@@ -64,7 +64,7 @@ by the environment variable `$PORT`.
 
 The original tutorial application uses SQLite as the database in all
 environments, even the production one. It is not possible to use a SQLite
-database on cloudControl because the filesystem is
+database on dotCloud because the filesystem is
 [not persistent][filesystem]. To use a database, you should choose an Add-on
 from [the Data Storage category][data-storage-addons].
 
@@ -109,7 +109,7 @@ DATABASES = {
 ## Pushing and Deploying your App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your
-application and create it on the cloudControl platform: 
+application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create python
@@ -124,7 +124,7 @@ Delta compression using up to 8 threads.
 Compressing objects: 100% (33/33), done.
 Writing objects: 100% (49/49), 8.80 KiB | 0 bytes/s, done.
 Total 49 (delta 11), reused 38 (delta 8)
-       
+
 -----> Receiving push
 -----> No runtime.txt provided; assuming python-2.7.3.
 -----> Preparing Python runtime (python-2.7.3)
@@ -161,9 +161,9 @@ For additional information take a look at [Django Notes][django-notes] and
 other [python-specific documents][python-guides].
 
 [django]: https://www.djangoproject.com/
-[cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud]: http://www.cloudcontrol.com
+[dotCloud-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
+[dotCloud-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem

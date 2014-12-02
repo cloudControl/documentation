@@ -11,17 +11,17 @@ reduces expensive communication overhead significantly.
 
 Usersnap integrates seamlessly with your existing Bug Tracker and causes
 no switching costs. Connect Usersnap with one of our supported tools and
-you will get issue reports in a familiar place. 
+you will get issue reports in a familiar place.
 
 [Learn more about all supported tools](https://usersnap.com/doc/connect)
 Usersnap provides simple and yet powerful tools which allow anybody to
 report bugs and issues. All bug reports contain additional information
 such as the used browser and the source URL of the screenshot making it
-easy to reproduce the reported issues. 
-[Learn more about Usersnap's features](https://usersnap.com/support/docs/javascript#tools). 
+easy to reproduce the reported issues.
+[Learn more about Usersnap's features](https://usersnap.com/support/docs/javascript#tools).
 
 ## Adding or removing the Usersnap Add-on
-The Add-on comes in different sizes and prices. It can be added by 
+The Add-on comes in different sizes and prices. It can be added by
 executing the command addon.add:
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add usersnap.OPTION
@@ -41,9 +41,9 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add usersnap.OPTION \
  + __targetmails__ (comma-separated, optional - default: cloud control account owner email): You can add one or more email addresses as recipients for Usersnap screenshots.
  + __senderemail__ (optional - default: "noreply@usersnap.com"): If you plan to deliver Usersnap reports to a ticketing system via email, you can change the sender address to your needs.
  + __subject__ (optional - default: "[Usersnap] New Usersnap feedback"): Particularly useful if you want to create an email filter to organize your screenshots.
- 
- 
-Once Usersnap has been added, a `USERSNAP_APIKEY` setting will be available inside the `CRED_FILE` under the `USERSNAP` key. This will contain the API key to be used in the [Usersnap snippet](https://usersnap.com/support/docs/install). 
+
+
+Once Usersnap has been added, a `USERSNAP_APIKEY` setting will be available inside the `CRED_FILE` under the `USERSNAP` key. This will contain the API key to be used in the [Usersnap snippet](https://usersnap.com/support/docs/install).
 
 You can confirm a valid setup using:
 ~~~
@@ -79,14 +79,14 @@ On CloudControl, one even doesn't have to take care of the API key because it is
 Provisioning Usersnap sets up a default email subscription for screenshots. To set up more advanced delivery methods just use the add-on's administration interface. You can open it in the resources view of your app. One single click on the Usersnap add-on opens the configuration view.
 
 ## Install Usersnap to your Web App
-Usersnap works with every web project, regardless of the backend language. 
+Usersnap works with every web project, regardless of the backend language.
 All you need to do is include the [Usersnap JavaScript code](https://usersnap.com/configurator) right before
 the closing `</body>` tag of your main template.
 
- 
+
 ### Example for PHP web sites
 Include this snippet in your base template, right before the closing `</body>`
-tag (you can easily configure the snippet to your needs with the 
+tag (you can easily configure the snippet to your needs with the
 [Usersnap Configurator](https://usersnap.com/configurator)):
 
 ```php
@@ -112,7 +112,7 @@ $USERSNAP_APIKEY = $creds['USERSNAP']['USERSNAP_APIKEY'];
        lang: 'en',
        commentBox: true,
        emailBox: true
-   }; 
+   };
    (function() {
        var s = document.createElement('script');
        s.type = 'text/javascript';
@@ -125,12 +125,12 @@ $USERSNAP_APIKEY = $creds['USERSNAP']['USERSNAP_APIKEY'];
 </body>
 </html>
 ```
-You can learn more about getting addon credentials with PHP in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
+You can learn more about getting addon credentials with PHP in the
+[dotCloud Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
 
 ### Example for Python web sites (Example for mako templates)
 Include this snippet in your base template, right before the closing `</body>`
-tag (you can easily configure the snippet to your needs with the 
+tag (you can easily configure the snippet to your needs with the
 [Usersnap Configurator](https://usersnap.com/configurator)):
 
 ```python
@@ -157,7 +157,7 @@ except IOError:
        lang: 'en',
        commentBox: true,
        emailBox: true
-   }; 
+   };
    (function() {
        var s = document.createElement('script');
        s.type = 'text/javascript';
@@ -171,12 +171,12 @@ except IOError:
 </html>
 ```
 
-You can learn more about getting addon credentials with Python in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
+You can learn more about getting addon credentials with Python in the
+[dotCloud Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
 
 ### Example for Ruby on Rails websites
-Include this snippet in your base template, right before the closing `</body>` 
-tag (you can easily configure the snippet to your needs with the 
+Include this snippet in your base template, right before the closing `</body>`
+tag (you can easily configure the snippet to your needs with the
 [Usersnap Configurator](https://usersnap.com/configurator)):
 
 ```ruby
@@ -201,7 +201,7 @@ end
        lang: 'en',
        commentBox: true,
        emailBox: true
-   }; 
+   };
    (function() {
        var s = document.createElement('script');
        s.type = 'text/javascript';
@@ -223,12 +223,12 @@ it in other templates by adding this line to your main template:
 ```
 
 
-You can learn more about getting addon credentials with Ruby in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
+You can learn more about getting addon credentials with Ruby in the
+[dotCloud Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
 
-### Example for Java, NodeJS and all other web languages 
+### Example for Java, NodeJS and all other web languages
 Include this snippet in your base template, right before the closing `</body>` tag
-(you can easily configure the snippet to your needs with the 
+(you can easily configure the snippet to your needs with the
 [Usersnap Configurator](https://usersnap.com/configurator)):
 
 ```html
@@ -241,7 +241,7 @@ Include this snippet in your base template, right before the closing `</body>` t
        lang: 'en',
        commentBox: true,
        emailBox: true
-   }; 
+   };
    (function() {
        var s = document.createElement('script');
        s.type = 'text/javascript';
@@ -256,9 +256,8 @@ Include this snippet in your base template, right before the closing `</body>` t
 ```
 
 Make sure to replace `YOUR-APIKEY-HERE` with the addon credential value stored in the `USERSNAP.USERSNAP_APIKEY`
-option. [How to get add on credentials in cloudControl](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons).
+option. [How to get add on credentials in dotCloud](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons).
 
 ## Support
 If you need help installing the [Usersnap addon](https://www.cloudcontrol.com/add-ons/usersnap)
-or you have further questions, please get in touch with the [Usersnap team](https://usersnap.com/support). 
-
+or you have further questions, please get in touch with the [Usersnap team](https://usersnap.com/support).

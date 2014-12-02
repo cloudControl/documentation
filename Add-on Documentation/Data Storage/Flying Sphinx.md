@@ -1,6 +1,6 @@
 # Flying Sphinx (Alpha)
 
-Flying Sphinx is an Add-on for cloudControl which lets you use Thinking Sphinx (and thus, Sphinx) for all your search needs.
+Flying Sphinx is an Add-on for dotCloud which lets you use Thinking Sphinx (and thus, Sphinx) for all your search needs.
 
 ## Adding or removing the Flying Sphinx Add-on
 
