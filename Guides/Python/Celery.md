@@ -1,7 +1,7 @@
-# Deploying Celery on cloudControl
+# Deploying Celery on dotCloud
 [Celery] is an asynchronous task queue/job queue based on distributed message passing. It is focused on real-time operation, but supports scheduling as well.
 
-In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and the [Worker Add-on] on [cloudControl].
+In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and the [Worker Add-on] on [dotCloud].
 
 ## The Example App Explained
 First, lets clone the example code from Github. It is based on the official [first steps with Celery guide][celeryguide] and also includes [Flower] the Celery web interface.
@@ -22,7 +22,7 @@ flower==0.4.2
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes.
+dotCloud uses a [Procfile] to know how to start the app's processes.
 
 The example code also already includes a file called `Procfile` at the top level of your repository. It looks like this:
 
@@ -55,7 +55,7 @@ def add(x, y):
 ~~~
 
 ## Creating the App and Adding the Required Add-ons
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create python
@@ -96,7 +96,7 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
 Writing objects: 100% (6/6), 605 bytes, done.
 Total 6 (delta 0), reused 0 (delta 0)
-       
+
 -----> Receiving push
 -----> Preparing Python interpreter (2.7.2)
 -----> Creating Virtualenv version 1.7.2
@@ -107,14 +107,14 @@ Total 6 (delta 0), reused 0 (delta 0)
        Running virtualenv with interpreter /usr/bin/python2.7
 -----> Activating virtualenv
 -----> Installing dependencies using pip version 1.2.1
-       
+
        [...]
-           
+
        Successfully installed celery flower billiard python-dateutil kombu tornado anyjson amqp
        Cleaning up...
 -----> Building image
 -----> Uploading image (4.3M)
-       
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
@@ -122,13 +122,13 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 Last but not least deploy the latest version of the app with the cctrlapp deploy command.
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy 
+$ cctrlapp APP_NAME/default deploy
 ~~~
 
 At this point you can see web interface at `http://APP_NAME.cloudcontrolled.com`. But it hasn't got any workers yet.
 
 ## Scaling Celery Workers
-Scaling Celery workers on cloudControl is easy enough luckily. We have already defined how to run one in the `Procfile` earlier. So we can now go ahead and start the first one.
+Scaling Celery workers on dotCloud is easy enough luckily. We have already defined how to run one in the `Procfile` earlier. So we can now go ahead and start the first one.
 
 ### Adding Workers
 
@@ -139,7 +139,7 @@ $ cctrlapp APP_NAME/default worker
 # and also check the worker's log output with
 $ cctrlapp APP_NAME/default log worker
 [TIMESTAMP] WRK_ID Started worker (command: 'celery -A tasks worker --loglevel=info ', parameter: '')
-[TIMESTAMP] WRK_ID 
+[TIMESTAMP] WRK_ID
 [TIMESTAMP] WRK_ID  -------------- celery@HOSTNAME v3.0.15 (Chiastic Slide)
 [TIMESTAMP] WRK_ID ---- **** -----
 [TIMESTAMP] WRK_ID --- * ***  * -- [Configuration]
@@ -151,7 +151,7 @@ $ cctrlapp APP_NAME/default log worker
 [TIMESTAMP] WRK_ID - *** --- * --- [Queues]
 [TIMESTAMP] WRK_ID -- ******* ---- . celery:      exchange:celery(direct) binding:celery
 [TIMESTAMP] WRK_ID --- ***** -----
-[TIMESTAMP] WRK_ID 
+[TIMESTAMP] WRK_ID
 [TIMESTAMP] WRK_ID [Tasks]
 [TIMESTAMP] WRK_ID   . tasks.add
 [TIMESTAMP] WRK_ID [TIMESTAMP: WARNING/MainProcess] celery@HOSTNAME ready.
@@ -206,14 +206,13 @@ Connection to ssh.cloudcontrolled.net closed.
 
 ## Résumé
 
-This guide showed how to run both Flower aswell as a Celery worker on cloudControl by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
+This guide showed how to run both Flower aswell as a Celery worker on dotCloud by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
 
 [Celery]: http://celeryproject.org/
 [CloudAMQP Add-on]: https://www.cloudcontrol.com/add-ons/cloudamqp
 [Worker Add-on]: https://www.cloudcontrol.com/add-ons/worker
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [celeryguide]: http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html
 [Flower]: http://docs.celeryproject.org/en/latest/userguide/monitoring.html#flower-real-time-celery-web-monitor
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-

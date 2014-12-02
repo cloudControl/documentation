@@ -1,6 +1,6 @@
 # Deploying a Grails application
 
-In this tutorial we're going to show you how to deploy a Grails  application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/grails-example-app) and check out the [Grails buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Grails  application on [dotCloud]. You can find the [source code on Github](https://github.com/cloudControl/grails-example-app) and check out the [Grails buildpack] for supported features.
 
 ## The Grails Application Explained
 ### Get the App
@@ -17,18 +17,18 @@ Now you have a small, but fully functional Grails application.
 Dependencies in Grails applications are resolved using [Ivy]. The dependency requirements are defined in the `grails-app/conf/BuildConfig.groovy` file which needs to be located in the root of your repository. The one you cloned as part of the example app looks like this:
 
 ~~~groovy
-grails.servlet.version = "2.5" 
+grails.servlet.version = "2.5"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 
 grails.project.dependency.resolution = {
     inherits("global") {
     }
-    log "error" 
+    log "error"
     checksums true
     legacyResolve false
     repositories {
-        inherits true 
+        inherits true
         grailsPlugins()
         grailsHome()
         grailsCentral()
@@ -52,7 +52,7 @@ grails.project.dependency.resolution = {
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your repository. It looks like this:
 
@@ -63,7 +63,7 @@ web: java $JAVA_OPTS -jar server/webapp-runner.jar --port $PORT target/*.war
 The `web` process type is required and specifies the command that will be executed when the app is deployed. The environment variable `$PORT` defines the port the application-server should listen to.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -100,9 +100,9 @@ $ cctrlapp APP_NAME/default deploy
 
 Congratulations, you can now see your Grails application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [Grails buildpack]: https://github.com/cloudControl/buildpack-grails
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [Ivy]: http://ant.apache.org/ivy/

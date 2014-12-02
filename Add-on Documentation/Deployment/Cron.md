@@ -3,8 +3,8 @@
 ## What are cronjobs?
 
 On UNIX systems [cronjobs](http://en.wikipedia.org/wiki/Cron) are commands that
-are periodically executed. On cloudControl however, there is no one node that
-the cronjob can run on. Therefore cronjobs on cloudControl are periodical calls
+are periodically executed. On dotCloud however, there is no one node that
+the cronjob can run on. Therefore cronjobs on dotCloud are periodical calls
 to a URL you specify.
 
 ## How does it work?

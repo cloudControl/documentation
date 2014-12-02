@@ -34,7 +34,7 @@ is exposed in the `CRED_FILE` environment variable. You can see the format of th
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
-We provide a small [cloudControl credentials helper class] to get the Add-on credentials from the file.
+We provide a small [dotCloud credentials helper class] to get the Add-on credentials from the file.
 It requires [json-simple], a simple Java toolkit to encode or decode JSON text easily.
 To use it in your project, add it as a maven dependency:
 ~~~xml
@@ -56,7 +56,7 @@ String database = (String)cr.getCredential("MYSQLS_DATABASE", "MYSQLS");
 
 # Examples
 
-cloudControl offers a number of data storage solutions via the [Add-on Marketplace].
+dotCloud offers a number of data storage solutions via the [Add-on Marketplace].
 Below you can find examples on how to access the Add-on
 credentials for MySQL and PostgreSQL.
 
@@ -100,7 +100,7 @@ String password 	 = credentials[1];
 [Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
 [cred-env-vars]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#enabling-disabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
-[cloudControl credentials helper class]: https://gist.github.com/b350762c61fcc069b427
+[dotCloud credentials helper class]: https://gist.github.com/b350762c61fcc069b427
 [MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
 [MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls
 [ElephantSQL Add-on]: https://www.cloudcontrol.com/add-ons/elephantsql

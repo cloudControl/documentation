@@ -3,7 +3,7 @@
 [Revel] is an open source web framework for Go.
 
 In this tutorial we're going to show you how to deploy a simple Revel based
-application on [cloudControl].
+application on [dotCloud].
 
 ## The Example App Explained
 
@@ -23,7 +23,7 @@ through the different files and their purpose real quick.
 The [Revel buildpack] handles the Revel dependencies automatically.
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start the app's processes. The example app provides a Procfile. It runs the revel app in production mode and listens on the port specified by the `$PORT` environment variable.
+dotCloud uses a [Procfile] to know how to start the app's processes. The example app provides a Procfile. It runs the revel app in production mode and listens on the port specified by the `$PORT` environment variable.
 
 ~~~
 web: revel run github.com/cloudControl/go-revel-example-app prod $PORT
@@ -73,7 +73,7 @@ GET     /public/*filepath                       Static.Serve("public")
 ## Pushing and Deploying the App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the cloudControl platform using the custom Go buildpack:
+and create it on the dotCloud platform using the custom Go buildpack:
 
 ~~~bash
 $ cctrlapp APP_NAME create custom --buildpack https://github.com/revel/heroku-buildpack-go-revel
@@ -120,6 +120,6 @@ $ cctrlapp APP_NAME/default open
 ~~~
 
 [Revel]: http://revel.github.io
-[cloudControl]: https://www.cloudcontrol.com
+[dotCloud]: https://www.cloudcontrol.com
 [Revel buildpack]: https://github.com/revel/heroku-buildpack-go-revel
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

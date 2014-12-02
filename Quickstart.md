@@ -1,6 +1,6 @@
-# cloudControl Quickstart
+# dotCloud Quickstart
 
-It's easy to start with cloudControl. Follow this 5 minute quickstart to get your first app running on cloudControl PaaS.
+It's easy to start with dotCloud. Follow this 5 minute quickstart to get your first app running on dotCloud PaaS.
 
 **Note:** All examples starting with $ are supposed to be run in a terminal. For Windows we recommend using Git bash, which comes bundled with the Windows Git installer. Throughout this quickstart and the rest of the documentation placeholders are marked by being written all uppercase.
 
@@ -58,9 +58,9 @@ Password: PASSWORD
 
 The command line client will determine if you already have a public key and upload that or offer to create one.
 
-## Create the First Application on cloudControl
+## Create the First Application on dotCloud
 
-Create a new application on the cloudControl platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
+Create a new application on the dotCloud platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
 
 ~~~bash
 $ cctrlapp APP_NAME create [java, php, python, ruby, nodejs]
@@ -74,7 +74,7 @@ Change to the working directory where you want to store your source code.
 $ cd PATH_TO/YOUR_WORKDIR
 ~~~
 
-Clone one of the example apps in your preferred programming language and push it to the cloudControl platform.
+Clone one of the example apps in your preferred programming language and push it to the dotCloud platform.
 
 ~~~bash
 # for Java
@@ -103,7 +103,7 @@ $ cctrlapp APP_NAME push
 
 The push fires a hook that prepares your application for deployment like pulling in requirements and more. You can see the output of the build process in your terminal.
 
-## Deploy Your Application on cloudControl
+## Deploy Your Application on dotCloud
 
 Deploy your app with
 

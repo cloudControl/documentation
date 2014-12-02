@@ -1,6 +1,6 @@
 # Third-Party Custom Buildpacks
 
-[cloudControl] officially supports the following application types via the [Pinky Stack][PinkyStack].
+[dotCloud] officially supports the following application types via the [Pinky Stack][PinkyStack].
 
 - Java-based (Java with Maven, Gradle, Grails, Scala, Play! or Clojure)
 - Ruby
@@ -11,7 +11,7 @@ However, you can deploy apps developed on languages and technologies beyond the 
 
 ## Verified Buildpacks
 
-Here is a list of verified and recommended buildpacks for the cloudControl platform covering the following languages and technologies:
+Here is a list of verified and recommended buildpacks for the dotCloud platform covering the following languages and technologies:
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
@@ -37,7 +37,7 @@ You can use any of the aforementioned buildpacks, fork them and make changes acc
 
 Before using any third party buildpack you should inspect their source code and proceed with caution.
 
-[cloudControl]: https://www.cloudcontrol.com
+[dotCloud]: https://www.cloudcontrol.com
 [PinkyStack]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#stacks
 [buildpack-java]: https://github.com/cloudControl/buildpack-java
 [buildpack-python]: https://github.com/cloudControl/buildpack-python
