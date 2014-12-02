@@ -119,7 +119,7 @@ http[s]://APP_NAME.cloudcontrolled.com
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](https://www.cloudcontrol.com/dev-center/cctrl_cheatsheet.pdf) to have the most important command line client commands handy at all times.
+Grab [our cheatsheet (PDF)](/dev-center/dotcloudng_cheatsheet.pdf) to have the most important command line client commands handy at all times.
 
 ## Documentation
 
