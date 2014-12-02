@@ -2,7 +2,7 @@
 
 Every deployment can access a highly available shared MySQL Add-on based on [Amazon RDS](http://aws.amazon.com/rds/).
 The shared MySQL Add-on is recommended for development and low-traffic apps only. For medium to high-traffic apps we
-recommend one of the dedicated [MySQLd Add-on](https://www.cloudcontrol.com/add-ons/mysqld) plans.
+recommend one of the dedicated [MySQLd Add-on](https://next.dotcloud.com/add-ons/mysqld) plans.
 
 ## Adding the MySQLs Add-on
 
@@ -84,7 +84,7 @@ SHOW CHARSET;
 It's recommended to the read database credentials from the creds.json file. The location of the file is available
 in the `CRED_FILE` environment variable. Reading the credentials from the creds.json file ensures your app is always
 using the correct credentials. For detailed instructions on how to use the creds.json file please refer to the
-section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) in
+section about [Add-on Credentials](https://next.dotcloud.com/dev-center/Platform%20Documentation#add-ons) in
 the general documentation.
 
 ### External Access

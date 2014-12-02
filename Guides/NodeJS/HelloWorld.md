@@ -133,10 +133,10 @@ Building a data app with Node.js? Check out our next [example on how to use Node
 Good luck building your apps using Node.js and dotCloud.
 
 
-[example on how to use Node.js with MongoDB]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Express
+[example on how to use Node.js with MongoDB]: https://next.dotcloud.com/dev-center/Guides/NodeJS/Express
 [Node.js]: http://nodejs.org/
 [npm]: https://npmjs.org/
-[dotCloud]: http://www.cloudcontrol.com
+[dotCloud]: http://next.dotcloud.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[platform documentation]: https://next.dotcloud.com/dev-center/Platform%20Documentation

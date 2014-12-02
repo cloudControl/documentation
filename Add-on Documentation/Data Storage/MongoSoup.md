@@ -15,7 +15,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add mongosoup.OPTION
 For your OPTION, select one of MongoSoup's plan offerings: small, medium,
 large, xlarge, dedicated-small, dedicated-medium, dedicated-large,
 dedicated-xlarge For more information, click
-[here](https://www.cloudcontrol.com/add-ons/mongosoup).
+[here](https://next.dotcloud.com/add-ons/mongosoup).
 
 ## For example:
 ~~~bash
@@ -24,7 +24,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add mongosoup.large
 
 When added, MongoSoup automatically creates a new user account and database in
 an Amazon EC2 cloud. You can manage your database and data easily from the
-[web console](https://www.cloudcontrol.com/console) by clicking the MongoSoup add-on
+[web console](https://next.dotcloud.com/console) by clicking the MongoSoup add-on
 entry on your app's deployment page, and you gain immediate access to MongoSoup
 customer support. Email [support@mongosoup.de](mailto:support@mongosoup.de)
 with any questions.
@@ -71,7 +71,7 @@ Here are some snippets of code to help you get started:
 ### Java
 
 For reading CloudControl credentials you can use the Credentials class as
-described in [Reading the Credentials](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials)
+described in [Reading the Credentials](https://next.dotcloud.com/dev-center/Guides/Java/Add-on%20credentials)
 article.
 
 ```java

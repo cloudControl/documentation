@@ -19,10 +19,10 @@ timelimit.
 
 If you need more control over when and how often tasks are run and/or have
 tasks that take longer than 120 seconds we recommend using the
-[Worker](https://www.cloudcontrol.com/add-ons/worker) or
-[IronWorker](https://www.cloudcontrol.com/add-ons/iron_worker) Add-on. There
-are also the [IronMQ](https://www.cloudcontrol.com/add-ons/iron_mq) and the
-[CloudAMQP](https://www.cloudcontrol.com/add-ons/cloudamqp) message queues
+[Worker](https://next.dotcloud.com/add-ons/worker) or
+[IronWorker](https://next.dotcloud.com/add-ons/iron_worker) Add-on. There
+are also the [IronMQ](https://next.dotcloud.com/add-ons/iron_mq) and the
+[CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queues
 available that can be used to dispatch tasks to the workers.
 
 ## Adding the Cron Add-on
@@ -34,7 +34,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add cron.OPTION
 ~~~
 
 As always the different options are listed on the [Cron
-Add-on](https://www.cloudcontrol.com/add-ons/cron) page.
+Add-on](https://next.dotcloud.com/add-ons/cron) page.
 
 ## Adding a URL for the Cron job
 

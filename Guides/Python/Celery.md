@@ -209,10 +209,10 @@ Connection to ssh.cloudcontrolled.net closed.
 This guide showed how to run both Flower aswell as a Celery worker on dotCloud by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
 
 [Celery]: http://celeryproject.org/
-[CloudAMQP Add-on]: https://www.cloudcontrol.com/add-ons/cloudamqp
-[Worker Add-on]: https://www.cloudcontrol.com/add-ons/worker
-[dotCloud]: http://www.cloudcontrol.com
+[CloudAMQP Add-on]: https://next.dotcloud.com/add-ons/cloudamqp
+[Worker Add-on]: https://next.dotcloud.com/add-ons/worker
+[dotCloud]: http://next.dotcloud.com
 [celeryguide]: http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html
 [Flower]: http://docs.celeryproject.org/en/latest/userguide/monitoring.html#flower-real-time-celery-web-monitor
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

@@ -148,9 +148,9 @@ Congratulations, you can now see your Sails.js application running at
 [Sails getting started page]: http://sailsjs.org/#!getStarted
 [Ruby on Rails]: http://rubyonrails.org/
 [npm]: https://npmjs.org/
-[dotCloud]: http://www.cloudcontrol.com
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[get the MySQL credentials]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
+[dotCloud]: http://next.dotcloud.com
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[get the MySQL credentials]: https://next.dotcloud.com/dev-center/Guides/NodeJS/Add-on%20credentials
 [websockets]: http://socket.io/
-[dotCloud websockets documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#websockets
-[Shared MySQL Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[dotCloud websockets documentation]: https://next.dotcloud.com/dev-center/Platform%20Documentation#websockets
+[Shared MySQL Add-on]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs

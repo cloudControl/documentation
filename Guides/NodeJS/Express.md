@@ -155,10 +155,10 @@ applications.
 [Node.js]: http://nodejs.org/
 [Express]: http://expressjs.com/
 [npm]: https://npmjs.org/
-[dotCloud]: http://www.cloudcontrol.com
+[dotCloud]: http://next.dotcloud.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
-[Data Storage]: https://www.cloudcontrol.com/add-ons?c=1
-[MongoSoup]: https://www.cloudcontrol.com/add-ons/mongosoup
+[get-conf]: https://next.dotcloud.com/dev-center/Guides/NodeJS/Add-on%20credentials
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[platform documentation]: https://next.dotcloud.com/dev-center/Platform%20Documentation
+[Data Storage]: https://next.dotcloud.com/add-ons?c=1
+[MongoSoup]: https://next.dotcloud.com/add-ons/mongosoup

@@ -161,23 +161,23 @@ For additional information take a look at [Django Notes][django-notes] and
 other [python-specific documents][python-guides].
 
 [django]: https://www.djangoproject.com/
-[dotCloud]: http://www.cloudcontrol.com
-[dotCloud-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[dotCloud-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[dotCloud]: http://next.dotcloud.com
+[dotCloud-doc-user]: https://next.dotcloud.com/dev-center/Platform%20Documentation#user-accounts
+[dotCloud-doc-cmdline]: https://next.dotcloud.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
-[filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[mysqls]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[filesystem]: https://next.dotcloud.com/dev-center/Platform%20Documentation#non-persistent-filesystem
+[data-storage-addons]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/
+[mysqls]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
 [example-app]: https://github.com/cloudControl/python-django-example-app
-[django-notes]: https://www.cloudcontrol.com/dev-center/Guides/Python/Django%20notes
-[get-conf]: https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials
+[django-notes]: https://next.dotcloud.com/dev-center/Guides/Python/Django%20notes
+[get-conf]: https://next.dotcloud.com/dev-center/Guides/Python/Add-on%20credentials
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
-[python-guides]: https://www.cloudcontrol.com/dev-center/Guides/Python
+[python-guides]: https://next.dotcloud.com/dev-center/Guides/Python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [gunicorn]: http://gunicorn.org/
-[worker]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
+[worker]: https://next.dotcloud.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
 [db-commit]: https://github.com/cloudControl/python-django-example-app/commit/983f45e46ce0707476cec167ea062e19adcb53c9
-[ssh-session]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#secure-shell-ssh
+[ssh-session]: https://next.dotcloud.com/dev-center/Platform%20Documentation#secure-shell-ssh
 [mysql-driver]: https://pypi.python.org/pypi/MySQL-python/1.2.5

@@ -185,16 +185,16 @@ For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].
 
 [Ruby on Rails]: http://rubyonrails.org/
-[dotCloud]: http://www.cloudcontrol.com
+[dotCloud]: http://next.dotcloud.com
 [example-app]: https://github.com/cloudControl/ruby-rails-example-app
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/
 [Bundler]: http://bundler.io/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[filesystem]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[postgres-addon]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/ElephantSQL
-[run command]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/RunCommand
-[rails-notes]: https://www.cloudcontrol.com/dev-center/Guides/Ruby/RailsNotes
-[ruby-guides]: https://www.cloudcontrol.com/dev-center/Guides/Ruby
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[filesystem]: https://next.dotcloud.com/dev-center/Platform%20Documentation#non-persistent-filesystem
+[data-storage-addons]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/
+[postgres-addon]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/ElephantSQL
+[run command]: https://next.dotcloud.com/dev-center/Guides/Ruby/RunCommand
+[rails-notes]: https://next.dotcloud.com/dev-center/Guides/Ruby/RailsNotes
+[ruby-guides]: https://next.dotcloud.com/dev-center/Guides/Ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails

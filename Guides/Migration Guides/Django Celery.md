@@ -136,12 +136,12 @@ having everything under control.
 [Django]: https://www.djangoproject.com/
 [Celery]: http://www.celeryproject.org/
 [dotCloud]: https://www.dotcloud.com/
-[Next dotCloud]: https://www.next.dotcloud.com/
-[Procfile]: https://www.next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
+[Next dotCloud]: https://next.dotcloud.com/
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [gunicorn]: http://gunicorn.org/
-[add-ons]: https://www.next.dotcloud.com/add-ons
-[MySQLd]: https://www.next.dotcloud.com/add-ons/mysqld
-[CloudAMQP]: https://www.next.dotcloud.com/add-ons/cloudamqp
-[run]: https://www.next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh
-[Worker]: https://www.next.dotcloud.com/add-ons/worker
-[logs]: https://www.next.dotcloud.com/dev-center/platform-documentation#logging
+[add-ons]: https://next.dotcloud.com/add-ons
+[MySQLd]: https://next.dotcloud.com/add-ons/mysqld
+[CloudAMQP]: https://next.dotcloud.com/add-ons/cloudamqp
+[run]: https://next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh
+[Worker]: https://next.dotcloud.com/add-ons/worker
+[logs]: https://next.dotcloud.com/dev-center/platform-documentation#logging

@@ -108,10 +108,10 @@ db_config = {
 }
 ~~~
 
-[env-vars]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
-[Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
-[Add-on Marketplace]: https://www.cloudcontrol.com/add-ons/
-[Custom Config Add-on]: https://www.cloudcontrol.com/add-ons/config
-[MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
-[MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls
-[ElephantSQL Add-on]: https://www.cloudcontrol.com/add-ons/elephantsql
+[env-vars]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
+[Add-on credentials]: https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
+[Add-on Marketplace]: https://next.dotcloud.com/add-ons/
+[Custom Config Add-on]: https://next.dotcloud.com/add-ons/config
+[MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld
+[MySQL Shared Add-on]: https://next.dotcloud.com/add-ons/mysqls
+[ElephantSQL Add-on]: https://next.dotcloud.com/add-ons/elephantsql

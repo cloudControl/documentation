@@ -50,8 +50,8 @@ Yes! Next dotCloud still behaves in all the ways you'd expect.
 
 # Where should I begin?
 
-A good place to start is to read the [Quickstart](https://www.cloudcontrol.com/dev-center/Quickstart)
-and [Platform Documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation)
+A good place to start is to read the [Quickstart](https://next.dotcloud.com/dev-center/Quickstart)
+and [Platform Documentation](https://next.dotcloud.com/dev-center/Platform%20Documentation)
 to get familiar with the Next dotCloud PaaS.
 
 Then read the docs [here](https://next.dotcloud.com/dev-center/dotcloud-nextdotcloud-migration/cli-cheatsheet) comparing the dotCloud

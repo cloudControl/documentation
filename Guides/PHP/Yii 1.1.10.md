@@ -10,7 +10,7 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
  * Lots of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the dotCloud platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the dotCloud platform](http://next.dotcloud.com).
 
 ##Prerequisites
 

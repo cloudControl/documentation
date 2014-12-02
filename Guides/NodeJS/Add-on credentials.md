@@ -90,9 +90,9 @@ var password = auth[1];
 var port = elephantSQLUrl.port;
 ~~~
 
-[Add-on Marketplace]: https://www.cloudcontrol.com/add-ons
-[environment variables]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
-[MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
-[MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls
-[Add-on credentials]:https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
-[ElephantSQL Add-on]: https://www.cloudcontrol.com/add-ons/elephantsql
+[Add-on Marketplace]: https://next.dotcloud.com/add-ons
+[environment variables]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
+[MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld
+[MySQL Shared Add-on]: https://next.dotcloud.com/add-ons/mysqls
+[Add-on credentials]:https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
+[ElephantSQL Add-on]: https://next.dotcloud.com/add-ons/elephantsql

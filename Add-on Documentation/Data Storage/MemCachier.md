@@ -378,7 +378,7 @@ $ memcached -v
 Usage analytics
 ------
 
-Our analytics dashboard is a simple tool that gives you more insight into how you’re using memcache. Just open your application's dashboard on our [web interface](https://www.cloudcontrol.com/console).
+Our analytics dashboard is a simple tool that gives you more insight into how you’re using memcache. Just open your application's dashboard on our [web interface](https://next.dotcloud.com/console).
 
 Sample apps
 -----
@@ -398,7 +398,7 @@ Changing your plan, either by upgrading or downgrading, requires no code changes
 Support
 -------
 
-All Memcachier support and runtime issues should be submitted via one of the dotCloud Support channels](https://www.cloudcontrol.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
+All Memcachier support and runtime issues should be submitted via one of the dotCloud Support channels](https://next.dotcloud.com/dev-center/support). Any non-support related issues or product feedback is welcome via email at: [support@memcachier.com](mailto:support@memcachier.com)
 
 Any issues related to Memcachier service are reported at [Memcachier Status](http://status.memcachier.com/).
 

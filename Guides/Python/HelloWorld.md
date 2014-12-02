@@ -80,7 +80,7 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Flask]: http://flask.pocoo.org/
-[dotCloud]: http://www.cloudcontrol.com
+[dotCloud]: http://next.dotcloud.com
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

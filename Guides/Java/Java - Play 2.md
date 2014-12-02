@@ -107,10 +107,10 @@ redeploy all changes will be lost. If you want a production database you should
 use one of our available [Data Storage Add-ons].
 
 [Play 2.3.x]: https://www.playframework.com/documentation/2.3.x/Home
-[dotCloud]: https://www.cloudcontrol.com/
+[dotCloud]: https://next.dotcloud.com/
 [Scala buildpack]: https://github.com/cloudControl/buildpack-scala
-[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [sbt]: http://www.scala-sbt.org/
-[Data Storage Add-ons]: https://www.cloudcontrol.com/add-ons?c=1
+[Data Storage Add-ons]: https://next.dotcloud.com/add-ons?c=1

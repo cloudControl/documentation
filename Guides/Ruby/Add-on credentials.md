@@ -99,10 +99,10 @@ db_config = {
 
 You can also find a working example application on [Github][ruby-postgresql-example].
 
-[Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
-[environment variables]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
-[Add-on Marketplace]: https://www.cloudcontrol.com/add-ons/?c=1
-[MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
-[MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls
-[ElephantSQL Add-on]: https://www.cloudcontrol.com/add-ons/elephantsql
+[Add-on credentials]: https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
+[environment variables]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
+[Add-on Marketplace]: https://next.dotcloud.com/add-ons/?c=1
+[MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld
+[MySQL Shared Add-on]: https://next.dotcloud.com/add-ons/mysqls
+[ElephantSQL Add-on]: https://next.dotcloud.com/add-ons/elephantsql
 [ruby-postgresql-example]: https://github.com/ElephantSQL/ruby-postgresql-example

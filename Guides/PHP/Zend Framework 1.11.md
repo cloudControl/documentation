@@ -10,7 +10,7 @@ If you're looking for a feature-rich, flexible and capable PHP Framework for you
  * Easy to read documentation
  * A super, shiny, new version 2 **coming soon**
 
-In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the dotCloud platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the dotCloud platform](http://next.dotcloud.com).
 
 ##Prerequisites
 

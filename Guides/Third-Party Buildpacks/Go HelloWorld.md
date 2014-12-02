@@ -123,6 +123,6 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Go app running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Go]: http://golang.org/
-[dotCloud]: http://www.cloudcontrol.com
+[dotCloud]: http://next.dotcloud.com
 [godep]: https://github.com/tools/godep
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
