@@ -25,7 +25,7 @@ $ sudo easy_install pip
 $ sudo pip install cctrl
 ~~~
 
-**Windows:** Please download the provided [installer](https://www.cloudcontrol.com/download/win).
+**Windows:** Please download the provided [installer](https://download.dotcloudapp.com/windows).
 
 ## Create a User Account (if you haven't already)
 

@@ -89,12 +89,11 @@ Now, we need to make our first deployment of both branches to the cloudControl p
 
     // deploy the default branch
     cctrlapp cloudcontroldlyii/default push
-    cctrlapp cloudcontroldlyii/default deploy --stack luigi
+    cctrlapp cloudcontroldlyii/default deploy
 
     // deploy the testing branch
     cctrlapp cloudcontroldlyii/testing push
-    cctrlapp cloudcontroldlyii/testing deploy --stack luigi
-
+    cctrlapp cloudcontroldlyii/testing deploy
 You should see output as below:
 
     $ cctrlapp cloudcontroldlyii/default push
@@ -316,14 +315,14 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
     // deploy the default branch
     cctrlapp cloudcontroldlyii/default push    
-    cctrlapp cloudcontroldlyii/default deploy --stack luigi
+    cctrlapp cloudcontroldlyii/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
     cctrlapp cloudcontroldlyii/testing push    
-    cctrlapp cloudcontroldlyii/testing deploy --stack luigi
+    cctrlapp cloudcontroldlyii/testing deploy
 
 ##7. Review the Deployment
 

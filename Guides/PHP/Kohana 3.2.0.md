@@ -117,8 +117,7 @@ Note the following lines:
 
     INFO: Kohana Framework detected
     INFO: Required directory missing, creating 'application/cache'.
-
-Beginning with the **luigi** stack, a number of PHP frameworks, including Kohana, are auto-detected handling some of the deployment work for us, such as clearing/creating the cache directory. 
+ 
 
 ##4. Initialise the Required Addons
 

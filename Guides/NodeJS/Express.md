@@ -55,11 +55,11 @@ Left of the colon, we specified the **required** process type called `web` follo
 
 Node.js and MongoDB are an excellent combination because JSON
 (JavaScript Object Notation) is a subset of JavaScript, making storage and
-retrieval of the objects very simple. MongoDB is provided by [MongoSoup] and
-[MongoLab] which can be found in cloudControl's Add-on Marketplace under the
+retrieval of the objects very simple. MongoDB is provided by [MongoSoup]
+which can be found in cloudControl's Add-on Marketplace under the
 category [Data Storage].
 
-This example uses the MongoLab Add-on. In the
+This example uses the MongoSoup Add-on. In the
 `employeeprovider.js` file, you can find how the connection to the database is
 established:
 
@@ -78,7 +78,7 @@ var Db = require('mongodb').Db,
 
 EmployeeProvider = function() {
   var that = this;
-  mongodbUri = process.env.MONGOLAB_URI || 'mongodb://localhost';
+  mongodbUri = process.env.MONGOSOUP_URL || 'mongodb://localhost';
   MongoClient.connect(mongodbUri, function(err, db){
     if(err) { return console.dir(err); }
     that.db = db;
@@ -134,11 +134,11 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Finally, don’t forget to add the MongoLab Add-on for cloudControl and deploy the
+Finally, don’t forget to add the MongoSoup Add-on for cloudControl and deploy the
 latest version of the app:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mongolab.free
+$ cctrlapp APP_NAME/default addon.add mongosoup.sandbox
 $ cctrlapp APP_NAME/default deploy
 ~~~
 
@@ -161,5 +161,4 @@ applications.
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [platform documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation
 [Data Storage]: https://www.cloudcontrol.com/add-ons?c=1
-[MongoLab]: https://www.cloudcontrol.com/add-ons/mongolab
 [MongoSoup]: https://www.cloudcontrol.com/add-ons/mongosoup

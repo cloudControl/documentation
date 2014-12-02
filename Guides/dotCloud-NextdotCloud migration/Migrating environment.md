@@ -1,4 +1,4 @@
-# Migrating the dotCloud environment to dotCloudNext
+# Migrating the dotCloud environment to Next dotCloud
 
 ## What is the Environment File in dotCloud?
 
@@ -9,9 +9,9 @@ This file contains a JSON-formatted dictionary with most of the configuration in
 of the services in your application. You can use it to retrieve data or
 credentials by reading the file.
 
-## How does it work on dotCloudNext?
+## How does it work on Next dotCloud?
 
-dotCloudNext stores config variables for each deployment in a single file called `creds.json`. It looks like this:
+Next dotCloud stores config variables for each deployment in a single file called `creds.json`. It looks like this:
 
 ~~~json
 {
@@ -90,7 +90,7 @@ Please keep in mind that these variables will not be present in `creds.json` fil
     print 'MySQL Host: {0}'.format(env['DOTCLOUD_DB_MYSQL_HOST'])
     ~~~
 
-* On dotCloudNext, you can add a [MySQLd Add-on](http://next.dotcloud.com/add-ons/mysqld) (or alternately MySQLS) with:
+* On Next dotCloud, you can add a [MySQLd Add-on](http://next.dotcloud.com/add-ons/mysqld) (or alternately MySQLS) with:
 
     ~~~bash
     $ dcapp APP_NAME/DEP_NAME addon.add mysqld.OPTION
@@ -134,7 +134,7 @@ Please keep in mind that these variables will not be present in `creds.json` fil
     KEY2=VALUE2
     ...
 
-    # Add them to your deployment in dotCloudNext
+    # Add them to your deployment in Next dotCloud
     $ dcapp APP_NAME/DEP_NAME config.add KEY1=VALUE1 KEY2=VALUE2 ... SET_ENV_VARS
     ~~~
 
@@ -163,5 +163,3 @@ Please keep in mind that these variables will not be present in `creds.json` fil
     print 'Key 1: {0}'.format(creds['CONFIG']['CONFIG_VARS']['KEY1'])
     print 'Key 2: {0}'.format(os.getenv('KEY2'))
     ~~~
-
- 

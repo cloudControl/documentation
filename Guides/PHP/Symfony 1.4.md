@@ -121,9 +121,7 @@ In the previous version of the cloudControl platform, you would have had to have
 
     BaseConfig:
       WebContent: /web
-
-However, beginning with the **luigi** stack, that's a thing of the past for a number of PHP frameworks, including Symfony 1.x because it auto-detects it and handles this for us. 
-
+ 
 ##4. Initialise the Required Add-ons
 
 Now that that's done, we need to configure two add-ons, config and mysqls. The config Add-on is required for determining the active environment and mysqls for storing our session and logging information. 
