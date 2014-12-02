@@ -147,9 +147,9 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.c
 
 
 [Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample
-[Database credentials]: Add-on%20credentials
+[Database credentials]: add-on-credentials
 [Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
 [dotCloud]: /
-[file system]: ../../Platform%20Documentation#non-persistent-filesystem
-[log command]: ../../Platform%20Documentation#logging
-[Shared MySQL Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs
+[file system]: ../../platform-documentation#non-persistent-filesystem
+[log command]: ../../platform-documentation#logging
+[Shared MySQL Add-on]: ../../add-on-documentation/data-storage/MySQLs

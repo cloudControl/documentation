@@ -113,10 +113,10 @@ Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.c
 
 [silex]: http://silex.sensiolabs.org/
 [dotCloud]: http://next.dotcloud.com
-[dotCloud-doc-user]: https://next.dotcloud.com/dev-center/Platform%20Documentation#user-accounts
-[dotCloud-doc-cmdline]: https://next.dotcloud.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api "documentation of the dotCloud-command-line-client"
+[dotCloud-doc-user]: https://next.dotcloud.com/dev-center/platform-documentation#user-accounts
+[dotCloud-doc-cmdline]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api "documentation of the dotCloud-command-line-client"
 [php buildpack]: https://github.com/cloudControl/buildpack-php
-[procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [composer]: http://getcomposer.org/
 [example-app]: https://github.com/cloudControl/php-silex-example-app

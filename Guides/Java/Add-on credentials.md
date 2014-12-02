@@ -96,9 +96,9 @@ String password 	 = credentials[1];
 
 [Java application with MySQL]: https://github.com/cloudControl/java-mysql-example-app
 [Add-on Marketplace]: https://next.dotcloud.com/add-ons/?c=1
-[environment variables]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
-[Add-on credentials]: https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
-[cred-env-vars]: https://next.dotcloud.com/dev-center/Platform%20Documentation#enabling-disabling-credentials-environment-variables
+[environment variables]: https://next.dotcloud.com/dev-center/platform-documentation#environment-variables
+[Add-on credentials]: https://next.dotcloud.com/dev-center/platform-documentation#add-on-credentials
+[cred-env-vars]: https://next.dotcloud.com/dev-center/platform-documentation#enabling-disabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
 [dotCloud credentials helper class]: https://gist.github.com/b350762c61fcc069b427
 [MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld

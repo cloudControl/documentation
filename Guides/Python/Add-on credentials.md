@@ -108,8 +108,8 @@ db_config = {
 }
 ~~~
 
-[env-vars]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
-[Add-on credentials]: https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
+[env-vars]: https://next.dotcloud.com/dev-center/platform-documentation#environment-variables
+[Add-on credentials]: https://next.dotcloud.com/dev-center/platform-documentation#add-on-credentials
 [Add-on Marketplace]: https://next.dotcloud.com/add-ons/
 [Custom Config Add-on]: https://next.dotcloud.com/add-ons/config
 [MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld

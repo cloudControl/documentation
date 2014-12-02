@@ -141,6 +141,6 @@ $ mysql -u MYSQLD_USER -p --host=MYSQLD_SERVER --ssl-ca=PATH_TO_CERTIFICATE/ca-c
 [Google Cloud SQL]: https://developers.google.com/cloud-sql/
 [Config Add-on]: https://next.dotcloud.com/add-ons/config
 [MySQLd]: https://next.dotcloud.com/add-ons/mysqld
-[Add-on Credentials]: https://next.dotcloud.com/dev-center/Platform%20Documentation#add-ons
+[Add-on Credentials]: https://next.dotcloud.com/dev-center/platform-documentation#add-ons
 [Email us]: mailto:support@cloudcontrol.de
 [Webconsole]: https://next.dotcloud.com/console/login

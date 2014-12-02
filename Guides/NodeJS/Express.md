@@ -157,8 +157,8 @@ applications.
 [npm]: https://npmjs.org/
 [dotCloud]: http://next.dotcloud.com
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[get-conf]: https://next.dotcloud.com/dev-center/Guides/NodeJS/Add-on%20credentials
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[platform documentation]: https://next.dotcloud.com/dev-center/Platform%20Documentation
+[get-conf]: https://next.dotcloud.com/dev-center/guides/nodejs/add-on-credentials
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
+[platform documentation]: https://next.dotcloud.com/dev-center/platform-documentation
 [Data Storage]: https://next.dotcloud.com/add-ons?c=1
 [MongoSoup]: https://next.dotcloud.com/add-ons/mongosoup

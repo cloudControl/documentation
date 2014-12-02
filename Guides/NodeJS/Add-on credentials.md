@@ -91,8 +91,8 @@ var port = elephantSQLUrl.port;
 ~~~
 
 [Add-on Marketplace]: https://next.dotcloud.com/add-ons
-[environment variables]: https://next.dotcloud.com/dev-center/Platform%20Documentation#environment-variables
+[environment variables]: https://next.dotcloud.com/dev-center/platform-documentation#environment-variables
 [MySQL Dedicated Add-on]: https://next.dotcloud.com/add-ons/mysqld
 [MySQL Shared Add-on]: https://next.dotcloud.com/add-ons/mysqls
-[Add-on credentials]:https://next.dotcloud.com/dev-center/Platform%20Documentation#add-on-credentials
+[Add-on credentials]:https://next.dotcloud.com/dev-center/platform-documentation#add-on-credentials
 [ElephantSQL Add-on]: https://next.dotcloud.com/add-ons/elephantsql

@@ -215,4 +215,4 @@ This guide showed how to run both Flower aswell as a Celery worker on dotCloud b
 [celeryguide]: http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html
 [Flower]: http://docs.celeryproject.org/en/latest/userguide/monitoring.html#flower-real-time-celery-web-monitor
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile

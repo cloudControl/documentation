@@ -190,11 +190,11 @@ other [ruby-specific documents][ruby-guides].
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/
 [Bundler]: http://bundler.io/
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[filesystem]: https://next.dotcloud.com/dev-center/Platform%20Documentation#non-persistent-filesystem
-[data-storage-addons]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[postgres-addon]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/ElephantSQL
-[run command]: https://next.dotcloud.com/dev-center/Guides/Ruby/RunCommand
-[rails-notes]: https://next.dotcloud.com/dev-center/Guides/Ruby/RailsNotes
-[ruby-guides]: https://next.dotcloud.com/dev-center/Guides/Ruby
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
+[filesystem]: https://next.dotcloud.com/dev-center/platform-documentation#non-persistent-filesystem
+[data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/
+[postgres-addon]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/elephantsql
+[run command]: https://next.dotcloud.com/dev-center/guides/ruby/runcommand
+[rails-notes]: https://next.dotcloud.com/dev-center/guides/ruby/railsnotes
+[ruby-guides]: https://next.dotcloud.com/dev-center/guides/ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails

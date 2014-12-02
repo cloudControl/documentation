@@ -128,4 +128,4 @@ Congratulations, you can now see your Tornado app running at `http://APP_NAME.cl
 [Tornado]: http://www.tornadoweb.org
 [dotCloud]: http://next.dotcloud.com
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile

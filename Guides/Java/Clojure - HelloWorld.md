@@ -78,7 +78,7 @@ Congratulations, you can now see your Clojure application running at `http[s]://
 
 [dotCloud]: https://next.dotcloud.com/
 [Clojure buildpack]: https://github.com/cloudControl/buildpack-clojure
-[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [Leiningen]: http://leiningen.org/

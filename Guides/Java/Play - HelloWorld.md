@@ -80,8 +80,8 @@ Congratulations, you can now see your Play! application running at `http[s]://AP
 
 [dotCloud]: https://next.dotcloud.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play
-[Play 2 tutorial]: https://next.dotcloud.com/dev-center/Guides/Java/Java%20-%20Play%202
-[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[Play 2 tutorial]: https://next.dotcloud.com/dev-center/guides/java/java---play-2
+[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [Ivy]: http://ant.apache.org/ivy/

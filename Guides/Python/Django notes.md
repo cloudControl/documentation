@@ -25,12 +25,12 @@ To use a database, you should choose an Add-on from [the Data Storage category][
 ## Email
 You can't use a local SMTP server, instead choose one of our [email Add-ons][messaging-addons].
 
-[SSH-session]: https://next.dotcloud.com/dev-center/Platform%20Documentation#secure-shell-ssh
+[SSH-session]: https://next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
-[procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[messaging-addons]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Messaging%20&%20Mobile/
-[data-storage-addons]: https://next.dotcloud.com/dev-center/Add-on%20Documentation/Data%20Storage/
-[add-on-credentials]: https://next.dotcloud.com/dev-center/Guides/Python/Add-on%20credentials
+[procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
+[messaging-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/messaging-&-mobile/
+[data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/
+[add-on-credentials]: https://next.dotcloud.com/dev-center/guides/python/add-on-credentials
 [dotCloud]: https://next.dotcloud.com/
-[worker]: https://next.dotcloud.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers
+[worker]: https://next.dotcloud.com/dev-center/platform-documentation#scheduled-jobs-and-background-workers

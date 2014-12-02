@@ -122,4 +122,4 @@ $ cctrlapp APP_NAME/default open
 [Revel]: http://revel.github.io
 [dotCloud]: https://next.dotcloud.com
 [Revel buildpack]: https://github.com/revel/heroku-buildpack-go-revel
-[Procfile]: https://next.dotcloud.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
