@@ -96,14 +96,14 @@ Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create nodejs
+$ dcapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment
 image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 73, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (35/35), done.
@@ -138,8 +138,8 @@ Finally, don’t forget to add the MongoSoup Add-on for dotCloud and deploy the
 latest version of the app:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mongosoup.sandbox
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default addon.add mongosoup.sandbox
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Express app running with MongoDB at

@@ -9,12 +9,12 @@ Getting started
 
 Start by installing the Add-on:
 
-    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.dev
+    $ dcapp APP_NAME/DEP_NAME addon.add memcachier.dev
 
 You can start with more memory if you know you'll need it:
 
-    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.100mb
-    $ cctrlapp APP_NAME/DEP_NAME addon.add memcachier.250mb
+    $ dcapp APP_NAME/DEP_NAME addon.add memcachier.100mb
+    $ dcapp APP_NAME/DEP_NAME addon.add memcachier.250mb
      ... etc ...
 
 Next, setup your app to start using the cache. We have documentation for the following languages and frameworks:

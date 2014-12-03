@@ -112,13 +112,13 @@ Choose a unique name to replace the `APP_NAME` placeholder for your
 application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create python
+$ dcapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME push
+$ dcapp APP_NAME push
 Counting objects: 49, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (33/33), done.
@@ -143,15 +143,15 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Add MySQLs Add-on with `free` plan to your deployment and deploy it:
 ~~~bash
-$ cctrlapp APP_NAME addon.add mysqls.free
-$ cctrlapp APP_NAME deploy
+$ dcapp APP_NAME addon.add mysqls.free
+$ dcapp APP_NAME deploy
 ~~~
 
 Finally, prepare the database using the
 [Run command][ssh-session] (when prompted create admin user):
 
 ~~~bash
-$ cctrlapp APP_NAME run "python manage.py syncdb"
+$ dcapp APP_NAME run "python manage.py syncdb"
 ~~~
 
 You can login to the admin console at `APP_NAME.cloudcontrolled.com/admin`,

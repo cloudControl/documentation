@@ -117,13 +117,13 @@ The 'cloudcontrol-rails' gem will provide the database credentials.
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create ruby
+$ dcapp APP_NAME create ruby
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 62, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (51/51), done.
@@ -169,14 +169,14 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 Add ElephantSQL Add-on with `turtle` plan to your deployment and deploy it:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add elephantsql.turtle
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default addon.add elephantsql.turtle
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Finally, prepare the database by running migrations using the [Run command][run command]:
 
 ~~~bash
-$ cctrlapp APP_NAME/default run "rake db:migrate"
+$ dcapp APP_NAME/default run "rake db:migrate"
 ~~~
 
 Congratulations, you can now access the app at http://APP_NAME.cloudcontrolled.com.

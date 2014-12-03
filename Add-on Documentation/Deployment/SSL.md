@@ -149,12 +149,12 @@ in PEM format.
 To add the SSL Add-on, simply provide the paths to the files provided by the
 certificate authority using the respective parameters of the addon.add command.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+ $ dcapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
  ~~~
 
 In order to check the status of the Add-on, you can do the following.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
+ $ dcapp APP_NAME/DEP_NAME addon ssl.host
  Addon                    : ssl.host
 
  Settings
@@ -171,8 +171,8 @@ for 23 minutes after removing the Add-on so that it can be updated in the
 meantime without interrupting the service. To achieve that you have to run the
 following commands:
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.remove ssl.host
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+ $ dcapp APP_NAME/DEP_NAME addon.remove ssl.host
+ $ dcapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
  ~~~
 
 Note: You need to provide the original key and chain again when updating the

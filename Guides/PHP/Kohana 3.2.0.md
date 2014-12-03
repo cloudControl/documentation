@@ -81,21 +81,21 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldlkohana create php
+    dcapp cloudcontroldlkohana create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldlkohana/default push
-    cctrlapp cloudcontroldlkohana/default deploy
+    dcapp cloudcontroldlkohana/default push
+    dcapp cloudcontroldlkohana/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlkohana/testing push
-    cctrlapp cloudcontroldlkohana/testing deploy
+    dcapp cloudcontroldlkohana/testing push
+    dcapp cloudcontroldlkohana/testing deploy
 
 ###3.1 Kohana Auto-Detected
 
 When you do this, you'll see output similar to the following:
 
-    $ cctrlapp cloudcontroldlkohana/default push
+    $ dcapp cloudcontroldlkohana/default push
     Counting objects: 9, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (5/5), done.
@@ -124,25 +124,25 @@ Note the following lines:
 Now that that's done, we need to configure two addons, config and mysqls. The config addon's required for determining the active environment and mysqls for storing our session information. To initialise these, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlkohana/default addon.add mysqls.free
+    dcapp cloudcontroldlkohana/default addon.add mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlkohana/testing addon.add mysqls.free
+    dcapp cloudcontroldlkohana/testing addon.add mysqls.free
 
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Add the APPLICATION_ENV variable to production
-    cctrlapp cloudcontroldlkohana/default config.add APPLICATION_ENV=production
+    dcapp cloudcontroldlkohana/default config.add APPLICATION_ENV=production
 
     // Add the APPLICATION_ENV variable to testing
-    cctrlapp cloudcontroldlkohana/testing config.add APPLICATION_ENV=testing
+    dcapp cloudcontroldlkohana/testing config.add APPLICATION_ENV=testing
 
 ###4.1 Check the Add-on Configuration
 
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlkohana/testing addon mysqls.free
+    dcapp cloudcontroldlkohana/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -445,12 +445,12 @@ After all these changes are done, we need to then commit them on the master bran
     git merge master
 
     // push the code to the default (production) branch
-    cctrlapp cloudcontroldlkohana/default push
-    cctrlapp cloudcontroldlkohana/default deploy
+    dcapp cloudcontroldlkohana/default push
+    dcapp cloudcontroldlkohana/default deploy
 
     // push the code to the testing branch
-    cctrlapp cloudcontroldlkohana/testing push
-    cctrlapp cloudcontroldlkohana/testing deploy
+    dcapp cloudcontroldlkohana/testing push
+    dcapp cloudcontroldlkohana/testing deploy
 
 ##A Simple Application
 

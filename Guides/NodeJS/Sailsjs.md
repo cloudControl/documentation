@@ -100,13 +100,13 @@ In Sails.js, client-backend communication is done using [websockets]. In order t
 To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create nodejs
+$ dcapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 73, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (35/35), done.
@@ -132,12 +132,12 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 
 Add the [Shared MySQL Add-on]:
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mysqls.free
+$ dcapp APP_NAME/default addon.add mysqls.free
 ~~~
 
 Finally, deploy the Sails.js application:
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Sails.js application running at

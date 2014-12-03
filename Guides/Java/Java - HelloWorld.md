@@ -65,14 +65,14 @@ The java command starts the 'com.cloudcontrolled.sample.jetty.App' with the clas
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create java
+$ dcapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 
 -----> Receiving push
 -----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
@@ -98,10 +98,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
    54b0da2..d247825  master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the dcapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.cloudcontrolled.com`.

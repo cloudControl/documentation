@@ -82,13 +82,13 @@ web: java -jar target/spring-boot-example-app-*.jar
 Choose a unique name (from now on called APP_NAME) for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create java
+$ dcapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 
 Counting objects: 47, done.
 Delta compression using up to 8 threads.
@@ -125,8 +125,8 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
 Add MySQLs Add-on with free plan to your deployment and deploy it:
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add mysqls.free
-$ cctrlapp APP_NAME/default deploy --memory=768MB
+$ dcapp APP_NAME/default addon.add mysqls.free
+$ dcapp APP_NAME/default deploy --memory=768MB
 ~~~
 
 The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.

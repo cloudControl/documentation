@@ -24,7 +24,7 @@ boto==2.9.8
 The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config):
 
 ~~~bash
-$ cctrlapp APP_NAME/default config.add AWS_SECRET_KEY=[YOUR_SECRET_KEY] AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
+$ dcapp APP_NAME/default config.add AWS_SECRET_KEY=[YOUR_SECRET_KEY] AWS_ACCESS_KEY=[YOUR_ACCESS_KEY]
 ~~~
 
 Now let's show some operations on buckets and objects:

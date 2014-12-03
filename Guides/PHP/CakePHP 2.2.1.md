@@ -82,15 +82,15 @@ By running the following commands, this will all be done:
     git checkout master
 
     // create the application
-    cctrlapp cloudcontrolledcakephp create php
+    dcapp cloudcontrolledcakephp create php
 
     // deploy the default branch
-    cctrlapp cloudcontrolledcakephp/default push
-    cctrlapp cloudcontrolledcakephp/default deploy
+    dcapp cloudcontrolledcakephp/default push
+    dcapp cloudcontrolledcakephp/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontrolledcakephp/testing push
-    cctrlapp cloudcontrolledcakephp/testing deploy
+    dcapp cloudcontrolledcakephp/testing push
+    dcapp cloudcontrolledcakephp/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -101,16 +101,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontrolledcakephp/default addon.add mysql.free
+    dcapp cloudcontrolledcakephp/default addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontrolledcakephp/default addon mysql.free
+    dcapp cloudcontrolledcakephp/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontrolledcakephp/testing addon.add mysql.free
+    dcapp cloudcontrolledcakephp/testing addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontrolledcakephp/testing addon mysql.free
+    dcapp cloudcontrolledcakephp/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -128,10 +128,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontrolledcakephp/default config.add CAKE_ENV=production
+    dcapp cloudcontrolledcakephp/default config.add CAKE_ENV=production
 
     // Set the testing environment setting
-    cctrlapp cloudcontrolledcakephp/testing config.add CAKE_ENV=testing
+    dcapp cloudcontrolledcakephp/testing config.add CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -411,15 +411,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontrolledcakephp/default push
-    cctrlapp cloudcontrolledcakephp/default deploy
+    dcapp cloudcontrolledcakephp/default push
+    dcapp cloudcontrolledcakephp/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    cctrlapp cloudcontrolledcakephp/testing push
-    cctrlapp cloudcontrolledcakephp/testing deploy
+    dcapp cloudcontrolledcakephp/testing push
+    dcapp cloudcontrolledcakephp/testing deploy
 
 ##7. Review the Deployment
 

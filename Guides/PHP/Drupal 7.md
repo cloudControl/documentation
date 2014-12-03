@@ -71,15 +71,15 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
     
     // create the application, indicating it's PHP-based
-    cctrlapp cloudcontroldldrupal create php
+    dcapp cloudcontroldldrupal create php
     
     // deploy the default branch
-    cctrlapp cloudcontroldldrupal/default push    
-    cctrlapp cloudcontroldldrupal/default deploy
+    dcapp cloudcontroldldrupal/default push    
+    dcapp cloudcontroldldrupal/default deploy
     
     // deploy the testing branch
-    cctrlapp cloudcontroldldrupal/testing push    
-    cctrlapp cloudcontroldldrupal/testing deploy
+    dcapp cloudcontroldldrupal/testing push    
+    dcapp cloudcontroldldrupal/testing deploy
 
 ##4. Initialise the Required Addons
 
@@ -90,16 +90,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 To initialise mysqls, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldldrupal/default addon.add mysql.free
+    dcapp cloudcontroldldrupal/default addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldldrupal/default addon mysql.free
+    dcapp cloudcontroldldrupal/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldldrupal/testing addon.add mysql.free
+    dcapp cloudcontroldldrupal/testing addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldldrupal/testing addon mysql.free
+    dcapp cloudcontroldldrupal/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -117,10 +117,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldldrupal/default config.add APPLICATION_ENV=production
+    dcapp cloudcontroldldrupal/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting
-    cctrlapp cloudcontroldldrupal/testing config.add APPLICATION_ENV=testing
+    dcapp cloudcontroldldrupal/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -281,15 +281,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlDrupal 7/default push    
-    cctrlapp cloudcontroldlDrupal 7/default deploy
+    dcapp cloudcontroldlDrupal 7/default push    
+    dcapp cloudcontroldlDrupal 7/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    cctrlapp cloudcontroldlDrupal 7/testing push    
-    cctrlapp cloudcontroldlDrupal 7/testing deploy
+    dcapp cloudcontroldlDrupal 7/testing push    
+    dcapp cloudcontroldlDrupal 7/testing deploy
 
 ##8. Review the Deployment
 

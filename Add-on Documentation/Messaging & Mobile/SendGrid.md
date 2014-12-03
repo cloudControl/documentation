@@ -7,7 +7,7 @@ Sendgrid's cloud-based email infrastructure relieves businesses of the cost and 
 The Sendgrid Add-on can be added to every deployment with:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add sendgrid.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add sendgrid.OPTION
 ~~~
 
 When added, Sendgrid automatically creates a new user account with your email adress. You can manage your sendgrid Add-on easily within the web console (go to the specific deployment and click the link "sendgrid.OPTION").
@@ -17,7 +17,7 @@ When added, Sendgrid automatically creates a new user account with your email ad
 Upgrading to another version of Sendgrid is easily done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
+$ dcapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
 ~~~
 
 ## Downgrade Sendgrid
@@ -25,13 +25,13 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_N
 Downgrading to another version of Sendgrid is easily done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
+$ dcapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
 ~~~
 
 ## Removing Sendgrid
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove sendgrid.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove sendgrid.OPTION
 ~~~
 
 Once you added a SendGrid plan, you need to login once at http://sendgrid.com with your Add-on credentials (see below) and complete their setup wizard to activate your account. For additional information please visit the SendGrid documentation.
