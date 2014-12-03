@@ -4,33 +4,33 @@
 
 **TL;DR:**
 
- * The command line client cctrl is the primary interface.
+ * The command line client dotcloudng is the primary interface.
  * We also offer a web console.
  * For full control and integration it's possible to talk directly to the RESTful API.
 
-To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via [the command-line interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) called *cctrl*. Additionally we also offer a [web console]. Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries].
+To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via [the command-line interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) called *dotcloudng*. Additionally we also offer a [web console]. Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries].
 
 Throughout this documentation we will use the CLI as the primary way of controlling the dotCloud platform. The CLI consists of 2 parts: *dcapp* and *dcuser*. To get help for the command line client, just append --help or -h to any of the commands.
 
-Installing *cctrl* is easy and works on Mac/Linux as well as on Windows.
+Installing *dotcloudng* is easy and works on Mac/Linux as well as on Windows.
 
 #### Quick Installation Windows
 
-For Windows we offer an installer. Please download [the latest version] of the installer from Cloud Storage. The file is named cctrl-x.x-setup.exe.
+For Windows we offer an installer. Please download [the latest version] of the installer from Cloud Storage. The file is named dotcloudng-x.x-setup.exe.
 
 #### Quick Installation Linux/Mac
 
-On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+].
+On Linux and Mac OS we recommend installing and updating dotcloudng via pip. *dotcloudng* requires [Python 2.6+].
 
 ~~~
-$ sudo pip install -U cctrl
+$ sudo pip install -U dotcloudng
 ~~~
 
-If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
+If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install dotcloudng.
 
 ~~~
 $ sudo easy_install pip
-$ sudo pip install -U cctrl
+$ sudo pip install -U dotcloudng
 ~~~
 
 ## User Accounts
@@ -212,8 +212,8 @@ $ dcapp APP_NAME/dev push
 # get the REPO_URL from the output of dcapp APP_NAME details
 
 # with git:
-$ git remote add cctrl REPO_URL
-$ git push cctrl dev
+$ git remote add dotcloudng REPO_URL
+$ git push dotcloudng dev
 ~~~
 
 The repositories support all other remote operations like pulling and cloning as well.

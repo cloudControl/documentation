@@ -9,20 +9,20 @@ It's easy to start with dotCloud. Follow this 5 minute quickstart to get your fi
 ### Requirements
 
 * git version control system
-* cctrl command line client
+* dotcloudng command line client
 
 ### Install git
 
 Install Git from the [official site](http://git-scm.com/) or your package repository of choice. For Windows it's recommended to use the official installer and Git bash. Come back when you are done.
 
-### Install cctrl
+### Install dotcloudng
 
-**Linux/Mac OS X:** We recommend installing cctrl via pip.
+**Linux/Mac OS X:** We recommend installing dotcloudng via pip.
 
 ~~~bash
 # if you don't have pip yet
 $ sudo easy_install pip
-$ sudo pip install cctrl
+$ sudo pip install dotcloudng
 ~~~
 
 **Windows:** Please download the provided [installer](https://download.dotcloudapp.com/windows).
