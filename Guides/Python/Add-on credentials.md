@@ -55,7 +55,7 @@ available in your deployment containers.
 
 # Examples
 
-cloudControl offers a number of data storage solutions via the [Add-on Marketplace].
+dotCloud offers a number of data storage solutions via the [Add-on Marketplace].
 Below you can see how to access Add-on credentials on two examples for MySQL
 and PostgreSQL.
 

@@ -1,6 +1,6 @@
 # Deploying a Scala application
 
-In this tutorial we're going to show you how to deploy a Scala application on [cloudControl]. You can find the [source code on Github](https://github.com/cloudControl/scalatra-example-app) and check out the [Scala buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Scala application on [dotCloud]. You can find the [source code on Github](https://github.com/cloudControl/scalatra-example-app) and check out the [Scala buildpack] for supported features.
 
 ## The Scala Application Explained
 ### Get the App
@@ -45,7 +45,7 @@ resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/reposi
 ~~~
 
 ### Process Type Definition
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your repository. It looks like this:
 
@@ -56,7 +56,7 @@ web: target/start
 The `web` process type is required and specifies the command that will be executed when the app is deployed.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform: 
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -88,10 +88,10 @@ $ cctrlapp APP_NAME/default deploy
 
 Congratulations, you can now see your Scala application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [Scala buildpack]: https://github.com/cloudControl/buildpack-scala
 [sbt]: http://www.scala-sbt.org/
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [sbt]: http://www.scala-sbt.org/

@@ -2,7 +2,7 @@
 [Sinatra][sinatra] is a DSL for quickly creating web applications in Ruby with minimal effort.
 
 In this tutorial we're going to show you how to deploy a Sinatra application on
-[cloudControl]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack] for supported features.
+[dotCloud]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack] for supported features.
 
 
 ## The Sinatra App Explained
@@ -29,7 +29,7 @@ use the same versions of all the gems.
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 ~~~
@@ -39,7 +39,7 @@ web: bundle exec ruby server.rb -e production -p $PORT
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform: 
 ~~~bash
 $ cctrlapp APP_NAME create ruby
 ~~~
@@ -86,9 +86,9 @@ Congratulations, you can now see your Sinatra App running at `http[s]://APP_NAME
 
 
 [sinatra]: http://www.sinatrarb.com/
-[cloudControl]: http://www.cloudcontrol.com
-[cloudControl-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[cloudControl-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud]: http://www.cloudcontrol.com
+[dotCloud-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
+[dotCloud-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git

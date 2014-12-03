@@ -9,7 +9,7 @@ If you're looking for a flexible, friendly and powerful content management platf
  * Auto-update notification
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Drupal 7 to [the cloudControl platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying Drupal 7 to [the dotCloud platform](http://www.cloudcontrol.com).
 
 ##Prerequisites
 
@@ -65,7 +65,7 @@ That will show output similar to below:
         * testing
 
 I am using the application name ``cloudcontroldldrupal`` in this example. You will of course have to use some different name. 
-Now, we need to make our first deployment of both branches to the cloudControl platform. To do this we checkout the master branch, create the application in our cloudControl account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
+Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -156,7 +156,7 @@ Have a look at it and we'll go through it together.
 
 Firstly, we set the environment to default to production. Then, if we're in a local development environment, as determined, rather simply, by having ``localdomain`` in the URL, then we set the environment to development.
 
-Otherwise, we will retrieve the setting contained in the cloudControl credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
+Otherwise, we will retrieve the setting contained in the dotCloud credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
 
 With this code in place, we can now bootstrap multiple environments. Following this, we need to configure the database,.
 

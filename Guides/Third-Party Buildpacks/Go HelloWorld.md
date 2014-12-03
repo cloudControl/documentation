@@ -1,7 +1,7 @@
 # Deploying a Go Application
 The [Go] language standard library comes with a full working web server that we used to build our *Hello world* example application 
 
-In this tutorial we're going to show you how to deploy this simple Go app on [cloudControl].
+In this tutorial we're going to show you how to deploy this simple Go app on [dotCloud].
 
 ## The Go App Explained
 
@@ -32,7 +32,7 @@ The `Godeps.json` you cloned as part of the example app looks like this:
 
 ### Process Type Definition
 
-cloudControl uses a [Procfile] to know how to start your processes.
+dotCloud uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 ~~~
@@ -43,7 +43,7 @@ Left from the colon we specified the **required** process type called `web` foll
 
 ### The Actual Application Code
 
-The example app has two request handlers registered in the `main` function. The `http.FileServer` returns the static content while the other serves the default page. To start the web server `http.ListenAndServe` is called with the server port passed. The app listens on the port specified in the `$PORT` environment variable as is required on cloudControl.
+The example app has two request handlers registered in the `main` function. The `http.FileServer` returns the static content while the other serves the default page. To start the web server `http.ListenAndServe` is called with the server port passed. The app listens on the port specified in the `$PORT` environment variable as is required on dotCloud.
 
 
 ~~~go
@@ -85,7 +85,7 @@ func getEnv(key, defaultValue string) string {
 
 ## Pushing and Deploying the App
 
-Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
+Choose a unique name (from now on called APP_NAME) for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
@@ -123,6 +123,6 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your Go app running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Go]: http://golang.org/
-[cloudControl]: http://www.cloudcontrol.com
+[dotCloud]: http://www.cloudcontrol.com
 [godep]: https://github.com/tools/godep
 [Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile

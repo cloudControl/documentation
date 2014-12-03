@@ -1,11 +1,11 @@
 # Notes for Django Developers
-This document contains information for Django programmers deploying their applications on [cloudControl].
+This document contains information for Django programmers deploying their applications on [dotCloud].
 
 ## Managing Dependencies
 The [python buildpack] uses [pip] to manage dependencies. Specify your dependencies in a file called `requirements.txt` in the project root directory.
 
 ## Defining the Process Type
-cloudControl uses a [Procfile][procfile] to know how to start your processes. This file specifies a _web_ command that will be executed to start the server once the app is deployed. It optionally also specifies [worker] types that can be used to execute long running tasks.
+dotCloud uses a [Procfile][procfile] to know how to start your processes. This file specifies a _web_ command that will be executed to start the server once the app is deployed. It optionally also specifies [worker] types that can be used to execute long running tasks.
 
 The `Procfile` for a Django app using gunicorn as web server can look like this:
 ~~~
@@ -32,5 +32,5 @@ You can't use a local SMTP server, instead choose one of our [email Add-ons][mes
 [messaging-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Messaging%20&%20Mobile/
 [data-storage-addons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/
 [add-on-credentials]: https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials
-[cloudControl]: https://www.cloudcontrol.com/
+[dotCloud]: https://www.cloudcontrol.com/
 [worker]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#scheduled-jobs-and-background-workers

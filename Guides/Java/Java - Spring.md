@@ -1,6 +1,6 @@
 #Deploying a Spring Application
 
-In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate application on [cloudControl]. The example app is a ready to deploy project based on the [Spring Roo petclinic] example.
+In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate application on [dotCloud]. The example app is a ready to deploy project based on the [Spring Roo petclinic] example.
 
 ## The Spring Application Explained
 
@@ -74,7 +74,7 @@ log4j.appender.stdout.layout.ConversionPattern=%p [%t] (%c) - %m%n%
 
 ### Process Type Definition
 
-cloudControl uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Jetty Runner:
+dotCloud uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Jetty Runner:
 
 ~~~
 web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/*.war
@@ -83,7 +83,7 @@ web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target
 
 ## Pushing and Deploying your App
 
-Choose a unique name (from now on called APP_NAME) for your application and create it on the cloudControl platform:
+Choose a unique name (from now on called APP_NAME) for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create java
@@ -149,7 +149,7 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.c
 [Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample
 [Database credentials]: Add-on%20credentials
 [Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
-[cloudControl]: /
+[dotCloud]: /
 [file system]: ../../Platform%20Documentation#non-persistent-filesystem
 [log command]: ../../Platform%20Documentation#logging
 [Shared MySQL Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs

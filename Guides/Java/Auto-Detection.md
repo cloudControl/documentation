@@ -1,6 +1,6 @@
 # Autodetection for JVM-Based Applications
 
-For most officially supported languages on the cloudControl platform, the application type defines exactly which buildpack is used, and thus which runtime is created. Due to the diversity of JVM-based applications and the mix of languages used, these types of apps are an exception to this rule.
+For most officially supported languages on the dotCloud platform, the application type defines exactly which buildpack is used, and thus which runtime is created. Due to the diversity of JVM-based applications and the mix of languages used, these types of apps are an exception to this rule.
 
 To determine the right buildpack to use for JVM-based applications, each of the Java buildpacks defines a "detect" script. In order for the platform to determine the correct buildpack, your application must follow these conventions:
 
