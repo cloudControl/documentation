@@ -58,19 +58,19 @@ def add(x, y):
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create python
+$ dcapp APP_NAME create python
 ~~~
 
 As we chose to use AMQP as a broker, we add the CloudAMQP Add-on now.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add cloudamqp.lemur
+$ dcapp APP_NAME/default addon.add cloudamqp.lemur
 ~~~
 
 We also need to add the Worker Add-on to be able to start the workers later.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add worker.single
+$ dcapp APP_NAME/default addon.add worker.single
 ~~~
 
 Since we are reading the AMQP URL for the broker from the environment in both, the `Procfile` and the Python code we have to enable providing Add-on credentials as environment variables which is disabled per default for Python apps.
@@ -78,7 +78,7 @@ Since we are reading the AMQP URL for the broker from the environment in both, t
 We also set another environment variable called `FLOWER_AUTH_EMAIL` that is passed to the Flower web process for authentication purposes. Without this, the web interface would be public showing your secret AMQP credentials and allowing people to stop your workers.
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS --FLOWER_AUTH_EMAIL=YOUR_EMAIL_HERE
+$ dcapp APP_NAME/default addon.add config.free --SET_ENV_VARS --FLOWER_AUTH_EMAIL=YOUR_EMAIL_HERE
 # seperate multiple emails by comma
 ~~~
 
@@ -90,7 +90,7 @@ Now lets push your code to the application's repository, which triggers the depl
 The first push will take a couple of seconds, because it will download and compile and install a number of dependencies. So please be patient. Dependencies will be cached for future pushes significantly speeding up the process.
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 6, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
@@ -119,10 +119,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command.
+Last but not least deploy the latest version of the app with the dcapp deploy command.
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 At this point you can see web interface at `http://APP_NAME.cloudcontrolled.com`. But it hasn't got any workers yet.
@@ -133,11 +133,11 @@ Scaling Celery workers on dotCloud is easy enough luckily. We have already defin
 ### Adding Workers
 
 ~~~bash
-$ cctrlapp APP_NAME/default worker.add worker
+$ dcapp APP_NAME/default worker.add worker
 # you can always list running workers like this
-$ cctrlapp APP_NAME/default worker
+$ dcapp APP_NAME/default worker
 # and also check the worker's log output with
-$ cctrlapp APP_NAME/default log worker
+$ dcapp APP_NAME/default log worker
 [TIMESTAMP] WRK_ID Started worker (command: 'celery -A tasks worker --loglevel=info ', parameter: '')
 [TIMESTAMP] WRK_ID
 [TIMESTAMP] WRK_ID  -------------- celery@HOSTNAME v3.0.15 (Chiastic Slide)
@@ -165,7 +165,7 @@ To handle more tasks simultaneously you can always just add more workers. (Pleas
 
 ~~~bash
 # call worker.add to start additional workers one at a time
-$ cctrlapp APP_NAME/default worker.add worker
+$ dcapp APP_NAME/default worker.add worker
 ~~~
 
 ### Removing Workers
@@ -174,14 +174,14 @@ To stop a worker you can stop it from the command line.
 
 ~~~bash
 # use the worker list command to get the WRK_ID
-$ cctrlapp APP_NAME/default worker
-$ cctrlapp APP_NAME/default worker.remove WRK_ID
+$ dcapp APP_NAME/default worker
+$ dcapp APP_NAME/default worker.remove WRK_ID
 ~~~
 
 You can also stop the Celery worker from the web interface, which will also stop the container. Check the worker log output for details.
 
 ~~~bash
-$ cctrlapp APP_NAME/default log worker
+$ dcapp APP_NAME/default log worker
 [...]
 [TIMESTAMP] WRK_ID [TIMESTAMP: WARNING/MainProcess] Got shutdown from remote
 [TIMESTAMP] WRK_ID Container stopped
@@ -191,10 +191,10 @@ $ cctrlapp APP_NAME/default log worker
 
 ## Celery Commands
 
-To run Celery commands use the cctrlapp run command. It will launch an additional container and connect you via SSH. You can then use the Celery commands in the an identical environment as the web interface and the workers itself.
+To run Celery commands use the dcapp run command. It will launch an additional container and connect you via SSH. You can then use the Celery commands in the an identical environment as the web interface and the workers itself.
 
 ~~~bash
-$ cctrlapp APP_NAME/default run bash
+$ dcapp APP_NAME/default run bash
 Connecting...
 USER@HOSTNAME:~/www$ celery --broker=$CLOUDAMQP_URL status
 -> WORKER_HOSTNAME: OK
@@ -206,7 +206,7 @@ Connection to ssh.cloudcontrolled.net closed.
 
 ## Résumé
 
-This guide showed how to run both Flower aswell as a Celery worker on dotCloud by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the cctrlapp run command to use the Celery command line tool.
+This guide showed how to run both Flower aswell as a Celery worker on dotCloud by specifying the commands in the `Procfile` and how to connect to a AMQP broker provided by the CloudAMQP Add-on with the credentials provided in the app's runtime environment. Additionally we learned how we can use the dcapp run command to use the Celery command line tool.
 
 [Celery]: http://celeryproject.org/
 [CloudAMQP Add-on]: https://next.dotcloud.com/add-ons/cloudamqp

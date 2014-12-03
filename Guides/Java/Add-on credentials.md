@@ -17,7 +17,7 @@ Some examples for database Add-ons can be seen in the last section.
 In case you don't want to expose these credentials in the environment, you can
 disable them by executing:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add SET_ENV_VARS=false
+$ dcapp APP_NAME/DEP_NAME config.add SET_ENV_VARS=false
 ~~~
 
 The Add-on credentials can still be read from the credentials file, as explained in the next section.
@@ -31,7 +31,7 @@ All the [Add-on credentials] can be found in a provided JSON file as well, which
 is exposed in the `CRED_FILE` environment variable. You can see the format of that file locally:
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.creds
+$ dcapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
 We provide a small [dotCloud credentials helper class] to get the Add-on credentials from the file.

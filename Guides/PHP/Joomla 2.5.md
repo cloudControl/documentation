@@ -160,15 +160,15 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldljoomla create php
+    dcapp cloudcontroldljoomla create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push
-    cctrlapp cloudcontroldljoomla/default deploy
+    dcapp cloudcontroldljoomla/default push
+    dcapp cloudcontroldljoomla/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push
-    cctrlapp cloudcontroldljoomla/testing deploy
+    dcapp cloudcontroldljoomla/testing push
+    dcapp cloudcontroldljoomla/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -179,16 +179,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldljoomla/default addon.add mysql.free
+    dcapp cloudcontroldljoomla/default addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldljoomla/default addon mysql.free
+    dcapp cloudcontroldljoomla/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldljoomla/testing addon.add mysql.free
+    dcapp cloudcontroldljoomla/testing addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldljoomla/testing addon mysql.free
+    dcapp cloudcontroldljoomla/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -206,10 +206,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldljoomla/default config.add APPLICATION_ENV=production
+    dcapp cloudcontroldljoomla/default config.add APPLICATION_ENV=production
 
     // Set the testing environment settings
-    cctrlapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
+    dcapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -243,15 +243,15 @@ This will show you the tables from the SQL file. Now that that's done, commit th
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldljoomla/default push
-    cctrlapp cloudcontroldljoomla/default deploy
+    dcapp cloudcontroldljoomla/default push
+    dcapp cloudcontroldljoomla/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    cctrlapp cloudcontroldljoomla/testing push
-    cctrlapp cloudcontroldljoomla/testing deploy
+    dcapp cloudcontroldljoomla/testing push
+    dcapp cloudcontroldljoomla/testing deploy
 
 ##7. Review the Deployment
 
@@ -268,11 +268,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    cctrlapp cloudcontroldljoomla/default log deploy
+    dcapp cloudcontroldljoomla/default log deploy
 
 ####7.1.1 Errors
 
-    cctrlapp cloudcontroldljoomla/default log error
+    dcapp cloudcontroldljoomla/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 

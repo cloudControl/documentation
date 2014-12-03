@@ -88,13 +88,13 @@ func getEnv(key, defaultValue string) string {
 Choose a unique name (from now on called APP_NAME) for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
+$ dcapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
 ~~~
 
 Push your code to the application's repository:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 
 Counting objects: 17, done.
 Delta compression using up to 8 threads.
@@ -114,10 +114,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the dcapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Go app running at `http[s]://APP_NAME.cloudcontrolled.com`.

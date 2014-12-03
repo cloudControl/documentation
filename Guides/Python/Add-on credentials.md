@@ -13,7 +13,7 @@ By default, all the Add-on credentials can be found in a provided JSON file,
 which path is exposed in the `CRED_FILE` environment variable. You can see
 the format of that file locally with the command:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.creds
+$ dcapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
 You can use the following code wherever you want to get the credentials in your
@@ -43,7 +43,7 @@ Some examples for database Add-ons can be seen in the last section.
 The default for Python is to not expose Add-on credentials as environment
 variables. To overwrite this default use the following command:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add SET_ENV_VARS
+$ dcapp APP_NAME/DEP_NAME config.add SET_ENV_VARS
 ~~~
 
 You can look up the individual environment variable names in the respective

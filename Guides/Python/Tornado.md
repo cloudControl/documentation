@@ -89,13 +89,13 @@ if __name__ == "__main__":
 Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the dotCloud platform:
 ~~~bash
-$ cctrlapp APP_NAME create python
+$ dcapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment
 image build process:
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 7, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
@@ -117,10 +117,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  + [new branch] master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp
+Last but not least deploy the latest version of the app with the dcapp
 deploy command.
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Tornado app running at `http://APP_NAME.cloudcontrolled.com`.

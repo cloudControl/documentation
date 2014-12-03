@@ -103,7 +103,7 @@ Alternatively you can use the [cloudcontrol-rails] gem.
 Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RACK_ENV` environment variables with the [Custom Config addon](https://next.dotcloud.com/add-ons/config). For example:
 
 ~~~
-cctrlapp APP_NAME/DEPLOYMENT config.add RACK_ENV=some_env RAILS_ENV=some_env
+dcapp APP_NAME/DEPLOYMENT config.add RACK_ENV=some_env RAILS_ENV=some_env
 ~~~
 
 NOTE: Gems in development and test environments are excluded from bundle install process.

@@ -4,33 +4,33 @@
 
 **TL;DR:**
 
- * The command line client cctrl is the primary interface.
+ * The command line client dotcloudng is the primary interface.
  * We also offer a web console.
  * For full control and integration it's possible to talk directly to the RESTful API.
 
-To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via [the command-line interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) called *cctrl*. Additionally we also offer a [web console]. Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries].
+To control the platform we offer different interfaces. The primary way of controlling your apps and deployments is via [the command-line interface](http://en.wikipedia.org/wiki/Command-line_interface) (CLI) called *dotcloudng*. Additionally we also offer a [web console]. Both the CLI as well as the web console however are merely frontends to our RESTful API. For deep integration into your apps you can optionally use one of our available [API libraries].
 
-Throughout this documentation we will use the CLI as the primary way of controlling the dotCloud platform. The CLI consists of 2 parts: *cctrlapp* and *cctrluser*. To get help for the command line client, just append --help or -h to any of the commands.
+Throughout this documentation we will use the CLI as the primary way of controlling the dotCloud platform. The CLI consists of 2 parts: *dcapp* and *dcuser*. To get help for the command line client, just append --help or -h to any of the commands.
 
-Installing *cctrl* is easy and works on Mac/Linux as well as on Windows.
+Installing *dotcloudng* is easy and works on Mac/Linux as well as on Windows.
 
 #### Quick Installation Windows
 
-For Windows we offer an installer. Please download [the latest version] of the installer from Cloud Storage. The file is named cctrl-x.x-setup.exe.
+For Windows we offer an installer. Please download [the latest version] of the installer from Cloud Storage. The file is named dotcloudng-x.x-setup.exe.
 
 #### Quick Installation Linux/Mac
 
-On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+].
+On Linux and Mac OS we recommend installing and updating dotcloudng via pip. *dotcloudng* requires [Python 2.6+].
 
 ~~~
-$ sudo pip install -U cctrl
+$ sudo pip install -U dotcloudng
 ~~~
 
-If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
+If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install dotcloudng.
 
 ~~~
 $ sudo easy_install pip
-$ sudo pip install -U cctrl
+$ sudo pip install -U dotcloudng
 ~~~
 
 ## User Accounts
@@ -38,23 +38,23 @@ $ sudo pip install -U cctrl
 **TL;DR:**
 
  * Every developer has their own user account
- * User accounts can be created via the *web console* or via ``cctrluser create``
- * User accounts can be deleted via the *web console* or via ``cctrluser delete``
+ * User accounts can be created via the *web console* or via ``dcuser create``
+ * User accounts can be deleted via the *web console* or via ``dcuser delete``
 
 To work on and manage your applications on the platform, a user account is needed. User accounts can be created via the *web console* or using the following CLI command:
 ~~~
-$ cctrluser create
+$ dcuser create
 ~~~
 
 After this, an activation email is sent to the given email address. Click the link in the email or use the following CLI command to activate the account:
 
 ~~~
-$ cctrluser activate USER_NAME ACTIVATION_CODE
+$ dcuser activate USER_NAME ACTIVATION_CODE
 ~~~
 
 If you want to delete your user account, please use either the *web console* or the following CLI command:
 ~~~
-$ cctrluser delete
+$ dcuser delete
 ~~~
 
 ### Password Reset
@@ -80,13 +80,13 @@ An app consists of a repository (with branches), deployments and users. Creating
 Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
 
 ~~~
-$ cctrlapp APP_NAME create php
+$ dcapp APP_NAME create php
 ~~~
 
 You can always list your existing apps using the command line client too.
 
 ~~~
-$ cctrlapp -l
+$ dcapp -l
 Apps
  Nr  Name                           Type
    1 myfirstapp                     php
@@ -102,7 +102,7 @@ the user's [roles](#roles). Users can be added to applications or more fine grai
 You can list, add and remove app users using the command line client.
 
 ~~~
-$ cctrlapp APP_NAME user
+$ dcapp APP_NAME user
 
 Users
  Name		Email				 	Role		Deployment
@@ -115,18 +115,18 @@ Users
 Add a user to an app by providing their email address. If the user is already registered they will be added to the app immediately. Otherwise they will receive an invitation email first.
 
 ~~~
-$ cctrlapp APP_NAME user.add user4@example.com
+$ dcapp APP_NAME user.add user4@example.com
 ~~~
 
 To remove a user, please use their email address.
 ~~~
-$ cctrlapp APP_NAME user.remove user3@example.com
+$ dcapp APP_NAME user.remove user3@example.com
 ~~~
 
 On deployment level:
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME user.add user5@example.com
-$ cctrlapp APP_NAME/DEP_NAME user.remove user5@example.com
+$ dcapp APP_NAME/DEP_NAME user.add user5@example.com
+$ dcapp APP_NAME/DEP_NAME user.remove user5@example.com
 ~~~
 Please note: a user can either be added to the application or to one or more deployments.
 
@@ -139,28 +139,28 @@ Please note: a user can either be added to the application or to one or more dep
 You can provide the role with the `user.add` command.
 
 ~~~
-$ cctrlapp APP_NAME user.add user5@example.com --role readonly
+$ dcapp APP_NAME user.add user5@example.com --role readonly
 ~~~
 
 #### Keys
 
-For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, cctrlapp will offer to create one.
+For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, dcapp will offer to create one.
 
 ~~~
-$ cctrluser key.add
+$ dcuser key.add
 ~~~
 
 You can also list the available key ids and remove existing keys using the key id.
 
 ~~~
-$ cctrluser key
+$ dcuser key
 Keys
  Dohyoonuf7
 
-$ cctrluser key Dohyoonuf7
+$ dcuser key Dohyoonuf7
 ssh-rsa AAA[...]
 
-$ cctrluser key.remove Dohyoonuf7
+$ dcuser key.remove Dohyoonuf7
 ~~~
 
 ### Deployments
@@ -175,7 +175,7 @@ Please refer to the section about [development, staging and production environme
 You can list all the deployments with the *details* command.
 
 ~~~
-$ cctrlapp APP_NAME details
+$ dcapp APP_NAME details
 App
  Name: APP_NAME                       Type: php        Owner: user1
  Repository: ssh://APP_NAME@cloudcontrolled.com/repository.git
@@ -203,17 +203,17 @@ Whenever you push an updated branch, a deployment image is built automatically.
 This image can then be deployed with the *deploy* command to the deployment matching the branch name.
 The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
 
-You can either use the cctrlapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
+You can either use the dcapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
 
 ~~~
-# with cctrlapp:
-$ cctrlapp APP_NAME/dev push
+# with dcapp:
+$ dcapp APP_NAME/dev push
 
-# get the REPO_URL from the output of cctrlapp APP_NAME details
+# get the REPO_URL from the output of dcapp APP_NAME details
 
 # with git:
-$ git remote add cctrl REPO_URL
-$ git push cctrl dev
+$ git remote add dotcloudng REPO_URL
+$ git push dotcloudng dev
 ~~~
 
 The repositories support all other remote operations like pulling and cloning as well.
@@ -258,7 +258,7 @@ At the end of the buildpack process, the image is ready to be deployed.
 The dotCloud platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME deploy
+$ dcapp APP_NAME/DEP_NAME deploy
 ~~~
 
 To deploy a specific version, append your version control systems identifier (full commit-SHA1).
@@ -279,7 +279,7 @@ first request is served. All following requests will perform normally.
 
 You can see the state of your application with the following command:
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME details
+$ dcapp APP_NAME/DEP_NAME details
 Deployment
  name: APP_NAME/DEP_NAME
  [...]
@@ -295,13 +295,13 @@ any production system.
 If your newest version breaks unexpectedly, you can use the rollback command to revert to the previous version in a matter of seconds:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME rollback
+$ dcapp APP_NAME/DEP_NAME rollback
 ~~~
 
 It is also possible to deploy any other prior version. To find the version identifier you need, simply check the [deploy log](#deploy-log) for a previously deployed version, or get it directly from the version control system. You can redeploy this version using the deploy command:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
+$ dcapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 ~~~
 
 
@@ -355,23 +355,23 @@ Add-ons add additional services to your deployment. The [Add-on marketplace] off
 
 Each deployment has its own set of Add-ons. If your app needs a MySQL database and you have a production, a development and a staging environment, all three must have their own MySQL Add-ons. Each Add-on comes with different plans allowing you to choose  a more powerful database for your high traffic production deployment and smaller ones for the development or staging environments.
 
-You can see the available Add-on plans on the Add-on marketplace website or with the `cctrlapp addon.list` command.
+You can see the available Add-on plans on the Add-on marketplace website or with the `dcapp addon.list` command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.list
+$ dcapp APP_NAME/DEP_NAME addon.list
 [...]
 ~~~
 
 Adding an Add-on is just as easy.
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
 ~~~
 
 As always replace the placeholders written in uppercase with their respective values.
 
 To get the list of current Add-ons for a deployment use the addon command.
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon
+$ dcapp APP_NAME/DEP_NAME addon
 Addon                    : alias.free
 
 Addon                    : newrelic.standard
@@ -388,9 +388,9 @@ To upgrade or downgrade an Add-on use the respective command followed by the Add
 
 ~~~
 # upgrade
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
+$ dcapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
 # downgrade
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
+$ dcapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 ~~~
 **Remember:** As in all examples in this documentation, replace all the uppercase placeholders with their respective values.
 
@@ -417,7 +417,7 @@ The guides section has detailed examples about how to get the credentials in dif
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.creds
+$ dcapp APP_NAME/DEP_NAME addon.creds
 {
     "BLITZ": {
         "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
@@ -444,10 +444,10 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
 
  * There are four different log types (access, error, worker and deploy) available.
 
-To see the log output in a `tail -f`-like fashion use the cctrlapp log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
+To see the log output in a `tail -f`-like fashion use the dcapp log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
+$ dcapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
 [...]
 ~~~
 
@@ -489,7 +489,7 @@ Where "SERVER_ADDRESS" and "PORT" should be replaced with the concrete values an
 
 Use the name of the file (for example `custom_remote.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
+$ dcapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
 ~~~
 
 From now on all the new logs should be visible in your custom syslog remote.
@@ -755,7 +755,7 @@ The container is identical to the web or worker containers but starts an SSH dae
 To start a shell (e.g. bash) use the `run` command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME run bash
+$ dcapp APP_NAME/DEP_NAME run bash
 Connecting...
 Warning: Permanently added '[10.62.45.100]:25832' (RSA) to the list of known hosts.
 u25832@DEP_ID-25832:~/www$ echo "interactive commands work as well"
@@ -769,7 +769,7 @@ It's also possible to execute a command directly and have the container shutdown
 
 For example, passing the `"env | sort"` command will list the environment variables. Note that the use of the quotes is required for a command that includes spaces.
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME run "env | sort"
+$ dcapp APP_NAME/DEP_NAME run "env | sort"
 Connecting...
 CRED_FILE=/srv/creds/creds.json
 DEP_ID=DEP_ID
@@ -822,9 +822,9 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
 
  * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin]
 
-Details about the current stack are available via the `cctrlapp` command line interface.
+Details about the current stack are available via the `dcapp` command line interface.
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME details
+$ dcapp APP_NAME/DEP_NAME details
  name: APP_NAME/DEP_NAME
  stack: pinky
  [...]

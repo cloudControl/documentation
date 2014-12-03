@@ -6,10 +6,10 @@ running MongoDB database in virtually no time.
 
 ## MongoSoup 
 
-The MongoSoup Add-on can be added to any deployment from the cctrlapp command
+The MongoSoup Add-on can be added to any deployment from the dcapp command
 line:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.add mongosoup.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add mongosoup.OPTION
 ~~~
 
 For your OPTION, select one of MongoSoup's plan offerings: small, medium,
@@ -19,7 +19,7 @@ dedicated-xlarge For more information, click
 
 ## For example:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.add mongosoup.large
+$ dcapp APP_NAME/DEP_NAME addon.add mongosoup.large
 ~~~
 
 When added, MongoSoup automatically creates a new user account and database in
@@ -133,9 +133,9 @@ changes are required.
 
 ## Removing MongoSoup
 
-If you'd like to remove the MongoSoup add-on, use the cctrlapp command line:
+If you'd like to remove the MongoSoup add-on, use the dcapp command line:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.remove mongosoup.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove mongosoup.OPTION
 ~~~
 
 Note: All data in your database will be lost if you remove the MongoSoup

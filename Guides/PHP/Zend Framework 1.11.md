@@ -55,7 +55,7 @@ If we were deploying the application in a simple, configurable VHost, then we'd 
         SetEnv APPLICATION_ENV development
     </VirtualHost>
 
-When using dotCloud, we need to do this in a slightly different way. It involves, for each environment, setting an environment variable with the cctrlapp config add-on, then reading that information from the environment at runtime. We'll come to this shortly.
+When using dotCloud, we need to do this in a slightly different way. It involves, for each environment, setting an environment variable with the dcapp config add-on, then reading that information from the environment at runtime. We'll come to this shortly.
 
 ##3. Put the Code Under Git Control
 
@@ -90,19 +90,19 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldlzf create php
+    dcapp cloudcontroldlzf create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldlzf/default push
-    cctrlapp cloudcontroldlzf/default deploy
+    dcapp cloudcontroldlzf/default push
+    dcapp cloudcontroldlzf/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlzf/testing push
-    cctrlapp cloudcontroldlzf/testing deploy
+    dcapp cloudcontroldlzf/testing push
+    dcapp cloudcontroldlzf/testing deploy
 
 You'll see output similar to the following:
 
-    $ cctrlapp cloudcontroldlzf/testing push
+    $ dcapp cloudcontroldlzf/testing push
     Total 0 (delta 0), reused 0 (delta 0)
 
     >> Receiving push
@@ -125,16 +125,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlzf/default addon.add mysqls.free
+    dcapp cloudcontroldlzf/default addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlzf/default addon mysqls.free
+    dcapp cloudcontroldlzf/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlzf/testing addon.add mysqls.free
+    dcapp cloudcontroldlzf/testing addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlzf/testing addon mysqls.free
+    dcapp cloudcontroldlzf/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -152,10 +152,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldlzf/default config.add APPLICATION_ENV=production
+    dcapp cloudcontroldlzf/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting
-    cctrlapp cloudcontroldlzf/testing config.add APPLICATION_ENV=testing
+    dcapp cloudcontroldlzf/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -454,15 +454,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlzf/default push
-    cctrlapp cloudcontroldlzf/default deploy
+    dcapp cloudcontroldlzf/default push
+    dcapp cloudcontroldlzf/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlzf/testing push
-    cctrlapp cloudcontroldlzf/testing deploy
+    dcapp cloudcontroldlzf/testing push
+    dcapp cloudcontroldlzf/testing deploy
 
 ##7. Review the Deployment
 
@@ -480,11 +480,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    cctrlapp cloudcontroldlzf/default log deploy
+    dcapp cloudcontroldlzf/default log deploy
 
 ####7.1.1 Errors
 
-    cctrlapp cloudcontroldlzf/default log error
+    dcapp cloudcontroldlzf/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 

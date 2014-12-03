@@ -11,7 +11,7 @@ custom domain follow the following simple steps **for each domain**.
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
- $ cctrlapp APP_NAME/default alias APP_NAME.cloudcontrolled.com
+ $ dcapp APP_NAME/default alias APP_NAME.cloudcontrolled.com
  ~~~
 
  The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
@@ -32,12 +32,12 @@ custom domain follow the following simple steps **for each domain**.
  
  ~~~
  # for the default deployment
-  $ cctrlapp APP_NAME/default alias
+  $ dcapp APP_NAME/default alias
  Aliases
  name                                                         default  verified
  APP_NAME.cloudcontrolled.com                                        1        1
  # for any additional deployment
- $ cctrlapp APP_NAME/DEP_NAME alias
+ $ dcapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  DEP_NAME.APP_NAME.cloudcontrolled.com                               1        1
@@ -54,13 +54,13 @@ custom domain follow the following simple steps **for each domain**.
  Next add the domain as an alias to your deployment using the alias.add command.
  
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME alias.add www.example.com
+ $ dcapp APP_NAME/DEP_NAME alias.add www.example.com
  ~~~
  
  You should now see your domain in the deployment's list of aliases.
  
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME alias
+ $ dcapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  www.example.com                                                     0        0
@@ -74,7 +74,7 @@ custom domain follow the following simple steps **for each domain**.
  As soon as the changes have propagated through the DNS the alias will be verified and the deployment will start answering requests to that domain automatically.
  
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME alias
+ $ dcapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  www.example.com                                                     0        1
@@ -86,7 +86,7 @@ custom domain follow the following simple steps **for each domain**.
 To remove an alias, simply use the alias.remove command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME alias.remove www.example.com
+$ dcapp APP_NAME/DEP_NAME alias.remove www.example.com
 ~~~
 
 ## Special Case: Wildcard Domains
@@ -96,13 +96,13 @@ The alias add-on does support wildcard domains. A wildcard domain like `*.exampl
 To use this feature first upgrade your alias add-on from free to wildcard.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard 
+$ dcapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard 
 ~~~
 
 Then add the wildcard domain itself as an alias.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME alias.add *.example.com
+$ dcapp APP_NAME/DEP_NAME alias.add *.example.com
 ~~~
 
 The TXT record requirement also applies to wildcard domains, so please follow the steps above accordingly.

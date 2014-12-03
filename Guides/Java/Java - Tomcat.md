@@ -116,12 +116,12 @@ commands to start your servlet using the built classes.
 Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the dotCloud platform:
 ~~~bash
-$ cctrlapp APP_NAME create java
+$ dcapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 2, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (2/2), done.
@@ -156,10 +156,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
    db605ac...6a884f1 master -> master
 ~~~
 
-Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the dcapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your JSP Application running on Tomcat at `http[s]://APP_NAME.cloudcontrolled.com`.

@@ -9,7 +9,7 @@ recommend one of the dedicated [MySQLd Add-on](https://next.dotcloud.com/add-ons
 The database comes in different sizes and prices. It can be added using the addon.add command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add mysqls.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add mysqls.OPTION
 ~~~
 Replace `mysqls.OPTION` with a valid option, e.g. `mysqls.free`.
 
@@ -18,7 +18,7 @@ Replace `mysqls.OPTION` with a valid option, e.g. `mysqls.free`.
 To upgrade from one plan to another use the addon.upgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.upgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
 ~~~
 
 ## Downgrading the MySQLs Add-on
@@ -26,7 +26,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
 To downgrade from the current plan to a smaller one use the addon.downgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.downgrade mysqls.OPTION_OLD mysqls.OPTION_NEW
 ~~~
 
 ## Removing the MySQLs Add-on
@@ -36,7 +36,7 @@ Similarily, an Add-on can also be removed from the deployment by using the addon
 **Attention:** Removing the MySQLs Add-on deletes all data in the database.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
 ~~~
 
 ## Replication and Failover
@@ -103,7 +103,7 @@ $ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICAT
 Replace the uppercase variables with the corresponding values shown by the addon command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon mysqls.OPTION
+$ dcapp APP_NAME/DEP_NAME addon mysqls.OPTION
 Addon : mysqls.512mb
 
 Settings

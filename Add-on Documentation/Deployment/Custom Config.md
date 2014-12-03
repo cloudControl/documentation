@@ -18,7 +18,7 @@ To add configuration settings, simply invoke the config command with the add
 option, and append the desired `key` / `value` pairs.
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add KEY=VALUE
+$ dcapp APP_NAME/DEP_NAME config.add KEY=VALUE
 ~~~
 
 This will automatically add the Config Add-on to your deployment.
@@ -30,7 +30,7 @@ To set multiple settings at once, simply append more than one `key` / `value`
 pair.
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add KEY1=VALUE1 KEY2=VALUE2 [...]
+$ dcapp APP_NAME/DEP_NAME config.add KEY1=VALUE1 KEY2=VALUE2 [...]
 ~~~
 
 Config parameters can be set using the format shown in first column of the
@@ -53,7 +53,7 @@ You can list the existing set of configuration settings by invoking the config
 command:
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config
+$ dcapp APP_NAME/DEP_NAME config
 KEY1=VALUE1
 KEY2=VALUE2
 ~~~
@@ -61,7 +61,7 @@ KEY2=VALUE2
 To show the value of a specific key, simply append the desired key name:
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config KEY
+$ dcapp APP_NAME/DEP_NAME config KEY
 VALUE
 ~~~
 
@@ -71,8 +71,8 @@ To add or remove settings to your custom config, simply use the `add` or
 `remove` option of the config command and append the parameters you need.
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add [-f|--force] NEW_PARAM=NEW_VALUE [...]
-$ cctrlapp APP_NAME/DEP_NAME config.remove PARAM1 PARAM2 [...]
+$ dcapp APP_NAME/DEP_NAME config.add [-f|--force] NEW_PARAM=NEW_VALUE [...]
+$ dcapp APP_NAME/DEP_NAME config.remove PARAM1 PARAM2 [...]
 ~~~
 
 Updating the existing settings is also possible using the `add` command. This
@@ -85,7 +85,7 @@ Deleting all the existing configuration settings from a deployment can be done
 by removing the Add-on.
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.remove config.free
+$ dcapp APP_NAME/DEP_NAME addon.remove config.free
 ~~~
 
 This will remove all the custom configuration settings.

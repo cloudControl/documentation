@@ -18,7 +18,7 @@ database Add-ons can be seen in the last section.
 In case you don't want to expose these credentials in the environment, you can
 disable them by executing:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME config.add SET_ENV_VARS=false
+$ dcapp APP_NAME/DEP_NAME config.add SET_ENV_VARS=false
 ~~~
 
 The Add-on credentials can still be read from the credentials file, as explained in the next section.
@@ -32,7 +32,7 @@ available in your deployment containers.
 All the [Add-on credentials] can be found in a provided JSON file as well, which path is exposed in
 the `CRED_FILE` environment variable. You can see the format of that file locally with the command:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME addon.creds
+$ dcapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
 You can use the following code wherever you want to get the credentials in your

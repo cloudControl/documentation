@@ -146,13 +146,13 @@ class Module
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform: 
 
 ~~~bash
-$ cctrlapp APP_NAME create php
+$ dcapp APP_NAME create php
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 2208, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (771/771), done.
@@ -178,10 +178,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least deploy the latest version of the app with the dcapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 ## Add the Required MySQL Database Add-on and Initialize the Session Table
@@ -194,9 +194,9 @@ Creating the session table is easy by executing the included init-session-table 
 
 ~~~bash
 # add the Add-on
-$ cctrlapp APP_NAME/default addon.add mysqls.free
+$ dcapp APP_NAME/default addon.add mysqls.free
 # initialize the session table
-$ cctrlapp APP_NAME/default run "php code/public/index.php init-session-table"
+$ dcapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
 Connection to ssh.cloudcontrolled.net closed.

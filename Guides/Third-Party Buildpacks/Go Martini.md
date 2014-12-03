@@ -97,14 +97,14 @@ Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the dotCloud platform using the custom Go buildpack:
 
 ~~~bash
-$ cctrlapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
+$ dcapp APP_NAME create custom --buildpack https://github.com/cloudControl/buildpack-go
 ~~~
 
 Push your code to the application's repository, which triggers the deployment
 image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 Counting objects: 73, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (52/52), done.
@@ -122,17 +122,17 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the cctrlapp
+Last but not least deploy the latest version of the app with the dcapp
 deploy command.
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Martini app running at `http://APP_NAME.cloudcontrolled.com`. The command line client provides the `open` command to quickly open the app in your default browser.
 
 ~~~bash
-$ cctrlapp APP_NAME/default open
+$ dcapp APP_NAME/default open
 ~~~
 
 [Martini]: http://martini.codegangsta.io/

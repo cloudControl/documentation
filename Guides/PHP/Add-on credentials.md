@@ -10,7 +10,7 @@ appear in the version control and cause potential security issues.
 All the [Add-on credentials] can be found in a provided JSON file, which path
 is exposed in the `CRED_FILE` environment variable. You can see the format of that file locally with the command:
 ~~~bash
-$ cctrlapp APP_NAME/DEPLOYMENT_NAME addon.creds
+$ dcapp APP_NAME/DEPLOYMENT_NAME addon.creds
 ~~~
 
 You can use the following code wherever you want to get the credentials in your

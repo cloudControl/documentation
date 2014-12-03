@@ -7,7 +7,7 @@ CloudAMQP is a hosted RabbitMQ service, with high availability and blazing perfo
 The Add-on comes in different sizes and prices. It can be added by executing the command addon.add:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add cloudamqp.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add cloudamqp.OPTION
 ~~~
 ".option" represents the plan size, e.g. cloudamqp.lemur
 
@@ -16,7 +16,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add cloudamqp.OPTION
 Upgrading to another option can easily be done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade cloudamqp.OPTION_OLD cloudamqp.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.upgrade cloudamqp.OPTION_OLD cloudamqp.OPTION_NEW
 ~~~
 
 ## Downgrade the CloudAMQP Add-on
@@ -24,7 +24,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.upgrade cloudamqp.OPTION_OLD cloudamqp.OPTION
 Downgrading to another option can easily be done:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade cloudamqp.OPTION_OLD cloudamqp.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.downgrade cloudamqp.OPTION_OLD cloudamqp.OPTION_NEW
 ~~~
 
 ## Removing the CloudAMQP Add-on
@@ -32,7 +32,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade cloudamqp.OPTION_OLD cloudamqp.OPTI
 Similarily, an Add-on can also be removed from the deployment easily. The costs only apply for the time the Add-on was active:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove cloudamqp.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove cloudamqp.OPTION
 ~~~
 
 ## Add-on credentials

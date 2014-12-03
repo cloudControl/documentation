@@ -28,7 +28,7 @@ available that can be used to dispatch tasks to the workers.
 Before you can add a Cron job, the Add-on itself has to be added:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add cron.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add cron.OPTION
 ~~~
 
 As always the different options are listed on the [Cron
@@ -40,9 +40,9 @@ To call an URL with the specific interval you write it as the parameter:
 
 ~~~
 # for the default deployment
-$ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudcontrolled.com
+$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudcontrolled.com
 # for any additional deployment
-$ cctrlapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
+$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
@@ -53,7 +53,7 @@ recommended to use https when sending credentials. Please, note that URL must be
 Get an overview of all your Cron jobs:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME cron
+$ dcapp APP_NAME/DEP_NAME cron
 ~~~
 
 ## Cron details
@@ -61,7 +61,7 @@ $ cctrlapp APP_NAME/DEP_NAME cron
 Get the details of a specific Cron job:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME cron CRON_ID
+$ dcapp APP_NAME/DEP_NAME cron CRON_ID
 Cronjob
  job_id   : jobkqy7rdmg
  url      : http://APP_NAME.cloudcontrolled.com
@@ -75,7 +75,7 @@ Cronjob
 You can remove a Cron job by the job_id
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME cron.remove JOB_ID
+$ dcapp APP_NAME/DEP_NAME cron.remove JOB_ID
 ~~~
 
 ## Upgrading / downgrading the Cron addon
@@ -84,13 +84,13 @@ In order to switch from a daily to hourly Cron or vice versa, use the up- or
 downgrade function
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade cron.free cron.hourly
+$ dcapp APP_NAME/DEP_NAME addon.upgrade cron.free cron.hourly
 ~~~
 
 or
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade cron.hourly cron.free
+$ dcapp APP_NAME/DEP_NAME addon.downgrade cron.hourly cron.free
 ~~~
 
 Crons added with the free Add-on will stay daily and crons added with the
@@ -101,7 +101,7 @@ hourly Add-on will stay hourly.
 Removing the Add-on itself can be done with:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove cron.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove cron.OPTION
 ~~~
 
 Please note: Removing the Add-on will not automatically remove all Cron jobs.

@@ -16,7 +16,7 @@ manage: python manage.py
 ## Executing Management Tasks
 Use the `run` command to execute tasks like `syncdb`. This starts an interactive [SSH-session].
 ~~~bash
-cctrlapp APP_NAME/DEP_NAME run "python manage.py syncdb"
+dcapp APP_NAME/DEP_NAME run "python manage.py syncdb"
 ~~~
 
 ## Databases

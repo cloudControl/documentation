@@ -66,13 +66,13 @@ The `web` process type is required and specifies the command that will be execut
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
-$ cctrlapp APP_NAME create java
+$ dcapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ cctrlapp APP_NAME/default push
+$ dcapp APP_NAME/default push
 [...]
 -----> Receiving push
 -----> Grails 2.2.0 app detected
@@ -92,10 +92,10 @@ To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least, deploy the latest version of the app with the cctrlapp deploy command:
+Last but not least, deploy the latest version of the app with the dcapp deploy command:
 
 ~~~bash
-$ cctrlapp APP_NAME/default deploy
+$ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Grails application running at `http[s]://APP_NAME.cloudcontrolled.com`.

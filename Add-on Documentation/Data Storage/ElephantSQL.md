@@ -9,7 +9,7 @@ As a full-featured, open-source relational DBMS (RDBMS), PostgreSQL boasts many 
 To add the ElephantSQL Add-on use the addon.add command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.add elephantsql.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.add elephantsql.OPTION
 ~~~
 Replace `elephantsql.OPTION` with a valid option, e.g. `elephantsql.turtle`.
 
@@ -20,7 +20,7 @@ When added, ElephantSQL automatically creates a new user account with your email
 To upgrade from a smaller to a more powerful plan use the addon.upgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.upgrade elephantsql.OPTION_OLD elephantsql.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.upgrade elephantsql.OPTION_OLD elephantsql.OPTION_NEW
 ~~~
 
 Please note: Upgrading works only between shared plans or between dedicated
@@ -33,7 +33,7 @@ later.
 To downgrade to a smaller plan use the addon.downgrade command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.downgrade elephantsql.OPTION_OLD elephantsql.OPTION_NEW
+$ dcapp APP_NAME/DEP_NAME addon.downgrade elephantsql.OPTION_OLD elephantsql.OPTION_NEW
 ~~~
 
 ## Removing the ElephantSQL Add-on
@@ -41,7 +41,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade elephantsql.OPTION_OLD elephantsql.
 The ElephantSQL Add-on can be removed from the deployment by using the addon.remove command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME addon.remove elephantsql.OPTION
+$ dcapp APP_NAME/DEP_NAME addon.remove elephantsql.OPTION
 ~~~
 
 ### Internal Access

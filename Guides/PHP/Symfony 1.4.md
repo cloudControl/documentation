@@ -81,21 +81,21 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldlsymfony create php
+    dcapp cloudcontroldlsymfony create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldlsymfony/default push
-    cctrlapp cloudcontroldlsymfony/default deploy
+    dcapp cloudcontroldlsymfony/default push
+    dcapp cloudcontroldlsymfony/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlsymfony/testing push
-    cctrlapp cloudcontroldlsymfony/testing deploy
+    dcapp cloudcontroldlsymfony/testing push
+    dcapp cloudcontroldlsymfony/testing deploy
 
 ###3.1 Symfony Auto-Detected
 
 When you do this, you'll see output similar to the following:
 
-    $ cctrlapp cloudcontroldlsymfony/default push
+    $ dcapp cloudcontroldlsymfony/default push
     Counting objects: 15, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (7/7), done.
@@ -131,16 +131,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 To initialise mysqls, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlsymfony/default addon.add mysql.free
+    dcapp cloudcontroldlsymfony/default addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlsymfony/default addon mysql.free
+    dcapp cloudcontroldlsymfony/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlsymfony/testing addon.add mysql.free
+    dcapp cloudcontroldlsymfony/testing addon.add mysql.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlsymfony/testing addon mysql.free
+    dcapp cloudcontroldlsymfony/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -158,10 +158,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp     cloudcontroldlsymfony/default config.add APPLICATION_ENV=production
+    dcapp     cloudcontroldlsymfony/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting
-    cctrlapp     cloudcontroldlsymfony/testing config.add APPLICATION_ENV=testing
+    dcapp     cloudcontroldlsymfony/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -319,15 +319,15 @@ After this, stage all the files in Git and commit them with a suitable commit me
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlsymfony/default push
-    cctrlapp cloudcontroldlsymfony/default deploy
+    dcapp cloudcontroldlsymfony/default push
+    dcapp cloudcontroldlsymfony/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlsymfony/testing push
-    cctrlapp cloudcontroldlsymfony/testing deploy
+    dcapp cloudcontroldlsymfony/testing push
+    dcapp cloudcontroldlsymfony/testing deploy
 
 
 ##7. Review the Deployment

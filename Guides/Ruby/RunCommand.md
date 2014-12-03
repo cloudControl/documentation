@@ -5,18 +5,18 @@ Run command is really useful for the ruby programmers. Here are some examples ho
 To migrate database:
 
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME run "rake db:migrate"
+$ dcapp APP_NAME/DEP_NAME run "rake db:migrate"
 ~~~
 
 To run rails console:
 ~~~bash
-$ cctrlapp APP_NAME/DEP_NAME run "rails c"
+$ dcapp APP_NAME/DEP_NAME run "rails c"
 ~~~
 
 Here is a full example in which multiple commands are run in remote bash session:
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME run bash
+$ dcapp APP_NAME/DEP_NAME run bash
 Connecting...
 Warning: Permanently added '[X.X.X.X]:<PORT>' (RSA) to the list of known hosts.
 u<PORT>@<DEP_ID>-<PORT>:~/www$ rails g scaffold Post title:string content:text
@@ -84,7 +84,7 @@ Connection to ssh.cloudcontrolled.net closed.
 The same could be accomplished if the multiple individual commands were chained:
 
 ~~~
-$ cctrlapp APP_NAME/DEPLOYMENT run "rails g scaffold Post title:string content:text && rake db:migrate && rails c"
+$ dcapp APP_NAME/DEPLOYMENT run "rails g scaffold Post title:string content:text && rake db:migrate && rails c"
 ~~~
 
 The previous example is quite artificial and it's usefulness in the real world would be questionable. The changes to the database are retained, but all the generated files are lost. Nevertheless it demonstrates more complex usage of the run command and gives a bit of insight in it's power.

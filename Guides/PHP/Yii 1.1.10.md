@@ -85,18 +85,18 @@ Now, we need to make our first deployment of both branches to the dotCloud platf
     git checkout master
 
     // create the application
-    cctrlapp cloudcontroldlyii create php
+    dcapp cloudcontroldlyii create php
 
     // deploy the default branch
-    cctrlapp cloudcontroldlyii/default push
-    cctrlapp cloudcontroldlyii/default deploy
+    dcapp cloudcontroldlyii/default push
+    dcapp cloudcontroldlyii/default deploy
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlyii/testing push
-    cctrlapp cloudcontroldlyii/testing deploy
+    dcapp cloudcontroldlyii/testing push
+    dcapp cloudcontroldlyii/testing deploy
 You should see output as below:
 
-    $ cctrlapp cloudcontroldlyii/default push
+    $ dcapp cloudcontroldlyii/default push
     Counting objects: 2257, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (2131/2131), done.
@@ -123,16 +123,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    cctrlapp cloudcontroldlyii/default addon.add mysqls.free
+    dcapp cloudcontroldlyii/default addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlyii/default addon mysqls.free
+    dcapp cloudcontroldlyii/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    cctrlapp cloudcontroldlyii/testing addon.add mysqls.free
+    dcapp cloudcontroldlyii/testing addon.add mysqls.free
 
     // Retrieve the settings
-    cctrlapp cloudcontroldlyii/testing addon mysqls.free
+    dcapp cloudcontroldlyii/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -150,10 +150,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    cctrlapp cloudcontroldlyii/default config.add APPLICATION_ENV=main
+    dcapp cloudcontroldlyii/default config.add APPLICATION_ENV=main
 
     // Set the testing environment setting
-    cctrlapp cloudcontroldlyii/testing config.add APPLICATION_ENV=testing
+    dcapp cloudcontroldlyii/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -314,15 +314,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    cctrlapp cloudcontroldlyii/default push
-    cctrlapp cloudcontroldlyii/default deploy
+    dcapp cloudcontroldlyii/default push
+    dcapp cloudcontroldlyii/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    cctrlapp cloudcontroldlyii/testing push
-    cctrlapp cloudcontroldlyii/testing deploy
+    dcapp cloudcontroldlyii/testing push
+    dcapp cloudcontroldlyii/testing deploy
 
 ##7. Review the Deployment
 
@@ -339,11 +339,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    cctrlapp cloudcontroldlyii/default log deploy
+    dcapp cloudcontroldlyii/default log deploy
 
 ####7.1.1 Errors
 
-    cctrlapp cloudcontroldlyii/default log error
+    dcapp cloudcontroldlyii/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 
