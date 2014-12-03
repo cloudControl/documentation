@@ -374,10 +374,10 @@ To get the list of current Add-ons for a deployment use the addon command.
 $ dcapp APP_NAME/DEP_NAME addon
 Addon                    : alias.free
 
-Addon                    : newrelic.standard
+Addon                    : sendgrid.starter
 [...]
 
-Addon                    : blitz.250
+Addon                    : mysqls.free
 [...]
 
 Addon                    : memcachier.dev
@@ -419,9 +419,9 @@ To see the format and contents of the credentials file locally, use the `addon.c
 ~~~
 $ dcapp APP_NAME/DEP_NAME addon.creds
 {
-    "BLITZ": {
-        "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
-        "BLITZ_API_USER": "SOME_USER_ID"
+    "SENDGRID": {
+      "SENDGRID_PASSWORD": "SOME_SECRET_PASSWORD",
+      "SENDGRID_USERNAME": "SOME_USERNAME"
     },
     "MEMCACHIER": {
         "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD",
