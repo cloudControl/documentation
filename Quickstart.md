@@ -60,7 +60,7 @@ The command line client will determine if you already have a public key and uplo
 
 ## Create the First Application on dotCloud
 
-Create a new application on the dotCloud platform by giving it an unique `APP_NAME` (the name is used as the `.cloudcontrolled.com` subdomain) and choosing the `TYPE`.
+Create a new application on the dotCloud platform by giving it an unique `APP_NAME` (the name is used as the `.dotcloudapp.com` subdomain) and choosing the `TYPE`.
 
 ~~~bash
 $ dcapp APP_NAME create [java, php, python, ruby, nodejs]
@@ -114,7 +114,7 @@ $ dcapp APP_NAME deploy
 **Congratulations, your app is now up and running.**
 
 ~~~bash
-http[s]://APP_NAME.cloudcontrolled.com
+http[s]://APP_NAME.dotcloudapp.com
 ~~~
 
 ## Cheatsheet

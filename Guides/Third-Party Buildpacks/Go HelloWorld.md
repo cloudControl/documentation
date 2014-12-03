@@ -60,7 +60,7 @@ import (
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("templates/hello.html"))
 	pageModel := make(map[string]interface{})
-	pageModel["Domain"] = getEnv("DOMAIN", "cloudcontrolled.com")
+	pageModel["Domain"] = getEnv("DOMAIN", "dotcloudapp.com")
 	if err := t.Execute(w, pageModel); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -110,7 +110,7 @@ Total 17 (delta 0), reused 0 (delta 0)
 -----> Custom buildpack provided
 -----> Uploading image (2.2 MB)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -120,7 +120,7 @@ Last but not least deploy the latest version of the app with the dcapp deploy co
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Go app running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Go app running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [Go]: http://golang.org/
 [dotCloud]: http://next.dotcloud.com

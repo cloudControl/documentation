@@ -162,7 +162,7 @@ Total 62 (delta 2), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (34M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -179,7 +179,7 @@ Finally, prepare the database by running migrations using the [Run command][run 
 $ dcapp APP_NAME/default run "rake db:migrate"
 ~~~
 
-Congratulations, you can now access the app at http://APP_NAME.cloudcontrolled.com.
+Congratulations, you can now access the app at http://APP_NAME.dotcloudapp.com.
 
 For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].

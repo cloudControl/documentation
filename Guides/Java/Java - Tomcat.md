@@ -152,7 +152,7 @@ Total 2 (delta 1), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (50.2 MB)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
    db605ac...6a884f1 master -> master
 ~~~
 
@@ -162,7 +162,7 @@ Last but not least, deploy the latest version of the app with the dcapp deploy c
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your JSP Application running on Tomcat at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your JSP Application running on Tomcat at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [Tomcat]: https://tomcat.apache.org/
 [dotCloud]: https://next.dotcloud.com/

@@ -178,7 +178,7 @@ You can list all the deployments with the *details* command.
 $ dcapp APP_NAME details
 App
  Name: APP_NAME                       Type: php        Owner: user1
- Repository: ssh://APP_NAME@cloudcontrolled.com/repository.git
+ Repository: ssh://APP_NAME@dotcloudapp.com/repository.git
 
  [...]
 
@@ -374,10 +374,10 @@ To get the list of current Add-ons for a deployment use the addon command.
 $ dcapp APP_NAME/DEP_NAME addon
 Addon                    : alias.free
 
-Addon                    : newrelic.standard
+Addon                    : sendgrid.starter
 [...]
 
-Addon                    : blitz.250
+Addon                    : mysqls.free
 [...]
 
 Addon                    : memcachier.dev
@@ -419,9 +419,9 @@ To see the format and contents of the credentials file locally, use the `addon.c
 ~~~
 $ dcapp APP_NAME/DEP_NAME addon.creds
 {
-    "BLITZ": {
-        "BLITZ_API_KEY": "SOME_SECRET_API_KEY",
-        "BLITZ_API_USER": "SOME_USER_ID"
+    "SENDGRID": {
+      "SENDGRID_PASSWORD": "SOME_SECRET_PASSWORD",
+      "SENDGRID_USERNAME": "SOME_USERNAME"
     },
     "MEMCACHIER": {
         "MEMCACHIER_PASSWORD": "SOME_SECRET_PASSWORD",
@@ -499,18 +499,18 @@ From now on all the new logs should be visible in your custom syslog remote.
 
 **TL;DR:**
 
- * Each deployment is provided with a `cloudcontrolapp.com` subdomain.
+ * Each deployment is provided with a `dotcloudapp.com` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment is provided per default with a `*.cloudcontrolapp.com` subdomain.
-The `APP_NAME.cloudcontrolapp.com` will point to the `default` deployment while
+Each deployment is provided per default with a `*.dotcloudapp.com` subdomain.
+The `APP_NAME.dotcloudapp.com` will point to the `default` deployment while
 any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io`.
 
 You can also use custom domains to access your deployments. To add a domain
 like `www.example.com`, `app.example.com` or `secure.example.com` to one of your
 deployments, simply add each one as an alias and add a CNAME for each pointing to
 your deployment's subdomain. So to point `www.example.com` to the default deployment
-of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.cloudcontrolapp.com`.
+of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.dotcloudapp.com`.
 The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one
 of your deployments.
 
@@ -542,8 +542,8 @@ root to the configured subdomain (e.g. example.org -> www.example.org).
 **TL;DR:**
 
  * All HTTP requests are routed via our routing tier.
- * Within the routing tier, requests are routed via the `*.cloudcontrolapp.com` subdomain.
- * The `*.cloudcontrolapp.com` subdomain provides WebSocket support.
+ * Within the routing tier, requests are routed via the `*.dotcloudapp.com` subdomain.
+ * The `*.dotcloudapp.com` subdomain provides WebSocket support.
  * Requests are routed based on the `Host` header.
  * Use the `X-Forwarded-For` header to get the client IP.
 
@@ -552,7 +552,7 @@ The routing tier is designed as a cluster of reverse proxy loadbalancers which
 orchestrate the forwarding of user requests to your applications. It takes care
 of routing the request to one of the application's containers based on matching
 the `Host` header against the list of the deployment's aliases. This is accomplished
-via the `*.cloudcontrolapp.com` subdomain.
+via the `*.dotcloudapp.com` subdomain.
 
 The routing tier is designed to be robust against single node and even complete
 datacenter failures while still keeping the added latency as low as possible.
@@ -562,11 +562,11 @@ datacenter failures while still keeping the added latency as low as possible.
 Transport Layer Security (TLS / SSL) is available to encrypt traffic between
 users and applications.
 
-As part of the provided `.cloudcontrolapp.com` subdomain, all deployments have
-access to piggyback SSL using a `*.cloudcontrolapp.com` wildcard certificate.
+As part of the provided `.dotcloudapp.com` subdomain, all deployments have
+access to piggyback SSL using a `*.dotcloudapp.com` wildcard certificate.
 To use this, simply point your browser to:
-* `https://APP_NAME.cloudcontrolapp.com` for the default deployment
-* `https://DEP_NAME-APP_NAME.cloudcontrolapp.com` for non-default deployments
+* `https://APP_NAME.dotcloudapp.com` for the default deployment
+* `https://DEP_NAME-APP_NAME.dotcloudapp.com` for non-default deployments
 
     Please note the **dash** between DEP_NAME and APP_NAME.
 
@@ -607,7 +607,7 @@ strict timeouts to the read/ write operations. You can find them below.
  * __Send timeout__ - maximum time between two write operations of a request. If your application
  does not take new data within this time, the routing tier will shut down the connection.
 
-#### Timeouts for `*.cloudcontrolapp.com` subdomain:
+#### Timeouts for `*.dotcloudapp.com` subdomain:
 
 |Parameter|Value [s]|
 |:---------|:----------:|
@@ -638,7 +638,7 @@ the replacement. To avoid even short downtimes, set the --containers option to a
 
 #### Health Checker
 
-For the `*.cloudcontrolapp.com` subdomain, failed requests will cause an error message to be returned to
+For the `*.dotcloudapp.com` subdomain, failed requests will cause an error message to be returned to
 the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals
 the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests.
 Subsequent requests are routed to an available container of the deployment. Once the health checker notices
@@ -688,7 +688,7 @@ css files into one file each and using sprites for images.
 
 **TL;DR:**
 
- * WebSockets are supported via the `*.cloudcontrolapp.com` subdomain.
+ * WebSockets are supported via the `*.dotcloudapp.com` subdomain.
  * WebSockets allow real-time, bidirectional communication between clients and servers
  * Additional steps are necessary to secure WebSocket connections
  * It is highly recommended to use the secure `wss://` protocol rather than the insecure `ws://`.
@@ -713,7 +713,7 @@ Normal connection: ws://{host}:{port}/{path to the server}
 Secure connection: wss://{host}:{port}/{path to the server}
 ~~~
 
-Please note that Secure WebSockets connections can only be established using `*.cloudcontrolapp.com` subdomains, not custom ones. It is highly recommended to use them, not only for data security reasons. Secure WebSockets are 100% proxy transparent, which puts your containers in full control of WebSocket `upgrade handshake` in case some of the proxies do not handle it properly.
+Please note that Secure WebSockets connections can only be established using `*.dotcloudapp.com` subdomains, not custom ones. It is highly recommended to use them, not only for data security reasons. Secure WebSockets are 100% proxy transparent, which puts your containers in full control of WebSocket `upgrade handshake` in case some of the proxies do not handle it properly.
 
 
 ## Scheduled Jobs and Background Workers

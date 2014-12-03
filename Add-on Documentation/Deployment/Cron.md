@@ -40,9 +40,9 @@ To call an URL with the specific interval you write it as the parameter:
 
 ~~~
 # for the default deployment
-$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.cloudcontrolled.com
+$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]APP_NAME.dotcloudapp.com
 # for any additional deployment
-$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.cloudcontrolled.com
+$ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.dotcloudapp.com
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
@@ -64,7 +64,7 @@ Get the details of a specific Cron job:
 $ dcapp APP_NAME/DEP_NAME cron CRON_ID
 Cronjob
  job_id   : jobkqy7rdmg
- url      : http://APP_NAME.cloudcontrolled.com
+ url      : http://APP_NAME.dotcloudapp.com
  next_run : 2011-05-09 19:39:39
  created  : 2011-05-05 19:39:39
  modified : 2011-05-05 19:39:39

@@ -109,7 +109,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (3.0M)
 
-    To ssh://cloudcontroldlsymfony@cloudcontrolled.com/repository.git
+    To ssh://cloudcontroldlsymfony@dotcloudapp.com/repository.git
        d90506c..4078c78  master -> master
 
 Note the following lines:
@@ -199,7 +199,7 @@ Under ``apps/frontend/config`` open the file ``factories.yaml``. In that file, w
         param:
           session_name: symfony1_cloudcontrol
           session_cookie_path: /
-          session_cookie_domain: cloudcontroldlsymfony.cloudcontrolled.com
+          session_cookie_domain: cloudcontroldlsymfony.dotcloudapp.com
           session_cookie_lifetime: +30 days
           session_cookie_secure: false
           session_cookie_http_only: true

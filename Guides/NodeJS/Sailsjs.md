@@ -19,7 +19,7 @@ Now you have a small, but fully functional Sails.js application.
 
 ### Dependency Tracking
 
-Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory. 
+Dependencies are tracked using [npm] and specified in a `package.json`-file in your project's root directory.
 The one you cloned as part of the example app looks like this:
 
 ~~~json
@@ -50,7 +50,7 @@ The one you cloned as part of the example app looks like this:
 ### Process Type Definition
 dotCloud uses a [Procfile] to start the application processes. The `Procfile` can be found at the root level of your repository.
 
-To start the sails server, you need to use the `sails lift` command. This command is included in the procfile definition as shown below: 
+To start the sails server, you need to use the `sails lift` command. This command is included in the procfile definition as shown below:
 
 ~~~
 web:  export NODE_ENV=production; sails lift
@@ -59,7 +59,7 @@ web:  export NODE_ENV=production; sails lift
 Left from the colon we specified the **required** process type called `web` for a web application and followed by the command that starts the Sails server.
 
 ### Connecting the Sails.js Application to a Database
-Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. Here, we show you how to connect your Sails.js application to a MySQL database using the dotCloud [Shared MySQL Add-on]. 
+Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. Here, we show you how to connect your Sails.js application to a MySQL database using the dotCloud [Shared MySQL Add-on].
 
 Have a look at the `config/adapter.js` file so you can find out how to [get the MySQL credentials] provided by MySQLs Add-on:
 
@@ -94,7 +94,7 @@ module.exports.adapters = {
 
 ### Socket.io and Websocket Support
 
-In Sails.js, client-backend communication is done using [websockets]. In order to use websockets, it is important to use `*.cloudcontrolapp.com` domain instead of `*.cloudcontrolled.com`. For more details, take a look at the [dotCloud websockets documentation].
+In Sails.js, client-backend communication is done using [websockets]. For more details, take a look at the [dotCloud websockets documentation].
 
 ## Pushing and Deploying your Sails.js App
 To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
@@ -126,7 +126,7 @@ Total 73 (delta 30), reused 73 (delta 30)
 -----> Building image
 -----> Uploading image (17M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -141,7 +141,7 @@ $ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Sails.js application running at
-`http://APP_NAME.cloudcontrolapp.com`.
+`http://APP_NAME.dotcloudapp.com`.
 
 [Node.js]: http://nodejs.org/
 [Sails.js]: http://sailsjs.org/

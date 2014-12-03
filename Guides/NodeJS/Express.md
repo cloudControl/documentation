@@ -130,7 +130,7 @@ Total 73 (delta 30), reused 73 (delta 30)
 -----> Building image
 -----> Uploading image (17M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -143,7 +143,7 @@ $ dcapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Express app running with MongoDB at
-`http[s]://APP_NAME.cloudcontrolled.com`.
+`http[s]://APP_NAME.dotcloudapp.com`.
 
 
 ## Next Steps

@@ -90,7 +90,7 @@ done
 -----> Building image
 -----> Uploading image (0.1 GB)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -100,7 +100,7 @@ Last but not least, deploy the latest version of the app with the dcapp deploy c
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Play 2 application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Play 2 application running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 Note: This app uses an in-memory database, which is not persistent. After a
 redeploy all changes will be lost. If you want a production database you should
