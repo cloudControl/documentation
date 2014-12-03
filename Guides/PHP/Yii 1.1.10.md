@@ -111,7 +111,7 @@ You should see output as below:
     >> Building image
     >> Uploading image (4.1M)
 
-    To ssh://cloudcontroldlyii@cloudcontrolled.com/repository.git
+    To ssh://cloudcontroldlyii@dotcloudapp.com/repository.git
      * [new branch]      master -> master
 
 ##4. Initialise the Required Add-ons

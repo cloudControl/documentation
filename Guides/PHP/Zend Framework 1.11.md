@@ -111,7 +111,7 @@ You'll see output similar to the following:
     >> Building image
     >> Uploading image (3.6M)
 
-    To ssh://cloudcontroldlzf@cloudcontrolled.com/repository.git
+    To ssh://cloudcontroldlzf@dotcloudapp.com/repository.git
        dde253a..7b040e2  testing -> testing
 
 In the output above, you'll see ``INFO: Zend Framework 1.x detected``. This is the latest stack auto-identifying that the application we're deploying is based on the Zend Framework and will take care of ensuring it sees /public as the root directory to find the bootstrap file, ``index.php``, in.

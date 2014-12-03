@@ -66,7 +66,7 @@ $ dcapp APP_NAME/default push
 -----> Building image
 -----> Uploading image (65M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -76,7 +76,7 @@ Last but not least, deploy the latest version of the app with the dcapp deploy c
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Play! application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Play! application running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [dotCloud]: https://next.dotcloud.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play

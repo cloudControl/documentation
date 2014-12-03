@@ -66,7 +66,7 @@ Total 16 (delta 2), reused 16 (delta 2)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 
 ~~~
@@ -77,7 +77,7 @@ Last but not least deploy the latest version of the app with the dcapp deploy co
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [Flask]: http://flask.pocoo.org/
 [dotCloud]: http://next.dotcloud.com

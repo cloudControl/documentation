@@ -94,7 +94,7 @@ $ dcapp APP_NAME/default push
 -----> Building image
 -----> Uploading image (39M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
    54b0da2..d247825  master -> master
 ~~~
 
@@ -104,7 +104,7 @@ Last but not least deploy the latest version of the app with the dcapp deploy co
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [Jetty]: http://jetty.codehaus.org/jetty/
 [dotCloud]: https://next.dotcloud.com/

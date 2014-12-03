@@ -118,7 +118,7 @@ Total 47 (delta 15), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (70.0 MB)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -131,7 +131,7 @@ $ dcapp APP_NAME/default deploy --memory=768MB
 
 The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com` .
+Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com` .
 
 
 

@@ -115,7 +115,7 @@ Total 344 (delta 24), reused 337 (delta 20)
 -----> Uploading image (5.9 MB)
 
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -126,7 +126,7 @@ $ dcapp APP_NAME deploy
 ~~~
 
 Congratulations, you can now see your Node.js app running at
-`http[s]://APP_NAME.cloudcontrolled.com`.
+`http[s]://APP_NAME.dotcloudapp.com`.
 
 ## Next Steps
 Building a data app with Node.js? Check out our next [example on how to use Node.js with MongoDB]. Read our [platform documentation] for a technical overview of the concepts you’ll encounter while writing, configuring, deploying and running your Node.js applications.

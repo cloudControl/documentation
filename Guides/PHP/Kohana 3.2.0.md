@@ -110,7 +110,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (772K)
 
-    To ssh://cloudcontroldlkohana@cloudcontrolled.com/repository.git
+    To ssh://cloudcontroldlkohana@dotcloudapp.com/repository.git
        f98a87c..a685cd6  master -> master
 
 Note the following lines:

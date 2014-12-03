@@ -113,7 +113,7 @@ Total 7 (delta 0), reused 7 (delta 0)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  + [new branch] master -> master
 ~~~
 
@@ -123,7 +123,7 @@ deploy command.
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Tornado app running at `http://APP_NAME.cloudcontrolled.com`.
+Congratulations, you can now see your Tornado app running at `http://APP_NAME.dotcloudapp.com`.
 
 [Tornado]: http://www.tornadoweb.org
 [dotCloud]: http://next.dotcloud.com

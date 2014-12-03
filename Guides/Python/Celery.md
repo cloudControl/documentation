@@ -115,7 +115,7 @@ Total 6 (delta 0), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (4.3M)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -125,7 +125,7 @@ Last but not least deploy the latest version of the app with the dcapp deploy co
 $ dcapp APP_NAME/default deploy
 ~~~
 
-At this point you can see web interface at `http://APP_NAME.cloudcontrolled.com`. But it hasn't got any workers yet.
+At this point you can see web interface at `http://APP_NAME.dotcloudapp.com`. But it hasn't got any workers yet.
 
 ## Scaling Celery Workers
 Scaling Celery workers on dotCloud is easy enough luckily. We have already defined how to run one in the `Procfile` earlier. So we can now go ahead and start the first one.
@@ -159,7 +159,7 @@ $ dcapp APP_NAME/default log worker
 [TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] Events enabled by remote.
 ~~~
 
-If you refresh the web interface at `http://APP_NAME.cloudcontrolled.com` you should be able to see the worker now.
+If you refresh the web interface at `http://APP_NAME.dotcloudapp.com` you should be able to see the worker now.
 
 To handle more tasks simultaneously you can always just add more workers. (Please note that only the first worker is free, adding additional workers requires a billing account.)
 

@@ -137,7 +137,7 @@ Total 49 (delta 11), reused 38 (delta 8)
 -----> Building image
 -----> Uploading image (29.9 MB)
 
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -154,8 +154,8 @@ Finally, prepare the database using the
 $ dcapp APP_NAME run "python manage.py syncdb"
 ~~~
 
-You can login to the admin console at `APP_NAME.cloudcontrolled.com/admin`,
-create some polls and see them at `APP_NAME.cloudcontrolled.com/polls`.
+You can login to the admin console at `APP_NAME.dotcloudapp.com/admin`,
+create some polls and see them at `APP_NAME.dotcloudapp.com/polls`.
 
 For additional information take a look at [Django Notes][django-notes] and
 other [python-specific documents][python-guides].

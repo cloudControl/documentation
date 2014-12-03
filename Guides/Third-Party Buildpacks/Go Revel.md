@@ -102,7 +102,7 @@ cat: /srv/tmp/builddir/.godir: No such file or directory
 remote: -----> Custom buildpack provided
 -----> Uploading image (57.0 MB)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -113,7 +113,7 @@ deploy command.
 $ dcapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Revel app running at `http://APP_NAME.cloudcontrolled.com`. The command line client provides the `open` command to quickly open the app in your default browser.
+Congratulations, you can now see your Revel app running at `http://APP_NAME.dotcloudapp.com`. The command line client provides the `open` command to quickly open the app in your default browser.
 
 ~~~bash
 $ dcapp APP_NAME/default open

@@ -174,7 +174,7 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
 -----> Building image
 -----> Uploading image (3.1M)
        
-To ssh://APP_NAME@cloudcontrolled.com/repository.git
+To ssh://APP_NAME@dotcloudapp.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -202,7 +202,7 @@ Connecting...
 Connection to ssh.cloudcontrolled.net closed.
 ~~~
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.com`.
+Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com`.
 
 [PHP buildpack]: https://github.com/cloudControl/buildpack-php
 [dotCloud]: https://next.dotcloud.com/
