@@ -123,4 +123,4 @@ Grab [our cheatsheet (PDF)](/dev-center/dotcloudng_cheatsheet.pdf) to have the m
 
 ## Documentation
 
-To learn more about all the platform features and how to integrate it seamlessly into the development life cycle please refer to the extensive [platform documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation).
+To learn more about all the platform features and how to integrate it seamlessly into the development life cycle please refer to the extensive [platform documentation](https://next.dotcloud.com/dev-center/platform-documentation).

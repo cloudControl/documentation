@@ -9,7 +9,7 @@ If you're looking for a flexible, friendly and powerful content management platf
  * Auto-update notification
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Drupal 7 to [the dotCloud platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying Drupal 7 to [the dotCloud platform](http://next.dotcloud.com).
 
 ##Prerequisites
 

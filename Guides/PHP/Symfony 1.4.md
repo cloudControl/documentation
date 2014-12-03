@@ -12,7 +12,7 @@ If you're looking for a feature-rich, open source, PHP Framework for your projec
  * Factories, plug-ins, and mixins
  * Built-in unit and functional testing framework
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the dotCloud platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the dotCloud platform](http://next.dotcloud.com).
 
 ##Prerequisites
 

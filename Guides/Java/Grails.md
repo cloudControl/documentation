@@ -100,9 +100,9 @@ $ cctrlapp APP_NAME/default deploy
 
 Congratulations, you can now see your Grails application running at `http[s]://APP_NAME.cloudcontrolled.com`.
 
-[dotCloud]: https://www.cloudcontrol.com/
+[dotCloud]: https://next.dotcloud.com/
 [Grails buildpack]: https://github.com/cloudControl/buildpack-grails
-[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [Ivy]: http://ant.apache.org/ivy/

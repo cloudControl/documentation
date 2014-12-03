@@ -136,6 +136,6 @@ $ cctrlapp APP_NAME/default open
 ~~~
 
 [Martini]: http://martini.codegangsta.io/
-[dotCloud]: https://www.cloudcontrol.com
+[dotCloud]: https://next.dotcloud.com
 [Go buildpack]: https://github.com/cloudControl/buildpack-go
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile

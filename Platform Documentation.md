@@ -413,7 +413,7 @@ the credentials file.
 Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
 this feature.
 
-The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Node.js](https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
+The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://next.dotcloud.com/dev-center/guides/ruby/add-on-credentials), [Python](https://next.dotcloud.com/dev-center/guides/python/add-on-credentials), [Node.js](https://next.dotcloud.com/dev-center/guides/nodejs/add-on-credentials), [Java](https://next.dotcloud.com/dev-center/guides/java/add-on-credentials), [PHP](https://next.dotcloud.com/dev-center/guides/php/add-on-credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
 
 ~~~
@@ -571,10 +571,10 @@ To use this, simply point your browser to:
     Please note the **dash** between DEP_NAME and APP_NAME.
 
 SSL support for custom domains is available through the
-[SSL add-on](https://www.cloudcontrol.com/add-ons/ssl).
+[SSL add-on](https://next.dotcloud.com/add-ons/ssl).
 
 Instructions on how to add HTTPS redirects to your application can be
-found in the [SSL add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/SSL#https-redirects).
+found in the [SSL add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/ssl#https-redirects).
 
 ### Elastic Addresses
 
@@ -832,27 +832,27 @@ $ cctrlapp APP_NAME/DEP_NAME details
 
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
-[web console]: https://www.cloudcontrol.com/console
+[Custom Config Add-on]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config
+[web console]: https://next.dotcloud.com/console
 [API libraries]: https://github.com/cloudControl
 [the latest version]: https://download.dotcloudapp.com/windows
 [Python 2.6+]: http://python.org/download/
-[reset your password]: https://api.cloudcontrol.com/reset_password/
+[reset your password]: https://api.dotcloudapp.com/reset_password/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
-[guides]: https://www.cloudcontrol.com/dev-center/Guides
+[guides]: https://next.dotcloud.com/dev-center/guides
 [MongoSoup Add-on]: https://next.dotcloud.com/add-ons/mongosoup
-[Add-on marketplace]: https://www.cloudcontrol.com/add-ons
-[Deployment category]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment
+[Add-on marketplace]: https://next.dotcloud.com/add-ons
+[Deployment category]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
-[Alias Add-on]: https://www.cloudcontrol.com/add-ons/alias
-[MemCachier Add-on]: https://www.cloudcontrol.com/add-ons/memcachier
-[MemCachier Documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MemCachier
+[Alias Add-on]: https://next.dotcloud.com/add-ons/alias
+[MemCachier Add-on]: https://next.dotcloud.com/add-ons/memcachier
+[MemCachier Documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/memcachier
 [tutorial]: https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app
-[Cron Add-on]: https://www.cloudcontrol.com/add-ons/cron
-[Cron Add-on documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Cron
-[Worker Add-on]: https://www.cloudcontrol.com/add-ons/worker
-[Worker Add-on documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Processing/Worker
+[Cron Add-on]: https://next.dotcloud.com/add-ons/cron
+[Cron Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment/cron
+[Worker Add-on]: https://next.dotcloud.com/add-ons/worker
+[Worker Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/data-processing/worker
 [Ubuntu 10.04 LTS Lucid Lynx]: http://releases.ubuntu.com/lucid/
 [Ubuntu 12.04 LTS Precise Pangolin]: http://releases.ubuntu.com/precise/

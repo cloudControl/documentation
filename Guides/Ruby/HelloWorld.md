@@ -86,11 +86,11 @@ Congratulations, you can now see your Sinatra App running at `http[s]://APP_NAME
 
 
 [sinatra]: http://www.sinatrarb.com/
-[dotCloud]: http://www.cloudcontrol.com
-[dotCloud-doc-user]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#user-accounts
-[dotCloud-doc-cmdline]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud]: http://next.dotcloud.com
+[dotCloud-doc-user]: https://next.dotcloud.com/dev-center/platform-documentation#user-accounts
+[dotCloud-doc-cmdline]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
-[procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [bundler]: http://gembundler.com/
 [example-app]: https://github.com/cloudControl/ruby-sinatra-example-app

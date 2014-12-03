@@ -165,9 +165,9 @@ $ cctrlapp APP_NAME/default deploy
 Congratulations, you can now see your JSP Application running on Tomcat at `http[s]://APP_NAME.cloudcontrolled.com`.
 
 [Tomcat]: https://tomcat.apache.org/
-[dotCloud]: https://www.cloudcontrol.com/
+[dotCloud]: https://next.dotcloud.com/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[dotCloud-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Application Assembler Maven Plugin]: http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile

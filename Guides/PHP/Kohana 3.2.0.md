@@ -12,7 +12,7 @@ If you're looking for a very fast, light, highly configurable and effective PHP 
  * The ability to add in 3rd party libraries, such as Zend Framework
  * Rich [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) support
 
-In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the dotCloud platform](http://www.cloudcontrol.com). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the dotCloud platform](http://next.dotcloud.com). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
 
 ##Prerequisites
 

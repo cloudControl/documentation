@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the dotCloud platform](http://www.cloudcontrol.com).
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the dotCloud platform](http://next.dotcloud.com).
 
 ##Prerequisites
 
