@@ -19,10 +19,8 @@ timelimit.
 
 If you need more control over when and how often tasks are run and/or have
 tasks that take longer than 120 seconds we recommend using the
-[Worker](https://next.dotcloud.com/add-ons/worker) or
-[IronWorker](https://next.dotcloud.com/add-ons/iron_worker) Add-on. There
-are also the [IronMQ](https://next.dotcloud.com/add-ons/iron_mq) and the
-[CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queues
+[Worker](https://next.dotcloud.com/add-ons/worker). There is also
+[CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queue
 available that can be used to dispatch tasks to the workers.
 
 ## Adding the Cron Add-on
