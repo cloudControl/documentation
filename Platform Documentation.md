@@ -1,26 +1,3 @@
-<aside>
-<ul>
-<li class=""><a href="#platform-access">Platform Access</a></li>
-<li class=""><a href="#user-accounts">User Accounts</a></li>
-<li class=""><a href="#apps-users-and-deployments">Apps, Users and Deployments</a></li>
-<li class=""><a href="#version-control--images">Version Control & Images</a></li>
-<li class=""><a href="#deploying-new-versions">Deploying New Versions</a></li>
-<li class=""><a href="#emergency-rollback">Emergency Rollback</a></li>
-<li class=""><a href="#non-persistent-filesystem">Non-Persistent Filesystem</a></li>
-<li class=""><a href="#development-staging-and-production-environments">Development, Staging and Production Environments</a></li>
-<li class=""><a href="#add-ons">Add-ons</a></li>
-<li class=""><a href="#logging">Logging</a></li>
-<li class=""><a href="#provided-subdomains-and-custom-domains">Provided Subdomains and Custom Domains</a></li>
-<li class=""><a href="#routing-tier">Routing Tier</a></li>
-<li class=""><a href="#scaling">Scaling</a></li>
-<li class=""><a href="#performance">Performance</a></li>
-<li class=""><a href="#websockets">WebSockets</a></li>
-<li class=""><a href="#scheduled-jobs-and-background-workers">Scheduled Jobs and Background Workers</a></li>
-<li class=""><a href="#secure-shell-ssh">Secure Shell (SSH)</a></li>
-<li class=""><a href="#stacks">Stacks</a></li>
-</ul>
-</aside>
-
 # dotCloud Documentation
 
 ## Platform Access
