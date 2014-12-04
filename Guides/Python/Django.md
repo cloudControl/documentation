@@ -173,7 +173,7 @@ other [python-specific documents][python-guides].
 [django-notes]: https://next.dotcloud.com/dev-center/guides/python/django-notes
 [get-conf]: https://next.dotcloud.com/dev-center/guides/python/add-on-credentials
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
-[python-guides]: https://next.dotcloud.com/dev-center/guides/python
+[python-guides]: https://next.dotcloud.com/dev-center/guides#python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [gunicorn]: http://gunicorn.org/
