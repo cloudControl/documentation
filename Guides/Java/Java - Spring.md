@@ -147,7 +147,7 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io` .
 
 
 [Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample
-[Database credentials]: Add-on%20credentials
+[Database credentials]: https://community.exoscale.ch/tutorial/java-app-add-on-credentials
 [Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
 [exoscale]: http://exoscale.ch
 [file system]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem

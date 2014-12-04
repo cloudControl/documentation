@@ -193,7 +193,7 @@ other [ruby-specific documents][ruby-guides].
 [Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
 [filesystem]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
 [run command]: https://community.exoscale.ch/tutorial/ruby-app-runcommand
-[rails-notes]: https://community.exoscale.ch/tutorial/ruby/ruby-app-rubynotes
+[rails-notes]: https://community.exoscale.ch/tutorial/ruby-app-rubynotes
 [ruby-guides]: https://community.exoscale.ch/tutorials/tagged/ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
-[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on
