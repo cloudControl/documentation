@@ -62,8 +62,8 @@ In this tutorial we use the [Shared MySQL Add-on]. We have changed the `src/main
 
 ### Adjust Logger Configuration
 
-Logging to a file is not recommended since the container's [file system] is not persistent. 
-The default logger configuration - `src/main/resources/log4j.properties` is modified to log to `stdout/stderr`. 
+Logging to a file is not recommended since the container's [file system] is not persistent.
+The default logger configuration - `src/main/resources/log4j.properties` is modified to log to `stdout/stderr`.
 Then dotCloud can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
 ~~~xml
 og4j.rootLogger=DEBUG, stdout
@@ -152,4 +152,4 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com` 
 [dotCloud]: /
 [file system]: ../../platform-documentation#non-persistent-filesystem
 [log command]: ../../platform-documentation#logging
-[Shared MySQL Add-on]: ../../add-on-documentation/data-storage/MySQLs
+[Shared MySQL Add-on]: ../../add-on-documentation/mysql
