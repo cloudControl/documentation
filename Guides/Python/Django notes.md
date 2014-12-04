@@ -30,7 +30,7 @@ You can't use a local SMTP server, instead choose one of our [email Add-ons][mes
 [pip]: http://www.pip-installer.org/
 [procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [messaging-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/messaging-&-mobile/
-[data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/
+[data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation#data-storage
 [add-on-credentials]: https://next.dotcloud.com/dev-center/guides/python/add-on-credentials
 [dotCloud]: https://next.dotcloud.com/
 [worker]: https://next.dotcloud.com/dev-center/platform-documentation#scheduled-jobs-and-background-workers
