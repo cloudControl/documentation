@@ -140,5 +140,5 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com` 
 [examples]: https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
 [Database credentials]: add-on-credentials
 [dotCloud]: /
-[MySQLs Add-on]: ../../add-on-documentation/data-storage/MySQLs
+[MySQLs Add-on]: ../../add-on-documentation/mysqls
 [hsqlDB]: http://hsqldb.org/
