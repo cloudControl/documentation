@@ -574,7 +574,7 @@ SSL support for custom domains is available through the
 [SSL add-on](https://next.dotcloud.com/add-ons/ssl).
 
 Instructions on how to add HTTPS redirects to your application can be
-found in the [SSL add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/ssl#https-redirects).
+found in the [SSL add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/ssl#https-redirects).
 
 ### Elastic Addresses
 
@@ -832,7 +832,7 @@ $ dcapp APP_NAME/DEP_NAME details
 
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config
+[Custom Config Add-on]: https://next.dotcloud.com/dev-center/add-on-documentation/custom-config
 [web console]: https://next.dotcloud.com/console
 [API libraries]: https://github.com/cloudControl
 [the latest version]: https://download.dotcloudapp.com/windows
@@ -843,16 +843,16 @@ $ dcapp APP_NAME/DEP_NAME details
 [guides]: https://next.dotcloud.com/dev-center/guides
 [MongoSoup Add-on]: https://next.dotcloud.com/add-ons/mongosoup
 [Add-on marketplace]: https://next.dotcloud.com/add-ons
-[Deployment category]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment
+[Deployment category]: https://next.dotcloud.com/dev-center/add-on-documentation#deployment
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
 [Alias Add-on]: https://next.dotcloud.com/add-ons/alias
 [MemCachier Add-on]: https://next.dotcloud.com/add-ons/memcachier
-[MemCachier Documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/memcachier
+[MemCachier Documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/memcachier
 [tutorial]: https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app
 [Cron Add-on]: https://next.dotcloud.com/add-ons/cron
-[Cron Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/deployment/cron
+[Cron Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/cron
 [Worker Add-on]: https://next.dotcloud.com/add-ons/worker
-[Worker Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/data-processing/worker
+[Worker Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/worker
 [Ubuntu 10.04 LTS Lucid Lynx]: http://releases.ubuntu.com/lucid/
 [Ubuntu 12.04 LTS Precise Pangolin]: http://releases.ubuntu.com/precise/

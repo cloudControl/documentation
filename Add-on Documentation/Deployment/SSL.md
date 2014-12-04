@@ -1,7 +1,7 @@
 # SSL Add-on
 
 This add-on provides SSL support for custom domains (e.g. "www.example.com")
-that you have added to your application using the [alias addon](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/alias).
+that you have added to your application using the [alias addon](https://next.dotcloud.com/dev-center/add-on-documentation/alias).
 
 
 ## Overview
@@ -15,7 +15,7 @@ sections, to add SSL support for custom domains to your deployment:
  * Set your DNS entry to point to your SSL DNS Domain.
 
 Root or naked domains like `example.com` without a subdomain are not
-directly supported. For details, please see the [alias addon](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/alias) documentation.
+directly supported. For details, please see the [alias addon](https://next.dotcloud.com/dev-center/add-on-documentation/alias) documentation.
 
 
 ### Acquiring an SSL Certificate

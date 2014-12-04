@@ -193,7 +193,7 @@ other [ruby-specific documents][ruby-guides].
 [Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [filesystem]: https://next.dotcloud.com/dev-center/platform-documentation#non-persistent-filesystem
 [data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/
-[postgres-addon]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/elephantsql
+[postgres-addon]: https://next.dotcloud.com/dev-center/add-on-documentation/elephantsql
 [run command]: https://next.dotcloud.com/dev-center/guides/ruby/runcommand
 [rails-notes]: https://next.dotcloud.com/dev-center/guides/ruby/railsnotes
 [ruby-guides]: https://next.dotcloud.com/dev-center/guides/ruby

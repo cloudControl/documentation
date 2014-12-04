@@ -188,7 +188,7 @@ $ dcapp APP_NAME/default deploy
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on's free plan](https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/mysqls). It provides a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://next.dotcloud.com/dev-center/add-on-documentation/mysqls). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container:
 
