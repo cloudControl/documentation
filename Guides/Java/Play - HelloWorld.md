@@ -35,7 +35,7 @@ web: play run --http.port=$PORT $PLAY_OPTS
 The `web` process type is required and specifies the command that will be executed when the app is deployed. The environment variable `$PORT` defines the port the application-server should listen to.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the dotCloud platform:
 
 ~~~bash
 $ dcapp APP_NAME create java
@@ -80,7 +80,7 @@ Congratulations, you can now see your Play! application running at `http[s]://AP
 
 [dotCloud]: https://next.dotcloud.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play
-[Play 2 tutorial]: https://next.dotcloud.com/dev-center/guides/java/java---play-2
+[Play 2 tutorial]: https://next.dotcloud.com/dev-center/guides/java/java-play-2
 [dotCloud-command-line-client]: https://next.dotcloud.com/dev-center/platform-documentation#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Procfile]: https://next.dotcloud.com/dev-center/platform-documentation#buildpacks-and-the-procfile
