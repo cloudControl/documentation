@@ -786,7 +786,7 @@ $ exoapp APP_NAME/DEP_NAME details
 [Python 2.6+]: http://python.org/download/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
-[guides]: https://community.exoscale.ch/apps/tutorials
+[guides]: https://community.exoscale.ch/tutorials/tagged/apps/
 [Add-on marketplace]: https://community.exoscale.ch/apps/addons/
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
