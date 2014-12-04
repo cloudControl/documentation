@@ -548,4 +548,4 @@ In this view file, we output some simple HTML and then iterate the value of the 
 
 After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well.
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and dotCloud. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and dotCloud. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).

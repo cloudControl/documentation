@@ -374,7 +374,7 @@ To get the list of current Add-ons for a deployment use the addon command.
 $ dcapp APP_NAME/DEP_NAME addon
 Addon                    : alias.free
 
-Addon                    : sendgrid.starter
+Addon                    : sendgrid.free
 [...]
 
 Addon                    : mysqls.free

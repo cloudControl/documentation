@@ -36,7 +36,7 @@ variable, a JSON document that stores credentials from your add-on providers.
 This allows you to avoid hard-coding.
 
 Note: In the event that MongoSoup must update your MongoSoup_URI, you will be
-notified through the email address you\92ve provided to CloudControl.
+notified through the email address you\92ve provided to dotCloud.
 
 MongoSoup's entry in your application CRED_FILE looks like this:
 ~~~
@@ -70,7 +70,7 @@ Here are some snippets of code to help you get started:
 
 ### Java
 
-For reading CloudControl credentials you can use the Credentials class as
+For reading dotCloud credentials you can use the Credentials class as
 described in [Reading the Credentials](https://next.dotcloud.com/dev-center/guides/java/add-on-credentials)
 article.
 

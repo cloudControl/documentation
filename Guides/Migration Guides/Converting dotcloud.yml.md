@@ -181,7 +181,7 @@ worker: celery -A tasks worker --loglevel=info
 
 The entry for the web or worker process will be executed as a shell command.
 
-For more specific details, please see the [porting guides](https://github.com/cloudControl/documentation/tree/master/Guides/dotCloud-cloudControl-migration) specific to your language of choice. Please note that we will continually update these guides to include all of the languages officially supported on Next dotCloud.
+For more specific details, please see the [porting guides](../) specific to your language of choice. Please note that we will continually update these guides to include all of the languages officially supported on Next dotCloud.
 
 ## approot
 You may have used the approot directive in dotcloud.yml to tell the platform where to find the code to run, but the Next dotCloud Procfile lets you set this first command explicitly, so you don't need an approot. If you need to change directory before running your first statement, you can do that in the command of the Procfile:
@@ -218,7 +218,7 @@ If you’re using the config section to specify an interpreter version (e.g. Pyt
 
 If you’re using the dotcloud.yml config section to specify how to start your processes, you can accomplish this on Next dotCloud using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config) and the Procfile. First set the variables using Custom Config and add them as part of the shell command that starts the web and worker processes in the Procfile. Note that for some Add-on services, this is done automatically.
 
-For more information, read our guide on [migrating environment variables](https://github.com/cloudControl/documentation/blob/master/Guides/dotCloud-cloudControl-migration/Migrating-environment.md) from dotCloud to Next dotCloud.
+For more information, read our guide on [migrating environment variables](./migrating-environment) from dotCloud to Next dotCloud.
 
 ## ports
 If you have a ports section in your dotcloud.yml then you should only have one port listed, a single http type port. That is the only kind of port allowed on the Next dotCloud PaaS. You can only have one process which listens to an HTTP port.
@@ -228,7 +228,7 @@ If you do have multiple services each with their own HTTP port, then you should 
 Note that Next dotCloud containers do not expose an SSH port. See the [Secure Shell docs](https://next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh).
 
 ## environment
-If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config) and our [dedicated guide](https://github.com/cloudControl/documentation/blob/master/Guides/dotCloud-cloudControl-migration/Migrating-environment.md) on this topic.
+If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config) and our [dedicated guide](./migrating-environment) on this topic.
 
 Note that the same variables are set in all your application processes (web and worker) -- you cannot specify that a variable should only be set on one process (as you could in a dotcloud.yml file).
 
@@ -238,5 +238,5 @@ additional dependencies of your application during build time (after
 `dotcloud push`). On Next dotCloud you should use the mechanism
 provided by your Buildpack.
 
-For more information on all supported languages, please check our [Guides](https://github.com/cloudControl/documentation/tree/master/Guides).
+For more information on all supported languages, please check our [Guides](../..).
 

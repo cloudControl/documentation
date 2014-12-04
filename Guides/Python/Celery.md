@@ -201,7 +201,7 @@ USER@HOSTNAME:~/www$ celery --broker=$CLOUDAMQP_URL status
 
 1 node online.
 USER@HOSTNAME:~/www$ exit
-Connection to ssh.cloudcontrolled.net closed.
+Connection to sshforwarder.dotcloudapp.com closed.
 ~~~
 
 ## Résumé

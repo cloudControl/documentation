@@ -349,7 +349,7 @@ The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Ta
 
 ##8. All done
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Yii Framework. If you want to save yourself some time, you can clone a copy of the modified Yii Framework source from the dotCloud Github repository. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Yii Framework. If you want to save yourself some time, you can clone a copy of the modified Yii Framework source from the dotCloud Github repository. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 
 ##Links
 

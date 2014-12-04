@@ -142,5 +142,5 @@ $ mysql -u MYSQLD_USER -p --host=MYSQLD_SERVER --ssl-ca=PATH_TO_CERTIFICATE/ca-c
 [Config Add-on]: https://next.dotcloud.com/add-ons/config
 [MySQLd]: https://next.dotcloud.com/add-ons/mysqld
 [Add-on Credentials]: https://next.dotcloud.com/dev-center/platform-documentation#add-ons
-[Email us]: mailto:support@cloudcontrol.de
+[Email us]: mailto:support@dotcloud.com
 [Webconsole]: https://next.dotcloud.com/console/login

@@ -199,7 +199,7 @@ $ dcapp APP_NAME/default addon.add mysqls.free
 $ dcapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
-Connection to ssh.cloudcontrolled.net closed.
+Connection to sshforwarder.dotcloudapp.com closed.
 ~~~
 
 Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com`.
