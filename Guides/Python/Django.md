@@ -168,7 +168,7 @@ other [python-specific documents][python-guides].
 [git]: https://help.github.com/articles/set-up-git
 [filesystem]: https://next.dotcloud.com/dev-center/platform-documentation#non-persistent-filesystem
 [data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/
-[mysqls]: https://next.dotcloud.com/dev-center/add-on-documentation/data-storage/mysqls
+[mysqls]: https://next.dotcloud.com/dev-center/add-on-documentation/mysqls
 [example-app]: https://github.com/cloudControl/python-django-example-app
 [django-notes]: https://next.dotcloud.com/dev-center/guides/python/django-notes
 [get-conf]: https://next.dotcloud.com/dev-center/guides/python/add-on-credentials

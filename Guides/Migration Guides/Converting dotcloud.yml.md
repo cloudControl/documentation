@@ -14,7 +14,7 @@ On Next dotCloud, each application runs one main process – a web process. Each
 
 To port apps with several different languages onto Next dotCloud, you’ll need to create several applications – one for each type. However, many dotCloud services that aren’t related to the code itself, such as databases, are handled as [Add-ons](https://next.dotcloud.com/dev-center/add-on-documentation) on Next dotCloud. These integrate directly with your application and don’t require you to create multiple applications.
 
-You can run several [workers](https://next.dotcloud.com/dev-center/add-on-documentation/data-processing/worker) within a single application on Next dotCloud. These are handled as background processes of the application and use exactly the same runtime environment as the app.
+You can run several [workers](https://next.dotcloud.com/dev-center/add-on-documentation/worker) within a single application on Next dotCloud. These are handled as background processes of the application and use exactly the same runtime environment as the app.
 
 ### App structure on dotCloud
 ~~~text
@@ -149,14 +149,14 @@ Once you’ve created the application, you need to set the web process and speci
 ### Type: (language)-worker / worker process
 On Next dotCloud, you can define multiple workers in the Procfile that will run as background processes in that application. They use the exact same runtime environment as the web process.
 
-To use this functionality, you need to add the [Worker Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/data-processing/worker) to your app.
+To use this functionality, you need to add the [Worker Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/worker) to your app.
 
 ### Non-code services / Add-ons
 In the dotcloud.yml file, you can define many different kinds of services within the app, including databases like MySQL, or other services like Redis. A Procfile on Next dotCloud only specifies your web and worker processes. This is very different from a dotcloud.yml file.
 
 On Next dotCloud, "Data Services" like MySQL and Redis, as well as many other types of services like logging, monitoring and even SSL, are handled outside of the Procfile with [Add-ons](https://next.dotcloud.com/dev-center/platform-documentation#add-ons). You can simply add them to your web app in the CLI with `dcapp addon.add`. This automatically connects the services to your app.
 
-To connect these services to an additional web app (for example if your existing dotCloud app was using multiple http-port code services in different languages), you can connect them manually using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config).
+To connect these services to an additional web app (for example if your existing dotCloud app was using multiple http-port code services in different languages), you can connect them manually using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/custom-config).
 
 
 ### Example dotcloud.yml to Procfile migration
@@ -216,7 +216,7 @@ There are a couple of ways to migrate your dotcloud.yml config section, dependin
 
 If you’re using the config section to specify an interpreter version (e.g. Python 2.6 vs. Python 2.7), check the [Next dotCloud buildpack documentation on Github](https://github.com/cloudcontrol?query=buildpack) for how to do this with your specific buildpack. For example, you can specify the Python version by creating a runtime.txt file to replace your dotcloud.yml config: python_version.
 
-If you’re using the dotcloud.yml config section to specify how to start your processes, you can accomplish this on Next dotCloud using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config) and the Procfile. First set the variables using Custom Config and add them as part of the shell command that starts the web and worker processes in the Procfile. Note that for some Add-on services, this is done automatically.
+If you’re using the dotcloud.yml config section to specify how to start your processes, you can accomplish this on Next dotCloud using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/custom-config) and the Procfile. First set the variables using Custom Config and add them as part of the shell command that starts the web and worker processes in the Procfile. Note that for some Add-on services, this is done automatically.
 
 For more information, read our guide on [migrating environment variables](./migrating-environment) from dotCloud to Next dotCloud.
 
@@ -228,7 +228,7 @@ If you do have multiple services each with their own HTTP port, then you should 
 Note that Next dotCloud containers do not expose an SSH port. See the [Secure Shell docs](https://next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh).
 
 ## environment
-If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/deployment/custom-config) and our [dedicated guide](./migrating-environment) on this topic.
+If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/custom-config) and our [dedicated guide](./migrating-environment) on this topic.
 
 Note that the same variables are set in all your application processes (web and worker) -- you cannot specify that a variable should only be set on one process (as you could in a dotcloud.yml file).
 
