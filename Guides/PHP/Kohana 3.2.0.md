@@ -74,28 +74,28 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldlkohana`` in this example. You will of course have to use some different name.
+I am using the application name ``dotcloudkohana`` in this example. You will of course have to use some different name.
 Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
 
     // create the application
-    dcapp cloudcontroldlkohana create php
+    dcapp dotcloudkohana create php
 
     // deploy the default branch
-    dcapp cloudcontroldlkohana/default push
-    dcapp cloudcontroldlkohana/default deploy
+    dcapp dotcloudkohana/default push
+    dcapp dotcloudkohana/default deploy
 
     // deploy the testing branch
-    dcapp cloudcontroldlkohana/testing push
-    dcapp cloudcontroldlkohana/testing deploy
+    dcapp dotcloudkohana/testing push
+    dcapp dotcloudkohana/testing deploy
 
 ###3.1 Kohana Auto-Detected
 
 When you do this, you'll see output similar to the following:
 
-    $ dcapp cloudcontroldlkohana/default push
+    $ dcapp dotcloudkohana/default push
     Counting objects: 9, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (5/5), done.
@@ -110,7 +110,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (772K)
 
-    To ssh://cloudcontroldlkohana@dotcloudapp.com/repository.git
+    To ssh://dotcloudkohana@dotcloudapp.com/repository.git
        f98a87c..a685cd6  master -> master
 
 Note the following lines:
@@ -124,25 +124,25 @@ Note the following lines:
 Now that that's done, we need to configure two addons, config and mysqls. The config addon's required for determining the active environment and mysqls for storing our session information. To initialise these, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    dcapp cloudcontroldlkohana/default addon.add mysqls.free
+    dcapp dotcloudkohana/default addon.add mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    dcapp cloudcontroldlkohana/testing addon.add mysqls.free
+    dcapp dotcloudkohana/testing addon.add mysqls.free
 
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Add the APPLICATION_ENV variable to production
-    dcapp cloudcontroldlkohana/default config.add APPLICATION_ENV=production
+    dcapp dotcloudkohana/default config.add APPLICATION_ENV=production
 
     // Add the APPLICATION_ENV variable to testing
-    dcapp cloudcontroldlkohana/testing config.add APPLICATION_ENV=testing
+    dcapp dotcloudkohana/testing config.add APPLICATION_ENV=testing
 
 ###4.1 Check the Add-on Configuration
 
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Retrieve the settings
-    dcapp cloudcontroldlkohana/testing addon mysqls.free
+    dcapp dotcloudkohana/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -309,7 +309,7 @@ Create a new file under ``application/config`` called ``database.php``. In that 
                     'username'   => 'cc_dev',
                     'password'   => 'cc_dev',
                     'persistent' => FALSE,
-                    'database'   => 'cloudcontrol_kohana',
+                    'database'   => 'dotcloud_kohana',
                 ),
                 'table_prefix' => '',
                 'charset'      => 'utf8',
@@ -408,7 +408,7 @@ Now, in the shell, we're going to load the schema in to the remote mysql instanc
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < kohana_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < kohana_dotcloud_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -445,12 +445,12 @@ After all these changes are done, we need to then commit them on the master bran
     git merge master
 
     // push the code to the default (production) branch
-    dcapp cloudcontroldlkohana/default push
-    dcapp cloudcontroldlkohana/default deploy
+    dcapp dotcloudkohana/default push
+    dcapp dotcloudkohana/default deploy
 
     // push the code to the testing branch
-    dcapp cloudcontroldlkohana/testing push
-    dcapp cloudcontroldlkohana/testing deploy
+    dcapp dotcloudkohana/testing push
+    dcapp dotcloudkohana/testing deploy
 
 ##A Simple Application
 

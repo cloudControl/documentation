@@ -74,28 +74,28 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldlsymfony`` in this example. You will of course have to use some different name.
+I am using the application name ``dotcloudsymfony`` in this example. You will of course have to use some different name.
 Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
 
     // create the application
-    dcapp cloudcontroldlsymfony create php
+    dcapp dotcloudsymfony create php
 
     // deploy the default branch
-    dcapp cloudcontroldlsymfony/default push
-    dcapp cloudcontroldlsymfony/default deploy
+    dcapp dotcloudsymfony/default push
+    dcapp dotcloudsymfony/default deploy
 
     // deploy the testing branch
-    dcapp cloudcontroldlsymfony/testing push
-    dcapp cloudcontroldlsymfony/testing deploy
+    dcapp dotcloudsymfony/testing push
+    dcapp dotcloudsymfony/testing deploy
 
 ###3.1 Symfony Auto-Detected
 
 When you do this, you'll see output similar to the following:
 
-    $ dcapp cloudcontroldlsymfony/default push
+    $ dcapp dotcloudsymfony/default push
     Counting objects: 15, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (7/7), done.
@@ -109,7 +109,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (3.0M)
 
-    To ssh://cloudcontroldlsymfony@dotcloudapp.com/repository.git
+    To ssh://dotcloudsymfony@dotcloudapp.com/repository.git
        d90506c..4078c78  master -> master
 
 Note the following lines:
@@ -131,16 +131,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 To initialise mysqls, run the following commands and make a note of the output:
 
     // Initialise the mysqls.free addon for the default deployment
-    dcapp cloudcontroldlsymfony/default addon.add mysql.free
+    dcapp dotcloudsymfony/default addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontroldlsymfony/default addon mysql.free
+    dcapp dotcloudsymfony/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    dcapp cloudcontroldlsymfony/testing addon.add mysql.free
+    dcapp dotcloudsymfony/testing addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontroldlsymfony/testing addon mysql.free
+    dcapp dotcloudsymfony/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -158,10 +158,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config addon and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    dcapp     cloudcontroldlsymfony/default config.add APPLICATION_ENV=production
+    dcapp     dotcloudsymfony/default config.add APPLICATION_ENV=production
 
     // Set the testing environment setting
-    dcapp     cloudcontroldlsymfony/testing config.add APPLICATION_ENV=testing
+    dcapp     dotcloudsymfony/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -197,9 +197,9 @@ Under ``apps/frontend/config`` open the file ``factories.yaml``. In that file, w
       storage:
         class: sfCacheSessionStorage
         param:
-          session_name: symfony1_cloudcontrol
+          session_name: symfony1_dotcloud
           session_cookie_path: /
-          session_cookie_domain: cloudcontroldlsymfony.dotcloudapp.com
+          session_cookie_domain: dotcloudsymfony.dotcloudapp.com
           session_cookie_lifetime: +30 days
           session_cookie_secure: false
           session_cookie_http_only: true
@@ -276,7 +276,7 @@ What we're going to do is change it to have the values from our initialised mysq
         param:
           classname: DebugPDO
           debug: { realmemoryusage: true, details: { time: { enabled: true }, slow: { enabled: true, threshold: 0.1 }, mem: { enabled: true }, mempeak: { enabled: true }, memdelta: { enabled: true } } }
-          dsn: 'mysql:host=localhost;dbname=cloudcontrol_symfony1'
+          dsn: 'mysql:host=localhost;dbname=dotcloud_symfony1'
           username: cc_dev
           password: cc_dev
           encoding: utf8
@@ -319,15 +319,15 @@ After this, stage all the files in Git and commit them with a suitable commit me
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    dcapp cloudcontroldlsymfony/default push
-    dcapp cloudcontroldlsymfony/default deploy
+    dcapp dotcloudsymfony/default push
+    dcapp dotcloudsymfony/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    dcapp cloudcontroldlsymfony/testing push
-    dcapp cloudcontroldlsymfony/testing deploy
+    dcapp dotcloudsymfony/testing push
+    dcapp dotcloudsymfony/testing deploy
 
 
 ##7. Review the Deployment

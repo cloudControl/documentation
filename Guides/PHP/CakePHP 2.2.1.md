@@ -74,7 +74,7 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontrolledcakephp`` in this example. You will of course have to use some different name.
+I am using the application name ``dotcloudcakephp`` in this example. You will of course have to use some different name.
 Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments.
 By running the following commands, this will all be done:
 
@@ -82,15 +82,15 @@ By running the following commands, this will all be done:
     git checkout master
 
     // create the application
-    dcapp cloudcontrolledcakephp create php
+    dcapp dotcloudcakephp create php
 
     // deploy the default branch
-    dcapp cloudcontrolledcakephp/default push
-    dcapp cloudcontrolledcakephp/default deploy
+    dcapp dotcloudcakephp/default push
+    dcapp dotcloudcakephp/default deploy
 
     // deploy the testing branch
-    dcapp cloudcontrolledcakephp/testing push
-    dcapp cloudcontrolledcakephp/testing deploy
+    dcapp dotcloudcakephp/testing push
+    dcapp dotcloudcakephp/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -101,16 +101,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    dcapp cloudcontrolledcakephp/default addon.add mysql.free
+    dcapp dotcloudcakephp/default addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontrolledcakephp/default addon mysql.free
+    dcapp dotcloudcakephp/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    dcapp cloudcontrolledcakephp/testing addon.add mysql.free
+    dcapp dotcloudcakephp/testing addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontrolledcakephp/testing addon mysql.free
+    dcapp dotcloudcakephp/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -128,10 +128,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    dcapp cloudcontrolledcakephp/default config.add CAKE_ENV=production
+    dcapp dotcloudcakephp/default config.add CAKE_ENV=production
 
     // Set the testing environment setting
-    dcapp cloudcontrolledcakephp/testing config.add CAKE_ENV=testing
+    dcapp dotcloudcakephp/testing config.add CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -235,7 +235,7 @@ An example is provided below:
     		'host' => 'localhost',
     		'login' => 'cc_dev',
     		'password' => 'cc _dev',
-    		'database' => 'cloudcontrol_cakephp',
+    		'database' => 'dotcloud_cakephp',
     		'prefix' => '',
     		'encoding' => 'utf8',
     	);
@@ -356,7 +356,7 @@ What this does is to extend the DatabaseSession class so that we can use both AP
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_cloudcontrol_init.sql``, ready to be used to initialise the database next.
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_dotcloud_init.sql``, ready to be used to initialise the database next.
 
     CREATE TABLE `cake_sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
@@ -393,7 +393,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_dotcloud_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -411,15 +411,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    dcapp cloudcontrolledcakephp/default push
-    dcapp cloudcontrolledcakephp/default deploy
+    dcapp dotcloudcakephp/default push
+    dcapp dotcloudcakephp/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    dcapp cloudcontrolledcakephp/testing push
-    dcapp cloudcontrolledcakephp/testing deploy
+    dcapp dotcloudcakephp/testing push
+    dcapp dotcloudcakephp/testing deploy
 
 ##7. Review the Deployment
 

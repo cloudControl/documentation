@@ -153,22 +153,22 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldljoomla`` in this example. You will of course have to use some different name.
+I am using the application name ``dotcloudjoomla`` in this example. You will of course have to use some different name.
 Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
 
     // create the application
-    dcapp cloudcontroldljoomla create php
+    dcapp dotcloudjoomla create php
 
     // deploy the default branch
-    dcapp cloudcontroldljoomla/default push
-    dcapp cloudcontroldljoomla/default deploy
+    dcapp dotcloudjoomla/default push
+    dcapp dotcloudjoomla/default deploy
 
     // deploy the testing branch
-    dcapp cloudcontroldljoomla/testing push
-    dcapp cloudcontroldljoomla/testing deploy
+    dcapp dotcloudjoomla/testing push
+    dcapp dotcloudjoomla/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -179,16 +179,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    dcapp cloudcontroldljoomla/default addon.add mysql.free
+    dcapp dotcloudjoomla/default addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontroldljoomla/default addon mysql.free
+    dcapp dotcloudjoomla/default addon mysql.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    dcapp cloudcontroldljoomla/testing addon.add mysql.free
+    dcapp dotcloudjoomla/testing addon.add mysql.free
 
     // Retrieve the settings
-    dcapp cloudcontroldljoomla/testing addon mysql.free
+    dcapp dotcloudjoomla/testing addon mysql.free
 
 The output of the commands will be similar to that below:
 
@@ -206,10 +206,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    dcapp cloudcontroldljoomla/default config.add APPLICATION_ENV=production
+    dcapp dotcloudjoomla/default config.add APPLICATION_ENV=production
 
     // Set the testing environment settings
-    dcapp cloudcontroldljoomla/testing config.add APPLICATION_ENV=testing
+    dcapp dotcloudjoomla/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -222,12 +222,12 @@ Where it may become interesting is if/when you start to use more than one clone 
 Now, in the shell, we're going to dump the database that the install routine created and load it in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both default and testing:
 
     -- the database dump (SQL) file
-    mysqldump -u <database_username> -p <database_name> > joomla_cloudcontrol_init.sql
+    mysqldump -u <database_username> -p <database_name> > joomla_dotcloud_init.sql
 
     -- load the database dump (SQL) file in to the remote environment database
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_dotcloud_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -243,15 +243,15 @@ This will show you the tables from the SQL file. Now that that's done, commit th
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    dcapp cloudcontroldljoomla/default push
-    dcapp cloudcontroldljoomla/default deploy
+    dcapp dotcloudjoomla/default push
+    dcapp dotcloudjoomla/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    dcapp cloudcontroldljoomla/testing push
-    dcapp cloudcontroldljoomla/testing deploy
+    dcapp dotcloudjoomla/testing push
+    dcapp dotcloudjoomla/testing deploy
 
 ##7. Review the Deployment
 
@@ -268,11 +268,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    dcapp cloudcontroldljoomla/default log deploy
+    dcapp dotcloudjoomla/default log deploy
 
 ####7.1.1 Errors
 
-    dcapp cloudcontroldljoomla/default log error
+    dcapp dotcloudjoomla/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 
