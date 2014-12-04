@@ -78,25 +78,25 @@ That will show output similar to below:
         master
         * testing
 
-I am using the application name ``cloudcontroldlyii`` in this example. You will of course have to use some different name.
+I am using the application name ``dotcloudyii`` in this example. You will of course have to use some different name.
 Now, we need to make our first deployment of both branches to the dotCloud platform. To do this we checkout the master branch, create the application in our dotCloud account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
 
     // create the application
-    dcapp cloudcontroldlyii create php
+    dcapp dotcloudyii create php
 
     // deploy the default branch
-    dcapp cloudcontroldlyii/default push
-    dcapp cloudcontroldlyii/default deploy
+    dcapp dotcloudyii/default push
+    dcapp dotcloudyii/default deploy
 
     // deploy the testing branch
-    dcapp cloudcontroldlyii/testing push
-    dcapp cloudcontroldlyii/testing deploy
+    dcapp dotcloudyii/testing push
+    dcapp dotcloudyii/testing deploy
 You should see output as below:
 
-    $ dcapp cloudcontroldlyii/default push
+    $ dcapp dotcloudyii/default push
     Counting objects: 2257, done.
     Delta compression using up to 2 threads.
     Compressing objects: 100% (2131/2131), done.
@@ -111,7 +111,7 @@ You should see output as below:
     >> Building image
     >> Uploading image (4.1M)
 
-    To ssh://cloudcontroldlyii@dotcloudapp.com/repository.git
+    To ssh://dotcloudyii@dotcloudapp.com/repository.git
      * [new branch]      master -> master
 
 ##4. Initialise the Required Add-ons
@@ -123,16 +123,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    dcapp cloudcontroldlyii/default addon.add mysqls.free
+    dcapp dotcloudyii/default addon.add mysqls.free
 
     // Retrieve the settings
-    dcapp cloudcontroldlyii/default addon mysqls.free
+    dcapp dotcloudyii/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    dcapp cloudcontroldlyii/testing addon.add mysqls.free
+    dcapp dotcloudyii/testing addon.add mysqls.free
 
     // Retrieve the settings
-    dcapp cloudcontroldlyii/testing addon mysqls.free
+    dcapp dotcloudyii/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -150,10 +150,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    dcapp cloudcontroldlyii/default config.add APPLICATION_ENV=main
+    dcapp dotcloudyii/default config.add APPLICATION_ENV=main
 
     // Set the testing environment setting
-    dcapp cloudcontroldlyii/testing config.add APPLICATION_ENV=testing
+    dcapp dotcloudyii/testing config.add APPLICATION_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration.
 
@@ -257,7 +257,7 @@ Now, ``index.php`` will load the configuration file based on *APPLICATION_ENV* a
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``Yii Framework_cloudcontrol_init.sql``, ready to be used to initialise the database next.
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``Yii Framework_dotcloud_init.sql``, ready to be used to initialise the database next.
 
     --
     -- Table structure for table `YiiLog`
@@ -296,7 +296,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < Yii Framework_cloudcontrol_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < Yii Framework_dotcloud_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -314,15 +314,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    dcapp cloudcontroldlyii/default push
-    dcapp cloudcontroldlyii/default deploy
+    dcapp dotcloudyii/default push
+    dcapp dotcloudyii/default deploy
 
     git checkout testing
     git merge master
 
     // deploy the testing branch
-    dcapp cloudcontroldlyii/testing push
-    dcapp cloudcontroldlyii/testing deploy
+    dcapp dotcloudyii/testing push
+    dcapp dotcloudyii/testing deploy
 
 ##7. Review the Deployment
 
@@ -339,11 +339,11 @@ To view the information, run the following commands respectively:
 
 ####7.1.1 Deployment
 
-    dcapp cloudcontroldlyii/default log deploy
+    dcapp dotcloudyii/default log deploy
 
 ####7.1.1 Errors
 
-    dcapp cloudcontroldlyii/default log error
+    dcapp dotcloudyii/default log error
 
 The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Tail_%28Unix%29) like fashion. So just call them and cancel the commend when you are no longer interested in the output.
 
