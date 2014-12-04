@@ -64,7 +64,7 @@ In this tutorial we use the [Shared MySQL Add-on]. We have changed the `src/main
 
 Logging to a file is not recommended since the container's [file system] is not persistent. 
 The default logger configuration - `src/main/resources/log4j.properties` is modified to log to `stdout/stderr`. 
-Then cloudcontrol can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
+Then dotCloud can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
 ~~~xml
 og4j.rootLogger=DEBUG, stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
