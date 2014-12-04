@@ -119,7 +119,7 @@ http[s]://APP_NAME.dotcloudapp.com
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](/dev-center/dotcloudng_cheatsheet.pdf) to have the most important command line client commands handy at all times.
+Grab [our cheatsheet (PDF)](https://storage.googleapis.com/download.dotcloudapp.com/dotcloudng_cheatsheet.pdf) to have the most important command line client commands handy at all times.
 
 ## Documentation
 
