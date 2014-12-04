@@ -299,5 +299,5 @@ You should see output similar to that below, in figure 2.
 
 ![Successful Deployment](images/drupal7-running.png)
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 

@@ -435,7 +435,7 @@ If you see output similar to figure 3, then double check your database configura
 
 ![Misconfigured Database](images/misconfigured-database.png)
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the cloudControl Github repository. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the cloudControl Github repository. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 
 ##Links
 

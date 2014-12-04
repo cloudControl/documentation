@@ -337,7 +337,7 @@ You should see output similar to that below, in figure 2.
 
 ![Successful Deployment](images/symfony1.png)
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Symfony. If you have any issues, feel free to email [support@cloudcontrol.com](mailto:support@cloudcontrol.com).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Symfony. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 
 ##Links
 
