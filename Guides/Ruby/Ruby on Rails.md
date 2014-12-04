@@ -181,8 +181,7 @@ $ dcapp APP_NAME/default run "rake db:migrate"
 
 Congratulations, you can now access the app at http://APP_NAME.dotcloudapp.com.
 
-For additional information take a look at [Ruby on Rails notes][rails-notes] and
-other [ruby-specific documents][ruby-guides].
+For additional information take a look at [Ruby notes][rubynotes].
 
 [Ruby on Rails]: http://rubyonrails.org/
 [dotCloud]: http://next.dotcloud.com
@@ -195,6 +194,5 @@ other [ruby-specific documents][ruby-guides].
 [data-storage-addons]: https://next.dotcloud.com/dev-center/add-on-documentation#data-storage
 [postgres-addon]: https://next.dotcloud.com/dev-center/add-on-documentation/elephantsql
 [run command]: https://next.dotcloud.com/dev-center/guides/ruby/runcommand
-[rails-notes]: https://next.dotcloud.com/dev-center/guides/ruby/railsnotes
-[ruby-guides]: https://next.dotcloud.com/dev-center/guides/ruby
+[rubynotes]: https://next.dotcloud.com/dev-center/guides/ruby/rubynotes
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
