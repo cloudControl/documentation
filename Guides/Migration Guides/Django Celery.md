@@ -69,7 +69,7 @@ Next dotCloud those are called [add-ons] and in this case we will need a databas
 add-on and a RabbitMQ add-on. In this example we will use the [MySQLd] and the
 [CloudAMQP] add-ons:
 ~~~
-$ dcapp APP_NAME addon.add mysqld.micro
+$ dcapp APP_NAME addon.add mysqld.d0
 $ dcapp APP_NAME addon.add cloudamqp.tiger
 ~~~
 
