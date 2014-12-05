@@ -1,3 +1,4 @@
+
 # Cron Add-on
 
 ## What are cronjobs?
@@ -19,7 +20,7 @@ timelimit.
 
 If you need more control over when and how often tasks are run and/or have
 tasks that take longer than 55 seconds we recommend using the
-[Worker](https://www.exoscale.com/add-ons/worker) Add-on.
+[Worker](https://community.exoscale.ch/tutorial/worker-add-on) Add-on.
 
 ## Adding the Cron Add-on
 
@@ -29,7 +30,7 @@ Before you can add a Cron job, the Add-on itself has to be added:
 $ exoapp APP_NAME/DEP_NAME addon.add cron.OPTION
 ~~~
 
-As always the different options are listed on the [Cron Add-on](https://community.exoscale.ch/tutorial/cron-add-on/) page.
+As always the different options are listed on the [Cron Add-on](https://community.exoscale.ch/tutorial/cron-add-on) page.
 
 ## Adding a url for the Cron job
 
