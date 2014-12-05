@@ -238,5 +238,5 @@ additional dependencies of your application during build time (after
 `dotcloud push`). On Next dotCloud you should use the mechanism
 provided by your Buildpack.
 
-For more information on all supported languages, please check our [Guides](../..).
+For more information on all supported languages, please check our [Guides](../../guides).
 
