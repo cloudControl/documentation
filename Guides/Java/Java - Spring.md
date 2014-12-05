@@ -152,4 +152,4 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.dotcloudapp.com` 
 [dotCloud]: /
 [file system]: ../../platform-documentation#non-persistent-filesystem
 [log command]: ../../platform-documentation#logging
-[Shared MySQL Add-on]: ../../add-on-documentation/mysql
+[Shared MySQL Add-on]: ../../add-on-documentation/mysqls
