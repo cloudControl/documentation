@@ -832,7 +832,7 @@ $ dcapp APP_NAME/DEP_NAME details
 
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://next.dotcloud.com/dev-center/add-on-documentation/custom-config
+[Custom Config Add-on]: https://next.dotcloud.com/dev-center/add-on-documentation/config
 [web console]: https://next.dotcloud.com/console
 [API libraries]: https://github.com/cloudControl
 [the latest version]: https://download.dotcloudapp.com/windows
