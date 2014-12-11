@@ -1,6 +1,6 @@
 # MySQLs: Shared MySQL Add-on
 
-Every deployment can access a highly available shared MySQL Add-on based on [Amazon RDS](http://aws.amazon.com/rds/).
+Every deployment can access a highly available shared MySQL Add-on based on [Google Cloud SQL](https://cloud.google.com/sql/).
 The shared MySQL Add-on is recommended for development and low-traffic apps only. For medium to high-traffic apps we
 recommend one of the dedicated [MySQLd Add-on](https://next.dotcloud.com/add-ons/mysqld) plans.
 
@@ -41,41 +41,7 @@ $ dcapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
 
 ## Replication and Failover
 
-All instances are master-slave replicated accross two different availability zones. In case of a failure
-of the master, an automatic failover to the slave will trigger to restore availability. This failover process
-takes usually between 3 and 10 minutes.
-
-## Encoding
-
-All databases and tables use `latin1` as the default character set. You can find the character set
-and collation of all your tables by running `SHOW STATUS TABLE;` under the `Collation` row.
-
-You can change the encoding of a table with this query:
-
-~~~
-ALTER TABLE <table_name> CHARSET=<character_set>;
-~~~
-
-Or create a new table with an explicit encoding adding a `CHARSET` value to the query:
-
-~~~
-CREATE TABLE <table_name> (
-      `id` int,
-      ......
-  ) CHARSET=<character_set>;
-~~~
-
-Or change the default character set for a database, so all tables created would use this enconding:
-
-~~~
-ALTER DATABASE <database_name> CHARSET <character_set>;
-~~~
-
-You can find a list with all character sets supported by MySQL with this query:
-
-~~~
-SHOW CHARSET;
-~~~
+Your data is replicated in many geographic locations as standard. Failover between them is handled automatically by us. Your data is safe and your database is available even in the event of a major failure in one location
 
 ## Database Credentials
 
@@ -91,13 +57,13 @@ the general documentation.
 
 External access to the MySQLs Add-on is available through an SSL encrypted connection by following these simple steps.
 
- 1. Download the [certificate file](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem) to your local machine.
+ 1. Download the [certificate file](https://console.developers.google.com/m/cloudstorage/b/dotcloudapp-ca/o/addon_mysqls_ca.pem) to your local machine.
  1. Connect to the database using an SSL encrypted connection.
 
 The following example uses the MySQL command line tool.
 
 ~~~
-$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/addon_mysqls_ca.pem
 ~~~
 
 Replace the uppercase variables with the corresponding values shown by the addon command.
@@ -110,7 +76,7 @@ Settings
 
 MYSQLS_PASSWORD    : SOME_SECRET_PASSWORD
 MYSQLS_USERNAME    : SOME_SECRET_USERNAME
-MYSQLS_HOSTNAME    : SOME_HOST.eu-west-1.rds.amazonaws.com:3306
+MYSQLS_HOSTNAME    : SOME_HOSTNAME
 MYSQLS_DATABASE    : SOME_DATABASE_NAME
 ~~~
 
@@ -118,11 +84,11 @@ Likewise imports and exports are equally simple.
 
 To **export** your data use the mysqldump command.
 ~~~
-$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE > MYSQLS_DATABASE.sql
+$ mysqldump -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/addon_mysqls_ca.pem MYSQLS_DATABASE > MYSQLS_DATABASE.sql
 ~~~
 
 To **import** an sql file into a MySQL database use the following command.
 ~~~
-$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/mysql-ssl-ca-cert.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
+$ mysql -u MYSQLS_USERNAME -p --host=MYSQLS_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/addon_mysqls_ca.pem MYSQLS_DATABASE < MYSQLS_DATABASE.sql
 ~~~
 
