@@ -41,41 +41,7 @@ $ dcapp APP_NAME/DEP_NAME addon.remove mysqls.OPTION
 
 ## Replication and Failover
 
-All instances are master-slave replicated accross two different availability zones. In case of a failure
-of the master, an automatic failover to the slave will trigger to restore availability. This failover process
-takes usually between 3 and 10 minutes.
-
-## Encoding
-
-All databases and tables use `latin1` as the default character set. You can find the character set
-and collation of all your tables by running `SHOW STATUS TABLE;` under the `Collation` row.
-
-You can change the encoding of a table with this query:
-
-~~~
-ALTER TABLE <table_name> CHARSET=<character_set>;
-~~~
-
-Or create a new table with an explicit encoding adding a `CHARSET` value to the query:
-
-~~~
-CREATE TABLE <table_name> (
-      `id` int,
-      ......
-  ) CHARSET=<character_set>;
-~~~
-
-Or change the default character set for a database, so all tables created would use this enconding:
-
-~~~
-ALTER DATABASE <database_name> CHARSET <character_set>;
-~~~
-
-You can find a list with all character sets supported by MySQL with this query:
-
-~~~
-SHOW CHARSET;
-~~~
+Your data is replicated in many geographic locations as standard. Failover between them is handled automatically by us. Your data is safe and your database is available even in the event of a major failure in one location
 
 ## Database Credentials
 
