@@ -118,8 +118,8 @@ $ dcapp APP_NAME/DEP_NAME addon mysqld.OPTION
 Addon                    : mysqld.d0
  Settings
    MYSQLD_PASSWORD          : SOME_SECRET_PASSWORD
-   MYSQLD_USER              : SOME_SECRET_USER
-   MYSQLD_HOST              : SOME_HOST
+   MYSQLD_USERNAME          : SOME_SECRET_USERNAME
+   MYSQLD_HOSTNAME          : SOME_HOSTNAME
    MYSQLD_DATABASE          : SOME_DATABASE_NAME
    MYSQLD_PORT              : 3306
    MYSQLD_URL               : SOME_DATABASE_URL
@@ -134,7 +134,7 @@ $ mysqldump -u MYSQLD_USERNAME -p --host=MYSQLD_HOSTNAME --ssl-ca=PATH_TO_CERTIF
 
 To **import** an sql file into a MySQL database use the following command:
 ~~~
-$ mysql -u MYSQLD_USER -p --host=MYSQLD_SERVER --ssl-ca=PATH_TO_CERTIFICATE/ca-cert.pem MYSQLD_DATABASE < MYSQLD_DATABASE.sql
+$ mysql -u MYSQLD_USERNAME -p --host=MYSQLD_HOSTNAME --ssl-ca=PATH_TO_CERTIFICATE/ca-cert.pem MYSQLD_DATABASE < MYSQLD_DATABASE.sql
 ~~~
 
 
