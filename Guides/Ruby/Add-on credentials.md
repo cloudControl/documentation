@@ -69,9 +69,9 @@ Here's a Ruby snippet that reads the database settings and stores them in the
 ~~~ruby
 db_config = {
   database: ENV["MYSQLD_DATABASE"],
-  host: ENV["MYSQLD_HOST"],
+  host: ENV["MYSQLD_HOSTNAME"],
   port: ENV["MYSQLD_PORT"],
-  username: ENV["MYSQLD_USER"],
+  username: ENV["MYSQLD_USERNAME"],
   password: ENV["MYSQLD_PASSWORD"]
 }
 ~~~

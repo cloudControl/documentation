@@ -102,11 +102,11 @@ Please keep in mind that these variables will not be present in `creds.json` fil
     {
         "MYSQLD": {
             "MYSQLD_DATABASE": "...",
-            "MYSQLD_HOST": "...",
+            "MYSQLD_HOSTNAME": "...",
             "MYSQLD_PASSWORD": "...",
             "MYSQLD_PORT": "3306",
             "MYSQLD_URL": "...",
-            "MYSQLD_USER": "..."
+            "MYSQLD_USERNAME": "..."
         }
     }
     ~~~

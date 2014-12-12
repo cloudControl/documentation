@@ -74,9 +74,9 @@ creds = json.load(cred_file)
 
 db_config = {
     'database': creds['MYSQLD']['MYSQLD_DATABASE'],
-    'host': creds['MYSQLD']['MYSQLD_HOST'],
+    'host': creds['MYSQLD']['MYSQLD_HOSTNAME'],
     'port': creds['MYSQLD']['MYSQLD_PORT'],
-    'username': creds['MYSQLD']['MYSQLD_USER'],
+    'username': creds['MYSQLD']['MYSQLD_USERNAME'],
     'password': creds['MYSQLD']['MYSQLD_PASSWORD']
 }
 ~~~
