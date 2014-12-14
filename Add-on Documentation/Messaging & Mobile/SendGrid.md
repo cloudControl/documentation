@@ -1,34 +1,34 @@
-# Sendgrid
+# SendGrid
 
-Sendgrid's cloud-based email infrastructure relieves businesses of the cost and complexity of maintaining custom email systems.
+SendGrid's cloud-based email infrastructure relieves businesses of the cost and complexity of maintaining custom email systems.
 
-## Adding Sendgrid
+## Adding SendGrid
 
-The Sendgrid Add-on can be added to every deployment with:
+The SendGrid Add-on can be added to every deployment with:
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add sendgrid.OPTION
 ~~~
 
-When added, Sendgrid automatically creates a new user account with your email adress. You can manage your sendgrid Add-on easily within the web console (go to the specific deployment and click the link "sendgrid.OPTION").
+When added, SendGrid automatically creates a new user account with your email adress. You can manage your SendGrid Add-on easily within the web console (go to the specific deployment and click the link "sendgrid.OPTION").
 
-## Upgrade Sendgrid
+## Upgrade SendGrid
 
-Upgrading to another version of Sendgrid is easily done:
+Upgrading to another version of SendGrid is easily done:
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
 ~~~
 
-## Downgrade Sendgrid
+## Downgrade SendGrid
 
-Downgrading to another version of Sendgrid is easily done:
+Downgrading to another version of SendGrid is easily done:
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
 ~~~
 
-## Removing Sendgrid
+## Removing SendGrid
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.remove sendgrid.OPTION
