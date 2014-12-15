@@ -1,6 +1,6 @@
 #Deploying Joomla 2.5 to dotCloud
 
-![Successful Deployment](images/joomla-logo.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/joomla-logo.png)
 
 If you're looking for a fast, light and effective PHP Framework for your projects, you can't go past [Joomla](http://www.joomla.org/download.html). Now at [version 2.5](http://www.joomla.org/download.html) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release. You can find it at: [http://www.joomla.org/download.html](http://www.joomla.org/download.html). After that, extract it to your local file sytem.
 
-![Successful Deployment](images/joomla-source.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/joomla-source.png)
 
 
 ##Create a Basic Application
@@ -258,7 +258,7 @@ This will show you the tables from the SQL file. Now that that's done, commit th
 With that completed, then have a look at both your deployments to ensure that they're working.
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/joomla-running.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/joomla-running.png)
 
 ###7.1 Deployment Problems
 

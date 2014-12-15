@@ -1,5 +1,5 @@
 #Deploying Drupal 7
-![Successful Deployment](images/drupal7.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/drupal7.png)
 
 If you're looking for a flexible, friendly and powerful content management platform, built in PHP, for your projects, you really can't go past [Drupal](http://drupal.org/). Having been consistently growing and evolving since it was first created by Dries Buytaert in January 2001, Drupal 7 is the latest iteration and comes packed with a variety of features to speed up your application development, including:
 
@@ -22,7 +22,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release, 7.14 at the time or publishing. You can find it at: [http://ftp.drupal.org/files/projects/drupal-7.14.tar.gz](http://ftp.drupal.org/files/projects/drupal-7.14.tar.gz). After that, extract it to your local filesystem.
 
-![Source files](images/drupal7-files.png)
+![Source files](https://raw.githubusercontent.com/cloudControl/documentation/master/images/drupal7-files.png)
 
 After this, in your local development environment, perform a standard installation of Drupal, as covered in the [online installation documentation](http://drupal.org/documentation/install).
 
@@ -297,6 +297,6 @@ With that completed, then you'll be able to have a look at both your deployments
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/drupal7-running.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/drupal7-running.png)
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).

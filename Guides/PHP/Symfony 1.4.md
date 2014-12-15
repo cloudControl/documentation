@@ -1,6 +1,6 @@
 #Deploying Symfony 1.4 to dotCloud
 
-![Successful Deployment](images/symfony1.4-homepage.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/symfony1.4-homepage.png)
 
 If you're looking for a feature-rich, open source, PHP Framework for your projects complete with a strong community, large variety of plugins and add-ons and a strong history of active development, you can't go past [Symfony 1](http://symfony.com/). It comes with a variety of features to speed up your application development, including:
 
@@ -25,7 +25,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 Now that you have the prerequisites in place, download a copy of the latest, stable, release of Symfony, **version 1.4** at the time or publishing. You can find it at: [http://www.symfony-project.org/installation/1_4](http://www.symfony-project.org/installation/1_4). After that, extract it to your local filesystem.
 
-![Source files](images/symfony1-source.png)
+![Source files](https://raw.githubusercontent.com/cloudControl/documentation/master/images/symfony1-source.png)
 
 ##2. Amend the Code
 
@@ -335,7 +335,7 @@ After this, stage all the files in Git and commit them with a suitable commit me
 With that completed, then have a look at both your deployments to ensure that they're working.
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/symfony1.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/symfony1.png)
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using Symfony. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 
