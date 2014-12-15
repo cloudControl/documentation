@@ -1,6 +1,6 @@
 #Deploying Kohana 3.2.0
 
-![Successful Deployment](images/kohana-homepage.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/kohana-homepage.png)
 
 If you're looking for a very fast, light, highly configurable and effective PHP Framework for your projects, look no further than [Kohana](http://kohanaframework.org/). Now at [version 3.2.0](http://dev.kohanaframework.org/attachments/download/1670/kohana-3.2.0.zip) it comes with a variety of features to speed up your application development, including:
 
@@ -25,7 +25,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 Now that you have the prerequisites in place, download a copy of the latest, stable, release, 3.2.0 at the time or publishing. You can find it at: [http://dev.kohanaframework.org/attachments/download/1670/kohana-3.2.0.zip](http://dev.kohanaframework.org/attachments/download/1670/kohana-3.2.0.zip). After that, extract it to your local filesystem.
 
-![Source files](images/kohana-files.png)
+![Source files](https://raw.githubusercontent.com/cloudControl/documentation/master/images/kohana-files.png)
 
 ##2. Amend the Code
 
@@ -347,7 +347,7 @@ What this does is to say that the session information will be stored in the data
 
 So your ``application/config`` directory should look like that below:
 
-![Successful Deployment](images/kohana application-config dir.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/kohana application-config dir.png)
 
 ##6. Database Schema
 
@@ -542,7 +542,7 @@ Now create a file called ``site.php`` under ``application/views/``. In it, add t
 
 In this view file, we output some simple HTML and then iterate the value of the users that we retrieved in the controller before. All being well, you'll see output similar to that below.
 
-![Successful Deployment](images/kohana-success-output.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/kohana-success-output.png)
 
 ##7. Review the Deployment
 

@@ -1,6 +1,6 @@
 #Deploying CakePHP 2.2.1
 
-![Successful Deployment](images/cake-homepage.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/cake-homepage.png)
 
 If you're looking for a fast, light and effective PHP Framework for your projects, you can't go past [CakePHP](http://cakephp.org/). Now at [version 2.2.1](https://github.com/cakephp/cakephp/zipball/2.2.1) it comes with a variety of features to speed up your application development, including:
 
@@ -23,7 +23,7 @@ You're going to need only a few things to following along with this tutorial. Th
 
 So now that you have the prerequisites in place, download a copy of the latest, stable, release, 2.2.1 at the time or publishing. You can find it at: [https://github.com/cakephp/cakephp/zipball/2.2.1](https://github.com/cakephp/cakephp/zipball/2.2.1). After that, extract it to your local file sytem.
 
-![Source files](images/expanded-sourcefile.png)
+![Source files](https://raw.githubusercontent.com/cloudControl/documentation/master/images/expanded-sourcefile.png)
 
 If you use an IDE, then it's best to open up the source as a project in it. In this tutorial, I'm using SublimeText2.
 
@@ -427,13 +427,13 @@ With that completed, then have a look at both your deployments to ensure that th
 
 You should see output similar to that below, in figure 2.
 
-![Successful Deployment](images/cake-deployed-successfully.png)
+![Successful Deployment](https://raw.githubusercontent.com/cloudControl/documentation/master/images/cake-deployed-successfully.png)
 
 ###7.1 Deployment Problems
 
 If you see output similar to figure 3, then double check your database configuration settings and run through commit and deploy again.
 
-![Misconfigured Database](images/misconfigured-database.png)
+![Misconfigured Database](https://raw.githubusercontent.com/cloudControl/documentation/master/images/misconfigured-database.png)
 
 With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the cloudControl Github repository. If you have any issues, feel free to email [support@dotcloud.com](mailto:support@dotcloud.com).
 
