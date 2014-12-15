@@ -13,6 +13,7 @@ Drupal provides by default a `.htaccess` file, that sets several webserver confi
 
 * remove all comments (whitespaces before the comment "#" character are treated as error)
 * enclose all content by:
+
 ~~~xml
 <Directory "/app/code">
   ...

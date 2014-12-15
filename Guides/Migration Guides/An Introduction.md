@@ -54,7 +54,7 @@ A good place to start is to read the [Quickstart](https://next.dotcloud.com/dev-
 and [Platform Documentation](https://next.dotcloud.com/dev-center/platform-documentation)
 to get familiar with the Next dotCloud PaaS.
 
-Then read the docs [here](https://next.dotcloud.com/dev-center/dotcloud-nextdotcloud-migration/cli-cheatsheet) comparing the dotCloud
+Then read the docs [here](./cli-cheatsheet) comparing the dotCloud
 CLI to the Next dotCloud CLI and `dotcloud.yml` to a `Procfile` (including
 a comparison of build/deploy processes in general).
 

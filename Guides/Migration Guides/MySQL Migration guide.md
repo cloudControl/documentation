@@ -68,7 +68,7 @@ Using MySQLD Add-on it is possible to create custom/multiple databases. By defau
 
 ### Update application configuration
 
-Update your application code/environment to use the Add-on credentials. You can find examples in the [migration guides](../converting-environment-dot-json).
+Update your application code/environment to use the Add-on credentials. You can find examples in the [migration guides](./converting-environment-dot-json).
 
 ## Supported Flags
 
