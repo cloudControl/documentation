@@ -79,7 +79,7 @@ Note that there is also the `composer.lock`. When you change the dependencies, y
 [Next dotCloud]: https://next.dotcloud.com/
 [Quickstart]: https://next.dotcloud.com/dev-center/quickstart
 [Introduction for dotCloud Developers]: https://next.dotcloud.com/dev-center/guides/migration-guides/an-introduction
-[PHP & PHP Worker Migration Guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/php-basic-use
+[PHP & PHP Worker Migration Guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/php-general-use
 [MySQLs Add-on]: https://next.dotcloud.com/add-ons/mysqls
-[mysql migration guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/migrating-mysql-services.md
+[mysql migration guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/mysql-migration-guide
 [Composer]: http://getcomposer.org
