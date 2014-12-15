@@ -66,7 +66,7 @@ You can follow the same steps above to migrate a custom service. As a working ex
 [Node.js]: http://nodejs.org/
 [npm]: https://www.npmjs.com/
 [Introduction for dotCloud Developers]: ./an-introduction
-[Quickstart]: ../../../quickstart
+[Quickstart]: ../../quickstart
 [Buildpacks and Procfile]: ../../platform-documentation#buildpacks-and-the-procfile
 [convert dotcloud.yml]: ./converting-dotcloud-dot-yml
 [custom service recipe]: https://github.com/dotcloud/node-on-dotcloud
