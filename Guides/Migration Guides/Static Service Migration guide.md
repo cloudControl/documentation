@@ -9,7 +9,7 @@ show you how to do it in few easy steps.
 The static service is a simple web server that can be used to host static content (images, packages...) efficiently.
 
 This makes it ideal to serve:
-    
+
 - Static "maintenance" pages or placeholders for future services
 - URL routers, to dispatch requests to other services
 - Static assets that you want to keep on a separate domain, for hardcore optimization reasons (like cookie separation)
@@ -76,14 +76,14 @@ Delta compression using up to 4 threads.
 Compressing objects: 100% (3/3), done.
 Writing objects: 100% (4/4), 357 bytes | 0 bytes/s, done.
 Total 4 (delta 1), reused 0 (delta 0)
-       
+
 -----> Receiving push
 -----> Downloading nginx ...
 ...
 -----> Building image
 -----> Custom buildpack provided
 -----> Uploading image (1.1 MB)
-       
+
 To ssh://APP_NAME@dotcloudapp.com/repository.git
    497fcf3..ab5e9e4  master -> master
 ~~~
