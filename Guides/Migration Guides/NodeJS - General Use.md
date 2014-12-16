@@ -12,7 +12,7 @@ In this guide we'll covers the Node.js specific changes:
 ## Procfile to start the server
 The new build process is based on [Buildpacks and Procfile]. The `Procfile` replaces the `dotcloud.yml` and is expected to be in the project root. It can be as simple as this:
 
-~~~ini
+~~~
 web: node hellonode/server.js
 ~~~
 

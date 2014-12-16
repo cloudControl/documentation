@@ -20,7 +20,7 @@ In many cases you can just push your code and deploy it. But there are some diff
 [Apache] uses a default configuration that listens on the platform assigned port. The document root is set up as a `<Directory>` reachable without access limitations and `AllowOverride All` set to enable the use of `.htaccess` files. The `DirectoryIndex` directive is set to `index.php index.html index.htm`.
 
 ### Setting the DocumentRoot
-By default the document root of the web application is `/app/code`, where the repository content is extracted. The document root can be modified in custom Apache configuration files. Below is an example of the Apache configuration file (e.g. `.buildpack/apache/conf/custom_document_root.conf`) specifying a custom DocumentRoot and Directory (in this case the `public` folder in your project root):
+The `DocumentRoot` is the directory from which `httpd` will serve files, which is not necessarily the application root. By default the `DocumentRoot` of the web application is `/app/code`, where the repository content is extracted. The `DocumentRoot` can be modified in custom Apache configuration files. Below is an example of the Apache configuration file (e.g. `.buildpack/apache/conf/custom_document_root.conf`) specifying a custom `DocumentRoot` (in this case the `public` folder in your application root):
 ~~~xml
 DocumentRoot "/app/code/public"
 <Directory "/app/code/public">
@@ -39,30 +39,31 @@ For more information check out the [buildpack documentation].
 
 You can set the configuration similar to [Setting the DocumentRoot](#setting-the-documentroot). For more information check out the [buildpack documentation].
 
-Many PHP frameworks and applications require a custom Apache configuration to enable “pretty URLs” (that’s the name used by WordPress to designate this feature). Many of these frameworks provide `.htaccess` files by default. You can set the `.htaccess` files content into `.buildpack/apache/conf/*.conf` files and still use the Apache webserver's useful features, e.g:
+Many PHP frameworks and applications require a custom Apache configuration to enable “pretty URLs” (that’s the name used by WordPress to designate this feature). Many of these frameworks provide `.htaccess` files by default. You can put the `.htaccess` files content into `.buildpack/apache/conf/*.conf` files and still use the Apache webserver's useful features, e.g:
 
-* [Authorization, authentication](#authentcation) -
+* [Authorization, authentication](#authentcation)
     An apache configuration is often used to specify security restrictions for a directory, hence the filename "access". The authorization is often accompanied by a `.htpasswd` file which stores valid usernames and their passwords.
 
-* [Blocking](#blocking-directory) -
+* [Blocking](#blocking-directory)
     Use allow/deny to block users by IP address or domain. Also, use to block bad bots, rippers and referrers. Often used to restrict access by Search Engine spiders
 
-* [Rewriting URLs](#redirect-all-requests-to-indexphp) -
+* [Rewriting URLs](#redirect-all-requests-to-index.php)
     Servers often use apache configuration to rewrite long, overly verbose URLs to shorter and more memorable ones.
 
-* SSI -
+* [Cache Control](#cache-control)
+    The server sets the `Expires` HTTP header and the `max-age` directive of the `Cache-Control` HTTP header in server responses, to control the browser cache.
+
+* SSI
     Enable server-side includes.
 
-* Directory listing -
+* Directory listing
     Control how the server will react when no specific web page is specified.
 
-* Customized error responses -
+* Customized error responses
     Changing the page that is shown when a server-side error occurs, for example HTTP 404 Not Found or, to indicate to a search engine that a page has moved, HTTP 301 Moved Permanently.
 
-* MIME types -
+* MIME types
     Instruct the server how to treat different varying file types.
-
-* [Cache Control](#cache-control)
 
 Following examples should helps you migrate the nginx.conf to a apache config file.
 
@@ -97,10 +98,10 @@ This config blocks all requests to the system folder. You can only access throug
   RewriteRule ^(.*)$ index.php/$1 [L,QSA]
 </Directory>
 ~~~
-In this example all requests that don't point to a public, css or js folder or don't point to the index.php or robots.txt file will be redirected to index.php with all arguments.
+In this example all requests that don't point to a `public`, `css` or `js` folder or don't point to the `index.php` or `robots.txt` file will be redirected to index.php with all arguments.
 
 #### Cache Control
-You can control the cache by setting the `Cache-Control` header directly. In this examle you **deactivate** caching.
+You can control the cache by setting the `Cache-Control` header directly. In this example you **deactivate** caching.
 ~~~xml
 <Directory "/app/code/web">
     Header Set Cache-Control "max-age=0, no-store"

@@ -68,9 +68,9 @@ dcapp APP_NAME/DEP_NAME worker.add mailworker "--interval 15"
 [Next dotCloud]: https://next.dotcloud.com/
 [Quickstart]: https://next.dotcloud.com/dev-center/quickstart
 [Introduction for dotCloud Developers]: https://next.dotcloud.com/dev-center/guides/migration-guides/an-introduction
-[PHP & PHP Worker Migration Guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/php-basic-use
+[PHP & PHP Worker Migration Guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/php-general-use
 [MySQLs Add-on]: https://next.dotcloud.com/add-ons/mysqls
-[mysql migration guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/migrating-mysql-services.md
+[mysql migration guide]: https://next.dotcloud.com/dev-center/guides/migration-guides/mysql-migration-guide
 [Worker add-on]: https://next.dotcloud.com/add-ons/worker
 [Worker Add-on documentation]: https://next.dotcloud.com/dev-center/add-on-documentation/worker
 [CakeResque]: http://cakeresque.kamisama.me/

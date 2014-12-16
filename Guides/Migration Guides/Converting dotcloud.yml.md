@@ -218,7 +218,7 @@ If you’re using the config section to specify an interpreter version (e.g. Pyt
 
 If you’re using the dotcloud.yml config section to specify how to start your processes, you can accomplish this on Next dotCloud using the [Custom Config Add-on](https://next.dotcloud.com/dev-center/add-on-documentation/config) and the Procfile. First set the variables using Custom Config and add them as part of the shell command that starts the web and worker processes in the Procfile. Note that for some Add-on services, this is done automatically.
 
-For more information, read our guide on [migrating environment variables](./migrating-environment) from dotCloud to Next dotCloud.
+For more information, read our guide on [migrating environment variables](./converting-environment-dot-json) from dotCloud to Next dotCloud.
 
 ## ports
 If you have a ports section in your dotcloud.yml then you should only have one port listed, a single http type port. That is the only kind of port allowed on the Next dotCloud PaaS. You can only have one process which listens to an HTTP port.
@@ -228,7 +228,7 @@ If you do have multiple services each with their own HTTP port, then you should 
 Note that Next dotCloud containers do not expose an SSH port. See the [Secure Shell docs](https://next.dotcloud.com/dev-center/platform-documentation#secure-shell-ssh).
 
 ## environment
-If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/config) and our [dedicated guide](./migrating-environment) on this topic.
+If you were setting environment variables in your dotcloud.yml then you should set these via `dcapp APP_NAME config.add` on Next dotCloud. Please read the [Add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/config) and our [dedicated guide](./converting-environment-dot-json) on this topic.
 
 Note that the same variables are set in all your application processes (web and worker) -- you cannot specify that a variable should only be set on one process (as you could in a dotcloud.yml file).
 
