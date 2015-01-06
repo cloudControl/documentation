@@ -48,7 +48,7 @@ takes usually between 3 and 10 minutes.
 ## Encoding
 
 All databases and tables use `latin1` as the default character set. You can find the character set
-and collation of all your tables by running `SHOW STATUS TABLE;` under the `Collation` row.
+and collation of all your tables by running `SHOW TABLE STATUS;` under the `Collation` row.
 
 You can change the encoding of a table with this query:
 
