@@ -119,8 +119,9 @@ http[s]://APP_NAME.cloudcontrolled.com
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](https://www.cloudcontrol.com/dev-center/cctrl_cheatsheet.pdf) to have the most important command line client commands handy at all times.
+Grab [our cheatsheet (PDF)](https://cmsengine.s3.amazonaws.com/sites/544a16276a594a501e0000ec/theme/others/cctrl_cheatsheet.pdf) to have the most important command line client commands handy at all times.
 
 ## Documentation
 
 To learn more about all the platform features and how to integrate it seamlessly into the development life cycle please refer to the extensive [platform documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation).
+
