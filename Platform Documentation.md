@@ -21,13 +21,11 @@ For Windows we offer an installer. Please download [the latest version] of the i
 #### Quick Installation Linux/Mac
 
 On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+].
-
 ~~~
 $ sudo pip install -U cctrl
 ~~~
 
 If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
-
 ~~~
 $ sudo easy_install pip
 $ sudo pip install -U cctrl
@@ -40,6 +38,7 @@ $ sudo pip install -U cctrl
  * Every developer has their own user account
  * User accounts can be created via the *web console* or via ``cctrluser create``
  * User accounts can be deleted via the *web console* or via ``cctrluser delete``
+ * The CLI can be configured via ``cctrluser setup``
 
 To work on and manage your applications on the platform, a user account is needed. User accounts can be created via the *web console* or using the following CLI command:
 ~~~
@@ -47,7 +46,6 @@ $ cctrluser create
 ~~~
 
 After this, an activation email is sent to the given email address. Click the link in the email or use the following CLI command to activate the account:
-
 ~~~
 $ cctrluser activate USER_NAME ACTIVATION_CODE
 ~~~
@@ -57,10 +55,62 @@ If you want to delete your user account, please use either the *web console* or 
 $ cctrluser delete
 ~~~
 
+### Setup CLI
+
+With the `cctrluser setup` command you can create or modify your CLI configuration whenever you need to. We do not ask for configurations changes anymore, instead you will have explicit control over this by using this command.
+
+Usually you only need to run `cctrluser setup` to get this job done. In the first run you will be asked for your email. For all other setup options, e.g. ssh-key-path, the default values are taken.
+
+The command has three different options to modify each of the existing values on the user configuration:
+
+- `--email` will set the email on your configuration. This email is used to login on the platform.
+
+- `--ssh-auth` will enable the ssh public key authentication if set to `yes` and disable it when `no` (it defaults to `yes`). See more for [ssh public key authentication](#ssh-public-key-authentication).
+
+- `--ssh-key-path` specifies the path of your ssh public key used for the authentication. If the flag is not set, it defaults to `HOME_DIR/.ssh/id_rsa.pub`. The application will try to upload the public key to the platform.
+
+The whole command as example:
+~~~
+cctrluser setup --email user1@example.com --ssh-auth yes --ssh-key-path /path/to/your/publickey.pub
+~~~
+
 ### Password Reset
 
 You can [reset your password], in case you forgot it.
 
+## CLI Authentication
+
+At the moment our CLI allows users to authenticate to the platform with two methods.
+
+### SSH Public Key Authentication
+
+With this method you can authenticate to the platform in a more convenient way than using [email / password authentication](#email--password-authentication). After adding your SSH key to the platform, its location is remembered by the CLI and will be used in the future requests. You can add a public key to the platform and/or change the public key used for the authentication by [setup the CLI](#setup-cli).
+~~~bash
+cctrluser setup --ssh-key-path /path/to/your/publickey.pub
+~~~
+
+If you set a passphrase for your SSH key, which is strongly recommended, than you have to add the key to your ssh-agent by:
+~~~bash
+# start ssh-agent
+eval `ssh-agent`
+ssh-add /path/to/your/privatekey
+~~~
+
+### Email / Password Authentication
+
+The email / password authentication is an alternative to SSH public key authentication. To enable it, simply [setup the CLI](#setup-cli), setting the `--ssh-auth` parameter to `no`.
+~~~
+cctrluser setup --ssh-auth no
+~~~
+
+From now, whenever you want to authenticate to the platform you have to put your password.
+
+Alternatively, to get this process less verbose, you can set the password as shell environment variable:
+~~~bash
+export CCTRL_PASSWORD=yourpassword
+~~~
+
+Disadvantage of this approach is the fact that your password is exposed to your environment, that is why we encourage using SSH public key authentication instead.
 
 ## Apps, Users and Deployments
 
@@ -78,13 +128,11 @@ cloudControl PaaS uses a distinct set of naming conventions. To understand how t
 An app consists of a repository (with branches), deployments and users. Creating an app allows you to add or remove users to that app, giving them access to the source code as well as allowing them to manage the deployments.
 
 Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
-
 ~~~
 $ cctrlapp APP_NAME create php
 ~~~
 
 You can always list your existing apps using the command line client too.
-
 ~~~
 $ cctrlapp -l
 Apps
@@ -96,11 +144,9 @@ Apps
 
 ### Users
 
-By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on
-the user's [roles](#roles). Users can be added to applications or more fine grained to deployments.
+By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the user's [roles](#roles). Users can be added to applications or more fine grained to deployments.
 
 You can list, add and remove app users using the command line client.
-
 ~~~
 $ cctrlapp APP_NAME user
 
@@ -113,7 +159,6 @@ Users
 
 
 Add a user to an app by providing their email address. If the user is already registered they will be added to the app immediately. Otherwise they will receive an invitation email first.
-
 ~~~
 $ cctrlapp APP_NAME user.add user4@example.com
 ~~~
@@ -137,7 +182,6 @@ Please note: a user can either be added to the application or to one or more dep
  * **Read-only** The Read-only role allows you to see the application details, deployments and logs. Any update operation is forbidden.
 
 You can provide the role with the `user.add` command.
-
 ~~~
 $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 ~~~
@@ -145,13 +189,11 @@ $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 #### Keys
 
 For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, cctrlapp will offer to create one.
-
 ~~~
 $ cctrluser key.add
 ~~~
 
 You can also list the available key ids and remove existing keys using the key id.
-
 ~~~
 $ cctrluser key
 Keys
@@ -165,15 +207,11 @@ $ cctrluser key.remove Dohyoonuf7
 
 ### Deployments
 
-A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains).
-It is based on the branch of the same name. Exception: the default deployment is based on the master (Git) / trunk (Bazaar).
+A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains). It is based on the branch of the same name. Exception: the default deployment is based on the master (Git) / trunk (Bazaar).
 
-Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches).
-This allows you to have different versions of your app running at the same time without interfering with each other.
-Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
+Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches). This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
 
 You can list all the deployments with the *details* command.
-
 ~~~
 $ cctrlapp APP_NAME details
 App
@@ -188,7 +226,6 @@ App
    APP_NAME/stage
 ~~~
 
-
 ## Version Control & Images
 
 **TL;DR:**
@@ -200,13 +237,11 @@ App
 ### Supported Version Control Systems
 
 The platform supports Git ([quick Git tutorial]) and Bazaar ([Bazaar in five minutes]). When you create an app we try to determine if the current working directory has a .git or .bzr directory. If it does, we create the app with the detected version control system. If we can't determine this based on the current working directory, Git is used as the default. You can always overwrite this with the --repo command line switch.
-
 ~~~
 $ cctrlapp APP_NAME create php [--repo [git,bzr]]
 ~~~
 
 It's easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
-
 ~~~
 $ cctrlapp APP_NAME details
 App
@@ -218,12 +253,9 @@ If yours starts with `ssh://` and ends with `.git` then Git is being used. If it
 
 ### Image Building
 
-Whenever you push an updated branch, a deployment image is built automatically.
-This image can then be deployed with the *deploy* command to the deployment matching the branch name.
-The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
+Whenever you push an updated branch, a deployment image is built automatically. This image can then be deployed with the *deploy* command to the deployment matching the branch name. The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
 
 You can either use the cctrlapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
-
 ~~~
 # with cctrlapp:
 $ cctrlapp APP_NAME/dev push
@@ -240,15 +272,9 @@ $ bzr push --remember REPO_URL
 
 The repositories support all other remote operations like pulling and cloning as well.
 
-The compressed image size is limited to 200MB.
-Smaller images can be deployed faster, so we recommend to keep the image size below 50MB.
-The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
+The compressed image size is limited to 200MB. Smaller images can be deployed faster, so we recommend to keep the image size below 50MB. The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
 
-You can decrease your image size by making sure that no unneeded files (e.g. caches, logs, backup files) are tracked
-in your repository. Files that need to be tracked but are not required in the image (e.g. development assets or
-source code files in compiled languages), can be added to a `.cctrlignore` file in the project root directory.
-The format is similar to the `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
-
+You can decrease your image size by making sure that no unneeded files (e.g. caches, logs, backup files) are tracked in your repository. Files that need to be tracked but are not required in the image (e.g. development assets or source code files in compiled languages), can be added to a `.cctrlignore` file in the project root directory. The format is similar to the `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
 ~~~
 *.psd
 *.pdf
@@ -265,7 +291,6 @@ Part of the buildpack scripts is also to pull in dependencies according to the l
 Which buildpack is going to be used is determined by the application type set when creating the app.
 
 A required part of the image is a file called `Procfile` in the root directory. It is used to determine how to start the actual application in the container. Some of the buildpacks can provide a default Procfile. But it is recommended to explicitly define the Procfile in your application to match your individual requirements better. For a container to be able to receive requests from the routing tier it needs at least the following content:
-
 ~~~
 web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
 ~~~
@@ -278,7 +303,6 @@ At the end of the buildpack process, the image is ready to be deployed.
 ## Deploying New Versions
 
 The cloudControl platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
@@ -286,18 +310,13 @@ $ cctrlapp APP_NAME/DEP_NAME deploy
 To deploy a specific version, append your version control systems identifier (full commit-SHA1 for Git or an integer for Bazaar).
 If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
 
-For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile).
-After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version.
-A log message in the [deploy log](#deploy-log) appears when this process has finished.
+For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) appears when this process has finished.
 
 ### Container Idling
 
-Deployments running on a single web container with one unit of memory (128MB/h) are automatically idled when they are not receiving HTTP requests for 1 hour or more. This
-results in a temporary suspension of the container where the application is
-running. It does not affect the Add-ons or workers related to this deployment.
+Deployments running on a single web container with one unit of memory (128MB/h) are automatically idled when they are not receiving HTTP requests for 1 hour or more. This results in a temporary suspension of the container where the application is running. It does not affect the Add-ons or workers related to this deployment.
 
-Once a new HTTP request is sent to this deployment, the application is automatically re-engaged. This process causes a slight delay until the
-first request is served. All following requests will perform normally.
+Once a new HTTP request is sent to this deployment, the application is automatically re-engaged. This process causes a slight delay until the first request is served. All following requests will perform normally.
 
 You can see the state of your application with the following command:
 ~~~
@@ -315,13 +334,11 @@ any production system.
 ## Emergency Rollback
 
 If your newest version breaks unexpectedly, you can use the rollback command to revert to the previous version in a matter of seconds:
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME rollback
 ~~~
 
 It is also possible to deploy any other prior version. To find the version identifier you need, simply check the [deploy log](#deploy-log) for a previously deployed version, or get it directly from the version control system. You can redeploy this version using the deploy command:
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 ~~~
@@ -378,7 +395,6 @@ Add-ons add additional services to your deployment. The [Add-on marketplace] off
 Each deployment has its own set of Add-ons. If your app needs a MySQL database and you have a production, a development and a staging environment, all three must have their own MySQL Add-ons. Each Add-on comes with different plans allowing you to choose  a more powerful database for your high traffic production deployment and smaller ones for the development or staging environments.
 
 You can see the available Add-on plans on the Add-on marketplace website or with the `cctrlapp addon.list` command.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.list
 [...]
@@ -407,7 +423,6 @@ Addon                    : memcachier.dev
 ~~~
 
 To upgrade or downgrade an Add-on use the respective command followed by the Add-on plan you upgrade from and the Add-on plan you upgrade to.
-
 ~~~
 # upgrade
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
@@ -417,27 +432,18 @@ $ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 **Remember:** As in all examples in this documentation, replace all the uppercase placeholders with their respective values.
 
 ### Add-on Credentials
-For many Add-ons you require credentials to connect to their service. The credentials are exported to the deployment in
-a JSON formatted config file. The path to the file can be found in the `CRED_FILE` environment variable. Never
-hardcode these credentials in your application, because they differ over deployments and can change after any redeploy
-without notice.
+For many Add-ons you require credentials to connect to their service. The credentials are exported to the deployment in a JSON formatted config file. The path to the file can be found in the `CRED_FILE` environment variable. Never hardcode these credentials in your application, because they differ over deployments and can change after any redeploy without notice.
 
 We provide detailed code examples how to use the config file in our guides section.
 
 #### Enabling/disabling credentials environment variables
-We recommend using the credentials file for security reasons but credentials can also be accessed through environment variables.
-This is disabled by default for PHP and Python apps.
-Accessing the environment is more convenient in most languages, but some reporting tools or wrong security settings in
-your app might print environment variables to external services or even your users. This also applies to any child processes
-of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use
-the credentials file.
+We recommend using the credentials file for security reasons but credentials can also be accessed through environment variables. This is disabled by default for PHP and Python apps. Accessing the environment is more convenient in most languages, but some reporting tools or wrong security settings in your app might print environment variables to external services or even your users. This also applies to any child processes of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use the credentials file.
 
 Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
 this feature.
 
 The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Node.js](https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 {
@@ -467,7 +473,6 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
  * There are four different log types (access, error, worker and deploy) available.
 
 To see the log output in a `tail -f`-like fashion use the cctrlapp log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
 [...]
@@ -523,7 +528,6 @@ $ cctrlapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
 
 From now on all the new logs should be visible in your custom syslog remote.
 
-
 ## Provided Subdomains and Custom Domains
 
 **TL;DR:**
@@ -541,20 +545,11 @@ Changes to DNS can take up to 24 hours until they have effect. Please refer to t
 
 ### Root Domains
 
-Root domains (e.g. "example.com") can also be added but are not directly
-supported. While you theoretically can add a CNAME record for your root
-domain, you have to be aware that no other record for this domain can
-be set then. ("A CNAME record is not allowed to coexist with any other
-data", http://tools.ietf.org/html/rfc1912). From the point you set a
-CNAME, all standard-compliant DNS servers will ignore any other entry you
-might have set for your zone (e.g. SOA, NS or MX records).
+Root domains (e.g. "example.com") can also be added but are not directly supported. While you theoretically can add a CNAME record for your root domain, you have to be aware that no other record for this domain can be set then. ("A CNAME record is not allowed to coexist with any other data", http://tools.ietf.org/html/rfc1912). From the point you set a CNAME, all standard-compliant DNS servers will ignore any other entry you might have set for your zone (e.g. SOA, NS or MX records).
 
-You can circumvent this limitation by using a DNS provider which provides
-CNAME-like functionality for root domains, often called ANAME or ALIAS.
+You can circumvent this limitation by using a DNS provider which provides CNAME-like functionality for root domains, often called ANAME or ALIAS.
 
-An alternative is to use a redirection service to send users from the
-root to the configured subdomain (e.g. example.org -> www.example.org).
-
+An alternative is to use a redirection service to send users from the root to the configured subdomain (e.g. example.org -> www.example.org).
 
 ## Routing Tier
 
@@ -573,12 +568,9 @@ The routing tier is designed to be robust against single node and even complete 
 
 ### SSL
 
-Transport Layer Security (TLS / SSL) is available to encrypt traffic between
-users and applications.
+Transport Layer Security (TLS / SSL) is available to encrypt traffic between users and applications.
 
-As part of the provided `.cloudcontrolled.com` subdomain, all deployments have
-access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate.
-To use this, simply point your browser to:
+As part of the provided `.cloudcontrolled.com` subdomain, all deployments have access to piggyback SSL using a `*.cloudcontrolled.com` wildcard certificate. To use this, simply point your browser to:
 * `https://APP_NAME.cloudcontrolled.com` for the default deployment
 * `https://DEP_NAME-APP_NAME.cloudcontrolled.com` for non-default deployments
 
@@ -642,7 +634,6 @@ For the `*.cloudcontrolapp.com` subdomain, failed requests will cause an error m
 
 Because the health checker actively monitors containers where an application is running into timeouts or returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502` or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
 
-
 ## Scaling
 
 **TL;DR:**
@@ -654,10 +645,7 @@ When scaling your apps you have two options. You can either scale horizontally b
 
 ### Horizontal Scaling
 
-Horizontal scaling is controlled by the --containers parameter.
-It specifies the number of containers you have running.
-Raising --containers also increases the availability in case of node failures.
-Deployments with --containers 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --containers value to at least 2 if you want to avoid downtime in such situations.
+Horizontal scaling is controlled by the --containers parameter. It specifies the number of containers you have running. Raising --containers also increases the availability in case of node failures. Deployments with --containers 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --containers value to at least 2 if you want to avoid downtime in such situations.
 
 ### Vertical Scaling
 
@@ -702,14 +690,11 @@ When caching requests on client side or in a caching proxy, the URL is usually u
 
 The [environment variables](#environment-variables) of the deployment runtime environment contain the DEP_VERSION of the app. If you want to force a refresh of the cache when a new version is deployed you can use the DEP_VERSION to accomplish this.
 
-This technique works for URLs as well as for the keys in in-memory caches like `Memcached`.
-Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache, you would lose all cached values.
-Including the DEP_VERSION in the key is an easy way to ensure that the cache is clear for a new version without flushing.
+This technique works for URLs as well as for the keys in in-memory caches like `Memcached`. Imagine you have cached values in Memcached that you want to keep between deploys and have values in Memcached that you want refreshed for each new version. Since Memcached only allows flushing the complete cache, you would lose all cached values. Including the DEP_VERSION in the key is an easy way to ensure that the cache is clear for a new version without flushing.
 
 ### Caching in cloudcontrolapp.com subdomain
 
 Requests via the `*.cloudcontrolapp.com` subdomain cannot be cached in the routing tier. However, it is still possible to provide caching for static assets by utilizing a separate cookieless domain as a CNAME of the `*.cloudcontrolled.com`subdomain. For example, you can serve the dynamic requests of your application via www.example.com (a CNAME FOR `example.cloudcontrolapp.com`) and serve the static assets like CSS, JS and images via `static.example.com` (a CNAME for `example.cloudcontrolled.com`).
-
 
 ## WebSockets
 
@@ -734,14 +719,12 @@ To overcome any timeout limitations, you can explicitly implement the WebSocket 
 ### Secure WebSockets
 
 Conventional WebSockets do not offer any kind of protocol specific authentication or data encryption. You are encouraged to use standard HTTP authentication mechanisms like cookies, basic/diggest or TLS. The same goes for data encryption where SSL is your obvious choice. While a conventional WebSocket connection is established via HTTP, a protected one uses HTTPS. The distinction is based on the URI schemes:
-
 ~~~
 Normal connection: ws://{host}:{port}/{path to the server}
 Secure connection: wss://{host}:{port}/{path to the server}
 ~~~
 
 Please note that Secure WebSockets connections can only be established using `*.cloudcontrolapp.com` subdomains, not custom ones. It is highly recommended to use them, not only for data security reasons. Secure WebSockets are 100% proxy transparent, which puts your containers in full control of WebSocket `upgrade handshake` in case some of the proxies do not handle it properly.
-
 
 ## Scheduled Jobs and Background Workers
 
@@ -761,7 +744,6 @@ For tasks that are guaranteed to finish within the time limit, the [Cron add-on]
 
 Tasks that will take longer than 120s to execute, or that are triggered by a user request and should be handled asyncronously to not keep the user waiting, are best handled by the [Worker add-on]. Workers are long-running processes started in containers. Just like the web processes but they are not listening on any port and therefore do not receive http requests. You can use workers, for example, to poll a queue and execute tasks in the background or handle long-running periodical calculations. More details on usage scenarios and available queuing Add-ons are available as part of the [Worker Add-on documentation].
 
-
 ## Secure Shell (SSH)
 
 The distributed nature of the cloudControl platform means it's not possible to SSH into the actual server. Instead, we offer the run command, that allows you to launch a new container and connect to that via SSH.
@@ -771,7 +753,6 @@ The container is identical to the web or worker containers but starts an SSH dae
 ### Examples
 
 To start a shell (e.g. bash) use the `run` command.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME run bash
 Connecting...
@@ -848,7 +829,6 @@ $ cctrlapp APP_NAME/DEP_NAME details
 ~~~
 
 To change the stack of a deployment simply append the --stack command line option to the `deploy` command.
-
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
