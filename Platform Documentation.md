@@ -21,13 +21,11 @@ For Windows we offer an installer. Please download [the latest version] of the i
 #### Quick Installation Linux/Mac
 
 On Linux and Mac OS we recommend installing and updating dotcloudng via pip. *dotcloudng* requires [Python 2.6+].
-
 ~~~
 $ sudo pip install -U dotcloudng
 ~~~
 
 If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install dotcloudng.
-
 ~~~
 $ sudo easy_install pip
 $ sudo pip install -U dotcloudng
@@ -40,6 +38,7 @@ $ sudo pip install -U dotcloudng
  * Every developer has their own user account
  * User accounts can be created via the *web console* or via ``dcuser create``
  * User accounts can be deleted via the *web console* or via ``dcuser delete``
+ * The CLI can be configured via ``dcuser setup``
 
 To work on and manage your applications on the platform, a user account is needed. User accounts can be created via the *web console* or using the following CLI command:
 ~~~
@@ -47,7 +46,6 @@ $ dcuser create
 ~~~
 
 After this, an activation email is sent to the given email address. Click the link in the email or use the following CLI command to activate the account:
-
 ~~~
 $ dcuser activate USER_NAME ACTIVATION_CODE
 ~~~
@@ -57,10 +55,63 @@ If you want to delete your user account, please use either the *web console* or 
 $ dcuser delete
 ~~~
 
+### Setup CLI
+
+With the `dcuser setup` command you can create or modify your CLI configuration whenever you need to. We do not ask for configurations changes anymore, instead you will have explicit control over this by using this command.
+
+Usually you only need to run `dcuser setup` to get this job done. In the first run you will be asked for your email. For all other options, e.g. ssh-key-path, the default values are taken.
+
+The command has three different options to modify each of the existing values on the user configuration:
+
+- `--email` will set the email on your configuration. This email is used to login on the platform.
+
+- `--ssh-auth` will enable the ssh public key authentication if set to `yes` and disable it when `no` (it defaults to `yes`). See more for [ssh public key authentication](#ssh-public-key-authentication).
+
+- `--ssh-key-path` specifies the path of your ssh public key used for the authentication. If the flag is not set, it defaults to `HOME_DIR/.ssh/id_rsa.pub`. The application will try to upload the public key to the platform.
+
+The whole command as example:
+~~~
+dcuser setup --email user1@example.com --ssh-auth yes --ssh-key-path /path/to/your/publickey.pub
+~~~
+
 ### Password Reset
 
 You can [reset your password], in case you forgot it.
 
+## CLI Authentication
+
+At the moment our CLI allows users to authenticate to the platform with two methods.
+
+### SSH Public Key Authentication
+
+With this method you can authenticate to the platform in a more convenient way than using [email / password authentication](#email--password-authentication). After adding your SSH key to the platform, its location is remembered by the CLI and will be used in the future requests. You can add a public key to the platform and/or change the public key used for the authentication by [setup the CLI](#setup-cli).
+
+~~~bash
+dcuser setup --ssh-key-path /path/to/your/publickey.pub
+~~~
+
+If you set a passphrase for your SSH key, which is strongly recommended, than you have to add the key to your ssh-agent by:
+~~~bash
+# start ssh-agent
+eval `ssh-agent`
+ssh-add /path/to/your/privatekey
+~~~
+
+### Email / Password Authentication
+
+The email / password authentication is an alternative to SSH public key authentication. To enable it, simply [setup the CLI](#setup-cli), setting the `--ssh-auth` parameter to `no`.
+~~~
+dcuser setup --ssh-auth no
+~~~
+
+From now, whenever you want to authenticate to the platform you have to put your password.
+
+Alternatively, to get this process less verbose, you can set the password as shell environment variable:
+~~~bash
+export DC_PASSWORD=yourpassword
+~~~
+
+Disadvantage of this approach is the fact that your password is exposed to your environment, that is why we encourage using SSH public key authentication instead.
 
 ## Apps, Users and Deployments
 
@@ -78,13 +129,11 @@ dotCloud PaaS uses a distinct set of naming conventions. To understand how to wo
 An app consists of a repository (with branches), deployments and users. Creating an app allows you to add or remove users to that app, giving them access to the source code as well as allowing them to manage the deployments.
 
 Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
-
 ~~~
 $ dcapp APP_NAME create php
 ~~~
 
 You can always list your existing apps using the command line client too.
-
 ~~~
 $ dcapp -l
 Apps
@@ -96,11 +145,9 @@ Apps
 
 ### Users
 
-By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on
-the user's [roles](#roles). Users can be added to applications or more fine grained to deployments.
+By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the user's [roles](#roles). Users can be added to applications or more fine grained to deployments.
 
 You can list, add and remove app users using the command line client.
-
 ~~~
 $ dcapp APP_NAME user
 
@@ -113,7 +160,6 @@ Users
 
 
 Add a user to an app by providing their email address. If the user is already registered they will be added to the app immediately. Otherwise they will receive an invitation email first.
-
 ~~~
 $ dcapp APP_NAME user.add user4@example.com
 ~~~
@@ -145,13 +191,11 @@ $ dcapp APP_NAME user.add user5@example.com --role readonly
 #### Keys
 
 For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, dcapp will offer to create one.
-
 ~~~
 $ dcuser key.add
 ~~~
 
 You can also list the available key ids and remove existing keys using the key id.
-
 ~~~
 $ dcuser key
 Keys
@@ -165,15 +209,11 @@ $ dcuser key.remove Dohyoonuf7
 
 ### Deployments
 
-A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains).
-It is based on the branch of the same name. Exception: the default deployment is based on the master branch.
+A deployment is the running version of one of your branches made accessible via a [provided subdomain](#provided-subdomains-and-custom-domains). It is based on the branch of the same name. Exception: the default deployment is based on the master branch.
 
-Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches).
-This allows you to have different versions of your app running at the same time without interfering with each other.
-Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
+Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches). This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
 
 You can list all the deployments with the *details* command.
-
 ~~~
 $ dcapp APP_NAME details
 App
@@ -188,7 +228,6 @@ App
    APP_NAME/stage
 ~~~
 
-
 ## Version Control & Images
 
 **TL;DR:**
@@ -199,12 +238,9 @@ App
 
 ### Image Building
 
-Whenever you push an updated branch, a deployment image is built automatically.
-This image can then be deployed with the *deploy* command to the deployment matching the branch name.
-The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
+Whenever you push an updated branch, a deployment image is built automatically. This image can then be deployed with the *deploy* command to the deployment matching the branch name. The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
 
 You can either use the dcapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
-
 ~~~
 # with dcapp:
 $ dcapp APP_NAME/dev push
@@ -218,15 +254,9 @@ $ git push dotcloudng dev
 
 The repositories support all other remote operations like pulling and cloning as well.
 
-The compressed image size is limited to 200MB.
-Smaller images can be deployed faster, so we recommend to keep the image size below 50MB.
-The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
+The compressed image size is limited to 200MB. Smaller images can be deployed faster, so we recommend to keep the image size below 50MB. The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
 
-You can decrease your image size by making sure that no unneeded files (e.g. caches, logs, backup files) are tracked
-in your repository. Files that need to be tracked but are not required in the image (e.g. development assets or
-source code files in compiled languages), can be added to a `.cctrlignore` file in the project root directory.
-The format is similar to the `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
-
+You can decrease your image size by making sure that no unneeded files (e.g. caches, logs, backup files) are tracked in your repository. Files that need to be tracked but are not required in the image (e.g. development assets or source code files in compiled languages), can be added to a `.cctrlignore` file in the project root directory. The format is similar to the `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
 ~~~
 *.psd
 *.pdf
@@ -243,7 +273,6 @@ Part of the buildpack scripts is also to pull in dependencies according to the l
 Which buildpack is going to be used is determined by the application type set when creating the app.
 
 A required part of the image is a file called `Procfile` in the root directory. It is used to determine how to start the actual application in the container. Some of the buildpacks can provide a default Procfile. But it is recommended to explicitly define the Procfile in your application to match your individual requirements better. For a container to be able to receive requests from the routing tier it needs at least the following content:
-
 ~~~
 web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
 ~~~
@@ -256,26 +285,19 @@ At the end of the buildpack process, the image is ready to be deployed.
 ## Deploying New Versions
 
 The dotCloud platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME deploy
 ~~~
 
-To deploy a specific version, append your version control systems identifier (full commit-SHA1).
-If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
+To deploy a specific version, append your version control systems identifier (full commit-SHA1). If not specified, the version to be deployed defaults to the latest image available (the one built during the last successful push).
 
-For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile).
-After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version.
-A log message in the [deploy log](#deploy-log) appears when this process has finished.
+For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) appears when this process has finished.
 
 ### Container Idling
 
-Deployments running on a single web container with one unit of memory (128MB/h) are automatically idled when they are not receiving HTTP requests for 1 hour or more. This
-results in a temporary suspension of the container where the application is
-running. It does not affect the Add-ons or workers related to this deployment.
+Deployments running on a single web container with one unit of memory (128MB/h) are automatically idled when they are not receiving HTTP requests for 1 hour or more. This results in a temporary suspension of the container where the application is running. It does not affect the Add-ons or workers related to this deployment.
 
-Once a new HTTP request is sent to this deployment, the application is automatically re-engaged. This process causes a slight delay until the
-first request is served. All following requests will perform normally.
+Once a new HTTP request is sent to this deployment, the application is automatically re-engaged. This process causes a slight delay until the first request is served. All following requests will perform normally.
 
 You can see the state of your application with the following command:
 ~~~
@@ -287,19 +309,16 @@ Deployment
  [...]
 ~~~
 
-Scaling your deployment will prevent idling, which is recommended for
-any production system.
+Scaling your deployment will prevent idling, which is recommended for any production system.
 
 ## Emergency Rollback
 
 If your newest version breaks unexpectedly, you can use the rollback command to revert to the previous version in a matter of seconds:
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME rollback
 ~~~
 
 It is also possible to deploy any other prior version. To find the version identifier you need, simply check the [deploy log](#deploy-log) for a previously deployed version, or get it directly from the version control system. You can redeploy this version using the deploy command:
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 ~~~
@@ -356,7 +375,6 @@ Add-ons add additional services to your deployment. The [Add-on marketplace] off
 Each deployment has its own set of Add-ons. If your app needs a MySQL database and you have a production, a development and a staging environment, all three must have their own MySQL Add-ons. Each Add-on comes with different plans allowing you to choose  a more powerful database for your high traffic production deployment and smaller ones for the development or staging environments.
 
 You can see the available Add-on plans on the Add-on marketplace website or with the `dcapp addon.list` command.
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME addon.list
 [...]
@@ -385,7 +403,6 @@ Addon                    : memcachier.dev
 ~~~
 
 To upgrade or downgrade an Add-on use the respective command followed by the Add-on plan you upgrade from and the Add-on plan you upgrade to.
-
 ~~~
 # upgrade
 $ dcapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
@@ -395,27 +412,19 @@ $ dcapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 **Remember:** As in all examples in this documentation, replace all the uppercase placeholders with their respective values.
 
 ### Add-on Credentials
-For many Add-ons you require credentials to connect to their service. The credentials are exported to the deployment in
-a JSON formatted config file. The path to the file can be found in the `CRED_FILE` environment variable. Never
-hardcode these credentials in your application, because they differ over deployments and can change after any redeploy
-without notice.
+
+For many Add-ons you require credentials to connect to their service. The credentials are exported to the deployment in a JSON formatted config file. The path to the file can be found in the `CRED_FILE` environment variable. Never hardcode these credentials in your application, because they differ over deployments and can change after any redeploy without notice.
 
 We provide detailed code examples how to use the config file in our guides section.
 
 #### Enabling/disabling credentials environment variables
-We recommend using the credentials file for security reasons but credentials can also be accessed through environment variables.
-This is disabled by default for PHP and Python apps.
-Accessing the environment is more convenient in most languages, but some reporting tools or wrong security settings in
-your app might print environment variables to external services or even your users. This also applies to any child processes
-of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use
-the credentials file.
 
-Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
-this feature.
+We recommend using the credentials file for security reasons but credentials can also be accessed through environment variables. This is disabled by default for PHP and Python apps. Accessing the environment is more convenient in most languages, but some reporting tools or wrong security settings in your app might print environment variables to external services or even your users. This also applies to any child processes of your app if they inherit the environment (which is the default). When in doubt, disable this feature and use the credentials file.
+
+Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable this feature.
 
 The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://next.dotcloud.com/dev-center/guides/ruby/add-on-credentials), [Python](https://next.dotcloud.com/dev-center/guides/python/add-on-credentials), [Node.js](https://next.dotcloud.com/dev-center/guides/nodejs/add-on-credentials), [Java](https://next.dotcloud.com/dev-center/guides/java/add-on-credentials), [PHP](https://next.dotcloud.com/dev-center/guides/php/add-on-credentials)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME addon.creds
 {
@@ -445,7 +454,6 @@ $ dcapp APP_NAME/DEP_NAME addon.creds
  * There are four different log types (access, error, worker and deploy) available.
 
 To see the log output in a `tail -f`-like fashion use the dcapp log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
 [...]
@@ -494,7 +502,6 @@ $ dcapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
 
 From now on all the new logs should be visible in your custom syslog remote.
 
-
 ## Provided Subdomains and Custom Domains
 
 **TL;DR:**
@@ -502,40 +509,21 @@ From now on all the new logs should be visible in your custom syslog remote.
  * Each deployment is provided with a `dotcloudapp.com` subdomain.
  * Custom domains are supported via the Alias Add-on.
 
-Each deployment is provided per default with a `*.dotcloudapp.com` subdomain.
-The `APP_NAME.dotcloudapp.com` will point to the `default` deployment while
-any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io`.
+Each deployment is provided per default with a `*.dotcloudapp.com` subdomain. The `APP_NAME.dotcloudapp.com` will point to the `default` deployment while any additional deployment can be accessed with a prefixed subdomain: `DEP_NAME-APP_NAME.app.exo.io`.
 
-You can also use custom domains to access your deployments. To add a domain
-like `www.example.com`, `app.example.com` or `secure.example.com` to one of your
-deployments, simply add each one as an alias and add a CNAME for each pointing to
-your deployment's subdomain. So to point `www.example.com` to the default deployment
-of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.dotcloudapp.com`.
-The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one
-of your deployments.
+You can also use custom domains to access your deployments. To add a domain like `www.example.com`, `app.example.com` or `secure.example.com` to one of your deployments, simply add each one as an alias and add a CNAME for each pointing to your deployment's subdomain. So to point `www.example.com` to the default deployment of the app called *awesomeapp*, add a CNAME for `www.example.com` pointing to `awesomeapp.dotcloudapp.com`. The [Alias Add-on] also supports mapping wildcard domains like `*.example.com` to one of your deployments.
 
-All custom domains need to be verified before they start working. To verify a domain,
-it is required to also add the exoscale verification code as a TXT record.
+All custom domains need to be verified before they start working. To verify a domain, it is required to also add the exoscale verification code as a TXT record.
 
-Changes to DNS can take up to 24 hours until they have effect. Please refer to the
-Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
+Changes to DNS can take up to 24 hours until they have effect. Please refer to the Alias Add-on Documentation for detailed instructions on how to setup CNAME and TXT records.
 
 ### Root Domains
 
-Root domains (e.g. "example.com") can also be added but are not directly
-supported. While you theoretically can add a CNAME record for your root
-domain, you have to be aware that no other record for this domain can
-be set then. ("A CNAME record is not allowed to coexist with any other
-data", http://tools.ietf.org/html/rfc1912). From the point you set a
-CNAME, all standard-compliant DNS servers will ignore any other entry you
-might have set for your zone (e.g. SOA, NS or MX records).
+Root domains (e.g. "example.com") can also be added but are not directly supported. While you theoretically can add a CNAME record for your root domain, you have to be aware that no other record for this domain can be set then. ("A CNAME record is not allowed to coexist with any other data", http://tools.ietf.org/html/rfc1912). From the point you set a CNAME, all standard-compliant DNS servers will ignore any other entry you might have set for your zone (e.g. SOA, NS or MX records).
 
-You can circumvent this limitation by using a DNS provider which provides
-CNAME-like functionality for root domains, often called ANAME or ALIAS.
+You can circumvent this limitation by using a DNS provider which provides CNAME-like functionality for root domains, often called ANAME or ALIAS.
 
-An alternative is to use a redirection service to send users from the
-root to the configured subdomain (e.g. example.org -> www.example.org).
-
+An alternative is to use a redirection service to send users from the root to the configured subdomain (e.g. example.org -> www.example.org).
 
 ## Routing Tier
 
@@ -547,65 +535,39 @@ root to the configured subdomain (e.g. example.org -> www.example.org).
  * Requests are routed based on the `Host` header.
  * Use the `X-Forwarded-For` header to get the client IP.
 
-All HTTP requests made to apps on the platform are routed via our routing tier.
-The routing tier is designed as a cluster of reverse proxy loadbalancers which
-orchestrate the forwarding of user requests to your applications. It takes care
-of routing the request to one of the application's containers based on matching
-the `Host` header against the list of the deployment's aliases. This is accomplished
-via the `*.dotcloudapp.com` subdomain.
+All HTTP requests made to apps on the platform are routed via our routing tier. The routing tier is designed as a cluster of reverse proxy loadbalancers which orchestrate the forwarding of user requests to your applications. It takes care of routing the request to one of the application's containers based on matching the `Host` header against the list of the deployment's aliases. This is accomplished via the `*.dotcloudapp.com` subdomain.
 
-The routing tier is designed to be robust against single node and even complete
-datacenter failures while still keeping the added latency as low as possible.
+The routing tier is designed to be robust against single node and even complete datacenter failures while still keeping the added latency as low as possible.
 
 ### SSL
 
-Transport Layer Security (TLS / SSL) is available to encrypt traffic between
-users and applications.
+Transport Layer Security (TLS / SSL) is available to encrypt traffic between users and applications.
 
-As part of the provided `.dotcloudapp.com` subdomain, all deployments have
-access to piggyback SSL using a `*.dotcloudapp.com` wildcard certificate.
-To use this, simply point your browser to:
+As part of the provided `.dotcloudapp.com` subdomain, all deployments have access to piggyback SSL using a `*.dotcloudapp.com` wildcard certificate. To use this, simply point your browser to:
 * `https://APP_NAME.dotcloudapp.com` for the default deployment
 * `https://DEP_NAME-APP_NAME.dotcloudapp.com` for non-default deployments
 
     Please note the **dash** between DEP_NAME and APP_NAME.
 
-SSL support for custom domains is available through the
-[SSL add-on](https://next.dotcloud.com/add-ons/ssl).
+SSL support for custom domains is available through the [SSL add-on](https://next.dotcloud.com/add-ons/ssl).
 
-Instructions on how to add HTTPS redirects to your application can be
-found in the [SSL add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/ssl#https-redirects).
+Instructions on how to add HTTPS redirects to your application can be found in the [SSL add-on documentation](https://next.dotcloud.com/dev-center/add-on-documentation/ssl#https-redirects).
 
 ### Elastic Addresses
 
-Because of the elastic nature of the routing tier, the list of routing tier addresses
-can change at any time. It is therefore highly discouraged to point custom domains
-directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to
-the [custom domain section](#provided-subdomains-and-custom-domains) for more details
-on the correct DNS configuration.
+Because of the elastic nature of the routing tier, the list of routing tier addresses can change at any time. It is therefore highly discouraged to point custom domains directly to any of the routing tier IP addresses. Please use a CNAME instead. Refer to the [custom domain section](#provided-subdomains-and-custom-domains) for more details on the correct DNS configuration.
 
 ### Remote Address
 
-Given that client requests don't hit your application directly, but are forwarded via
-the routing tier, you can't access the client's IP by reading the remote address. The
-remote address will always be the internal IP of one of the routing nodes. To make the
-origin remote address available, the routing tier sets the `X-Forwarded-For` header to
-the original client's IP.
+Given that client requests don't hit your application directly, but are forwarded via the routing tier, you can't access the client's IP by reading the remote address. The remote address will always be the internal IP of one of the routing nodes. To make the origin remote address available, the routing tier sets the `X-Forwarded-For` header to the original client's IP.
 
 ### Reverse Proxy timeouts
 
-Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and
-forwarding of user requests to your applications. To do this in an efficient way, we set
-strict timeouts to the read/ write operations. You can find them below.
+Our routing tier uses a cluster of reverse proxy loadbalancers to manage the acceptance and forwarding of user requests to your applications. To do this in an efficient way, we set strict timeouts to the read/ write operations. You can find them below.
 
- * __Connect timeout__ - time within a connection to your application has to be established.
- If your containers are up, but hanging, then this timeout will not apply as the connection to
- the endpoints has already been made.
- * __Read timeout__ - time to retrieve a response from your application. It determines how long
- the routing tier will wait to get the response to a request. The timeout is established not
- for an entire response, but only between two operations of reading.
- * __Send timeout__ - maximum time between two write operations of a request. If your application
- does not take new data within this time, the routing tier will shut down the connection.
+ * __Connect timeout__ - time within a connection to your application has to be established.  If your containers are up, but hanging, then this timeout will not apply as the connection to  the endpoints has already been made.
+ * __Read timeout__ - time to retrieve a response from your application. It determines how long  the routing tier will wait to get the response to a request. The timeout is established not  for an entire response, but only between two operations of reading.
+ * __Send timeout__ - maximum time between two write operations of a request. If your application  does not take new data within this time, the routing tier will shut down the connection.
 
 #### Timeouts for `*.dotcloudapp.com` subdomain:
 
@@ -617,37 +579,19 @@ strict timeouts to the read/ write operations. You can find them below.
 
 ### Requests distribution
 
-Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable
-service resolving domain names in a round robin fashion. All nodes are equally distributed to
-the three different availability zones but can route requests to any container in any other
-availability zone. To keep latency low, the routing tier tries to route requests to containers
-in the same availability zone unless none are available. Deployments running on --containers 1
-(see the [scaling section](#scaling) for details) only run on one container and therefore are
-only hosted in one availability zone.
+Our smart [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) provides a fast and reliable service resolving domain names in a round robin fashion. All nodes are equally distributed to the three different availability zones but can route requests to any container in any other availability zone. To keep latency low, the routing tier tries to route requests to containers in the same availability zone unless none are available. Deployments running on --containers 1 (see the [scaling section](#scaling) for details) only run on one container and therefore are only hosted in one availability zone.
 
 ### High Availability
 
-The routing tier provides a Health Checker to ensure high availability. Because this mechanism
-depends on having multiple containers available to route requests, only deployments with more
-than one container running (see the [scaling section](#scaling) for details) can take advantage
-of high availability.
+The routing tier provides a Health Checker to ensure high availability. Because this mechanism depends on having multiple containers available to route requests, only deployments with more than one container running (see the [scaling section](#scaling) for details) can take advantage of high availability.
 
-In the event of a single node or container failure, the platform will start a replacement container.
-Deployments running on --containers 1 will be unavailable for a few minutes while the platform starts
-the replacement. To avoid even short downtimes, set the --containers option to at least 2.
+In the event of a single node or container failure, the platform will start a replacement container. Deployments running on --containers 1 will be unavailable for a few minutes while the platform starts the replacement. To avoid even short downtimes, set the --containers option to at least 2.
 
 #### Health Checker
 
-For the `*.dotcloudapp.com` subdomain, failed requests will cause an error message to be returned to
-the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals
-the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests.
-Subsequent requests are routed to an available container of the deployment. Once the health checker notices
-that the container has recovered, the container will be re-included in the list to receive requests.
+For the `*.dotcloudapp.com` subdomain, failed requests will cause an error message to be returned to the user once, but the "unhealthy" container will be actively monitored by a health checker. This signals the routing tier to temporarily remove the unhealthy container from the list of containers receiving requests. Subsequent requests are routed to an available container of the deployment. Once the health checker notices that the container has recovered, the container will be re-included in the list to receive requests.
 
-Because the health checker actively monitors containers where an application is running into timeouts or
-returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502`
-or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
-
+Because the health checker actively monitors containers where an application is running into timeouts or returning [http error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5) `501`, `502` or `greater 503`, you may see requests to `/CloudHealthCheck` coming from a `cloudControl-HealthCheck` agent.
 
 ## Scaling
 
@@ -660,15 +604,11 @@ When scaling your apps you have two options. You can either scale horizontally b
 
 ### Horizontal Scaling
 
-Horizontal scaling is controlled by the --containers parameter.
-It specifies the number of containers you have running.
-Raising --containers also increases the availability in case of node failures.
-Deployments with --containers 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --containers value to at least 2 if you want to avoid downtime in such situations.
+Horizontal scaling is controlled by the --containers parameter. It specifies the number of containers you have running. Raising --containers also increases the availability in case of node failures. Deployments with --containers 1 (the default) are unavailable for a few minutes in the event of a node failure until the failover process has finished. Set --containers value to at least 2 if you want to avoid downtime in such situations.
 
 ### Vertical Scaling
 
 In addition to controlling the number of containers you can also specify the memory size of a container. Container sizes are specified using the --memory parameter, being possible to choose from 128MB to 1024MB.
-
 
 ## Performance
 
@@ -678,11 +618,7 @@ In addition to controlling the number of containers you can also specify the mem
 
 ### Reducing the Number of Requests
 
-Perceived web application performance is mostly influenced by the frontend. It's very common
-that the highest optimization potential lies in reducing the overall number of requests per
-page view. One common technique to accomplish this is combining and minimizing javascript and
-css files into one file each and using sprites for images.
-
+Perceived web application performance is mostly influenced by the frontend. It's very common that the highest optimization potential lies in reducing the overall number of requests per page view. One common technique to accomplish this is combining and minimizing javascript and css files into one file each and using sprites for images.
 
 ## WebSockets
 
@@ -729,20 +665,11 @@ running tasks have to be handled asyncronously.
 
 ### Cron
 
-For tasks that are guaranteed to finish within the time limit, the [Cron add-on] is a
-simple solution to call a predefined URL daily or hourly and have that task called periodically.
-For a more detailed documentation on the Cron Add-on, please refer to the [Cron Add-on documentation].
+For tasks that are guaranteed to finish within the time limit, the [Cron add-on] is a simple solution to call a predefined URL daily or hourly and have that task called periodically. For a more detailed documentation on the Cron Add-on, please refer to the [Cron Add-on documentation].
 
 ### Workers
 
-Tasks that will take longer than 55s to execute, or that are triggered by a user
-request and should be handled asyncronously to not keep the user waiting, are best
-handled by the [Worker add-on]. Workers are long-running processes started in containers.
-Just like the web processes but they are not listening on any port and therefore do not
-receive http requests. You can use workers, for example, to poll a queue and execute tasks
-in the background or handle long-running periodical calculations. More details on usage
-scenarios and available queuing Add-ons are available as part of the [Worker Add-on documentation].
-
+Tasks that will take longer than 55s to execute, or that are triggered by a user request and should be handled asyncronously to not keep the user waiting, are best handled by the [Worker add-on]. Workers are long-running processes started in containers. Just like the web processes but they are not listening on any port and therefore do not receive http requests. You can use workers, for example, to poll a queue and execute tasks in the background or handle long-running periodical calculations. More details on usage scenarios and available queuing Add-ons are available as part of the [Worker Add-on documentation].
 
 ## Secure Shell (SSH)
 
@@ -753,7 +680,6 @@ The container is identical to the web or worker containers but starts an SSH dae
 ### Examples
 
 To start a shell (e.g. bash) use the `run` command.
-
 ~~~
 $ dcapp APP_NAME/DEP_NAME run bash
 Connecting...
