@@ -67,7 +67,7 @@ The command has three different options to modify each of the existing values on
 
 - `--ssh-auth` will enable the ssh public key authentication if set to `yes` and disable it when `no` (it defaults to `yes`). See more for [ssh public key authentication](#ssh-public-key-authentication).
 
-- `--ssh-key-path` specifies the path of your ssh public key used for the authentication. If the flag is not set, it defaults to `HOME_DIR/.ssh/id_rsa.pub`. The application will try to upload the public key to the platform.
+- `--ssh-key-path` specifies the path of your ssh public key used for the authentication. If the flag is not set, it defaults to `HOME_DIR/.ssh/id_rsa.pub`. The CLI will try to upload the public key to the platform. We only support RSA keys. Details can be found under [Keys](#keys).
 
 The whole command as example:
 ~~~
@@ -189,6 +189,8 @@ $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 #### Keys
 
 For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, cctrlapp will offer to create one.
+
+We only support RSA ssh keys. The key must be a one-liner and start with "ssh-rsa AAAAB3NzaC1yc2E" (OpenSSH compatible).
 ~~~
 $ cctrluser key.add
 ~~~
