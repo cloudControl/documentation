@@ -81,15 +81,15 @@ By running the following commands, this will all be done:
     git checkout master
     
     // create the application
-    exoapp APP_NAME create php
+    ironcliapp APP_NAME create php
     
     // deploy the default branch
-    exoapp APP_NAME/default push
-    exoapp APP_NAME/default deploy
+    ironcliapp APP_NAME/default push
+    ironcliapp APP_NAME/default deploy
 
     // deploy the testing branch
-    exoapp APP_NAME/testing push
-    exoapp APP_NAME/testing deploy
+    ironcliapp APP_NAME/testing push
+    ironcliapp APP_NAME/testing deploy
 
 ##4. Initialise the Required Add-ons
 
@@ -100,16 +100,16 @@ Now that that's done, we need to configure two add-ons, config and mysqls. The c
 Now let's be sure that everything is in order by having a look at the add-on configuration output, in this case for testing. To do that, run the command below:
 
     // Initialise the mysqls.free addon for the default deployment
-    exoapp APP_NAME/default addon.add mysqls.free
+    ironcliapp APP_NAME/default addon.add mysqls.free
     
     // Retrieve the settings
-    exoapp APP_NAME/default addon mysqls.free
+    ironcliapp APP_NAME/default addon mysqls.free
 
     // Initialise the mysqls.free addon for the testing deployment
-    exoapp APP_NAME/testing addon.add mysqls.free
+    ironcliapp APP_NAME/testing addon.add mysqls.free
     
     // Retrieve the settings
-    exoapp APP_NAME/testing addon mysqls.free
+    ironcliapp APP_NAME/testing addon mysqls.free
 
 The output of the commands will be similar to that below:
 
@@ -127,10 +127,10 @@ The output of the commands will be similar to that below:
 Now we need to configure the config add-on and store the respective environment setting in it. So run the following commands to do this:
 
     // Set the default environment setting
-    exoapp APP_NAME/default config.add CAKE_ENV=production
+    ironcliapp APP_NAME/default config.add CAKE_ENV=production
 
     // Set the testing environment setting    
-    exoapp APP_NAME/testing config.add CAKE_ENV=testing
+    ironcliapp APP_NAME/testing config.add CAKE_ENV=testing
 
 Now that this is done, we're ready to make some changes to our code to make use of the new configuration. 
 
@@ -410,15 +410,15 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
     git commit -m "changed to store log and session in mysql and auto-determine environment"
 
     // deploy the default branch
-    exoapp APP_NAME/default push    
-    exoapp APP_NAME/default deploy
+    ironcliapp APP_NAME/default push    
+    ironcliapp APP_NAME/default deploy
     
     git checkout testing
     git merge master
     
     // deploy the testing branch
-    exoapp APP_NAME/testing push    
-    exoapp APP_NAME/testing deploy
+    ironcliapp APP_NAME/testing push    
+    ironcliapp APP_NAME/testing deploy
 
 ##7. Review the Deployment
 

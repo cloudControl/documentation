@@ -8,7 +8,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
- $ exoapp APP_NAME/default alias APP_NAME.app.exo.io
+ $ ironcliapp APP_NAME/default alias APP_NAME.app.exo.io
  ~~~
 
  The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
@@ -30,12 +30,12 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
 
  ~~~
  # for the default deployment
-  $ exoapp APP_NAME/default alias
+  $ ironcliapp APP_NAME/default alias
  Aliases
  name                                                         default  verified
  APP_NAME.app.exo.io                                                 1        1
  # for any additional deployment
- $ exoapp APP_NAME/DEP_NAME alias
+ $ ironcliapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  DEP_NAME.APP_NAME.app.exo.io                                        1        1
@@ -52,13 +52,13 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  Next add the domain as an alias to your deployment using the alias.add command.
 
  ~~~
- $ exoapp APP_NAME/DEP_NAME alias.add www.example.com
+ $ ironcliapp APP_NAME/DEP_NAME alias.add www.example.com
  ~~~
 
  You should now see your domain in the deployment's list of aliases.
 
  ~~~
- $ exoapp APP_NAME/DEP_NAME alias
+ $ ironcliapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  www.example.com                                                     0        0
@@ -72,7 +72,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  As soon as the changes have propagated through the DNS the alias will be verified and the deployment will start answering requests to that domain automatically.
 
  ~~~
- $ exoapp APP_NAME/DEP_NAME alias
+ $ ironcliapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
  www.example.com                                                     0        1
@@ -84,7 +84,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
 To remove an alias, simply use the alias.remove command.
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME alias.remove www.example.com
+$ ironcliapp APP_NAME/DEP_NAME alias.remove www.example.com
 ~~~
 
 ## Special Case: Wildcard Domains
@@ -94,13 +94,13 @@ The alias add-on does support wildcard domains. A wildcard domain like `*.exampl
 To use this feature first upgrade your alias add-on from free to wildcard.
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard
+$ ironcliapp APP_NAME/DEP_NAME addon.upgrade alias.free alias.wildcard
 ~~~
 
 Then add the wildcard domain itself as an alias.
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME alias.add *.example.com
+$ ironcliapp APP_NAME/DEP_NAME alias.add *.example.com
 ~~~
 
 The TXT record requirement also applies to wildcard domains, so please follow the steps above accordingly.

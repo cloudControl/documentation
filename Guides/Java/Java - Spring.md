@@ -86,13 +86,13 @@ web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target
 Choose a unique name (from now on called APP_NAME) for your application and create it on the exoscale platform:
 
 ~~~bash
-$ exoapp APP_NAME create java
+$ ironcliapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository:
 
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 Counting objects: 223, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (212/212), done.
@@ -137,8 +137,8 @@ To ssh://APP_NAME@app.exo.io/repository.git
 Add MySQLs Add-on with free plan to your deployment and deploy it:
 
 ~~~bash
-$ exoapp APP_NAME/default addon.add mysqls.free
-$ exoapp APP_NAME/default deploy --memory=768MB
+$ ironcliapp APP_NAME/default addon.add mysqls.free
+$ ironcliapp APP_NAME/default deploy --memory=768MB
 ~~~
 
 The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.

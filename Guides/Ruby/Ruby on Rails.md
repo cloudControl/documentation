@@ -117,13 +117,13 @@ The 'cloudcontrol-rails' gem will provide the database credentials.
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
 
 ~~~bash
-$ exoapp APP_NAME create ruby
+$ ironcliapp APP_NAME create ruby
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process (do it with `mysql` deployment name since we use the same branch in application repo):
 
 ~~~bash
-$ exoapp APP_NAME/mysql push
+$ ironcliapp APP_NAME/mysql push
 Counting objects: 62, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (51/51), done.
@@ -169,14 +169,14 @@ To ssh://APP_NAME@app.exo.io/repository.git
 Add MySQLs Add-on with `free` plan to your deployment and deploy it:
 
 ~~~bash
-$ exoapp APP_NAME/mysql addon.add mysqls.free
-$ exoapp APP_NAME/mysql deploy
+$ ironcliapp APP_NAME/mysql addon.add mysqls.free
+$ ironcliapp APP_NAME/mysql deploy
 ~~~
 
 Finally, prepare the database by running migrations using the [Run command][run command]:
 
 ~~~bash
-$ exoapp APP_NAME/mysql run "rake db:migrate"
+$ ironcliapp APP_NAME/mysql run "rake db:migrate"
 ~~~
 
 Congratulations, you can now access the app at http://mysql-APP_NAME.app.exo.io.

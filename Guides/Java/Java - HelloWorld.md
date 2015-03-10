@@ -85,14 +85,14 @@ The java command starts the 'com.exo.sample.jetty.App' with the classpath set to
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ exoapp APP_NAME create java
+$ ironcliapp APP_NAME create java
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 
 -----> Receiving push
 -----> Installing OpenJDK 1.7(openjdk7.b32.tar.gz)... done
@@ -118,10 +118,10 @@ To ssh://APP_NAME@app.exo.io/repository.git
    54b0da2..d247825  master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the exoapp deploy command:
+Last but not least deploy the latest version of the app with the ironcliapp deploy command:
 
 ~~~bash
-$ exoapp APP_NAME/default deploy
+$ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.app.exo.io`.

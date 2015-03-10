@@ -13,7 +13,7 @@ placeholders are marked by being written all uppercase.
 ### Requirements
 
 * git version control system
-* the exouser/ exoapp command line clients
+* the ironcliuser/ ironcliapp command line clients
 
 ### Install git
 
@@ -40,7 +40,7 @@ You can register on [exoscale.ch](http://exoscale.ch).
 ## Add a Public Key
 
 ~~~bash
-$ exouser key.add
+$ ironcliuser key.add
 Email   : EMAIL
 Password: PASSWORD
 ~~~
@@ -54,7 +54,7 @@ Create a new application on the exoscale platform by giving it an unique
 `TYPE`.
 
 ~~~bash
-$ exoapp APP_NAME create [java, php, python, ruby, nodejs]
+$ ironcliapp APP_NAME create [java, php, python, ruby, nodejs]
 ~~~
 
 If the `APP_NAME` is already taken, please pick another one.
@@ -90,7 +90,7 @@ $ git clone https://github.com/cloudControl/nodejs-express-example-app.git
 $ cd nodejs-express-example-app
 
 # now push
-$ exoapp APP_NAME push
+$ ironcliapp APP_NAME push
 ~~~
 
 The push fires a hook that prepares your application for deployment like
@@ -102,7 +102,7 @@ in your terminal.
 Deploy your app with
 
 ~~~bash
-$ exoapp APP_NAME deploy
+$ ironcliapp APP_NAME deploy
 ~~~
 
 **Congratulations, your app is now up and running.**

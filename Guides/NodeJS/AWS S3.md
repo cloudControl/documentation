@@ -24,7 +24,7 @@ In addition to the AWS SDK, you also need to have AWS access credentials. If you
 S3 needs your AWS credentials for access. The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on]:
 
 ~~~bash
-exoapp APP_NAME/default config.add 
+ironcliapp APP_NAME/default config.add 
 AWS_ACCESS_KEY_ID=[YOUR_SECRET_KEY] 
 AWS_SECRET_ACCESS_KEY=[YOUR_ACCESS_KEY] 
 AWS_REGION='eu-west-1' 

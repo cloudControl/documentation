@@ -29,7 +29,7 @@ Here is a list of verified and recommended buildpacks for the exoscale platform 
 In order to create an app using a custom buildpack you have to choose the `custom` app type and then provide the desired buildpack URL:
 
 ~~~bash
-$ exoapp APP_NAME create custom --buildpack BUILDPACK_URL
+$ ironcliapp APP_NAME create custom --buildpack BUILDPACK_URL
 ~~~
 
 **Note:** `BUILDPACK_URL` has to be a non-ssh git repository.

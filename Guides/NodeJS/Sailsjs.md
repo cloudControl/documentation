@@ -100,13 +100,13 @@ In Sails.js, client-backend communication is done using [websockets]. For more d
 To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
 
 ~~~bash
-$ exoapp APP_NAME create nodejs
+$ ironcliapp APP_NAME create nodejs
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 Counting objects: 73, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (35/35), done.
@@ -132,12 +132,12 @@ To ssh://APP_NAME@app.exo.io/repository.git
 
 Add the [Shared MySQL Add-on]:
 ~~~bash
-$ exoapp APP_NAME/default addon.add mysqls.free
+$ ironcliapp APP_NAME/default addon.add mysqls.free
 ~~~
 
 Finally, deploy the Sails.js application:
 ~~~bash
-$ exoapp APP_NAME/default deploy
+$ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Sails.js application running at

@@ -89,13 +89,13 @@ if __name__ == "__main__":
 Choose a unique name to replace the `APP_NAME` placeholder for your application
 and create it on the exoscale platform:
 ~~~bash
-$ exoapp APP_NAME create python
+$ ironcliapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment
 image build process:
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 Counting objects: 7, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
@@ -117,10 +117,10 @@ To ssh://APP_NAME@app.exo.io/repository.git
  + [new branch] master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the exoapp
+Last but not least deploy the latest version of the app with the ironcliapp
 deploy command.
 ~~~bash
-$ exoapp APP_NAME/default deploy
+$ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Tornado app running at `http://APP_NAME.app.exo.io`.

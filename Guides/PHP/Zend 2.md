@@ -146,13 +146,13 @@ class Module
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ exoapp APP_NAME create php
+$ ironcliapp APP_NAME create php
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 Counting objects: 2208, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (771/771), done.
@@ -178,10 +178,10 @@ To ssh://APP_NAME@app.exo.io/repository.git
  * [new branch]      master -> master
 ~~~
 
-Last but not least deploy the latest version of the app with the exoapp deploy command:
+Last but not least deploy the latest version of the app with the ironcliapp deploy command:
 
 ~~~bash
-$ exoapp APP_NAME/default deploy
+$ ironcliapp APP_NAME/default deploy
 ~~~
 
 ## Add the Required MySQL Database Add-on and Initialize the Session Table
@@ -194,9 +194,9 @@ Creating the session table is easy by executing the included init-session-table 
 
 ~~~bash
 # add the Add-on
-$ exoapp APP_NAME/default addon.add mysqls.free
+$ ironcliapp APP_NAME/default addon.add mysqls.free
 # initialize the session table
-$ exoapp APP_NAME/default run "php code/public/index.php init-session-table"
+$ ironcliapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
 Connection to sshforwarder.app.exo.io closed.

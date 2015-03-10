@@ -29,7 +29,7 @@ Follow the [Amazon Guide](http://docs.aws.amazon.com/AWSSdkDocsJava/latest/Devel
 The recommended way to provide your AWS credentials to your app is via environment variables. To do this, use the [Config Add-on](https://community.exoscale.ch/tutorial/custom-config-add-on/):
 
 ~~~bash
-$ exoapp APP_NAME/default config.add AWS_ACCESS_KEY_ID=[YOUR_SECRET_KEY] AWS_SECRET_ACCESS_KEY=[YOUR_ACCESS_KEY] AWS_REGION='eu-west-1'
+$ ironcliapp APP_NAME/default config.add AWS_ACCESS_KEY_ID=[YOUR_SECRET_KEY] AWS_SECRET_ACCESS_KEY=[YOUR_ACCESS_KEY] AWS_REGION='eu-west-1'
 ~~~
 
 Now let's show some operations on buckets and objects:

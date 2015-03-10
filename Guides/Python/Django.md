@@ -90,13 +90,13 @@ DATABASES = {
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
 
 ~~~bash
-$ exoapp APP_NAME create python
+$ ironcliapp APP_NAME create python
 ~~~
 
 Push your code to the application's repository, which triggers the deployment image build process:
 
 ~~~bash
-$ exoapp APP_NAME/default push
+$ ironcliapp APP_NAME/default push
 Counting objects: 31, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (25/25), done.
@@ -121,14 +121,14 @@ To ssh://APP_NAME@app.exo.io/repository.git
 
 Add MySQLs Add-on with `free` plan to your deployment and deploy it:
 ~~~bash
-$ exoapp APP_NAME/default addon.add mysqls.free
-$ exoapp APP_NAME/default deploy
+$ ironcliapp APP_NAME/default addon.add mysqls.free
+$ ironcliapp APP_NAME/default deploy
 ~~~
 
 Finally, prepare the database using the [Run command][ssh-session] (when prompted create admin user):
 
 ~~~bash
-$ exoapp APP_NAME/default run "python manage.py syncdb"
+$ ironcliapp APP_NAME/default run "python manage.py syncdb"
 ~~~
 
 You can login to the admin console at `APP_NAME.app.exo.io/admin`, create some polls and see them at `APP_NAME.app.exo.io/polls`.

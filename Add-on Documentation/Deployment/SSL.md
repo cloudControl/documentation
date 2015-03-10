@@ -177,7 +177,7 @@ In order to check the status of the Add-on, you can do the following.
 If you want to exchange your certificate (e.g. because it is about to expire),
 you can upload the new certificate with the following command:
  ~~~
- $ exoapp APP_NAME/DEP_NAME addon.upgrade ssl.host ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
+ $ ironcliapp APP_NAME/DEP_NAME addon.upgrade ssl.host ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
  ~~~
 
 Note: If the new certificate has the same chain file, you still need to pass it again.

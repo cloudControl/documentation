@@ -27,7 +27,7 @@ tasks that take longer than 55 seconds we recommend using the
 Before you can add a Cron job, the Add-on itself has to be added:
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME addon.add cron.OPTION
+$ ironcliapp APP_NAME/DEP_NAME addon.add cron.OPTION
 ~~~
 
 As always the different options are listed on the [Cron Add-on](https://community.exoscale.ch/tutorial/cron-add-on) page.
@@ -38,9 +38,9 @@ To call an URL with the specific interval you write it as the parameter:
 
 ~~~
 # for the default deployment
-$ exoapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.app.exo.io
+$ ironcliapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.app.exo.io
 # for any additional deployment
-$ exoapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.app.exo.io
+$ ironcliapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.app.exo.io
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
@@ -51,7 +51,7 @@ recommended to use https when sending credentials.
 Get an overview of all your Cron jobs:
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME cron
+$ ironcliapp APP_NAME/DEP_NAME cron
 ~~~
 
 ## Cron details
@@ -59,7 +59,7 @@ $ exoapp APP_NAME/DEP_NAME cron
 Get the details of a specific Cron job:
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME cron CRON_ID
+$ ironcliapp APP_NAME/DEP_NAME cron CRON_ID
 Cronjob
  job_id   : jobkqy7rdmg
  url      : http://APP_NAME.app.exo.io
@@ -73,7 +73,7 @@ Cronjob
 You can remove a Cron job by the job_id
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME cron.remove JOB_ID
+$ ironcliapp APP_NAME/DEP_NAME cron.remove JOB_ID
 ~~~
 
 ## Upgrading / downgrading the Cron addon
@@ -82,13 +82,13 @@ In order to switch from a daily to hourly Cron or vice versa, use the up- or
 downgrade function
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME addon.upgrade cron.free cron.hourly
+$ ironcliapp APP_NAME/DEP_NAME addon.upgrade cron.free cron.hourly
 ~~~
 
 or
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME addon.downgrade cron.hourly cron.free
+$ ironcliapp APP_NAME/DEP_NAME addon.downgrade cron.hourly cron.free
 ~~~
 
 Crons added with the free Add-on will stay daily and crons added with the
@@ -99,7 +99,7 @@ hourly Add-on will stay hourly.
 Removing the Add-on itself can be done with:
 
 ~~~
-$ exoapp APP_NAME/DEP_NAME addon.remove cron.OPTION
+$ ironcliapp APP_NAME/DEP_NAME addon.remove cron.OPTION
 ~~~
 
 Please note: Removing the Add-on will not automatically remove all Cron jobs.
