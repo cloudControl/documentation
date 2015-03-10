@@ -162,7 +162,7 @@ Total 62 (delta 2), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (34M)
 
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      mysql -> mysql
 ~~~
 
@@ -179,7 +179,7 @@ Finally, prepare the database by running migrations using the [Run command][run 
 $ ironcliapp APP_NAME/mysql run "rake db:migrate"
 ~~~
 
-Congratulations, you can now access the app at http://mysql-APP_NAME.app.exo.io.
+Congratulations, you can now access the app at http://mysql-APP_NAME.dionepaas.com.
 
 For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].

@@ -50,7 +50,7 @@ The command line client will determine if you already have a public key and uplo
 ## Create the First Application on exoscale
 
 Create a new application on the exoscale platform by giving it an unique
-`APP_NAME` (the name is used as the `.app.exo.io` subdomain) and choosing the
+`APP_NAME` (the name is used as the `.dionepaas.com` subdomain) and choosing the
 `TYPE`.
 
 ~~~bash
@@ -108,7 +108,7 @@ $ ironcliapp APP_NAME deploy
 **Congratulations, your app is now up and running.**
 
 ~~~bash
-http[s]://APP_NAME.app.exo.io
+http[s]://APP_NAME.dionepaas.com
 ~~~
 
 ## Cheatsheet

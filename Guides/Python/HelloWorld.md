@@ -66,7 +66,7 @@ Total 16 (delta 2), reused 16 (delta 2)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 
 ~~~
@@ -77,7 +77,7 @@ Last but not least deploy the latest version of the app with the ironcliapp depl
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.app.exo.io`.
+Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.dionepaas.com`.
 
 [Flask]: http://flask.pocoo.org/
 [exoscale]: http://www.exoscale.ch

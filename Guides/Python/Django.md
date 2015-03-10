@@ -115,7 +115,7 @@ Total 31 (delta 3), reused 24 (delta 0)
 -----> Building image
 -----> Uploading image (30M)
 
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -131,7 +131,7 @@ Finally, prepare the database using the [Run command][ssh-session] (when prompte
 $ ironcliapp APP_NAME/default run "python manage.py syncdb"
 ~~~
 
-You can login to the admin console at `APP_NAME.app.exo.io/admin`, create some polls and see them at `APP_NAME.app.exo.io/polls`.
+You can login to the admin console at `APP_NAME.dionepaas.com/admin`, create some polls and see them at `APP_NAME.dionepaas.com/polls`.
 
 For additional information take a look at [Django Notes][django-notes] and other [python-specific documents][python-guides].
 

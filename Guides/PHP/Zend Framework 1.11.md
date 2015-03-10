@@ -110,7 +110,7 @@ You'll see output similar to the following:
     >> Building image
     >> Uploading image (3.6M)
 
-    To ssh://APP_NAME@app.exo.io/repository.git
+    To ssh://APP_NAME@dionepaas.com/repository.git
        dde253a..7b040e2  testing -> testing
 
 ##4. Initialise the Required Add-ons

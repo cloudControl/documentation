@@ -126,7 +126,7 @@ Total 73 (delta 30), reused 73 (delta 30)
 -----> Building image
 -----> Uploading image (17M)
 
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -141,7 +141,7 @@ $ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Sails.js application running at
-`http://APP_NAME.app.exo.io`.
+`http://APP_NAME.dionepaas.com`.
 
 [Node.js]: http://nodejs.org/
 [Sails.js]: http://sailsjs.org/

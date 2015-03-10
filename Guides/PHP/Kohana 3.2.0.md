@@ -109,7 +109,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (772K)
 
-    To ssh://APP_NAME@app.exo.io/repository.git
+    To ssh://APP_NAME@dionepaas.com/repository.git
        f98a87c..a685cd6  master -> master
 
 Note the following lines:
@@ -539,7 +539,7 @@ Now create a file called ``site.php`` under ``application/views/``. In it, add t
         </body>
     </html>
 
-In this view file, we output some simple HTML and then iterate the value of the users that we retrieved in the controller before. Point your browser to `APP_NAME.app.exo.io/hello.php` to see the result.
+In this view file, we output some simple HTML and then iterate the value of the users that we retrieved in the controller before. Point your browser to `APP_NAME.dionepaas.com/hello.php` to see the result.
 
 ##7. Review the Deployment
 

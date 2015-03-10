@@ -38,9 +38,9 @@ To call an URL with the specific interval you write it as the parameter:
 
 ~~~
 # for the default deployment
-$ ironcliapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.app.exo.io
+$ ironcliapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.dionepaas.com
 # for any additional deployment
-$ ironcliapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.app.exo.io
+$ ironcliapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.dionepaas.com
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
@@ -62,7 +62,7 @@ Get the details of a specific Cron job:
 $ ironcliapp APP_NAME/DEP_NAME cron CRON_ID
 Cronjob
  job_id   : jobkqy7rdmg
- url      : http://APP_NAME.app.exo.io
+ url      : http://APP_NAME.dionepaas.com
  next_run : 2011-05-09 19:39:39
  created  : 2011-05-05 19:39:39
  modified : 2011-05-05 19:39:39

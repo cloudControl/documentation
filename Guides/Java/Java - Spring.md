@@ -130,7 +130,7 @@ Total 223 (delta 107), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (84M)
 
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -143,7 +143,7 @@ $ ironcliapp APP_NAME/default deploy --memory=768MB
 
 The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io` .
+Et voila, the app is now up and running at `http[s]://APP_NAME.dionepaas.com` .
 
 
 [Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample

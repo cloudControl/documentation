@@ -113,7 +113,7 @@ Total 7 (delta 0), reused 7 (delta 0)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  + [new branch] master -> master
 ~~~
 
@@ -123,7 +123,7 @@ deploy command.
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Tornado app running at `http://APP_NAME.app.exo.io`.
+Congratulations, you can now see your Tornado app running at `http://APP_NAME.dionepaas.com`.
 
 [Tornado]: http://www.tornadoweb.org
 [exoscale]: http://www.exoscale.ch

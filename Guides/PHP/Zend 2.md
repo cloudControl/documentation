@@ -174,7 +174,7 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
 -----> Building image
 -----> Uploading image (3.1M)
        
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -199,10 +199,10 @@ $ ironcliapp APP_NAME/default addon.add mysqls.free
 $ ironcliapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
-Connection to sshforwarder.app.exo.io closed.
+Connection to sshforwarder.dionepaas.com closed.
 ~~~
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.app.exo.io`.
+Et voila, the app is now up and running at `http[s]://APP_NAME.dionepaas.com`.
 
 [PHP buildpack]: https://github.com/cloudControl/buildpack-php
 [exoscale]: https://www.exoscale.ch/

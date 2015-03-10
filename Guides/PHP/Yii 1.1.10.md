@@ -111,7 +111,7 @@ You should see output as below:
     >> Building image
     >> Uploading image (4.1M)
 
-    To ssh://APP_NAME@app.exo.io/repository.git
+    To ssh://APP_NAME@dionepaas.com/repository.git
      * [new branch]      master -> master
 
 ##4. Initialise the Required Add-ons

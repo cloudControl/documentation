@@ -73,7 +73,7 @@ Total 14 (delta 0), reused 14 (delta 0)
 -----> Building image
 -----> Uploading image (31M)
 
-To ssh://APP_NAME@app.exo.io/repository.git
+To ssh://APP_NAME@dionepaas.com/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -82,7 +82,7 @@ Last but not least deploy the latest version of the app with the ironcliapp depl
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Sinatra App running at `http[s]://APP_NAME.app.exo.io`.
+Congratulations, you can now see your Sinatra App running at `http[s]://APP_NAME.dionepaas.com`.
 
 
 [sinatra]: http://www.sinatrarb.com/

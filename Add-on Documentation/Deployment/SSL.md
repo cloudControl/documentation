@@ -9,11 +9,11 @@ Overview:
 Secure Socket Layer (SSL) encryption is available for improved security when
 transmitting passwords and other sensitive data.
 
-As part of the provided `.app.exo.io` subdomain, all deployments have
-access to piggyback SSL using a `*.app.exo.io` wildcard certificate.
+As part of the provided `.dionepaas.com` subdomain, all deployments have
+access to piggyback SSL using a `*.dionepaas.com` wildcard certificate.
 To use this, simply point your browser to:
-* `https://APP_NAME.app.exo.io` for the default deployment
-* `https://DEP_NAME-APP_NAME.app.exo.io` for non-default deployments
+* `https://APP_NAME.dionepaas.com` for the default deployment
+* `https://DEP_NAME-APP_NAME.dionepaas.com` for non-default deployments
 
     Please note the **dash** between DEP_NAME and APP_NAME.
 
