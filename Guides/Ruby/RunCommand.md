@@ -78,7 +78,7 @@ irb(main):004:0> Post.all
 irb(main):005:0> exit
 u<PORT>@<DEP_ID>-<PORT>:~/www$ exit
 Connection to X.X.X.X closed.
-Connection to sshforwarder.dionepaas.com closed.
+Connection to sshforwarder.kilatiron.net closed.
 ~~~
 
 The same could be accomplished if the multiple individual commands were chained:

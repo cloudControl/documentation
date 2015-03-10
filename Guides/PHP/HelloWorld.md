@@ -1,10 +1,10 @@
-#Deploying a Silex application on exoscale
+#Deploying a Silex application on CloudKilat
 
 [Silex] is a PHP microframework for PHP 5.3. It is inspired by sinatra and
 built on the shoulders of Symfony2 and Pimple.
 
 In this tutorial we're going to show you how to deploy a Silex application on
-[exoscale]. You can find the [source code on Github][example-app] and check
+[CloudKilat]. You can find the [source code on Github][example-app] and check
 out the [php buildpack] for supported features.
 
 
@@ -67,7 +67,7 @@ DocumentRoot /app/www/web
 For more information check out [the buildpack documentation][php buildpack].
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform:
 ~~~bash
 $ ironcliapp APP_NAME create php
 ~~~
@@ -99,7 +99,7 @@ Total 29 (delta 5), reused 18 (delta 0)
 -----> Building image
 -----> Uploading image (14M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
 * [new branch]      master -> master
 ~~~
 
@@ -108,15 +108,15 @@ Last but not least deploy the latest version of the app with the ironcliapp depl
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.dionepaas.com`.
+Congratulations, you can now see your Silex app running at `http[s]://APP_NAME.kilatiron.net`.
 
 
 [silex]: http://silex.sensiolabs.org/
-[exoscale]: http://www.exoscale.ch
-[exoscale-doc-user]: https://community.exoscale.ch/apps/documentation/#user-accounts
-[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/documentation/#command-line-client-web-console-and-api "documentation of the exoscale-command-line-client"
+[CloudKilat]: http://www.cloudkilat.com/
+[CloudKilat-doc-user]: /Platform%20Documentation/#user-accounts
+[CloudKilat-doc-cmdline]: /Platform%20Documentation/#command-line-client-web-console-and-api "documentation of the CloudKilat-command-line-client"
 [php buildpack]: https://github.com/cloudControl/buildpack-php
-[procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[procfile]: /Platform%20Documentation/#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
 [composer]: http://getcomposer.org/
 [example-app]: https://github.com/cloudControl/php-silex-example-app

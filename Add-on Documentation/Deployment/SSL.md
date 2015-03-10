@@ -9,11 +9,11 @@ Overview:
 Secure Socket Layer (SSL) encryption is available for improved security when
 transmitting passwords and other sensitive data.
 
-As part of the provided `.dionepaas.com` subdomain, all deployments have
-access to piggyback SSL using a `*.dionepaas.com` wildcard certificate.
+As part of the provided `.kilatiron.net` subdomain, all deployments have
+access to piggyback SSL using a `*.kilatiron.net` wildcard certificate.
 To use this, simply point your browser to:
-* `https://APP_NAME.dionepaas.com` for the default deployment
-* `https://DEP_NAME-APP_NAME.dionepaas.com` for non-default deployments
+* `https://APP_NAME.kilatiron.net` for the default deployment
+* `https://DEP_NAME-APP_NAME.kilatiron.net` for non-default deployments
 
     Please note the **dash** between DEP_NAME and APP_NAME.
 
@@ -160,12 +160,12 @@ in PEM format.
 To add the SSL Add-on, simply provide the paths to the files provided by the
 certificate authority using the respective parameters of the addon.add command.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
+ $ ironcliapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
  ~~~
 
 In order to check the status of the Add-on, you can do the following.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
+ $ ironcliapp APP_NAME/DEP_NAME addon ssl.host
  Addon                    : ssl.host
 
  Settings

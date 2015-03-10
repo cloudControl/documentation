@@ -1,6 +1,6 @@
 # Deploying a Django Application
 
-In this tutorial we're going to show you how to deploy a Django application on [exoscale]. You can find the [source code on Github][example-app] and check out the [Python buildpack][python buildpack] for supported features. The application follows the official [Django tutorial] and allows you to create, use and manage simple polls.
+In this tutorial we're going to show you how to deploy a Django application on [CloudKilat]. You can find the [source code on Github][example-app] and check out the [Python buildpack][python buildpack] for supported features. The application follows the official [Django tutorial] and allows you to create, use and manage simple polls.
 
 ## The Django Application Explained
 
@@ -37,7 +37,7 @@ INSTALLED_APPS = (
 
 ### Process Type Definition
 
-exoscale uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile at the top level of your repository. It looks like this:
+CloudKilat uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile at the top level of your repository. It looks like this:
 
 ~~~
 web: python manage.py run_gunicorn -b 0.0.0.0:$PORT
@@ -47,7 +47,7 @@ Left from the colon we specified the **required** process type called `web` foll
 
 ### Production Database
 
-The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on exoscale because the filesystem is [not persistent][filesystem]. To use a database, you should choose a data storage Add-on from [the available addons][data-storage-addons].
+The original tutorial application uses SQLite as the database in all environments, even the production one. It is not possible to use a SQLite database on CloudKilat because the filesystem is [not persistent][filesystem]. To use a database, you should choose a data storage Add-on from [the available addons][data-storage-addons].
 
 In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at `mysite/settings.py` so you can find out how to [get the MySQL credentials][get-conf] provided by MySQLs Add-on:
 
@@ -87,7 +87,7 @@ DATABASES = {
 
 ## Pushing and Deploying your App
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform: 
 
 ~~~bash
 $ ironcliapp APP_NAME create python
@@ -115,7 +115,7 @@ Total 31 (delta 3), reused 24 (delta 0)
 -----> Building image
 -----> Uploading image (30M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -131,28 +131,29 @@ Finally, prepare the database using the [Run command][ssh-session] (when prompte
 $ ironcliapp APP_NAME/default run "python manage.py syncdb"
 ~~~
 
-You can login to the admin console at `APP_NAME.dionepaas.com/admin`, create some polls and see them at `APP_NAME.dionepaas.com/polls`.
+You can login to the admin console at `APP_NAME.kilatiron.net/admin`, create some polls and see them at `APP_NAME.kilatiron.net/polls`.
 
 For additional information take a look at [Django Notes][django-notes] and other [python-specific documents][python-guides].
 
 [django]: https://www.djangoproject.com/
-[exoscale]: http://www.exoscale.ch
-[exoscale-doc-user]: https://community.exoscale.ch/apps/documentation/#user-accounts
-[exoscale-doc-cmdline]: https://community.exoscale.ch/apps/documentation/#command-line-client-web-console-and-api
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[CloudKilat]: http://www.cloudkilat.com/
+[CloudKilat]: http://www.cloudkilat.com/
+[CloudKilat-doc-user]: /Platform%20Documentation.md/#user-accounts
+[CloudKilat-doc-cmdline]: /Platform%20Documentation.md/#command-line-client-web-console-and-api
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile
 [git]: https://help.github.com/articles/set-up-git
-[filesystem]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
-[data-storage-addons]: https://community.exoscale.ch/apps/addons/
-[mysqls]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[filesystem]: /Platform%20Documentation.md/#non-persistent-filesystem
+[data-storage-addons]: /Add-on%20Documentation/Data%20Storage
+[mysqls]: /Add-on%20Documentation/Data%20Storage/MySQLs.md
 [example-app]: https://github.com/cloudControl/python-django-example-app
-[django-notes]: https://community.exoscale.ch/tutorial/python-app-django-notes
-[get-conf]: https://community.exoscale.ch/tutorial/python-app-add-on-credentials
+[django-notes]: /Guides/Python/Django%20notes.md
+[get-conf]: /Guides/Python/Add-on%20credentials.md
 [Django tutorial]: https://docs.djangoproject.com/en/1.4/intro/tutorial01/
-[python-guides]: https://community.exoscale.ch/tutorials/tagged/python
+[python-guides]: /Guides/Python
 [python buildpack]: https://github.com/cloudControl/buildpack-python
 [pip]: http://www.pip-installer.org/
 [gunicorn]: http://gunicorn.org/
-[worker]: https://community.exoscale.ch/apps/documentation/#scheduled-jobs-and-background-workers
+[worker]: /Platform%20Documentation.md/#scheduled-jobs-and-background-workers
 [db-commit]: https://github.com/cloudControl/python-django-example-app/commit/983f45e46ce0707476cec167ea062e19adcb53c9
-[ssh-session]: https://community.exoscale.ch/apps/documentation/#secure-shell-ssh
+[ssh-session]: /Platform%20Documentation.md/#secure-shell-ssh
 [mysql-driver]: https://pypi.python.org/pypi/MySQL-python/1.2.4

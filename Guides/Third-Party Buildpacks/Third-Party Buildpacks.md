@@ -1,6 +1,6 @@
 # Third-Party Custom Buildpacks
 
-[exoscale] officially supports the following application types via the [Pinky Stack][PinkyStack].
+[CloudKilat] officially supports the following application types via the [Pinky Stack][PinkyStack].
 
 - Java-based (Java with Maven, Gradle, Grails, Scala, Play! or Clojure)
 - Ruby
@@ -12,7 +12,7 @@ However, you can deploy apps developed on languages and technologies beyond the 
 
 ## Verified Buildpacks
 
-Here is a list of verified and recommended buildpacks for the exoscale platform covering the following languages and technologies:
+Here is a list of verified and recommended buildpacks for the CloudKilat platform covering the following languages and technologies:
 
 |Technology|Buildpack URL|
 |:---------|:----------:|
@@ -38,8 +38,8 @@ You can use any of the aforementioned buildpacks, fork them and make changes acc
 
 Before using any third party buildpack you should inspect their source code and proceed with caution.
 
-[exoscale]: https://www.exoscale.ch
-[PinkyStack]: https://community.exoscale.ch/apps/documentation/#stacks
+[CloudKilat]: http://www.cloudkilat.com/
+[PinkyStack]: /Platform%20Documentation.md/#stacks
 [buildpack-java]: https://github.com/cloudControl/buildpack-java
 [buildpack-python]: https://github.com/cloudControl/buildpack-python
 [buildpack-ruby]: https://github.com/cloudControl/buildpack-ruby

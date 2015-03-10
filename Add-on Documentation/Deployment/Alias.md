@@ -8,7 +8,7 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  The verification code is unique to the owner of the app. To get it simply use the alias command.
 
  ~~~
- $ ironcliapp APP_NAME/default alias APP_NAME.dionepaas.com
+ $ ironcliapp APP_NAME/default alias APP_NAME.kilatiron.net
  ~~~
 
  The verification code is case sensitive and includes a space after the colon. Please ensure, it keeps the exact same syntax in the TXT records text or the alias will not get verified.
@@ -22,29 +22,29 @@ Adding custom domains to a deployment is supported via the Alias add-on. The pro
  68b676e063eadb350876ae291e9ae43748d6e51c85ecd3c4cc026c869acc9d2d"
  ~~~
 
- Since we are going to use a CNAME to point the custom domain to the provided `.dionepaas.com` subdomain all additional record types will be ignored. It's therefor required to set the TXT record on the root domain. This has the added benefit, that if you can verifiy multiple domains like e.g. `www.example.com` and `secure.example.com` with just one TXT record set for `example.com`.
+ Since we are going to use a CNAME to point the custom domain to the provided `.kilatiron.net` subdomain all additional record types will be ignored. It's therefor required to set the TXT record on the root domain. This has the added benefit, that if you can verifiy multiple domains like e.g. `www.example.com` and `secure.example.com` with just one TXT record set for `example.com`.
 
- 1. Add a CNAME pointing to the provided `.dionepaas.com` subdomain.
+ 1. Add a CNAME pointing to the provided `.kilatiron.net` subdomain.
 
- In addition to the TXT record, go ahead and also add a CNAME pointing to your apps `.dionepaas.com` subdomain. Use the command line client's alias command to show the one specific to your deployment.
+ In addition to the TXT record, go ahead and also add a CNAME pointing to your apps `.kilatiron.net` subdomain. Use the command line client's alias command to show the one specific to your deployment.
 
  ~~~
  # for the default deployment
   $ ironcliapp APP_NAME/default alias
  Aliases
  name                                                         default  verified
- APP_NAME.dionepaas.com                                                 1        1
+ APP_NAME.kilatiron.net                                                 1        1
  # for any additional deployment
  $ ironcliapp APP_NAME/DEP_NAME alias
  Aliases
  name                                                         default  verified
- DEP_NAME.APP_NAME.dionepaas.com                                        1        1
+ DEP_NAME.APP_NAME.kilatiron.net                                        1        1
  ~~~
 
  The resulting CNAME record should look something like this example.
 
  ~~~
- www.example.com.	1593	IN	CNAME	APP_NAME.dionepaas.com.
+ www.example.com.	1593	IN	CNAME	APP_NAME.kilatiron.net.
  ~~~
 
  1. Add one alias per domain to your deployment.

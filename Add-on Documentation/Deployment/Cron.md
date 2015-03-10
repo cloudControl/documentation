@@ -4,8 +4,8 @@
 ## What are cronjobs?
 
 On UNIX systems [cronjobs](http://en.wikipedia.org/wiki/Cron) are commands that
-are periodically executed. On exoscale however, there is no one node that
-the cronjob can run on. Therefore cronjobs on exoscale are periodical calls
+are periodically executed. On CloudKilat however, there is no one node that
+the cronjob can run on. Therefore cronjobs on CloudKilat are periodical calls
 to a URL you specify.
 
 ## How does it work?
@@ -20,7 +20,7 @@ timelimit.
 
 If you need more control over when and how often tasks are run and/or have
 tasks that take longer than 55 seconds we recommend using the
-[Worker](https://community.exoscale.ch/tutorial/worker-add-on) Add-on.
+[Worker](/Add-on Documentation/Data Processing/Worker.md) Add-on.
 
 ## Adding the Cron Add-on
 
@@ -30,7 +30,7 @@ Before you can add a Cron job, the Add-on itself has to be added:
 $ ironcliapp APP_NAME/DEP_NAME addon.add cron.OPTION
 ~~~
 
-As always the different options are listed on the [Cron Add-on](https://community.exoscale.ch/tutorial/cron-add-on) page.
+As always the different options are listed on the [Cron Add-on](/Add-on Documentation/Deployment/Cron.md) page.
 
 ## Adding a url for the Cron job
 
@@ -38,9 +38,9 @@ To call an URL with the specific interval you write it as the parameter:
 
 ~~~
 # for the default deployment
-$ ironcliapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.dionepaas.com
+$ ironcliapp APP_NAME/default cron.add http[s]://[user:password@]APP_NAME.kilatiron.net
 # for any additional deployment
-$ ironcliapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.dionepaas.com
+$ ironcliapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.kilatiron.net
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
@@ -62,7 +62,7 @@ Get the details of a specific Cron job:
 $ ironcliapp APP_NAME/DEP_NAME cron CRON_ID
 Cronjob
  job_id   : jobkqy7rdmg
- url      : http://APP_NAME.dionepaas.com
+ url      : http://APP_NAME.kilatiron.net
  next_run : 2011-05-09 19:39:39
  created  : 2011-05-05 19:39:39
  modified : 2011-05-05 19:39:39

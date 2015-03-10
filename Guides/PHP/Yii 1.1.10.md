@@ -1,4 +1,4 @@
-#Deploying Yii 1.1.10 to exoscale
+#Deploying Yii 1.1.10 to CloudKilat
 
 ![Successful Deployment](/static/apps/images/yii-framework-logo.png)
 
@@ -10,7 +10,7 @@ If you're looking for a lightning fast, light and effective PHP Framework for yo
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the exoscale platform](http://www.exoscale.ch).
+In this tutorial, we're going to take you through deploying the Yii Framework v1.1.11 to [the CloudKilat platform](http://www.cloudkilat.com/).
 
 ##Prerequisites
 
@@ -28,7 +28,7 @@ So now that you have the prerequisites in place, download a copy of the latest, 
 
 ##Create a Basic Application
 
-Ok, first things first, [follow the online tutorial](http://www.yiiframework.com/doc/guide/1.1/en/quickstart.installation) on the Yii site and create a simple application in your local development environment. Then, after you've done that, we're going to make a set of simple changes and you'll be ready to deploy your first application to exoscale.
+Ok, first things first, [follow the online tutorial](http://www.yiiframework.com/doc/guide/1.1/en/quickstart.installation) on the Yii site and create a simple application in your local development environment. Then, after you've done that, we're going to make a set of simple changes and you'll be ready to deploy your first application to CloudKilat.
 
 ##2. Amend the Code
 
@@ -40,7 +40,7 @@ Ok, now that you have your test application created and running, we need to modi
 
 ###2.1 Store Session in the Cache Log Files in a Database, Not on the Filesystem
 
-We need to do this because Yii Framework, by default, logs to and stores its session files on the filesystem. However, this approach isn't recommended on the exoscale platform.
+We need to do this because Yii Framework, by default, logs to and stores its session files on the filesystem. However, this approach isn't recommended on the CloudKilat platform.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store both the session and log files in a two-level cache, composed of MySQL and APC.
 
@@ -50,7 +50,7 @@ Thankfully, Yii Framework is written in a very straight-forward and configurable
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. Yii Framework does do this out of the box, but it's done by using different bootstrap files, such as ``index.php``, ``index-test.php`` and so on.
 
-On exoscale, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
+On CloudKilat, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code Under Git Control
 
@@ -78,7 +78,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -111,7 +111,7 @@ You should see output as below:
     >> Building image
     >> Uploading image (4.1M)
 
-    To ssh://APP_NAME@dionepaas.com/repository.git
+    To ssh://APP_NAME@kilatiron.net/repository.git
      * [new branch]      master -> master
 
 ##4. Initialise the Required Add-ons
@@ -257,7 +257,7 @@ Now, ``index.php`` will load the configuration file based on *APPLICATION_ENV* a
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``Yii Framework_exoscale_init.sql``, ready to be used to initialise the database next.
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``Yii Framework_CloudKilat_init.sql``, ready to be used to initialise the database next.
 
     --
     -- Table structure for table `YiiLog`
@@ -296,7 +296,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < Yii Framework_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < Yii Framework_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -349,7 +349,7 @@ The commands output information in a [UNIX tail](http://en.wikipedia.org/wiki/Ta
 
 ##8. All done
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Yii Framework. If you want to save yourself some time, you can clone a copy of the modified Yii Framework source from the exoscale Github repository. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Yii Framework. If you want to save yourself some time, you can clone a copy of the modified Yii Framework source from the CloudKilat Github repository. If you have any issues, feel free to email [support@cloudkilat.com](mailto:support@cloudkilat.com).
 
 ##Links
 

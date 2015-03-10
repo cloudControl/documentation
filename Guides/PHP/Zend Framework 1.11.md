@@ -1,4 +1,4 @@
-#Deploying Zend Framework 1.11 to exoscale
+#Deploying Zend Framework 1.11 to CloudKilat
 
 ![Successful Deployment](/static/apps/images/ZendFramework-logo.png)
 
@@ -10,7 +10,7 @@ If you're looking for a feature-rich, flexible and capable PHP Framework for you
  * Easy to read documentation
  * A super, shiny, new version 2 **coming soon**
 
-In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the exoscale platform](http://www.exoscale.ch).
+In this tutorial, we're going to take you through deploying Zend Framework v1.11 to [the CloudKilat platform](http://www.cloudkilat.com/).
 
 ##Prerequisites
 
@@ -36,7 +36,7 @@ With that, you'll have a basic application that can be run in a basic VHost.
 
 ##2. Amend the Code
 
-As I mentioned before, a few changes need to be made to the default application configuration and code to accommodate exoscale deployment. These changes are as follows:
+As I mentioned before, a few changes need to be made to the default application configuration and code to accommodate CloudKilat deployment. These changes are as follows:
 
  * Store session and log files in a database, not on the filesystem
  * Auto-magically determine the environment and set the configuration
@@ -55,7 +55,7 @@ If we were deploying the application in a simple, configurable VHost, then we'd 
         SetEnv APPLICATION_ENV development
     </VirtualHost>
 
-When using exoscale, we need to do this in a slightly different way. It involves, for each environment, setting an environment variable with the ironcliapp config add-on, then reading that information from the environment at runtime. We'll come to this shortly.
+When using CloudKilat, we need to do this in a slightly different way. It involves, for each environment, setting an environment variable with the ironcliapp config add-on, then reading that information from the environment at runtime. We'll come to this shortly.
 
 ##3. Put the Code Under Git Control
 
@@ -83,7 +83,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -110,7 +110,7 @@ You'll see output similar to the following:
     >> Building image
     >> Uploading image (3.6M)
 
-    To ssh://APP_NAME@dionepaas.com/repository.git
+    To ssh://APP_NAME@kilatiron.net/repository.git
        dde253a..7b040e2  testing -> testing
 
 ##4. Initialise the Required Add-ons
@@ -213,7 +213,7 @@ Ok, let's start looking over the bootstrap plugin resources that will help us co
 
 ####5.2.1 Database
 
-In the database configuration, if we're **not** in the local development environment, we need to consult the ``CRED_FILE`` variable, available in all exoscale environments, for the options for mysql.
+In the database configuration, if we're **not** in the local development environment, we need to consult the ``CRED_FILE`` variable, available in all CloudKilat environments, for the options for mysql.
 
 When we configured the add ons earlier (**mysqls** and **config**) the settings were automatically persisted to the running server environments. So we’re now able to retrieve these settings and configure our database connection to make use of them.
 
@@ -402,7 +402,7 @@ What that does is to use the ``CRED_FILE`` settings that we configured earlier t
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``zendframework_exoscale_init.sql``, ready to be used to initialise the database next.
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``zendframework_CloudKilat_init.sql``, ready to be used to initialise the database next.
 
     -- table structure
     CREATE TABLE `session` (
@@ -433,7 +433,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < zendframework_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < zendframework_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 

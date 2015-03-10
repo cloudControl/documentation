@@ -12,7 +12,7 @@ If you're looking for a very fast, light, highly configurable and effective PHP 
  * The ability to add in 3rd party libraries, such as Zend Framework
  * Rich [HMVC](http://en.wikipedia.org/wiki/Hierarchical_model%E2%80%93view%E2%80%93controller) support
 
-In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the exoscale platform](http://www.exoscale.ch). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
+In this tutorial, we're going to take you through deploying Kohana 3.2.0 to [the CloudKilat platform](http://www.cloudkilat.com/). If you need further information about Kohana, check out [the online user guide](http://kohanaframework.org/documentation) or jump in to [the IRC channel](irc://irc.freenode.net/kohana). Otherwise, let's get started.
 
 ##Prerequisites
 
@@ -36,7 +36,7 @@ As I mentioned before, a few changes need to be made to the default Kohana confi
 
 ###2.1 Store Sessions in the Database
 
-We need to do this because Kohana, by default, stores its session files on the filesystem. However, this approach isn't recommended on the exoscale platform.
+We need to do this because Kohana, by default, stores its session files on the filesystem. However, this approach isn't recommended on the CloudKilat platform.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store them in a MySQL database.
 
@@ -46,7 +46,7 @@ Thankfully, Kohana is written in a very straight-forward and configurable manner
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. Kohana does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on.
 
-On exoscale, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
+On CloudKilat, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code Under Git Control
 
@@ -74,7 +74,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -109,7 +109,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (772K)
 
-    To ssh://APP_NAME@dionepaas.com/repository.git
+    To ssh://APP_NAME@kilatiron.net/repository.git
        f98a87c..a685cd6  master -> master
 
 Note the following lines:
@@ -208,7 +208,7 @@ After you've found it, replace them with the following. I'll go through the code
 
     Kohana::$environment = $env;
 
-What that the code's completed for replacing the original environment configuration with one that is based on looking at the setting contained in the exoscale credentials file setting, *APPLICATION_ENV*, that we set earlier.
+What that the code's completed for replacing the original environment configuration with one that is based on looking at the setting contained in the CloudKilat credentials file setting, *APPLICATION_ENV*, that we set earlier.
 
 You'll notice that the we're using the Kohana environment constants, which you can find in ``/system/classes/kohana/core.php``. This way, the code can stay consistent throughout and we're not adding on any unnecessary complexity or reinventing the wheel.
 
@@ -260,7 +260,7 @@ Create a new file under ``application/config`` called ``cache.php``. In that fil
         ),
     );
 
-What that does is to tell Kohana that the cache will be using APC as the backend, which exoscale provides out of the box and sets the default expiry period to be **3600 seconds**, or **60 minutes**.
+What that does is to tell Kohana that the cache will be using APC as the backend, which CloudKilat provides out of the box and sets the default expiry period to be **3600 seconds**, or **60 minutes**.
 
 ###5.3 Configuring Database Connections
 
@@ -308,7 +308,7 @@ Create a new file under ``application/config`` called ``database.php``. In that 
                     'username'   => 'cc_dev',
                     'password'   => 'cc_dev',
                     'persistent' => FALSE,
-                    'database'   => 'exoscale_kohana',
+                    'database'   => 'CloudKilat_kohana',
                 ),
                 'table_prefix' => '',
                 'charset'      => 'utf8',
@@ -401,13 +401,13 @@ Ok, after all this is done, we need to load the database schema in to each of ou
 
 What we have is a simple MySQL schema that creates two tables, one to store **session information** and one to store **users**, which we'll be using in our simple example application controller and view next.
 
-We also load in a few users in to the users table as we're not going to create and forms to manage the information there, but want to have something to look at to confirm it's working. So store the schema in a file called ``kohana_exoscale_init.sql``.
+We also load in a few users in to the users table as we're not going to create and forms to manage the information there, but want to have something to look at to confirm it's working. So store the schema in a file called ``kohana_CloudKilat_init.sql``.
 
 Now, in the shell, we're going to load the schema in to the remote mysql instance that we created earlier with the mysqls add-on. To do so, run the following command, changing the respective options with your configuration settings:
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < kohana_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < kohana_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -522,7 +522,7 @@ Now create a file called ``site.php`` under ``application/views/``. In it, add t
             </style>
         </head>
         <body>
-            <h1>Welcome to Kohana on exoscale</h1>
+            <h1>Welcome to Kohana on CloudKilat</h1>
             <p><?php echo $message; ?></p>
             <table cellspacing="2" cellpadding="4" border="2" width="100%">
                 <tr>
@@ -539,10 +539,10 @@ Now create a file called ``site.php`` under ``application/views/``. In it, add t
         </body>
     </html>
 
-In this view file, we output some simple HTML and then iterate the value of the users that we retrieved in the controller before. Point your browser to `APP_NAME.dionepaas.com/hello.php` to see the result.
+In this view file, we output some simple HTML and then iterate the value of the users that we retrieved in the controller before. Point your browser to `APP_NAME.kilatiron.net/hello.php` to see the result.
 
 ##7. Review the Deployment
 
 After this, add the files to git and commit them and push/deploy the changes out to both environments. From there you can review the testing and production deployments to ensure that they're working as well.
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and exoscale. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Kohana and CloudKilat. If you have any issues, feel free to email [support@cloudkilat.com](mailto:support@cloudkilat.com).

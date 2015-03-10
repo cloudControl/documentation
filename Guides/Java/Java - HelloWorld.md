@@ -2,7 +2,7 @@
 
 If you're looking for a fast and lightweight Java web server / Servlet container for your projects, you definitely have to try [Jetty].
 
-In this tutorial we're going to show you how to deploy a Jetty application on [exoscale]. You can find the [source code on Github](https://github.com/cloudControl/java-jetty-jsp-example-app.git) and check out the [Java buildpack] for supported features.
+In this tutorial we're going to show you how to deploy a Jetty application on [CloudKilat]. You can find the [source code on Github](https://github.com/cloudControl/java-jetty-jsp-example-app.git) and check out the [Java buildpack] for supported features.
 
 
 ## The Jetty Application Explained
@@ -70,7 +70,7 @@ To create this application we had to provide Spring framework and Log4j as Maven
 ~~~
 
 ### Process Type Definition
-exoscale uses a [Procfile] to know how to start your processes.
+CloudKilat uses a [Procfile] to know how to start your processes.
 
 The example code already includes the `Procfile` at the top level of your repository. It looks like this:
 
@@ -82,7 +82,7 @@ The `web` process type is required and specifies the command that will be execut
 The java command starts the 'com.exo.sample.jetty.App' with the classpath set to the compiled Java classes and dependencies.
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform: 
 
 ~~~bash
 $ ironcliapp APP_NAME create java
@@ -114,7 +114,7 @@ $ ironcliapp APP_NAME/default push
 -----> Building image
 -----> Uploading image (39M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
    54b0da2..d247825  master -> master
 ~~~
 
@@ -124,12 +124,12 @@ Last but not least deploy the latest version of the app with the ironcliapp depl
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.dionepaas.com`.
+Congratulations, you can now see your Jetty Application running at `http[s]://APP_NAME.kilatiron.net`.
 
 [Jetty]: http://jetty.codehaus.org/jetty/
-[exoscale]: https://www.exoscale.ch/
+[CloudKilat]: http://www.cloudkilat.com/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[exoscale-command-line-client]: https://community.exoscale.ch/apps/documentation/#command-line-client-web-console-and-api
+[CloudKilat-command-line-client]: /Platform%20Documentaion.md/#command-line-client-web-console-and-api
 [Git client]: http://git-scm.com/
 [Maven dependency plugin]: http://maven.apache.org/plugins/maven-dependency-plugin/
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[Procfile]: /Platform%20Documentaion.md/#buildpacks-and-the-procfile

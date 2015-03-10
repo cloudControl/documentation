@@ -1,6 +1,6 @@
 #Deploying a Spring Application
 
-In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate application on [exoscale]. The example app is a ready to deploy project based on the [Spring Roo petclinic] example.
+In this tutorial we're going to show you how to deploy a Spring/MVC/Hibernate application on [CloudKilat]. The example app is a ready to deploy project based on the [Spring Roo petclinic] example.
 
 ## The Spring Application Explained
 
@@ -64,7 +64,7 @@ In this tutorial we use the [Shared MySQL Add-on]. We have changed the `src/main
 
 Logging to a file is not recommended since the container's [file system] is not persistent.
 The default logger configuration - `src/main/resources/log4j.properties` is modified to log to `stdout/stderr`.
-Then exoscale can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
+Then CloudKilat can pick up all the messages and provide them to you via the [log command]. This is how the file looks now:
 ~~~xml
 og4j.rootLogger=DEBUG, stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
@@ -74,7 +74,7 @@ log4j.appender.stdout.layout.ConversionPattern=%p [%t] (%c) - %m%n%
 
 ### Process Type Definition
 
-exoscale uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Jetty Runner:
+CloudKilat uses the `Procfile` to start the application. The `Procfile` in the project root therefore specifies the command which executes the Jetty Runner:
 
 ~~~
 web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target/*.war
@@ -83,7 +83,7 @@ web: java $JAVA_OPTS -jar target/dependency/jetty-runner.jar --port $PORT target
 
 ## Pushing and Deploying your App
 
-Choose a unique name (from now on called APP_NAME) for your application and create it on the exoscale platform:
+Choose a unique name (from now on called APP_NAME) for your application and create it on the CloudKilat platform:
 
 ~~~bash
 $ ironcliapp APP_NAME create java
@@ -130,7 +130,7 @@ Total 223 (delta 107), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (84M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -143,13 +143,13 @@ $ ironcliapp APP_NAME/default deploy --memory=768MB
 
 The `--memory=768MB` argument increases the container size to meet the high memory consumption of the Spring framework. Please note: increasing the size comes with additional costs.
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.dionepaas.com` .
+Et voila, the app is now up and running at `http[s]://APP_NAME.kilatiron.net` .
 
 
 [Spring Roo petclinic]: http://static.springsource.org/spring-roo/reference/html/intro.html#intro-exploring-sample
-[Database credentials]: https://community.exoscale.ch/tutorial/java-app-add-on-credentials
+[Database credentials]: /Guides/Java/Add-on%20credentials.md
 [Jetty Runner]: http://wiki.eclipse.org/Jetty/Howto/Using_Jetty_Runner
-[exoscale]: http://exoscale.ch
-[file system]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
-[log command]: https://community.exoscale.ch/apps/documentation/#logging
-[Shared MySQL Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[CloudKilat]: http://www.cloudkilat.com/
+[file system]: /Platform%20Documentation.md/#non-persistent-filesystem
+[log command]: /Platform%20Documentation.md//#logging
+[Shared MySQL Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md

@@ -35,7 +35,7 @@ $var3_name = $creds['ADDON_NAME']['ADDON_NAME_PARAMETER3'];
 
 # Examples
 
-exoscale offers a number of data storage solutions via the [Add-on Marketplace].
+CloudKilat offers a number of data storage solutions via the [Add-on Marketplace].
 Below you can see how to access Add-on credentials for MySQL.
 
 ## MySQL
@@ -58,7 +58,7 @@ $password   = $creds['MYSQLS']['MYSQLS_PASSWORD'];
 
 Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
-[env-vars]: https://community.exoscale.ch/apps/documentation/#environment-variables
-[Add-on credentials]: https://community.exoscale.ch/apps/documentation/#add-on-credentials
-[Add-on Marketplace]: https://community.exoscale.ch/apps/addons/
-[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[env-vars]: /Platform%20Documentation.md/#environment-variables
+[Add-on credentials]: /Platform%20Documentation.md/#add-on-credentials
+[Add-on Marketplace]: http://www.cloudkilat.com/
+[MySQL Shared Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md

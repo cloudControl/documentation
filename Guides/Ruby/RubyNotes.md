@@ -3,7 +3,7 @@
 
 ## Procfile
 
-The exoscale platform uses a file named `Procfile` to determine how to run your
+The CloudKilat platform uses a file named `Procfile` to determine how to run your
 application. This `Procfile` uses the YAML format to specify the desired
 configuration.
 
@@ -100,7 +100,7 @@ Alternatively you can use the [cloudcontrol-rails] gem.
 
 ## Environments
 
-Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://community.exoscale.ch/tutorial/custom-config-add-on/). For example:
+Rails servers can be run in different environments. Production is the default one but you can change it by setting the `RAILS_ENV` and `RAKE_ENV` environment variables with the [Custom Config addon](https://community.CloudKilat.ch/tutorial/custom-config-add-on/). For example:
 
 ~~~
 ironcliapp APP_NAME/DEP_NAME config.add RACK_ENV=some_env RAILS_ENV=some_env
@@ -111,6 +111,6 @@ NOTE: Gems in development and test environments are excluded from bundle install
 
 
 [cloudcontrol-rails]: https://rubygems.org/gems/cloudcontrol-rails
-[procfile]: https://community.exoscale.ch/apps/documentation/#version-control-images
+[procfile]: /Platform%20Documentation.md/#version-control-images
 [rails-procfile]: #rails-procfile
 [ruby-buildpack]: https://github.com/cloudControl/buildpack-ruby

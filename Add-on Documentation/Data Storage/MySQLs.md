@@ -1,7 +1,7 @@
 # MySQLs: Shared MySQL Add-on
 
 Every deployment can access a highly available shared MySQL add-on with
-databases guaranteed to be located in exoscale datacenters in Switzerland.
+databases guaranteed to be located in CloudKilat datacenters in Indonesia.
 
 ## Adding the MySQLs Add-on
 
@@ -52,7 +52,7 @@ location of the file is available in the `CRED_FILE` environment variable.
 Reading the credentials from the creds.json file ensures your app is always
 using the correct credentials. For detailed instructions on how to use the
 creds.json file please refer to the section about
-[Add-on Credentials](https://community.exoscale.ch/apps/documentation/#add-ons)
+[Add-on Credentials](/Platform Documentation.md/#add-ons)
 in the general documentation.
 
 Most database drivers provide a reconnect on connection issues when you add **autoReconnect=true** parameter to your database uri. This should be enabled to have the most stable setup. For example with Java:
@@ -65,7 +65,7 @@ jdbc:mysql://{MYSQLS_HOSTNAME}:{MYSQLS_PORT}/{MYSQLS_DATABASE}?autoReconnect=tru
 
 External access to the MySQLs add-on is available through an SSL encrypted connection by following these simple steps.
 
- 1. Download the [certificate file](https://community.exoscale.ch/static/apps/ca-cert.pem) to your local machine.
+ 1. Download the [certificate file](TODO) to your local machine.
  1. Connect to the database using an SSL encrypted connection.
 
 The following example uses the MySQL command line tool.
@@ -83,7 +83,7 @@ Addon : mysqls.512mb
 Settings
 
 MYSQLS_DATABASE    : SOME_DATABASE_NAME
-MYSQLS_HOSTNAME    : mysql.dionepaas.com
+MYSQLS_HOSTNAME    : mysql.kilatiron.net
 MYSQLS_PORT        : 3306
 MYSQLS_PASSWORD    : SOME_SECRET_PASSWORD
 MYSQLS_USERNAME    : SOME_SECRET_USERNAME

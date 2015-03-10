@@ -44,7 +44,7 @@ var param3 = creds.ADDON_NAME.ADDON_NAME_PARAMETER3;
 
 # Examples
 
-exoscale offers a number of data storage solutions via the [Add-on Marketplace]. Below you can see how to access Add-on credentials for MySQL.
+CloudKilat offers a number of data storage solutions via the [Add-on Marketplace]. Below you can see how to access Add-on credentials for MySQL.
 
 ##MySQL
 To add a MySQL database, use the [MySQL Shared Add-on].
@@ -68,7 +68,7 @@ var port = creds.MYSQLS.MYSQLS_PORT;
 
 Remember, you can always refer to the `addon.creds` command to see the actual variable names and values.
 
-[Add-on Marketplace]: https://community.exoscale.ch/apps/addons/
-[environment variables]: https://community.exoscale.ch/apps/documentation/#environment-variables
-[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
-[Add-on credentials]:https://community.exoscale.ch/apps/documentation/#add-on-credentials
+[Add-on Marketplace]: http://www.cloudkilat.com/
+[environment variables]: /Platform%20Documentation.md/#environment-variables
+[MySQL Shared Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md
+[Add-on credentials]: /Platform%20Documentation.md/#add-on-credentials

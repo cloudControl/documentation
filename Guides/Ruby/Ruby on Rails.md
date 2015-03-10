@@ -1,6 +1,6 @@
 # Deploying a Ruby on Rails Application
 
-In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [exoscale]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
+In this tutorial we're going to show you how to deploy a [Ruby on Rails] application on [CloudKilat]. You can find the [source code on Github][example-app] and check out the [Ruby buildpack][ruby buildpack] for supported features. The application is a fork of Michael Hartl's [Rails tutorial] sample app which is a Twitter clone.
 
 ## The Rails Application Explained
 
@@ -65,11 +65,11 @@ $ bundle exec rake db:test:prepare
 $ bundle exec rspec spec/
 ~~~
 
-Now that the app is working, lets have a look at changes we have made to deploy it on exoscale.
+Now that the app is working, lets have a look at changes we have made to deploy it on CloudKilat.
 
 ### Process Type Definition
 
-exoscale uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
+CloudKilat uses a [Procfile] to know how to start your processes. The example code already includes a file called Procfile in the root of your repository. It looks like this:
 
 ~~~
 web: bundle exec rails s -p $PORT
@@ -98,7 +98,7 @@ end
 
 ### Production Database
 
-By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on exoscale because the filesystem is [not persistent][filesystem]. 
+By default, Rails 3 uses SQLite for all the environments. However, it is not recommended to use SQLite on CloudKilat because the filesystem is [not persistent][filesystem]. 
 
 In this tutorial we use MySQL with the [MySQL Shared Add-on]. This is why we have modified the `Gemfile` by moving the `sqlite3` line to ":development, :test" block and added a new ":production" group with "mysql2" and ["cloudcontrol-rails"][gem itself] gems.
 
@@ -114,7 +114,7 @@ The 'cloudcontrol-rails' gem will provide the database credentials.
 
 ## Pushing and Deploying your App
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform:
 
 ~~~bash
 $ ironcliapp APP_NAME create ruby
@@ -162,7 +162,7 @@ Total 62 (delta 2), reused 0 (delta 0)
 -----> Building image
 -----> Uploading image (34M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      mysql -> mysql
 ~~~
 
@@ -179,21 +179,21 @@ Finally, prepare the database by running migrations using the [Run command][run 
 $ ironcliapp APP_NAME/mysql run "rake db:migrate"
 ~~~
 
-Congratulations, you can now access the app at http://mysql-APP_NAME.dionepaas.com.
+Congratulations, you can now access the app at http://mysql-APP_NAME.kilatiron.net.
 
 For additional information take a look at [Ruby on Rails notes][rails-notes] and
 other [ruby-specific documents][ruby-guides].
 
 [Ruby on Rails]: http://rubyonrails.org/
-[exoscale]: http://www.exoscale.ch
+[CloudKilat]: http://www.cloudkilat.com/
 [example-app]: https://github.com/cloudControl/ruby-rails-example-app
 [ruby buildpack]: https://github.com/cloudControl/buildpack-ruby
 [Rails tutorial]: http://ruby.railstutorial.org/
 [Bundler]: http://bundler.io/
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
-[filesystem]: https://community.exoscale.ch/apps/documentation/#non-persistent-filesystem
-[run command]: https://community.exoscale.ch/tutorial/ruby-app-runcommand
-[rails-notes]: https://community.exoscale.ch/tutorial/ruby-app-rubynotes
-[ruby-guides]: https://community.exoscale.ch/tutorials/tagged/ruby
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile
+[filesystem]: /Platform%20Documentation.md/#non-persistent-filesystem
+[run command]: /Guides/Ruby/RunCommand.md
+[rails-notes]: /Guides/Ruby/RubyNotes.md
+[ruby-guides]: /Guides/Ruby
 [gem itself]: http://rubygems.org/gems/cloudcontrol-rails
-[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on
+[MySQL Shared Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md

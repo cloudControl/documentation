@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the exoscale platform](http://www.exoscale.ch). 
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the CloudKilat platform](http://www.CloudKilat.ch). 
 
 ##Prerequisites
 
@@ -29,14 +29,14 @@ If you use an IDE, then it's best to open up the source as a project in it. In t
 
 ##2. Amend the Code
 
-A few changes need to be made to the default CakePHP configuration and code to accommodate exoscale deployment. These changes are as follows:
+A few changes need to be made to the default CakePHP configuration and code to accommodate CloudKilat deployment. These changes are as follows:
 
  * Store session and log files in a database, not on the filesystem
  * Auto-magically determine the environment and set the configuration
 
 ###2.1 Store session and log files in a database, not on the filesystem
 
-We need to do this because CakePHP, by default, stores its session files on the filesystem. However, this approach isn’t recommended on cloud platforms like exoscale.
+We need to do this because CakePHP, by default, stores its session files on the filesystem. However, this approach isn’t recommended on cloud platforms like CloudKilat.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store both the session and log files in a two-level cache, composed of MySQL and APC. 
 
@@ -46,7 +46,7 @@ Thankfully, CakePHP is written in a very straight-forward and configurable manne
 
 As each environment will, likely, have different configuration settings, we also need to be able to differentiate between them. CakePHP does do this out of the box, but it's done by using different bootstrap files, such as **index.php**, **index-test.php** and so on. 
 
-On exoscale, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
+On CloudKilat, an app should programmatically know where it is and set the appropriate configuration options. That way, your code will run in every environment. So we're going to be making additions to the code so this happens auto-magically.
 
 ##3. Put the Code under Git Control
 
@@ -74,7 +74,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments.
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments.
 By running the following commands, this will all be done:
 
     // switch to the master branch
@@ -148,7 +148,7 @@ We then create a new class, **BASE_CONFIG**, that the database config, will late
         var $default = array();
 
 
-In the function, ``getEnvironmentName``, if we're not in a local, development, environment, as indicated by having '**localdomain**' in the URL, we retrieve [the credentials file](https://github.com/cloudControl/add_on_cred_file/blob/master/_config.php) from the environment, which is part of a standard exoscale deployment.
+In the function, ``getEnvironmentName``, if we're not in a local, development, environment, as indicated by having '**localdomain**' in the URL, we retrieve [the credentials file](https://github.com/cloudControl/add_on_cred_file/blob/master/_config.php) from the environment, which is part of a standard CloudKilat deployment.
 
 We then look in there for a value called **CAKE_ENV**, which determines the active environment and we store that in an application environment setting and return the value determined.
 
@@ -175,7 +175,7 @@ We then look in there for a value called **CAKE_ENV**, which determines the acti
         return $environment;
     }
      
-Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in ``app/Config/database.php``. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all exoscale environments. 
+Now that we're able to know the environment that we're operating in, we setup the database configuration appropriately. If we're in development, then we use the development configuration in ``app/Config/database.php``. If we're not, then we retrieve the options from the ``CRED_FILE`` that is available to all CloudKilat environments. 
 
 When we configured the add ons earlier (*mysqls* and *config*) the settings were automatically persisted to the running server environments. So we're now able to retrieve these settings, when we're not in a local development environment, and configure our database connection to use them. It's really handy as we don't need to do too much to make use of the options.
 
@@ -234,7 +234,7 @@ An example is provided below:
     		'host' => 'localhost',
     		'login' => 'cc_dev',
     		'password' => 'cc _dev',
-    		'database' => 'exoscale_cakephp',
+    		'database' => 'CloudKilat_cakephp',
     		'prefix' => '',
     		'encoding' => 'utf8',
     	);
@@ -243,7 +243,7 @@ An example is provided below:
 
 ###5.2 app/Config/bootstrap.php
 
-The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching is using the filesystem as storage. What we're going to do is to make use of the built-in APC module that comes with exoscale and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
+The bootstrap file is the core file managing the bootstrap process in CakePHP. By default, caching is using the filesystem as storage. What we're going to do is to make use of the built-in APC module that comes with CloudKilat and store the cache information there. We could use Memcache, but for the purposes of this tutorial, we'll be using APC.
 
 Go down in the file until you find a line similar to below:
 
@@ -355,7 +355,7 @@ What this does is to extend the DatabaseSession class so that we can use both AP
 
 ##6. Database Schema
 
-Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_exoscale_init.sql``, ready to be used to initialise the database next. 
+Ok, next we need to create a basic database schema for storing both the session and log information. To save time, add the following to a SQL file called ``cakephp_CloudKilat_init.sql``, ready to be used to initialise the database next. 
 
     CREATE TABLE `cake_sessions` (
       `id` varchar(255) NOT NULL DEFAULT '',
@@ -392,7 +392,7 @@ Now, in the shell, we're going to load the data in to the remote mysql instance 
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < cakephp_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -428,7 +428,7 @@ With that completed, then have a look at both your deployments to ensure that th
 
 If you see any errors, then double check your database configuration settings and run through commit and deploy again.
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the exoscale Github repository. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using CakePHP. If you want to save yourself some time, you can clone a copy of the modified CakePHP source from the CloudKilat Github repository. If you have any issues, feel free to email [support@CloudKilat.ch](mailto:support@CloudKilat.ch).
 
 ##Links
  

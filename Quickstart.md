@@ -1,7 +1,7 @@
-# exoscale Apps Quickstart
+# CloudKilat Quickstart
 
-It's easy to start with exoscale. Follow this 5 minute quickstart to get your
-first app running on exoscale PaaS.
+It's easy to start with CloudKilat. Follow this 5 minute quickstart to get your
+first app running on CloudKilat PaaS.
 
 **Note:** All examples starting with $ are supposed to be run in a terminal.
 For Windows we recommend using Git bash, which comes bundled with the Windows
@@ -28,14 +28,14 @@ installer and Git bash. Come back when you are done.
 ~~~bash
 # if you don't have pip yet
 $ sudo easy_install pip
-$ sudo pip install cctrl
+$ sudo pip install ironcli
 ~~~
 
 **Windows:** Please download the provided [installer].
 
 ## Create a User Account (if you haven't already)
 
-You can register on [exoscale.ch](http://exoscale.ch).
+You can register on [www.cloudkilat.com](http://www.cloudkilat.com/).
 
 ## Add a Public Key
 
@@ -47,10 +47,10 @@ Password: PASSWORD
 
 The command line client will determine if you already have a public key and upload that or offer to create one.
 
-## Create the First Application on exoscale
+## Create the First Application on CloudKilat
 
-Create a new application on the exoscale platform by giving it an unique
-`APP_NAME` (the name is used as the `.dionepaas.com` subdomain) and choosing the
+Create a new application on the CloudKilat platform by giving it an unique
+`APP_NAME` (the name is used as the `.kilatiron.net` subdomain) and choosing the
 `TYPE`.
 
 ~~~bash
@@ -66,7 +66,7 @@ $ cd PATH_TO/YOUR_WORKDIR
 ~~~
 
 Clone one of the example apps in your preferred programming language and push
-it to the exoscale platform.
+it to the CloudKilat platform.
 
 ~~~bash
 # for Java
@@ -97,7 +97,7 @@ The push fires a hook that prepares your application for deployment like
 pulling in requirements and more. You can see the output of the build process
 in your terminal.
 
-## Deploy Your Application on exoscale
+## Deploy Your Application on CloudKilat
 
 Deploy your app with
 
@@ -108,18 +108,18 @@ $ ironcliapp APP_NAME deploy
 **Congratulations, your app is now up and running.**
 
 ~~~bash
-http[s]://APP_NAME.dionepaas.com
+http[s]://APP_NAME.kilatiron.net
 ~~~
 
 ## Cheatsheet
 
-Grab [our cheatsheet (PDF)](/static/apps/exo_cheatsheet.pdf)
+Grab [our cheatsheet (PDF)](/cloudkilat_cheatsheet.pdf)
 to have the most important command line client commands handy at all times.
 
 ## Documentation
 
 To learn more about all the platform features and how to integrate it
 seamlessly into the development life cycle please refer to the extensive
-[platform documentation](https://community.exoscale.ch/apps/documentation/).
+[platform documentation](/Platform Documentation.md).
 
 [installer]: https://www.cloudcontrol.com/download/win

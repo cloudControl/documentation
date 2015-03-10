@@ -3,7 +3,7 @@
 intentions.
 
 In this tutorial we're going to show you how to deploy a Flask
-application on [exoscale]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
+application on [CloudKilat]. You can find the [source code on Github][example_app] and check out the [Python buildpack] for
 supported features.
 
 ## The Flask App Explained
@@ -26,7 +26,7 @@ Flask==0.9
 ~~~
 
 ### Process Type Definition
-exoscale uses a [Procfile] to know how to start your processes.
+CloudKilat uses a [Procfile] to know how to start your processes.
 
 The example code already includes a file called `Procfile` at the top level of your repository. It looks like this:
 
@@ -37,7 +37,7 @@ web: python server.py
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
 ## Pushing and Deploying the App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform:
 
 ~~~bash
 $ ironcliapp APP_NAME create python
@@ -66,7 +66,7 @@ Total 16 (delta 2), reused 16 (delta 2)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 
 ~~~
@@ -77,10 +77,10 @@ Last but not least deploy the latest version of the app with the ironcliapp depl
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.dionepaas.com`.
+Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.kilatiron.net`.
 
 [Flask]: http://flask.pocoo.org/
-[exoscale]: http://www.exoscale.ch
+[CloudKilat]: http://www.cloudkilat.com/
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

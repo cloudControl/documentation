@@ -1,4 +1,4 @@
-#Deploying Symfony 1.4 to exoscale
+#Deploying Symfony 1.4 to CloudKilat
 
 ![Successful Deployment](/static/apps/images/symfony1.4-homepage.png)
 
@@ -12,7 +12,7 @@ If you're looking for a feature-rich, open source, PHP Framework for your projec
  * Factories, plug-ins, and mixins
  * Built-in unit and functional testing framework
 
-In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the exoscale platform](http://www.exoscale.ch).
+In this tutorial, we're going to take you through deploying CakePHP v2.2.1 to [the CloudKilat platform](http://www.cloudkilat.com/).
 
 ##Prerequisites
 
@@ -38,7 +38,7 @@ As I mentioned before, a few changes need to be made to the default Symfony conf
 
 ###2.1 Store Sessions in the Database & Disable Logging
 
-We need to do this because Symfony, by default, logs to and stores its session files on the filesystem. However, this approach recommended on the exoscale platform.
+We need to do this because Symfony, by default, logs to and stores its session files on the filesystem. However, this approach recommended on the CloudKilat platform.
 
 What's more, storing files in a multi-server environment can lead to hard to debug issues. So what we're going to do is to store sessions in the database and disable logging.
 
@@ -74,7 +74,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -108,7 +108,7 @@ When you do this, you'll see output similar to the following:
     >> Building image
     >> Uploading image (3.0M)
 
-    To ssh://APP_NAME@dionepaas.com/repository.git
+    To ssh://APP_NAME@kilatiron.net/repository.git
        d90506c..4078c78  master -> master
 
 Note the following lines:
@@ -116,7 +116,7 @@ Note the following lines:
     INFO: Symfony 1.x detected
     INFO: No '.ccconfig.yaml' found, setting web content to '/web'.
 
-In the previous version of the exoscale platform, you would have had to have used a platform-specific config file called: ``.ccconfig.yaml`` and in it set the following:
+In the previous version of the CloudKilat platform, you would have had to have used a platform-specific config file called: ``.ccconfig.yaml`` and in it set the following:
 
     BaseConfig:
       WebContent: /web
@@ -197,9 +197,9 @@ Under ``apps/frontend/config`` open the file ``factories.yaml``. In that file, w
       storage:
         class: sfCacheSessionStorage
         param:
-          session_name: symfony1_exoscale
+          session_name: symfony1_CloudKilat
           session_cookie_path: /
-          session_cookie_domain: APP_NAME.dionepaas.com
+          session_cookie_domain: APP_NAME.kilatiron.net
           session_cookie_lifetime: +30 days
           session_cookie_secure: false
           session_cookie_http_only: true
@@ -256,7 +256,7 @@ And then replace it with the following
         'frontend', $environment, $debug
     );
 
-What that will do is, if we're not using the local development environment, determined by having ``localdomain`` in the url, then we will retrieve a copy of the credentials file from the environment settings, that comes with every exoscale application deployment by default.
+What that will do is, if we're not using the local development environment, determined by having ``localdomain`` in the url, then we will retrieve a copy of the credentials file from the environment settings, that comes with every CloudKilat application deployment by default.
 
 In there, we'll look for what the value of the **APPLICATION_ENV** config var is. If it's set, then we set the environment to be that. If it's not set, then we'll set the environment to ``prod``, so that we have a safe and sane default at all times.
 
@@ -276,7 +276,7 @@ What we're going to do is change it to have the values from our initialised mysq
         param:
           classname: DebugPDO
           debug: { realmemoryusage: true, details: { time: { enabled: true }, slow: { enabled: true, threshold: 0.1 }, mem: { enabled: true }, mempeak: { enabled: true }, memdelta: { enabled: true } } }
-          dsn: 'mysql:host=localhost;dbname=exoscale_symfony1'
+          dsn: 'mysql:host=localhost;dbname=CloudKilat_symfony1'
           username: cc_dev
           password: cc_dev
           encoding: utf8
@@ -334,7 +334,7 @@ After this, stage all the files in Git and commit them with a suitable commit me
 
 With that completed, then have a look at both your deployments to ensure that they're working.
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Symfony. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Symfony. If you have any issues, feel free to email [support@CloudKilat.ch](mailto:support@CloudKilat.ch).
 
 ##Links
 

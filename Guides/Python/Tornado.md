@@ -4,7 +4,7 @@
 and tools that power FriendFeed written in Python.
 
 In this tutorial we're going to show you how to deploy a simple Tornado based
-application on [exoscale].
+application on [CloudKilat].
 
 ## The Example App Explained
 
@@ -29,7 +29,7 @@ tornado==2.4.1
 ~~~
 
 ### Process Type Definition
-exoscale uses a [Procfile] to know how to start the app's processes.
+CloudKilat uses a [Procfile] to know how to start the app's processes.
 
 The example code already includes a file called `Procfile` at the top level of
 your repository. It looks like this:
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 ## Pushing and Deploying the App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the exoscale platform:
+and create it on the CloudKilat platform:
 ~~~bash
 $ ironcliapp APP_NAME create python
 ~~~
@@ -113,7 +113,7 @@ Total 7 (delta 0), reused 7 (delta 0)
 -----> Building image
 -----> Uploading image (25M)
        
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  + [new branch] master -> master
 ~~~
 
@@ -123,9 +123,9 @@ deploy command.
 $ ironcliapp APP_NAME/default deploy
 ~~~
 
-Congratulations, you can now see your Tornado app running at `http://APP_NAME.dionepaas.com`.
+Congratulations, you can now see your Tornado app running at `http://APP_NAME.kilatiron.net`.
 
 [Tornado]: http://www.tornadoweb.org
-[exoscale]: http://www.exoscale.ch
+[CloudKilat]: http://www.cloudkilat.com/
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile

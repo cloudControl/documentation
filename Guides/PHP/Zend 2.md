@@ -1,6 +1,6 @@
 # Deploying a Zend2 Application
 
-In this tutorial we're going to show you how to deploy a Zend2 application on [exoscale].
+In this tutorial we're going to show you how to deploy a Zend2 application on [CloudKilat].
 
 The [example app] is a ready to deploy fork of the official ZendSkeletonApplication available on [github](https://github.com/zendframework/ZendSkeletonApplication).
 
@@ -87,7 +87,7 @@ function get_credentials() {
 
 $config = array();
 
-// If the app is running on the exoscale PaaS read the credentials
+// If the app is running on the CloudKilat PaaS read the credentials
 // from the environment. Local db credentials should be put in local.php
 if (isset($_ENV['CRED_FILE'])) {
 	$config['db'] = get_credentials();
@@ -117,7 +117,7 @@ return $config;
 
 ### Store Sessions in the Database
 
-Storing sessions on the local filesystem does not work well on a horizontally scaling platform like exoscale. Additionally the filesystem on exoscale is not persitent across deploys so all sessions are lost after each deploy.
+Storing sessions on the local filesystem does not work well on a horizontally scaling platform like CloudKilat. Additionally the filesystem on CloudKilat is not persitent across deploys so all sessions are lost after each deploy.
 
 To avoid this, the app is preconfigured to store sessions using the previously configured connection in the database.
 
@@ -143,7 +143,7 @@ class Module
 ~~~
 
 ## Pushing and Deploying your App
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform: 
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform: 
 
 ~~~bash
 $ ironcliapp APP_NAME create php
@@ -174,7 +174,7 @@ Total 2208 (delta 1087), reused 2208 (delta 1087)
 -----> Building image
 -----> Uploading image (3.1M)
        
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -188,7 +188,7 @@ $ ironcliapp APP_NAME/default deploy
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on's free plan](https://community.exoscale.ch/tutorial/mysqls-add-on/). It provides a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://community.CloudKilat.ch/tutorial/mysqls-add-on/). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container:
 
@@ -199,12 +199,12 @@ $ ironcliapp APP_NAME/default addon.add mysqls.free
 $ ironcliapp APP_NAME/default run "php code/public/index.php init-session-table"
 Connecting...
 [SUCCESS] Session table created.
-Connection to sshforwarder.dionepaas.com closed.
+Connection to sshforwarder.kilatiron.net closed.
 ~~~
 
-Et voila, the app is now up and running at `http[s]://APP_NAME.dionepaas.com`.
+Et voila, the app is now up and running at `http[s]://APP_NAME.kilatiron.net`.
 
 [PHP buildpack]: https://github.com/cloudControl/buildpack-php
-[exoscale]: https://www.exoscale.ch/
+[CloudKilat]: http://www.cloudkilat.com/
 [example app]: https://github.com/cloudControl/php-zend2-example-app.git
 

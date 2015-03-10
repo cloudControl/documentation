@@ -75,7 +75,7 @@ For more details refer to the [PHP example](#php-worker-example) below.
 
 ## Worker log
 
-As already explained in the [Logging section](https://community.exoscale.ch/apps/documentation/#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the log command.
+As already explained in the [Logging section](/Platform Documentation.md/#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the log command.
 
 ~~~
 $ ironcliapp APP_NAME/DEP_NAME log worker

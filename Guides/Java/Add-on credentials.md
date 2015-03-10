@@ -34,7 +34,7 @@ is exposed in the `CRED_FILE` environment variable. You can see the format of th
 $ ironcliapp APP_NAME/DEP_NAME addon.creds
 ~~~
 
-We provide a small [exoscale credentials helper class] to get the Add-on credentials from the file.
+We provide a small [CloudKilat credentials helper class] to get the Add-on credentials from the file.
 It requires [json-simple], a simple Java toolkit to encode or decode JSON text easily.
 To use it in your project, add it as a maven dependency:
 ~~~xml
@@ -56,7 +56,7 @@ String database = (String)cr.getCredential("MYSQLS_DATABASE", "MYSQLS");
 
 # Examples
 
-exoscale offers a number of data storage solutions via the [Add-on Marketplace].
+CloudKilat offers a number of data storage solutions via the [Add-on Marketplace].
 Below you can find examples on how to access the Add-on
 credentials for MySQL.
 
@@ -74,10 +74,10 @@ String password = System.getenv("MYSQLS_PASSWORD");
 Remember, you can always refer to the addon.creds command to see the actual variable names and values.
 
 [Java application with MySQL]: https://github.com/cloudControl/java-mysql-example-app
-[Add-on Marketplace]: https://community.exoscale.ch/apps/addons/
-[environment variables]: https://community.exoscale.ch/apps/documentation/#environment-variables
-[Add-on credentials]: https://community.exoscale.ch/apps/documentation/#add-on-credentials
-[cred-env-vars]: https://community.exoscale.ch/apps/documentation/#enablingdisabling-credentials-environment-variables
+[Add-on Marketplace]: http://www.cloudkilat.com/
+[environment variables]: /Platform%20Documentation.md/#environment-variables
+[Add-on credentials]: /Platform%20Documentation.md/#add-on-credentials
+[cred-env-vars]: /Platform%20Documentation.md/#enablingdisabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
-[exoscale credentials helper class]: https://gist.github.com/b350762c61fcc069b427
-[MySQL Shared Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[CloudKilat credentials helper class]: https://gist.github.com/b350762c61fcc069b427
+[MySQL Shared Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md

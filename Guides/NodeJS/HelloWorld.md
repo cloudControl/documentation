@@ -1,7 +1,7 @@
 # Deploying a Node.js Application
 [Node.js] is a platform built on Chrome's JavaScript runtime for building fast and scalable network applications. Its event-driven, non-blocking I/O model makes it a lightweight and efficient framework for building data-intensive real-time cloud apps.
 
-This tutorial demonstrates how to build and deploy a simple Hello World Node.js application on [exoscale]. Check out the [Node.js buildpack] for supported features.
+This tutorial demonstrates how to build and deploy a simple Hello World Node.js application on [CloudKilat]. Check out the [Node.js buildpack] for supported features.
 
 ## The Node.js App Explained
 
@@ -39,7 +39,7 @@ app looks like this:
 You should always specify the versions of your dependencies if you want your builds to be reproducible and to prevent unexpected errors caused by version changes.
 
 ### Process Type Definition
-A [Procfile] is required to start processes on the exoscale platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
+A [Procfile] is required to start processes on the CloudKilat platform. There must be a file called `Procfile` at the root of your repository. In the example code you already cloned it looks like this:
 
 ~~~
 web: node web.js
@@ -49,7 +49,7 @@ Left from the colon, we specified the **required** process type called `web` fol
 
 ## Pushing and Deploying your App
 Choose a unique name to replace the `APP_NAME` placeholder for your application
-and create it on the exoscale platform:
+and create it on the CloudKilat platform:
 
 ~~~bash
 $ ironcliapp APP_NAME create nodejs
@@ -91,7 +91,7 @@ Total 307 (delta 18), reused 307 (delta 18)
 -----> Building image
 -----> Uploading image (4.3M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -102,12 +102,12 @@ $ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Node.js app running at
-`http[s]://APP_NAME.dionepaas.com`.
+`http[s]://APP_NAME.kilatiron.net`.
 
 
 [Node.js]: http://nodejs.org/
 [npm]: https://npmjs.org/
-[exoscale]: http://www.exoscale.ch
+[CloudKilat]: http://www.cloudkilat.com/
 [Node.js buildpack]: https://github.com/cloudControl/buildpack-nodejs
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
-[platform documentation]: https://community.exoscale.ch/apps/documentation/
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile
+[platform documentation]: /Platform%20Documentation.md

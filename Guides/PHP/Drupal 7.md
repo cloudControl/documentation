@@ -9,7 +9,7 @@ If you're looking for a flexible, friendly and powerful content management platf
  * Auto-update notification
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Drupal 7 to [the exoscale platform](http://www.exoscale.ch).
+In this tutorial, we're going to take you through deploying Drupal 7 to [the CloudKilat platform](http://www.CloudKilat.ch).
 
 ##Prerequisites
 
@@ -64,7 +64,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and *push* and *deploy* both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -155,7 +155,7 @@ Have a look at it and we'll go through it together.
 
 Firstly, we set the environment to default to production. Then, if we're in a local development environment, as determined, rather simply, by having ``localdomain`` in the URL, then we set the environment to development.
 
-Otherwise, we will retrieve the setting contained in the exoscale credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
+Otherwise, we will retrieve the setting contained in the CloudKilat credentials file setting, **APPLICATION_ENV**, that we set earlier with the config addon, which should be one of '**production**' or '**testing**'.
 
 With this code in place, we can now bootstrap multiple environments. Following this, we need to configure the database,.
 
@@ -233,13 +233,13 @@ Two examples are provided below:
 
 Ok, next we need to create a basic database schema for storing the session and
 log information as well as the other configuration and user data settings that
-Drupal stores. Download [the file](/static/apps/drupal_exoscale_init.sql), ready to be used to initialise the database. 
+Drupal stores. Download [the file](/static/apps/drupal_CloudKilat_init.sql), ready to be used to initialise the database. 
 
 Now, in the shell, we're going to load the data in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both **default** and **testing**:
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < drupal_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < drupal_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
@@ -296,5 +296,5 @@ Now that that's done, commit the changes we made earlier and push and deploy bot
 
 With that completed, then you'll be able to have a look at both your deployments to ensure that they're working. 
 
-With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@exoscale.ch](mailto:support@exoscale.ch).
+With that, you should be up and running, ready to create your next, amazing, PHP web application, using Drupal 7. If you have any issues, feel free to email [support@cloudkilat.com](mailto:support@cloudkilat.com).
 

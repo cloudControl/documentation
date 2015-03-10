@@ -1,6 +1,6 @@
 # Deploying a Sails.js Application
 
-In this guide we're going to show you how to deploy a [Sails.js] application on [exoscale]. Sails.js is a real-time [Node.js] MVC framework, designed to mimic the pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
+In this guide we're going to show you how to deploy a [Sails.js] application on [CloudKilat]. Sails.js is a real-time [Node.js] MVC framework, designed to mimic the pattern of frameworks like [Ruby on Rails]. It allows you to easily create applications with Node.js using the Model-View-Controller pattern to organize your code so that it is easier to maintain.
 
 If you are new to Sails.js, first, check out the [Sails getting started page] for more info on how to install Sails.
 
@@ -48,7 +48,7 @@ The one you cloned as part of the example app looks like this:
 ~~~
 
 ### Process Type Definition
-exoscale uses a [Procfile] to start the application processes. The `Procfile` can be found at the root level of your repository.
+CloudKilat uses a [Procfile] to start the application processes. The `Procfile` can be found at the root level of your repository.
 
 To start the sails server, you need to use the `sails lift` command. This command is included in the procfile definition as shown below: 
 
@@ -59,7 +59,7 @@ web:  export NODE_ENV=production; sails lift
 Left from the colon we specified the **required** process type called `web` for a web application and followed by the command that starts the Sails server.
 
 ### Connecting the Sails.js Application to a Database
-Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. Here, we show you how to connect your Sails.js application to a MySQL database using the exoscale [Shared MySQL Add-on]. 
+Sails.js is database agnostic. It provides a simple data access layer that works, no matter what database you're using. All you have to do is plug in one of the adapters for your database. Here, we show you how to connect your Sails.js application to a MySQL database using the CloudKilat [Shared MySQL Add-on]. 
 
 Have a look at the `config/adapter.js` file so you can find out how to [get the MySQL credentials] provided by MySQLs Add-on:
 
@@ -94,10 +94,10 @@ module.exports.adapters = {
 
 ### Socket.io and Websocket Support
 
-In Sails.js, client-backend communication is done using [websockets]. For more details, take a look at the [exoscale websockets documentation].
+In Sails.js, client-backend communication is done using [websockets]. For more details, take a look at the [CloudKilat websockets documentation].
 
 ## Pushing and Deploying your Sails.js App
-To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform:
+To deploy your Sails.js application, choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform:
 
 ~~~bash
 $ ironcliapp APP_NAME create nodejs
@@ -126,7 +126,7 @@ Total 73 (delta 30), reused 73 (delta 30)
 -----> Building image
 -----> Uploading image (17M)
 
-To ssh://APP_NAME@dionepaas.com/repository.git
+To ssh://APP_NAME@kilatiron.net/repository.git
  * [new branch]      master -> master
 ~~~
 
@@ -141,16 +141,16 @@ $ ironcliapp APP_NAME/default deploy
 ~~~
 
 Congratulations, you can now see your Sails.js application running at
-`http://APP_NAME.dionepaas.com`.
+`http://APP_NAME.kilatiron.net`.
 
 [Node.js]: http://nodejs.org/
 [Sails.js]: http://sailsjs.org/
 [Sails getting started page]: http://sailsjs.org/#!getStarted
 [Ruby on Rails]: http://rubyonrails.org/
 [npm]: https://npmjs.org/
-[exoscale]: http://www.exoscale.ch
-[Procfile]: https://community.exoscale.ch/apps/documentation/#buildpacks-and-the-procfile
-[get the MySQL credentials]: https://community.exoscale.ch/tutorial/nodejs-app-add-on-credentials/
+[CloudKilat]: http://www.cloudkilat.com/
+[Procfile]: /Platform%20Documentation.md/#buildpacks-and-the-procfile
+[get the MySQL credentials]: /Guides/NodeJS/Add-on%20credentials.md
 [websockets]: http://socket.io/
-[exoscale websockets documentation]: https://community.exoscale.ch/apps/documentation/#websockets
-[Shared MySQL Add-on]: https://community.exoscale.ch/tutorial/mysqls-add-on/
+[CloudKilat websockets documentation]: /Platform%20Documentation.md/#websockets
+[Shared MySQL Add-on]: /Add-on%20Documentation/Data%20Storage/MySQLs.md

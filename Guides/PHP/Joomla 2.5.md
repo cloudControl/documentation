@@ -1,4 +1,4 @@
-#Deploying Joomla 2.5 to exoscale
+#Deploying Joomla 2.5 to CloudKilat
 
 ![Successful Deployment](/static/apps/images/joomla-logo.png)
 
@@ -10,7 +10,7 @@ If you're looking for a fast, light and effective PHP Framework for your project
  * Loads of plugins and add-ons
  * Easy to read documentation
 
-In this tutorial, we're going to take you through deploying Joomla v2.5 to [the exoscale platform](http://www.exoscale.ch). 
+In this tutorial, we're going to take you through deploying Joomla v2.5 to [the CloudKilat platform](http://www.CloudKilat.ch). 
 
 ##Prerequisites
 
@@ -32,7 +32,7 @@ Once you have a copy of the Joomla source available locally, setup a VHost (or e
 
 ##2. Update the Configuration
 
-A few changes need to be made to the default Joomla configuration and code to accommodate exoscale deployment. These changes are as follows:
+A few changes need to be made to the default Joomla configuration and code to accommodate CloudKilat deployment. These changes are as follows:
 
  * Store sessions in the database
  * Store Cache Information in APC
@@ -59,7 +59,7 @@ Click **Save & Close**.
 
 ###2.3 Update the Configuration Code
 
-Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the exoscale environment becomes a, little, bit tricky. 
+Joomla's core configuration file, ``configuration.php``, is updated whenever the details are changed in the administration panel as we just did. So, to retrieve the information from the CloudKilat environment becomes a, little, bit tricky. 
 
 What we can do, though an impermanent solution if we're upgrading our version of Joomla, is to update the file that is responsible for writing the configuration.php file, so that though a new constructor it can elect to return either the original information or the retrieve the database data from the environment and return that instead. 
 
@@ -153,7 +153,7 @@ That will show output similar to below:
         master
         * testing
 
-Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the exoscale platform. Now, we need to make our first deployment of both branches to the exoscale platform. To do this we checkout the master branch, create the application in our exoscale account and push and deploy both deployments. By running the following commands, this will all be done:
+Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the CloudKilat platform. Now, we need to make our first deployment of both branches to the CloudKilat platform. To do this we checkout the master branch, create the application in our CloudKilat account and push and deploy both deployments. By running the following commands, this will all be done:
 
     // switch to the master branch
     git checkout master
@@ -221,12 +221,12 @@ Where it may become interesting is if/when you start to use more than one clone 
 Now, in the shell, we're going to dump the database that the install routine created and load it in to the remote mysql instance that we created earlier. To do so, run the following command, changing the respective options with your configuration settings, doing this for both default and testing:
 
     -- the database dump (SQL) file
-    mysqldump -u <database_username> -p <database_name> > joomla_exoscale_init.sql 
+    mysqldump -u <database_username> -p <database_name> > joomla_CloudKilat_init.sql 
 
     -- load the database dump (SQL) file in to the remote environment database
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
-        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_exoscale_init.sql
+        --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_CloudKilat_init.sql
 
 In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
