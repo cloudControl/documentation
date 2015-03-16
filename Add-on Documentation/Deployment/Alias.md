@@ -7,7 +7,7 @@ custom domain follow the following simple steps **for each domain**.
 Note: instead of APP_NAME.cloudcontrolled.com (for caching loadbalancers) you
 can also use APP_NAME.cloudcontrolapp.com (for non-caching loadbalancers
 supporting websockets) as a target for your CNAME.  Details can be found under
-[Performance & Caching](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#performance--caching).
+[Performance & Caching](https://www.cloudcontrol.com/dev-center/platform-documentation#performance-&-caching).
 
 
 ## Adding an Alias

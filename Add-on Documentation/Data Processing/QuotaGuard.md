@@ -46,7 +46,7 @@ Geocoder.configure(
 )
 ~~~
 
-Alternatively you can read the QuotaGuard credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) in the general documentation.
+Alternatively you can read the QuotaGuard credentials from the creds.json file. The location of the file is available in the `CRED_FILE` environment variable. For detailed instructions on how to use the creds.json file please refer to the section about [Add-on Credentials](https://www.cloudcontrol.com/dev-center/platform-documentation#add-ons) in the general documentation.
 
 The JSON file has the following structure:
 

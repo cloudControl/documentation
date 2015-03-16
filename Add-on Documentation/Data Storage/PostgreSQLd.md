@@ -167,6 +167,6 @@ $ psql POSTGRESQLD_URL < PG_DUMP
 [Amazon RDS]: http://aws.amazon.com/rds/
 [Config Add-on]: https://www.cloudcontrol.com/add-ons/config
 [PostgreSQLd]: https://www.cloudcontrol.com/add-ons/postgresqld
-[Add-on Credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons
+[Add-on Credentials]: https://www.cloudcontrol.com/dev-center/platform-documentation#add-ons
 [Email us]: mailto:support@cloudcontrol.de
 [Webconsole]: https://www.cloudcontrol.com/console/login

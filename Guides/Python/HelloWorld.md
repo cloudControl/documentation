@@ -82,5 +82,5 @@ Congratulations, you can now see your Flask app running at `http[s]://APP_NAME.c
 [Flask]: http://flask.pocoo.org/
 [cloudControl]: http://www.cloudcontrol.com
 [Python buildpack]: https://github.com/cloudControl/buildpack-python
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [example_app]: https://github.com/cloudControl/python-flask-example-app.git

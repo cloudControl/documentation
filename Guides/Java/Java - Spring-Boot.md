@@ -138,7 +138,7 @@ Et voila, the app is now up and running at `http[s]://APP_NAME.cloudcontrolled.c
 [Jetty server]: http://www.eclipse.org/jetty/
 [Spring Boot]: http://projects.spring.io/spring-boot/
 [examples]: https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
-[Database credentials]: Add-on%20credentials
+[Database credentials]: https://www.cloudcontrol.com/dev-center/guides/java/add-on-credentials-3
 [cloudControl]: /
-[MySQLs Add-on]: ../../Add-on%20Documentation/Data%20Storage/MySQLs
+[MySQLs Add-on]: https://www.cloudcontrol.com/dev-center/add-on-documentation/mysqls
 [hsqlDB]: http://hsqldb.org/

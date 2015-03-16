@@ -21,11 +21,13 @@ For Windows we offer an installer. Please download [the latest version] of the i
 #### Quick Installation Linux/Mac
 
 On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* requires [Python 2.6+].
+
 ~~~
 $ sudo pip install -U cctrl
 ~~~
 
 If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
+
 ~~~
 $ sudo easy_install pip
 $ sudo pip install -U cctrl
@@ -41,16 +43,19 @@ $ sudo pip install -U cctrl
  * The CLI can be configured via ``cctrluser setup``
 
 To work on and manage your applications on the platform, a user account is needed. User accounts can be created via the *web console* or using the following CLI command:
+
 ~~~
 $ cctrluser create
 ~~~
 
 After this, an activation email is sent to the given email address. Click the link in the email or use the following CLI command to activate the account:
+
 ~~~
 $ cctrluser activate USER_NAME ACTIVATION_CODE
 ~~~
 
 If you want to delete your user account, please use either the *web console* or the following CLI command:
+
 ~~~
 $ cctrluser delete
 ~~~
@@ -70,6 +75,7 @@ The command has three different options to modify each of the existing values on
 - `--ssh-key-path` specifies the path of your ssh public key used for the authentication. If the flag is not set, it defaults to `HOME_DIR/.ssh/id_rsa.pub`. The CLI will try to upload the public key to the platform. We only support RSA keys. Details can be found under [Keys](#keys).
 
 The whole command as example:
+
 ~~~
 cctrluser setup --email user1@example.com --ssh-auth yes --ssh-key-path /path/to/your/publickey.pub
 ~~~
@@ -85,11 +91,13 @@ At the moment our CLI allows users to authenticate to the platform with two meth
 ### SSH Public Key Authentication
 
 With this method you can authenticate to the platform in a more convenient way than using [email / password authentication](#email--password-authentication). After adding your SSH key to the platform, its location is remembered by the CLI and will be used in the future requests. You can add a public key to the platform and/or change the public key used for the authentication by [setup the CLI](#setup-cli).
+
 ~~~bash
 cctrluser setup --ssh-key-path /path/to/your/publickey.pub
 ~~~
 
 If you set a passphrase for your SSH key, which is strongly recommended, than you have to add the key to your ssh-agent by:
+
 ~~~bash
 # start ssh-agent
 eval `ssh-agent`
@@ -99,6 +107,7 @@ ssh-add /path/to/your/privatekey
 ### Email / Password Authentication
 
 The email / password authentication is an alternative to SSH public key authentication. To enable it, simply [setup the CLI](#setup-cli), setting the `--ssh-auth` parameter to `no`.
+
 ~~~
 cctrluser setup --ssh-auth no
 ~~~
@@ -106,6 +115,7 @@ cctrluser setup --ssh-auth no
 From now, whenever you want to authenticate to the platform you have to put your password.
 
 Alternatively, to get this process less verbose, you can set the password as shell environment variable:
+
 ~~~bash
 export CCTRL_PASSWORD=yourpassword
 ~~~
@@ -128,11 +138,13 @@ cloudControl PaaS uses a distinct set of naming conventions. To understand how t
 An app consists of a repository (with branches), deployments and users. Creating an app allows you to add or remove users to that app, giving them access to the source code as well as allowing them to manage the deployments.
 
 Creating an app is easy. Simply specify a name and the desired type to determine which [buildpack](#buildpacks-and-the-procfile) to use.
+
 ~~~
 $ cctrlapp APP_NAME create php
 ~~~
 
 You can always list your existing apps using the command line client too.
+
 ~~~
 $ cctrlapp -l
 Apps
@@ -147,6 +159,7 @@ Apps
 By adding users to an app you can grant fellow developers access to the source code in the repository, allow them to [deploy new versions](#deploying-new-versions) and modify the deployments including their [Add-ons](#managing-add-ons). Permissions are based on the user's [roles](#roles). Users can be added to applications or more fine grained to deployments.
 
 You can list, add and remove app users using the command line client.
+
 ~~~
 $ cctrlapp APP_NAME user
 
@@ -159,16 +172,19 @@ Users
 
 
 Add a user to an app by providing their email address. If the user is already registered they will be added to the app immediately. Otherwise they will receive an invitation email first.
+
 ~~~
 $ cctrlapp APP_NAME user.add user4@example.com
 ~~~
 
 To remove a user, please use their email address.
+
 ~~~
 $ cctrlapp APP_NAME user.remove user3@example.com
 ~~~
 
 On deployment level:
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME user.add user5@example.com
 $ cctrlapp APP_NAME/DEP_NAME user.remove user5@example.com
@@ -182,6 +198,7 @@ Please note: a user can either be added to the application or to one or more dep
  * **Read-only** The Read-only role allows you to see the application details, deployments and logs. Any update operation is forbidden.
 
 You can provide the role with the `user.add` command.
+
 ~~~
 $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 ~~~
@@ -191,11 +208,13 @@ $ cctrlapp APP_NAME user.add user5@example.com --role readonly
 For secure access to the app's repository, each developer needs to authenticate via public/ private key authentication. Please refer to GitHub's article on [generating SSH keys] for details on how to create a key. You can simply add your default key to your user account using the *web console* or the command line client. If no default key can be found, cctrlapp will offer to create one.
 
 We only support RSA ssh keys. The key must be a one-liner and start with "ssh-rsa AAAAB3NzaC1yc2E" (OpenSSH compatible).
+
 ~~~
 $ cctrluser key.add
 ~~~
 
 You can also list the available key ids and remove existing keys using the key id.
+
 ~~~
 $ cctrluser key
 Keys
@@ -214,6 +233,7 @@ A deployment is the running version of one of your branches made accessible via 
 Deployments run independently from each other, including separate runtime environments, file system storage and Add-ons (e.g. databases and caches). This allows you to have different versions of your app running at the same time without interfering with each other. Please refer to the section about [development, staging and production environments](#development-staging-and-production-environments) to understand why this is a good idea.
 
 You can list all the deployments with the *details* command.
+
 ~~~
 $ cctrlapp APP_NAME details
 App
@@ -239,11 +259,13 @@ App
 ### Supported Version Control Systems
 
 The platform supports Git ([quick Git tutorial]) and Bazaar ([Bazaar in five minutes]). When you create an app we try to determine if the current working directory has a .git or .bzr directory. If it does, we create the app with the detected version control system. If we can't determine this based on the current working directory, Git is used as the default. You can always overwrite this with the --repo command line switch.
+
 ~~~
 $ cctrlapp APP_NAME create php [--repo [git,bzr]]
 ~~~
 
 It's easy to tell what version control system an existing app uses based on the repository URL provided as part of the app details.
+
 ~~~
 $ cctrlapp APP_NAME details
 App
@@ -251,6 +273,7 @@ App
  Repository: ssh://APP_NAME@cloudcontrolled.com/repository.git
  [...]
 ~~~
+
 If yours starts with `ssh://` and ends with `.git` then Git is being used. If it starts with `bzr+ssh://`, Bazaar is being used.
 
 ### Image Building
@@ -258,6 +281,7 @@ If yours starts with `ssh://` and ends with `.git` then Git is being used. If it
 Whenever you push an updated branch, a deployment image is built automatically. This image can then be deployed with the *deploy* command to the deployment matching the branch name. The content of the image is generated by the [buildpack](#buildpacks-and-the-procfile) including your application code in a runnable form with all the dependencies.
 
 You can either use the cctrlapp push command or your version control system's push command. Please remember that deployment and branch names have to match. So to push to your dev deployment the following commands are interchangeable. Also note, both require the existence of a branch called dev.
+
 ~~~
 # with cctrlapp:
 $ cctrlapp APP_NAME/dev push
@@ -277,6 +301,7 @@ The repositories support all other remote operations like pulling and cloning as
 The compressed image size is limited to 200MB. Smaller images can be deployed faster, so we recommend to keep the image size below 50MB. The image size is printed at the end of the build process; if the image exceeds the limit, the push gets rejected.
 
 You can decrease your image size by making sure that no unneeded files (e.g. caches, logs, backup files) are tracked in your repository. Files that need to be tracked but are not required in the image (e.g. development assets or source code files in compiled languages), can be added to a `.cctrlignore` file in the project root directory. The format is similar to the `.gitignore`, but without the negation operator `!`. Here’s an example `.cctrlignore`:
+
 ~~~
 *.psd
 *.pdf
@@ -293,6 +318,7 @@ Part of the buildpack scripts is also to pull in dependencies according to the l
 Which buildpack is going to be used is determined by the application type set when creating the app.
 
 A required part of the image is a file called `Procfile` in the root directory. It is used to determine how to start the actual application in the container. Some of the buildpacks can provide a default Procfile. But it is recommended to explicitly define the Procfile in your application to match your individual requirements better. For a container to be able to receive requests from the routing tier it needs at least the following content:
+
 ~~~
 web: COMMAND_TO_START_THE_APP_AND_LISTEN_ON_A_PORT --port $PORT
 ~~~
@@ -305,6 +331,7 @@ At the end of the buildpack process, the image is ready to be deployed.
 ## Deploying New Versions
 
 The cloudControl platform supports zero downtime deploys for all deployments. To deploy a new version use either the *web console* or the `deploy` command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy
 ~~~
@@ -321,6 +348,7 @@ Deployments running on a single web container with one unit of memory (128MB/h) 
 Once a new HTTP request is sent to this deployment, the application is automatically re-engaged. This process causes a slight delay until the first request is served. All following requests will perform normally.
 
 You can see the state of your application with the following command:
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME details
 Deployment
@@ -336,11 +364,13 @@ any production system.
 ## Emergency Rollback
 
 If your newest version breaks unexpectedly, you can use the rollback command to revert to the previous version in a matter of seconds:
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME rollback
 ~~~
 
 It is also possible to deploy any other prior version. To find the version identifier you need, simply check the [deploy log](#deploy-log) for a previously deployed version, or get it directly from the version control system. You can redeploy this version using the deploy command:
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy THE_LAST_WORKING_VERSION_HASH
 ~~~
@@ -397,12 +427,14 @@ Add-ons add additional services to your deployment. The [Add-on marketplace] off
 Each deployment has its own set of Add-ons. If your app needs a MySQL database and you have a production, a development and a staging environment, all three must have their own MySQL Add-ons. Each Add-on comes with different plans allowing you to choose  a more powerful database for your high traffic production deployment and smaller ones for the development or staging environments.
 
 You can see the available Add-on plans on the Add-on marketplace website or with the `cctrlapp addon.list` command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.list
 [...]
 ~~~
 
 Adding an Add-on is just as easy.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
 ~~~
@@ -410,6 +442,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.add ADDON_NAME.ADDON_OPTION
 As always replace the placeholders written in uppercase with their respective values.
 
 To get the list of current Add-ons for a deployment use the addon command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon
 Addon                    : alias.free
@@ -425,12 +458,14 @@ Addon                    : memcachier.dev
 ~~~
 
 To upgrade or downgrade an Add-on use the respective command followed by the Add-on plan you upgrade from and the Add-on plan you upgrade to.
+
 ~~~
 # upgrade
 $ cctrlapp APP_NAME/DEP_NAME addon.upgrade FROM_SMALL_ADDON TO_BIG_ADDON
 # downgrade
 $ cctrlapp APP_NAME/DEP_NAME addon.downgrade FROM_BIG_ADDON TO_SMALL_ADDON
 ~~~
+
 **Remember:** As in all examples in this documentation, replace all the uppercase placeholders with their respective values.
 
 ### Add-on Credentials
@@ -444,8 +479,9 @@ We recommend using the credentials file for security reasons but credentials can
 Set the variable `SET_ENV_VARS` using the [Custom Config Add-on] to either `false` or `true` to explicitly enable or disable
 this feature.
 
-The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials), [Python](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials), [Node.js](https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials), [Java](https://www.cloudcontrol.com/dev-center/Guides/Java/Add-on%20credentials), [PHP](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials)).
+The guides section has detailed examples about how to get the credentials in different languages ([Ruby](https://www.cloudcontrol.com/dev-center/guides/ruby/add-on-credentials-2), [Python](https://www.cloudcontrol.com/dev-center/guides/python/add-on-credentials), [Node.js](https://www.cloudcontrol.com/dev-center/guides/nodejs/add-on-credentials-1), [Java](https://www.cloudcontrol.com/dev-center/guides/java/add-on-credentials-3), [PHP](https://www.cloudcontrol.com/dev-center/guides/php/add-on-credentials-4)).
 To see the format and contents of the credentials file locally, use the `addon.creds` command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME addon.creds
 {
@@ -475,6 +511,7 @@ $ cctrlapp APP_NAME/DEP_NAME addon.creds
  * There are four different log types (access, error, worker and deploy) available.
 
 To see the log output in a `tail -f`-like fashion use the cctrlapp log command. The log command initially shows the last 500 log messages and then appends new messages as they arrive.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME log [access,error,worker,deploy]
 [...]
@@ -513,6 +550,7 @@ The Custom Config Add-on can be used to specify an additional endpoint to receiv
 This is done by setting the config variable "RSYSLOG_REMOTE". The content should contain valid [rsyslog] configuration and can span multiple lines.
 
 E.g. to forward the logs to custom syslog remote over a [TLS] connection, create a temporary file with the following content:
+
 ~~~
 $DefaultNetstreamDriverCAFile /app/CUSTOM_CERTIFICATE_PATH
 $ActionSendStreamDriver gtls
@@ -521,9 +559,11 @@ $ActionSendStreamDriverAuthMode x509/name
 $template CustomFormat, "%syslogtag%%msg%\n"
 *.* @@SERVER_ADDRESS:PORT;CustomFormat
 ~~~
+
 Where "SERVER_ADDRESS" and "PORT" should be replaced with the concrete values and "CUSTOM_CERTIFICATE_PATH" should be the path to a certificate file for the custom syslog remote in you repository.
 
 Use the name of the file (for example `custom_remote.cfg`) as a value for the "RSYSLOG_REMOTE" config variable:
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME config.add RSYSLOG_REMOTE=custom_remote.cfg
 ~~~
@@ -582,7 +622,7 @@ SSL support for custom domains is available through the
 [SSL add-on](https://www.cloudcontrol.com/add-ons/ssl).
 
 Instructions on how to add HTTPS redirects to your application can be
-found in the [SSL add-on documentation](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/SSL#https-redirects).
+found in the [SSL add-on documentation](https://www.cloudcontrol.com/dev-center/add-on-documentation/ssl#https-redirects).
 
 ### Elastic Addresses
 
@@ -721,6 +761,7 @@ To overcome any timeout limitations, you can explicitly implement the WebSocket 
 ### Secure WebSockets
 
 Conventional WebSockets do not offer any kind of protocol specific authentication or data encryption. You are encouraged to use standard HTTP authentication mechanisms like cookies, basic/diggest or TLS. The same goes for data encryption where SSL is your obvious choice. While a conventional WebSocket connection is established via HTTP, a protected one uses HTTPS. The distinction is based on the URI schemes:
+
 ~~~
 Normal connection: ws://{host}:{port}/{path to the server}
 Secure connection: wss://{host}:{port}/{path to the server}
@@ -755,6 +796,7 @@ The container is identical to the web or worker containers but starts an SSH dae
 ### Examples
 
 To start a shell (e.g. bash) use the `run` command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME run bash
 Connecting...
@@ -770,6 +812,7 @@ Connection to ssh.cloudcontrolled.net closed.
 It's also possible to execute a command directly and have the container shutdown after the command is finished. This is very useful for database migrations and other one-time tasks.
 
 For example, passing the `"env | sort"` command will list the environment variables. Note that the use of the quotes is required for a command that includes spaces.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME run "env | sort"
 Connecting...
@@ -823,6 +866,7 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
  * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin]
 
 You can change the stack per deployment. This is handy for testing new stacks before migrating the production deployment. Details are available via the `cctrlapp` command line interface.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME details
  name: APP_NAME/DEP_NAME
@@ -831,12 +875,13 @@ $ cctrlapp APP_NAME/DEP_NAME details
 ~~~
 
 To change the stack of a deployment simply append the --stack command line option to the `deploy` command.
+
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 ~~~
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
-[Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Custom%20Config
+[Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/add-on-documentation/custom-config
 [web console]: https://www.cloudcontrol.com/console
 [API libraries]: https://github.com/cloudControl
 [the latest version]: https://www.cloudcontrol.com/download/win
@@ -845,22 +890,22 @@ $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
 [Bazaar in five minutes]: http://doc.bazaar.canonical.com/latest/en/mini-tutorial/
 [Heroku buildpack API]: https://devcenter.heroku.com/articles/buildpack-api
-[guides]: https://www.cloudcontrol.com/dev-center/Guides
+[guides]: https://www.cloudcontrol.com/dev-center/guides
 [MongoLab Add-on]: https://www.cloudcontrol.com/add-ons/mongolab
 [Add-on marketplace]: https://www.cloudcontrol.com/add-ons
-[Deployment category]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment
+[Deployment category]: https://www.cloudcontrol.com/dev-center/add-on-documentation#deployment
 [rsyslog]: http://www.rsyslog.com/
 [TLS]: http://en.wikipedia.org/wiki/Transport_Layer_Security
 [Alias Add-on]: https://www.cloudcontrol.com/add-ons/alias
-[Blitz.io]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/Blitz.io
+[Blitz.io]: https://www.cloudcontrol.com/dev-center/add-on-documentation/blitz-dot-io
 [MemCachier Add-on]: https://www.cloudcontrol.com/add-ons/memcachier
 [Varnish]: https://www.varnish-cache.org/
-[MemCachier Documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MemCachier
-[New Relic Add-ons]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Performance%20&%20Monitoring/New%20Relic
+[MemCachier Documentation]: https://www.cloudcontrol.com/dev-center/add-on-documentation/memcachier
+[New Relic Add-ons]: https://www.cloudcontrol.com/dev-center/add-on-documentation/new-relic
 [tutorial]: https://www.cloudcontrol.com/blog/best-practice-running-and-analyzing-load-tests-on-your-cloudcontrol-app
 [Cron Add-on]: https://www.cloudcontrol.com/add-ons/cron
-[Cron Add-on documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Deployment/Cron
+[Cron Add-on documentation]: https://www.cloudcontrol.com/dev-center/add-on-documentation/cron
 [Worker Add-on]: https://www.cloudcontrol.com/add-ons/worker
-[Worker Add-on documentation]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Processing/Worker
+[Worker Add-on documentation]: https://www.cloudcontrol.com/dev-center/add-on-documentation/worker
 [Ubuntu 10.04 LTS Lucid Lynx]: http://releases.ubuntu.com/lucid/
 [Ubuntu 12.04 LTS Precise Pangolin]: http://releases.ubuntu.com/precise/

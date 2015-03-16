@@ -125,4 +125,4 @@ Congratulations, you can now see your Go app running at `http[s]://APP_NAME.clou
 [Go]: http://golang.org/
 [cloudControl]: http://www.cloudcontrol.com
 [godep]: https://github.com/tools/godep
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile

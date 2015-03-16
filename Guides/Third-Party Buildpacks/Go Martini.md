@@ -138,4 +138,4 @@ $ cctrlapp APP_NAME/default open
 [Martini]: http://martini.codegangsta.io/
 [cloudControl]: https://www.cloudcontrol.com
 [Go buildpack]: https://github.com/cloudControl/buildpack-go
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile

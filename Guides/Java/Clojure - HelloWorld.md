@@ -78,7 +78,7 @@ Congratulations, you can now see your Clojure application running at `http[s]://
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Clojure buildpack]: https://github.com/cloudControl/buildpack-clojure
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[cloudControl-command-line-client]: https://www.cloudcontrol.com//dev-center/platform-documentation#platform-access
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [Leiningen]: http://leiningen.org/
