@@ -23,7 +23,7 @@ You can find the documentation on our [Exceptiontrap Gem](https://github.com/itm
 ## Using with PHP, Zend Framework & other frameworks
 
 You can find the documentation on our [Exceptiontrap Library](https://github.com/itmLABS/exceptiontrap-php) GitHub page.
-The easiest way to get the API key automatically set by cloudControl and our library is to set the variable `SET_ENV_VARS` to `true` for your application using the `Custom Config Add-on`, which is desribed [here](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons) under "Add-on Credentials".
+The easiest way to get the API key automatically set by cloudControl and our library is to set the variable `SET_ENV_VARS` to `true` for your application using the `Custom Config Add-on`, which is desribed [here](https://www.cloudcontrol.com/dev-center/platform-documentation#add-ons) under "Add-on Credentials".
 
 If you don't want to do this, use the following code snippet to "manually" extract the Exceptiontrap API key from the cloudControl environment variables file.
 

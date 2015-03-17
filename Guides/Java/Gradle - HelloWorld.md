@@ -93,6 +93,6 @@ Congratulations, you can now see your Gradle application running at `http[s]://A
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Gradle buildpack]: https://github.com/cloudControl/buildpack-gradle
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/platform-documentation#platform-access
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile

@@ -96,9 +96,9 @@ String password 	 = credentials[1];
 
 [Java application with MySQL]: https://github.com/cloudControl/java-mysql-example-app
 [Add-on Marketplace]: https://www.cloudcontrol.com/add-ons/?c=1
-[environment variables]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
-[Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
-[cred-env-vars]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#enabling-disabling-credentials-environment-variables
+[environment variables]: https://www.cloudcontrol.com/dev-center/platform-documentation#environment-variables
+[Add-on credentials]: https://www.cloudcontrol.com/dev-center/platform-documentation#add-on-credentials
+[cred-env-vars]: https://www.cloudcontrol.com/dev-center/platform-documentation#enabling/disabling-credentials-environment-variables
 [json-simple]: http://code.google.com/p/json-simple/
 [cloudControl credentials helper class]: https://gist.github.com/b350762c61fcc069b427
 [MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld

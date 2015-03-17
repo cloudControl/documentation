@@ -126,7 +126,7 @@ $USERSNAP_APIKEY = $creds['USERSNAP']['USERSNAP_APIKEY'];
 </html>
 ```
 You can learn more about getting addon credentials with PHP in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/PHP/Add-on%20credentials).
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/guides/php/add-on-credentials-4).
 
 ### Example for Python web sites (Example for mako templates)
 Include this snippet in your base template, right before the closing `</body>`
@@ -172,7 +172,7 @@ except IOError:
 ```
 
 You can learn more about getting addon credentials with Python in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Python/Add-on%20credentials).
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/guides/python/add-on-credentials).
 
 ### Example for Ruby on Rails websites
 Include this snippet in your base template, right before the closing `</body>` 
@@ -224,7 +224,7 @@ it in other templates by adding this line to your main template:
 
 
 You can learn more about getting addon credentials with Ruby in the 
-[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/Guides/Ruby/Add-on%20credentials).
+[cloudControl Add-On-Credentials Doc](https://www.cloudcontrol.com/dev-center/guides/ruby/add-on-credentials-2).
 
 ### Example for Java, NodeJS and all other web languages 
 Include this snippet in your base template, right before the closing `</body>` tag
@@ -256,7 +256,7 @@ Include this snippet in your base template, right before the closing `</body>` t
 ```
 
 Make sure to replace `YOUR-APIKEY-HERE` with the addon credential value stored in the `USERSNAP.USERSNAP_APIKEY`
-option. [How to get add on credentials in cloudControl](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-ons).
+option. [How to get add on credentials in cloudControl](https://www.cloudcontrol.com/dev-center/platform-documentation#add-ons).
 
 ## Support
 If you need help installing the [Usersnap addon](https://www.cloudcontrol.com/add-ons/usersnap)

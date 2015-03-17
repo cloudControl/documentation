@@ -109,8 +109,8 @@ use one of our available [Data Storage Add-ons].
 [Play 2.3.x]: https://www.playframework.com/documentation/2.3.x/Home
 [cloudControl]: https://www.cloudcontrol.com/
 [Scala buildpack]: https://github.com/cloudControl/buildpack-scala
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/platform-documentation#platform-access
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [sbt]: http://www.scala-sbt.org/
 [Data Storage Add-ons]: https://www.cloudcontrol.com/add-ons?c=1

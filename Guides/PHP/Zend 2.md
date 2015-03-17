@@ -188,7 +188,7 @@ $ cctrlapp APP_NAME/default deploy
 
 To store the sessions we need to add a database Add-on and initialize the table.
 
-We are going to use [the MySQLs Add-on's free plan](https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs). It provides a free shared database for testing and development.
+We are going to use [the MySQLs Add-on's free plan](https://www.cloudcontrol.com/dev-center/add-on-documentation/mysqls). It provides a free shared database for testing and development.
 
 Creating the session table is easy by executing the included init-session-table command in a run-container:
 

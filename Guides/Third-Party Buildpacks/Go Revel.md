@@ -122,4 +122,4 @@ $ cctrlapp APP_NAME/default open
 [Revel]: http://revel.github.io
 [cloudControl]: https://www.cloudcontrol.com
 [Revel buildpack]: https://github.com/revel/heroku-buildpack-go-revel
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile

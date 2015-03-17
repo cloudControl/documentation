@@ -44,7 +44,7 @@ Once the add-on has been provisioned the `PHRASE_AUTH_TOKEN` will be available w
 
 ## Installation and Usage
 
-The PhraseApp In-Context-Editor can be used best in a separate staging environment for copywriters and translators. If you haven't done so already, we recommend you set up a staging environment as explained in the [cloudControl Documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation#development-staging-and-production-environments). This staging environment will be used by your translators to edit your website content.
+The PhraseApp In-Context-Editor can be used best in a separate staging environment for copywriters and translators. If you haven't done so already, we recommend you set up a staging environment as explained in the [cloudControl Documentation](https://www.cloudcontrol.com/dev-center/platform-documentation#development,-staging-and-production-environments). This staging environment will be used by your translators to edit your website content.
 Of course, you can use your local development environment for integration as well. If you decide to do so, simply apply the steps used for the "staging" environment to your "development" environment during the following steps.
 
 If you have any questions, contact us at [https://phraseapp.com/en/contact](https://phraseapp.com/en/contact). We will guide you through the installation process.

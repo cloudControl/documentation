@@ -80,8 +80,8 @@ Congratulations, you can now see your Play! application running at `http[s]://AP
 
 [cloudControl]: https://www.cloudcontrol.com/
 [Play buildpack]: https://github.com/cloudControl/buildpack-play
-[Play 2 tutorial]: https://www.cloudcontrol.com/dev-center/Guides/Java/Java%20-%20Play%202
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[Play 2 tutorial]: https://www.cloudcontrol.com/dev-center/guides/java/java-play-2
+[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/platform-documentation#platform-access
 [Git client]: http://git-scm.com/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile
 [Ivy]: http://ant.apache.org/ivy/

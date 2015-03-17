@@ -25,7 +25,7 @@ $ sudo easy_install pip
 $ sudo pip install cctrl
 ~~~
 
-**Windows:** Please download the provided [installer](https://www.cloudcontrol.com/download/win).
+**Windows:** Please download the provided [installer](https://download.cloudcontrolled.com/windows).
 
 ## Create a User Account (if you haven't already)
 
@@ -123,5 +123,4 @@ Grab [our cheatsheet (PDF)](https://cmsengine.s3.amazonaws.com/sites/544a16276a5
 
 ## Documentation
 
-To learn more about all the platform features and how to integrate it seamlessly into the development life cycle please refer to the extensive [platform documentation](https://www.cloudcontrol.com/dev-center/Platform%20Documentation).
-
+To learn more about all the platform features and how to integrate it seamlessly into the development life cycle please refer to the extensive [platform documentation](https://www.cloudcontrol.com/dev-center/platform-documentation).

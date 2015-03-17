@@ -99,8 +99,8 @@ db_config = {
 
 You can also find a working example application on [Github][ruby-postgresql-example].
 
-[Add-on credentials]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#add-on-credentials
-[environment variables]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#environment-variables
+[Add-on credentials]: https://www.cloudcontrol.com/dev-center/platform-documentation#add-on-credentials
+[environment variables]: https://www.cloudcontrol.com/dev-center/platform-documentation#environment-variables
 [Add-on Marketplace]: https://www.cloudcontrol.com/add-ons/?c=1
 [MySQL Dedicated Add-on]: https://www.cloudcontrol.com/add-ons/mysqld
 [MySQL Shared Add-on]: https://www.cloudcontrol.com/add-ons/mysqls

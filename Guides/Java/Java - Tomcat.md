@@ -167,7 +167,7 @@ Congratulations, you can now see your JSP Application running on Tomcat at `http
 [Tomcat]: https://tomcat.apache.org/
 [cloudControl]: https://www.cloudcontrol.com/
 [Java buildpack]: https://github.com/cloudControl/buildpack-java
-[cloudControl-command-line-client]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#command-line-client-web-console-and-api
+[cloudControl-command-line-client]: /dev-center/platform-documentation#platform-access
 [Git client]: http://git-scm.com/
 [Application Assembler Maven Plugin]: http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile

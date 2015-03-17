@@ -111,6 +111,6 @@ NOTE: Gems in development and test environments are excluded from bundle install
 
 
 [cloudcontrol-rails]: https://rubygems.org/gems/cloudcontrol-rails
-[procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#version-control--images
+[procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#version-control-&-images
 [rails-procfile]: #rails-procfile
 [ruby-buildpack]: https://github.com/cloudControl/buildpack-ruby

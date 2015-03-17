@@ -149,8 +149,8 @@ Congratulations, you can now see your Sails.js application running at
 [Ruby on Rails]: http://rubyonrails.org/
 [npm]: https://npmjs.org/
 [cloudControl]: http://www.cloudcontrol.com
-[Procfile]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#buildpacks-and-the-procfile
-[get the MySQL credentials]: https://www.cloudcontrol.com/dev-center/Guides/NodeJS/Add-on%20credentials
+[Procfile]: https://www.cloudcontrol.com/dev-center/platform-documentation#buildpacks-and-the-procfile
+[get the MySQL credentials]: https://www.cloudcontrol.com/dev-center/guides/nodejs/add-on-credentials-1
 [websockets]: http://socket.io/
-[cloudControl websockets documentation]: https://www.cloudcontrol.com/dev-center/Platform%20Documentation#websockets
-[Shared MySQL Add-on]: https://www.cloudcontrol.com/dev-center/Add-on%20Documentation/Data%20Storage/MySQLs
+[cloudControl websockets documentation]: https://www.cloudcontrol.com/dev-center/platform-documentation#websockets
+[Shared MySQL Add-on]: https://www.cloudcontrol.com/dev-center/add-on-documentation/mysqls
