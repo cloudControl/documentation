@@ -18,10 +18,10 @@ Cronjobs are regular requests against your app and are subject to the same 120s
 timelimit.
 
 If you need more control over when and how often tasks are run and/or have
-tasks that take longer than 120 seconds we recommend using the
-[Worker](https://next.dotcloud.com/add-ons/worker). There is also
-[CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queue
-available that can be used to dispatch tasks to the workers.
+tasks that take longer than 120 seconds we recommend using a
+[Worker](https://next.dotcloud.com/dev-center/platform-documentation#workers)
+or the [CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queues
+that can be used to dispatch tasks to the workers.
 
 ## Adding the Cron Add-on
 
@@ -105,4 +105,3 @@ $ dcapp APP_NAME/DEP_NAME addon.remove cron.OPTION
 ~~~
 
 Please note: Removing the Add-on will not automatically remove all Cron jobs.
-
