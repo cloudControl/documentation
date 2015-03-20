@@ -18,8 +18,8 @@ Cronjobs are regular requests against your app and are subject to the same 120s
 timelimit.
 
 If you need more control over when and how often tasks are run and/or have
-tasks that take longer than 120 seconds we recommend using the
-[Worker](https://www.cloudcontrol.com/add-ons/worker) or
+tasks that take longer than 120 seconds we recommend using a
+[Worker](https://www.cloudcontrol.com/dev-center/platform-documentation#workers) or
 [IronWorker](https://www.cloudcontrol.com/add-ons/iron_worker) Add-on. There
 are also the [IronMQ](https://www.cloudcontrol.com/add-ons/iron_mq) and the
 [CloudAMQP](https://www.cloudcontrol.com/add-ons/cloudamqp) message queues
@@ -107,4 +107,3 @@ $ cctrlapp APP_NAME/DEP_NAME addon.remove cron.OPTION
 ~~~
 
 Please note: Removing the Add-on will not automatically remove all Cron jobs.
-
