@@ -229,7 +229,7 @@ Now, in the shell, we're going to dump the database that the install routine cre
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
         --ssl-ca=mysql-ssl-ca-cert.pem <database_name> < joomla_cloudcontrol_init.sql
 
-In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem](http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
+In the command above, you can see a reference to a **.pem** file. This can be downloaded from: [https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem). All being well, the command will finish silently, loading the data. You can check that all's gone well with following commands:
 
     mysql -u <database_username> -p \
         -h mysqlsdb.co8hm2var4k9.eu-west-1.rds.amazonaws.com \
