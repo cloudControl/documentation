@@ -142,5 +142,5 @@ $ mysql -u MYSQLD_USER -p --host=MYSQLD_SERVER --ssl-ca=PATH_TO_CERTIFICATE/mysq
 [MySQLd]: https://www.cloudcontrol.com/add-ons/mysqld
 [Add-on Credentials]: https://www.cloudcontrol.com/dev-center/platform-documentation#add-ons
 [Email us]: mailto:support@cloudcontrol.de
-[certificate file]: http://s3.amazonaws.com/rds-downloads/mysql-ssl-ca-cert.pem
+[certificate file]: https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 [Webconsole]: https://www.cloudcontrol.com/console/login
