@@ -802,9 +802,16 @@ signal is send to your worker before the shutdown.
 
 #### Starting a Worker
 
-Workers can be started via the command line client's worker.add command.
+Depending on the [stack](#stack) your app is running on, you may have to edit the app's
+`Procfile` first.
+For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`.
+If your app is running on the Pinky stack, add the following line to your app's `Procfile`:
 
-For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`. But for apps on the Pinky stack, first specifiy how to start the worker by adding a new line to your app's `Procfile` and then use that as the `WORKER_NAME`.
+~~~
+WORKER_NAME: COMMANDLINE_COMMAND_TO_EXECUTE SCRIPT
+~~~
+
+Workers can be started via the command line client's `worker.add` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME [WORKER_PARAMS]
@@ -818,7 +825,7 @@ $ cctrlapp APP_NAME/DEP_NAME worker.add WORKER_NAME "PARAM1 PARAM2 PARAM3"
 
 #### List Running Workers
 
-To get a list of currently running workers use the worker command.
+To get a list of currently running workers use the `worker` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME worker
@@ -843,7 +850,7 @@ Workers can be either stopped via the command line client or by exiting the proc
 
 ##### Via Command Line
 
-To stop a running worker via the command line use the worker.remove command.
+To stop a running worker via the command line use the `worker.remove` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME worker.remove WRK_ID
@@ -863,7 +870,7 @@ For more details refer to the [PHP example](#php-worker-example) below.
 
 #### Worker log
 
-As already explained in the [Logging section](https://www.cloudcontrol.com/dev-center/platform-documentation#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the log command.
+As already explained in the [Logging section](https://www.cloudcontrol.com/dev-center/platform-documentation#logging) all stdout and stderr output of workers is redirected to the worker log. To see the output in a tail -f like fashion use the `log` command.
 
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME log worker
