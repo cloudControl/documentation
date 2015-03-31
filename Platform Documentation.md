@@ -785,11 +785,19 @@ For tasks that are guaranteed to finish within the time limit, the [Cron add-on]
 
 ### Workers
 
-Tasks that will take longer than 120s to execute, or that are triggered by a user request and should be handled asyncronously to not keep the user waiting, are best handled by workers. Workers are long-running processes started in containers. Just like the web processes but they are not listening on any port and therefore do not receive http requests. You can use workers, for example, to poll a queue and execute tasks in the background or handle long-running periodical calculations.
+Workers are long-running processes started in containers just as the web
+processes. The difference between web processes and workers is, that they are
+not listening on any port and therefore do not receive http requests. Workers
+exploits it's full potential in handling tasks that will take longer than 120s
+to execute, or that are triggered by a user request which are handled
+asynchronously to prevent idle time for users. For example, handling
+long-running periodical calculations or to poll a queue and execute tasks in the
+background.
 
-Each worker runs in a seperate isolated container. The containers have exactly
-the same runtime environment defined by the stack chosen and the buildpack used
-and have the same access to all of the deployments add-ons.
+You can create multiple workers for individual tasks. Each worker runs in a
+separate isolated container. The containers have exactly the same runtime
+environment defined by the stack chosen and the buildpack used and have the same
+access to all of the deployments add-ons.
 
 Note: Workers sometimes get interrupted and restarted on a different host for
 the following reasons:
@@ -804,7 +812,6 @@ signal is send to your worker before the shutdown.
 
 Depending on the [stack](#stack) your app is running on, you may have to edit the app's
 `Procfile` first.
-For the Luigi stack (only supporting PHP), use the PHP filename as the `WORKER_NAME`.
 If your app is running on the Pinky stack, add the following line to your app's `Procfile`:
 
 ~~~
