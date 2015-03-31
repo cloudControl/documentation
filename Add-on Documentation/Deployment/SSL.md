@@ -158,9 +158,7 @@ In order to check the status of the Add-on, you can do the following.
  Addon                    : ssl.host
 
  Settings
-   SSL_CERT_EXPIRES      : 2016-01-01 10:00:00
-   SSL_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
-   SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
+   SSL_ENDPOINT          : deppfdxjnm5.ssl.dotcloudapp.com.
  ~~~
 
 ### Updating your Certificate
@@ -182,7 +180,7 @@ Add-on even if those are not changed.
 ### Setup your DNS
 
 As a final step, create a corresponding CNAME entry and point it to the
-SSL_DNS_DOMAIN shown in the configuration for your SSL add-on as seen
+SSL_ENDPOINT shown in the configuration for your SSL add-on as seen
 above.
 
 
