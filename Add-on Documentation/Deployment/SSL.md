@@ -1,22 +1,40 @@
 # SSL Add-on
 
-This add-on provides SSL support for custom domains (e.g. "www.example.com")
-that you have added to your application using the [alias addon](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias).
+Overview:
 
+ * This Add-on provides SSL support for custom domains.
+ * You need to have an RSA Private Key, an SSL Certificate and a Certificate Chain.
+ * Add the Add-on to your deployment via our CLI with the [addon.add command](#adding-the-ssl-add-on).
 
-## Overview
+Secure Socket Layer (SSL) encryption is available for improved security when
+transmitting passwords and other sensitive data.
+
+As part of the provided `.app.exo.io` subdomain, all deployments have
+access to piggyback SSL using a `*.app.exo.io` wildcard certificate.
+To use this, simply point your browser to:
+* `https://APP_NAME.app.exo.io` for the default deployment
+* `https://DEP_NAME-APP_NAME.app.exo.io` for non-default deployments
+
+    Please note the **dash** between DEP_NAME and APP_NAME.
+
+SSL support for custom domains is available through the SSL Add-on.
+
+## Custom Domain Certificates
+
+To enable SSL support for custom domains like `www.example.com` or
+`secure.example.com`, you need the SSL Add-on.
 
 Please go through the following steps, which are described in the upcoming
-sections, to add SSL support for custom domains to your deployment:
+sections, to add SSL support to your deployment:
 
  * Acquire a signed certificate from your certificate authority of trust.
- * Add the SSL add-on providing the certificate, the private key and the
+ * Add the SSL Add-on providing the certificate, the private key and the
    certificate-chain files.
  * Set your DNS entry to point to your SSL DNS Domain.
 
-Root or naked domains like `example.com` without a subdomain are not
-directly supported. For details, please see the [alias addon](https://www.cloudcontrol.com/dev-center/add-on-documentation/alias) documentation.
-
+Note: Please allow up to one hour for DNS changes to propagate before they take
+effect. Root or naked domains like `example.com` without a subdomain are not
+supported.
 
 ### Acquiring an SSL Certificate
 
@@ -99,27 +117,20 @@ previous step. Quite often you will also need define the web server you are
 going to use. In this case you should select the Nginx web server, and if this
 is not an option then Apache 2.x should also be OK.
 
-In the end, your CA will provide you with one or more files including the
-SSL certificate and the certificate chain (the intermediate certificate(s)).
+In the end, your CA will provide you with some files including the SSL
+certificate and the certificate chain. Your certificate file should have either
+a `.crt` or `.pem` extension. Our service requires the certificates to be in
+PEM format, so if it isn't, you can transform it with the following command:
+ ~~~
+ $ openssl x509 -inform PEM -in www_example_com.crt -out www_example_com.pem
+ ~~~
 
-If you got only one file with both your certificate and all intermediates,
-you have to split this file into two, server.crt (topmost certificate)
-and chain.crt (rest of original file).
-
-The SSL certificates have to be in PEM format and should look like this:
-
-~~~
------BEGIN CERTIFICATE-----
-...
------END CERTIFICATE-----
-~~~
-
-If your certificates are not in PEM yet, you can transform them with the
-following command:
-
-~~~
-$ openssl x509 -inform PEM -in www_example_com.crt -out www_example_com.pem
-~~~
+The content of the SSL certificate file should look like this:
+ ~~~
+ -----BEGIN CERTIFICATE-----
+ ...
+ -----END CERTIFICATE-----
+ ~~~
 
 The certificate chain is a chain of trust which proves that your certificate is
 issued by a trustworthy provider authorized by a Root CA. Root CA certificates
@@ -149,7 +160,7 @@ in PEM format.
 To add the SSL Add-on, simply provide the paths to the files provided by the
 certificate authority using the respective parameters of the addon.add command.
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+ $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
  ~~~
 
 In order to check the status of the Add-on, you can do the following.
@@ -158,89 +169,15 @@ In order to check the status of the Add-on, you can do the following.
  Addon                    : ssl.host
 
  Settings
-   SSL_CERT_EXPIRES      : 2016-01-01 10:00:00
-   SSL_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
-   SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
+   SSLDEV_CERT_EXPIRES      : 2016-01-01 10:00:00
+   SSLDEV_DNS_DOMAIN        : snip.app.exo.com
+   SSLDEV_CERT_INCEPTS      : 2013-01-01 10:00:00
  ~~~
 
-### Updating your Certificate
-
-When the SSL certificate is expired, you can update it by removing the Add-on
-and re-adding it, providing the updated certificate. The SSL service is provided
-for 23 minutes after removing the Add-on so that it can be updated in the
-meantime without interrupting the service. To achieve that you have to run the
-following commands:
+If you want to exchange your certificate (e.g. because it is about to expire),
+you can upload the new certificate with the following command:
  ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.remove ssl.host
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+ $ exoapp APP_NAME/DEP_NAME addon.upgrade ssl.host ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE [--chain path/to/CHAIN_FILE]
  ~~~
 
-Note: You need to provide the original key and chain again when updating the
-Add-on even if those are not changed.
-
-
-### Setup your DNS
-
-As a final step, create a corresponding CNAME entry and point it to the
-SSL_DNS_DOMAIN shown in the configuration for your SSL add-on as seen
-above.
-
-
-## HTTPS Redirects
-
-HTTPS termination is done at the routing tier. Requests are then routed via
-HTTP to one of your app's clones. To determine if a request was made via HTTPS
-originally, the routing tier sets the `X-FORWARDED-PROTO` header to `https`.
-The header is only set for requests that arrived via HTTPS at the routing tier.
-This allows you to redirect accordingly.
-
-### PHP Example
-
-For PHP you can either redirect via Apache's mod_rewrite using a `.htaccess`
-file or directly in your PHP code.
-
-#### .htaccess
-~~~
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{HTTP:X-FORWARDED-PROTO} !=https [NC]
-    RewriteRule ^.*$ https://%{HTTP_HOST}
-</IfModule>
-~~~
-
-#### PHP
-~~~php
-<?php
-    if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
-        $_SERVER['HTTP_X_FORWARDED_PROTO'] != 'https') {
-        header(
-            'Location: https://' .
-            $_SERVER['HTTP_HOST'] .
-            $_SERVER['REQUEST_URI']
-        );
-    }
-?>
-~~~
-
-### Rails Example
-
-For Rails you can find several ways to force requests to be redirected via HTTPS protocol.
-As of version 3.10, [`force_ssl`](http://api.rubyonrails.org/classes/ActionController/ForceSSL/ClassMethods.html)
-provides this functionality. This can be added to a particular controller or to the whole application via configuration.
-
-#### At the Controller Level
-~~~ruby
-MyController < ApplicationController
-  force_ssl
-end
-~~~
-
-#### At the Application Level
-~~~ruby
-# config/application.rb
-module MyApp
-  class Application < Rails::Application
-    config.force_ssl = true
-  end
-end
-~~~
+Note: If the new certificate has the same chain file, you still need to pass it again.
