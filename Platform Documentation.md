@@ -884,7 +884,7 @@ $ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
 [Custom Config Add-on]: https://www.cloudcontrol.com/dev-center/add-on-documentation/custom-config
 [web console]: https://www.cloudcontrol.com/console
 [API libraries]: https://github.com/cloudControl
-[the latest version]: https://www.cloudcontrol.com/download/win
+[the latest version]: https://download.cloudcontrolled.com/windows
 [Python 2.6+]: http://python.org/download/
 [reset your password]: https://api.cloudcontrol.com/reset_password/
 [quick Git tutorial]: http://rogerdudler.github.com/git-guide/
