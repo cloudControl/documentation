@@ -854,7 +854,7 @@ Connection to ssh.cloudcontrolled.net closed.
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
- * Luigi supports only PHP. Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
+ * Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
 
 A stack defines the common runtime environment for all deployments using it. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
@@ -862,7 +862,6 @@ Stacks are based on Ubuntu releases and have the same first letter as the releas
 
 ### Available Stacks
 
- * **Luigi** based on [Ubuntu 10.04 LTS Lucid Lynx]
  * **Pinky** based on [Ubuntu 12.04 LTS Precise Pangolin]
 
 You can change the stack per deployment. This is handy for testing new stacks before migrating the production deployment. Details are available via the `cctrlapp` command line interface.
@@ -870,14 +869,14 @@ You can change the stack per deployment. This is handy for testing new stacks be
 ~~~
 $ cctrlapp APP_NAME/DEP_NAME details
  name: APP_NAME/DEP_NAME
- stack: luigi
+ stack: pinky
  [...]
 ~~~
 
 To change the stack of a deployment simply append the --stack command line option to the `deploy` command.
 
 ~~~
-$ cctrlapp APP_NAME/DEP_NAME deploy --stack [luigi,pinky]
+$ cctrlapp APP_NAME/DEP_NAME deploy --stack [pinky]
 ~~~
 
 [generating SSH keys]: https://help.github.com/articles/generating-ssh-keys
