@@ -14,11 +14,11 @@ hourly. When you add an hourly cron at 2.45pm, the next call will run at
 3.45pm. For the daily Cron it would reoccur the next day at 2.45pm. The Cron
 Add-on does not guarantee a URL is only called once per interval.
 
-Cronjobs are regular requests against your app and are subject to the same 120s
-timelimit.
+Cronjobs are regular requests against your app and are subject to the same
+timelimit as [HTTP-Requests](https://www.dotcloud.com/dev-center/platform-documentation#routing-tier).
 
 If you need more control over when and how often tasks are run and/or have
-tasks that take longer than 120 seconds we recommend using a
+longer running tasks we recommend using a
 [Worker](https://next.dotcloud.com/dev-center/platform-documentation#workers)
 or the [CloudAMQP](https://next.dotcloud.com/add-ons/cloudamqp) message queues
 that can be used to dispatch tasks to the workers.
@@ -46,7 +46,8 @@ $ dcapp APP_NAME/DEP_NAME cron.add http[s]://[user:password@]DEP_NAME.APP_NAME.d
 ~~~
 
 You can only add cron jobs calling a verified alias of the deployment. It is
-recommended to use https when sending credentials. Please, note that URL must be fully encoded.
+recommended to use https when sending credentials. Please, note that URL must be
+fully encoded.
 
 ## List Cron overview
 
