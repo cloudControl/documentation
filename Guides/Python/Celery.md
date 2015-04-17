@@ -1,7 +1,7 @@
 # Deploying Celery on dotCloud
 [Celery] is an asynchronous task queue/job queue based on distributed message passing. It is focused on real-time operation, but supports scheduling as well.
 
-In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and the [Worker Add-on] on [dotCloud].
+In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and a [Worker] on [dotCloud].
 
 ## The Example App Explained
 First, lets clone the example code from Github. It is based on the official [first steps with Celery guide][celeryguide] and also includes [Flower] the Celery web interface.
@@ -65,12 +65,6 @@ As we chose to use AMQP as a broker, we add the CloudAMQP Add-on now.
 
 ~~~bash
 $ dcapp APP_NAME/default addon.add cloudamqp.lemur
-~~~
-
-We also need to add the Worker Add-on to be able to start the workers later.
-
-~~~bash
-$ dcapp APP_NAME/default addon.add worker.single
 ~~~
 
 Since we are reading the AMQP URL for the broker from the environment in both, the `Procfile` and the Python code we have to enable providing Add-on credentials as environment variables which is disabled per default for Python apps.
@@ -210,7 +204,7 @@ This guide showed how to run both Flower aswell as a Celery worker on dotCloud b
 
 [Celery]: http://celeryproject.org/
 [CloudAMQP Add-on]: https://next.dotcloud.com/add-ons/cloudamqp
-[Worker Add-on]: https://next.dotcloud.com/add-ons/worker
+[Worker]: https://next.dotcloud.com/dev-center/platform-documentation#workers
 [dotCloud]: http://next.dotcloud.com
 [celeryguide]: http://docs.celeryproject.org/en/latest/getting-started/first-steps-with-celery.html
 [Flower]: http://docs.celeryproject.org/en/latest/userguide/monitoring.html#flower-real-time-celery-web-monitor
