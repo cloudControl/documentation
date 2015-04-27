@@ -1014,7 +1014,6 @@ Connection to ssh.cloudcontrolled.net closed.
 
  * Stacks define the common runtime environment.
  * They are based on Ubuntu and stack names match the Ubuntu release's first letter.
- * Pinky supports multiple languages according to the available [buildpacks](#buildpacks-and-the-procfile).
 
 A stack defines the common runtime environment for all deployments using it. By choosing the same stack for all your deployments, it's guaranteed that all your deployments find the same version of all OS components as well as all preinstalled libraries.
 
