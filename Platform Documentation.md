@@ -341,6 +341,12 @@ If not specified, the version to be deployed defaults to the latest image availa
 
 For every deploy, the image is downloaded to as many of the platform’s nodes as required by the [--containers setting](#scaling) and started according to the buildpack’s default or the [Procfile](#buildpacks-and-the-procfile). After the new containers are up and running the load balancing tier stops sending requests to the old containers and instead sends them to the new version. A log message in the [deploy log](#deploy-log) appears when this process has finished.
 
+Running [workers](#Workers) have to be redeployed separately by initiating a [manual restart](#restarting-workers) or by adding the `--restart-workers` option to the `deploy` command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME deploy --restart-workers
+~~~
+
 ### Container Idling
 
 Deployments running on a single web container with one unit of memory (128MB/h) are automatically idled when they are not receiving HTTP requests for 1 hour or more. This results in a temporary suspension of the container where the application is running. It does not affect the Add-ons or workers related to this deployment.
@@ -861,6 +867,15 @@ Worker
 wrk_id   : WRK_ID
 command  : WORKER_NAME
 params   : "PARAM1 PARAM2 PARAM3"
+~~~
+
+#### Restarting Workers
+
+Running workers can be restarted via the command the command line client's
+`worker.restart` command.
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME worker.restart (WRK_ID | --all)
 ~~~
 
 #### Stopping Workers
