@@ -2,6 +2,8 @@
 
 SendGrid's cloud-based email infrastructure relieves businesses of the cost and complexity of maintaining custom email systems.
 
+**Note**: *dotCloud operates on GCE, therefore the standard SMTP-Ports (i.e., 25, 465, 587) are blocked. Please make sure that you have set the SMTP-Port in your application to port: **2525** *
+
 ## Adding SendGrid
 
 The SendGrid Add-on can be added to every deployment with:
@@ -17,7 +19,7 @@ When added, SendGrid automatically creates a new user account with your email ad
 Upgrading to another version of SendGrid is easily done:
 
 ~~~
-$ dcapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
+$ dcapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW
 ~~~
 
 ## Downgrade SendGrid
@@ -25,7 +27,7 @@ $ dcapp APP_NAME/DEP_NAME addon.upgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW
 Downgrading to another version of SendGrid is easily done:
 
 ~~~
-$ dcapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW 
+$ dcapp APP_NAME/DEP_NAME addon.downgrade sendgrid.OPTION_OLD sendgrid.OPTION_NEW
 ~~~
 
 ## Removing SendGrid
@@ -52,4 +54,3 @@ The JSON file has the following structure:
     }
 }
 ~~~
-
