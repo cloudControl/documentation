@@ -46,18 +46,20 @@ depending on your platform:
 
 After you are done with the installation, use the `openssl` command line tool to
 proceed with generating your private RSA key:
- ~~~
- $ openssl genrsa -des3 -out server.key.org 2048
- # Enter and confirm a passphrase
- ~~~
+
+~~~
+$ openssl genrsa -des3 -out server.key.org 2048
+# Enter and confirm a passphrase
+~~~
 
 #### Removing the passphrase
 
 The generated key is protected by a passphrase which needs to be removed so
 that it can be loaded by the web server.
- ~~~
- $ openssl rsa -in server.key.org -out server.key
- ~~~
+
+~~~
+$ openssl rsa -in server.key.org -out server.key
+~~~
 
 Your private key used for the process is now saved in the file `server.key`
 
@@ -67,20 +69,21 @@ For acquiring an SSL Certificate, you need to provide your CA with a CSR
 (Certificate Signing Request). This can also be used for creating self-signed
 certificates. The CSR contains all the information regarding your company or
 organization, thus prompting you to enter those:
- ~~~
- $ openssl req -new -key server.key -out server.csr
- Country Name (2 letter code) [AU]:DE
- State or Province Name (full name) [Some-State]:
- Locality Name (eg, city) []:
- Organization Name (eg, company) [Internet Widgits Pty Ltd]:
- Organizational Unit Name (eg, section) []:Information Technology
- Common Name (eg, your name or your server's hostname) []:www.example.com
- Email Address []:
- Please enter the following 'extra' attributes
- to be sent with your certificate request
- A challenge password []:
- An optional company name []:
- ~~~
+
+~~~
+$ openssl req -new -key server.key -out server.csr
+Country Name (2 letter code) [AU]:DE
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:Information Technology
+Common Name (eg, your name or your server's hostname) []:www.example.com
+Email Address []:
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+~~~
 
 The file created after this process is named `server.csr`.
 
@@ -130,14 +133,15 @@ similar to this:
 ![Firefox warning](https://s3-eu-west-1.amazonaws.com/cctrl-www-production/custom_assets/attachments/000/000/038/original/ffssl.png)
 
 You should also have a file which is a bundle of certificates which succeed each other:
- ~~~
- -----BEGIN CERTIFICATE-----
- ...
- -----END CERTIFICATE-----
- -----BEGIN CERTIFICATE-----
- ...
- -----END CERTIFICATE-----
- ~~~
+
+~~~
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+~~~
 
 Note: If you do not have a certificate bundle but a series of `.crt` files, you
 have to place them in the right order starting from the intermediate
@@ -148,20 +152,22 @@ in PEM format.
 
 To add the SSL Add-on, simply provide the paths to the files provided by the
 certificate authority using the respective parameters of the addon.add command.
- ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
- ~~~
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+~~~
 
 In order to check the status of the Add-on, you can do the following.
- ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon ssl.host
- Addon                    : ssl.host
 
- Settings
-   SSL_CERT_EXPIRES      : 2016-01-01 10:00:00
-   SSL_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
-   SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
- ~~~
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon ssl.host
+Addon                    : ssl.host
+
+Settings
+SSL_CERT_EXPIRES      : 2016-01-01 10:00:00
+SSL_DNS_DOMAIN        : addonssl-depxxxxxxxx-1234567890.eu-west-1.elb.amazonaws.com
+SSL_CERT_INCEPTS      : 2013-01-01 10:00:00
+~~~
 
 ### Updating your Certificate
 
@@ -170,10 +176,11 @@ and re-adding it, providing the updated certificate. The SSL service is provided
 for 23 minutes after removing the Add-on so that it can be updated in the
 meantime without interrupting the service. To achieve that you have to run the
 following commands:
- ~~~
- $ cctrlapp APP_NAME/DEP_NAME addon.remove ssl.host
- $ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
- ~~~
+
+~~~
+$ cctrlapp APP_NAME/DEP_NAME addon.remove ssl.host
+$ cctrlapp APP_NAME/DEP_NAME addon.add ssl.host --cert path/to/NEW_CERT_FILE --key path/to/KEY_FILE --chain path/to/CHAIN_FILE
+~~~
 
 Note: You need to provide the original key and chain again when updating the
 Add-on even if those are not changed.
@@ -200,6 +207,7 @@ For PHP you can either redirect via Apache's mod_rewrite using a `.htaccess`
 file or directly in your PHP code.
 
 #### .htaccess
+
 ~~~
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -209,6 +217,7 @@ file or directly in your PHP code.
 ~~~
 
 #### PHP
+
 ~~~php
 <?php
     if (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
@@ -229,6 +238,7 @@ As of version 3.10, [`force_ssl`](http://api.rubyonrails.org/classes/ActionContr
 provides this functionality. This can be added to a particular controller or to the whole application via configuration.
 
 #### At the Controller Level
+
 ~~~ruby
 MyController < ApplicationController
   force_ssl
@@ -236,6 +246,7 @@ end
 ~~~
 
 #### At the Application Level
+
 ~~~ruby
 # config/application.rb
 module MyApp
