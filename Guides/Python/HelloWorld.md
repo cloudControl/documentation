@@ -16,13 +16,14 @@ $ git clone https://github.com/cloudControl/python-flask-example-app.git
 $ cd python-flask-example-app
 ~~~
 
-Now you have a small but fully functional Flask application.
+The code from the example repository is ready to be deployed. Lets still go
+through the different files and their purpose real quick.
 
 ### Dependency Tracking
 The Python buildpack tracks dependencies via pip and the `requirements.txt` file. It needs to be placed in the root directory of your repository. The example app specifies only Flask itself as a dependency and looks like this:
 
 ~~~pip
-Flask==0.9
+Flask==0.10.1
 ~~~
 
 ### Process Type Definition
@@ -36,6 +37,27 @@ web: python server.py
 
 Left from the colon we specified the **required** process type called `web` followed by the command that starts the app and listens on the port specified by the environment variable `$PORT`.
 
+###The Actual Application Code
+
+The actual application code is really straight forward. We import the required
+modules and create an instance of the class. Next we set the routes to trigger
+our hello() function which will then render the jinja template.
+
+~~~python
+import os
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello():
+    return render_template('hello.jinja', domain=os.environ['DOMAIN'])
+
+app.debug = True
+app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+~~~
+
 ## Pushing and Deploying the App
 Choose a unique name to replace the `APP_NAME` placeholder for your application and create it on the cloudControl platform:
 
@@ -47,25 +69,25 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME/default push
-Counting objects: 16, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (10/10), done.
-Writing objects: 100% (16/16), 258.30 KiB, done.
-Total 16 (delta 2), reused 16 (delta 2)
-       
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 283 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+
 -----> Receiving push
------> No runtime.txt provided; assuming python-2.7.3.
------> Preparing Python runtime (python-2.7.3)
+-----> No runtime.txt provided; assuming python-2.7.8.
+-----> Preparing Python runtime (python-2.7.8)
 -----> Installing Distribute (0.6.36)
 -----> Installing Pip (1.3.1)
 -----> Installing dependencies using Pip (1.3.1)
-       Downloading/unpacking Flask==0.9 (from -r requirements.txt (line 1))
-       ...
-       Successfully installed Flask Werkzeug Jinja2 markupsafe
+       Downloading/unpacking Flask==0.10.1 (from -r requirements.txt (line 1))
+        ...
+       Successfully installed Flask Werkzeug Jinja2 itsdangerous MarkupSafe
        Cleaning up...
 -----> Building image
------> Uploading image (25M)
-       
+-----> Uploading image (25.1 MB)
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
 
