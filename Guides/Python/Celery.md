@@ -1,10 +1,12 @@
 # Deploying Celery on cloudControl
-[Celery] is an asynchronous task queue/job queue based on distributed message passing. It is focused on real-time operation, but supports scheduling as well.
+[Celery] is an asynchronous task queue/job queue based on distributed message
+passing. It is focused on real-time operation, but supports scheduling as well.
 
-In this tutorial we're going to show you how to deploy an example Celery app using the [CloudAMQP Add-on] and a [Worker] on [cloudControl].
+In this tutorial we're going to show you how to deploy an example Celery app
+using the [CloudAMQP Add-on], a [Worker] and [Flower] on [cloudControl].
 
 ## The Example App Explained
-First, lets clone the example code from Github. It is based on the official [first steps with Celery guide][celeryguide] and also includes [Flower] the Celery web interface.
+First, lets clone the example code from Github. It is based on the official [first steps with Celery guide][celeryguide] and also includes [Flower] the Celery web interface for monitoring your application.
 
 ~~~bash
 $ git clone git://github.com/cloudControl/python-celery-example-app.git
@@ -17,21 +19,26 @@ The code from the example repository is ready to be deployed. Lets still go thro
 The [Python buildpack] tracks dependencies via pip and the `requirements.txt` file. It needs to be placed in the root directory of your repository. Our example app requires both `celery` itself aswell as `flower` Celery's monitoring web app. The `requirements.txt` you cloned as part of the example app looks like this:
 
 ~~~pip
-celery==3.0.15
-flower==0.4.2
+celery==3.1.18
+flower==0.8.3
 ~~~
 
 ### Process Type Definition
 cloudControl uses a [Procfile] to know how to start the app's processes.
 
-The example code also already includes a file called `Procfile` at the top level of your repository. It looks like this:
+The example code also already includes a file called `Procfile` at the top level
+of your repository. It looks like this:
 
 ~~~
-web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --auth=$FLOWER_AUTH_EMAIL
+web: celery flower --port=$PORT --broker=$CLOUDAMQP_URL --basic_auth=$AUTH_USER:$AUTH_PW
 worker: celery -A tasks worker --loglevel=info
 ~~~
 
-We have specified two process types here. One called `web` to start the web interface and additionally one called `worker` used to start the actual Celery worker.
+We have specified two process types here. One called `web` to start the web
+interface and additionally one called `worker` used to start the actual Celery
+worker.
+
+*Note: Checkout the Flower docs for other [authentication methods](https://flower.readthedocs.org/en/latest/auth.html)*
 
 ### The Celery Task
 
@@ -69,11 +76,11 @@ $ cctrlapp APP_NAME/default addon.add cloudamqp.lemur
 
 Since we are reading the AMQP URL for the broker from the environment in both, the `Procfile` and the Python code we have to enable providing Add-on credentials as environment variables which is disabled per default for Python apps.
 
-We also set another environment variable called `FLOWER_AUTH_EMAIL` that is passed to the Flower web process for authentication purposes. Without this, the web interface would be public showing your secret AMQP credentials and allowing people to stop your workers.
+We also set another environment variables called `AUTH_USER` and `AUTH_PW` that are passed to the Flower web process for authentication purposes. Without this, the web interface would be public showing your secret AMQP credentials and allowing people to stop your workers.
+
 
 ~~~bash
-$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS --FLOWER_AUTH_EMAIL=YOUR_EMAIL_HERE
-# seperate multiple emails by comma
+$ cctrlapp APP_NAME/default addon.add config.free --SET_ENV_VARS --AUTH_USER=YOUR_FLOWER_USER_HERE --AUTH_PW=YOUR_FLOWER_PW
 ~~~
 
 This is it. The example code will now find all necessary credentials to connect to the AMQP service automatically in the runtime environment.
@@ -86,28 +93,23 @@ The first push will take a couple of seconds, because it will download and compi
 ~~~bash
 $ cctrlapp APP_NAME/default push
 Counting objects: 6, done.
-Delta compression using up to 4 threads.
+Delta compression using up to 8 threads.
 Compressing objects: 100% (4/4), done.
-Writing objects: 100% (6/6), 605 bytes, done.
-Total 6 (delta 0), reused 0 (delta 0)
+Writing objects: 100% (6/6), 577 bytes | 0 bytes/s, done.
+Total 6 (delta 2), reused 0 (delta 0)
 
 -----> Receiving push
------> Preparing Python interpreter (2.7.2)
------> Creating Virtualenv version 1.7.2
-       New python executable in .heroku/venv/bin/python2.7
-       Also creating executable in .heroku/venv/bin/python
-       Installing distribute..................................................................................................................................................................................................done.
-       Installing pip................done.
-       Running virtualenv with interpreter /usr/bin/python2.7
------> Activating virtualenv
------> Installing dependencies using pip version 1.2.1
-
-       [...]
-
-       Successfully installed celery flower billiard python-dateutil kombu tornado anyjson amqp
+-----> No runtime.txt provided; assuming python-2.7.8.
+-----> Preparing Python runtime (python-2.7.8)
+-----> Installing Distribute (0.6.36)
+-----> Installing Pip (1.3.1)
+-----> Installing dependencies using Pip (1.3.1)
+       Downloading/unpacking celery==3.1.18 (from -r requirements.txt (line 1))
+       ...
+       Successfully installed celery flower tornado pytz billiard kombu babel futures certifi backports.ssl-match-hostname anyjson amqp
        Cleaning up...
 -----> Building image
------> Uploading image (4.3M)
+-----> Uploading image (30.3 MB)
 
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  * [new branch]      master -> master
@@ -153,7 +155,7 @@ $ cctrlapp APP_NAME/default log worker
 [TIMESTAMP] WRK_ID [TIMESTAMP: INFO/MainProcess] Events enabled by remote.
 ~~~
 
-If you refresh the web interface at `http://APP_NAME.cloudcontrolled.com` you should be able to see the worker now.
+Congratulations, you can now see your Celery application with the worker in the Flower web interface at `http://APP_NAME.cloudcontrolled.com`
 
 To handle more tasks simultaneously you can always just add more workers. (Please note that only the first worker is free, adding additional workers requires a billing account.)
 
