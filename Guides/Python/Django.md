@@ -26,8 +26,8 @@ example app specifies [Django][django], [MySQL driver][mysql-driver] and
 looks like this:
 
 ~~~
-Django==1.7.1
-gunicorn==19.1.1
+Django==1.8.3
+gunicorn==19.3
 MySQL-python==1.2.5
 ~~~
 
@@ -60,13 +60,49 @@ Left from the colon we specified the **required** process type called `web`
 followed by the command that starts the app and listens on the port specified
 by the environment variable `$PORT`.
 
+### The Actual Application Code
+
+The actual application code is taken from the [official Django tutorial](https://docs.djangoproject.com/en/1.8/intro/tutorial01/) and explains in detail how the applications works. 
+
+~~~python
+import datetime
+
+from django.db import models
+from django.utils import timezone
+
+
+class Poll(models.Model):
+    question = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+    def __unicode__(self):
+        return self.question
+
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.boolean = True
+    was_published_recently.short_description = 'Published recently?'
+
+
+class Choice(models.Model):
+    poll = models.ForeignKey(Poll)
+    choice = models.CharField(max_length=200)
+    votes = models.IntegerField()
+
+    def __unicode__(self):
+        return self.choice
+~~~
+
 ### Production Database
 
 The original tutorial application uses SQLite as the database in all
 environments, even the production one. It is not possible to use a SQLite
 database on cloudControl because the filesystem is
 [not persistent][filesystem]. To use a database, you should choose an Add-on
-from [the Data Storage category][data-storage-addons].
+from [the Data Storage category][data-storage-addons] after creating and pushing
+the application to cloudcontrol.
 
 In this tutorial we use the [Shared MySQL Add-on][mysqls]. Have a look at
 `mysite/settings.py` so you can find out how to
@@ -109,7 +145,7 @@ DATABASES = {
 ## Pushing and Deploying your App
 
 Choose a unique name to replace the `APP_NAME` placeholder for your
-application and create it on the cloudControl platform: 
+application and create it on the cloudControl platform:
 
 ~~~bash
 $ cctrlapp APP_NAME create python
@@ -119,36 +155,41 @@ Push your code to the application's repository, which triggers the deployment im
 
 ~~~bash
 $ cctrlapp APP_NAME push
-Counting objects: 49, done.
+Counting objects: 53, done.
 Delta compression using up to 8 threads.
-Compressing objects: 100% (33/33), done.
-Writing objects: 100% (49/49), 8.80 KiB | 0 bytes/s, done.
-Total 49 (delta 11), reused 38 (delta 8)
-       
+Compressing objects: 100% (44/44), done.
+Writing objects: 100% (53/53), 9.33 KiB | 0 bytes/s, done.
+Total 53 (delta 12), reused 0 (delta 0)
+
 -----> Receiving push
------> No runtime.txt provided; assuming python-2.7.3.
------> Preparing Python runtime (python-2.7.3)
+-----> No runtime.txt provided; assuming python-2.7.8.
+-----> Preparing Python runtime (python-2.7.8)
 -----> Installing Distribute (0.6.36)
 -----> Installing Pip (1.3.1)
 -----> Installing dependencies using Pip (1.3.1)
-       Downloading/unpacking Django==1.7.1 (from -r requirements.txt (line 1))
-         Running setup.py egg_info for package Django
+       Downloading/unpacking Django==1.8.3 (from -r requirements.txt (line 1))
        ...
------> Building image
------> Uploading image (29.9 MB)
+       Successfully installed Django gunicorn MySQL-python
+             Cleaning up...
+
+      -----> Building image
+      -----> Uploading image (28.8 MB)
 
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
- * [new branch]      master -> master
+ *  [new branch]      master -> master
 ~~~
 
-Add MySQLs Add-on with `free` plan to your deployment and deploy it:
+Add MySQLs Add-on with 'free' plan to your deployment and deploy it:
+
 ~~~bash
 $ cctrlapp APP_NAME addon.add mysqls.free
 $ cctrlapp APP_NAME deploy
 ~~~
 
+## Migrating the database
+
 Finally, prepare the database using the
-[Run command][ssh-session] (when prompted create admin user):
+[Run command][ssh-session] (when prompted you can create an admin user):
 
 ~~~bash
 $ cctrlapp APP_NAME run "python manage.py syncdb"
