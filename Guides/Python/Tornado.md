@@ -6,6 +6,7 @@ and tools that power FriendFeed written in Python.
 In this tutorial we're going to show you how to deploy a simple Tornado based
 application on [cloudControl].
 
+
 ## The Example App Explained
 
 ### Get the App
@@ -25,7 +26,7 @@ file. It needs to be placed in the root directory of your repository. The
 example app specifies only Tornado itself as a dependency. The one you cloned
 as part of the example app looks like this:
 ~~~pip
-tornado==2.4.1
+tornado==4.2.1
 ~~~
 
 ### Process Type Definition
@@ -96,23 +97,25 @@ Push your code to the application's repository, which triggers the deployment
 image build process:
 ~~~bash
 $ cctrlapp APP_NAME/default push
-Counting objects: 7, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (7/7), 1.01 KiB, done.
-Total 7 (delta 0), reused 7 (delta 0)
-       
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (10/10), 1.22 KiB | 0 bytes/s, done.
+Total 10 (delta 1), reused 0 (delta 0)
+
 -----> Receiving push
------> No runtime.txt provided; assuming python-2.7.3.
------> Using Python runtime (python-2.7.3)
+-----> No runtime.txt provided; assuming python-2.7.8.
+-----> Preparing Python runtime (python-2.7.8)
+-----> Installing Distribute (0.6.36)
+-----> Installing Pip (1.3.1)
 -----> Installing dependencies using Pip (1.3.1)
-       Downloading/unpacking tornado==2.4.1 (from -r requirements.txt (line 1))
+       Downloading/unpacking tornado==4.2.1 (from -r requirements.txt (line 1))
        ...
-       Successfully installed tornado
+       Successfully installed tornado backports.ssl-match-hostname certifi
        Cleaning up...
 -----> Building image
------> Uploading image (25M)
-       
+-----> Uploading image (24.7 MB)
+
 To ssh://APP_NAME@cloudcontrolled.com/repository.git
  + [new branch] master -> master
 ~~~
