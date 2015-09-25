@@ -20,9 +20,16 @@ Install Git from the [official site](http://git-scm.com/) or your package reposi
 **Linux/Mac OS X:** We recommend installing cctrl via pip.
 
 ~~~bash
-# if you don't have pip yet
-$ sudo easy_install pip
 $ sudo pip install cctrl
+~~~
+
+If you don't have pip, you can install it either using packages from
+your distribution or following the instructions in
+[pip documentation](https://pip.pypa.io/en/stable/installing/). For
+example, on Ubuntu, use:
+
+~~~bash
+$ sudo apt-get install python-pip python-dev
 ~~~
 
 **Windows:** Please download the provided [installer](https://download.cloudcontrolled.com/windows).
