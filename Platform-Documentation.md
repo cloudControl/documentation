@@ -26,10 +26,13 @@ On Linux and Mac OS we recommend installing and updating cctrl via pip. *cctrl* 
 $ sudo pip install -U cctrl
 ~~~
 
-If you don't have pip you can install pip via easy_install (on Linux usually part of the python-setuptools package) and then install cctrl.
+If you don't have pip, you can install it either using packages from
+your distribution or following the instructions in
+[pip documentation](https://pip.pypa.io/en/stable/installing/). For
+example, on Ubuntu, use:
 
 ~~~
-$ sudo easy_install pip
+$ sudo apt-get install python-pip python-dev
 $ sudo pip install -U cctrl
 ~~~
 
